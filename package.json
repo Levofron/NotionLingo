@@ -10,7 +10,14 @@
     "lint:fix": "yarn lint --fix",
     "format": "yarn prettier --write",
     "format:check": "yarn prettier --check",
-    "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json)\""
+    "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json)\"",
+    "gcb": "bash ./scripts/shell/git-create-branch.sh",
+    "gcdwp": "bash ./scripts/shell/git-checkout-develop-with-pull.sh",
+    "gpc": "bash ./scripts/shell/git-push-changes.sh",
+    "grlc": "bash ./scripts/shell/git-reset-local-changes.sh",
+    "rlb": "bash ./scripts/shell/remove-local-branches.sh",
+    "release": "bash ./scripts/shell/release-develop-to-main.sh",
+    "reinstall-node-modules": "bash ./scripts/shell/reinstall-node-modules.sh"
   },
   "dependencies": {
     "@types/node": "18.11.9",
