@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "format": "yarn prettier --write",
+    "format:check": "yarn prettier --check",
+    "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json)\""
   },
   "dependencies": {
     "@types/node": "18.11.9",
@@ -22,6 +25,7 @@
     "typescript": "4.8.4"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -31,6 +35,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
-    "eslint-plugin-unicorn": "^44.0.2"
+    "eslint-plugin-unicorn": "^44.0.2",
+    "prettier": "^2.7.1"
   }
 }

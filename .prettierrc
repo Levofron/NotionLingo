@@ -1,0 +1,30 @@
+{
+  "semi": true,
+  "useTabs": false,
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@application",
+    "^@application/(.*)$",
+    "^@domain",
+    "^@domain/(.*)$",
+    "^@ui",
+    "^@ui/(.*)$",
+    "^@utils",
+    "^@utils/(.*)$",
+    "^@infrastructure",
+    "^@infrastructure/(.*)$",
+    "([.]svg|[.]jpg|[.]jpeg|[.]gif|[.]png)$",
+    "^@enums",
+    "^@interfaces",
+    "^@constants",
+    "^[./]",
+    "^[./](?!.*([.]css|[.]scss))",
+    "([.]css|[.]scss)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderGroupNamespaceSpecifiers": true
+}
