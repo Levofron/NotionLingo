@@ -17,7 +17,8 @@
     "grlc": "bash ./scripts/shell/git-reset-local-changes.sh",
     "rlb": "bash ./scripts/shell/remove-local-branches.sh",
     "release": "bash ./scripts/shell/release-develop-to-main.sh",
-    "reinstall-node-modules": "bash ./scripts/shell/reinstall-node-modules.sh"
+    "reinstall-node-modules": "bash ./scripts/shell/reinstall-node-modules.sh",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@commitlint/cli": "^17.2.0",
@@ -45,11 +46,18 @@
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "eslint-plugin-unicorn": "^44.0.2",
-    "husky": "^8.0.1",
-    "prettier": "^2.7.1"
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "prettier-package-json": "^2.7.0"
   },
   "installConfig": {
     "pnp": true
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.2.4",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
