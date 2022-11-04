@@ -54,10 +54,5 @@
   "installConfig": {
     "pnp": true
   },
-  "packageManager": "yarn@3.2.4",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  }
+  "packageManager": "yarn@3.2.4"
 }
