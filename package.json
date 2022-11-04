@@ -1,28 +1,30 @@
 {
+  "private": true,
   "name": "levofron",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "yarn lint --fix",
+    "dev": "next dev",
     "format": "yarn prettier --write",
     "format:check": "yarn prettier --check",
-    "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json)\"",
     "gcb": "bash ./scripts/shell/git-create-branch.sh",
     "gcdwp": "bash ./scripts/shell/git-checkout-develop-with-pull.sh",
     "gpc": "bash ./scripts/shell/git-push-changes.sh",
     "grlc": "bash ./scripts/shell/git-reset-local-changes.sh",
-    "rlb": "bash ./scripts/shell/remove-local-branches.sh",
-    "release": "bash ./scripts/shell/release-develop-to-main.sh",
+    "lint": "next lint",
+    "lint:fix": "yarn lint --fix",
+    "prepare": "husky install",
     "reinstall-node-modules": "bash ./scripts/shell/reinstall-node-modules.sh",
-    "prepare": "husky install"
+    "release": "bash ./scripts/shell/release-develop-to-main.sh",
+    "rlb": "bash ./scripts/shell/remove-local-branches.sh",
+    "start": "next start",
+    "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json)\"",
+    "typecheck": "tsc --noEmit -p . --pretty"
   },
   "dependencies": {
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
+    "@optimizely/optimizely-sdk": "^4.9.2",
     "@types/node": "18.11.9",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
@@ -37,6 +39,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-folders": "^1.0.3",
@@ -50,9 +53,5 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prettier-package-json": "^2.7.0"
-  },
-  "installConfig": {
-    "pnp": true
-  },
-  "packageManager": "yarn@3.2.4"
+  }
 }
