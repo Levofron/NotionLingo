@@ -20,6 +20,8 @@
     "reinstall-node-modules": "bash ./scripts/shell/reinstall-node-modules.sh"
   },
   "dependencies": {
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
@@ -43,6 +45,7 @@
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "eslint-plugin-unicorn": "^44.0.2",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1"
   },
   "installConfig": {
