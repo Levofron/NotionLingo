@@ -44,5 +44,9 @@
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "eslint-plugin-unicorn": "^44.0.2",
     "prettier": "^2.7.1"
-  }
+  },
+  "installConfig": {
+    "pnp": true
+  },
+  "packageManager": "yarn@3.2.4"
 }
