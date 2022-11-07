@@ -1,12 +1,10 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "ESNEXT",
-    "lib": ["dom", "esnext", "dom.iterable"],
-    "baseUrl": ".",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
     "strictBindCallApply": true,
@@ -19,7 +17,7 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "module": "ESNEXT",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
