@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toMatchSnapshot function snapshot test should match snapshot 1`] = `"test"`;

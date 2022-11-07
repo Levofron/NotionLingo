@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@enums": ["./src/enums"],
+      "@constants": ["./src/constants"],
+      "@interfaces": ["./src/interfaces"],
+      "@ui/*": ["./src/ui/*"],
+      "@ui": ["./src/ui"],
+      "@utils/*": ["./src/utils/*"],
+      "@utils": ["./src/utils"],
+      "@domain/*": ["./src/domain/*"],
+      "@domain": ["./src/domain"],
+      "@application/*": ["./src/application/*"],
+      "@application": ["./src/application"],
+      "@infrastructure/*": ["./src/infrastructure/*"],
+      "@infrastructure": ["./src/infrastructure"]
+    }
+  }
+}
