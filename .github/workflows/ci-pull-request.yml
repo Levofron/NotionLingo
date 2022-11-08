@@ -4,9 +4,11 @@ on: [pull_request]
 
 jobs:
   pull-request:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os:
+          - ubuntu-latest
         node-version: [16.x]
     steps:
       - uses: actions/checkout@v3.0.2
@@ -16,7 +18,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: "${{ steps.nvmrc.outputs.version }}"
+          node-version: "${{ matrix.node-version }}"
           cache: "yarn"
 
       - name: Install dependencies
