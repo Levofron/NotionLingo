@@ -1,9 +1,9 @@
 name: CI
 
-on: [pull_request]
-  # schedule:
-  #   # runs tests every day at 4am
-  #   - cron: "0 4 * * *"
+on:
+  schedule:
+    # runs tests every day at 4am
+    - cron: "0 4 * * *"
 
 jobs:
   cron:
