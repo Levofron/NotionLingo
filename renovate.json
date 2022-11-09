@@ -1,3 +1,19 @@
 {
+  "prHourlyLimit": 1,
+  "prConcurrentLimit": 1,
+  "dependencyDashboardApproval": true,
+  "repositories": ["Levofron/levofron"],
+  "extends": ["config:base"],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "minor": {
+    "automerge": false
+  },
+  "rangeStrategy": "bump",
+  "separateMultipleMajor": true,
+  "labels": ["renovate", "type: dependencies"],
+  "packageRules": [{ "enabled": false, "matchPackageNames": ["node"] }],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json"
 }
