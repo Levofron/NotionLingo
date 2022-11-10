@@ -1,3 +1,4 @@
+import { Heading } from '@chakra-ui/react';
 import Head from 'next/head';
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <h1 className="text-4xl">Test</h1>
+        <Heading>Test</Heading>
       </main>
     </div>
   );

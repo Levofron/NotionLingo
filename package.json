@@ -32,8 +32,11 @@
     "typecheck": "tsc --noEmit -p . --pretty"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.3.7",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@optimizely/optimizely-sdk": "^4.9.2",
     "@types/node": "18.11.9",
     "@types/react": "18.0.24",
@@ -41,6 +44,7 @@
     "concurrently": "^7.5.0",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
+    "framer-motion": "^7.6.5",
     "next": "13.0.1",
     "prisma": "^4.5.0",
     "react": "18.2.0",
