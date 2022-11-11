@@ -5,6 +5,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:unicorn/recommended',
     'plugin:typescript-sort-keys/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   parserOptions: {
     project: './tsconfig.json',
@@ -14,7 +15,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['react', 'folders', 'sort-destructure-keys'],
+  plugins: ['react', 'folders', 'sort-destructure-keys', 'tailwindcss'],
   overrides: [
     {
       files: ['*.js', '*.ts', '*.tsx'],
@@ -123,6 +124,11 @@ module.exports = {
         ],
         'sort-destructure-keys/sort-destructure-keys': [2, { caseSensitive: false }],
         'folders/match-regex': [2, '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$', `${process.cwd()}/`],
+        'tailwindcss/classnames-order': 'error',
+        'tailwindcss/migration-from-tailwind-2': 'error',
+        'tailwindcss/no-custom-classname': 'error',
+        'tailwindcss/enforces-negative-arbitrary-values': 'error',
+        'tailwindcss/no-contradicting-classname': 'error',
       },
     },
   ],
