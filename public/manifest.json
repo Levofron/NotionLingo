@@ -1,6 +1,6 @@
 {
-  "theme_color": "#FF5A5F",
-  "background_color": "#3c3c3c",
+  "theme_color": "#F5F5F5",
+  "background_color": "#3C3C3C",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
@@ -8,6 +8,12 @@
   "short_name": "Levofron",
   "description": "LEarn VOcabulary FROm Notion",
   "icons": [
+    {
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable",
+      "src": "/icon-192x192.png"
+    },
     {
       "src": "/icon-192x192.png",
       "sizes": "192x192",
