@@ -4,9 +4,8 @@ import { SupabaseClient } from '@supabase/supabase-js';
 export const getAuthorizationRepository = (
   supabaseInstance: SupabaseClient,
 ): IAuthorizationRepository => ({
-  async loginViaGoogle(): Promise<void> {
+  loginViaGoogle: () =>
     supabaseInstance.auth.signInWithOAuth({
       provider: 'google',
-    });
-  },
+    }),
 });
