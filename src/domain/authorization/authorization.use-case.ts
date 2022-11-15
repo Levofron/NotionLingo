@@ -1,12 +1,22 @@
 import { IAuthorizationRepository } from './authorization.repository';
 
 import { IUseCase } from '../common.types';
-import { OAuthResponse } from '@supabase/supabase-js';
+import { TOAuthResponse, ILogoutResponse } from './authorization.types';
 
-export type LoginViaGoogleUseCase = IUseCase<void, OAuthResponse>;
+// loginViaGoogleUseCase
+export type TLoginViaGoogleUseCase = IUseCase<void, TOAuthResponse>;
 
 export const loginViaGoogleUseCase = (
   authorizationRepository: IAuthorizationRepository,
-): LoginViaGoogleUseCase => ({
-  execute: (): Promise<OAuthResponse> => authorizationRepository.loginViaGoogle(),
+): TLoginViaGoogleUseCase => ({
+  execute: (): Promise<TOAuthResponse> => authorizationRepository.loginViaGoogle(),
+});
+
+// logoutUseCase
+export type TLogoutUseCase = IUseCase<void, ILogoutResponse>;
+
+export const logoutUseCase = (
+  authorizationRepository: IAuthorizationRepository,
+): TLogoutUseCase => ({
+  execute: (): Promise<ILogoutResponse> => authorizationRepository.logout(),
 });

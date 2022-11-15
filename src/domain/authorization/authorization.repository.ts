@@ -1,5 +1,6 @@
-import { OAuthResponse } from '@supabase/supabase-js';
+import { TOAuthResponse, ILogoutResponse } from './authorization.types';
 
 export interface IAuthorizationRepository {
-  loginViaGoogle: () => Promise<OAuthResponse>;
+  loginViaGoogle: () => Promise<TOAuthResponse>;
+  logout: () => Promise<ILogoutResponse>;
 }

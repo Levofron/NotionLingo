@@ -1,11 +1,12 @@
 import { IAuthorizationRepository } from '@domain/authorization/authorization.repository';
-import { SupabaseClient } from '@supabase/supabase-js';
+import { TSupabaseClient } from '@domain/authorization/authorization.types';
 
 export const getAuthorizationRepository = (
-  supabaseInstance: SupabaseClient,
+  supabaseInstance: TSupabaseClient,
 ): IAuthorizationRepository => ({
   loginViaGoogle: () =>
     supabaseInstance.auth.signInWithOAuth({
       provider: 'google',
     }),
+  logout: () => supabaseInstance.auth.signOut(),
 });
