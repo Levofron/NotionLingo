@@ -10,12 +10,12 @@ import { injectDependencies } from '../utils';
 import { getAuthorizationRepository } from '@data/authorization/authorization.repository';
 import { IAuthorizationRepository } from '@domain/authorization/authorization.repository';
 import { dataSymbols } from '@data/data.symbols';
-import { getSupabaseInstanceSource } from '@data/sources';
+import { getSupabaseSource } from '@data/sources';
 import { TSupabaseClient } from '@domain/authorization/authorization.types';
 
 export const authorizationModule = new ContainerModule((bind) => {
   bind<TSupabaseClient>(dataSymbols.SupabaseSource).toDynamicValue(
-    injectDependencies(getSupabaseInstanceSource),
+    injectDependencies(getSupabaseSource),
   );
 
   bind<IAuthorizationRepository>(dataSymbols.AuthorizationRepository).toDynamicValue(

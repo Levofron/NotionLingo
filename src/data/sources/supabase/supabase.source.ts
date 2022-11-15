@@ -5,4 +5,4 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 
 const supabaseInstance = createClient(supabaseUrl, supabaseKey);
 
-export const getSupabaseInstanceSource = () => supabaseInstance;
+export const getSupabaseSource = () => supabaseInstance;
