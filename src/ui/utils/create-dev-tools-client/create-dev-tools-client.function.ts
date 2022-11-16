@@ -5,10 +5,10 @@ export const createDevToolsClient = () => {
     return;
   }
 
-  // @ts-ignore
-  window.Authorization = authorizationModule;
+  // @ts-expect-error
+  window.authorization = authorizationModule;
 
   console.log('Welcome to Levofron devtools!');
-  console.log('window.Authorization.logout() - to logout');
-  console.log('window.Authorization.loginViaGoogle() - to login via google');
+  console.log('window.authorization.logout() - to logout');
+  console.log('window.authorization.loginViaGoogle() - to login via google');
 };
