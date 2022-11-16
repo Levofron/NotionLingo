@@ -1,7 +1,5 @@
-import { Button, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import Head from 'next/head';
-
-import { authorizationExecutors } from '@adapter/executors/authorization.executors';
 
 export default function Home() {
   return (
@@ -14,8 +12,6 @@ export default function Home() {
         <h1 className="block bg-slate-300 text-4xl leading-tight">Test</h1>
         <Heading>Test</Heading>
       </main>
-      <Button onClick={() => authorizationExecutors.loginViaGoogle()}>Login</Button>
-      <Button onClick={() => authorizationExecutors.logout()}>Logout</Button>
     </div>
   );
 }

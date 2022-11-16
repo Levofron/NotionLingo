@@ -4,7 +4,7 @@ import { supabaseInstance } from '@data/sources';
 
 const authorizationRepository = getAuthorizationRepository(supabaseInstance);
 
-export const authorizationExecutors = {
+export const authorizationModule = {
   logout: logoutUseCase(authorizationRepository).execute,
   loginViaGoogle: loginViaGoogleUseCase(authorizationRepository).execute,
 };
