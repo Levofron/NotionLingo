@@ -1,3 +1,4 @@
+import { restModule } from '@adapter/modules/rest.module';
 import { authorizationModule } from '@adapter/modules/authorization.module';
 
 export const createDevToolsClient = () => {
@@ -8,7 +9,13 @@ export const createDevToolsClient = () => {
   // @ts-expect-error
   window.authorization = authorizationModule;
 
+  // @ts-expect-error
+  window.rest = restModule;
+
   console.log('Welcome to Levofron devtools!');
+  console.log('-----------------------------');
   console.log('window.authorization.logout() - to logout');
   console.log('window.authorization.loginViaGoogle() - to login via google');
+  console.log('-----------------------------');
+  console.log('window.rest.healthCheck() - to verify if API works correctly');
 };
