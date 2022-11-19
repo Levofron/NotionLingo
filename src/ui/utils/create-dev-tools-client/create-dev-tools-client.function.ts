@@ -13,9 +13,13 @@ export const createDevToolsClient = () => {
   window.rest = restModule;
 
   console.log('Welcome to Levofron devtools!');
+
+  // authorization
   console.log('-----------------------------');
   console.log('window.authorization.logout() - to logout');
   console.log('window.authorization.loginViaGoogle() - to login via google');
+
+  // rest
   console.log('-----------------------------');
   console.log('window.rest.healthCheck() - to verify if API works correctly');
 };

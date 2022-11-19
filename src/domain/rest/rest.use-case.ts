@@ -7,5 +7,5 @@ import { AxiosResponse } from 'axios';
 export type THealthCheckUseCase = IUseCase<void, AxiosResponse<string>>;
 
 export const healthCheckUseCase = (restRepository: IRestRepository): THealthCheckUseCase => ({
-  execute: (): Promise<AxiosResponse<string>> => restRepository.healthCheck(),
+  execute: () => restRepository.healthCheck(),
 });
