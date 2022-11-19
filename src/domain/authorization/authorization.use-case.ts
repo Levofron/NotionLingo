@@ -9,7 +9,7 @@ export type TLoginViaGoogleUseCase = IUseCase<void, TOAuthResponse>;
 export const loginViaGoogleUseCase = (
   authorizationRepository: IAuthorizationRepository,
 ): TLoginViaGoogleUseCase => ({
-  execute: (): Promise<TOAuthResponse> => authorizationRepository.loginViaGoogle(),
+  execute: () => authorizationRepository.loginViaGoogle(),
 });
 
 // logoutUseCase
@@ -18,5 +18,5 @@ export type TLogoutUseCase = IUseCase<void, ILogoutResponse>;
 export const logoutUseCase = (
   authorizationRepository: IAuthorizationRepository,
 ): TLogoutUseCase => ({
-  execute: (): Promise<ILogoutResponse> => authorizationRepository.logout(),
+  execute: () => authorizationRepository.logout(),
 });
