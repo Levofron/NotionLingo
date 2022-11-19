@@ -7,8 +7,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  // TODO - validate header key
-
   const currentDate = new Date();
   const isoDate = currentDate.toISOString();
 
