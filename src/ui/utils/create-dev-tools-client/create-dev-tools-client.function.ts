@@ -1,5 +1,5 @@
 import { restModule } from '@adapter/modules/rest.module';
-import { authorizationModule } from '@adapter/modules/authorization.module';
+import { supabaseModule } from '@adapter/modules/supabase.module';
 
 export const createDevToolsClient = () => {
   if (process.env.NEXT_PUBLIC_APP_ENV !== 'local') {
@@ -7,17 +7,17 @@ export const createDevToolsClient = () => {
   }
 
   // @ts-expect-error
-  window.authorization = authorizationModule;
+  window.supabase = supabaseModule;
 
   // @ts-expect-error
   window.rest = restModule;
 
   console.log('Welcome to Levofron devtools!');
 
-  // authorization
+  // supabase
   console.log('-----------------------------');
-  console.log('window.authorization.logout() - to logout');
-  console.log('window.authorization.loginViaGoogle() - to login via google');
+  console.log('window.supabase.logout() - to logout');
+  console.log('window.supabase.loginViaGoogle() - to login via google');
 
   // rest
   console.log('-----------------------------');
