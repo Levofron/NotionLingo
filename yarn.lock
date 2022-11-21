@@ -3689,26 +3689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/auth-helpers-nextjs@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "@supabase/auth-helpers-nextjs@npm:0.5.2"
-  dependencies:
-    "@supabase/auth-helpers-shared": 0.2.3
-  peerDependencies:
-    "@supabase/supabase-js": ^2.0.4
-  checksum: 0c200e9fcabaf156e51c21c69c5a92c448ca1de4f33c479ed1cc8816090d1538af9d536a232fdcafbb267c7dbdd0438a419517c08cf3084b7fb54ab45ed16ef0
-  languageName: node
-  linkType: hard
-
-"@supabase/auth-helpers-shared@npm:0.2.3":
-  version: 0.2.3
-  resolution: "@supabase/auth-helpers-shared@npm:0.2.3"
-  peerDependencies:
-    "@supabase/supabase-js": ^2.0.4
-  checksum: c1fdea7b83d07a5dc87550a1cb784d61f33f5adce2118bac69d8a735bfc9a91aee97e7d53f4833bb1420a11c4675d7b2fcd0294aa508d3ba43688543ee414813
-  languageName: node
-  linkType: hard
-
 "@supabase/functions-js@npm:^2.0.0":
   version: 2.0.0
   resolution: "@supabase/functions-js@npm:2.0.0"
@@ -9786,7 +9766,6 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@optimizely/optimizely-sdk": ^4.9.2
     "@prisma/client": 4.6.1
-    "@supabase/auth-helpers-nextjs": ^0.5.2
     "@supabase/supabase-js": ^2.1.0
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
