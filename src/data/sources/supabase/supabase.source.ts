@@ -8,4 +8,5 @@ export const getSupabaseSource = (supabaseInstance: TSupabaseClient): ISupabaseS
       provider: 'google',
     }),
   logout: () => supabaseInstance.auth.signOut(),
+  getUser: () => supabaseInstance.auth.getUser(),
 });
