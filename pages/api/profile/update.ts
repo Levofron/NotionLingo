@@ -1,16 +1,19 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    res.status(405).send({ message: 'Only POST requests allowed' });
+import {
+  withMiddleware,
+  validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
+} from '../utils';
 
-    return;
-  }
-
-  // TODO - validate header key
+const handler = (_: NextApiRequest, res: NextApiResponse) => {
   // TODO - add login validation
   // TODO - create update profile endpoint
   // TODO - allow user to change only api_key and page_id
 
   res.status(200).json({ name: 'John Doe' });
-}
+};
+
+const middlewareToApply = [validateRequestMethodMiddleware('POST'), validateRouteSecretMiddleware];
+
+export default withMiddleware(handler)(middlewareToApply);

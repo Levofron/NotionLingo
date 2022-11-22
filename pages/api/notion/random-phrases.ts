@@ -1,15 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    res.status(405).send({ message: 'Only GET requests allowed' });
+import {
+  withMiddleware,
+  validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
+} from '../utils';
 
-    return;
-  }
-
-  // TODO - validate header key
+const handler = (_: NextApiRequest, res: NextApiResponse) => {
   // TODO - add login validation
   // TODO - create get 5 random phrases endpoint
 
   res.status(200).json({ name: 'John Doe' });
-}
+};
+
+const middlewareToApply = [validateRequestMethodMiddleware('GET'), validateRouteSecretMiddleware];
+
+export default withMiddleware(handler)(middlewareToApply);
