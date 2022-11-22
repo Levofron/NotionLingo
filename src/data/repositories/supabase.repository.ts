@@ -5,4 +5,5 @@ export const getSupabaseRepository = (supabaseSource: ISupabaseSource): ISupabas
   loginViaGoogle: () => supabaseSource.loginViaGoogle(),
   logout: () => supabaseSource.logout(),
   getUser: () => supabaseSource.getUser(),
+  getSession: () => supabaseSource.getSession(),
 });
