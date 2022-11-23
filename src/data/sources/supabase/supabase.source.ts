@@ -4,10 +4,10 @@ import { TSupabaseClient } from '@domain/supabase/supabase.types';
 
 export const getSupabaseSource = (supabaseInstance: TSupabaseClient): ISupabaseSource => ({
   loginViaGoogle: () =>
-    supabaseInstance.auth.signInWithOAuth({
+    supabaseInstance.auth.signIn({
       provider: 'google',
     }),
   logout: () => supabaseInstance.auth.signOut(),
-  getUser: () => supabaseInstance.auth.getUser(),
-  getSession: () => supabaseInstance.auth.getSession(),
+  getUser: () => Promise.resolve(supabaseInstance.auth.user()),
+  getSession: () => Promise.resolve(supabaseInstance.auth.session()),
 });

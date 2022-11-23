@@ -3689,63 +3689,62 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/functions-js@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@supabase/functions-js@npm:2.0.0"
+"@supabase/functions-js@npm:^1.3.4":
+  version: 1.3.4
+  resolution: "@supabase/functions-js@npm:1.3.4"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: 023d1bf17a7e58d40822ef09ea0d751a807dc9028ba5f47b93177f2d3c13bcebe1db109dc1c507e4b5d8efdedb8f1b13d2e1bfef34adf1e81126b6d970027cce
+  checksum: 9101b90784c247efa91a761da545eb845cbad6b0c769b0e775f642de9c43394bc176d27f94598595e762a265983ecf59d625645a262891de008702dfdcdd0f0b
   languageName: node
   linkType: hard
 
-"@supabase/gotrue-js@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "@supabase/gotrue-js@npm:2.3.0"
+"@supabase/gotrue-js@npm:^1.22.21":
+  version: 1.24.0
+  resolution: "@supabase/gotrue-js@npm:1.24.0"
   dependencies:
-    cross-fetch: ^3.1.5
-  checksum: 80bcaa3590a9b72f55ca28980e54f80a73f9d2644443323c4e6886f5d495f9a4869cd6ec51fb2c0a7b4ddb9fabea11dc3c978770e2a2d80c8468f6db79c4e05a
+    cross-fetch: ^3.0.6
+  checksum: 95191c8b94c02d23dee190fbb8797826fc0a37a88e7431eb4910325a405193f12ada3c1141e2fd8c7fe69caf88ff0664b62d0e716625866eb9eb7e2c038308b4
   languageName: node
   linkType: hard
 
-"@supabase/postgrest-js@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@supabase/postgrest-js@npm:1.1.0"
+"@supabase/postgrest-js@npm:^0.37.4":
+  version: 0.37.4
+  resolution: "@supabase/postgrest-js@npm:0.37.4"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: 5cb0cd696976c29e1b618004df5096c36f13f38bb6eca12107ffcd918cd8f39d10180993404c7b3b268c30c35a56c27cc02f983488996ad59b9a4919b6f40295
+  checksum: 898da6b2e77454832b0b8edfdb3db67f2a65a58ee1fe10d3e4cb517c7586c2621a022b2f332d55e8bf784a21ae62285391e591f2f1a086eaa23651d78799c9f5
   languageName: node
   linkType: hard
 
-"@supabase/realtime-js@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@supabase/realtime-js@npm:2.1.0"
+"@supabase/realtime-js@npm:^1.7.5":
+  version: 1.7.5
+  resolution: "@supabase/realtime-js@npm:1.7.5"
   dependencies:
     "@types/phoenix": ^1.5.4
     websocket: ^1.0.34
-  checksum: 839ba208a61c8049fd3dc0be6fac1bc6cd5b8985d0ae412598dfc350f705c40066d0446381a92081a7dc1da4900d9dfa78e97e034a501da4019ae587a56549af
+  checksum: 9b24eae299a1bc152c25754557653b3a4dafa0350a676b301326ac12afb18070dbc91593fb93cfe41cf0dc19c47374da9c8517bd0b0dc7a675ae028d4c8f4351
   languageName: node
   linkType: hard
 
-"@supabase/storage-js@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@supabase/storage-js@npm:2.0.0"
+"@supabase/storage-js@npm:^1.7.2":
+  version: 1.7.3
+  resolution: "@supabase/storage-js@npm:1.7.3"
   dependencies:
-    cross-fetch: ^3.1.5
-  checksum: e1610e0304ee071dfe67490a145b3097377978b38c28c0b307642354644fa6804e1118b0e4bcd870b90c56e8aba5c366093f0d538a39a402576102c927b4e176
+    cross-fetch: ^3.1.0
+  checksum: f9ae3fdc2ae238041618dc2e653b2993f723c0e08f6a02bc6d919018df18c492e7025b2fe7e03c0a6c6e11102361c2a3c3a31ffc7f5539c21de368bdcc3012be
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@supabase/supabase-js@npm:2.1.0"
+"@supabase/supabase-js@npm:1.35.7":
+  version: 1.35.7
+  resolution: "@supabase/supabase-js@npm:1.35.7"
   dependencies:
-    "@supabase/functions-js": ^2.0.0
-    "@supabase/gotrue-js": ^2.3.0
-    "@supabase/postgrest-js": ^1.1.0
-    "@supabase/realtime-js": ^2.1.0
-    "@supabase/storage-js": ^2.0.0
-    cross-fetch: ^3.1.5
-  checksum: 4e4e23cb9ba85b6339b3e617525a799c7aeb122a6ed3e39c423d6d75c87d67ef2f74d216d4a2a04e1bc11f4a2962fefbb49a9feed26776cd1c01167d501b2068
+    "@supabase/functions-js": ^1.3.4
+    "@supabase/gotrue-js": ^1.22.21
+    "@supabase/postgrest-js": ^0.37.4
+    "@supabase/realtime-js": ^1.7.5
+    "@supabase/storage-js": ^1.7.2
+  checksum: 9535695d3ed6e0d6b37cad4a500a948e7719c4a89234212f5d9d2927318cda33359840d181b1adaa6fc022ec955eabf79f260af037c5f13e8de662fe73f6833b
   languageName: node
   linkType: hard
 
@@ -6130,7 +6129,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:^3.1.5":
+"cross-fetch@npm:^3.0.6, cross-fetch@npm:^3.1.0, cross-fetch@npm:^3.1.5":
   version: 3.1.5
   resolution: "cross-fetch@npm:3.1.5"
   dependencies:
@@ -9766,7 +9765,7 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@optimizely/optimizely-sdk": ^4.9.2
     "@prisma/client": 4.6.1
-    "@supabase/supabase-js": ^2.1.0
+    "@supabase/supabase-js": 1.35.7
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
     "@testing-library/react-hooks": ^8.0.1

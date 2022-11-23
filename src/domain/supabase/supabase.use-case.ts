@@ -1,10 +1,10 @@
 import { ISupabaseRepository } from './supabase.repository';
 
 import { IUseCase } from '../common.types';
-import { TOAuthResponse, ILogoutResponse, TUserResponse, TSessionResponse } from './supabase.types';
+import { IOAuthResponse, ILogoutResponse, TUser, TSession } from './supabase.types';
 
 // loginViaGoogleUseCase
-export type TLoginViaGoogleUseCase = IUseCase<void, TOAuthResponse>;
+export type TLoginViaGoogleUseCase = IUseCase<void, IOAuthResponse>;
 
 export const loginViaGoogleUseCase = (
   supabaseRepository: ISupabaseRepository,
@@ -20,14 +20,14 @@ export const logoutUseCase = (supabaseRepository: ISupabaseRepository): TLogoutU
 });
 
 // getUserUseCase
-export type TGetUserUseCase = IUseCase<void, TUserResponse>;
+export type TGetUserUseCase = IUseCase<void, TUser | null>;
 
 export const getUserUseCase = (supabaseRepository: ISupabaseRepository): TGetUserUseCase => ({
   execute: () => supabaseRepository.getUser(),
 });
 
 // getSessionUseCase
-export type TGetSessionUseCase = IUseCase<void, TSessionResponse>;
+export type TGetSessionUseCase = IUseCase<void, TSession | null>;
 
 export const getSessionUseCase = (supabaseRepository: ISupabaseRepository): TGetSessionUseCase => ({
   execute: () => supabaseRepository.getSession(),
