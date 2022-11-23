@@ -9,4 +9,5 @@ export const getSupabaseSource = (supabaseInstance: TSupabaseClient): ISupabaseS
     }),
   logout: () => supabaseInstance.auth.signOut(),
   getUser: () => supabaseInstance.auth.getUser(),
+  getSession: () => supabaseInstance.auth.getSession(),
 });

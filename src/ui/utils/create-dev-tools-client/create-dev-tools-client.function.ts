@@ -18,6 +18,7 @@ export const createDevToolsClient = () => {
   console.log('-----------------------------');
   console.log('window.supabase.logout() - to logout');
   console.log('window.supabase.getUser() - to get user');
+  console.log('window.supabase.getSession() - to get session');
   console.log('window.supabase.loginViaGoogle() - to login via google');
 
   // rest
