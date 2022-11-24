@@ -4,10 +4,11 @@ import {
   TUserResponse,
   TSessionResponse,
 } from '@domain/supabase/supabase.types';
+import { Provider } from '@supabase/supabase-js';
 
 export interface ISupabaseSource {
   getSession: () => Promise<TSessionResponse>;
   getUser: () => Promise<TUserResponse>;
-  loginViaGoogle: () => Promise<TOAuthResponse>;
+  loginWithOAuth: (provider: Provider) => Promise<TOAuthResponse>;
   logout: () => Promise<ILogoutResponse>;
 }
