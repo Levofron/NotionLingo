@@ -24,4 +24,5 @@ export const createDevToolsClient = () => {
   // rest
   console.log('-----------------------------');
   console.log('window.rest.healthCheck() - to verify if API works correctly');
+  console.log('window.rest.setSupabaseCookie() - to set supabase cookie');
 };
