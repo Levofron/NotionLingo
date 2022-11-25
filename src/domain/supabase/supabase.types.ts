@@ -1,37 +1,22 @@
-import {
-  AuthError,
-  OAuthResponse,
-  Session,
-  SupabaseClient,
-  UserResponse,
-} from '@supabase/supabase-js';
-
-export type TOAuthResponse = OAuthResponse;
+import { ApiError, Session, SupabaseClient, User, Provider } from '@supabase/supabase-js';
 
 export type TSupabaseClient = SupabaseClient;
 
-export type TUserResponse = UserResponse;
+export type TUser = User;
 
-export type TSessionResponse =
-  | {
-      data: {
-        session: Session;
-      };
-      error: null;
-    }
-  | {
-      data: {
-        session: null;
-      };
-      error: AuthError;
-    }
-  | {
-      data: {
-        session: null;
-      };
-      error: null;
-    };
+export type TSession = Session;
+
+export type TProvider = Provider;
+
+export type TApiError = ApiError;
 
 export interface ILogoutResponse {
-  error: AuthError | null;
+  error: TApiError | null;
+}
+
+export interface IOAuthResponse extends ILogoutResponse {
+  provider?: Provider;
+  session: TSession | null;
+  url?: string | null;
+  user: TUser | null;
 }

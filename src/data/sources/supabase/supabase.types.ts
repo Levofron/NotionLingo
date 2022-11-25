@@ -1,14 +1,14 @@
 import {
-  TOAuthResponse,
+  IOAuthResponse,
   ILogoutResponse,
-  TUserResponse,
-  TSessionResponse,
+  TUser,
+  TSession,
+  TProvider,
 } from '@domain/supabase/supabase.types';
-import { Provider } from '@supabase/supabase-js';
 
 export interface ISupabaseSource {
-  getSession: () => Promise<TSessionResponse>;
-  getUser: () => Promise<TUserResponse>;
-  loginWithOAuth: (provider: Provider) => Promise<TOAuthResponse>;
+  getSession: () => Promise<TSession | null>;
+  getUser: () => Promise<TUser | null>;
   logout: () => Promise<ILogoutResponse>;
+  signIn: (provider: TProvider) => Promise<IOAuthResponse>;
 }

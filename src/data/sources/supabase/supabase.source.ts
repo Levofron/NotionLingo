@@ -1,14 +1,13 @@
 import { ISupabaseSource } from './supabase.types';
 
-import { TSupabaseClient } from '@domain/supabase/supabase.types';
-import { Provider } from '@supabase/supabase-js';
+import { TProvider, TSupabaseClient } from '@domain/supabase/supabase.types';
 
 export const getSupabaseSource = (supabaseInstance: TSupabaseClient): ISupabaseSource => ({
-  loginWithOAuth: (provider: Provider) =>
-    supabaseInstance.auth.signInWithOAuth({
+  signIn: (provider: TProvider) =>
+    supabaseInstance.auth.signIn({
       provider,
     }),
   logout: () => supabaseInstance.auth.signOut(),
-  getUser: () => supabaseInstance.auth.getUser(),
-  getSession: () => supabaseInstance.auth.getSession(),
+  getUser: () => Promise.resolve(supabaseInstance.auth.user()),
+  getSession: () => Promise.resolve(supabaseInstance.auth.session()),
 });
