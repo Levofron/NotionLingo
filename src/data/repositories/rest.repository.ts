@@ -12,4 +12,5 @@ export const getRestRepository = (
 
     return restSource.setSupabaseCookie(session);
   },
+  getLoggedUser: () => restSource.getLoggedUser(),
 });

@@ -17,4 +17,9 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
       event: supabaseSession ? 'SIGNED_IN' : 'SIGNED_OUT',
     });
   },
+  getLoggedUser: async () => {
+    const response = await axiosInstance.get(restEndpoints.GET_LOGGED_USER);
+
+    return response;
+  },
 });

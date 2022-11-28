@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { data: profilesData, error: profilesError } = await supabaseInstance
     .from('profiles')
-    .select('email,created_at,updated_at')
+    .select('id,email,created_at,updated_at')
     .eq('id', user?.id)
     .single();
 
@@ -23,7 +23,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).send(profilesError);
   }
 
-  const mergedUser = { ...user, ...profilesData };
+  const mergedUser = {
+    id: profilesData.id,
+    email: profilesData.email,
+    createdAt: profilesData.created_at,
+    updatedAt: profilesData.updated_at,
+    fullName: user?.user_metadata.full_name,
+    avatarUrl: user?.user_metadata.avatar_url,
+  };
 
   res.status(200).json(mergedUser);
 };
