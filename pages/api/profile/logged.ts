@@ -23,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).send(profilesError);
   }
 
-  const mergedUser = {
+  const userData = {
     id: profilesData.id,
     email: profilesData.email,
     createdAt: profilesData.created_at,
@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     avatarUrl: user?.user_metadata.avatar_url,
   };
 
-  res.status(200).json(mergedUser);
+  res.status(200).json(userData);
 };
 
 const middlewareToApply = [
