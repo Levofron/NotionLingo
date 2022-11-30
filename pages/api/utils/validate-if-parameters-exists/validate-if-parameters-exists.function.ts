@@ -6,7 +6,7 @@ export const validateIfParametersExists =
     const requestParameters = req[parametersDestination];
     const requestParametersKeys = Object.keys(requestParameters);
 
-    const hasParameters = requestParametersKeys?.some((_requestParametersKey) =>
+    const hasParameters = requestParametersKeys?.every((_requestParametersKey) =>
       requiredParameters.includes(requestParameters[_requestParametersKey]),
     );
 
