@@ -20,6 +20,6 @@ const restRepository = getRestRepository(restSource, supabaseSource);
 export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
   getLoggedUser: getLoggedUserUseCase(restRepository).execute,
-  setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
   setNotionToken: setNotionTokenUseCase(restRepository).execute,
+  setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
 };
