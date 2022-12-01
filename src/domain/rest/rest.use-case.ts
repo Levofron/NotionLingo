@@ -2,6 +2,7 @@ import { IRestRepository } from './rest.repository';
 
 import { IUseCase } from '../common.types';
 import { AxiosResponse } from 'axios';
+import { IUser } from './rest.models';
 
 // healthCheckUseCase
 export type THealthCheckUseCase = IUseCase<void, AxiosResponse<string>>;
@@ -17,4 +18,11 @@ export const setSupabaseCookieUseCase = (
   restRepository: IRestRepository,
 ): TSetSupabaseCookieUseCase => ({
   execute: () => restRepository.setSupabaseCookie(),
+});
+
+// getLoggedUser
+export type TGetLoggedUserUseCase = IUseCase<void, AxiosResponse<IUser>>;
+
+export const getLoggedUserUseCase = (restRepository: IRestRepository): TGetLoggedUserUseCase => ({
+  execute: () => restRepository.getLoggedUser(),
 });
