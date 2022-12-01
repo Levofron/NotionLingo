@@ -3564,34 +3564,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:4.6.1":
-  version: 4.6.1
-  resolution: "@prisma/client@npm:4.6.1"
-  dependencies:
-    "@prisma/engines-version": 4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32
-  peerDependencies:
-    prisma: "*"
-  peerDependenciesMeta:
-    prisma:
-      optional: true
-  checksum: ef044195e166f96fc1f82bd8ce0d79038d416a2797bc9fb902a23ca357763f881b576694d89b8bf6ecf438ee13fc96e9e6c99df048d159410fe4097f40c38caa
-  languageName: node
-  linkType: hard
-
-"@prisma/engines-version@npm:4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32":
-  version: 4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32
-  resolution: "@prisma/engines-version@npm:4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32"
-  checksum: 6375e3e89381f4c4faf44d8020ec67826eb8dd5eaa5b775360252aaf209506c147ac57e3c22e86388a058a8ade59f57e2c208b4b183da91045da94e2a5b86ec4
-  languageName: node
-  linkType: hard
-
-"@prisma/engines@npm:4.6.1":
-  version: 4.6.1
-  resolution: "@prisma/engines@npm:4.6.1"
-  checksum: ca49b8ffdfc69fe8ed8362d2670f46e7f6333e5ee92096ac88aada2cec0763e29def0e7c23dc5703cec29e14b067bad3bd52475badcbf687e5483c9dbaed05e8
-  languageName: node
-  linkType: hard
-
 "@rollup/plugin-babel@npm:^5.2.0":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
@@ -9778,7 +9750,6 @@ __metadata:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     "@optimizely/optimizely-sdk": ^4.9.2
-    "@prisma/client": 4.6.1
     "@supabase/supabase-js": 1.35.7
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
@@ -9823,7 +9794,6 @@ __metadata:
     prettier: ^2.7.1
     prettier-package-json: ^2.7.0
     prettier-plugin-tailwindcss: ^0.1.13
-    prisma: 4.6.1
     react: 18.2.0
     react-dom: 18.2.0
     tailwindcss: ^3.2.2
@@ -11477,18 +11447,6 @@ __metadata:
     ansi-styles: ^5.0.0
     react-is: ^18.0.0
   checksum: d192cbd3dee72e9b60764629d1f098d60fddc3fc9435f44774a01dd1c5794f36a81fa6a7377a527f994317950d8fc6c5bf9c9915387c5d32f107525996e32a1c
-  languageName: node
-  linkType: hard
-
-"prisma@npm:4.6.1":
-  version: 4.6.1
-  resolution: "prisma@npm:4.6.1"
-  dependencies:
-    "@prisma/engines": 4.6.1
-  bin:
-    prisma: build/index.js
-    prisma2: build/index.js
-  checksum: 8041ac71b383bff3e737c2f1a047c89d8ff7684640fe842233186a561996f607b2eacb9451df6fc0135fe1ec53a8fe0dd1edbc84b3c58becad9d38850f5f0bf4
   languageName: node
   linkType: hard
 
