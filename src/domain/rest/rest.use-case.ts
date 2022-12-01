@@ -20,14 +20,14 @@ export const setSupabaseCookieUseCase = (
   execute: () => restRepository.setSupabaseCookie(),
 });
 
-// getLoggedUser
+// getLoggedUserUseCase
 export type TGetLoggedUserUseCase = IUseCase<void, AxiosResponse<IUser>>;
 
 export const getLoggedUserUseCase = (restRepository: IRestRepository): TGetLoggedUserUseCase => ({
   execute: () => restRepository.getLoggedUser(),
 });
 
-// setNotionToken
+// setNotionTokenUseCase
 export type TSetNotionTokenUseCase = IUseCase<{ token: string }, AxiosResponse<IHash>>;
 
 export const setNotionTokenUseCase = (restRepository: IRestRepository): TSetNotionTokenUseCase => ({
