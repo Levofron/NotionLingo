@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
   withMiddleware,
+  getUserFromRequest,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   validateIfUserIsLoggedIn,
@@ -11,7 +12,7 @@ import {
 import { supabaseInstance } from '@infrastructure';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { user } = await supabaseInstance.auth.api.getUserByCookie(req);
+  const user = await getUserFromRequest(req);
 
   const { data: profilesData, error: profilesError } = await supabaseInstance
     .from('profiles')
