@@ -1,3 +1,5 @@
+export { decrypt } from './decrypt/decrypt.function';
+export { encrypt } from './encrypt/encrypt.function';
 export { withMiddleware } from './with-middleware/with-middleware.function';
 export { validateIfUserIsLoggedIn } from './validate-if-user-is-logged-in/validate-if-user-is-logged-in.function';
 export { validateRouteSecretMiddleware } from './validate-route-secret-middleware/validate-route-secret-middleware.function';

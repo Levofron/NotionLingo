@@ -1,7 +1,7 @@
 const mapPathsFromTsConfig = require('jest-module-name-mapper').default;
 
 module.exports = {
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/src', '<rootDir>/pages'],
   testEnvironment: 'jsdom',
   moduleNameMapper: mapPathsFromTsConfig(),
   transform: { '^.+\\.(ts|tsx)$': 'ts-jest' },
