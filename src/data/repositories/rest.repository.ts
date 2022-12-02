@@ -14,4 +14,5 @@ export const getRestRepository = (
   },
   getLoggedUser: () => restSource.getLoggedUser(),
   setNotionApiToken: (token: string) => restSource.setNotionApiToken(token),
+  getAvailableNotionPages: () => restSource.getAvailableNotionPages(),
 });

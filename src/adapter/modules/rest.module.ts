@@ -3,6 +3,7 @@ import {
   getLoggedUserUseCase,
   setNotionApiTokenUseCase,
   setSupabaseCookieUseCase,
+  getAvailableNotionPagesUseCase,
 } from '@domain/rest/rest.use-case';
 import { getRestRepository } from '@data/repositories/rest.repository';
 import { getRestSource } from '@data/sources/rest/rest.source';
@@ -22,4 +23,5 @@ export const restModule = {
   getLoggedUser: getLoggedUserUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
+  getAvailableNotionPages: getAvailableNotionPagesUseCase(restRepository).execute,
 };
