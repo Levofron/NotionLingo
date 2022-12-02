@@ -6,3 +6,8 @@ export interface IUser {
   id: string;
   updatedAt: string | null;
 }
+
+export interface IHash {
+  content: string;
+  iv: string;
+}

@@ -22,4 +22,9 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
+  setNotionToken: async (token: string) => {
+    const response = await axiosInstance.post(restEndpoints.SET_NOTION_TOKEN, { token });
+
+    return response;
+  },
 });

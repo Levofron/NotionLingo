@@ -2,6 +2,7 @@ import {
   healthCheckUseCase,
   setSupabaseCookieUseCase,
   getLoggedUserUseCase,
+  setNotionTokenUseCase,
 } from '@domain/rest/rest.use-case';
 import { getRestRepository } from '@data/repositories/rest.repository';
 import { getRestSource } from '@data/sources/rest/rest.source';
@@ -19,5 +20,6 @@ const restRepository = getRestRepository(restSource, supabaseSource);
 export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
   getLoggedUser: getLoggedUserUseCase(restRepository).execute,
+  setNotionToken: setNotionTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
 };

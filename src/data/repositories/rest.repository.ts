@@ -13,4 +13,5 @@ export const getRestRepository = (
     return restSource.setSupabaseCookie(session);
   },
   getLoggedUser: () => restSource.getLoggedUser(),
+  setNotionToken: (token: string) => restSource.setNotionToken(token),
 });
