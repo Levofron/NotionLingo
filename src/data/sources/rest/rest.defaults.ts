@@ -7,5 +7,5 @@ export const restEndpoints = {
   GET_LOGGED_USER: '/profile/logged',
 
   // notion
-  SET_NOTION_TOKEN: '/notion/set-token',
+  SET_NOTION_API_TOKEN: '/notion/set-api-token',
 };

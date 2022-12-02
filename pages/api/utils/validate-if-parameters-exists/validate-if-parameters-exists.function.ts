@@ -7,11 +7,11 @@ export const validateIfParametersExists =
     const requestParametersKeys = Object.keys(requestParameters);
 
     const hasParameters = requestParametersKeys?.every((_requestParametersKey) =>
-      requiredParameters.includes(requestParameters[_requestParametersKey]),
+      requiredParameters.includes(_requestParametersKey),
     );
 
     if (!hasParameters) {
-      res.status(400).send({
+      res.status(400).json({
         message: `Incorrect request. Your "${parametersDestination}" does not contain all required arguments`,
       });
 
