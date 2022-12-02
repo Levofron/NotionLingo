@@ -27,9 +27,11 @@ export const getLoggedUserUseCase = (restRepository: IRestRepository): TGetLogge
   execute: () => restRepository.getLoggedUser(),
 });
 
-// setNotionTokenUseCase
-export type TSetNotionTokenUseCase = IUseCase<{ token: string }, AxiosResponse<IHash>>;
+// setNotionApiTokenUseCase
+export type TSetNotionApiTokenUseCase = IUseCase<{ token: string }, AxiosResponse<IHash>>;
 
-export const setNotionTokenUseCase = (restRepository: IRestRepository): TSetNotionTokenUseCase => ({
-  execute: ({ token }) => restRepository.setNotionToken(token),
+export const setNotionApiTokenUseCase = (
+  restRepository: IRestRepository,
+): TSetNotionApiTokenUseCase => ({
+  execute: ({ token }) => restRepository.setNotionApiToken(token),
 });

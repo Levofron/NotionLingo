@@ -5,7 +5,7 @@ export const validateIfUserIsLoggedIn = async (req: NextApiRequest, res: NextApi
   const { user } = await supabaseInstance.auth.api.getUserByCookie(req);
 
   if (!user) {
-    res.status(401).send({ message: 'Unauthorized user' });
+    res.status(401).json({ message: 'Unauthorized user' });
 
     return false;
   }

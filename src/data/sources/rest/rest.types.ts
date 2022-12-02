@@ -5,6 +5,6 @@ import { AxiosResponse } from 'axios';
 export interface IRestSource {
   getLoggedUser: () => Promise<AxiosResponse<IUser>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
-  setNotionToken: (token: string) => Promise<AxiosResponse<IHash>>;
+  setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
   setSupabaseCookie: (supabaseSession: TSession | null) => Promise<void>;
 }
