@@ -27,4 +27,9 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
+  getAvailableNotionPages: async () => {
+    const response = await axiosInstance.get(restEndpoints.GET_AVAILABLE_NOTION_PAGES);
+
+    return response;
+  },
 });

@@ -3,6 +3,7 @@ import { TSession } from '@domain/supabase/supabase.types';
 import { AxiosResponse } from 'axios';
 
 export interface IRestSource {
+  getAvailableNotionPages: () => Promise<AxiosResponse<void>>;
   getLoggedUser: () => Promise<AxiosResponse<IUser>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;

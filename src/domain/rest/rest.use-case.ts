@@ -35,3 +35,12 @@ export const setNotionApiTokenUseCase = (
 ): TSetNotionApiTokenUseCase => ({
   execute: ({ token }) => restRepository.setNotionApiToken(token),
 });
+
+// getAvailableNotionPagesUseCase
+export type TGetAvailableNotionPagesTokenUseCase = IUseCase<void, AxiosResponse<void>>;
+
+export const getAvailableNotionPagesUseCase = (
+  restRepository: IRestRepository,
+): TGetAvailableNotionPagesTokenUseCase => ({
+  execute: () => restRepository.getAvailableNotionPages(),
+});
