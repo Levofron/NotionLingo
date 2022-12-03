@@ -37,10 +37,19 @@ export const setNotionApiTokenUseCase = (
 });
 
 // getAvailableNotionPagesUseCase
-export type TGetAvailableNotionPagesTokenUseCase = IUseCase<void, AxiosResponse<void>>;
+export type TGetAvailableNotionPagesUseCase = IUseCase<void, AxiosResponse<void>>;
 
 export const getAvailableNotionPagesUseCase = (
   restRepository: IRestRepository,
-): TGetAvailableNotionPagesTokenUseCase => ({
+): TGetAvailableNotionPagesUseCase => ({
   execute: () => restRepository.getAvailableNotionPages(),
+});
+
+// setNotionPageIdUseCase
+export type TSetNotionPageIdUseCase = IUseCase<{ pageId: string }, AxiosResponse<void>>;
+
+export const setNotionPageIdUseCase = (
+  restRepository: IRestRepository,
+): TSetNotionPageIdUseCase => ({
+  execute: ({ pageId }) => restRepository.setNotionPageId(pageId),
 });

@@ -7,5 +7,6 @@ export interface IRestSource {
   getLoggedUser: () => Promise<AxiosResponse<IUser>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
+  setNotionPageId: (pageId: string) => Promise<AxiosResponse<void>>;
   setSupabaseCookie: (supabaseSession: TSession | null) => Promise<void>;
 }

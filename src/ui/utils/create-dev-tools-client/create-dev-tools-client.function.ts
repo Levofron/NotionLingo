@@ -28,4 +28,5 @@ export const createDevToolsClient = () => {
   console.log('window.rest.setNotionApiToken(token) - to set a new notion token');
   console.log('window.rest.getLoggedUser() - to get all details about logged user');
   console.log('window.rest.getAvailableNotionPages() - to get all available notion pages');
+  console.log('window.rest.setNotionPageId(pageId) - to set a selected page id to logged user');
 };

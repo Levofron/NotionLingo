@@ -32,4 +32,9 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
+  setNotionPageId: async (pageId: string) => {
+    const response = await axiosInstance.post(restEndpoints.SET_NOTION_PAGE_ID, { pageId });
+
+    return response;
+  },
 });
