@@ -9,6 +9,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   decrypt,
   createNotionClient,
+  isValidNotionPageSchema,
 } from '../utils';
 
 import { supabaseInstance } from '@infrastructure';
@@ -33,19 +34,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const notionClient = createNotionClient(notionApiKey);
 
-    const availablePages = await notionClient.search({
+    const { results: availablePages } = await notionClient.search({
       filter: { value: 'database', property: 'object' },
     });
 
-    const parsedAvailablePages = (availablePages.results as DatabaseObjectResponse[]).map(
-      (_page) => ({
-        id: _page.id,
-        url: _page.url,
-        createdTime: _page.created_time,
-        title: _page.title[0].plain_text,
-        lastEditedTime: _page.last_edited_time,
-      }),
+    const filteredAvailablePages = (availablePages as DatabaseObjectResponse[]).filter(
+      (_availablePage) => isValidNotionPageSchema(_availablePage.properties),
     );
+
+    const parsedAvailablePages = filteredAvailablePages.map((_page) => ({
+      id: _page.id,
+      url: _page.url,
+      createdTime: _page.created_time,
+      title: _page.title[0].plain_text,
+      lastEditedTime: _page.last_edited_time,
+    }));
 
     return res.status(200).json(parsedAvailablePages);
   } catch (error) {
