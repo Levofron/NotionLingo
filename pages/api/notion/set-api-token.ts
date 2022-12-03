@@ -9,14 +9,9 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   validateIfParametersExists,
+  getUserFromRequest,
   assignRequestTokenToSupabaseSessionMiddleware,
 } from '../utils';
-
-const getUserFromRequest = async (req: NextApiRequest) => {
-  const { user } = await supabaseInstance.auth.api.getUserByCookie(req);
-
-  return user;
-};
 
 const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string) =>
   supabaseInstance
