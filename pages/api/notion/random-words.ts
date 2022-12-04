@@ -1,18 +1,122 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
+  decrypt,
   withMiddleware,
+  getUserFromRequest,
+  createNotionClient,
+  validateIfUserIsLoggedIn,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
+  assignRequestTokenToSupabaseSessionMiddleware,
 } from '../utils';
 
-const handler = (_: NextApiRequest, res: NextApiResponse) => {
-  // TODO - add login validation
-  // TODO - create get 5 random phrases endpoint
+import { supabaseInstance } from '@infrastructure';
+import { Client } from '@notionhq/client';
+import {
+  PageObjectResponse,
+  PartialPageObjectResponse,
+} from '@notionhq/client/build/src/api-endpoints';
 
-  res.status(200).json({ name: 'John Doe' });
+const PAGE_SIZE = 100;
+const RECORDS_TO_RETURN = 5;
+
+const getProfileDetails = (userId: string) =>
+  supabaseInstance
+    .from('profiles')
+    .select('notion_api_key,notion_page_id')
+    .eq('id', userId)
+    .single();
+
+const getAllPages = async (notionClient: Client, databaseId: string) => {
+  let startCursor: string | undefined;
+  let result: (PageObjectResponse | PartialPageObjectResponse)[] = [];
+
+  while (true) {
+    // eslint-disable-next-line no-await-in-loop
+    const database = await notionClient.databases.query({
+      start_cursor: startCursor,
+      database_id: databaseId,
+      page_size: PAGE_SIZE,
+    });
+
+    startCursor = database.next_cursor || undefined;
+
+    result = [...result, ...database.results];
+
+    if (!database.has_more) {
+      break;
+    }
+  }
+
+  return result;
 };
 
-const middlewareToApply = [validateRequestMethodMiddleware('GET'), validateRouteSecretMiddleware];
+const getRandomArbitrary = (min: number, max: number) =>
+  Math.round(Math.random() * (max - min) + min);
+
+const getRandomFivePages = (pages: (PageObjectResponse | PartialPageObjectResponse)[]) => {
+  const amountOfRecords = pages.length;
+
+  if (amountOfRecords <= RECORDS_TO_RETURN) {
+    return pages;
+  }
+
+  let result: (PageObjectResponse | PartialPageObjectResponse)[] = [];
+  const copiedPages = [...pages];
+
+  for (let i = 0; i < RECORDS_TO_RETURN; i += 1) {
+    const max = copiedPages.length;
+    const randomIndex = getRandomArbitrary(0, max);
+
+    console.log(randomIndex);
+    const selectedPage = copiedPages[randomIndex];
+
+    result = [...result, selectedPage];
+
+    delete copiedPages[randomIndex];
+  }
+
+  return result;
+};
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const user = await getUserFromRequest(req);
+
+  const { data: profilesData, error: profilesError } = await getProfileDetails(user?.id!);
+
+  if (profilesError) {
+    return res.status(500).send(profilesError);
+  }
+
+  try {
+    const hash = JSON.parse(profilesData.notion_api_key);
+    const notionApiKey = decrypt(hash);
+
+    const notionClient = createNotionClient(notionApiKey);
+
+    const allPages = await getAllPages(notionClient, profilesData.notion_page_id);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const selectedPages = getRandomFivePages(allPages) as any[];
+
+    const formattedPages = selectedPages.map((_selectedPage) => ({
+      word: _selectedPage.properties.Word.title[0].plain_text,
+      meaning: _selectedPage.properties.Meaning.rich_text[0].plain_text,
+      exampleSentence: _selectedPage.properties['Example sentence'].rich_text[0].plain_text,
+    }));
+
+    return res.status(200).json(formattedPages);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+const middlewareToApply = [
+  validateRequestMethodMiddleware('GET'),
+  validateRouteSecretMiddleware,
+  validateIfUserIsLoggedIn,
+  assignRequestTokenToSupabaseSessionMiddleware,
+];
 
 export default withMiddleware(handler)(middlewareToApply);
