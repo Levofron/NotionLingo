@@ -21,6 +21,8 @@ import {
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
 
+type TPage = PageObjectResponse | PartialPageObjectResponse;
+
 const getProfileDetails = (userId: string) =>
   supabaseInstance
     .from('profiles')
@@ -29,9 +31,10 @@ const getProfileDetails = (userId: string) =>
     .single();
 
 const getAllPages = async (notionClient: Client, databaseId: string) => {
+  let result: TPage[] = [];
   let startCursor: string | undefined;
-  let result: (PageObjectResponse | PartialPageObjectResponse)[] = [];
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     // eslint-disable-next-line no-await-in-loop
     const database = await notionClient.databases.query({
@@ -55,21 +58,20 @@ const getAllPages = async (notionClient: Client, databaseId: string) => {
 const getRandomArbitrary = (min: number, max: number) =>
   Math.round(Math.random() * (max - min) + min);
 
-const getRandomFivePages = (pages: (PageObjectResponse | PartialPageObjectResponse)[]) => {
+const getRandomFivePages = (pages: TPage[]) => {
   const amountOfRecords = pages.length;
 
   if (amountOfRecords <= RECORDS_TO_RETURN) {
     return pages;
   }
 
-  let result: (PageObjectResponse | PartialPageObjectResponse)[] = [];
+  let result: TPage[] = [];
   const copiedPages = [...pages];
 
   for (let i = 0; i < RECORDS_TO_RETURN; i += 1) {
     const max = copiedPages.length;
     const randomIndex = getRandomArbitrary(0, max);
 
-    console.log(randomIndex);
     const selectedPage = copiedPages[randomIndex];
 
     result = [...result, selectedPage];
@@ -78,6 +80,20 @@ const getRandomFivePages = (pages: (PageObjectResponse | PartialPageObjectRespon
   }
 
   return result;
+};
+
+const getTextFromProperty = (pageProperties: PageObjectResponse['properties'], key: string) => {
+  const selectedPageProperties = pageProperties[key];
+
+  if (selectedPageProperties.type === 'title') {
+    return selectedPageProperties.title[0].plain_text;
+  }
+
+  if (selectedPageProperties.type === 'rich_text') {
+    return selectedPageProperties.rich_text[0].plain_text;
+  }
+
+  return `Unsupported "${selectedPageProperties.type}" type`;
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -97,13 +113,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const allPages = await getAllPages(notionClient, profilesData.notion_page_id);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const selectedPages = getRandomFivePages(allPages) as any[];
+    const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
     const formattedPages = selectedPages.map((_selectedPage) => ({
-      word: _selectedPage.properties.Word.title[0].plain_text,
-      meaning: _selectedPage.properties.Meaning.rich_text[0].plain_text,
-      exampleSentence: _selectedPage.properties['Example sentence'].rich_text[0].plain_text,
+      word: getTextFromProperty(_selectedPage.properties, 'Word'),
+      meaning: getTextFromProperty(_selectedPage.properties, 'Meaning'),
+      exampleSentence: getTextFromProperty(_selectedPage.properties, 'Example sentence'),
     }));
 
     return res.status(200).json(formattedPages);
