@@ -16,4 +16,5 @@ export const getRestRepository = (
   setNotionApiToken: (token: string) => restSource.setNotionApiToken(token),
   getAvailableNotionPages: () => restSource.getAvailableNotionPages(),
   setNotionPageId: (pageId: string) => restSource.setNotionPageId(pageId),
+  getRandomNotionWords: () => restSource.getRandomNotionWords(),
 });

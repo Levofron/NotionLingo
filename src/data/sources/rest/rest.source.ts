@@ -37,4 +37,9 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
+  getRandomNotionWords: async () => {
+    const response = await axiosInstance.get(restEndpoints.GET_RANDOM_NOTION_WORDS);
+
+    return response;
+  },
 });

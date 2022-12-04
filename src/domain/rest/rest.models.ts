@@ -11,3 +11,9 @@ export interface IHash {
   content: string;
   iv: string;
 }
+
+export interface INotionWord {
+  exampleSentence: string;
+  meaning: string;
+  word: string;
+}
