@@ -5,6 +5,7 @@ import {
   setSupabaseCookieUseCase,
   getAvailableNotionPagesUseCase,
   setNotionPageIdUseCase,
+  getRandomNotionWordsUseCase,
 } from '@domain/rest/rest.use-case';
 import { getRestRepository } from '@data/repositories/rest.repository';
 import { getRestSource } from '@data/sources/rest/rest.source';
@@ -25,5 +26,6 @@ export const restModule = {
   setNotionPageId: setNotionPageIdUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
+  getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
   getAvailableNotionPages: getAvailableNotionPagesUseCase(restRepository).execute,
 };

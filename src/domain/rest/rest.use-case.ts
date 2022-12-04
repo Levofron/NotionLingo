@@ -2,7 +2,7 @@ import { IRestRepository } from './rest.repository';
 
 import { IUseCase } from '../common.types';
 import { AxiosResponse } from 'axios';
-import { IUser, IHash } from './rest.models';
+import { IUser, IHash, INotionWord } from './rest.models';
 
 // healthCheckUseCase
 export type THealthCheckUseCase = IUseCase<void, AxiosResponse<string>>;
@@ -52,4 +52,13 @@ export const setNotionPageIdUseCase = (
   restRepository: IRestRepository,
 ): TSetNotionPageIdUseCase => ({
   execute: ({ pageId }) => restRepository.setNotionPageId(pageId),
+});
+
+// getRandomNotionWordsUseCase
+export type TGetRandomNotionWordsUseCase = IUseCase<void, AxiosResponse<INotionWord>>;
+
+export const getRandomNotionWordsUseCase = (
+  restRepository: IRestRepository,
+): TGetRandomNotionWordsUseCase => ({
+  execute: () => restRepository.getRandomNotionWords(),
 });

@@ -9,5 +9,6 @@ export const restEndpoints = {
   // notion
   SET_NOTION_PAGE_ID: '/notion/set-page-id',
   SET_NOTION_API_TOKEN: '/notion/set-api-token',
+  GET_RANDOM_NOTION_WORDS: '/notion/random-words',
   GET_AVAILABLE_NOTION_PAGES: '/notion/available-pages',
 };

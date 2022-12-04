@@ -29,4 +29,5 @@ export const createDevToolsClient = () => {
   console.log('window.rest.getLoggedUser() - to get all details about logged user');
   console.log('window.rest.getAvailableNotionPages() - to get all available notion pages');
   console.log('window.rest.setNotionPageId(pageId) - to set a selected page id to logged user');
+  console.log('window.rest.getRandomNotionWords() - to get 5 random words from notion database');
 };
