@@ -1,5 +1,6 @@
 import { IPageProperties } from './is-valid-notion-page-schema.types';
 
+// TODO - add field type validation
 const validPageProperties = ['Word', 'Meaning', 'Example sentence'];
 
 export const isValidNotionPageSchema = (pageProperties: Record<string, IPageProperties>) => {
