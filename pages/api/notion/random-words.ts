@@ -16,6 +16,7 @@ import { Client } from '@notionhq/client';
 import {
   PageObjectResponse,
   PartialPageObjectResponse,
+  RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 
 const PAGE_SIZE = 100;
@@ -82,22 +83,18 @@ const getRandomFivePages = (pages: TPage[]) => {
   return result;
 };
 
-const getTextFromProperty = (
-  _selectedPage: PageObjectResponse,
-  pageProperties: PageObjectResponse['properties'],
-  key: string,
-) => {
+const joinRichTextItemResponse = (richTextItemResponse: RichTextItemResponse[]) =>
+  richTextItemResponse.map((_richText) => _richText.plain_text).join('');
+
+const getTextFromProperty = (pageProperties: PageObjectResponse['properties'], key: string) => {
   const selectedPageProperties = pageProperties[key];
 
-  console.log('//////////////////');
-  console.log(key, JSON.stringify(_selectedPage));
-
   if (selectedPageProperties.type === 'title') {
-    return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
+    return joinRichTextItemResponse(selectedPageProperties.title);
   }
 
   if (selectedPageProperties.type === 'rich_text') {
-    return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
+    return joinRichTextItemResponse(selectedPageProperties.rich_text);
   }
 
   return `Unsupported "${selectedPageProperties.type}" type`;
@@ -123,19 +120,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
     const formattedPages = selectedPages.map((_selectedPage) => ({
-      word: getTextFromProperty(_selectedPage, _selectedPage.properties, 'Word'),
-      meaning: getTextFromProperty(_selectedPage, _selectedPage.properties, 'Meaning'),
-      exampleSentence: getTextFromProperty(
-        _selectedPage,
-        _selectedPage.properties,
-        'Example sentence',
-      ),
+      word: getTextFromProperty(_selectedPage.properties, 'Word'),
+      meaning: getTextFromProperty(_selectedPage.properties, 'Meaning'),
+      exampleSentence: getTextFromProperty(_selectedPage.properties, 'Example sentence'),
     }));
 
-    return res.status(200).json({ selectedPages, formattedPages });
+    return res.status(200).json(formattedPages);
   } catch (error) {
-    console.log(error);
-
     return res.status(500).json(error);
   }
 };
