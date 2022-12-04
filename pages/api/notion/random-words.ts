@@ -82,15 +82,22 @@ const getRandomFivePages = (pages: TPage[]) => {
   return result;
 };
 
-const getTextFromProperty = (pageProperties: PageObjectResponse['properties'], key: string) => {
+const getTextFromProperty = (
+  _selectedPage: PageObjectResponse,
+  pageProperties: PageObjectResponse['properties'],
+  key: string,
+) => {
   const selectedPageProperties = pageProperties[key];
 
+  console.log('//////////////////');
+  console.log(key, JSON.stringify(_selectedPage));
+
   if (selectedPageProperties.type === 'title') {
-    return selectedPageProperties.title[0].plain_text;
+    return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
   }
 
   if (selectedPageProperties.type === 'rich_text') {
-    return selectedPageProperties.rich_text[0].plain_text;
+    return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
   }
 
   return `Unsupported "${selectedPageProperties.type}" type`;
@@ -116,13 +123,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
     const formattedPages = selectedPages.map((_selectedPage) => ({
-      word: getTextFromProperty(_selectedPage.properties, 'Word'),
-      meaning: getTextFromProperty(_selectedPage.properties, 'Meaning'),
-      exampleSentence: getTextFromProperty(_selectedPage.properties, 'Example sentence'),
+      word: getTextFromProperty(_selectedPage, _selectedPage.properties, 'Word'),
+      meaning: getTextFromProperty(_selectedPage, _selectedPage.properties, 'Meaning'),
+      exampleSentence: getTextFromProperty(
+        _selectedPage,
+        _selectedPage.properties,
+        'Example sentence',
+      ),
     }));
 
-    return res.status(200).json(formattedPages);
+    return res.status(200).json({ selectedPages, formattedPages });
   } catch (error) {
+    console.log(error);
+
     return res.status(500).json(error);
   }
 };
