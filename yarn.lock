@@ -7088,15 +7088,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-simple-import-sort@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "eslint-plugin-simple-import-sort@npm:8.0.0"
-  peerDependencies:
-    eslint: ">=5.0.0"
-  checksum: d2a92a7d148803ee9ad4f081892a8d03820198c36a0f4f16a97d9f686a714edc9c9a9e51cc79cb0ba1afff76a1fde6a5eae50e9e3754928068227c92a2db5d6b
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-sort-destructure-keys@npm:^1.4.0":
   version: 1.4.0
   resolution: "eslint-plugin-sort-destructure-keys@npm:1.4.0"
@@ -9872,7 +9863,6 @@ __metadata:
     eslint-plugin-import: ^2.26.0
     eslint-plugin-jsx-a11y: ^6.6.1
     eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-simple-import-sort: ^8.0.0
     eslint-plugin-sort-destructure-keys: ^1.4.0
     eslint-plugin-tailwindcss: ^3.6.2
     eslint-plugin-typescript-sort-keys: ^2.1.0

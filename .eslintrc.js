@@ -15,7 +15,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['react', 'folders', 'sort-destructure-keys', 'tailwindcss', 'simple-import-sort'],
+  plugins: ['react', 'folders', 'sort-destructure-keys', 'tailwindcss'],
   overrides: [
     {
       files: ['*.js', '*.ts', '*.tsx'],
@@ -129,11 +129,6 @@ module.exports = {
         'tailwindcss/no-custom-classname': 'error',
         'tailwindcss/enforces-negative-arbitrary-values': 'error',
         'tailwindcss/no-contradicting-classname': 'error',
-        'simple-import-sort/imports': 'error',
-        'simple-import-sort/exports': 'error',
-        'import/first': 'error',
-        'import/newline-after-import': 'error',
-        'import/no-duplicates': 'error',
       },
     },
   ],
