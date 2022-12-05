@@ -1,4 +1,4 @@
-import { ApiError, Session, SupabaseClient, User, Provider } from '@supabase/supabase-js';
+import { ApiError, Provider, Session, SupabaseClient, User } from '@supabase/supabase-js';
 
 export type TSupabaseClient = SupabaseClient;
 

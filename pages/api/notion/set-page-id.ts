@@ -1,18 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { supabaseInstance } from '@infrastructure';
+
 import {
-  decrypt,
-  withMiddleware,
+  assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
+  decrypt,
   getUserFromRequest,
-  validateIfUserIsLoggedIn,
   validateIfParametersExists,
+  validateIfUserIsLoggedIn,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
-  assignRequestTokenToSupabaseSessionMiddleware,
+  withMiddleware,
 } from '../utils';
-
-import { supabaseInstance } from '@infrastructure';
 
 const getProfileDetails = (userId: string) =>
   supabaseInstance

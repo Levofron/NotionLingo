@@ -1,9 +1,9 @@
 import {
-  IOAuthResponse,
   ILogoutResponse,
-  TUser,
-  TSession,
+  IOAuthResponse,
   TProvider,
+  TSession,
+  TUser,
 } from '@domain/supabase/supabase.types';
 
 export interface ISupabaseSource {

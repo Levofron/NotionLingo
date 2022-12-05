@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { IUser, IHash, INotionWord } from './rest.models';
+
+import { IHash, INotionWord, IUser } from './rest.models';
 
 export interface IRestRepository {
   getAvailableNotionPages: () => Promise<AxiosResponse<void>>;

@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+
 import { IHash } from './decrypt.type';
 
 const algorithm = process.env.CRYPTO_ALGORITHM;

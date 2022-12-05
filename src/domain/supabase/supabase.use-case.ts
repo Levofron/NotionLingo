@@ -1,7 +1,6 @@
-import { ISupabaseRepository } from './supabase.repository';
-
 import { IUseCase } from '../common.types';
-import { IOAuthResponse, ILogoutResponse, TUser, TSession } from './supabase.types';
+import { ISupabaseRepository } from './supabase.repository';
+import { ILogoutResponse, IOAuthResponse, TSession, TUser } from './supabase.types';
 
 // loginViaGoogleUseCase
 export type TLoginViaGoogleUseCase = IUseCase<void, IOAuthResponse>;

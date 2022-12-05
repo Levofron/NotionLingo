@@ -1,12 +1,14 @@
 import {
+  getSessionUseCase,
+  getUserUseCase,
   loginViaGoogleUseCase,
   logoutUseCase,
-  getUserUseCase,
-  getSessionUseCase,
 } from '@domain/supabase/supabase.use-case';
-import { supabaseInstance } from '@infrastructure';
-import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
+
 import { getSupabaseRepository } from '@data/repositories/supabase.repository';
+import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
+
+import { supabaseInstance } from '@infrastructure';
 
 // sources
 const supabaseSource = getSupabaseSource(supabaseInstance);

@@ -1,19 +1,19 @@
+import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { supabaseInstance } from '@infrastructure';
+
 import {
-  withMiddleware,
+  assignRequestTokenToSupabaseSessionMiddleware,
+  createNotionClient,
+  decrypt,
   getUserFromRequest,
+  isValidNotionPageSchema,
+  validateIfUserIsLoggedIn,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
-  validateIfUserIsLoggedIn,
-  assignRequestTokenToSupabaseSessionMiddleware,
-  decrypt,
-  createNotionClient,
-  isValidNotionPageSchema,
+  withMiddleware,
 } from '../utils';
-
-import { supabaseInstance } from '@infrastructure';
-import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);

@@ -1,6 +1,6 @@
-import { ISupabaseSource } from './supabase.types';
-
 import { TProvider, TSupabaseClient } from '@domain/supabase/supabase.types';
+
+import { ISupabaseSource } from './supabase.types';
 
 export const getSupabaseSource = (supabaseInstance: TSupabaseClient): ISupabaseSource => ({
   signIn: (provider: TProvider) =>
