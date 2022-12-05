@@ -73,6 +73,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "eslint-plugin-tailwindcss": "^3.6.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",

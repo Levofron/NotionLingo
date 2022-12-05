@@ -2,15 +2,15 @@ import { supabaseInstance } from '@infrastructure';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
-  encrypt,
-  withMiddleware,
+  assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
+  encrypt,
+  getUserFromRequest,
+  validateIfParametersExists,
   validateIfUserIsLoggedIn,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
-  validateIfParametersExists,
-  getUserFromRequest,
-  assignRequestTokenToSupabaseSessionMiddleware,
+  withMiddleware,
 } from '../utils';
 
 const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string) =>

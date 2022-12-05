@@ -1,15 +1,14 @@
+import { supabaseInstance } from '@infrastructure';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
-  withMiddleware,
+  assignRequestTokenToSupabaseSessionMiddleware,
   getUserFromRequest,
+  validateIfUserIsLoggedIn,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
-  validateIfUserIsLoggedIn,
-  assignRequestTokenToSupabaseSessionMiddleware,
+  withMiddleware,
 } from '../utils';
-
-import { supabaseInstance } from '@infrastructure';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);

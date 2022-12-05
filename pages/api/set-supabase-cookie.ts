@@ -1,11 +1,10 @@
+import { supabaseInstance } from '@infrastructure';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { supabaseInstance } from '@infrastructure';
-
 import {
-  withMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
+  withMiddleware,
 } from './utils';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) =>

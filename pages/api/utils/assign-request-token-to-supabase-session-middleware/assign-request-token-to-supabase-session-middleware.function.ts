@@ -1,5 +1,5 @@
-import cookie from 'cookie';
 import { supabaseInstance } from '@infrastructure';
+import cookie from 'cookie';
 import { NextApiRequest } from 'next';
 
 export const assignRequestTokenToSupabaseSessionMiddleware = async (req: NextApiRequest) => {

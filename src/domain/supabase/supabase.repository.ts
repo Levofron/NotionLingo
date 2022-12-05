@@ -1,4 +1,4 @@
-import { IOAuthResponse, ILogoutResponse, TUser, TSession } from './supabase.types';
+import { ILogoutResponse, IOAuthResponse, TSession, TUser } from './supabase.types';
 
 export interface ISupabaseRepository {
   getSession: () => Promise<TSession | null>;

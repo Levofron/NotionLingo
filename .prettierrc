@@ -18,13 +18,10 @@
     "^@utils/(.*)$",
     "^@infrastructure",
     "^@infrastructure/(.*)$",
-    "([.]svg|[.]jpg|[.]jpeg|[.]gif|[.]png)$",
-    "^[./]",
-    "^[./](?!.*([.]css|[.]scss))",
-    "([.]css|[.]scss)$"
+    "^[./]"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrderGroupNamespaceSpecifiers": true,
-  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"]
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

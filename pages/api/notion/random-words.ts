@@ -1,16 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
-import {
-  decrypt,
-  withMiddleware,
-  getUserFromRequest,
-  createNotionClient,
-  validateIfUserIsLoggedIn,
-  validateRequestMethodMiddleware,
-  validateRouteSecretMiddleware,
-  assignRequestTokenToSupabaseSessionMiddleware,
-} from '../utils';
-
 import { supabaseInstance } from '@infrastructure';
 import { Client } from '@notionhq/client';
 import {
@@ -18,6 +5,18 @@ import {
   PartialPageObjectResponse,
   RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints';
+import { NextApiRequest, NextApiResponse } from 'next';
+
+import {
+  assignRequestTokenToSupabaseSessionMiddleware,
+  createNotionClient,
+  decrypt,
+  getUserFromRequest,
+  validateIfUserIsLoggedIn,
+  validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
+  withMiddleware,
+} from '../utils';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;

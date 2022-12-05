@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
-  withMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
+  withMiddleware,
 } from './utils';
 
 const handler = (_: NextApiRequest, res: NextApiResponse) => {

@@ -1,8 +1,8 @@
-import { IRestSource } from './rest.types';
-import { restEndpoints } from './rest.defaults';
-
-import { AxiosInstance } from 'axios';
 import { TSession } from '@domain/supabase/supabase.types';
+import { AxiosInstance } from 'axios';
+
+import { restEndpoints } from './rest.defaults';
+import { IRestSource } from './rest.types';
 
 export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
   healthCheck: async () => {

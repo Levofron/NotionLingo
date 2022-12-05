@@ -1,4 +1,4 @@
-import { IUser, IHash, INotionWord } from '@domain/rest/rest.models';
+import { IHash, INotionWord, IUser } from '@domain/rest/rest.models';
 import { TSession } from '@domain/supabase/supabase.types';
 import { AxiosResponse } from 'axios';
 

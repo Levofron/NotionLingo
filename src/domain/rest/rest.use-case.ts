@@ -1,8 +1,8 @@
-import { IRestRepository } from './rest.repository';
+import { AxiosResponse } from 'axios';
 
 import { IUseCase } from '../common.types';
-import { AxiosResponse } from 'axios';
-import { IUser, IHash, INotionWord } from './rest.models';
+import { IHash, INotionWord, IUser } from './rest.models';
+import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
 export type THealthCheckUseCase = IUseCase<void, AxiosResponse<string>>;

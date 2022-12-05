@@ -1,16 +1,15 @@
-import {
-  healthCheckUseCase,
-  getLoggedUserUseCase,
-  setNotionApiTokenUseCase,
-  setSupabaseCookieUseCase,
-  getAvailableNotionPagesUseCase,
-  setNotionPageIdUseCase,
-  getRandomNotionWordsUseCase,
-} from '@domain/rest/rest.use-case';
 import { getRestRepository } from '@data/repositories/rest.repository';
 import { getRestSource } from '@data/sources/rest/rest.source';
 import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
-
+import {
+  getAvailableNotionPagesUseCase,
+  getLoggedUserUseCase,
+  getRandomNotionWordsUseCase,
+  healthCheckUseCase,
+  setNotionApiTokenUseCase,
+  setNotionPageIdUseCase,
+  setSupabaseCookieUseCase,
+} from '@domain/rest/rest.use-case';
 import { axiosInstance, supabaseInstance } from '@infrastructure';
 
 // sources
