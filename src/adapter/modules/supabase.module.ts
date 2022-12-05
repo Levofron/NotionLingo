@@ -1,11 +1,13 @@
-import { getSupabaseRepository } from '@data/repositories/supabase.repository';
-import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
 import {
   getSessionUseCase,
   getUserUseCase,
   loginViaGoogleUseCase,
   logoutUseCase,
 } from '@domain/supabase/supabase.use-case';
+
+import { getSupabaseRepository } from '@data/repositories/supabase.repository';
+import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
+
 import { supabaseInstance } from '@infrastructure';
 
 // sources

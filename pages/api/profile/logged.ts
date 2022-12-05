@@ -1,5 +1,6 @@
-import { supabaseInstance } from '@infrastructure';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+import { supabaseInstance } from '@infrastructure';
 
 import {
   assignRequestTokenToSupabaseSessionMiddleware,

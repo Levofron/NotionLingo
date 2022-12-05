@@ -1,6 +1,7 @@
-import { supabaseInstance } from '@infrastructure';
 import cookie from 'cookie';
 import { NextApiRequest } from 'next';
+
+import { supabaseInstance } from '@infrastructure';
 
 export const assignRequestTokenToSupabaseSessionMiddleware = async (req: NextApiRequest) => {
   const { user } = await supabaseInstance.auth.api.getUserByCookie(req);

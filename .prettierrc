@@ -18,7 +18,10 @@
     "^@utils/(.*)$",
     "^@infrastructure",
     "^@infrastructure/(.*)$",
-    "^[./]"
+    "([.]svg|[.]jpg|[.]jpeg|[.]gif|[.]png)$",
+    "^[./]",
+    "^[./](?!.*([.]css|[.]scss))",
+    "([.]css|[.]scss)$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,

@@ -1,4 +1,3 @@
-import { supabaseInstance } from '@infrastructure';
 import { Client } from '@notionhq/client';
 import {
   PageObjectResponse,
@@ -6,6 +5,8 @@ import {
   RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+import { supabaseInstance } from '@infrastructure';
 
 import {
   assignRequestTokenToSupabaseSessionMiddleware,

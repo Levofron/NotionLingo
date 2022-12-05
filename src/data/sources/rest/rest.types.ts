@@ -1,6 +1,7 @@
+import { AxiosResponse } from 'axios';
+
 import { IHash, INotionWord, IUser } from '@domain/rest/rest.models';
 import { TSession } from '@domain/supabase/supabase.types';
-import { AxiosResponse } from 'axios';
 
 export interface IRestSource {
   getAvailableNotionPages: () => Promise<AxiosResponse<void>>;

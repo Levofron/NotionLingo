@@ -1,5 +1,6 @@
-import { TSession } from '@domain/supabase/supabase.types';
 import { AxiosInstance } from 'axios';
+
+import { TSession } from '@domain/supabase/supabase.types';
 
 import { restEndpoints } from './rest.defaults';
 import { IRestSource } from './rest.types';
