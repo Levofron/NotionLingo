@@ -15,21 +15,20 @@ import {
   withMiddleware,
 } from '../utils';
 
+const getProfileDetails = (userId: string) =>
+  supabaseInstance.from('profiles').select('notion_api_key').eq('id', userId).single();
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
 
-  const { data: profilesData, error: profilesError } = await supabaseInstance
-    .from('profiles')
-    .select('notion_api_key')
-    .eq('id', user?.id)
-    .single();
+  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
 
-  if (profilesError) {
-    return res.status(500).send(profilesError);
+  if (profileError) {
+    return res.status(500).send(profileError);
   }
 
   try {
-    const hash = JSON.parse(profilesData.notion_api_key);
+    const hash = JSON.parse(profileData.notion_api_key);
     const notionApiKey = decrypt(hash);
 
     const notionClient = createNotionClient(notionApiKey);

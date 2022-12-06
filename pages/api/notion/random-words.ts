@@ -12,6 +12,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getRandomNumber,
   getUserFromRequest,
   validateIfUserIsLoggedIn,
   validateRequestMethodMiddleware,
@@ -56,9 +57,6 @@ const getAllPages = async (notionClient: Client, databaseId: string) => {
   return result;
 };
 
-const getRandomArbitrary = (min: number, max: number) =>
-  Math.round(Math.random() * (max - min) + min);
-
 const getRandomFivePages = (pages: TPage[]) => {
   const amountOfRecords = pages.length;
 
@@ -71,7 +69,7 @@ const getRandomFivePages = (pages: TPage[]) => {
 
   for (let i = 0; i < RECORDS_TO_RETURN; i += 1) {
     const max = copiedPages.length;
-    const randomIndex = getRandomArbitrary(0, max);
+    const randomIndex = getRandomNumber(0, max);
 
     const selectedPage = copiedPages[randomIndex];
 
@@ -86,7 +84,7 @@ const getRandomFivePages = (pages: TPage[]) => {
 const joinRichTextItemResponse = (richTextItemResponse: RichTextItemResponse[]) =>
   richTextItemResponse.map((_richText) => _richText.plain_text).join('');
 
-const getTextFromProperty = (pageProperties: PageObjectResponse['properties'], key: string) => {
+const getTextFromPageProperty = (pageProperties: PageObjectResponse['properties'], key: string) => {
   const selectedPageProperties = pageProperties[key];
 
   if (selectedPageProperties.type === 'title') {
@@ -120,9 +118,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
     const formattedPages = selectedPages.map((_selectedPage) => ({
-      word: getTextFromProperty(_selectedPage.properties, 'Word'),
-      meaning: getTextFromProperty(_selectedPage.properties, 'Meaning'),
-      exampleSentence: getTextFromProperty(_selectedPage.properties, 'Example sentence'),
+      word: getTextFromPageProperty(_selectedPage.properties, 'Word'),
+      meaning: getTextFromPageProperty(_selectedPage.properties, 'Meaning'),
+      exampleSentence: getTextFromPageProperty(_selectedPage.properties, 'Example sentence'),
     }));
 
     return res.status(200).json(formattedPages);
