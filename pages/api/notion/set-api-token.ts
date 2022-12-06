@@ -25,6 +25,7 @@ const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { token } = req.body;
 
+  const user = await getUserFromRequest(req);
   const notionClient = createNotionClient(token);
 
   try {
@@ -35,7 +36,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const hash = encrypt(token);
     const hashAsString = JSON.stringify(hash);
 
-    const user = await getUserFromRequest(req);
     const { error: updateProfileError } = await updateProfileNotionApiKey(user?.id!, hashAsString);
 
     if (updateProfileError) {

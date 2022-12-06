@@ -1,12 +1,20 @@
 import { IPageProperties } from './is-valid-notion-page-schema.types';
 
-// TODO - add field type validation
-const validPageProperties = ['Word', 'Meaning', 'Example sentence'];
+const validPageProperties: IPageProperties[] = [
+  { type: 'title', name: 'Word' },
+  { type: 'rich_text', name: 'Meaning' },
+  { type: 'rich_text', name: 'Example sentence' },
+];
+
+const hasValidTypeAndName =
+  (pagePropertiesValues: IPageProperties[]) => (currentPageProperty: IPageProperties) =>
+    pagePropertiesValues.find(
+      (_value) =>
+        _value.name === currentPageProperty.name && _value.type === currentPageProperty.type,
+    );
 
 export const isValidNotionPageSchema = (pageProperties: Record<string, IPageProperties>) => {
-  const values = Object.values(pageProperties);
+  const pagePropertiesValues = Object.values(pageProperties);
 
-  return validPageProperties.every((_validPageProperty) =>
-    values.find((_value) => _value.name === _validPageProperty),
-  );
+  return validPageProperties.every(hasValidTypeAndName(pagePropertiesValues));
 };
