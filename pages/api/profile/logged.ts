@@ -12,11 +12,7 @@ import {
 } from '../utils';
 
 const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select('id,email,created_at,updated_at')
-    .eq('id', userId)
-    .single();
+  supabaseInstance.from('profiles').select('id,email,created_at').eq('id', userId).single();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
@@ -31,7 +27,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     id: profileData.id,
     email: profileData.email,
     createdAt: profileData.created_at,
-    updatedAt: profileData.updated_at,
     fullName: user?.user_metadata.full_name,
     avatarUrl: user?.user_metadata.avatar_url,
   };
