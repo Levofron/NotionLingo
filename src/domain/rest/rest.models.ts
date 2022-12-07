@@ -4,8 +4,6 @@ export interface IUser {
   email: string;
   fullName: string;
   id: string;
-  // TODO - add support for updatedAt or remove it
-  updatedAt: string | null;
 }
 
 export interface IHash {
