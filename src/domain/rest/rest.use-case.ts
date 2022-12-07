@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { IUseCase } from '../common.types';
-import { IHash, INotionWord, IUser } from './rest.models';
+import { IHash, INotionPage, INotionWord, IUser } from './rest.models';
 import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
@@ -37,7 +37,7 @@ export const setNotionApiTokenUseCase = (
 });
 
 // getAvailableNotionPagesUseCase
-export type TGetAvailableNotionPagesUseCase = IUseCase<void, AxiosResponse<void>>;
+export type TGetAvailableNotionPagesUseCase = IUseCase<void, AxiosResponse<INotionPage[]>>;
 
 export const getAvailableNotionPagesUseCase = (
   restRepository: IRestRepository,
@@ -46,7 +46,7 @@ export const getAvailableNotionPagesUseCase = (
 });
 
 // setNotionPageIdUseCase
-export type TSetNotionPageIdUseCase = IUseCase<{ pageId: string }, AxiosResponse<void>>;
+export type TSetNotionPageIdUseCase = IUseCase<{ pageId: string }, AxiosResponse<string>>;
 
 export const setNotionPageIdUseCase = (
   restRepository: IRestRepository,
@@ -55,7 +55,7 @@ export const setNotionPageIdUseCase = (
 });
 
 // getRandomNotionWordsUseCase
-export type TGetRandomNotionWordsUseCase = IUseCase<void, AxiosResponse<INotionWord>>;
+export type TGetRandomNotionWordsUseCase = IUseCase<void, AxiosResponse<INotionWord[]>>;
 
 export const getRandomNotionWordsUseCase = (
   restRepository: IRestRepository,
