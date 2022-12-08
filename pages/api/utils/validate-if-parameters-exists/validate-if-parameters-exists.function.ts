@@ -5,7 +5,7 @@ export const validateIfParametersExists =
   async (req: NextApiRequest, res: NextApiResponse) => {
     if (requiredParameters.length === 0) {
       res.status(400).json({
-        message: 'Incorrect request. Your "requiredParameters" is empty',
+        message: 'Incorrect request. Your "requiredParameters" array is empty',
       });
 
       return false;
