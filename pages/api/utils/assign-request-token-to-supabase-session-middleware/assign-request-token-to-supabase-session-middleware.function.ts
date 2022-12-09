@@ -3,8 +3,10 @@ import { NextApiRequest } from 'next';
 
 import { supabaseInstance } from '@infrastructure';
 
+import { getUserFromRequest } from '..';
+
 export const assignRequestTokenToSupabaseSessionMiddleware = async (req: NextApiRequest) => {
-  const { user } = await supabaseInstance.auth.api.getUserByCookie(req);
+  const user = await getUserFromRequest(req);
 
   const token = cookie.parse(req.headers.cookie || '')['sb:token'];
 
