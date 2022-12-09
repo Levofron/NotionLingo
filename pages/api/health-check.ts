@@ -10,7 +10,7 @@ const handler = (_: NextApiRequest, res: NextApiResponse) => {
   const currentDate = new Date();
   const isoDate = currentDate.toISOString();
 
-  res.status(200).send(isoDate);
+  res.status(200).json(isoDate);
 };
 
 const middlewareToApply = [validateRequestMethodMiddleware('GET'), validateRouteSecretMiddleware];

@@ -39,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { error: updateProfileError } = await updateProfileNotionApiKey(user?.id!, hashAsString);
 
     if (updateProfileError) {
-      return res.status(500).send(updateProfileError);
+      return res.status(500).json(updateProfileError);
     }
 
     return res.status(200).json(hash);

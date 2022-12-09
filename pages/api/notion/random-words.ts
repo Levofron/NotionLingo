@@ -104,7 +104,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data: profilesData, error: profilesError } = await getProfileDetails(user?.id!);
 
   if (profilesError) {
-    return res.status(500).send(profilesError);
+    return res.status(500).json(profilesError);
   }
 
   try {
