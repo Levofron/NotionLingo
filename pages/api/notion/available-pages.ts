@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
 
   if (profileError) {
-    return res.status(500).send(profileError);
+    return res.status(500).json(profileError);
   }
 
   try {
@@ -51,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json(parsedAvailablePages);
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).json(error);
   }
 };
 
