@@ -9,7 +9,7 @@ import {
   decrypt,
   getUserFromRequest,
   isValidNotionPageSchema,
-  validateIfUserIsLoggedIn,
+  validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
@@ -58,7 +58,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
   validateRouteSecretMiddleware,
-  validateIfUserIsLoggedIn,
+  validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
 ];
 

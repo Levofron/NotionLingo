@@ -8,7 +8,7 @@ import {
   encrypt,
   getUserFromRequest,
   validateIfParametersExists,
-  validateIfUserIsLoggedIn,
+  validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
@@ -51,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const middlewareToApply = [
   validateRequestMethodMiddleware('POST'),
   validateRouteSecretMiddleware,
-  validateIfUserIsLoggedIn,
+  validateIfUserIsLoggedInMiddleware,
   validateIfParametersExists('body', ['token']),
   assignRequestTokenToSupabaseSessionMiddleware,
 ];

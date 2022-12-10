@@ -2,7 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getUserFromRequest } from '..';
 
-export const validateIfUserIsLoggedIn = async (req: NextApiRequest, res: NextApiResponse) => {
+export const validateIfUserIsLoggedInMiddleware = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
   const user = await getUserFromRequest(req);
 
   if (!user) {
