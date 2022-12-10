@@ -8,7 +8,7 @@ const validPageProperties: IPageProperties[] = [
 
 const hasValidTypeAndName =
   (pagePropertiesValues: IPageProperties[]) => (currentPageProperty: IPageProperties) =>
-    pagePropertiesValues.find(
+    pagePropertiesValues.some(
       (_value) =>
         _value.name === currentPageProperty.name && _value.type === currentPageProperty.type,
     );
