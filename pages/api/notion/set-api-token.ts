@@ -7,7 +7,7 @@ import {
   createNotionClient,
   encrypt,
   getUserFromRequest,
-  validateIfParametersExists,
+  validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -52,7 +52,7 @@ const middlewareToApply = [
   validateRequestMethodMiddleware('POST'),
   validateRouteSecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
-  validateIfParametersExists('body', ['token']),
+  validateIfParametersExistsMiddleware('body', ['token']),
   assignRequestTokenToSupabaseSessionMiddleware,
 ];
 
