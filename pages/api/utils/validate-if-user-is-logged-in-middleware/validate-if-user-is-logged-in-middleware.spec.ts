@@ -15,8 +15,8 @@ describe('validateIfUserIsLoggedInMiddleware function', () => {
       json: jest.fn().mockReturnThis(),
     };
 
-    const user = await validateIfUserIsLoggedInMiddleware(request, response);
+    const result = await validateIfUserIsLoggedInMiddleware(request, response);
 
-    expect(user).toBeFalsy();
+    expect(result).toBeFalsy();
   });
 });
