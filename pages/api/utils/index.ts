@@ -6,8 +6,8 @@ export { getRandomNumber } from './get-random-number/get-random-number.function'
 export { createNotionClient } from './create-notion-client/create-notion-client.function';
 export { getUserFromRequest } from './get-user-from-request/get-user-from-request.function';
 export { isValidNotionPageSchema } from './is-valid-notion-page-schema/is-valid-notion-page-schema.function';
-export { validateIfUserIsLoggedIn } from './validate-if-user-is-logged-in/validate-if-user-is-logged-in.function';
 export { validateRouteSecretMiddleware } from './validate-route-secret-middleware/validate-route-secret-middleware.function';
 export { validateRequestMethodMiddleware } from './validate-request-method-middleware/validate-request-method-middleware.function';
+export { validateIfUserIsLoggedInMiddleware } from './validate-if-user-is-logged-in-middleware/validate-if-user-is-logged-in-middleware.function';
 export { validateIfParametersExistsMiddleware } from './validate-if-parameters-exists-middleware/validate-if-parameters-exists-middleware.function';
 export { assignRequestTokenToSupabaseSessionMiddleware } from './assign-request-token-to-supabase-session-middleware/assign-request-token-to-supabase-session-middleware.function';
