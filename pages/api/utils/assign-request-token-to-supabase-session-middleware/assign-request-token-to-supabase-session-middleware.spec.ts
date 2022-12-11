@@ -25,4 +25,15 @@ describe('assignRequestTokenToSupabaseSessionMiddleware function', () => {
       access_token: 'token',
     });
   });
+
+  it('should return true if cookie is not present', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const request: any = {
+      headers: {},
+    };
+
+    const result = await assignRequestTokenToSupabaseSessionMiddleware(request);
+
+    expect(result).toBeTruthy();
+  });
 });
