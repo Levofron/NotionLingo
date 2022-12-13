@@ -7,4 +7,5 @@ export const getSupabaseRepository = (supabaseSource: ISupabaseSource): ISupabas
   logout: () => supabaseSource.logout(),
   getUser: () => supabaseSource.getUser(),
   getSession: () => supabaseSource.getSession(),
+  onAuthStateChange: (callback) => supabaseSource.onAuthStateChange(callback),
 });

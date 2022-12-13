@@ -1,6 +1,13 @@
 import { IUseCase } from '../common.types';
 import { ISupabaseRepository } from './supabase.repository';
-import { ILogoutResponse, IOAuthResponse, TSession, TUser } from './supabase.types';
+import {
+  ILogoutResponse,
+  IOAuthResponse,
+  IOnAuthStateChangeResponse,
+  TOnAuthStateChangeCallback,
+  TSession,
+  TUser,
+} from './supabase.types';
 
 // loginViaGoogleUseCase
 export type TLoginViaGoogleUseCase = IUseCase<void, IOAuthResponse>;
@@ -30,4 +37,16 @@ export type TGetSessionUseCase = IUseCase<void, TSession | null>;
 
 export const getSessionUseCase = (supabaseRepository: ISupabaseRepository): TGetSessionUseCase => ({
   execute: () => supabaseRepository.getSession(),
+});
+
+// onAuthStateChangeUseCase
+export type TOnAuthStateChangeUseCase = IUseCase<
+  { callback: TOnAuthStateChangeCallback },
+  IOnAuthStateChangeResponse
+>;
+
+export const onAuthStateChangeUseCase = (
+  supabaseRepository: ISupabaseRepository,
+): TOnAuthStateChangeUseCase => ({
+  execute: ({ callback }) => supabaseRepository.onAuthStateChange(callback),
 });
