@@ -20,7 +20,7 @@ export const createDevToolsClient = () => {
   console.log('window.supabase.getUser() - to get user');
   console.log('window.supabase.getSession() - to get session');
   console.log('window.supabase.loginViaGoogle() - to login via google');
-  console.log('window.supabase.onAuthStateChange() - to subscribe to auth state changes');
+  console.log('window.supabase.onAuthStateChange(callback) - to subscribe to auth state changes');
 
   // rest
   console.log('-----------------------------');
