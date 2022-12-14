@@ -16,6 +16,7 @@ describe('supabase source', () => {
       logout: expect.any(Function),
       getUser: expect.any(Function),
       getSession: expect.any(Function),
+      onAuthStateChange: expect.any(Function),
     });
   });
 
@@ -87,5 +88,22 @@ describe('supabase source', () => {
     const session = await supabaseSource.getSession();
 
     expect(session).toEqual(sessionMock);
+  });
+
+  it('should call onAuthStateChange', async () => {
+    const callbackMock = jest.fn();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabaseInstanceMock: any = {
+      auth: {
+        onAuthStateChange: jest.fn(),
+      },
+    };
+
+    const supabaseSource = getSupabaseSource(supabaseInstanceMock);
+
+    supabaseSource.onAuthStateChange(callbackMock);
+
+    expect(supabaseInstanceMock.auth.onAuthStateChange).toHaveBeenCalledWith(callbackMock);
   });
 });

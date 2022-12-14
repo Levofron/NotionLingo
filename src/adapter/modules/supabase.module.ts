@@ -3,6 +3,7 @@ import {
   getUserUseCase,
   loginViaGoogleUseCase,
   logoutUseCase,
+  onAuthStateChangeUseCase,
 } from '@domain/supabase/supabase.use-case';
 
 import { getSupabaseRepository } from '@data/repositories/supabase.repository';
@@ -21,4 +22,5 @@ export const supabaseModule = {
   getUser: getUserUseCase(supabaseRepository).execute,
   getSession: getSessionUseCase(supabaseRepository).execute,
   loginViaGoogle: loginViaGoogleUseCase(supabaseRepository).execute,
+  onAuthStateChange: onAuthStateChangeUseCase(supabaseRepository).execute,
 };
