@@ -1,7 +1,7 @@
 import { IRestRepository } from '@domain/rest/rest.repository';
 
-import { IRestSource } from '../sources/rest/rest.types';
-import { ISupabaseSource } from '../sources/supabase/supabase.types';
+import { IRestSource } from '../../sources/rest/rest.types';
+import { ISupabaseSource } from '../../sources/supabase/supabase.types';
 
 export const getRestRepository = (
   restSource: IRestSource,

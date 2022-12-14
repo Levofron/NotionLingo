@@ -4,7 +4,7 @@ import { functionImportTest } from '@utils';
 
 import { getRestSource } from './rest.source';
 
-describe('rest source', () => {
+describe('getRestSource function', () => {
   functionImportTest(getRestSource);
 
   it('should return proper object', () => {
