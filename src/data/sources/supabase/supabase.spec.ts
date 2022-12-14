@@ -2,7 +2,7 @@ import { functionImportTest } from '@utils';
 
 import { getSupabaseSource } from './supabase.source';
 
-describe('supabase source', () => {
+describe('getSupabaseSource function', () => {
   functionImportTest(getSupabaseSource);
 
   it('should return proper object', () => {
