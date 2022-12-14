@@ -1,6 +1,6 @@
 import { ISupabaseRepository } from '@domain/supabase/supabase.repository';
 
-import { ISupabaseSource } from '../sources/supabase/supabase.types';
+import { ISupabaseSource } from '../../sources/supabase/supabase.types';
 
 export const getSupabaseRepository = (supabaseSource: ISupabaseSource): ISupabaseRepository => ({
   loginViaGoogle: () => supabaseSource.signIn('google'),
