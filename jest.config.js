@@ -6,5 +6,5 @@ module.exports = {
   moduleNameMapper: mapPathsFromTsConfig(),
   transform: { '^.+\\.(ts|tsx)$': 'ts-jest' },
   testMatch: ['**/?(*.)+(spec).+(ts|tsx)'],
-  setupFilesAfterEnv: ['<rootDir>/src/infrastructure/jest/setup-tests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/infrastructure/config/jest/setup-tests.ts'],
 };

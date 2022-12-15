@@ -1,4 +1,4 @@
-import { functionImportTest } from '@utils';
+import { functionImportTest } from '@infrastructure';
 
 import { encrypt } from './encrypt.function';
 

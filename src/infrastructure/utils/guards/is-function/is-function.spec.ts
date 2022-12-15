@@ -1,4 +1,4 @@
-import { functionImportTest, isFunction } from '@utils';
+import { functionImportTest, isFunction } from '@infrastructure';
 
 describe('isFunction function', () => {
   functionImportTest(isFunction);

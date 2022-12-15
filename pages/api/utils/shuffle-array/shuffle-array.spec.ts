@@ -1,4 +1,4 @@
-import { functionImportTest } from '@utils';
+import { functionImportTest } from '@infrastructure';
 
 import { shuffleArray } from './shuffle-array.function';
 

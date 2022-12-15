@@ -4,8 +4,6 @@
     "paths": {
       "@ui/*": ["./src/ui/*"],
       "@ui": ["./src/ui"],
-      "@utils/*": ["./src/utils/*"],
-      "@utils": ["./src/utils"],
       "@data/*": ["./src/data/*"],
       "@data": ["./src/data"],
       "@domain/*": ["./src/domain/*"],

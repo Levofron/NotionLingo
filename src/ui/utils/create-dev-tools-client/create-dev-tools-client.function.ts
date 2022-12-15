@@ -2,7 +2,7 @@ import { restModule } from '@adapter/modules/rest.module';
 import { supabaseModule } from '@adapter/modules/supabase.module';
 
 export const createDevToolsClient = () => {
-  if (process.env.NEXT_PUBLIC_APP_ENV !== 'local') {
+  if (!['test', 'local'].includes(process.env.NEXT_PUBLIC_APP_ENV)) {
     return;
   }
 

@@ -1,4 +1,4 @@
-import { functionImportTest } from '@utils';
+import { functionImportTest } from '@infrastructure';
 
 import { createNotionClient } from './create-notion-client.function';
 
