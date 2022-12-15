@@ -1,4 +1,4 @@
-import { isFunction } from '@utils';
+import { isFunction } from '@infrastructure';
 
 export function functionImportTest(func: Function): void {
   if (!isFunction(func)) {

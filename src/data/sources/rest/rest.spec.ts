@@ -1,6 +1,6 @@
 import { IHash, INotionPage, INotionWord, IUser } from '@domain/rest/rest.models';
 
-import { functionImportTest } from '@utils';
+import { functionImportTest } from '@infrastructure';
 
 import { getRestSource } from './rest.source';
 

@@ -1,4 +1,4 @@
-import { isFunction } from '@utils';
+import { isFunction } from '@infrastructure';
 
 export function toMatchSnapshot(func: Function): void {
   if (!isFunction(func)) {

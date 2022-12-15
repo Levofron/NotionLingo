@@ -14,8 +14,6 @@
     "^@adapter/(.*)$",
     "^@ui",
     "^@ui/(.*)$",
-    "^@utils",
-    "^@utils/(.*)$",
     "^@infrastructure",
     "^@infrastructure/(.*)$",
     "([.]svg|[.]jpg|[.]jpeg|[.]gif|[.]png)$",

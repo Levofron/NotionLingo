@@ -1,4 +1,4 @@
-import { functionImportTest } from '@utils';
+import { functionImportTest } from '@infrastructure';
 
 import { validateRouteSecretMiddleware } from './validate-route-secret-middleware.function';
 
