@@ -27,6 +27,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json(profileError);
   }
 
+  if (!profileData.notion_api_key) {
+    return res.status(500).json({ message: 'The user does not have a notion api key' });
+  }
+
   try {
     const hash = JSON.parse(profileData.notion_api_key);
     const notionApiKey = decrypt(hash);

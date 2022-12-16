@@ -101,19 +101,27 @@ const getTextFromPageProperty = (pageProperties: PageObjectResponse['properties'
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
 
-  const { data: profilesData, error: profilesError } = await getProfileDetails(user?.id!);
+  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
 
-  if (profilesError) {
-    return res.status(500).json(profilesError);
+  if (profileError) {
+    return res.status(500).json(profileError);
+  }
+
+  if (!profileData.notion_api_key) {
+    return res.status(500).json({ message: 'The user does not have a notion api key' });
+  }
+
+  if (!profileData.notion_page_id) {
+    return res.status(500).json({ message: 'The user does not have a selected notion page id' });
   }
 
   try {
-    const hash = JSON.parse(profilesData.notion_api_key);
+    const hash = JSON.parse(profileData.notion_api_key);
     const notionApiKey = decrypt(hash);
 
     const notionClient = createNotionClient(notionApiKey);
 
-    const allPages = await getAllPages(notionClient, profilesData.notion_page_id);
+    const allPages = await getAllPages(notionClient, profileData.notion_page_id);
 
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
