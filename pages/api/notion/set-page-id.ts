@@ -45,20 +45,20 @@ const getDatabasePages = async (pageId: string, hashAsString: string) => {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
 
-  const { data: profilesData, error: profilesError } = await getProfileDetails(user?.id!);
+  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
 
-  if (profilesError) {
-    return res.status(500).json(profilesError);
+  if (profileError) {
+    return res.status(500).json(profileError);
   }
 
-  if (!profilesData.notion_api_key) {
+  if (!profileData.notion_api_key) {
     return res.status(500).json({ message: 'The user does not have a notion api key' });
   }
 
   try {
     const { pageId } = req.body;
 
-    const databasePages = await getDatabasePages(pageId, profilesData.notion_api_key);
+    const databasePages = await getDatabasePages(pageId, profileData.notion_api_key);
 
     if (databasePages.length === 0) {
       return res.status(500).json({ message: 'Your words database is empty' });
