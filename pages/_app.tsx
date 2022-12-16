@@ -1,19 +1,6 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
-
-import { createDevToolsClient } from '@ui/utils';
+import { App } from '@ui';
 
 import '../styles/globals.css';
 
-export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    createDevToolsClient();
-  }, []);
-
-  return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  );
-}
+// eslint-disable-next-line unicorn/prefer-export-from
+export default App;
