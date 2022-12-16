@@ -21,9 +21,7 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     getUserProfile();
 
     supabaseModule.onAuthStateChange({
-      callback: () => {
-        getUserProfile();
-      },
+      callback: getUserProfile,
     });
   }, []);
 
