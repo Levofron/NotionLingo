@@ -1,7 +1,11 @@
-import { Heading } from '@chakra-ui/react';
+import { Button, Heading } from '@chakra-ui/react';
 import Head from 'next/head';
 
+import { useUser } from '@infrastructure/utils';
+
 export default function Home() {
+  const { loginViaGoogle, logout, user } = useUser();
+
   return (
     <div className="px-8">
       <Head>
@@ -11,6 +15,11 @@ export default function Home() {
       <main>
         <h1 className="block bg-slate-300 text-4xl leading-tight">Test</h1>
         <Heading>Test</Heading>
+        {!user ? (
+          <Button onClick={loginViaGoogle}>Login</Button>
+        ) : (
+          <Button onClick={logout}>Logout</Button>
+        )}
       </main>
     </div>
   );

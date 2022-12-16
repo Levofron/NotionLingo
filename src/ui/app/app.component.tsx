@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { ChakraProvider } from '../providers';
+import { ChakraProvider, UserProvider } from '../providers';
 import { IAppProps } from './app.types';
 import { createDevToolsClient } from './utils';
 
@@ -11,7 +11,9 @@ export const App = ({ Component, pageProps }: IAppProps) => {
 
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </ChakraProvider>
   );
 };
