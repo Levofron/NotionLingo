@@ -51,10 +51,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json(profilesError);
   }
 
-  if (profilesData.notion_page_id) {
-    return res
-      .status(500)
-      .json({ message: 'You have already chosen from which page you want to download data' });
+  if (!profilesData.notion_api_key) {
+    return res.status(500).json({ message: 'The user does not have a notion api key' });
   }
 
   try {

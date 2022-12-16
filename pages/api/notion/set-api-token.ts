@@ -18,6 +18,7 @@ const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string
   supabaseInstance
     .from('profiles')
     .update({
+      notion_page_id: null,
       notion_api_key: newNotionApiKey,
     })
     .eq('id', userId);
