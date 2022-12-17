@@ -1,10 +1,12 @@
-import { Button, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { useUser } from '@infrastructure/utils';
+import { Button } from '@ui';
+
+import { useUser } from '@infrastructure';
 
 export default function Home() {
-  const { loginViaGoogle, logout, user } = useUser();
+  const { isUserAuthenticated, loginViaGoogle, logout } = useUser();
 
   return (
     <div className="px-8">
@@ -15,7 +17,7 @@ export default function Home() {
       <main>
         <h1 className="block bg-slate-300 text-4xl leading-tight">Test</h1>
         <Heading>Test</Heading>
-        {!user ? (
+        {!isUserAuthenticated ? (
           <Button onClick={loginViaGoogle}>Login</Button>
         ) : (
           <Button onClick={logout}>Logout</Button>
