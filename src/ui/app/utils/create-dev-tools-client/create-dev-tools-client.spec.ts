@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure';
+import { functionImportTest } from '@infrastructure/utils';
 
 import { createDevToolsClient } from './create-dev-tools-client.function';
 

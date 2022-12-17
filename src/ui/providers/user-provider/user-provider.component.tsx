@@ -4,7 +4,7 @@ import { TUser } from '@domain/supabase/supabase.types';
 
 import { restModule, supabaseModule } from '@adapter';
 
-import { UserContext } from '@infrastructure';
+import { UserContext } from '@infrastructure/context';
 
 import { IUserProviderProps } from './user-provider.types';
 

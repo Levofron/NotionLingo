@@ -9,7 +9,7 @@ import {
 import { getSupabaseRepository } from '@data/repositories/supabase/supabase.repository';
 import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
 
-import { supabaseInstance } from '@infrastructure';
+import { supabaseInstance } from '@infrastructure/config';
 
 // sources
 const supabaseSource = getSupabaseSource(supabaseInstance);

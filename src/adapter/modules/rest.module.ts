@@ -12,7 +12,7 @@ import { getRestRepository } from '@data/repositories/rest/rest.repository';
 import { getRestSource } from '@data/sources/rest/rest.source';
 import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
 
-import { axiosInstance, supabaseInstance } from '@infrastructure';
+import { axiosInstance, supabaseInstance } from '@infrastructure/config';
 
 // sources
 const restSource = getRestSource(axiosInstance);

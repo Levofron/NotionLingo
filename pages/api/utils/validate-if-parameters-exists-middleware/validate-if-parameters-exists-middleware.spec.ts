@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure';
+import { functionImportTest } from '@infrastructure/utils';
 
 import { validateIfParametersExistsMiddleware } from './validate-if-parameters-exists-middleware.function';
 
