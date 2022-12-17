@@ -34,6 +34,7 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const providerValue = {
     user,
     logout,
+    isUserAuthenticated: !!user,
     loginViaGoogle: supabaseModule.loginViaGoogle,
   };
 
