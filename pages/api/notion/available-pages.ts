@@ -1,7 +1,7 @@
 import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { supabaseInstance } from '@infrastructure';
+import { supabaseInstance } from '@infrastructure/config';
 
 import {
   assignRequestTokenToSupabaseSessionMiddleware,

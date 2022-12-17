@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure';
+import { functionImportTest } from '@infrastructure/utils';
 
 import { isValidNotionPageSchema } from './is-valid-notion-page-schema.function';
 
