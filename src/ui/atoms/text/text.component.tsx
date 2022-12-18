@@ -1,0 +1,15 @@
+import { Text as ChakraText } from '@chakra-ui/react';
+import { ForwardRefRenderFunction, forwardRef } from 'react';
+
+import { ITextProps } from './text.types';
+
+const TextComponent: ForwardRefRenderFunction<HTMLParagraphElement, ITextProps> = (
+  { children, ...restProps },
+  ref,
+): JSX.Element => (
+  <ChakraText ref={ref} {...restProps}>
+    {children}
+  </ChakraText>
+);
+
+export const Text = forwardRef(TextComponent);

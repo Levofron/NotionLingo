@@ -1,8 +1,7 @@
-import { Heading } from '@chakra-ui/react';
 import Head from 'next/head';
 import { FC } from 'react';
 
-import { Button, Input } from '@ui/atoms';
+import { Button, Heading, Input, Text } from '@ui/atoms';
 
 import { useUser } from '@infrastructure/utils';
 
@@ -24,6 +23,7 @@ export const HomePage: FC = (): JSX.Element => {
           <Button onClick={logout}>Logout</Button>
         )}
         <Input />
+        <Text>Test</Text>
       </main>
     </div>
   );
