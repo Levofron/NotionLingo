@@ -4,6 +4,7 @@ import {
   PartialPageObjectResponse,
   RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints';
+import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabaseInstance } from '@infrastructure/config';
@@ -22,8 +23,15 @@ import {
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
+const CACHE_TIME = 1000 * 60 * 60;
 
 type TPage = PageObjectResponse | PartialPageObjectResponse;
+
+interface IGetAllPagesParams {
+  databaseId: string;
+  notionApiKey: string;
+  notionClient: Client;
+}
 
 const getProfileDetails = (userId: string) =>
   supabaseInstance
@@ -32,7 +40,10 @@ const getProfileDetails = (userId: string) =>
     .eq('id', userId)
     .single();
 
-const getAllPages = async (notionClient: Client, databaseId: string) => {
+const getAllPages = async ({
+  databaseId,
+  notionClient,
+}: Omit<IGetAllPagesParams, 'notionApiKey'>) => {
   let result: TPage[] = [];
   let startCursor: string | undefined;
 
@@ -98,6 +109,25 @@ const getTextFromPageProperty = (pageProperties: PageObjectResponse['properties'
   return `Unsupported "${selectedPageProperties.type}" type`;
 };
 
+const getAllPagesWithCache = async ({
+  databaseId,
+  notionApiKey,
+  notionClient,
+}: IGetAllPagesParams) => {
+  const cacheKey = `${databaseId}-${notionApiKey}`;
+  const cachedPages = memoryCache.get(cacheKey);
+
+  if (cachedPages) {
+    return cachedPages;
+  }
+
+  const pages = await getAllPages({ notionClient, databaseId });
+
+  memoryCache.put(cacheKey, pages, CACHE_TIME);
+
+  return pages;
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
 
@@ -121,7 +151,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const notionClient = createNotionClient(notionApiKey);
 
-    const allPages = await getAllPages(notionClient, profileData.notion_page_id);
+    const allPages = await getAllPagesWithCache({
+      databaseId: profileData.notion_page_id,
+      notionApiKey,
+      notionClient,
+    });
 
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
