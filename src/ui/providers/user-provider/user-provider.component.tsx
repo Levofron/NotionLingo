@@ -11,18 +11,12 @@ import { IUserProviderProps } from './user-provider.types';
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const [user, setUser] = useState<TUser | null>(null);
 
-  const getUserProfile = async () => {
-    const sessionUser = await supabaseModule.getUser();
-
-    setUser(sessionUser);
-  };
+  const getUserProfile = () => setUser(supabaseModule.getUser());
 
   useEffect(() => {
     getUserProfile();
 
-    supabaseModule.onAuthStateChange({
-      callback: getUserProfile,
-    });
+    supabaseModule.onAuthStateChange(getUserProfile);
   }, []);
 
   useEffect(() => {

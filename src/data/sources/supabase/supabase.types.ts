@@ -9,9 +9,9 @@ import {
 } from '@domain/supabase/supabase.types';
 
 export interface ISupabaseSource {
-  getSession: () => Promise<TSession | null>;
-  getUser: () => Promise<TUser | null>;
+  getSession: () => TSession | null;
+  getUser: () => TUser | null;
   logout: () => Promise<ILogoutResponse>;
-  onAuthStateChange: (callback: TOnAuthStateChangeCallback) => Promise<IOnAuthStateChangeResponse>;
+  onAuthStateChange: (callback: TOnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
   signIn: (provider: TProvider) => Promise<IOAuthResponse>;
 }

@@ -51,7 +51,7 @@ describe('getSupabaseRepository function', () => {
   });
 
   describe('getUser function', () => {
-    it('should call getUser function', async () => {
+    it('should call getUser function', () => {
       const userMock = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -61,7 +61,7 @@ describe('getSupabaseRepository function', () => {
 
       const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
 
-      const result = await supabaseRepository.getUser();
+      const result = supabaseRepository.getUser();
 
       expect(result).toEqual(userMock);
       expect(supabaseSourceMock.getUser).toHaveBeenCalled();
@@ -69,7 +69,7 @@ describe('getSupabaseRepository function', () => {
   });
 
   describe('getSession function', () => {
-    it('should call getSession function', async () => {
+    it('should call getSession function', () => {
       const sessionMock = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -79,7 +79,7 @@ describe('getSupabaseRepository function', () => {
 
       const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
 
-      const result = await supabaseRepository.getSession();
+      const result = supabaseRepository.getSession();
 
       expect(result).toEqual(sessionMock);
       expect(supabaseSourceMock.getSession).toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe('getSupabaseRepository function', () => {
   });
 
   describe('onAuthStateChange function', () => {
-    it('should call onAuthStateChange function', async () => {
+    it('should call onAuthStateChange function', () => {
       const callbackMock = jest.fn();
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

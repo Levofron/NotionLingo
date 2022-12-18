@@ -52,7 +52,7 @@ describe('getSupabaseSource function', () => {
     expect(supabaseInstanceMock.auth.signOut).toHaveBeenCalled();
   });
 
-  it('should call getUser', async () => {
+  it('should call getUser', () => {
     const userMock = {};
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,12 +66,12 @@ describe('getSupabaseSource function', () => {
 
     supabaseInstanceMock.auth.user.mockReturnValue(userMock);
 
-    const user = await supabaseSource.getUser();
+    const user = supabaseSource.getUser();
 
     expect(user).toEqual(userMock);
   });
 
-  it('should call getSession', async () => {
+  it('should call getSession', () => {
     const sessionMock = {};
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,7 +85,7 @@ describe('getSupabaseSource function', () => {
 
     supabaseInstanceMock.auth.session.mockReturnValue(sessionMock);
 
-    const session = await supabaseSource.getSession();
+    const session = supabaseSource.getSession();
 
     expect(session).toEqual(sessionMock);
   });
