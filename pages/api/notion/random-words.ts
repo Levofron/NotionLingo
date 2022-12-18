@@ -29,8 +29,11 @@ type TPage = PageObjectResponse | PartialPageObjectResponse;
 
 interface IGetAllPagesParams {
   databaseId: string;
-  notionApiKey: string;
   notionClient: Client;
+}
+
+interface IGetAllPagesWithCacheParams extends IGetAllPagesParams {
+  notionApiKey: string;
 }
 
 const getProfileDetails = (userId: string) =>
@@ -40,10 +43,7 @@ const getProfileDetails = (userId: string) =>
     .eq('id', userId)
     .single();
 
-const getAllPages = async ({
-  databaseId,
-  notionClient,
-}: Omit<IGetAllPagesParams, 'notionApiKey'>) => {
+const getAllPages = async ({ databaseId, notionClient }: IGetAllPagesParams) => {
   let result: TPage[] = [];
   let startCursor: string | undefined;
 
@@ -113,7 +113,7 @@ const getAllPagesWithCache = async ({
   databaseId,
   notionApiKey,
   notionClient,
-}: IGetAllPagesParams) => {
+}: IGetAllPagesWithCacheParams) => {
   const cacheKey = `${databaseId}-${notionApiKey}`;
   const cachedPages = memoryCache.get(cacheKey);
 
