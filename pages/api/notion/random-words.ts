@@ -34,6 +34,7 @@ interface IGetAllPagesParams {
 
 interface IGetAllPagesWithCacheParams extends IGetAllPagesParams {
   notionApiKey: string;
+  profileId: string;
 }
 
 const getProfileDetails = (userId: string) =>
@@ -113,8 +114,9 @@ const getAllPagesWithCache = async ({
   databaseId,
   notionApiKey,
   notionClient,
+  profileId,
 }: IGetAllPagesWithCacheParams) => {
-  const cacheKey = `${databaseId}-${notionApiKey}`;
+  const cacheKey = `${profileId}-${notionApiKey}-${databaseId}`;
   const cachedPages = memoryCache.get(cacheKey);
 
   if (cachedPages) {
@@ -152,9 +154,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const notionClient = createNotionClient(notionApiKey);
 
     const allPages = await getAllPagesWithCache({
-      databaseId: profileData.notion_page_id,
       notionApiKey,
       notionClient,
+      profileId: user?.id!,
+      databaseId: profileData.notion_page_id,
     });
 
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
