@@ -4112,6 +4112,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/memory-cache@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@types/memory-cache@npm:0.2.2"
+  checksum: f2c9182432057f0034f6acb69d0c6f1df58adaeb970749444b86834325018a24cb7dedfbdc4086d859497167fc82a06538f80354cfccdc6a3f011af80bc75697
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 5.1.2
   resolution: "@types/minimatch@npm:5.1.2"
@@ -9844,6 +9851,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^3.4.0
     "@types/cookie": ^0.5.1
     "@types/jest": ^29.2.2
+    "@types/memory-cache": ^0.2.2
     "@types/node": 18.11.9
     "@types/react": 18.0.24
     "@types/react-dom": 18.0.8
@@ -9875,6 +9883,7 @@ __metadata:
     jest-module-name-mapper: ^0.1.5
     jsdom: ^20.0.2
     lint-staged: ^13.0.3
+    memory-cache: ^0.2.0
     next: 13.0.1
     next-pwa: ^5.6.0
     plop: ^3.1.1
@@ -10268,6 +10277,13 @@ __metadata:
   version: 4.3.0
   resolution: "map-obj@npm:4.3.0"
   checksum: fbc554934d1a27a1910e842bc87b177b1a556609dd803747c85ece420692380827c6ae94a95cce4407c054fa0964be3bf8226f7f2cb2e9eeee432c7c1985684e
+  languageName: node
+  linkType: hard
+
+"memory-cache@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "memory-cache@npm:0.2.0"
+  checksum: 255c87fec360ce06818ca7aeb5850d798e14950a9fcea879d88e1f8d1f4a6cffb8ed16da54aa677f5ec8e47773fbe15775a1cdf837ac190e17e9fb4b71e87bee
   languageName: node
   linkType: hard
 
