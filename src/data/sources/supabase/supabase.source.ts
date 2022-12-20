@@ -12,8 +12,8 @@ export const getSupabaseSource = (supabaseInstance: TSupabaseClient): ISupabaseS
       provider,
     }),
   logout: () => supabaseInstance.auth.signOut(),
-  getUser: () => Promise.resolve(supabaseInstance.auth.user()),
-  getSession: () => Promise.resolve(supabaseInstance.auth.session()),
+  getUser: () => supabaseInstance.auth.user(),
+  getSession: () => supabaseInstance.auth.session(),
   onAuthStateChange: (callback: TOnAuthStateChangeCallback) =>
-    Promise.resolve(supabaseInstance.auth.onAuthStateChange(callback)),
+    supabaseInstance.auth.onAuthStateChange(callback),
 });

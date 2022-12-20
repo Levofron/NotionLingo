@@ -1,18 +1,21 @@
 import { AxiosResponse } from 'axios';
 
-import { IUseCase } from '../common.types';
+import {
+  IUseCaseWithSingleParamAndPromiseResult,
+  IUseCaseWithoutParamsAndPromiseResult,
+} from '../common.types';
 import { IHash, INotionPage, INotionWord, IUser } from './rest.models';
 import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
-export type THealthCheckUseCase = IUseCase<void, AxiosResponse<string>>;
+export type THealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<AxiosResponse<string>>;
 
 export const healthCheckUseCase = (restRepository: IRestRepository): THealthCheckUseCase => ({
   execute: () => restRepository.healthCheck(),
 });
 
 // setSupabaseCookieUseCase
-export type TSetSupabaseCookieUseCase = IUseCase<void, void>;
+export type TSetSupabaseCookieUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
 export const setSupabaseCookieUseCase = (
   restRepository: IRestRepository,
@@ -21,23 +24,28 @@ export const setSupabaseCookieUseCase = (
 });
 
 // getLoggedUserUseCase
-export type TGetLoggedUserUseCase = IUseCase<void, AxiosResponse<IUser>>;
+export type TGetLoggedUserUseCase = IUseCaseWithoutParamsAndPromiseResult<AxiosResponse<IUser>>;
 
 export const getLoggedUserUseCase = (restRepository: IRestRepository): TGetLoggedUserUseCase => ({
   execute: () => restRepository.getLoggedUser(),
 });
 
 // setNotionApiTokenUseCase
-export type TSetNotionApiTokenUseCase = IUseCase<{ token: string }, AxiosResponse<IHash>>;
+export type TSetNotionApiTokenUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  string,
+  AxiosResponse<IHash>
+>;
 
 export const setNotionApiTokenUseCase = (
   restRepository: IRestRepository,
 ): TSetNotionApiTokenUseCase => ({
-  execute: ({ token }) => restRepository.setNotionApiToken(token),
+  execute: (token) => restRepository.setNotionApiToken(token),
 });
 
 // getAvailableNotionPagesUseCase
-export type TGetAvailableNotionPagesUseCase = IUseCase<void, AxiosResponse<INotionPage[]>>;
+export type TGetAvailableNotionPagesUseCase = IUseCaseWithoutParamsAndPromiseResult<
+  AxiosResponse<INotionPage[]>
+>;
 
 export const getAvailableNotionPagesUseCase = (
   restRepository: IRestRepository,
@@ -46,16 +54,21 @@ export const getAvailableNotionPagesUseCase = (
 });
 
 // setNotionPageIdUseCase
-export type TSetNotionPageIdUseCase = IUseCase<{ pageId: string }, AxiosResponse<string>>;
+export type TSetNotionPageIdUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  string,
+  AxiosResponse<string>
+>;
 
 export const setNotionPageIdUseCase = (
   restRepository: IRestRepository,
 ): TSetNotionPageIdUseCase => ({
-  execute: ({ pageId }) => restRepository.setNotionPageId(pageId),
+  execute: (pageId) => restRepository.setNotionPageId(pageId),
 });
 
 // getRandomNotionWordsUseCase
-export type TGetRandomNotionWordsUseCase = IUseCase<void, AxiosResponse<INotionWord[]>>;
+export type TGetRandomNotionWordsUseCase = IUseCaseWithoutParamsAndPromiseResult<
+  AxiosResponse<INotionWord[]>
+>;
 
 export const getRandomNotionWordsUseCase = (
   restRepository: IRestRepository,
