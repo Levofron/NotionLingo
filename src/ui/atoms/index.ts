@@ -5,6 +5,7 @@ export * from './text/text.component';
 export * from './hide/hide.component';
 export * from './input/input.component';
 export * from './modal/modal.component';
+export * from './stack/stack.component';
 export * from './button/button.component';
 export * from './avatar/avatar.component';
 export * from './heading/heading.component';
