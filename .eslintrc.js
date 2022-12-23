@@ -15,7 +15,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['react', 'folders', 'sort-destructure-keys', 'tailwindcss'],
+  plugins: ['react', 'react-hooks', 'folders', 'sort-destructure-keys', 'tailwindcss', 'json'],
   overrides: [
     {
       files: ['*.js', '*.ts', '*.tsx'],
@@ -38,8 +38,9 @@ module.exports = {
           { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
           { blankLine: 'always', prev: 'directive', next: '*' },
           { blankLine: 'any', prev: 'directive', next: 'directive' },
-          { blankLine: 'always', prev: ['case', 'default'], next: '*' },
           { blankLine: 'always', prev: 'if', next: '*' },
+          { blankLine: 'always', prev: '*', next: 'return' },
+          { blankLine: 'always', prev: 'function', next: 'function' },
         ],
         'implicit-arrow-linebreak': 'off',
         'import/order': 'off',
