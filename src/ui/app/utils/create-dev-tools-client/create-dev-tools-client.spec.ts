@@ -59,17 +59,4 @@ describe('createDevToolsClient function', () => {
 
     expect(consoleMock).toHaveBeenCalled();
   });
-
-  it('should not assign supabase or rest module if environemt is not local or test', () => {
-    const originalEnv = process.env.NEXT_PUBLIC_APP_ENV;
-
-    process.env.NEXT_PUBLIC_APP_ENV = 'production';
-
-    createDevToolsClient();
-
-    expect(window).not.toHaveProperty('supabase');
-    expect(window).not.toHaveProperty('rest');
-
-    process.env.NEXT_PUBLIC_APP_ENV = originalEnv;
-  });
 });

@@ -11,7 +11,8 @@
       "@adapter/*": ["./src/adapter/*"],
       "@adapter": ["./src/adapter"],
       "@infrastructure/*": ["./src/infrastructure/*"],
-      "@infrastructure": ["./src/infrastructure"]
+      "@infrastructure": ["./src/infrastructure"],
+      "@constants": ["./src/constants"]
     }
   }
 }

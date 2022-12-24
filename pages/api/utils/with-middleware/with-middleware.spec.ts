@@ -1,5 +1,7 @@
 import { functionImportTest } from '@infrastructure/utils';
 
+import { API_ROUTE_SECRET } from '@constants';
+
 import { validateRequestMethodMiddleware, validateRouteSecretMiddleware } from '..';
 import { withMiddleware } from './with-middleware.function';
 
@@ -48,7 +50,7 @@ describe('withMiddleware function', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const request: any = {
       headers: {
-        authorization: process.env.NEXT_PUBLIC_API_ROUTE_SECRET,
+        authorization: API_ROUTE_SECRET,
       },
     };
 
@@ -71,7 +73,7 @@ describe('withMiddleware function', () => {
     const request: any = {
       method: 'GET',
       headers: {
-        authorization: process.env.NEXT_PUBLIC_API_ROUTE_SECRET,
+        authorization: API_ROUTE_SECRET,
       },
     };
 
@@ -94,7 +96,7 @@ describe('withMiddleware function', () => {
     const request: any = {
       method: 'GET',
       headers: {
-        authorization: process.env.NEXT_PUBLIC_API_ROUTE_SECRET,
+        authorization: API_ROUTE_SECRET,
       },
     };
 
