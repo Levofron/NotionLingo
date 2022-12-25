@@ -4,7 +4,7 @@ import { API_ROUTE_SECRET } from '@constants';
 
 export const axiosConfiguration: AxiosRequestConfig = {
   baseURL: '/api',
-  timeout: 20_000,
+  timeout: 50_000,
   timeoutErrorMessage: 'Request timeout',
   headers: {
     authorization: API_ROUTE_SECRET,
