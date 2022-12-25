@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const apiRouteSecret = process.env.NEXT_PUBLIC_API_ROUTE_SECRET;
+import { API_ROUTE_SECRET } from '@constants';
 
 export const validateRouteSecretMiddleware = (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.headers.authorization !== apiRouteSecret) {
+  if (req.headers.authorization !== API_ROUTE_SECRET) {
     res.status(401).json({ message: 'Invalid api route secret' });
 
     return false;

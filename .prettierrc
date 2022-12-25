@@ -16,6 +16,7 @@
     "^@ui/(.*)$",
     "^@infrastructure",
     "^@infrastructure/(.*)$",
+    "^@constants",
     "([.]svg|[.]jpg|[.]jpeg|[.]gif|[.]png)$",
     "^[./]",
     "^[./](?!.*([.]css|[.]scss))",

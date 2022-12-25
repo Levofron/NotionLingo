@@ -1,12 +1,11 @@
 import crypto from 'node:crypto';
 
-const algorithm = process.env.CRYPTO_ALGORITHM;
-const secretKey = process.env.CRYPTO_SECRET_KEY;
+import { CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY } from '@constants';
 
 export const encrypt = (text: string) => {
   const iv = crypto.randomBytes(16);
 
-  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+  const cipher = crypto.createCipheriv(CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY, iv);
 
   const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
 

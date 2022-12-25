@@ -1,13 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const apiRouteSecret = process.env.NEXT_PUBLIC_API_ROUTE_SECRET;
+import { API_ROUTE_SECRET } from '@constants';
 
 export const axiosConfiguration: AxiosRequestConfig = {
   baseURL: '/api',
   timeout: 20_000,
   timeoutErrorMessage: 'Request timeout',
   headers: {
-    authorization: apiRouteSecret,
+    authorization: API_ROUTE_SECRET,
     'Content-Type': 'application/json;charset=utf-8',
   },
 };

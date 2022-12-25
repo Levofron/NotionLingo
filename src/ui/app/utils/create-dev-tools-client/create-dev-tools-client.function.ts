@@ -1,8 +1,10 @@
 import { restModule } from '@adapter/modules/rest.module';
 import { supabaseModule } from '@adapter/modules/supabase.module';
 
+import { APPLICATION_ENVIRONMENT } from '@constants';
+
 export const createDevToolsClient = () => {
-  if (!['test', 'local'].includes(process.env.NEXT_PUBLIC_APP_ENV)) {
+  if (!['test', 'local'].includes(APPLICATION_ENVIRONMENT)) {
     return;
   }
 
