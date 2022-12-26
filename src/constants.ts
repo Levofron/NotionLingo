@@ -1,6 +1,13 @@
-export const SUPPORTED_WORD_COLUMN_NAMES = ['Word'];
-export const SUPPORTED_MEANING_COLUMN_NAMES = ['Meaning'];
-export const SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES = ['Example sentence'];
+export const SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES = [
+  'example',
+  'Example',
+  'Sentence',
+  'sentence',
+  'Example sentence',
+  'example sentence',
+];
+export const SUPPORTED_MEANING_COLUMN_NAMES = ['Meaning', 'meaning'];
+export const SUPPORTED_WORD_COLUMN_NAMES = ['Word', 'word', 'Name', 'name'];
 
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 export const API_ROUTE_SECRET = process.env.NEXT_PUBLIC_API_ROUTE_SECRET;
