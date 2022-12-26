@@ -8,7 +8,6 @@ import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabaseInstance } from '@infrastructure/config';
-
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -19,7 +18,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '../utils';
+} from '@infrastructure/utils/node';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;

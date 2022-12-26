@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabaseInstance } from '@infrastructure/config';
-
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   getUserFromRequest,
@@ -9,7 +8,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '../utils';
+} from '@infrastructure/utils/node';
 
 const getProfileDetails = (userId: string) =>
   supabaseInstance.from('profiles').select('id,email,created_at').eq('id', userId).single();

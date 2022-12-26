@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
-  validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from './utils';
+} from '@infrastructure/utils/node';
 
 const handler = (_: NextApiRequest, res: NextApiResponse) => {
   const currentDate = new Date();
@@ -14,10 +13,6 @@ const handler = (_: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json(isoDate);
 };
 
-const middlewareToApply = [
-  validateRequestMethodMiddleware('GET'),
-  validateRouteSecretMiddleware,
-  validateIfUserIsLoggedInMiddleware,
-];
+const middlewareToApply = [validateRequestMethodMiddleware('GET'), validateRouteSecretMiddleware];
 
 export default withMiddleware(handler)(middlewareToApply);
