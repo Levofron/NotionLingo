@@ -32,7 +32,6 @@
     "typecheck": "tsc --noEmit -p . --pretty"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.15",
     "@chakra-ui/react": "^2.3.7",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
@@ -50,7 +49,6 @@
     "cookie": "^0.5.0",
     "crypto": "^1.0.1",
     "framer-motion": "^7.6.5",
-    "framesync": "^6.1.2",
     "memory-cache": "^0.2.0",
     "next": "13.0.1",
     "next-pwa": "^5.6.0",
