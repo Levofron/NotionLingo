@@ -32,7 +32,9 @@
     "typecheck": "tsc --noEmit -p . --pretty"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.15",
     "@chakra-ui/react": "^2.3.7",
+    "@chakra-ui/system": "^2.3.6",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
     "@emotion/react": "^11.10.5",
@@ -49,11 +51,14 @@
     "cookie": "^0.5.0",
     "crypto": "^1.0.1",
     "framer-motion": "^7.6.5",
+    "framesync": "^6.1.2",
     "memory-cache": "^0.2.0",
     "next": "13.0.1",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
+    "ts-node": "^10.9.1",
     "typescript": "4.8.4"
   },
   "devDependencies": {

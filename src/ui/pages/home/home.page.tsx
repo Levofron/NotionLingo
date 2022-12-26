@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import { FC } from 'react';
+import { FiHome } from 'react-icons/fi';
 
 import { Button, Heading, Input, Text } from '@ui/atoms';
+import { NavItem } from '@ui/molecules';
 
 import { useUser } from '@infrastructure/utils';
 
@@ -24,6 +26,12 @@ export const HomePage: FC = (): JSX.Element => {
         )}
         <Input />
         <Text>Test</Text>
+        <NavItem href="/" icon={FiHome}>
+          Home
+        </NavItem>
+        <NavItem href="/404" icon={FiHome}>
+          Not found
+        </NavItem>
       </main>
     </div>
   );
