@@ -1,16 +1,22 @@
-import { IPageProperties } from './is-valid-notion-page-schema.types';
+import {
+  SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
+  SUPPORTED_MEANING_COLUMN_NAMES,
+  SUPPORTED_WORD_COLUMN_NAMES,
+} from '@constants';
 
-const validPageProperties: IPageProperties[] = [
-  { type: 'title', name: 'Word' },
-  { type: 'rich_text', name: 'Meaning' },
-  { type: 'rich_text', name: 'Example sentence' },
+import { IPageProperties, IValidPageProperties } from './is-valid-notion-page-schema.types';
+
+const validPageProperties: IValidPageProperties[] = [
+  { type: 'title', names: SUPPORTED_WORD_COLUMN_NAMES },
+  { type: 'rich_text', names: SUPPORTED_MEANING_COLUMN_NAMES },
+  { type: 'rich_text', names: SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES },
 ];
 
 const hasValidTypeAndName =
-  (pagePropertiesValues: IPageProperties[]) => (currentPageProperty: IPageProperties) =>
+  (pagePropertiesValues: IPageProperties[]) => (currentPageProperty: IValidPageProperties) =>
     pagePropertiesValues.some(
       (_value) =>
-        _value.name === currentPageProperty.name && _value.type === currentPageProperty.type,
+        currentPageProperty.names.includes(_value.name) && _value.type === currentPageProperty.type,
     );
 
 export const isValidNotionPageSchema = (pageProperties: Record<string, IPageProperties>) => {

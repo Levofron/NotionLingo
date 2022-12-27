@@ -20,6 +20,12 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
+import {
+  SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
+  SUPPORTED_MEANING_COLUMN_NAMES,
+  SUPPORTED_WORD_COLUMN_NAMES,
+} from '@constants';
+
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
 const CACHE_TIME = 1000 * 60 * 60;
@@ -95,8 +101,21 @@ const getRandomFivePages = (pages: TPage[]) => {
 const joinRichTextItemResponse = (richTextItemResponse: RichTextItemResponse[]) =>
   richTextItemResponse.map((_richText) => _richText.plain_text).join('');
 
-const getTextFromPageProperty = (pageProperties: PageObjectResponse['properties'], key: string) => {
-  const selectedPageProperties = pageProperties[key];
+const getTextFromPageProperty = (
+  pageProperties: PageObjectResponse['properties'],
+  propertyNames: string[],
+) => {
+  let selectedPageProperties = pageProperties[propertyNames[0]];
+
+  if (!selectedPageProperties) {
+    for (const _propertyName of propertyNames) {
+      if (pageProperties[_propertyName]) {
+        selectedPageProperties = pageProperties[_propertyName];
+
+        break;
+      }
+    }
+  }
 
   if (selectedPageProperties.type === 'title') {
     return joinRichTextItemResponse(selectedPageProperties.title);
@@ -162,9 +181,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
     const formattedPages = selectedPages.map((_selectedPage) => ({
-      word: getTextFromPageProperty(_selectedPage.properties, 'Word'),
-      meaning: getTextFromPageProperty(_selectedPage.properties, 'Meaning'),
-      exampleSentence: getTextFromPageProperty(_selectedPage.properties, 'Example sentence'),
+      word: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES),
+      meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
+      exampleSentence: getTextFromPageProperty(
+        _selectedPage.properties,
+        SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
+      ),
     }));
 
     return res.status(200).json(formattedPages);
