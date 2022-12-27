@@ -2,9 +2,14 @@ import { FC } from 'react';
 
 import { ChakraNextLink, Flex, Icon } from '@ui/atoms';
 
-import { INavItemProps } from './nav-item.types';
+import { INavigationItemProps } from './navigation-item.types';
 
-export const NavItem: FC<INavItemProps> = ({ children, href, icon, ...restProps }): JSX.Element => (
+export const NavigationItem: FC<INavigationItemProps> = ({
+  children,
+  href,
+  icon,
+  ...restProps
+}): JSX.Element => (
   <ChakraNextLink _focus={{ boxShadow: 'none' }} href={href} style={{ textDecoration: 'none' }}>
     <Flex
       _hover={{
