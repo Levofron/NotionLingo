@@ -7,8 +7,9 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
-const handler = (req: NextApiRequest, res: NextApiResponse) =>
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
   supabaseInstance.auth.api.setAuthCookie(req, res);
+};
 
 const middlewareToApply = [validateRequestMethodMiddleware('POST'), validateRouteSecretMiddleware];
 

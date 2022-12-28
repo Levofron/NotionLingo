@@ -14,7 +14,6 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
   setSupabaseCookie: async (supabaseSession: TSession | null) => {
     axiosInstance.post(restEndpoints.SET_SUPABASE_COOKIE, {
       session: supabaseSession,
-      // TODO - verify if this is enough
       event: supabaseSession ? 'SIGNED_IN' : 'SIGNED_OUT',
     });
   },

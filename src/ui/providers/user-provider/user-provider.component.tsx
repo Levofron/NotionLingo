@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { IUser } from '@domain/rest/rest.models';
 import { TUser } from '@domain/supabase/supabase.types';
 
 import { restModule, supabaseModule } from '@adapter';
@@ -8,10 +9,35 @@ import { UserContext } from '@infrastructure/context';
 
 import { IUserProviderProps } from './user-provider.types';
 
-export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
-  const [user, setUser] = useState<TUser | null>(null);
+const delay = (time: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
 
-  const getUserProfile = () => setUser(supabaseModule.getUser());
+export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<(TUser & IUser) | null>(null);
+
+  const getUserProfile = async () => {
+    if (user) {
+      return;
+    }
+
+    setIsLoading(true);
+    const sessionUser = supabaseModule.getUser();
+
+    if (sessionUser) {
+      await restModule.setSupabaseCookie();
+      // TODO - wtf is this? xD
+      await delay(1000);
+
+      const response = await restModule.getLoggedUser();
+
+      setUser({ ...sessionUser, ...response.data });
+    }
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     getUserProfile();
@@ -19,15 +45,17 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     supabaseModule.onAuthStateChange(getUserProfile);
   }, []);
 
-  useEffect(() => {
-    restModule.setSupabaseCookie();
-  }, [JSON.stringify(user)]);
+  const logout = async () => {
+    await supabaseModule.logout();
+    await restModule.setSupabaseCookie();
 
-  const logout = () => supabaseModule.logout().then(() => setUser(null));
+    setUser(null);
+  };
 
   const providerValue = {
     user,
     logout,
+    isLoading,
     isUserAuthenticated: !!user,
     loginViaGoogle: supabaseModule.loginViaGoogle,
   };
