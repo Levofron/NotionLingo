@@ -1,4 +1,4 @@
-import { useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import { Box, Drawer, DrawerContent } from '@ui/atoms';
@@ -10,7 +10,7 @@ export const SidebarWithHeader: FC<ISidebarWithHeaderProps> = ({ children }): JS
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.900')} minH="100vh">
+    <Box bg="gray.100" minH="100vh">
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
