@@ -13,7 +13,7 @@ export const NavigationItem: FC<INavigationItemProps> = ({
   <ChakraNextLink _focus={{ boxShadow: 'none' }} href={href} style={{ textDecoration: 'none' }}>
     <Flex
       _hover={{
-        bg: 'cyan.400',
+        bg: 'red.400',
         color: 'white',
       }}
       align="center"
