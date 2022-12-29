@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
-import { Avatar, Flex, IconButton, Text } from '@ui/atoms';
+import { Button, Flex, IconButton } from '@ui/atoms';
 
 import { useUser } from '@infrastructure/utils';
 
 import { IHeaderProps } from './header.types';
 
 export const Header: FC<IHeaderProps> = ({ onOpen, ...restProps }): JSX.Element => {
-  const { user } = useUser();
+  const { isUserAuthenticated, loginViaGoogle, logout } = useUser();
 
   return (
     <Flex
@@ -29,10 +29,31 @@ export const Header: FC<IHeaderProps> = ({ onOpen, ...restProps }): JSX.Element 
         variant="outline"
         onClick={onOpen}
       />
-      <Text fontFamily="monospace" fontSize="2xl" fontWeight="bold">
-        Levofron
-      </Text>
-      <Avatar border="1px solid black" size="sm" src={user?.avatarUrl} />
+      {!isUserAuthenticated ? (
+        <Button
+          _hover={{
+            bg: 'red.500',
+          }}
+          bg="red.400"
+          color="white"
+          width={100}
+          onClick={loginViaGoogle}
+        >
+          Sign In
+        </Button>
+      ) : (
+        <Button
+          _hover={{
+            bg: 'red.500',
+          }}
+          bg="red.400"
+          color="white"
+          width={100}
+          onClick={logout}
+        >
+          Sign Out
+        </Button>
+      )}
     </Flex>
   );
 };
