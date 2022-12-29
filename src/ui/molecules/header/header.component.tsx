@@ -29,31 +29,14 @@ export const Header: FC<IHeaderProps> = ({ onOpen, ...restProps }): JSX.Element 
         variant="outline"
         onClick={onOpen}
       />
-      {!isUserAuthenticated ? (
-        <Button
-          _hover={{
-            bg: 'red.500',
-          }}
-          bg="red.400"
-          color="white"
-          width={100}
-          onClick={loginViaGoogle}
-        >
-          Sign In
-        </Button>
-      ) : (
-        <Button
-          _hover={{
-            bg: 'red.500',
-          }}
-          bg="red.400"
-          color="white"
-          width={100}
-          onClick={logout}
-        >
-          Sign Out
-        </Button>
-      )}
+      <Button
+        borderColor="black"
+        variant="outline"
+        width={100}
+        onClick={!isUserAuthenticated ? loginViaGoogle : logout}
+      >
+        {!isUserAuthenticated ? 'Sign In' : 'Sign Out'}
+      </Button>
     </Flex>
   );
 };
