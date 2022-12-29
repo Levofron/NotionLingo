@@ -52,6 +52,7 @@ module.exports = {
         'react/require-default-props': 'off',
         'react/jsx-filename-extension': 'off',
         'react/jsx-props-no-spreading': 'off',
+        'react/jsx-curly-brace-presence': 'error',
         'react/jsx-one-expression-per-line': 'off',
         'react/jsx-wrap-multilines': [
           'error',
