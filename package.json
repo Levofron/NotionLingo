@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "check:all": "concurrently \"yarn lint\" \"yarn typecheck\" \"yarn format:check\" \"yarn test\" \"yarn build\"",
+    "convert-pages-directory-to-routes-enum": "node ./scripts/node/convert-pages-directory-to-routes-enum.js",
     "create:component": "plop --plopfile ./scripts/plop/create-component/create-component.js",
     "create:function": "plop --plopfile ./scripts/plop/create-function/create-function.js",
     "create:hook": "plop --plopfile ./scripts/plop/create-hook/create-hook.js",
