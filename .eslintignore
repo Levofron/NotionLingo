@@ -8,7 +8,6 @@
 out
 .next
 build
-scripts
 coverage
 node_modules
 
