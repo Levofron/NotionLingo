@@ -3,6 +3,6 @@ import { FC } from 'react';
 
 import { IHighlightProps } from './highlight.types';
 
-export const Highligh: FC<IHighlightProps> = ({ children, ...restProps }): JSX.Element => (
+export const Highlight: FC<IHighlightProps> = ({ children, ...restProps }): JSX.Element => (
   <ChakraHighlight {...restProps}>{children}</ChakraHighlight>
 );
