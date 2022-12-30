@@ -11,7 +11,7 @@ export const InputControl: FC<IInputControlProps> = ({
   label,
   ...inputProps
 }): JSX.Element => (
-  <FormControl isDisabled={isDisabled} isRequired={isRequired}>
+  <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
     {label ? <FormLabel>{label}</FormLabel> : null}
     <Input {...inputProps} />
     {errorMessage ? <FormErrorMessage>{errorMessage}</FormErrorMessage> : null}
