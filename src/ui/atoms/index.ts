@@ -26,6 +26,7 @@ export * from './modal-header/modal-header.component';
 export * from './modal-content/modal-content.component';
 export * from './modal-overlay/modal-overlay.component';
 export * from './drawer-content/drawer-content.component';
+export * from './text-underline/text-underline.component';
 export * from './chakra-next-link/chakra-next-link.component';
 export * from './modal-close-button/modal-close-button.component';
 
