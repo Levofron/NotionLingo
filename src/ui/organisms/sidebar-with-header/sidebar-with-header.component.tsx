@@ -25,7 +25,7 @@ export const SidebarWithHeader: FC<ISidebarWithHeaderProps> = ({ children }): JS
         </DrawerContent>
       </Drawer>
       <Header onOpen={onOpen} />
-      <Box p="4">{children}</Box>
+      <Box>{children}</Box>
     </Box>
   );
 };
