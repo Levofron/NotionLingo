@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IIconButtonProps } from './icon-button.types';
 
 const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IIconButtonProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraIconButton ref={ref} {...restProps}>
-    {children}
-  </ChakraIconButton>
-);
+): JSX.Element => <ChakraIconButton ref={ref} {...props} />;
 
 export const IconButton = forwardRef(IconButtonComponent);

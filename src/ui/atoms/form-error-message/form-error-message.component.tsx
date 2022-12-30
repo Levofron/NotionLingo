@@ -6,10 +6,6 @@ import { IFormErrorMessageProps } from './form-error-message.types';
 const FormErrorMessageComponent: ForwardRefRenderFunction<
   HTMLDivElement,
   IFormErrorMessageProps
-> = ({ children, ...restProps }, ref): JSX.Element => (
-  <ChakraFormErrorMessage ref={ref} {...restProps}>
-    {children}
-  </ChakraFormErrorMessage>
-);
+> = (props, ref): JSX.Element => <ChakraFormErrorMessage ref={ref} {...props} />;
 
 export const FormErrorMessage = forwardRef(FormErrorMessageComponent);

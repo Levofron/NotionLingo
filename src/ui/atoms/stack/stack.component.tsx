@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IStackProps } from './stack.types';
 
 const StackComponent: ForwardRefRenderFunction<HTMLDivElement, IStackProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraStack ref={ref} {...restProps}>
-    {children}
-  </ChakraStack>
-);
+): JSX.Element => <ChakraStack ref={ref} {...props} />;
 
 export const Stack = forwardRef(StackComponent);

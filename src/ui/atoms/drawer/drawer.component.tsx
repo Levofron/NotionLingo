@@ -3,6 +3,4 @@ import { FC } from 'react';
 
 import { IDrawerProps } from './drawer.types';
 
-export const Drawer: FC<IDrawerProps> = ({ children, ...restProps }): JSX.Element => (
-  <ChakraDrawer {...restProps}>{children}</ChakraDrawer>
-);
+export const Drawer: FC<IDrawerProps> = (props): JSX.Element => <ChakraDrawer {...props} />;

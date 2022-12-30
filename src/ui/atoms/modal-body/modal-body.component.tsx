@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IModalBodyProps } from './modal-body.types';
 
 const ModalBodyComponent: ForwardRefRenderFunction<HTMLDivElement, IModalBodyProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraModalBody ref={ref} {...restProps}>
-    {children}
-  </ChakraModalBody>
-);
+): JSX.Element => <ChakraModalBody ref={ref} {...props} />;
 
 export const ModalBody = forwardRef(ModalBodyComponent);

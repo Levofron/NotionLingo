@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { ILinkProps } from './link.types';
 
 const LinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, ILinkProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraLink ref={ref} {...restProps}>
-    {children}
-  </ChakraLink>
-);
+): JSX.Element => <ChakraLink ref={ref} {...props} />;
 
 export const Link = forwardRef(LinkComponent);

@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { ICardBodyProps } from './card-body.types';
 
 const CardBodyComponent: ForwardRefRenderFunction<HTMLDivElement, ICardBodyProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraCardBody ref={ref} {...restProps}>
-    {children}
-  </ChakraCardBody>
-);
+): JSX.Element => <ChakraCardBody ref={ref} {...props} />;
 
 export const CardBody = forwardRef(CardBodyComponent);

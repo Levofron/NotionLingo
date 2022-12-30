@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { ICardHeaderProps } from './card-header.types';
 
 const CardHeaderComponent: ForwardRefRenderFunction<HTMLDivElement, ICardHeaderProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraCardHeader ref={ref} {...restProps}>
-    {children}
-  </ChakraCardHeader>
-);
+): JSX.Element => <ChakraCardHeader ref={ref} {...props} />;
 
 export const CardHeader = forwardRef(CardHeaderComponent);

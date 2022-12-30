@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IBoxProps } from './box.types';
 
 const BoxComponent: ForwardRefRenderFunction<HTMLDivElement, IBoxProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraBox ref={ref} {...restProps}>
-    {children}
-  </ChakraBox>
-);
+): JSX.Element => <ChakraBox ref={ref} {...props} />;
 
 export const Box = forwardRef(BoxComponent);
