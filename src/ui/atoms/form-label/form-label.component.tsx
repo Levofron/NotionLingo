@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IFormLabelProps } from './form-label.types';
 
 const FormLabelComponent: ForwardRefRenderFunction<HTMLLabelElement, IFormLabelProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraFormLabel ref={ref} {...restProps}>
-    {children}
-  </ChakraFormLabel>
-);
+): JSX.Element => <ChakraFormLabel ref={ref} {...props} />;
 
 export const FormLabel = forwardRef(FormLabelComponent);

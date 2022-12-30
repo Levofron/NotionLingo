@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IHeadingProps } from './heading.types';
 
 const HeadingComponent: ForwardRefRenderFunction<HTMLParagraphElement, IHeadingProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraHeading ref={ref} {...restProps}>
-    {children}
-  </ChakraHeading>
-);
+): JSX.Element => <ChakraHeading ref={ref} {...props} />;
 
 export const Heading = forwardRef(HeadingComponent);

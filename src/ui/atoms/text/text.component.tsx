@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { ITextProps } from './text.types';
 
 const TextComponent: ForwardRefRenderFunction<HTMLParagraphElement, ITextProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraText ref={ref} {...restProps}>
-    {children}
-  </ChakraText>
-);
+): JSX.Element => <ChakraText ref={ref} {...props} />;
 
 export const Text = forwardRef(TextComponent);

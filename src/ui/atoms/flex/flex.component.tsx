@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IFlexProps } from './flex.types';
 
 const FlexComponent: ForwardRefRenderFunction<HTMLDivElement, IFlexProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraFlex ref={ref} {...restProps}>
-    {children}
-  </ChakraFlex>
-);
+): JSX.Element => <ChakraFlex ref={ref} {...props} />;
 
 export const Flex = forwardRef(FlexComponent);

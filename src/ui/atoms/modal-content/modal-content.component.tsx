@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IModalContentProps } from './modal-content.types';
 
 const ModalContentComponent: ForwardRefRenderFunction<HTMLElement, IModalContentProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraModalContent ref={ref} {...restProps}>
-    {children}
-  </ChakraModalContent>
-);
+): JSX.Element => <ChakraModalContent ref={ref} {...props} />;
 
 export const ModalContent = forwardRef(ModalContentComponent);

@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IModalHeaderProps } from './modal-header.types';
 
 const ModalHeaderComponent: ForwardRefRenderFunction<HTMLElement, IModalHeaderProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraModalHeader ref={ref} {...restProps}>
-    {children}
-  </ChakraModalHeader>
-);
+): JSX.Element => <ChakraModalHeader ref={ref} {...props} />;
 
 export const ModalHeader = forwardRef(ModalHeaderComponent);

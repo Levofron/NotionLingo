@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IDrawerContentProps } from './drawer-content.types';
 
 const DrawerContentComponent: ForwardRefRenderFunction<HTMLElement, IDrawerContentProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraDrawerContent ref={ref} {...restProps}>
-    {children}
-  </ChakraDrawerContent>
-);
+): JSX.Element => <ChakraDrawerContent ref={ref} {...props} />;
 
 export const DrawerContent = forwardRef(DrawerContentComponent);

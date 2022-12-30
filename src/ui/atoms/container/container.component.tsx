@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IContainerProps } from './container.types';
 
 const ContainerComponent: ForwardRefRenderFunction<HTMLDivElement, IContainerProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraContainer ref={ref} {...restProps}>
-    {children}
-  </ChakraContainer>
-);
+): JSX.Element => <ChakraContainer ref={ref} {...props} />;
 
 export const Container = forwardRef(ContainerComponent);

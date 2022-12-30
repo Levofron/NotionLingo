@@ -4,12 +4,8 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IFormControlProps } from './form-control.types';
 
 const FormControlComponent: ForwardRefRenderFunction<HTMLDivElement, IFormControlProps> = (
-  { children, ...restProps },
+  props,
   ref,
-): JSX.Element => (
-  <ChakraFormControl ref={ref} {...restProps}>
-    {children}
-  </ChakraFormControl>
-);
+): JSX.Element => <ChakraFormControl ref={ref} {...props} />;
 
 export const FormControl = forwardRef(FormControlComponent);
