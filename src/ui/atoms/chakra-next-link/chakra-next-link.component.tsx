@@ -5,11 +5,13 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { TChakraNextLinkProps } from './chakra-next-link.types';
 
 const ChakraNextLinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, TChakraNextLinkProps> = (
-  { children, href, ...restProps },
+  { children, href, target, ...restProps },
   ref,
 ): JSX.Element => (
-  <NextLink ref={ref} passHref href={href}>
-    <ChakraLink {...restProps}>{children}</ChakraLink>
+  <NextLink ref={ref} passHref href={href} target={target}>
+    <ChakraLink target={target} {...restProps}>
+      {children}
+    </ChakraLink>
   </NextLink>
 );
 

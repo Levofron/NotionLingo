@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Box, Button, Container, Heading, Highlight, Stack, Text } from '@ui/atoms';
 
-import { CONFETTI_LIGHT } from './home-hero.defaults';
+import { CONFETTI_LIGHT } from '@constants';
 
 export const HomeHero: FC = (): JSX.Element => (
   <Box
