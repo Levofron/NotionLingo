@@ -17,7 +17,7 @@ import {
 import { InputControl } from '@ui/molecules';
 import { TextareaControl } from '@ui/molecules/textarea-control/textarea-control.component';
 
-import { CONFETTI_LIGHT } from '@constants';
+import { CONFETTI_LIGHT, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
 import { IContactFormProps } from './contact-form.types';
 
@@ -71,11 +71,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                     onClick={onCopy}
                   />
                 </Tooltip>
-                <ChakraNextLink
-                  href="https://github.com/playerony"
-                  rel="noreferrer"
-                  target="_blank"
-                >
+                <ChakraNextLink href={GITHUB_LINK} rel="noreferrer" target="_blank">
                   <IconButton
                     isRound
                     _hover={{
@@ -89,11 +85,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                     variant="ghost"
                   />
                 </ChakraNextLink>
-                <ChakraNextLink
-                  href="https://twitter.com/wojtasinskipawe"
-                  rel="noreferrer"
-                  target="_blank"
-                >
+                <ChakraNextLink href={TWITTER_LINK} rel="noreferrer" target="_blank">
                   <IconButton
                     isRound
                     _hover={{
@@ -106,11 +98,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                     variant="ghost"
                   />
                 </ChakraNextLink>
-                <ChakraNextLink
-                  href="https://www.linkedin.com/in/pwojtasinski"
-                  rel="noreferrer"
-                  target="_blank"
-                >
+                <ChakraNextLink href={LINKEDIN_LINK} rel="noreferrer" target="_blank">
                   <IconButton
                     isRound
                     _hover={{

@@ -25,6 +25,7 @@ export * from './modal-body/modal-body.component';
 export * from './form-label/form-label.component';
 export * from './card-header/card-header.component';
 export * from './icon-button/icon-button.component';
+export * from './simple-grid/simple-grid.component';
 export * from './close-button/close-button.component';
 export * from './modal-header/modal-header.component';
 export * from './form-control/form-control.component';

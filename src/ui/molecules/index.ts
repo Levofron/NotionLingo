@@ -1,3 +1,4 @@
+export * from './footer/footer.component';
 export * from './header/header.component';
 export * from './home-hero/home-hero.component';
 export * from './input-control/input-control.component';
