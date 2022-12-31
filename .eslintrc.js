@@ -19,6 +19,7 @@ module.exports = {
     {
       files: ['*.js', '*.ts', '*.tsx'],
       rules: {
+        'no-console': 'off',
         'linebreak-style': 0,
         'consistent-return': 'off',
         'prefer-arrow-callback': 2,
