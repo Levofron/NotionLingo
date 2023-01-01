@@ -35,11 +35,20 @@ type TPage = PageObjectResponse | PartialPageObjectResponse;
 interface IGetAllPagesParams {
   databaseId: string;
   notionClient: Client;
+  startCursor: string | null;
 }
 
-interface IGetAllPagesWithCacheParams extends IGetAllPagesParams {
+interface IGetAllPagesWithCacheParams {
+  databaseId: string;
   notionApiKey: string;
+  notionClient: Client;
   profileId: string;
+}
+
+interface IGetPagesResult {
+  hasMore: boolean;
+  nextCursor: string | null;
+  pages: TPage[];
 }
 
 const getProfileDetails = (userId: string) =>
@@ -48,31 +57,6 @@ const getProfileDetails = (userId: string) =>
     .select('notion_api_key,notion_page_id')
     .eq('id', userId)
     .single();
-
-const getAllPages = async ({ databaseId, notionClient }: IGetAllPagesParams) => {
-  let result: TPage[] = [];
-  let startCursor: string | undefined;
-
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const database = await notionClient.databases.query({
-      start_cursor: startCursor,
-      database_id: databaseId,
-      page_size: PAGE_SIZE,
-    });
-
-    startCursor = database.next_cursor || undefined;
-
-    result = [...result, ...database.results];
-
-    if (!database.has_more) {
-      break;
-    }
-  }
-
-  return result;
-};
 
 const getRandomFivePages = (pages: TPage[]) => {
   const amountOfRecords = pages.length;
@@ -96,6 +80,70 @@ const getRandomFivePages = (pages: TPage[]) => {
   }
 
   return result;
+};
+
+const getPages = async ({
+  databaseId,
+  notionClient,
+  startCursor,
+}: IGetAllPagesParams): Promise<IGetPagesResult> => {
+  const database = await notionClient.databases.query({
+    start_cursor: startCursor || undefined,
+    database_id: databaseId,
+    page_size: PAGE_SIZE,
+  });
+
+  return { pages: database.results, hasMore: database.has_more, nextCursor: database.next_cursor };
+};
+
+const getPagesWithCache = async ({
+  databaseId,
+  notionApiKey,
+  notionClient,
+  profileId,
+}: IGetAllPagesWithCacheParams) => {
+  const cacheKeyObject = {
+    profileId,
+    databaseId,
+    notionApiKey,
+  };
+
+  const cacheKey = JSON.stringify(cacheKeyObject);
+  const cachedGetPagesResult = memoryCache.get(cacheKey) as IGetPagesResult | null;
+
+  if (!cachedGetPagesResult) {
+    const result = await getPages({
+      databaseId,
+      notionClient,
+      startCursor: null,
+    });
+
+    memoryCache.put(cacheKey, result, CACHE_TIME);
+
+    return result.pages;
+  }
+
+  if (cachedGetPagesResult && !cachedGetPagesResult.hasMore) {
+    return cachedGetPagesResult.pages;
+  }
+
+  const { nextCursor, pages: cachedPages } = cachedGetPagesResult;
+
+  const {
+    hasMore,
+    nextCursor: newNextCursor,
+    pages: newPages,
+  } = await getPages({
+    databaseId,
+    notionClient,
+    startCursor: nextCursor,
+  });
+
+  const allPages = [...cachedPages, ...newPages];
+
+  memoryCache.put(cacheKey, { pages: allPages, hasMore, nextCursor: newNextCursor }, CACHE_TIME);
+
+  return allPages;
 };
 
 const joinRichTextItemResponse = (richTextItemResponse: RichTextItemResponse[]) =>
@@ -125,27 +173,7 @@ const getTextFromPageProperty = (
     return joinRichTextItemResponse(selectedPageProperties.rich_text);
   }
 
-  return `Unsupported "${selectedPageProperties.type}" type`;
-};
-
-const getAllPagesWithCache = async ({
-  databaseId,
-  notionApiKey,
-  notionClient,
-  profileId,
-}: IGetAllPagesWithCacheParams) => {
-  const cacheKey = `${profileId}-${notionApiKey}-${databaseId}`;
-  const cachedPages = memoryCache.get(cacheKey);
-
-  if (cachedPages) {
-    return cachedPages;
-  }
-
-  const pages = await getAllPages({ notionClient, databaseId });
-
-  memoryCache.put(cacheKey, pages, CACHE_TIME);
-
-  return pages;
+  throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -171,7 +199,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const notionClient = createNotionClient(notionApiKey);
 
-    const allPages = await getAllPagesWithCache({
+    const allPages = await getPagesWithCache({
       notionApiKey,
       notionClient,
       profileId: user?.id!,
