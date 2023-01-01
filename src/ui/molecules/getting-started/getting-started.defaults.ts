@@ -9,6 +9,6 @@ export const STEPS = [
   },
   {
     title: 'Enjoy your learning',
-    text: 'The way of learning words has never been so easy.',
+    text: 'The way of learning words has never been so easy!',
   },
 ];
