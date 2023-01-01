@@ -14,8 +14,9 @@ import {
   Tooltip,
   VStack,
 } from '@ui/atoms';
-import { InputControl } from '@ui/molecules';
-import { TextareaControl } from '@ui/molecules/textarea-control/textarea-control.component';
+import { InputControl, TextareaControl } from '@ui/molecules';
+
+import { useForm } from '@infrastructure/utils';
 
 import { CONFETTI_LIGHT, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
@@ -23,6 +24,14 @@ import { IContactFormProps } from './contact-form.types';
 
 export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Element => {
   const { hasCopied, onCopy } = useClipboard('pawel.wojtasinski.1995@gmail.com');
+
+  const { generateFieldProps, onSubmitWrapper } = useForm({
+    initialValues: { email: email || '', name: fullName || '', message: '' },
+  });
+
+  const handleSubmit = onSubmitWrapper((values) => {
+    console.log(values);
+  });
 
   return (
     <Flex
@@ -113,29 +122,21 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                 </ChakraNextLink>
               </Stack>
               <Box bg="white" borderRadius="lg" color="gray.700" p={8} shadow="base">
-                <VStack spacing={5}>
+                <VStack as="form" spacing={5} onSubmit={handleSubmit}>
+                  <InputControl isRequired minLength={3} {...generateFieldProps('name')} />
                   <InputControl
                     isRequired
-                    label="Name"
-                    name="name"
-                    placeholder="Your Name"
-                    value={fullName}
-                  />
-                  <InputControl
-                    isRequired
-                    label="Email"
-                    name="email"
-                    placeholder="Your Email"
+                    minLength={5}
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     type="email"
-                    value={email}
+                    {...generateFieldProps('email')}
                   />
                   <TextareaControl
                     isRequired
-                    label="Message"
-                    name="message"
-                    placeholder="Your Message"
+                    minLength={10}
                     resize="none"
                     rows={6}
+                    {...generateFieldProps('message')}
                   />
                   <Button
                     _hover={{
@@ -144,6 +145,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                     bg="red.400"
                     color="white"
                     colorScheme="red"
+                    type="submit"
                     width="full"
                   >
                     Send Message
