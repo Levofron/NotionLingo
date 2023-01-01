@@ -32,13 +32,13 @@ const CACHE_TIME = 1000 * 60 * 60;
 
 type TPage = PageObjectResponse | PartialPageObjectResponse;
 
-interface IGetAllPagesParams {
+interface IGetPagesParams {
   databaseId: string;
   notionClient: Client;
   startCursor: string | null;
 }
 
-interface IGetAllPagesWithCacheParams {
+interface IGetPagesWithCacheParams {
   databaseId: string;
   notionApiKey: string;
   notionClient: Client;
@@ -86,7 +86,7 @@ const getPages = async ({
   databaseId,
   notionClient,
   startCursor,
-}: IGetAllPagesParams): Promise<IGetPagesResult> => {
+}: IGetPagesParams): Promise<IGetPagesResult> => {
   const database = await notionClient.databases.query({
     start_cursor: startCursor || undefined,
     database_id: databaseId,
@@ -101,7 +101,7 @@ const getPagesWithCache = async ({
   notionApiKey,
   notionClient,
   profileId,
-}: IGetAllPagesWithCacheParams) => {
+}: IGetPagesWithCacheParams) => {
   const cacheKeyObject = {
     profileId,
     databaseId,
