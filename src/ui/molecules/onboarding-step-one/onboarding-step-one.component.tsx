@@ -102,8 +102,11 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = (): JSX.Element =>
             </List>
           </Flex>
           <Button
+            _hover={{
+              bg: 'red.500',
+            }}
             alignSelf="flex-end"
-            bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+            bg="red.400"
             h="35px"
             mt="24px"
             variant="no-hover"
