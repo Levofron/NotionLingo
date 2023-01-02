@@ -1,3 +1,13 @@
+import Head from 'next/head';
 import { FC } from 'react';
 
-export const OnboardingPage: FC = (): JSX.Element => <div className="block">Onboarding</div>;
+import { OnboardingTemplate } from '@ui/templates';
+
+export const OnboardingPage: FC = (): JSX.Element => (
+  <div className="block">
+    <Head>
+      <title>Levofron</title>
+    </Head>
+    <OnboardingTemplate />
+  </div>
+);
