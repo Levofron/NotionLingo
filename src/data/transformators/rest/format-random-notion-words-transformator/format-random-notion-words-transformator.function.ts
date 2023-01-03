@@ -15,15 +15,11 @@ const cleanUpString = (string: unknown): string => {
     return EMPTY_FIELD_VALUE;
   }
 
-  let stringAsLowerCase = trimmedString.toLowerCase();
+  const stringAsLowerCase = trimmedString.toLowerCase();
+  const stringWithoutMultipleSpaces = stringAsLowerCase.replaceAll(/\s+/g, ' ');
+  const stringWithoutWhitespaces = stringWithoutMultipleSpaces.replaceAll(/[\t\n\r]/g, ' ');
 
-  // Replace all whitespace characters with a single space
-  stringAsLowerCase = stringAsLowerCase.replaceAll(/\s+/g, ' ');
-
-  // Replace all new lines, tabs, and other white space characters
-  stringAsLowerCase = stringAsLowerCase.replaceAll(/[\t\n\r]/g, ' ');
-
-  return capitalizeFirstLetter(stringAsLowerCase);
+  return capitalizeFirstLetter(stringWithoutWhitespaces);
 };
 
 export const formatRandomNotionWordsTransformator = (
