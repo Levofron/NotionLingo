@@ -33,7 +33,7 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
 
       const response = await restModule.getLoggedUser();
 
-      setUser({ ...sessionUser, ...response.data });
+      setUser({ ...sessionUser, ...response });
     }
 
     setIsLoading(false);

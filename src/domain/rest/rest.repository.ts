@@ -1,13 +1,11 @@
-import { AxiosResponse } from 'axios';
-
 import { IHash, INotionPage, INotionWord, IUser } from './rest.models';
 
 export interface IRestRepository {
-  getAvailableNotionPages: () => Promise<AxiosResponse<INotionPage[]>>;
-  getLoggedUser: () => Promise<AxiosResponse<IUser>>;
-  getRandomNotionWords: () => Promise<AxiosResponse<INotionWord[]>>;
-  healthCheck: () => Promise<AxiosResponse<string>>;
-  setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
-  setNotionPageId: (pageId: string) => Promise<AxiosResponse<string>>;
+  getAvailableNotionPages: () => Promise<INotionPage[]>;
+  getLoggedUser: () => Promise<IUser>;
+  getRandomNotionWords: () => Promise<INotionWord[]>;
+  healthCheck: () => Promise<string>;
+  setNotionApiToken: (token: string) => Promise<IHash>;
+  setNotionPageId: (pageId: string) => Promise<string>;
   setSupabaseCookie: () => Promise<void>;
 }

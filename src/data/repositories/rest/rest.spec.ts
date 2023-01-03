@@ -39,7 +39,7 @@ describe('getRestRepository function', () => {
 
       const result = restRepository.healthCheck();
 
-      expect(result).resolves.toEqual({ data: 'data' });
+      expect(result).resolves.toEqual('data');
       expect(restSourceMock.healthCheck).toHaveBeenCalled();
     });
   });
@@ -60,7 +60,7 @@ describe('getRestRepository function', () => {
 
       const result = await restRepository.setSupabaseCookie();
 
-      expect(result).toEqual({ data: 'data' });
+      expect(result).toBeUndefined();
       expect(supabaseSourceMock.getSession).toHaveBeenCalled();
       expect(restSourceMock.setSupabaseCookie).toHaveBeenCalledWith({ data: 'data' });
     });
@@ -82,7 +82,7 @@ describe('getRestRepository function', () => {
 
       const result = await restRepository.getLoggedUser();
 
-      expect(result).toEqual({ data: userMock });
+      expect(result).toEqual(userMock);
       expect(restSourceMock.getLoggedUser).toHaveBeenCalled();
     });
   });
@@ -103,7 +103,7 @@ describe('getRestRepository function', () => {
 
       const result = await restRepository.setNotionApiToken(token);
 
-      expect(result).toEqual({ data: token });
+      expect(result).toEqual(token);
       expect(restSourceMock.setNotionApiToken).toHaveBeenCalledWith(token);
     });
   });
@@ -124,7 +124,7 @@ describe('getRestRepository function', () => {
 
       const result = await restRepository.getAvailableNotionPages();
 
-      expect(result).toEqual({ data: pages });
+      expect(result).toEqual(pages);
       expect(restSourceMock.getAvailableNotionPages).toHaveBeenCalled();
     });
   });
@@ -145,14 +145,14 @@ describe('getRestRepository function', () => {
 
       const result = await restRepository.setNotionPageId(pageId);
 
-      expect(result).toEqual({ data: pageId });
+      expect(result).toEqual(pageId);
       expect(restSourceMock.setNotionPageId).toHaveBeenCalledWith(pageId);
     });
   });
 
   describe('getRandomNotionWords function', () => {
     it('should call proper restSource function', async () => {
-      const words = [{ word: 'word', translation: 'translation' }];
+      const words = [{ word: 'word', translation: 'translation, TEST     ' }];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restSourceMock: any = {
@@ -166,7 +166,12 @@ describe('getRestRepository function', () => {
 
       const result = await restRepository.getRandomNotionWords();
 
-      expect(result).toEqual({ data: words });
+      expect(result).toEqual([
+        {
+          translation: 'Translation, test',
+          word: 'Word',
+        },
+      ]);
       expect(restSourceMock.getRandomNotionWords).toHaveBeenCalled();
     });
   });
