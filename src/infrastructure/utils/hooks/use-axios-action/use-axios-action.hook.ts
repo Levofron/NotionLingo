@@ -1,11 +1,10 @@
-import { AxiosResponse } from 'axios';
 import { useCallback, useState } from 'react';
 
 import { hasOwnProperty } from '@infrastructure/utils';
 
 import { isAxiosError } from './utils/is-axios-error/is-axios-error.function';
 
-type TCallback<TParam, TResponse> = (...params: TParam[]) => Promise<AxiosResponse<TResponse>>;
+type TCallback<TParam, TResponse> = (...params: TParam[]) => Promise<TResponse>;
 
 export const useAxiosAction = <TParam, TResponse>(callback: TCallback<TParam, TResponse>) => {
   const [loading, setLoading] = useState(false);
@@ -20,8 +19,7 @@ export const useAxiosAction = <TParam, TResponse>(callback: TCallback<TParam, TR
       try {
         const response = await callback(...params);
 
-        result = response.data;
-        setData(result);
+        setData((result = response));
       } catch (error) {
         let errorMessage = 'Something went wrong';
 
