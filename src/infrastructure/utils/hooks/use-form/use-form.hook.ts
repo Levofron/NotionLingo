@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { IUseFormParams } from './use-form.types';
+import { capitalizeFirstLetter } from '@infrastructure/utils';
 
-const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);
+import { IUseFormParams } from './use-form.types';
 
 export const useForm = <TFormData extends object>({ initialValues }: IUseFormParams<TFormData>) => {
   const [formState, setFormState] = useState(initialValues);

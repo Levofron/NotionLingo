@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import {
   IUseCaseWithSingleParamAndPromiseResult,
   IUseCaseWithoutParamsAndPromiseResult,
@@ -8,7 +6,7 @@ import { IHash, INotionPage, INotionWord, IUser } from './rest.models';
 import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
-export type THealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<AxiosResponse<string>>;
+export type THealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<string>;
 
 export const healthCheckUseCase = (restRepository: IRestRepository): THealthCheckUseCase => ({
   execute: () => restRepository.healthCheck(),
@@ -24,17 +22,14 @@ export const setSupabaseCookieUseCase = (
 });
 
 // getLoggedUserUseCase
-export type TGetLoggedUserUseCase = IUseCaseWithoutParamsAndPromiseResult<AxiosResponse<IUser>>;
+export type TGetLoggedUserUseCase = IUseCaseWithoutParamsAndPromiseResult<IUser>;
 
 export const getLoggedUserUseCase = (restRepository: IRestRepository): TGetLoggedUserUseCase => ({
   execute: () => restRepository.getLoggedUser(),
 });
 
 // setNotionApiTokenUseCase
-export type TSetNotionApiTokenUseCase = IUseCaseWithSingleParamAndPromiseResult<
-  string,
-  AxiosResponse<IHash>
->;
+export type TSetNotionApiTokenUseCase = IUseCaseWithSingleParamAndPromiseResult<string, IHash>;
 
 export const setNotionApiTokenUseCase = (
   restRepository: IRestRepository,
@@ -43,9 +38,7 @@ export const setNotionApiTokenUseCase = (
 });
 
 // getAvailableNotionPagesUseCase
-export type TGetAvailableNotionPagesUseCase = IUseCaseWithoutParamsAndPromiseResult<
-  AxiosResponse<INotionPage[]>
->;
+export type TGetAvailableNotionPagesUseCase = IUseCaseWithoutParamsAndPromiseResult<INotionPage[]>;
 
 export const getAvailableNotionPagesUseCase = (
   restRepository: IRestRepository,
@@ -54,10 +47,7 @@ export const getAvailableNotionPagesUseCase = (
 });
 
 // setNotionPageIdUseCase
-export type TSetNotionPageIdUseCase = IUseCaseWithSingleParamAndPromiseResult<
-  string,
-  AxiosResponse<string>
->;
+export type TSetNotionPageIdUseCase = IUseCaseWithSingleParamAndPromiseResult<string, string>;
 
 export const setNotionPageIdUseCase = (
   restRepository: IRestRepository,
@@ -66,9 +56,7 @@ export const setNotionPageIdUseCase = (
 });
 
 // getRandomNotionWordsUseCase
-export type TGetRandomNotionWordsUseCase = IUseCaseWithoutParamsAndPromiseResult<
-  AxiosResponse<INotionWord[]>
->;
+export type TGetRandomNotionWordsUseCase = IUseCaseWithoutParamsAndPromiseResult<INotionWord[]>;
 
 export const getRandomNotionWordsUseCase = (
   restRepository: IRestRepository,
