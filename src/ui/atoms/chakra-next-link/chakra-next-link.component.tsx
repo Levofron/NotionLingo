@@ -8,7 +8,7 @@ const ChakraNextLinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, TChak
   { children, href, target, ...restProps },
   ref,
 ): JSX.Element => (
-  <NextLink ref={ref} passHref href={href} target={target}>
+  <NextLink ref={ref} href={href} target={target}>
     <ChakraLink as="span" {...restProps}>
       {children}
     </ChakraLink>
