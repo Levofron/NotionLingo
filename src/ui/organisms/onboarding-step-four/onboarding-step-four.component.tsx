@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 
-import { restModule } from '@adapter/index';
+import { restModule } from '@adapter';
 
 import { Flex, Spinner, TabPanel, Text } from '@ui/atoms';
 import { AvailableNotionPage } from '@ui/molecules';
