@@ -11,7 +11,11 @@ import {
 } from '@infrastructure/utils/node';
 
 const getProfileDetails = (userId: string) =>
-  supabaseInstance.from('profiles').select('id,email,created_at').eq('id', userId).single();
+  supabaseInstance
+    .from('profiles')
+    .select('id,email,created_at,notion_api_key,notion_page_id')
+    .eq('id', userId)
+    .single();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
@@ -22,7 +26,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json(profileError);
   }
 
+  const hasNotionData = !!profileData?.notion_api_key && !!profileData?.notion_page_id;
+
   const userData = {
+    hasNotionData,
     id: profileData.id,
     email: profileData.email,
     createdAt: profileData.created_at,
