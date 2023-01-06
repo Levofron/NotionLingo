@@ -1,5 +1,4 @@
-import { restModule } from '@adapter/modules/rest.module';
-import { supabaseModule } from '@adapter/modules/supabase.module';
+import { restModule, supabaseModule } from '@adapter';
 
 import { APPLICATION_ENVIRONMENT } from '@constants';
 
