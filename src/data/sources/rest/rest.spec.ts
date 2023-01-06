@@ -97,6 +97,7 @@ describe('getRestSource function', () => {
     const userMock: IUser = {
       id: 'id',
       email: 'email',
+      hasNotionData: true,
       fullName: 'fullName',
       avatarUrl: 'avatarUrl',
       createdAt: 'createdAt',

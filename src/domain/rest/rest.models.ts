@@ -3,6 +3,7 @@ export interface IUser {
   createdAt: string;
   email: string;
   fullName: string;
+  hasNotionData: boolean;
   id: string;
 }
 
