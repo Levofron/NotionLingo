@@ -24,6 +24,50 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
     selectNotionPage: false,
   });
 
+  const displayCreateNotionIntegrationTab = () => {
+    createNotionIntegrationTabRef.current?.click();
+
+    setActiveTabs({
+      createNotionIntegration: true,
+      shareDatabaseIntegration: false,
+      validateIntegration: false,
+      selectNotionPage: false,
+    });
+  };
+
+  const displayShareDatabaseIntegrationTab = () => {
+    shareDatabaseIntegrationTabRef.current?.click();
+
+    setActiveTabs({
+      createNotionIntegration: true,
+      shareDatabaseIntegration: true,
+      validateIntegration: false,
+      selectNotionPage: false,
+    });
+  };
+
+  const displayValidateIntegrationTab = () => {
+    validateIntegrationTabRef.current?.click();
+
+    setActiveTabs({
+      createNotionIntegration: true,
+      shareDatabaseIntegration: true,
+      validateIntegration: true,
+      selectNotionPage: false,
+    });
+  };
+
+  const displaySelectNotionPageTab = () => {
+    selectNotionPageTabRef.current?.click();
+
+    setActiveTabs({
+      createNotionIntegration: true,
+      shareDatabaseIntegration: true,
+      validateIntegration: true,
+      selectNotionPage: true,
+    });
+  };
+
   return (
     <Flex direction="column" pt={{ base: '20px', sm: '25px', md: '55px' }} px={2}>
       <Flex direction="column" textAlign="center">
@@ -44,7 +88,6 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
         isLazy
         display="flex"
         flexDirection="column"
-        lazyBehavior="unmount"
         mt={{ sm: '25px', md: '35px' }}
         variant="unstyled"
       >
@@ -52,15 +95,24 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
           activeTabs={activeTabs}
           createNotionIntegrationTabRef={createNotionIntegrationTabRef}
           selectNotionPageTabRef={selectNotionPageTabRef}
-          setActiveTabs={setActiveTabs}
           shareDatabaseIntegrationTabRef={shareDatabaseIntegrationTabRef}
           validateIntegrationTabRef={validateIntegrationTabRef}
         />
         <TabPanels maxW={{ md: '90%', lg: '100%' }} mt="24px" mx="auto">
-          <OnboardingStepOne />
-          <OnboardingStepTwo />
-          <OnboardingStepThree />
-          <OnboardingStepFour />
+          <OnboardingStepOne onNextButtonClick={displayShareDatabaseIntegrationTab} />
+          {activeTabs.shareDatabaseIntegration ? (
+            <OnboardingStepTwo
+              onNextButtonClick={displayValidateIntegrationTab}
+              onPreviousButtonClick={displayCreateNotionIntegrationTab}
+            />
+          ) : null}
+          {activeTabs.validateIntegration ? (
+            <OnboardingStepThree
+              onNextButtonClick={displaySelectNotionPageTab}
+              onPreviousButtonClick={displayShareDatabaseIntegrationTab}
+            />
+          ) : null}
+          {activeTabs.selectNotionPage ? <OnboardingStepFour /> : null}
         </TabPanels>
       </Tabs>
     </Flex>

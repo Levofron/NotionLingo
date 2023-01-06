@@ -2,14 +2,17 @@ import { ChangeEvent, FC } from 'react';
 
 import { restModule } from '@adapter/modules';
 
-import { Flex, TabPanel, Text } from '@ui/atoms';
+import { Button, Flex, TabPanel, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
 
 import { debounce, useAxiosAction } from '@infrastructure/utils';
 
 import { IOnboardingStepThreeProps } from './onboarding-step-three.types';
 
-export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = (): JSX.Element => {
+export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
+  onNextButtonClick,
+  onPreviousButtonClick,
+}): JSX.Element => {
   const {
     data: setNotionApiTokenData,
     error: setNotionApiTokenError,
@@ -21,8 +24,7 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = (): JSX.Elemen
     const result = await setNotionApiToken(event.target.value);
 
     if (result) {
-      // TODO - handle result
-      console.log('result', result);
+      onNextButtonClick();
     }
   }, 1000);
 
@@ -56,6 +58,23 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = (): JSX.Elemen
           placeholder="Your integration token"
           onChange={handleInputChange}
         />
+      </Flex>
+      <Flex justify="space-between">
+        <Button
+          _hover={{
+            bg: 'black',
+            color: 'white',
+          }}
+          alignSelf="flex-end"
+          bg="white"
+          color="black"
+          mt="48px"
+          onClick={onPreviousButtonClick}
+        >
+          <Text fontSize="xs" fontWeight="bold">
+            PREV
+          </Text>
+        </Button>
       </Flex>
     </TabPanel>
   );

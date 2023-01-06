@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
 import { restModule } from '@adapter';
@@ -5,6 +6,7 @@ import { restModule } from '@adapter';
 import { Flex, Spinner, TabPanel, Text } from '@ui/atoms';
 import { AvailableNotionPage } from '@ui/molecules';
 
+import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction } from '@infrastructure/utils';
 
 import { IOnboardingStepFourProps } from './onboarding-step-four.types';
@@ -16,6 +18,8 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = (): JSX.Element 
     loading: isAvailableNotionPagesLoading,
   } = useAxiosAction(restModule.getAvailableNotionPages);
 
+  const router = useRouter();
+
   const { execute: setNotionPageId, loading: isSetNotionPageIdLoading } = useAxiosAction(
     restModule.setNotionPageId,
   );
@@ -23,6 +27,38 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = (): JSX.Element 
   useEffect(() => {
     fetchAvailableNotionPages();
   }, []);
+
+  const handleAvailableNotionPageClick = async (pageId: string) => {
+    const result = await setNotionPageId(pageId);
+
+    if (result) {
+      router.push(ERoutes.DASHBOARD);
+    }
+  };
+
+  const renderAvailableNotionPages = () => {
+    if (isAvailableNotionPagesLoading) {
+      return <Spinner size="lg" />;
+    }
+
+    if (!availableNotionPages?.length) {
+      return (
+        <Text color="gray.400" fontSize="sm" fontWeight="normal">
+          No available Notion pages were found. Please verify if your database has data or contains
+          correct column names.
+        </Text>
+      );
+    }
+
+    return availableNotionPages?.map((availableNotionPage) => (
+      <AvailableNotionPage
+        key={availableNotionPage.id}
+        availableNotionPage={availableNotionPage}
+        isLoading={isSetNotionPageIdLoading}
+        onClick={handleAvailableNotionPageClick}
+      />
+    ));
+  };
 
   return (
     <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
@@ -44,18 +80,7 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = (): JSX.Element 
         </Flex>
       </Flex>
       <Flex alignItems="center" direction="column" gap={5} w="100%">
-        {!isAvailableNotionPagesLoading ? (
-          availableNotionPages?.map((availableNotionPage) => (
-            <AvailableNotionPage
-              key={availableNotionPage.id}
-              availableNotionPage={availableNotionPage}
-              isLoading={isSetNotionPageIdLoading}
-              onClick={setNotionPageId}
-            />
-          ))
-        ) : (
-          <Spinner size="lg" />
-        )}
+        {renderAvailableNotionPages()}
       </Flex>
     </TabPanel>
   );

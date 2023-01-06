@@ -5,7 +5,10 @@ import { Button, Flex, List, ListIcon, ListItem, TabPanel, Text, TextUnderline }
 
 import { IOnboardingStepTwoProps } from './onboarding-step-two.types';
 
-export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = (): JSX.Element => (
+export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
+  onNextButtonClick,
+  onPreviousButtonClick,
+}): JSX.Element => (
   <TabPanel mx="auto" p={0} w={{ sm: '500px', md: '600px', lg: '650px' }}>
     <Flex mb="40px">
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
@@ -56,29 +59,22 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = (): JSX.Element =>
       </Flex>
       <Flex justify="space-between">
         <Button
+          _hover={{
+            bg: 'black',
+            color: 'white',
+          }}
           alignSelf="flex-end"
-          bg="gray.200"
-          h="35px"
+          bg="white"
+          color="black"
           mt="24px"
-          variant="no-hover"
-          w={{ sm: '75px', lg: '100px' }}
+          onClick={onPreviousButtonClick}
         >
-          <Text color="gray.700" fontSize="xs" fontWeight="bold">
+          <Text fontSize="xs" fontWeight="bold">
             PREV
           </Text>
         </Button>
-        <Button
-          _hover={{
-            bg: 'red.500',
-          }}
-          alignSelf="flex-end"
-          bg="red.400"
-          h="35px"
-          mt="24px"
-          variant="no-hover"
-          w={{ sm: '75px', lg: '100px' }}
-        >
-          <Text color="#fff" fontSize="xs" fontWeight="bold">
+        <Button alignSelf="flex-end" mt="24px" onClick={onNextButtonClick}>
+          <Text fontSize="xs" fontWeight="bold">
             NEXT
           </Text>
         </Button>
