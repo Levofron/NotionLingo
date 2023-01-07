@@ -3,8 +3,8 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 
 import {
   Button,
+  ChakraNextLink,
   Flex,
-  Link,
   List,
   ListIcon,
   ListItem,
@@ -34,9 +34,9 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = (): JSX.Element =>
             <ListIcon as={BsFillArrowRightCircleFill} />
             <Text>
               Visit{' '}
-              <Link color="red.500" href="https://www.notion.com/my-integrations" target="_blank">
+              <ChakraNextLink href="https://www.notion.com/my-integrations" target="_blank">
                 https://www.notion.com/my-integrations
-              </Link>{' '}
+              </ChakraNextLink>{' '}
               in your browser.
             </Text>
           </ListItem>

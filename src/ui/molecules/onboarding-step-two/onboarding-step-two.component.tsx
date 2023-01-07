@@ -16,7 +16,7 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = (): JSX.Element =>
           Now that you have created an integration, you need to grant it access to a database. To
           keep your information secure, integrations do not have access to any pages or databases in
           the workspace at first. You must share specific pages with an integration in order for the
-          API to access those pages. To share a database with your integration:
+          API to access those pages.
         </Text>
       </Flex>
     </Flex>

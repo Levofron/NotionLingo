@@ -6,6 +6,15 @@ import { IInputProps } from './input.types';
 const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
   props,
   ref,
-): JSX.Element => <ChakraInput ref={ref} {...props} />;
+): JSX.Element => (
+  <ChakraInput
+    ref={ref}
+    _hover={{ borderColor: 'black' }}
+    borderColor="black"
+    borderRadius={0}
+    focusBorderColor="black"
+    {...props}
+  />
+);
 
 export const Input = forwardRef(InputComponent);
