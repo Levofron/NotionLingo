@@ -1,64 +1,32 @@
-import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { ChangeEvent, FC } from 'react';
 
-import { restModule } from '@adapter';
+import { restModule } from '@adapter/modules';
 
-import { Flex, Spinner, TabPanel, Text } from '@ui/atoms';
-import { AvailableNotionPage } from '@ui/molecules';
+import { Button, Flex, TabPanel, Text } from '@ui/atoms';
+import { InputControl } from '@ui/molecules';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction } from '@infrastructure/utils';
+import { debounce, useAxiosAction } from '@infrastructure/utils';
 
 import { IOnboardingStepFourProps } from './onboarding-step-four.types';
 
-export const OnboardingStepFour: FC<IOnboardingStepFourProps> = (): JSX.Element => {
+export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
+  onNextButtonClick,
+  onPreviousButtonClick,
+}): JSX.Element => {
   const {
-    data: availableNotionPages,
-    execute: fetchAvailableNotionPages,
-    loading: isAvailableNotionPagesLoading,
-  } = useAxiosAction(restModule.getAvailableNotionPages);
+    data: setNotionApiTokenData,
+    error: setNotionApiTokenError,
+    execute: setNotionApiToken,
+    loading: isSetNotionApiTokenLoading,
+  } = useAxiosAction(restModule.setNotionApiToken);
 
-  const router = useRouter();
-
-  const { execute: setNotionPageId, loading: isSetNotionPageIdLoading } = useAxiosAction(
-    restModule.setNotionPageId,
-  );
-
-  useEffect(() => {
-    fetchAvailableNotionPages();
-  }, []);
-
-  const handleAvailableNotionPageClick = async (pageId: string) => {
-    const result = await setNotionPageId(pageId);
+  const handleInputChange = debounce(async (event: ChangeEvent<HTMLInputElement>) => {
+    const result = await setNotionApiToken(event.target.value);
 
     if (result) {
-      router.push(ERoutes.DASHBOARD);
+      onNextButtonClick();
     }
-  };
-
-  const renderAvailableNotionPages = () => {
-    if (isAvailableNotionPagesLoading) {
-      return <Spinner size="lg" />;
-    }
-
-    if (!availableNotionPages?.length) {
-      return (
-        <Text color="gray.400" fontSize="sm" fontWeight="normal">
-          No available Notion pages were found. Please verify if your database has data or contains
-          correct column names.
-        </Text>
-      );
-    }
-
-    return availableNotionPages?.map((availableNotionPage) => (
-      <AvailableNotionPage
-        key={availableNotionPage.id}
-        availableNotionPage={availableNotionPage}
-        isLoading={isSetNotionPageIdLoading}
-        onClick={handleAvailableNotionPageClick}
-      />
-    ));
-  };
+  }, 1000);
 
   return (
     <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
@@ -72,16 +40,41 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = (): JSX.Element 
           w="80%"
         >
           <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
-            Select a Notion page
+            Validate your integration
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="normal">
-            Please indicate from which Notion page we should use to get your vocabulary.
+            Paste your copied integration token below to validate your integration.
           </Text>
         </Flex>
       </Flex>
-      <Flex alignItems="center" direction="column" gap={5} w="100%">
-        {renderAvailableNotionPages()}
+      <Flex direction="column" w="100%">
+        <InputControl
+          isRequired
+          errorMessage={setNotionApiTokenError || undefined}
+          isDisabled={isSetNotionApiTokenLoading || !!setNotionApiTokenData}
+          isLoading={isSetNotionApiTokenLoading}
+          label="Integration token"
+          name="integrationToken"
+          placeholder="Your integration token"
+          onChange={handleInputChange}
+        />
       </Flex>
+      <Button
+        _hover={{
+          bg: 'black',
+          color: 'white',
+        }}
+        alignSelf="flex-end"
+        bg="white"
+        color="black"
+        isDisabled={isSetNotionApiTokenLoading || !!setNotionApiTokenData}
+        mt="48px"
+        onClick={onPreviousButtonClick}
+      >
+        <Text fontSize="xs" fontWeight="bold">
+          PREV
+        </Text>
+      </Button>
     </TabPanel>
   );
 };

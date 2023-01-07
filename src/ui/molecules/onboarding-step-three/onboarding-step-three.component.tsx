@@ -1,21 +1,11 @@
 import { FC } from 'react';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 
-import {
-  Button,
-  ChakraNextLink,
-  Flex,
-  List,
-  ListIcon,
-  ListItem,
-  TabPanel,
-  Text,
-  TextUnderline,
-} from '@ui/atoms';
+import { Button, Flex, List, ListIcon, ListItem, TabPanel, Text, TextUnderline } from '@ui/atoms';
 
-import { IOnboardingStepTwoProps } from './onboarding-step-two.types';
+import { IOnboardingStepThreeProps } from './onboarding-step-three.types';
 
-export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
+export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
   onNextButtonClick,
   onPreviousButtonClick,
 }): JSX.Element => (
@@ -23,10 +13,13 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
     <Flex mb="40px">
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
         <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
-          Create a Notion integration
+          Share a database with your integration
         </Text>
         <Text color="gray.400" fontSize="sm" fontWeight="normal">
-          A Notion integration lets you connect information in Notion to other software.
+          Now that you have created an integration, you need to grant it access to a database. To
+          keep your information secure, integrations do not have access to any pages or databases in
+          the workspace at first. You must share specific pages with an integration in order for the
+          API to access those pages.
         </Text>
       </Flex>
     </Flex>
@@ -36,54 +29,31 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
           <ListItem alignItems="center" display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} />
             <Text>
-              Visit{' '}
-              <ChakraNextLink href="https://www.notion.com/my-integrations" target="_blank">
-                https://www.notion.com/my-integrations
-              </ChakraNextLink>{' '}
-              in your browser.
+              Go to the database page in your workspace (the one with the vocabulary you want to
+              share).
             </Text>
           </ListItem>
           <ListItem alignItems="center" display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} />
             <Text>
-              Click the <TextUnderline>+ New integration</TextUnderline> button.
-            </Text>
-          </ListItem>
-          <ListItem alignItems="center" display="flex">
-            <ListIcon as={BsFillArrowRightCircleFill} />
-            <Text>Name the integration.</Text>
-          </ListItem>
-          <ListItem alignItems="center" display="flex">
-            <ListIcon as={BsFillArrowRightCircleFill} />
-            <Text>Select a proper workspace.</Text>
-          </ListItem>
-          <ListItem alignItems="center" display="flex">
-            <ListIcon as={BsFillArrowRightCircleFill} />
-            <Text>
-              In the <TextUnderline>Content Capabilities</TextUnderline> section leave only{' '}
-              <TextUnderline>Read content</TextUnderline> as the marked option.
+              Click the <TextUnderline>•••</TextUnderline> on the top right corner of the page.
             </Text>
           </ListItem>
           <ListItem alignItems="center" display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} />
             <Text>
-              In the <TextUnderline>Use Capabilities</TextUnderline> check{' '}
-              <TextUnderline>No user information</TextUnderline> option.
+              At the bottom of the pop-up, click <TextUnderline>Add connections</TextUnderline>.
             </Text>
           </ListItem>
           <ListItem alignItems="center" display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} />
             <Text>
-              Click <TextUnderline>Submit</TextUnderline> to create the integration.
+              Search for and select your integration in the{' '}
+              <TextUnderline>Search for connections...</TextUnderline> menu.
             </Text>
           </ListItem>
           <ListItem alignItems="center" display="flex">
-            <Text>
-              On the next page, you’ll find your Notion integration token, also called an API key.
-              You’ll need this token. Please click <TextUnderline>Show</TextUnderline> button and
-              then <TextUnderline>Copy</TextUnderline>. This action is going to save your token in
-              your clipboard.
-            </Text>
+            <Text>Your integration now has permission to read the database.</Text>
           </ListItem>
         </List>
       </Flex>

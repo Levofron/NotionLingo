@@ -5,6 +5,7 @@ export interface IActiveTabs {
   selectNotionPage: boolean;
   shareDatabaseIntegration: boolean;
   validateIntegration: boolean;
+  verifyDatabase: boolean;
 }
 
 export interface IOnboardingTabListProps {
@@ -13,4 +14,5 @@ export interface IOnboardingTabListProps {
   selectNotionPageTabRef: RefObject<HTMLButtonElement>;
   shareDatabaseIntegrationTabRef: RefObject<HTMLButtonElement>;
   validateIntegrationTabRef: RefObject<HTMLButtonElement>;
+  verifyDatabaseTabRef: RefObject<HTMLButtonElement>;
 }
