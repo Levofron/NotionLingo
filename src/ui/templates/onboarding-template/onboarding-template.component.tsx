@@ -100,18 +100,14 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
         />
         <TabPanels maxW={{ md: '90%', lg: '100%' }} mt="24px" mx="auto">
           <OnboardingStepOne onNextButtonClick={displayShareDatabaseIntegrationTab} />
-          {activeTabs.shareDatabaseIntegration ? (
-            <OnboardingStepTwo
-              onNextButtonClick={displayValidateIntegrationTab}
-              onPreviousButtonClick={displayCreateNotionIntegrationTab}
-            />
-          ) : null}
-          {activeTabs.validateIntegration ? (
-            <OnboardingStepThree
-              onNextButtonClick={displaySelectNotionPageTab}
-              onPreviousButtonClick={displayShareDatabaseIntegrationTab}
-            />
-          ) : null}
+          <OnboardingStepTwo
+            onNextButtonClick={displayValidateIntegrationTab}
+            onPreviousButtonClick={displayCreateNotionIntegrationTab}
+          />
+          <OnboardingStepThree
+            onNextButtonClick={displaySelectNotionPageTab}
+            onPreviousButtonClick={displayShareDatabaseIntegrationTab}
+          />
           {activeTabs.selectNotionPage ? <OnboardingStepFour /> : null}
         </TabPanels>
       </Tabs>
