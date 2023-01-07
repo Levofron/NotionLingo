@@ -17,7 +17,7 @@ export const OnboardingPage: FC = (): JSX.Element => {
       return;
     }
 
-    if (user?.hasNotionData === true) {
+    if (user?.hasNotionData === false) {
       router.push(ERoutes.DASHBOARD);
     }
   }, [user, isLoading]);

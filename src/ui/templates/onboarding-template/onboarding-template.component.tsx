@@ -4,30 +4,46 @@ import { Flex, TabPanels, Tabs, Text } from '@ui/atoms';
 import {
   IActiveTabs,
   OnboardingStepOne,
+  OnboardingStepThree,
   OnboardingStepTwo,
   OnboardingTabList,
 } from '@ui/molecules';
-import { OnboardingStepFour, OnboardingStepThree } from '@ui/organisms';
+import { OnboardingStepFive, OnboardingStepFour } from '@ui/organisms';
 
 import { IOnboardingTemplateProps } from './onboarding-template.types';
 
 export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element => {
+  const verifyDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
   const selectNotionPageTabRef = useRef<HTMLButtonElement | null>(null);
   const validateIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
   const createNotionIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
   const shareDatabaseIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
 
   const [activeTabs, setActiveTabs] = useState<IActiveTabs>({
-    createNotionIntegration: true,
+    verifyDatabase: true,
+    createNotionIntegration: false,
     shareDatabaseIntegration: false,
     validateIntegration: false,
     selectNotionPage: false,
   });
 
+  const displayVerifyDatabaseTab = () => {
+    verifyDatabaseTabRef.current?.click();
+
+    setActiveTabs({
+      verifyDatabase: true,
+      createNotionIntegration: false,
+      shareDatabaseIntegration: false,
+      validateIntegration: false,
+      selectNotionPage: false,
+    });
+  };
+
   const displayCreateNotionIntegrationTab = () => {
     createNotionIntegrationTabRef.current?.click();
 
     setActiveTabs({
+      verifyDatabase: true,
       createNotionIntegration: true,
       shareDatabaseIntegration: false,
       validateIntegration: false,
@@ -39,6 +55,7 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
     shareDatabaseIntegrationTabRef.current?.click();
 
     setActiveTabs({
+      verifyDatabase: true,
       createNotionIntegration: true,
       shareDatabaseIntegration: true,
       validateIntegration: false,
@@ -50,6 +67,7 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
     validateIntegrationTabRef.current?.click();
 
     setActiveTabs({
+      verifyDatabase: true,
       createNotionIntegration: true,
       shareDatabaseIntegration: true,
       validateIntegration: true,
@@ -61,6 +79,7 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
     selectNotionPageTabRef.current?.click();
 
     setActiveTabs({
+      verifyDatabase: true,
       createNotionIntegration: true,
       shareDatabaseIntegration: true,
       validateIntegration: true,
@@ -97,18 +116,25 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
           selectNotionPageTabRef={selectNotionPageTabRef}
           shareDatabaseIntegrationTabRef={shareDatabaseIntegrationTabRef}
           validateIntegrationTabRef={validateIntegrationTabRef}
+          verifyDatabaseTabRef={verifyDatabaseTabRef}
         />
         <TabPanels maxW={{ md: '90%', lg: '100%' }} mt="24px" mx="auto">
-          <OnboardingStepOne onNextButtonClick={displayShareDatabaseIntegrationTab} />
+          <OnboardingStepOne onNextButtonClick={displayCreateNotionIntegrationTab} />
           <OnboardingStepTwo
+            onNextButtonClick={displayShareDatabaseIntegrationTab}
+            onPreviousButtonClick={displayVerifyDatabaseTab}
+          />
+          <OnboardingStepThree
             onNextButtonClick={displayValidateIntegrationTab}
             onPreviousButtonClick={displayCreateNotionIntegrationTab}
           />
-          <OnboardingStepThree
+          <OnboardingStepFour
             onNextButtonClick={displaySelectNotionPageTab}
             onPreviousButtonClick={displayShareDatabaseIntegrationTab}
           />
-          {activeTabs.selectNotionPage ? <OnboardingStepFour /> : null}
+          {activeTabs.selectNotionPage ? (
+            <OnboardingStepFive onBackToFirstStepClick={displayVerifyDatabaseTab} />
+          ) : null}
         </TabPanels>
       </Tabs>
     </Flex>

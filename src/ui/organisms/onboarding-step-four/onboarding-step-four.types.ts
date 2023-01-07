@@ -1,1 +1,4 @@
-export interface IOnboardingStepFourProps {}
+export interface IOnboardingStepFourProps {
+  onNextButtonClick: () => void;
+  onPreviousButtonClick: () => void;
+}
