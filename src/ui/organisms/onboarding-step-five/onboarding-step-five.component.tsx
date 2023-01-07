@@ -15,7 +15,7 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   onBackToFirstStepClick,
 }): JSX.Element => {
   const {
-    data: availableNotionPages,
+    data: availableNotionPagesData,
     execute: fetchAvailableNotionPages,
     loading: isAvailableNotionPagesLoading,
   } = useAxiosAction(restModule.getAvailableNotionPages);
@@ -43,7 +43,7 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
       return <Spinner size="lg" />;
     }
 
-    if (availableNotionPages?.length) {
+    if (!availableNotionPagesData?.length) {
       return (
         <Flex alignItems="center" flexDirection="column">
           <Text color="red.400" fontSize="sm" fontWeight="normal" textAlign="center">
@@ -59,10 +59,10 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
       );
     }
 
-    return availableNotionPages?.map((availableNotionPage) => (
+    return availableNotionPagesData?.map((_availableNotionPage) => (
       <AvailableNotionPage
-        key={availableNotionPage.id}
-        availableNotionPage={availableNotionPage}
+        key={_availableNotionPage.id}
+        availableNotionPage={_availableNotionPage}
         isLoading={isSetNotionPageIdLoading}
         onClick={handleAvailableNotionPageClick}
       />
@@ -71,24 +71,21 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
 
   return (
     <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
-      <Flex mb="40px">
-        <Flex
-          align="center"
-          direction="column"
-          justify="center"
-          mx="auto"
-          textAlign="center"
-          w="80%"
-        >
-          <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
-            Select a Notion page
-          </Text>
-          <Text color="gray.400" fontSize="sm" fontWeight="normal">
-            Please indicate from which Notion page we should use to get your vocabulary.
-          </Text>
-        </Flex>
+      <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
+        <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
+          Select a Notion page
+        </Text>
+        <Text color="gray.400" fontSize="sm" fontWeight="normal">
+          Please indicate from which Notion page we should use to get your vocabulary.
+        </Text>
       </Flex>
-      <Flex alignItems="center" direction="column" gap={5} w="100%">
+      <Flex
+        alignItems="center"
+        direction="column"
+        gap={5}
+        mt={{ base: '25px', md: '40px' }}
+        w="100%"
+      >
         {renderAvailableNotionPages()}
       </Flex>
     </TabPanel>

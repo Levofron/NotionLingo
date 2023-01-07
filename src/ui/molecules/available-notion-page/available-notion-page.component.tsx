@@ -24,7 +24,7 @@ export const AvailableNotionPage: FC<IAvailableNotionPageProps> = ({
   return (
     <Card>
       <CardBody>
-        <Stack mt="6" spacing="3">
+        <Stack spacing="3">
           <Heading size="lg">{availableNotionPage.title}</Heading>
           <Text>
             <b>Created:</b> {availableNotionPage.createdTime.split(/[ t]/i, 1)[0]}

@@ -30,21 +30,9 @@ export const HomeHero: FC = (): JSX.Element => (
           Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to
           easily learn new words and phrases from your own <b>Notion</b> database!
         </Text>
-        <Stack align="center" alignSelf="center" direction="column" position="relative" spacing={3}>
-          <Button
-            _hover={{
-              bg: 'red.500',
-            }}
-            bg="red.400"
-            px={6}
-            rounded="full"
-          >
-            Get Started
-          </Button>
-          <Button colorScheme="blue" size="sm" variant="link">
-            Learn more
-          </Button>
-        </Stack>
+        <Button px={6} width="fit-content">
+          Get Started
+        </Button>
       </Stack>
     </Container>
   </Box>

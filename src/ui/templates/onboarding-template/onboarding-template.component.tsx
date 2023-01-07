@@ -88,7 +88,12 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
   };
 
   return (
-    <Flex direction="column" pt={{ base: '20px', sm: '25px', md: '55px' }} px={2}>
+    <Flex
+      direction="column"
+      overflowX="hidden"
+      px={2}
+      py={{ base: '20px', sm: '25px', md: '55px' }}
+    >
       <Flex direction="column" textAlign="center">
         <Text
           color="gray.700"
@@ -107,7 +112,7 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
         isLazy
         display="flex"
         flexDirection="column"
-        mt={{ sm: '25px', md: '35px' }}
+        mt={{ base: '10px', sm: '25px', md: '35px' }}
         variant="unstyled"
       >
         <OnboardingTabList
@@ -118,7 +123,7 @@ export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element 
           validateIntegrationTabRef={validateIntegrationTabRef}
           verifyDatabaseTabRef={verifyDatabaseTabRef}
         />
-        <TabPanels maxW={{ md: '90%', lg: '100%' }} mt="24px" mx="auto">
+        <TabPanels maxW={{ md: '90%', lg: '100%' }} mt={{ base: '10px', md: '24px' }} mx="auto">
           <OnboardingStepOne onNextButtonClick={displayCreateNotionIntegrationTab} />
           <OnboardingStepTwo
             onNextButtonClick={displayShareDatabaseIntegrationTab}
