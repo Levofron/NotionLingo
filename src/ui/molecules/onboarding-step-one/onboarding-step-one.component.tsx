@@ -15,7 +15,9 @@ import {
 
 import { IOnboardingStepOneProps } from './onboarding-step-one.types';
 
-export const OnboardingStepOne: FC<IOnboardingStepOneProps> = (): JSX.Element => (
+export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
+  onNextButtonClick,
+}): JSX.Element => (
   <TabPanel mx="auto" p={0} w={{ sm: '500px', md: '600px', lg: '650px' }}>
     <Flex mb="40px">
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
@@ -84,18 +86,8 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = (): JSX.Element =>
           </ListItem>
         </List>
       </Flex>
-      <Button
-        _hover={{
-          bg: 'red.500',
-        }}
-        alignSelf="flex-end"
-        bg="red.400"
-        h="35px"
-        mt="24px"
-        variant="no-hover"
-        w={{ sm: '75px', lg: '100px' }}
-      >
-        <Text color="#fff" fontSize="xs" fontWeight="bold">
+      <Button alignSelf="flex-end" mt="24px" onClick={onNextButtonClick}>
+        <Text fontSize="xs" fontWeight="bold">
           NEXT
         </Text>
       </Button>

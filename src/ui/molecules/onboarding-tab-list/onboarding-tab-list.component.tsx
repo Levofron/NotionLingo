@@ -3,35 +3,23 @@ import { BsCircleFill } from 'react-icons/bs';
 
 import { Flex, Icon, Tab, TabList } from '@ui/atoms';
 
-import { IActiveTabs, IOnboardingTabListProps } from './onboarding-tab-list.types';
+import { IOnboardingTabListProps } from './onboarding-tab-list.types';
 
 export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
   activeTabs,
   createNotionIntegrationTabRef,
   selectNotionPageTabRef,
-  setActiveTabs,
   shareDatabaseIntegrationTabRef,
   validateIntegrationTabRef,
 }): JSX.Element => {
-  const handleTabClick = (newActiveTabs: IActiveTabs) => () => setActiveTabs(newActiveTabs);
-
   const isCreateIntegrationTabActive = activeTabs.createNotionIntegration;
   const isShareDatabaseIntegrationTabActive = activeTabs.shareDatabaseIntegration;
   const isValidateIntegrationTabActive = activeTabs.validateIntegration;
   const isSelectPageTabActive = activeTabs.selectNotionPage;
 
   return (
-    <TabList display="flex" justifyContent="center">
-      <Tab
-        ref={createNotionIntegrationTabRef}
-        w={{ sm: '90px', md: '188px', lg: '225px' }}
-        onClick={handleTabClick({
-          createNotionIntegration: true,
-          shareDatabaseIntegration: false,
-          validateIntegration: false,
-          selectNotionPage: false,
-        })}
-      >
+    <TabList display="flex" justifyContent="center" pointerEvents="none">
+      <Tab ref={createNotionIntegrationTabRef} w={{ sm: '90px', md: '188px', lg: '225px' }}>
         <Flex
           _before={{
             content: "''",
@@ -60,16 +48,7 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           />
         </Flex>
       </Tab>
-      <Tab
-        ref={shareDatabaseIntegrationTabRef}
-        w={{ sm: '90px', md: '188px', lg: '225px' }}
-        onClick={handleTabClick({
-          createNotionIntegration: true,
-          shareDatabaseIntegration: true,
-          validateIntegration: false,
-          selectNotionPage: false,
-        })}
-      >
+      <Tab ref={shareDatabaseIntegrationTabRef} w={{ sm: '90px', md: '188px', lg: '225px' }}>
         <Flex
           _before={{
             content: "''",
@@ -98,16 +77,7 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           />
         </Flex>
       </Tab>
-      <Tab
-        ref={validateIntegrationTabRef}
-        w={{ sm: '90px', md: '188px', lg: '225px' }}
-        onClick={handleTabClick({
-          createNotionIntegration: true,
-          shareDatabaseIntegration: true,
-          validateIntegration: true,
-          selectNotionPage: false,
-        })}
-      >
+      <Tab ref={validateIntegrationTabRef} w={{ sm: '90px', md: '188px', lg: '225px' }}>
         <Flex
           _before={{
             content: "''",
@@ -136,16 +106,7 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           />
         </Flex>
       </Tab>
-      <Tab
-        ref={selectNotionPageTabRef}
-        w={{ sm: '90px', md: '188px', lg: '225px' }}
-        onClick={handleTabClick({
-          createNotionIntegration: true,
-          shareDatabaseIntegration: true,
-          validateIntegration: true,
-          selectNotionPage: true,
-        })}
-      >
+      <Tab ref={selectNotionPageTabRef} w={{ sm: '90px', md: '188px', lg: '225px' }}>
         <Flex
           _before={{
             content: "''",

@@ -22,16 +22,12 @@ export const OnboardingPage: FC = (): JSX.Element => {
     }
   }, [user, isLoading]);
 
-  if (isLoading || user?.hasNotionData === true) {
-    return <FullScreenLoader />;
-  }
-
   return (
     <>
       <Head>
         <title>Levofron</title>
       </Head>
-      <OnboardingTemplate />
+      {isLoading && !user ? <FullScreenLoader /> : <OnboardingTemplate />}
     </>
   );
 };

@@ -1,1 +1,3 @@
-export interface IOnboardingStepOneProps {}
+export interface IOnboardingStepOneProps {
+  onNextButtonClick: () => void;
+}

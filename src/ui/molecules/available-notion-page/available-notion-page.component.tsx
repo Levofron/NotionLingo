@@ -22,7 +22,7 @@ export const AvailableNotionPage: FC<IAvailableNotionPageProps> = ({
   const handleClick = useCallback(() => onClick(availableNotionPage.id), []);
 
   return (
-    <Card bg="gray.50">
+    <Card>
       <CardBody>
         <Stack mt="6" spacing="3">
           <Heading size="lg">{availableNotionPage.title}</Heading>
@@ -42,18 +42,8 @@ export const AvailableNotionPage: FC<IAvailableNotionPageProps> = ({
       </CardBody>
       <Divider />
       <CardFooter>
-        <Button
-          _hover={{
-            bg: 'red.500',
-          }}
-          bg="red.400"
-          h="35px"
-          isLoading={isLoading}
-          variant="no-hover"
-          w={{ sm: '75px', lg: '100px' }}
-          onClick={handleClick}
-        >
-          <Text color="#fff" fontSize="xs" fontWeight="bold">
+        <Button isLoading={isLoading} onClick={handleClick}>
+          <Text fontSize="xs" fontWeight="bold">
             Select
           </Text>
         </Button>
