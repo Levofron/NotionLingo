@@ -13,7 +13,7 @@ export const OnboardingPage: FC = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (!isLoading && user?.hasNotionData === false) {
+    if (!isLoading && user?.hasNotionData === true) {
       router.push(ERoutes.DASHBOARD);
     }
   }, [user, isLoading]);
