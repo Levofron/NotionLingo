@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Box, CloseButton, Flex, Text } from '@ui/atoms';
+import { Box, Container } from '@ui/atoms';
 import { NavigationItem } from '@ui/molecules';
 
 import { sidebarItems } from './sidebar-content.defaults';
@@ -11,25 +11,27 @@ export const SidebarContent: FC<ISidebarContentProps> = ({
   ...restProps
 }): JSX.Element => (
   <Box
-    bg="white"
     borderRight="1px"
     borderRightColor="black"
-    h="full"
-    pos="fixed"
+    css={{
+      backdropFilter: 'saturate(180%) blur(5px)',
+      backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    }}
+    left={0}
+    minH="calc(100vh - 65px)"
+    position="fixed"
+    top={65}
     transition="3s ease"
     w="full"
+    zIndex={9999}
     {...restProps}
   >
-    <Flex alignItems="center" h="20" justifyContent="space-between" mx="8">
-      <Text fontFamily="monospace" fontSize="2xl" fontWeight="bold">
-        Levofron
-      </Text>
-      <CloseButton onClick={onClose} />
-    </Flex>
-    {sidebarItems.map(({ href, icon, name }) => (
-      <NavigationItem key={name} href={href} icon={icon}>
-        {name}
-      </NavigationItem>
-    ))}
+    <Container display="flex" flexDirection="column" gap={2} maxW="7xl" mt={2}>
+      {sidebarItems.map(({ href, icon, name }) => (
+        <NavigationItem key={name} href={href} icon={icon}>
+          {name}
+        </NavigationItem>
+      ))}
+    </Container>
   </Box>
 );

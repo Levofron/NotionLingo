@@ -1,2 +1,3 @@
-export * from './home-template/home-template.component';
-export * from './onboarding-template/onboarding-template.component';
+export * from './home/home.component';
+export * from './dashboard/dashboard.component';
+export * from './onboarding/onboarding.component';

@@ -19,7 +19,6 @@ export const NavigationItem: FC<INavigationItemProps> = ({
       align="center"
       borderRadius="lg"
       cursor="pointer"
-      mx="4"
       p="4"
       role="group"
       {...restProps}
