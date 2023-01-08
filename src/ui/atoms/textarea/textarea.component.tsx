@@ -6,6 +6,15 @@ import { ITextareaProps } from './textarea.types';
 const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextareaProps> = (
   props,
   ref,
-): JSX.Element => <ChakraTextarea ref={ref} {...props} />;
+): JSX.Element => (
+  <ChakraTextarea
+    ref={ref}
+    _hover={{ borderColor: 'black' }}
+    borderColor="black"
+    borderRadius={0}
+    focusBorderColor="black"
+    {...props}
+  />
+);
 
 export const Textarea = forwardRef(TextareaComponent);

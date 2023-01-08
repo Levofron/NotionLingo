@@ -26,7 +26,7 @@ export const SidebarContent: FC<ISidebarContentProps> = ({
     zIndex={9999}
     {...restProps}
   >
-    <Container display="flex" flexDirection="column" gap={2} maxW="7xl" mt={2}>
+    <Container display="flex" flexDirection="column" gap={2} maxW="6xl" mt={2}>
       {sidebarItems.map(({ href, icon, name }) => (
         <NavigationItem key={name} href={href} icon={icon}>
           {name}
