@@ -76,7 +76,7 @@ export const Footer: FC = (): JSX.Element => {
             Levofron
           </Text>
         </Flex>
-        <Text fontSize="sm" pt={6} textAlign="center">
+        <Text color="gray.500" pt={6} textAlign="center">
           © {currentYear} Paweł Wojtasiński. All rights reserved.
         </Text>
       </Box>
