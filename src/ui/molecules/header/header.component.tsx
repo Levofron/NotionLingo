@@ -34,7 +34,7 @@ export const Header: FC<IHeaderProps> = ({
       zIndex="999"
       {...restProps}
     >
-      <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="7xl">
+      <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl">
         <Flex alignItems="center" gap={5}>
           <IconButton
             aria-label="open menu"

@@ -12,7 +12,7 @@ export const Footer: FC = (): JSX.Element => {
 
   return (
     <Box bg="white" borderColor="black" borderTop="1px solid" color="gray.700">
-      <Container as={Stack} maxW="6xl" py={10}>
+      <Container maxW="6xl" py={10}>
         <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={8}>
           <Stack align="flex-start">
             <Text fontSize="lg" fontWeight="600" mb={2}>

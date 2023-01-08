@@ -5,7 +5,7 @@ import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@
 
 export const TryItNow: FC = (): JSX.Element => (
   <Box bg="white" borderBottom="1px solid" borderColor="black" borderTop="1px solid">
-    <Container maxW="7xl" py={{ base: 14, sm: 20, md: 32 }}>
+    <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Box as={Card} color="black" px={{ base: 4, md: 10 }} py={10}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
           <Box>

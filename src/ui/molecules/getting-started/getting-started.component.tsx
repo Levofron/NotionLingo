@@ -6,7 +6,7 @@ import { STEPS } from './getting-started.defaults';
 
 export const GettingStarted: FC = (): JSX.Element => (
   <Box bg="white" borderBottom="1px solid" borderColor="black" borderTop="1px solid">
-    <Container maxW="7xl" py={{ base: 14, sm: 20, md: 32 }}>
+    <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading as="h3" mb={{ base: 14, sm: 16 }} textAlign="center">
         Getting started in <TextUnderline>3 easy steps</TextUnderline>
       </Heading>
