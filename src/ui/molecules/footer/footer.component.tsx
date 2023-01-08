@@ -11,7 +11,7 @@ export const Footer: FC = (): JSX.Element => {
   const currentYear = new Date().getUTCFullYear();
 
   return (
-    <Box bg="white" borderColor="black" borderTop="1px solid" color="gray.700">
+    <Box bg="white" borderColor="black" borderTop="5px solid" color="gray.700">
       <Container maxW="6xl" py={10}>
         <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={8}>
           <Stack align="flex-start">
@@ -58,14 +58,14 @@ export const Footer: FC = (): JSX.Element => {
         <Flex
           _after={{
             content: '""',
-            borderBottom: '1px solid',
+            borderBottom: '5px solid',
             borderColor: 'black',
             flexGrow: 1,
             ml: 8,
           }}
           _before={{
             content: '""',
-            borderBottom: '1px solid',
+            borderBottom: '5px solid',
             borderColor: 'black',
             flexGrow: 1,
             mr: 8,
