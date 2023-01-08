@@ -37,15 +37,9 @@ export const Header: FC<IHeaderProps> = ({
       <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="7xl">
         <Flex alignItems="center" gap={5}>
           <IconButton
-            _hover={{
-              bg: 'transparent',
-              borderColor: 'black',
-            }}
             aria-label="open menu"
-            borderColor="transparent"
-            borderRadius={0}
             icon={!isOpen ? <FaHamburger size="20px" /> : <TfiClose size="20px" />}
-            variant="outline"
+            variant="primary"
             onClick={!isOpen ? onOpen : onClose}
           />
           <Text fontFamily="monospace" fontSize="2xl" fontWeight="bold">

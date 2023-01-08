@@ -11,12 +11,12 @@ export const TextUnderline: FC<ITextUnderlineProps> = ({ children }): JSX.Elemen
       left: 0,
       bottom: 0,
       w: 'full',
-      h: '30%',
-      bg: 'red.100',
+      h: '10%',
+      bg: 'black',
       zIndex: -1,
     }}
     as="span"
-    color="red.400"
+    color="black"
     position="relative"
     zIndex={10}
   >

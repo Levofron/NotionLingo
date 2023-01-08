@@ -1,19 +1,18 @@
 import { FC } from 'react';
 
-import { Box, Button, Container, Heading, Highlight, Stack, Text } from '@ui/atoms';
-
-import { CONFETTI_LIGHT } from '@constants';
+import { Box, Button, Container, Flex, Heading, Highlight, Text } from '@ui/atoms';
 
 export const HomeHero: FC = (): JSX.Element => (
-  <Box
-    bg="gray.100"
-    css={{
-      backgroundAttachment: 'fixed',
-      backgroundImage: CONFETTI_LIGHT,
-    }}
-  >
+  <Box bg="white" borderBottom="1px solid" borderColor="black" borderTop="1px solid" pt={65}>
     <Container maxW="3xl">
-      <Stack as={Box} py={{ base: 20, md: 36 }} spacing={{ base: 8, md: 14 }} textAlign="center">
+      <Flex
+        alignItems="center"
+        flexDirection="column"
+        gap={{ base: 8, md: 14 }}
+        maxW="3xl"
+        py={{ base: 20, md: 36 }}
+        textAlign="center"
+      >
         <Heading
           fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
           fontWeight={800}
@@ -21,7 +20,7 @@ export const HomeHero: FC = (): JSX.Element => (
         >
           <Highlight
             query={['expand', 'skills']}
-            styles={{ px: '2', py: '1', rounded: 'full', bg: 'red.400' }}
+            styles={{ px: '2', py: '1', bg: 'white', border: '1px solid' }}
           >
             Expand your vocabulary, elevate your skills
           </Highlight>
@@ -30,10 +29,10 @@ export const HomeHero: FC = (): JSX.Element => (
           Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to
           easily learn new words and phrases from your own <b>Notion</b> database!
         </Text>
-        <Button px={6} width="fit-content">
+        <Button size="lg" variant="primary" width="fit-content">
           Get Started
         </Button>
-      </Stack>
+      </Flex>
     </Container>
   </Box>
 );

@@ -5,7 +5,7 @@ import { Box, Container, Flex, Heading, Stack, Text, TextUnderline } from '@ui/a
 import { STEPS } from './getting-started.defaults';
 
 export const GettingStarted: FC = (): JSX.Element => (
-  <Box bg="gray.50">
+  <Box bg="white" borderBottom="1px solid" borderColor="black" borderTop="1px solid">
     <Container maxW="7xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading as="h3" mb={{ base: 14, sm: 16 }} textAlign="center">
         Getting started in <TextUnderline>3 easy steps</TextUnderline>
@@ -30,13 +30,13 @@ export const GettingStarted: FC = (): JSX.Element => (
           >
             <Flex
               align="center"
-              bg="red.100"
-              color="red.700"
+              border="1px solid"
+              borderColor="black"
+              color="black"
               fontSize="sm"
               fontWeight={700}
               h={10}
               justify="center"
-              rounded="md"
               w={10}
             >
               0{index + 1}

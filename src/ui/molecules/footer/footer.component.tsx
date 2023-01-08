@@ -11,35 +11,39 @@ export const Footer: FC = (): JSX.Element => {
   const currentYear = new Date().getUTCFullYear();
 
   return (
-    <Box bg="gray.50" color="gray.700">
+    <Box bg="white" borderColor="black" borderTop="1px solid" color="gray.700">
       <Container as={Stack} maxW="6xl" py={10}>
         <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={8}>
           <Stack align="flex-start">
-            <Text fontSize="lg" fontWeight="500" mb={2}>
+            <Text fontSize="lg" fontWeight="600" mb={2}>
               Legal
             </Text>
-            <ChakraNextLink href={ERoutes.PRIVACY_POLICY}>Privacy & Policy</ChakraNextLink>
-            <ChakraNextLink href={ERoutes.TERMS}>Terms & Conditions</ChakraNextLink>
+            <ChakraNextLink color="black" href={ERoutes.PRIVACY_POLICY}>
+              Privacy & Policy
+            </ChakraNextLink>
+            <ChakraNextLink color="black" href={ERoutes.TERMS}>
+              Terms & Conditions
+            </ChakraNextLink>
           </Stack>
           <Stack align="flex-start">
-            <Text fontSize="lg" fontWeight="500" mb={2}>
+            <Text fontSize="lg" fontWeight="600" mb={2}>
               Follow us
             </Text>
-            <ChakraNextLink href={GITHUB_LINK} rel="noreferrer" target="_blank">
+            <ChakraNextLink color="black" href={GITHUB_LINK} target="_blank">
               GitHub
             </ChakraNextLink>
-            <ChakraNextLink href={TWITTER_LINK} rel="noreferrer" target="_blank">
+            <ChakraNextLink color="black" href={TWITTER_LINK} target="_blank">
               Twitter
             </ChakraNextLink>
-            <ChakraNextLink href={LINKEDIN_LINK} rel="noreferrer" target="_blank">
+            <ChakraNextLink color="black" href={LINKEDIN_LINK} target="_blank">
               LinkedIn
             </ChakraNextLink>
           </Stack>
           <Stack align="flex-start">
-            <Text fontSize="lg" fontWeight="500" mb={2}>
+            <Text fontSize="lg" fontWeight="600" mb={2}>
               Support us
             </Text>
-            <ChakraNextLink href={BUY_ME_A_COFFEE_LINK} rel="noreferrer" target="_blank">
+            <ChakraNextLink href={BUY_ME_A_COFFEE_LINK} target="_blank">
               <NextImage
                 alt="Buy Me A Coffee"
                 height={40}
@@ -55,14 +59,14 @@ export const Footer: FC = (): JSX.Element => {
           _after={{
             content: '""',
             borderBottom: '1px solid',
-            borderColor: 'gray.200',
+            borderColor: 'black',
             flexGrow: 1,
             ml: 8,
           }}
           _before={{
             content: '""',
             borderBottom: '1px solid',
-            borderColor: 'gray.200',
+            borderColor: 'black',
             flexGrow: 1,
             mr: 8,
           }}
