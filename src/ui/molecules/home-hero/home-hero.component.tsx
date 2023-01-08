@@ -14,7 +14,7 @@ export const HomeHero: FC = (): JSX.Element => {
     router.push(user?.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
 
   return (
-    <Box bg="white" borderBottom="20px solid" borderColor="black" pt={65}>
+    <Box bg="white" borderBottom="25px solid black" pt={65}>
       <Container maxW="3xl">
         <Flex
           alignItems="center"
@@ -29,10 +29,7 @@ export const HomeHero: FC = (): JSX.Element => {
             fontWeight={800}
             lineHeight="120%"
           >
-            <Highlight
-              query={['expand', 'skills']}
-              styles={{ px: '2', py: '1', bg: 'white', border: '2px solid' }}
-            >
+            <Highlight query={['expand', 'skills']}>
               Expand your vocabulary, elevate your skills
             </Highlight>
           </Heading>

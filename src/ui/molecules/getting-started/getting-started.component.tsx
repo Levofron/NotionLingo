@@ -5,7 +5,7 @@ import { Box, Card, Container, Flex, Heading, Stack, Text, TextUnderline } from 
 import { STEPS } from './getting-started.defaults';
 
 export const GettingStarted: FC = (): JSX.Element => (
-  <Box bg="white" borderBottom="15px solid" borderColor="black" borderTop="20px solid">
+  <Box bg="white" borderBottom="20px solid black" borderTop="25px solid black">
     <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading as="h3" mb={{ base: 14, sm: 16 }} textAlign="center">
         Getting started in <TextUnderline>3 easy steps</TextUnderline>
