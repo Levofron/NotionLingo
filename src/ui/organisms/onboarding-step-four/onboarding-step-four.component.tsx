@@ -1,4 +1,5 @@
 import { ChangeEvent, FC } from 'react';
+import { FaChevronLeft } from 'react-icons/fa';
 
 import { restModule } from '@adapter/modules';
 
@@ -30,24 +31,15 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
 
   return (
     <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
-      <Flex mb="40px">
-        <Flex
-          align="center"
-          direction="column"
-          justify="center"
-          mx="auto"
-          textAlign="center"
-          w="80%"
-        >
-          <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
-            Validate your integration
-          </Text>
-          <Text color="gray.400" fontSize="sm" fontWeight="normal">
-            Paste your copied integration token below to validate your integration.
-          </Text>
-        </Flex>
+      <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
+        <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
+          Validate your integration
+        </Text>
+        <Text color="gray.400" fontSize="sm" fontWeight="normal">
+          Paste your copied integration token below to validate your integration.
+        </Text>
       </Flex>
-      <Flex direction="column" w="100%">
+      <Flex direction="column" mt={{ base: '25px', md: '40px' }} w="100%">
         <InputControl
           isRequired
           errorMessage={setNotionApiTokenError || undefined}
@@ -60,15 +52,10 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
         />
       </Flex>
       <Button
-        _hover={{
-          bg: 'black',
-          color: 'white',
-        }}
-        alignSelf="flex-end"
-        bg="white"
-        color="black"
         isDisabled={isSetNotionApiTokenLoading || !!setNotionApiTokenData}
+        leftIcon={<FaChevronLeft size="10px" />}
         mt="48px"
+        variant="secondary"
         onClick={onPreviousButtonClick}
       >
         <Text fontSize="xs" fontWeight="bold">

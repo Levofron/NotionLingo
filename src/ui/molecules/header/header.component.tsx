@@ -31,7 +31,7 @@ export const Header: FC<IHeaderProps> = ({ onOpen, ...restProps }): JSX.Element 
       />
       <Button
         borderColor="black"
-        variant="outline"
+        variant="primary"
         width={100}
         onClick={!isUserAuthenticated ? loginViaGoogle : logout}
       >
