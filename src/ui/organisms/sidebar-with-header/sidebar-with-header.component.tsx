@@ -1,31 +1,16 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { Box, Drawer, DrawerContent } from '@ui/atoms';
+import { Box } from '@ui/atoms';
 import { Header, SidebarContent } from '@ui/molecules';
 
-import { ISidebarWithHeaderProps } from './sidebar-with-header.types';
-
-export const SidebarWithHeader: FC<ISidebarWithHeaderProps> = ({ children }): JSX.Element => {
+export const SidebarWithHeader: FC = (): JSX.Element => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Box bg="gray.100" minH="100vh">
-      <Drawer
-        autoFocus={false}
-        isOpen={isOpen}
-        placement="left"
-        returnFocusOnClose={false}
-        size="full"
-        onClose={onClose}
-        onOverlayClick={onClose}
-      >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
-        </DrawerContent>
-      </Drawer>
-      <Header onOpen={onOpen} />
-      <Box>{children}</Box>
+    <Box bg="gray.100" overflow="hidden">
+      <Header isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
+      {isOpen ? <SidebarContent onClose={onClose} /> : null}
     </Box>
   );
 };

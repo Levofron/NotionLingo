@@ -10,7 +10,7 @@ import {
 } from '@ui/molecules';
 import { OnboardingStepFive, OnboardingStepFour } from '@ui/organisms';
 
-import { IOnboardingTemplateProps } from './onboarding-template.types';
+import { IOnboardingTemplateProps } from './onboarding.types';
 
 export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element => {
   const verifyDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
