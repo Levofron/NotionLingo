@@ -38,9 +38,9 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
     <Flex
       align="center"
       bg="white"
-      borderBottom="1px solid"
+      borderBottom="5px solid"
       borderColor="black"
-      borderTop="1px solid"
+      borderTop="10px solid"
       id="contact"
       justify="center"
     >

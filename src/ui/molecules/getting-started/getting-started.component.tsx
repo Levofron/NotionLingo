@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import { Box, Container, Flex, Heading, Stack, Text, TextUnderline } from '@ui/atoms';
+import { Box, Card, Container, Flex, Heading, Stack, Text, TextUnderline } from '@ui/atoms';
 
 import { STEPS } from './getting-started.defaults';
 
 export const GettingStarted: FC = (): JSX.Element => (
-  <Box bg="white" borderBottom="1px solid" borderColor="black" borderTop="1px solid">
+  <Box bg="white" borderBottom="15px solid" borderColor="black" borderTop="20px solid">
     <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading as="h3" mb={{ base: 14, sm: 16 }} textAlign="center">
         Getting started in <TextUnderline>3 easy steps</TextUnderline>
@@ -30,14 +30,15 @@ export const GettingStarted: FC = (): JSX.Element => (
           >
             <Flex
               align="center"
-              border="1px solid"
+              as={Card}
+              border="2px solid"
               borderColor="black"
               color="black"
-              fontSize="sm"
+              fontSize="lg"
               fontWeight={700}
-              h={10}
+              h={20}
               justify="center"
-              w={10}
+              w={20}
             >
               0{index + 1}
             </Flex>

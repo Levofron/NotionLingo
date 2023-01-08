@@ -20,8 +20,8 @@ export const Header: FC<IHeaderProps> = ({
     <Flex
       alignItems="center"
       as="header"
-      borderBottomColor="black"
-      borderBottomWidth="1px"
+      borderBottom="2px solid"
+      borderColor="black"
       boxShadow="sm"
       css={{
         backdropFilter: 'saturate(180%) blur(5px)',
