@@ -29,7 +29,6 @@ export const Header: FC<IHeaderProps> = ({
       as="header"
       borderBottom="2px solid"
       borderColor="black"
-      boxShadow="sm"
       css={{
         backdropFilter: 'saturate(180%) blur(5px)',
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -41,7 +40,7 @@ export const Header: FC<IHeaderProps> = ({
       zIndex="999"
       {...restProps}
     >
-      <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl">
+      <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl" p={0}>
         <Flex alignItems="center" gap={5}>
           <IconButton
             aria-label="open menu"
