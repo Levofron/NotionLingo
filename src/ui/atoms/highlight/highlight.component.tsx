@@ -4,5 +4,5 @@ import { FC } from 'react';
 import { IHighlightProps } from './highlight.types';
 
 export const Highlight: FC<IHighlightProps> = (props): JSX.Element => (
-  <ChakraHighlight {...props} />
+  <ChakraHighlight styles={{ px: '2', py: '1', bg: 'white', border: '2px solid' }} {...props} />
 );
