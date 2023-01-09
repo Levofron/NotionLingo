@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { FaHamburger } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 
 import { Button, Container, Flex, IconButton, Text } from '@ui/atoms';
 
+import { ERoutes } from '@infrastructure/types/routes';
 import { useUser } from '@infrastructure/utils';
 
 import { IHeaderProps } from './header.types';
@@ -14,7 +16,12 @@ export const Header: FC<IHeaderProps> = ({
   onOpen,
   ...restProps
 }): JSX.Element => {
+  const router = useRouter();
   const { isLoading, isUserAuthenticated, loginViaGoogle, logout } = useUser();
+
+  const isHome = router.pathname === ERoutes.HOME;
+
+  const redirectToHome = () => !isHome && router.push(ERoutes.HOME);
 
   return (
     <Flex
@@ -38,11 +45,18 @@ export const Header: FC<IHeaderProps> = ({
         <Flex alignItems="center" gap={5}>
           <IconButton
             aria-label="open menu"
+            disabled={isLoading}
             icon={!isOpen ? <FaHamburger size="20px" /> : <TfiClose size="20px" />}
             variant="primary"
             onClick={!isOpen ? onOpen : onClose}
           />
-          <Text fontFamily="monospace" fontSize="2xl" fontWeight="bold">
+          <Text
+            cursor={isHome ? 'default' : 'pointer'}
+            fontFamily="monospace"
+            fontSize="2xl"
+            fontWeight="bold"
+            onClick={redirectToHome}
+          >
             Levofron
           </Text>
         </Flex>
