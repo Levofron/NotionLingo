@@ -15,12 +15,7 @@ export const TryItNow: FC = (): JSX.Element => {
     router.push(user?.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
 
   return (
-    <Box
-      bg="white"
-      borderBottom="15px solid black"
-      borderColor="black"
-      borderTop="20px solid black"
-    >
+    <Box bg="white" borderBottom="15px solid black" borderTop="20px solid black">
       <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
         <Box as={Card} color="black" px={{ base: 4, md: 10 }} py={10}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
