@@ -5,10 +5,10 @@ const minLength = (min: number) => (value: string) => !!value && value.length >=
 const maxLength = (max: number) => (value: string) => !!value && value.length <= max;
 
 const isValidEmail = (email: string) => {
-  const re =
+  const regex =
     /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Z\\a-z-]+\.)+[A-Za-z]{2,}))$/;
 
-  return re.test(String(email).toLowerCase());
+  return regex.test(String(email).toLowerCase());
 };
 
 const emailRegexValidator: IValidator = {
