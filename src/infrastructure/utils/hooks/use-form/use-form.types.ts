@@ -1,9 +1,9 @@
 export type TValidateFunction = (fieldName: string) => boolean;
 
-export type TErrorMessages<TFormData extends object> = Record<keyof TFormData, string>;
+export type TErrorMessages<TFormValues extends object> = Record<keyof TFormValues, string>;
 
-export interface IUseFormParams<TFormData extends object> {
-  initialValues: TFormData;
+export interface IUseFormParams<TFormValues extends object> {
+  initialValues: TFormValues;
 }
 
 export interface IValidator {

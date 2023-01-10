@@ -6,7 +6,7 @@ import { isString } from '../../guards/is-string/is-string.function';
 import { fieldToValidatorsMapper } from './use-form.defaults';
 import { IUseFormParams, TErrorMessages } from './use-form.types';
 
-const revalidateForm = <TFormData extends object>(newFormState: TFormData) =>
+const validateFormState = <TFormValues extends object>(newFormState: TFormValues) =>
   objectKeys(fieldToValidatorsMapper).reduce((_accumulator, _fieldName) => {
     const fieldValidators = fieldToValidatorsMapper[_fieldName];
 
@@ -20,12 +20,14 @@ const revalidateForm = <TFormData extends object>(newFormState: TFormData) =>
     }
 
     return { ..._accumulator, [_fieldName]: validator?.message || '' };
-  }, {} as TErrorMessages<TFormData>);
+  }, {} as TErrorMessages<TFormValues>);
 
-export const useForm = <TFormData extends object>({ initialValues }: IUseFormParams<TFormData>) => {
+export const useForm = <TFormValues extends object>({
+  initialValues,
+}: IUseFormParams<TFormValues>) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formState, setFormState] = useState(initialValues);
-  const [errors, setErrors] = useState<TErrorMessages<TFormData> | null>(null);
+  const [errors, setErrors] = useState<TErrorMessages<TFormValues> | null>(null);
 
   const getFormStateWithReformattedData = useCallback(
     () =>
@@ -57,25 +59,18 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
     setFormState((_prevState) => ({ ..._prevState, [name]: value }));
   };
 
-  const reset = (field?: keyof TFormData) => {
-    if (!field) {
-      setErrors(null);
-      setFormState(initialValues);
-
-      return;
-    }
-
-    setErrors(filterOutObjectKeys(errors, field));
-    setFormState((prevState) => ({ ...prevState, [field]: initialValues[field] }));
+  const reset = () => {
+    setErrors(null);
+    setFormState(initialValues);
   };
 
   const handleSubmit =
-    (onSubmit: (formData: TFormData, event: FormEvent<HTMLDivElement>) => void) =>
+    (onSubmit: (formData: TFormValues, event: FormEvent<HTMLDivElement>) => void) =>
     (event: FormEvent<HTMLDivElement>) => {
       event.preventDefault();
 
       const newFormState = getFormStateWithReformattedData();
-      const newErrors = revalidateForm(newFormState);
+      const newErrors = validateFormState(newFormState);
 
       setIsSubmitted(true);
       setErrors(newErrors);
@@ -92,7 +87,7 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
       reset();
     };
 
-  const generateFieldProps = (name: keyof TFormData) => {
+  const generateFieldProps = (name: keyof TFormValues) => {
     const label = capitalizeFirstLetter(name as string);
     const placeholder = `Your ${label}...`;
 
@@ -107,7 +102,6 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
   };
 
   return {
-    reset,
     formState,
     generateFieldProps,
     onSubmitWrapper: handleSubmit,
