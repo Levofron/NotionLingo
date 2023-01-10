@@ -1,24 +1,10 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
-import { capitalizeFirstLetter, objectKeys } from '@infrastructure/utils';
+import { capitalizeFirstLetter, filterOutObjectKeys, objectKeys } from '@infrastructure/utils';
 
 import { isString } from '../../guards/is-string/is-string.function';
 import { fieldToValidatorsMapper } from './use-form.defaults';
 import { IUseFormParams, TErrorMessages } from './use-form.types';
-
-const filterOutKeys = <T extends object, K extends keyof T>(obj: T | null, keys: K[]) => {
-  if (!obj) {
-    return null;
-  }
-
-  const filtered = { ...obj };
-
-  for (const key of keys) {
-    delete filtered[key];
-  }
-
-  return filtered;
-};
 
 const revalidateForm = <TFormData extends object>(newFormState: TFormData) =>
   objectKeys(fieldToValidatorsMapper).reduce((_accumulator, _fieldName) => {
@@ -62,7 +48,7 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
     if (isSubmitted) {
       const validators = fieldToValidatorsMapper[name] || [];
 
-      const filteredErrors = filterOutKeys(errors, [name]) as TErrorMessages<TFormData>;
+      const filteredErrors = filterOutObjectKeys(errors, name)!;
       const validator = validators.find((_validator) => !_validator.validate(value));
 
       setErrors({ ...filteredErrors, [name]: validator?.message || '' });
@@ -79,7 +65,7 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
       return;
     }
 
-    setErrors(filterOutKeys(errors, [field]) as TErrorMessages<TFormData>);
+    setErrors(filterOutObjectKeys(errors, field));
     setFormState((prevState) => ({ ...prevState, [field]: initialValues[field] }));
   };
 

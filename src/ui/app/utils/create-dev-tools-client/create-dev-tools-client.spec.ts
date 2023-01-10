@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { filterOutObjectKeys, functionImportTest } from '@infrastructure/utils';
 
 import { createDevToolsClient } from './create-dev-tools-client.function';
 
@@ -18,10 +18,8 @@ describe('createDevToolsClient function', () => {
 
   afterEach(() => {
     // @ts-expect-error
-    delete window.rest;
-
-    // @ts-expect-error
-    delete window.supabase;
+    // eslint-disable-next-line no-global-assign
+    window = filterOutObjectKeys(window, ['rest', 'supabase']);
   });
 
   it('should assign supabase module to window object', () => {
