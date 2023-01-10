@@ -98,7 +98,8 @@ describe('useForm hook', () => {
       name: 'name',
       label: 'Name',
       value: 'John',
-      placeholder: 'Your Name',
+      errorMessage: undefined,
+      placeholder: 'Your Name...',
       onChange: expect.any(Function),
     });
   });

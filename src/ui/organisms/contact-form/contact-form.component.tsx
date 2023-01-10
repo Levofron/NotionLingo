@@ -97,21 +97,9 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
             </Stack>
             <Box as={Card} minW={{ base: 'unset', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
               <VStack as="form" spacing={5} onSubmit={handleSubmit}>
-                <InputControl isRequired minLength={3} {...generateFieldProps('name')} />
-                <InputControl
-                  isRequired
-                  minLength={5}
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                  type="email"
-                  {...generateFieldProps('email')}
-                />
-                <TextareaControl
-                  isRequired
-                  minLength={10}
-                  resize="none"
-                  rows={6}
-                  {...generateFieldProps('message')}
-                />
+                <InputControl {...generateFieldProps('name')} />
+                <InputControl {...generateFieldProps('email')} />
+                <TextareaControl resize="none" rows={6} {...generateFieldProps('message')} />
                 <Button type="submit" variant="primary" width="full">
                   Send Message
                 </Button>
