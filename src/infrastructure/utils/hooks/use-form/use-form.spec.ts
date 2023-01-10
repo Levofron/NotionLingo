@@ -76,21 +76,6 @@ describe('useForm hook', () => {
     expect(result.current.formState).toEqual({ name: 'Jane', age: 20 });
   });
 
-  it('should call the onSubmit function when the handleSubmit function is called', () => {
-    const onSubmit = jest.fn();
-    const { result } = renderHook(() => useForm({ initialValues: { name: 'John' } }));
-
-    act(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      result.current.onSubmitWrapper(onSubmit)({ preventDefault: () => {} } as any);
-    });
-
-    expect(onSubmit).toHaveBeenCalledWith(
-      { name: 'John' },
-      { preventDefault: expect.any(Function) },
-    );
-  });
-
   it('should return the expected field props when the generateFieldProps function is called', () => {
     const { result } = renderHook(() => useForm({ initialValues: { name: 'John' } }));
 

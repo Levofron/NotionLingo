@@ -1,5 +1,7 @@
+import { isObject } from '@infrastructure/utils';
+
 export const objectKeys = <TObject extends object>(object: TObject | null) => {
-  if (!object) {
+  if (!isObject(object)) {
     return [];
   }
 
