@@ -2,7 +2,7 @@ import {
   IUseCaseWithSingleParamAndPromiseResult,
   IUseCaseWithoutParamsAndPromiseResult,
 } from '../common.types';
-import { IHash, INotionPage, INotionWord, IUser } from './rest.models';
+import { IContact, IHash, INotionPage, INotionWord, IUser } from './rest.models';
 import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
@@ -62,4 +62,16 @@ export const getRandomNotionWordsUseCase = (
   restRepository: IRestRepository,
 ): TGetRandomNotionWordsUseCase => ({
   execute: () => restRepository.getRandomNotionWords(),
+});
+
+// sendContactFormDataUseCase
+export type TSendContactFormDataUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  IContact,
+  IContact
+>;
+
+export const sendContactFormDataUseCase = (
+  restRepository: IRestRepository,
+): TSendContactFormDataUseCase => ({
+  execute: (data) => restRepository.sendContactFormData(data),
 });

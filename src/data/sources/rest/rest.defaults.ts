@@ -1,5 +1,6 @@
 export const restEndpoints = {
   // common
+  CONTACT: '/contact',
   HEALTH_CHECK: '/health-check',
   SET_SUPABASE_COOKIE: '/set-supabase-cookie',
 

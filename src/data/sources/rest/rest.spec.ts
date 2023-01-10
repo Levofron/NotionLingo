@@ -1,4 +1,4 @@
-import { IHash, INotionPage, INotionWord, IUser } from '@domain/rest/rest.models';
+import { IContact, IHash, INotionPage, INotionWord, IUser } from '@domain/rest/rest.models';
 
 import { functionImportTest } from '@infrastructure/utils';
 
@@ -21,6 +21,7 @@ describe('getRestSource function', () => {
       getAvailableNotionPages: expect.any(Function),
       setNotionPageId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      sendContactFormData: expect.any(Function),
     });
   });
 
@@ -271,6 +272,45 @@ describe('getRestSource function', () => {
       const restSource = getRestSource(axiosInstanceMock);
 
       const result = restSource.setNotionPageId('pageId');
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('sendContactFormData endpoint', () => {
+    it('should call proper endpoint with proper data', () => {
+      const contactFormDataMock: IContact = {
+        name: 'name',
+        email: 'email',
+        message: 'message',
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        post: jest.fn().mockResolvedValue({ data: contactFormDataMock }),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.sendContactFormData(contactFormDataMock);
+
+      expect(result).resolves.toEqual({ data: contactFormDataMock });
+      expect(axiosInstanceMock.post).toHaveBeenCalledWith('/contact', contactFormDataMock);
+    });
+
+    it('should throw error if endpoint fails', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        post: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.sendContactFormData({
+        name: 'name',
+        email: 'email',
+        message: 'message',
+      });
 
       expect(result).rejects.toThrow('error');
     });

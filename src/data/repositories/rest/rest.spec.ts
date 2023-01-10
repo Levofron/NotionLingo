@@ -1,3 +1,5 @@
+import { IContact } from '@domain/rest/rest.models';
+
 import { functionImportTest } from '@infrastructure/utils';
 
 import { getRestRepository } from './rest.repository';
@@ -22,6 +24,7 @@ describe('getRestRepository function', () => {
       getAvailableNotionPages: expect.any(Function),
       setNotionPageId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      sendContactFormData: expect.any(Function),
     });
   });
 
@@ -173,6 +176,31 @@ describe('getRestRepository function', () => {
         },
       ]);
       expect(restSourceMock.getRandomNotionWords).toHaveBeenCalled();
+    });
+  });
+
+  describe('sendContactFormData function', () => {
+    it('should call proper restSource function', async () => {
+      const formData: IContact = {
+        name: 'name',
+        email: 'email',
+        message: 'message',
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restSourceMock: any = {
+        sendContactFormData: jest.fn().mockImplementation(() => ({ data: formData })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseSourceMock: any = {};
+
+      const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
+
+      const result = await restRepository.sendContactFormData(formData);
+
+      expect(result).toEqual(formData);
+      expect(restSourceMock.sendContactFormData).toHaveBeenCalledWith(formData);
     });
   });
 });

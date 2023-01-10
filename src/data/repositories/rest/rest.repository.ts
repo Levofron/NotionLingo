@@ -1,3 +1,4 @@
+import { IContact } from '@domain/rest/rest.models';
 import { IRestRepository } from '@domain/rest/rest.repository';
 
 import { IRestSource } from '../../sources/rest/rest.types';
@@ -42,5 +43,10 @@ export const getRestRepository = (
     const { data } = await restSource.getRandomNotionWords();
 
     return formatRandomNotionWordsTransformator(data);
+  },
+  sendContactFormData: async (data: IContact) => {
+    const { data: response } = await restSource.sendContactFormData(data);
+
+    return response;
   },
 });
