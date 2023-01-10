@@ -37,6 +37,7 @@ const revalidateForm = <TFormData extends object>(newFormState: TFormData) =>
   }, {} as TErrorMessages<TFormData>);
 
 export const useForm = <TFormData extends object>({ initialValues }: IUseFormParams<TFormData>) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formState, setFormState] = useState(initialValues);
   const [errors, setErrors] = useState<TErrorMessages<TFormData> | null>(null);
 
@@ -58,13 +59,16 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
   const handleInputChange = (event: ChangeEvent<any>) => {
     const { name, value } = event.target;
 
-    const validators = fieldToValidatorsMapper[name] || [];
+    if (isSubmitted) {
+      const validators = fieldToValidatorsMapper[name] || [];
 
-    const filteredErrors = filterOutKeys(errors, [name]) as TErrorMessages<TFormData>;
-    const validator = validators.find((_validator) => !_validator.validate(value));
+      const filteredErrors = filterOutKeys(errors, [name]) as TErrorMessages<TFormData>;
+      const validator = validators.find((_validator) => !_validator.validate(value));
+
+      setErrors({ ...filteredErrors, [name]: validator?.message || '' });
+    }
 
     setFormState((_prevState) => ({ ..._prevState, [name]: value }));
-    setErrors({ ...filteredErrors, [name]: validator?.message || '' });
   };
 
   const reset = (field?: keyof TFormData) => {
@@ -87,6 +91,7 @@ export const useForm = <TFormData extends object>({ initialValues }: IUseFormPar
       const newFormState = getFormStateWithReformattedData();
       const newErrors = revalidateForm(newFormState);
 
+      setIsSubmitted(true);
       setErrors(newErrors);
       setFormState(newFormState);
 
