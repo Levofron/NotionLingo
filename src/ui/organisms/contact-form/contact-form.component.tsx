@@ -58,25 +58,38 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   aria-label="email"
                   fontSize="3xl"
                   icon={<MdEmail />}
+                  mode="light"
                   size="lg"
                   onClick={onCopy}
                 />
               </Tooltip>
               <ChakraNextLink href={GITHUB_LINK} rel="noreferrer" target="_blank">
-                <IconButton aria-label="github" fontSize="3xl" icon={<BsGithub />} size="lg" />
+                <IconButton
+                  aria-label="github"
+                  fontSize="3xl"
+                  icon={<BsGithub />}
+                  mode="light"
+                  size="lg"
+                />
               </ChakraNextLink>
               <ChakraNextLink href={TWITTER_LINK} rel="noreferrer" target="_blank">
-                <IconButton aria-label="twitter" icon={<BsTwitter size="28px" />} size="lg" />
+                <IconButton
+                  aria-label="twitter"
+                  icon={<BsTwitter size="28px" />}
+                  mode="light"
+                  size="lg"
+                />
               </ChakraNextLink>
               <ChakraNextLink href={LINKEDIN_LINK} rel="noreferrer" target="_blank">
-                <IconButton aria-label="linkedin" icon={<BsLinkedin size="28px" />} size="lg" />
+                <IconButton
+                  aria-label="linkedin"
+                  icon={<BsLinkedin size="28px" />}
+                  mode="light"
+                  size="lg"
+                />
               </ChakraNextLink>
             </Stack>
-            <Card
-              minW={{ base: 'unset', md: '350px' }}
-              p={{ base: 4, sm: 6, md: 8 }}
-              variant="light"
-            >
+            <Card minW={{ base: 'unset', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
               <VStack as="form" spacing={5} onSubmit={handleSubmit}>
                 <InputControl mode="light" {...generateFieldProps('name')} />
                 <InputControl mode="light" {...generateFieldProps('email')} />
@@ -86,7 +99,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   rows={6}
                   {...generateFieldProps('message')}
                 />
-                <Button type="submit" variant="secondary" width="full">
+                <Button mode="light" type="submit" width="full">
                   Send Message
                 </Button>
               </VStack>
