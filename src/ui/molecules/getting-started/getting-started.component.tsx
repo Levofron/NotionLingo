@@ -28,20 +28,18 @@ export const GettingStarted: FC = (): JSX.Element => (
             spacing={4}
             textAlign={{ base: 'left', md: 'center' }}
           >
-            <Flex
+            <Card
               align="center"
-              as={Card}
-              border="2px solid"
-              borderColor="gray.50"
               color="gray.50"
               fontSize="lg"
               fontWeight={700}
               h={20}
               justify="center"
+              mode="light"
               w={20}
             >
               0{index + 1}
-            </Flex>
+            </Card>
             <Heading color="gray.50" fontFamily="heading" fontSize="xl" pt={2}>
               {step.title}
             </Heading>
