@@ -8,16 +8,17 @@ const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextarea
   ref,
 ): JSX.Element => {
   const isDarkMode = mode === 'dark';
+  const color = isDarkMode ? 'gray.900' : 'gray.50';
 
   return (
     <ChakraTextarea
       ref={ref}
-      _hover={{ borderColor: isDarkMode ? 'gray.900' : 'gray.50' }}
-      _placeholder={{ color: !isDarkMode ? 'gray.50' : 'gray.900' }}
-      borderColor={isDarkMode ? 'gray.900' : 'gray.50'}
+      _hover={{ borderColor: color }}
+      _placeholder={{ color }}
+      borderColor={color}
       borderRadius={0}
-      color={mode === 'light' ? 'gray.50' : 'gray.900'}
-      focusBorderColor={isDarkMode ? 'gray.900' : 'gray.50'}
+      color={color}
+      focusBorderColor={color}
       {...restProps}
     />
   );
