@@ -10,7 +10,7 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
 ): JSX.Element => (
   <ChakraButton
     ref={ref}
-    borderColor="black"
+    borderColor="gray.900"
     borderRadius={0}
     borderWidth="1px"
     {...variantToStylesMapper[variant]}

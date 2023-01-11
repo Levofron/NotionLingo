@@ -16,7 +16,7 @@ export const SidebarWithHeader: FC = (): JSX.Element => {
   }, [isOpen]);
 
   return (
-    <Box bg="gray.100" overflow="hidden">
+    <Box bg="gray.50" overflow="hidden">
       <Header isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
       {isOpen ? <SidebarContent onClose={onClose} /> : null}
     </Box>

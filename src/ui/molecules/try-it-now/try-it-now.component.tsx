@@ -15,15 +15,17 @@ export const TryItNow: FC = (): JSX.Element => {
     router.push(user?.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
 
   return (
-    <Box bg="white" borderBottom="15px solid black" borderTop="20px solid black">
+    <Box bg="white">
       <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
-        <Box as={Card} color="black" px={{ base: 4, md: 10 }} py={10}>
+        <Card px={{ base: 4, md: 10 }} py={10} variant="dark">
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
             <Box>
               <Heading as="h3" mb={2}>
                 Start using your Notion dictionary today
               </Heading>
-              <Text fontSize="lg">and expand your vocabulary, elevate your skills!</Text>
+              <Text color="gray.900" fontSize="lg">
+                and expand your vocabulary, elevate your skills!
+              </Text>
             </Box>
             <Flex align="center" justify="center" w="full">
               <Button
@@ -31,14 +33,13 @@ export const TryItNow: FC = (): JSX.Element => {
                 isLoading={isLoading}
                 rightIcon={<IoArrowForward />}
                 size="lg"
-                variant="primary"
                 onClick={handleGetStartedClick}
               >
                 Get Started
               </Button>
             </Flex>
           </SimpleGrid>
-        </Box>
+        </Card>
       </Container>
     </Box>
   );

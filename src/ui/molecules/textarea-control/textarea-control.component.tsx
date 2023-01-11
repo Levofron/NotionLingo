@@ -9,11 +9,14 @@ export const TextareaControl: FC<ITextareaControlProps> = ({
   isDisabled,
   isRequired,
   label,
+  mode,
   ...textareaProps
 }): JSX.Element => (
   <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
-    {label ? <FormLabel>{label}</FormLabel> : null}
-    <Textarea {...textareaProps} />
+    {label ? (
+      <FormLabel color={mode === 'light' ? 'gray.50' : 'gray.900'}>{label}</FormLabel>
+    ) : null}
+    <Textarea mode={mode} {...textareaProps} />
     {errorMessage ? <FormErrorMessage>{errorMessage}</FormErrorMessage> : null}
   </FormControl>
 );

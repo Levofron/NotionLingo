@@ -4,16 +4,18 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { IInputProps } from './input.types';
 
 const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
-  props,
+  { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => (
   <ChakraInput
     ref={ref}
-    _hover={{ borderColor: 'black' }}
-    borderColor="black"
+    _hover={{ borderColor: mode === 'dark' ? 'gray.900' : 'gray.50' }}
+    _placeholder={{ color: mode === 'light' ? 'gray.50' : 'gray.900' }}
+    borderColor={mode === 'dark' ? 'gray.900' : 'gray.50'}
     borderRadius={0}
-    focusBorderColor="black"
-    {...props}
+    color={mode === 'light' ? 'gray.50' : 'gray.900'}
+    focusBorderColor={mode === 'dark' ? 'gray.900' : 'gray.50'}
+    {...restProps}
   />
 );
 

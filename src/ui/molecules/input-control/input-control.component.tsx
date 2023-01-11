@@ -10,16 +10,17 @@ export const InputControl: FC<IInputControlProps> = ({
   isLoading,
   isRequired,
   label,
+  mode,
   ...inputProps
 }): JSX.Element => (
   <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
     {label ? (
-      <FormLabel>
+      <FormLabel color={mode === 'light' ? 'gray.50' : 'gray.900'}>
         {label}
         {isLoading ? <Spinner ml="5px" size="xs" /> : null}
       </FormLabel>
     ) : null}
-    <Input {...inputProps} />
+    <Input mode={mode} {...inputProps} />
     {errorMessage ? <FormErrorMessage>{errorMessage}</FormErrorMessage> : null}
   </FormControl>
 );

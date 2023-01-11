@@ -5,12 +5,13 @@ import { Box, Container, Flex, Heading, Highlight, Stack, Text } from '@ui/atoms
 import { STEPS } from './logo-explanation.defaults';
 
 export const LogoExplanation: FC = (): JSX.Element => (
-  <Box bg="white" borderBottom="10px solid black" borderTop="15px solid black">
+  <Box bg="gray.50">
     <Container maxW="3xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Flex
         align={{ base: 'flex-start', md: 'center' }}
         direction={{ base: 'column', md: 'row' }}
-        justify="space-between"
+        gap={{ base: 0, md: 10 }}
+        justifyContent="center"
       >
         {STEPS.map((_step) => (
           <Stack
@@ -20,10 +21,10 @@ export const LogoExplanation: FC = (): JSX.Element => (
             }}
             align={{ base: 'flex-start', md: 'center' }}
             maxW={{ base: 'full', md: 'xs' }}
-            mt={{ base: 10, md: 0 }}
+            mt={{ base: 5, md: 0 }}
             textAlign={{ base: 'left', md: 'center' }}
           >
-            <Heading color="gray.700" fontFamily="heading" fontSize="7xl">
+            <Heading color="gray.900" fontFamily="heading" fontSize="7xl">
               <Highlight query={_step.title}>{_step.title}</Highlight>
             </Heading>
             <Text color="gray.500">{_step.text}</Text>

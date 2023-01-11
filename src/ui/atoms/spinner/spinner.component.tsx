@@ -6,6 +6,6 @@ import { ISpinnerProps } from './spinner.types';
 const SpinnerComponent: ForwardRefRenderFunction<HTMLDivElement, ISpinnerProps> = (
   props,
   ref,
-): JSX.Element => <ChakraSpinner ref={ref} color="black" size="xl" thickness="1px" {...props} />;
+): JSX.Element => <ChakraSpinner ref={ref} color="gray.900" size="xl" thickness="1px" {...props} />;
 
 export const Spinner = forwardRef(SpinnerComponent);

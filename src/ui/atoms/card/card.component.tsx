@@ -4,17 +4,17 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { ICardProps } from './card.types';
 
 const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
-  props,
+  { variant = 'light', ...restProps },
   ref,
 ): JSX.Element => (
   <ChakraCard
     ref={ref}
-    bg="white"
+    bg={variant === 'dark' ? 'gray.50' : 'gray.900'}
     border="1px"
-    borderColor="black"
+    borderColor={variant === 'light' ? 'gray.50' : 'gray.900'}
     borderRadius={0}
-    boxShadow="6px 6px 0 black"
-    {...props}
+    boxShadow={`6px 6px 0 var(--chakra-colors-gray-${variant === 'dark' ? '900' : '50'})`}
+    {...restProps}
   />
 );
 

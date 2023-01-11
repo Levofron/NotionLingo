@@ -3,18 +3,17 @@ import { IButtonProps, TButtonVariants } from './button.types';
 export const variantToStylesMapper: Record<TButtonVariants, IButtonProps> = {
   primary: {
     _hover: {
-      bg: 'white',
-      color: 'black',
+      bg: 'gray.50',
+      color: 'gray.900',
     },
-    bg: 'black',
-    color: 'white',
+    bg: 'gray.900',
+    color: 'gray.50',
   },
   secondary: {
     _hover: {
-      bg: 'black',
-      color: 'white',
+      bg: 'gray.300',
     },
-    bg: 'white',
-    color: 'black',
+    bg: 'gray.50',
+    color: 'gray.900',
   },
 };
