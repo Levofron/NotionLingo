@@ -5,9 +5,9 @@ import { ITextUnderlineProps } from './text-underline.types';
 
 export const TextUnderline: FC<ITextUnderlineProps> = ({
   children,
-  variant = 'light',
+  mode = 'dark',
 }): JSX.Element => {
-  const color = variant === 'light' ? 'gray.50' : 'gray.900';
+  const color = mode === 'light' ? 'gray.50' : 'gray.900';
 
   return (
     <Box

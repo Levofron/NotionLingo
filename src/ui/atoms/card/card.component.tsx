@@ -13,7 +13,7 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
     <ChakraCard
       ref={ref}
       bg={isDarkMode ? 'gray.50' : 'gray.900'}
-      border="1px"
+      border="2px"
       borderColor={!isDarkMode ? 'gray.50' : 'gray.900'}
       borderRadius={0}
       boxShadow={`6px 6px 0 var(--chakra-colors-gray-${isDarkMode ? '900' : '50'})`}

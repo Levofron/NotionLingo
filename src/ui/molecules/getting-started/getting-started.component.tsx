@@ -8,7 +8,7 @@ export const GettingStarted: FC = (): JSX.Element => (
   <Box bg="gray.900">
     <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading as="h3" color="gray.50" mb={{ base: 14, sm: 16 }} textAlign="center">
-        Getting started in <TextUnderline variant="light">3 easy steps</TextUnderline>
+        Getting started in <TextUnderline mode="light">3 easy steps</TextUnderline>
       </Heading>
       <Flex
         align={{ base: 'flex-start', md: 'center' }}
