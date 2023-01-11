@@ -58,14 +58,14 @@ export const Footer: FC = (): JSX.Element => {
         <Flex
           _after={{
             content: '""',
-            borderBottom: '5px solid',
+            borderBottom: '2px solid',
             borderColor: 'gray.50',
             flexGrow: 1,
             ml: 8,
           }}
           _before={{
             content: '""',
-            borderBottom: '5px solid',
+            borderBottom: '2px solid',
             borderColor: 'gray.50',
             flexGrow: 1,
             mr: 8,
@@ -76,7 +76,7 @@ export const Footer: FC = (): JSX.Element => {
             Levofron
           </Text>
         </Flex>
-        <Text color="gray.300" pt={6} textAlign="center">
+        <Text color="gray.50" pt={6} textAlign="center">
           © {currentYear} Paweł Wojtasiński. All rights reserved.
         </Text>
       </Box>
