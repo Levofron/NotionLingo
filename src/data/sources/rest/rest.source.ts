@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios';
 
+import { IContact } from '@domain/rest/rest.models';
 import { TSession } from '@domain/supabase/supabase.types';
 
 import { restEndpoints } from './rest.defaults';
@@ -42,6 +43,11 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
   },
   getRandomNotionWords: async () => {
     const response = await axiosInstance.get(restEndpoints.GET_RANDOM_NOTION_WORDS);
+
+    return response;
+  },
+  sendContactFormData: async (data: IContact) => {
+    const response = await axiosInstance.post(restEndpoints.CONTACT, data);
 
     return response;
   },

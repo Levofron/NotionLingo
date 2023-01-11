@@ -25,3 +25,9 @@ export interface INotionPage {
   title: string;
   url: string;
 }
+
+export interface IContact {
+  email: string;
+  message: string;
+  name: string;
+}

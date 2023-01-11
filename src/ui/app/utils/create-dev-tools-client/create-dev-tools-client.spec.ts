@@ -51,6 +51,7 @@ describe('createDevToolsClient function', () => {
       setNotionPageId: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
+      sendContactFormData: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
