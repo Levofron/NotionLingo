@@ -22,8 +22,8 @@ export const validateIfParametersExistsMiddleware =
     const requestParameters = req[parametersDestination];
     const requestParametersKeys = Object.keys(requestParameters);
 
-    const hasParameters = requestParametersKeys?.every((_requestParametersKey) =>
-      requiredParameters.includes(_requestParametersKey),
+    const hasParameters = requiredParameters?.every((_requestParametersKey) =>
+      requestParametersKeys.includes(_requestParametersKey),
     );
 
     if (!hasParameters) {
