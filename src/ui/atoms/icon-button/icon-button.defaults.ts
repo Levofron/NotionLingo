@@ -1,20 +1,22 @@
-import { IIconButtonProps, TIconButtonVariants } from './icon-button.types';
+import { IIconButtonProps } from './icon-button.types';
 
-export const variantToStylesMapper: Record<TIconButtonVariants, Partial<IIconButtonProps>> = {
-  primary: {
+export const variantToStylesMapper: Record<TThemeMode, Partial<IIconButtonProps>> = {
+  dark: {
     _hover: {
-      bg: 'gray.50',
+      bg: 'transparent',
       color: 'gray.900',
     },
     bg: 'gray.900',
     color: 'gray.50',
+    borderColor: 'gray.900',
   },
-  secondary: {
+  light: {
     _hover: {
       bg: 'gray.900',
       color: 'gray.50',
     },
     bg: 'gray.50',
     color: 'gray.900',
+    borderColor: 'gray.50',
   },
 };

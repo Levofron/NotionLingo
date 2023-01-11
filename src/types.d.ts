@@ -10,3 +10,5 @@ declare namespace NodeJS {
     NEXT_PUBLIC_SUPABASE_URL: string;
   }
 }
+
+type TThemeMode = 'light' | 'dark';

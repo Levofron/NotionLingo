@@ -5,15 +5,14 @@ import { variantToStylesMapper } from './icon-button.defaults';
 import { IIconButtonProps } from './icon-button.types';
 
 const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IIconButtonProps> = (
-  { variant = 'primary', ...restProps },
+  { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => (
   <ChakraIconButton
     ref={ref}
-    borderColor="gray.900"
     borderRadius={0}
-    borderWidth="1px"
-    {...variantToStylesMapper[variant]}
+    borderWidth="2px"
+    {...variantToStylesMapper[mode]}
     {...restProps}
   />
 );
