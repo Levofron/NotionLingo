@@ -41,7 +41,7 @@ export const Header: FC<IHeaderProps> = ({
       {...restProps}
     >
       <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl" p={0}>
-        <Flex alignItems="center" gap={5}>
+        <Flex alignItems="center" gap={{ base: 3, sm: 5 }}>
           <IconButton
             aria-label="Open menu"
             disabled={isLoading}
@@ -51,7 +51,7 @@ export const Header: FC<IHeaderProps> = ({
           <Text
             cursor={isHome ? 'default' : 'pointer'}
             fontFamily="monospace"
-            fontSize="2xl"
+            fontSize={{ base: 'xl', sm: '2xl' }}
             fontWeight="bold"
             onClick={redirectToHome}
           >
@@ -59,7 +59,6 @@ export const Header: FC<IHeaderProps> = ({
           </Text>
         </Flex>
         <Button
-          borderColor="gray"
           disabled={isLoading}
           isLoading={isLoading}
           size={{ base: 'sm', sm: 'md', md: 'lg' }}
