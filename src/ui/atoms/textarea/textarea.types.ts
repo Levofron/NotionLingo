@@ -1,5 +1,5 @@
 import { TextareaProps } from '@chakra-ui/react';
 
 export interface ITextareaProps extends TextareaProps {
-  mode?: 'light' | 'dark';
+  mode?: TThemeMode;
 }
