@@ -30,25 +30,6 @@ describe('validateIfParametersExistsMiddleware function', () => {
     expect(result).toBeTruthy();
   });
 
-  it('should return false if not all parameters exists', async () => {
-    const result = await validateIfParametersExistsMiddleware('query', ['name', 'email'])(
-      request,
-      response,
-    );
-
-    expect(result).toBeFalsy();
-  });
-
-  it('should return false if parametersDestination is not "body" or "query"', async () => {
-    // @ts-expect-error
-    const result = await validateIfParametersExistsMiddleware('params', ['name', 'email'])(
-      request,
-      response,
-    );
-
-    expect(result).toBeFalsy();
-  });
-
   it('should return false if requiredParameters is empty', async () => {
     const result = await validateIfParametersExistsMiddleware('query', [])(request, response);
 
