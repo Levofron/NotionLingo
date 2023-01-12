@@ -4,11 +4,11 @@ import { capitalizeFirstLetter, filterOutObjectKeys, objectKeys } from '@infrast
 
 import { isString } from '../../guards/is-string/is-string.function';
 import { fieldToValidatorsMapper } from './use-form.defaults';
-import { IUseFormParams, IValidator, TErrorMessages } from './use-form.types';
+import { IUseFormParams, TErrorMessages } from './use-form.types';
 
 const validateFormState = <TFormValues extends object>(newFormState: TFormValues) =>
   objectKeys(fieldToValidatorsMapper).reduce((_accumulator, _fieldName) => {
-    const fieldValidators = fieldToValidatorsMapper[_fieldName] as IValidator[];
+    const fieldValidators = fieldToValidatorsMapper[_fieldName];
 
     const validator = fieldValidators.find(
       // @ts-expect-error
@@ -66,7 +66,7 @@ export const useForm = <TFormValues extends object>({
 
   const handleSubmit =
     (onSubmit: (formData: TFormValues, event: FormEvent<HTMLDivElement>) => void) =>
-    async (event: FormEvent<HTMLDivElement>) => {
+    (event: FormEvent<HTMLDivElement>) => {
       event.preventDefault();
 
       const newFormState = getFormStateWithReformattedData();
