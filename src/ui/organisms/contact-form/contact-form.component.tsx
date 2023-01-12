@@ -50,21 +50,18 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
     }
   }, [email, fullName]);
 
-  const showErrorToast = (description: string = 'Something went wrong. Please try again later.') =>
-    toast({
-      description,
-      title: 'Error',
-      duration: 5000,
-      status: 'error',
-      onCloseComplete: () => {
-        setDisableForm(false);
-        resetSendContactFormData();
-      },
-    });
-
   useEffect(() => {
     if (sendContactFormDataError) {
-      showErrorToast(sendContactFormDataError);
+      toast({
+        title: 'Error',
+        duration: 5000,
+        status: 'error',
+        description: sendContactFormDataError,
+        onCloseComplete: () => {
+          setDisableForm(false);
+          resetSendContactFormData();
+        },
+      });
     }
   }, [sendContactFormDataError]);
 
@@ -84,8 +81,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
           },
         });
       }
-
-      showErrorToast(sendContactFormDataError || undefined);
     });
   });
 
