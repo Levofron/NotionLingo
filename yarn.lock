@@ -9858,7 +9858,6 @@ __metadata:
     react-custom-scrollbars-2: ^4.5.0
     react-dom: 18.2.0
     react-icons: ^4.7.1
-    react-particles-js: ^3.6.0
     react-tsparticles: ^2.7.1
     ts-jest: ^29.0.3
     tslib: ^2.4.1
@@ -11710,18 +11709,6 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: e72d0ba81b5922759e4aff17e0252bd29988f9642ed817f56b25a3e217e13eea8a7f2322af99a06edb779da12d5d636e9fda473d620df9a3da0df2a74141d53e
-  languageName: node
-  linkType: hard
-
-"react-particles-js@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "react-particles-js@npm:3.6.0"
-  dependencies:
-    lodash: ^4.17.11
-  peerDependencies:
-    react: ^16.0.0
-    tsparticles: <2.0.0
-  checksum: e649eedc4cc05202888a5084113c8f8c391e66423aa9c911fb407aa08a218340da4a3af0544d25be1ebc3f2725fd81eae12b11f3c55d3731f846a0a0537e5ec5
   languageName: node
   linkType: hard
 
