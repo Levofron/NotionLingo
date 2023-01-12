@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
         ? getErrorMessageFromAxiosResponse(error)
         : getErrorMessageFromAxiosRequest(error);
 
-      return Promise.reject(errorMessage);
+      return Promise.reject(errorMessage || DEFAULT_ERROR_MESSAGE);
     }
 
     return Promise.reject(DEFAULT_ERROR_MESSAGE);
