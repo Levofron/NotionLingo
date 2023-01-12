@@ -1,7 +1,9 @@
-import { useClipboard } from '@chakra-ui/react';
-import { FC } from 'react';
+import { useClipboard, useToast } from '@chakra-ui/react';
+import { FC, useEffect, useState } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
+
+import { restModule } from '@adapter/modules';
 
 import {
   Box,
@@ -17,22 +19,72 @@ import {
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
-import { useForm } from '@infrastructure/utils';
+import { useAxiosAction, useForm } from '@infrastructure/utils';
 
-import { GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
+import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
 import { IContactFormProps } from './contact-form.types';
 
 export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Element => {
-  const { hasCopied, onCopy } = useClipboard('pawel.wojtasinski.1995@gmail.com');
+  const toast = useToast();
+  const [disableForm, setDisableForm] = useState(false);
+  const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
+  const {
+    error: sendContactFormDataError,
+    execute: sendContactFormData,
+    loading: isSendContactFormDataLoading,
+    reset: resetSendContactFormData,
+  } = useAxiosAction(restModule.sendContactFormData);
 
-  const { generateFieldProps, onSubmitWrapper } = useForm({
+  const { generateFieldProps, onSubmitWrapper, reset, setValue } = useForm({
     initialValues: { email: email || '', name: fullName || '', message: '' },
   });
 
-  const handleSubmit = onSubmitWrapper((values) => {
-    console.log(values);
+  useEffect(() => {
+    if (email) {
+      setValue('email', email);
+    }
+
+    if (fullName) {
+      setValue('name', fullName);
+    }
+  }, [email, fullName]);
+
+  useEffect(() => {
+    if (sendContactFormDataError) {
+      toast({
+        title: 'Error',
+        duration: 5000,
+        status: 'error',
+        description: sendContactFormDataError,
+        onCloseComplete: () => {
+          setDisableForm(false);
+          resetSendContactFormData();
+        },
+      });
+    }
+  }, [sendContactFormDataError]);
+
+  const handleSubmit = onSubmitWrapper((_values) => {
+    setDisableForm(true);
+
+    sendContactFormData(_values).then((_response) => {
+      if (JSON.stringify(_values) === JSON.stringify(_response)) {
+        return toast({
+          duration: 5000,
+          status: 'success',
+          title: 'Thank you!',
+          description: "We'll get back to you soon!",
+          onCloseComplete: () => {
+            reset();
+            setDisableForm(false);
+          },
+        });
+      }
+    });
   });
+
+  const shouldDisableForm = isSendContactFormDataLoading || disableForm;
 
   return (
     <Flex align="center" bg="gray.900" id="contact" justify="center">
@@ -91,15 +143,30 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
             </Stack>
             <Card minW={{ base: 'unset', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
               <VStack as="form" spacing={5} onSubmit={handleSubmit}>
-                <InputControl mode="light" {...generateFieldProps('name')} />
-                <InputControl mode="light" {...generateFieldProps('email')} />
+                <InputControl
+                  isDisabled={shouldDisableForm}
+                  mode="light"
+                  {...generateFieldProps('name')}
+                />
+                <InputControl
+                  isDisabled={shouldDisableForm}
+                  mode="light"
+                  {...generateFieldProps('email')}
+                />
                 <TextareaControl
+                  isDisabled={shouldDisableForm}
                   mode="light"
                   resize="none"
                   rows={6}
                   {...generateFieldProps('message')}
                 />
-                <Button mode="light" type="submit" width="full">
+                <Button
+                  isDisabled={shouldDisableForm}
+                  isLoading={isSendContactFormDataLoading}
+                  mode="light"
+                  type="submit"
+                  width="full"
+                >
                   Send Message
                 </Button>
               </VStack>

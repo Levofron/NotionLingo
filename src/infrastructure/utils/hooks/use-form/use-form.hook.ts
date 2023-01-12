@@ -84,7 +84,6 @@ export const useForm = <TFormValues extends object>({
       }
 
       onSubmit(formState, event);
-      reset();
     };
 
   const generateFieldProps = (name: keyof TFormValues) => {
@@ -101,7 +100,12 @@ export const useForm = <TFormValues extends object>({
     };
   };
 
+  const setValue = (fieldName: keyof TFormValues, newValue: string) =>
+    setFormState((_prevState) => ({ ..._prevState, [fieldName]: newValue }));
+
   return {
+    reset,
+    setValue,
     formState,
     generateFieldProps,
     onSubmitWrapper: handleSubmit,
