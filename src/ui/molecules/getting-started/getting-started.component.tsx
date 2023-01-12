@@ -5,10 +5,10 @@ import { Box, Card, Container, Flex, Heading, Stack, Text, TextUnderline } from 
 import { STEPS } from './getting-started.defaults';
 
 export const GettingStarted: FC = (): JSX.Element => (
-  <Box bg="white" borderBottom="20px solid black" borderTop="25px solid black">
+  <Box bg="gray.900">
     <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
-      <Heading as="h3" mb={{ base: 14, sm: 16 }} textAlign="center">
-        Getting started in <TextUnderline>3 easy steps</TextUnderline>
+      <Heading as="h3" color="gray.50" mb={{ base: 14, sm: 16 }} textAlign="center">
+        Getting started in <TextUnderline mode="light">3 easy steps</TextUnderline>
       </Heading>
       <Flex
         align={{ base: 'flex-start', md: 'center' }}
@@ -28,24 +28,22 @@ export const GettingStarted: FC = (): JSX.Element => (
             spacing={4}
             textAlign={{ base: 'left', md: 'center' }}
           >
-            <Flex
+            <Card
               align="center"
-              as={Card}
-              border="2px solid"
-              borderColor="black"
-              color="black"
+              color="gray.50"
               fontSize="lg"
               fontWeight={700}
               h={20}
               justify="center"
+              mode="light"
               w={20}
             >
               0{index + 1}
-            </Flex>
-            <Heading color="gray.700" fontFamily="heading" fontSize="xl">
+            </Card>
+            <Heading color="gray.50" fontFamily="heading" fontSize="xl" pt={2}>
               {step.title}
             </Heading>
-            <Text color="gray.500">{step.text}</Text>
+            <Text color="gray.300">{step.text}</Text>
           </Stack>
         ))}
       </Flex>

@@ -22,12 +22,13 @@ export const NavigationItem: FC<INavigationItemProps> = ({
     <ChakraNextLink _focus={{ boxShadow: 'none' }} href={href} style={{ textDecoration: 'none' }}>
       <Flex
         _hover={{
-          bg: 'black',
-          color: 'white',
+          bg: 'gray.900',
+          color: 'gray.50',
         }}
         align="center"
-        border="1px solid black"
-        color="black"
+        border="2px solid"
+        borderColor="gray.900"
+        color="gray.900"
         cursor="pointer"
         p="4"
         role="group"
@@ -36,10 +37,10 @@ export const NavigationItem: FC<INavigationItemProps> = ({
         {icon && (
           <Icon
             _groupHover={{
-              color: 'white',
+              color: 'gray.50',
             }}
             as={icon}
-            color="black"
+            color="gray.900"
             fontSize="16"
             mr="4"
           />

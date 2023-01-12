@@ -11,36 +11,36 @@ export const Footer: FC = (): JSX.Element => {
   const currentYear = new Date().getUTCFullYear();
 
   return (
-    <Box bg="white" borderColor="black" borderTop="5px solid" color="gray.700">
+    <Box bg="gray.900">
       <Container maxW="6xl" py={10}>
         <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={8}>
           <Stack align="flex-start">
-            <Text fontSize="lg" fontWeight="600" mb={2}>
+            <Text color="gray.50" fontSize="lg" fontWeight="600" mb={2}>
               Legal
             </Text>
-            <ChakraNextLink color="black" href={ERoutes.PRIVACY_POLICY}>
+            <ChakraNextLink color="gray.50" href={ERoutes.PRIVACY_POLICY}>
               Privacy & Policy
             </ChakraNextLink>
-            <ChakraNextLink color="black" href={ERoutes.TERMS}>
+            <ChakraNextLink color="gray.50" href={ERoutes.TERMS}>
               Terms & Conditions
             </ChakraNextLink>
           </Stack>
           <Stack align="flex-start">
-            <Text fontSize="lg" fontWeight="600" mb={2}>
+            <Text color="gray.50" fontSize="lg" fontWeight="600" mb={2}>
               Follow us
             </Text>
-            <ChakraNextLink color="black" href={GITHUB_LINK} target="_blank">
+            <ChakraNextLink color="gray.50" href={GITHUB_LINK} target="_blank">
               GitHub
             </ChakraNextLink>
-            <ChakraNextLink color="black" href={TWITTER_LINK} target="_blank">
+            <ChakraNextLink color="gray.50" href={TWITTER_LINK} target="_blank">
               Twitter
             </ChakraNextLink>
-            <ChakraNextLink color="black" href={LINKEDIN_LINK} target="_blank">
+            <ChakraNextLink color="gray.50" href={LINKEDIN_LINK} target="_blank">
               LinkedIn
             </ChakraNextLink>
           </Stack>
           <Stack align="flex-start">
-            <Text fontSize="lg" fontWeight="600" mb={2}>
+            <Text color="gray.50" fontSize="lg" fontWeight="600" mb={2}>
               Support us
             </Text>
             <ChakraNextLink href={BUY_ME_A_COFFEE_LINK} target="_blank">
@@ -58,25 +58,25 @@ export const Footer: FC = (): JSX.Element => {
         <Flex
           _after={{
             content: '""',
-            borderBottom: '5px solid',
-            borderColor: 'black',
+            borderBottom: '2px solid',
+            borderColor: 'gray.50',
             flexGrow: 1,
             ml: 8,
           }}
           _before={{
             content: '""',
-            borderBottom: '5px solid',
-            borderColor: 'black',
+            borderBottom: '2px solid',
+            borderColor: 'gray.50',
             flexGrow: 1,
             mr: 8,
           }}
           align="center"
         >
-          <Text fontFamily="monospace" fontSize="2xl" fontWeight="bold">
+          <Text color="gray.50" fontFamily="monospace" fontSize="2xl" fontWeight="bold">
             Levofron
           </Text>
         </Flex>
-        <Text color="gray.500" pt={6} textAlign="center">
+        <Text color="gray.50" pt={6} textAlign="center">
           © {currentYear} Paweł Wojtasiński. All rights reserved.
         </Text>
       </Box>

@@ -14,18 +14,19 @@ export const HomeHero: FC = (): JSX.Element => {
     router.push(user?.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
 
   return (
-    <Box bg="white" borderBottom="25px solid black" pt={65}>
+    <Box bg="gray.50" pt={65}>
       <Container maxW="3xl">
         <Flex
           alignItems="center"
           flexDirection="column"
           gap={{ base: 8, md: 14 }}
           maxW="3xl"
-          py={{ base: 20, md: 36 }}
+          py={{ base: 10, sm: 20, md: 36 }}
           textAlign="center"
         >
           <Heading
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+            color="gray.900"
+            fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
             fontWeight={800}
             lineHeight="120%"
           >
@@ -33,14 +34,14 @@ export const HomeHero: FC = (): JSX.Element => {
               Expand your vocabulary, elevate your skills
             </Highlight>
           </Heading>
-          <Text color="gray.500">
+          <Text color="gray.500" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
             Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to
             easily learn new words and phrases from your own <b>Notion</b> database!
           </Text>
           <Button
             isDisabled={isLoading}
             isLoading={isLoading}
-            size="lg"
+            size={{ base: 'sm', sm: 'md', md: 'lg' }}
             variant="primary"
             width="fit-content"
             onClick={handleGetStartedClick}

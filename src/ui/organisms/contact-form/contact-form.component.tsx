@@ -35,17 +35,11 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
   });
 
   return (
-    <Flex
-      align="center"
-      bg="white"
-      borderBottom="5px solid black"
-      borderTop="10px solid black"
-      id="contact"
-      justify="center"
-    >
+    <Flex align="center" bg="gray.900" id="contact" justify="center">
       <Box borderRadius="lg" m={{ base: 5, md: 16, lg: 10 }} p={{ base: 5, lg: 16 }}>
         <VStack spacing={{ base: 4, md: 8, lg: 20 }}>
           <Heading
+            color="gray.50"
             fontSize={{
               base: '4xl',
               md: '5xl',
@@ -64,8 +58,8 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   aria-label="email"
                   fontSize="3xl"
                   icon={<MdEmail />}
+                  mode="light"
                   size="lg"
-                  variant="secondary"
                   onClick={onCopy}
                 />
               </Tooltip>
@@ -74,37 +68,42 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   aria-label="github"
                   fontSize="3xl"
                   icon={<BsGithub />}
+                  mode="light"
                   size="lg"
-                  variant="secondary"
                 />
               </ChakraNextLink>
               <ChakraNextLink href={TWITTER_LINK} rel="noreferrer" target="_blank">
                 <IconButton
                   aria-label="twitter"
                   icon={<BsTwitter size="28px" />}
+                  mode="light"
                   size="lg"
-                  variant="secondary"
                 />
               </ChakraNextLink>
               <ChakraNextLink href={LINKEDIN_LINK} rel="noreferrer" target="_blank">
                 <IconButton
                   aria-label="linkedin"
                   icon={<BsLinkedin size="28px" />}
+                  mode="light"
                   size="lg"
-                  variant="secondary"
                 />
               </ChakraNextLink>
             </Stack>
-            <Box as={Card} minW={{ base: 'unset', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
+            <Card minW={{ base: 'unset', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
               <VStack as="form" spacing={5} onSubmit={handleSubmit}>
-                <InputControl {...generateFieldProps('name')} />
-                <InputControl {...generateFieldProps('email')} />
-                <TextareaControl resize="none" rows={6} {...generateFieldProps('message')} />
-                <Button type="submit" variant="primary" width="full">
+                <InputControl mode="light" {...generateFieldProps('name')} />
+                <InputControl mode="light" {...generateFieldProps('email')} />
+                <TextareaControl
+                  mode="light"
+                  resize="none"
+                  rows={6}
+                  {...generateFieldProps('message')}
+                />
+                <Button mode="light" type="submit" width="full">
                   Send Message
                 </Button>
               </VStack>
-            </Box>
+            </Card>
           </Stack>
         </VStack>
       </Box>

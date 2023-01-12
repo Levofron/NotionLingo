@@ -4,17 +4,24 @@ import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { ITextareaProps } from './textarea.types';
 
 const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextareaProps> = (
-  props,
+  { mode = 'dark', ...restProps },
   ref,
-): JSX.Element => (
-  <ChakraTextarea
-    ref={ref}
-    _hover={{ borderColor: 'black' }}
-    borderColor="black"
-    borderRadius={0}
-    focusBorderColor="black"
-    {...props}
-  />
-);
+): JSX.Element => {
+  const isDarkMode = mode === 'dark';
+  const color = isDarkMode ? 'gray.900' : 'gray.50';
+
+  return (
+    <ChakraTextarea
+      ref={ref}
+      _hover={{ borderColor: color }}
+      _placeholder={{ color }}
+      borderColor={color}
+      borderRadius={0}
+      color={color}
+      focusBorderColor={color}
+      {...restProps}
+    />
+  );
+};
 
 export const Textarea = forwardRef(TextareaComponent);

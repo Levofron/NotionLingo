@@ -28,7 +28,7 @@ export const Header: FC<IHeaderProps> = ({
       alignItems="center"
       as="header"
       borderBottom="2px solid"
-      borderColor="black"
+      borderColor="gray.900"
       css={{
         backdropFilter: 'saturate(180%) blur(5px)',
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -41,18 +41,17 @@ export const Header: FC<IHeaderProps> = ({
       {...restProps}
     >
       <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl" p={0}>
-        <Flex alignItems="center" gap={5}>
+        <Flex alignItems="center" gap={{ base: 3, sm: 5 }}>
           <IconButton
-            aria-label="open menu"
+            aria-label="Open menu"
             disabled={isLoading}
             icon={!isOpen ? <FaHamburger size="20px" /> : <TfiClose size="20px" />}
-            variant="primary"
             onClick={!isOpen ? onOpen : onClose}
           />
           <Text
             cursor={isHome ? 'default' : 'pointer'}
             fontFamily="monospace"
-            fontSize="2xl"
+            fontSize={{ base: 'xl', sm: '2xl' }}
             fontWeight="bold"
             onClick={redirectToHome}
           >
@@ -60,11 +59,10 @@ export const Header: FC<IHeaderProps> = ({
           </Text>
         </Flex>
         <Button
-          borderColor="black"
           disabled={isLoading}
           isLoading={isLoading}
-          variant="primary"
-          width={100}
+          size={{ base: 'sm', sm: 'md', md: 'lg' }}
+          width={{ base: '80px', sm: '100px' }}
           onClick={!isUserAuthenticated ? loginViaGoogle : logout}
         >
           {!isUserAuthenticated ? 'Sign In' : 'Sign Out'}

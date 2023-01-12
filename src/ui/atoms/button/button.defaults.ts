@@ -1,20 +1,22 @@
-import { IButtonProps, TButtonVariants } from './button.types';
+import { IButtonProps } from './button.types';
 
-export const variantToStylesMapper: Record<TButtonVariants, IButtonProps> = {
-  primary: {
+export const variantToStylesMapper: Record<TThemeMode, IButtonProps> = {
+  dark: {
     _hover: {
-      bg: 'white',
-      color: 'black',
+      bg: 'transparent',
+      color: 'gray.900',
     },
-    bg: 'black',
-    color: 'white',
+    bg: 'gray.900',
+    color: 'gray.50',
+    borderColor: 'gray.900',
   },
-  secondary: {
+  light: {
     _hover: {
-      bg: 'black',
-      color: 'white',
+      bg: 'gray.900',
+      color: 'gray.50',
     },
-    bg: 'white',
-    color: 'black',
+    bg: 'gray.50',
+    color: 'gray.900',
+    borderColor: 'gray.50',
   },
 };
