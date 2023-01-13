@@ -2,12 +2,12 @@ import Image from 'next/image';
 import { FC } from 'react';
 import { BsHeart } from 'react-icons/bs';
 
+import { INotionWord } from '@domain/rest/rest.models';
+
 import { Box, Card, Flex, Heading, Text } from '@ui/atoms';
 
-import { INotionWordCardProps } from './notion-word-card.types';
-
 // TODO - add text reader
-export const NotionWordCard: FC<INotionWordCardProps> = ({
+export const NotionWordCard: FC<INotionWord> = ({
   exampleSentence,
   meaning,
   word,
