@@ -20,12 +20,12 @@ export const DashboardPage: FC = (): JSX.Element => {
   }, [user, isLoading]);
 
   return (
-    <div>
+    <>
       <Head>
         <title>Levofron</title>
       </Head>
       <SidebarWithHeader />
       {isLoading && !user ? <FullScreenLoader /> : <DashboardTemplate />}
-    </div>
+    </>
   );
 };
