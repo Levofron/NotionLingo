@@ -208,6 +208,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
+    // TODO - add type and IPA
     const formattedPages = selectedPages.map((_selectedPage) => ({
       word: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES),
       meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),

@@ -8,6 +8,7 @@ export * from './sidebar-content/sidebar-content.component';
 export * from './getting-started/getting-started.component';
 export * from './textarea-control/textarea-control.component';
 export * from './logo-explanation/logo-explanation.component';
+export * from './notion-word-card/notion-word-card.component';
 export * from './full-screen-loader/full-screen-loader.component';
 export * from './onboarding-step-two/onboarding-step-two.component';
 export * from './onboarding-tab-list/onboarding-tab-list.component';

@@ -9,6 +9,11 @@ module.exports = withPWA({
   swcMinify: true,
   reactStrictMode: false,
   images: {
-    domains: ['www.buymeacoffee.com', 'lh3.googleusercontent.com', 'www.paypalobjects.com'],
+    domains: [
+      'www.buymeacoffee.com',
+      'lh3.googleusercontent.com',
+      'www.paypalobjects.com',
+      'images.pexels.com',
+    ],
   },
 });
