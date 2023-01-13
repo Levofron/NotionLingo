@@ -13,7 +13,7 @@ export const LayoutProvider: FC<ILayoutProviderProps> = ({ children }): JSX.Elem
         height: 100%;
       }
     `}</style>
-    <Box bg="gray.50" height="100%" overflow="hidden" width="100%">
+    <Box bg="gray.50" height="100%" overflow="scroll" width="100%">
       {children}
     </Box>
   </>
