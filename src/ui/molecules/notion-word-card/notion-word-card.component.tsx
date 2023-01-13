@@ -14,7 +14,7 @@ export const NotionWordCard: FC<INotionWord> = ({
 }): JSX.Element => (
   <Card w={{ base: 300, sm: 350, md: 400 }}>
     <Box
-      borderBottom="2px"
+      borderBottom="2px solid"
       borderColor="gray.900"
       h={{ base: '180px', sm: '205px', md: '240px' }}
       position="relative"
