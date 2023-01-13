@@ -25,7 +25,7 @@ export const HomeHero: FC = (): JSX.Element => {
   return (
     <Box bg="gray.50" position="relative">
       <ParticlesBackground />
-      <Container maxW="3xl" pt={65}>
+      <Container maxW="3xl" pt={{ base: 66, md: 74 }}>
         <Flex
           alignItems="center"
           flexDirection="column"
