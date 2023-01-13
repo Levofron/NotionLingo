@@ -23,3 +23,5 @@ export const TWITTER_LINK = 'https://twitter.com/wojtasinskipawe';
 export const LINKEDIN_LINK = 'https://linkedin.com/in/pwojtasinski';
 export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/playerony';
 export const PAYPAL_LINK = 'https://www.paypal.com/donate/?hosted_button_id=XQC5QN5G4JJW2';
+
+export const DEFAULT_ERROR_MESSAGE = 'Something went wrong';
