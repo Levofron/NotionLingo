@@ -37,10 +37,10 @@ export const createDevToolsClient = () => {
   console.log('window.rest.setNotionPageId(pageId) - to set a selected page id to logged user');
   console.log('window.rest.getRandomNotionWords() - to get 5 random words from notion database');
 
-  // speech synthesis
+  // synthesis
   console.log('-----------------------------');
-  console.log('window.speechSynthesis.cancel() - to cancel speaking');
-  console.log('window.speechSynthesis.getVoices() - to get all available voices');
-  console.log('window.speechSynthesis.isSupported() - to check if speech synthesis is supported');
-  console.log('window.speechSynthesis.speak({ pitch, rate, text, voice, volume }) - to speak text');
+  console.log('window.synthesis.cancel() - to cancel speaking');
+  console.log('window.synthesis.getVoices() - to get all available voices');
+  console.log('window.synthesis.isSupported() - to check if speech synthesis is supported');
+  console.log('window.synthesis.speak({ pitch, rate, text, voice, volume }) - to speak text');
 };
