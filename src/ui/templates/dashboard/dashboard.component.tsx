@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { INotionWord } from '@domain/rest/rest.models';
 
-import { restModule } from '@adapter/modules';
+import { restModule } from '@adapter';
 
 import { Box, Flex, TinderAnimationWrapper } from '@ui/atoms';
 import { NotionWordCard } from '@ui/molecules';
