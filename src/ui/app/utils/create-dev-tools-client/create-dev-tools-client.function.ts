@@ -41,8 +41,6 @@ export const createDevToolsClient = () => {
   console.log('-----------------------------');
   console.log('window.speechSynthesis.cancel() - to cancel speaking');
   console.log('window.speechSynthesis.getVoices() - to get all available voices');
-  console.log(
-    'window.speechSynthesis.isSupported() - to check if speech synthesis API is supported',
-  );
+  console.log('window.speechSynthesis.isSupported() - to check if speech synthesis is supported');
   console.log('window.speechSynthesis.speak({ pitch, rate, text, voice, volume }) - to speak text');
 };
