@@ -1,4 +1,4 @@
-import { Container, Fade } from '@chakra-ui/react';
+import { Container, Fade, useToast } from '@chakra-ui/react';
 import { FC, useEffect, useState } from 'react';
 
 import { INotionWord } from '@domain/rest/rest.models';
@@ -6,20 +6,33 @@ import { INotionWord } from '@domain/rest/rest.models';
 import { restModule } from '@adapter/modules';
 
 import { Box, Flex, TinderAnimationWrapper } from '@ui/atoms';
-import { NotionWordCard } from '@ui/molecules';
+import { FullScreenLoader, NotionWordCard } from '@ui/molecules';
 
 import { useAxiosAction } from '@infrastructure/utils';
 
 import { IDashboardProps } from './dashboard.types';
 
 export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
-  const { mutateAsync } = useAxiosAction(restModule.getRandomNotionWords);
+  const toast = useToast();
   const [words, setWords] = useState<INotionWord[]>([]);
 
+  const { loading: isGetRandomWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
+    useAxiosAction(restModule.getRandomNotionWords);
+
   const fetchMoreWords = () =>
-    mutateAsync().then((_response) => {
-      setWords((_prevState) => [..._response, ..._prevState]);
-    });
+    mutateAsyncGetRandomNotionWords()
+      .then((_response) => {
+        setWords((_prevState) => [..._response, ..._prevState]);
+      })
+      .catch((_error) => {
+        toast({
+          title: 'Error',
+          description: _error,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+      });
 
   useEffect(() => {
     fetchMoreWords();
@@ -36,6 +49,10 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
       fetchMoreWords();
     }
   };
+
+  if (words.length === 0 && isGetRandomWordsLoading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <Box bg="gray.50" height="100%">
