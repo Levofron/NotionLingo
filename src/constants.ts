@@ -8,6 +8,7 @@ export const SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES = [
 ];
 export const SUPPORTED_MEANING_COLUMN_NAMES = ['Meaning', 'meaning'];
 export const SUPPORTED_WORD_COLUMN_NAMES = ['Word', 'word', 'Name', 'name'];
+export const SUPPORTED_TYPE_COLUMN_NAMES = ['Type', 'type', 'Category', 'category'];
 
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 export const API_ROUTE_SECRET = process.env.NEXT_PUBLIC_API_ROUTE_SECRET;

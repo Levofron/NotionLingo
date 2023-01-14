@@ -2,7 +2,6 @@ import { Client } from '@notionhq/client';
 import {
   PageObjectResponse,
   PartialPageObjectResponse,
-  RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -23,6 +22,7 @@ import {
 import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
   SUPPORTED_MEANING_COLUMN_NAMES,
+  SUPPORTED_TYPE_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
@@ -146,9 +146,6 @@ const getPagesWithCache = async ({
   return allPages;
 };
 
-const joinRichTextItemResponse = (richTextItemResponse: RichTextItemResponse[]) =>
-  richTextItemResponse.map((_richText) => _richText.plain_text).join('');
-
 const getTextFromPageProperty = (
   pageProperties: PageObjectResponse['properties'],
   propertyNames: string[],
@@ -165,12 +162,24 @@ const getTextFromPageProperty = (
     }
   }
 
+  if (!selectedPageProperties) {
+    return null;
+  }
+
   if (selectedPageProperties.type === 'title') {
-    return joinRichTextItemResponse(selectedPageProperties.title);
+    return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
   }
 
   if (selectedPageProperties.type === 'rich_text') {
-    return joinRichTextItemResponse(selectedPageProperties.rich_text);
+    return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
+  }
+
+  if (selectedPageProperties.type === 'multi_select') {
+    return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
+  }
+
+  if (selectedPageProperties.type === 'select') {
+    return selectedPageProperties.select?.name || '';
   }
 
   throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
@@ -208,8 +217,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
-    // TODO - add type and IPA
+    // TODO - add IPA
     const formattedPages = selectedPages.map((_selectedPage) => ({
+      type: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_TYPE_COLUMN_NAMES),
       word: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES),
       meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
       exampleSentence: getTextFromPageProperty(
@@ -220,6 +230,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json(formattedPages);
   } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message });
+    }
+
     return res.status(500).json(error);
   }
 };
