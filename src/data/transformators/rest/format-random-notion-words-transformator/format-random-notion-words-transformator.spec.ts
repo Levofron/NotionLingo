@@ -9,16 +9,19 @@ describe('formatRandomNotionWordsTransformator function', () => {
     const perfectObject = {
       word: 'Word',
       meaning: 'Meaning',
+      type: ['Type', 'Type2'],
       exampleSentence: 'Example sentence',
     };
 
     const result = formatRandomNotionWordsTransformator([
       {
+        type: null,
         word: 'word',
         meaning: 'meaning',
         exampleSentence: 'example Sentence',
       },
       {
+        type: 'TYPE',
         word: 'WORD',
         meaning: 'MEANING',
         exampleSentence: 'EXAMPLE SENTENCE',
@@ -27,14 +30,17 @@ describe('formatRandomNotionWordsTransformator function', () => {
       {
         word: 'wOrD',
         meaning: 'mEaNiNg',
+        type: ['type', 'type2'],
         exampleSentence: 'eXaMpLe sEnTeNcE',
       },
       {
         word: '        Word',
         meaning: 'Meaning        ',
+        type: ['        Type', '        Type2'],
         exampleSentence: 'Example sentence        ',
       },
       {
+        type: '',
         word: '',
         // @ts-expect-error
         meaning: null,
@@ -44,12 +50,33 @@ describe('formatRandomNotionWordsTransformator function', () => {
     ]);
 
     expect(result).toEqual([
-      perfectObject,
-      perfectObject,
-      perfectObject,
-      perfectObject,
+      {
+        type: '---',
+        word: 'Word',
+        meaning: 'Meaning',
+        exampleSentence: 'Example sentence',
+      },
+      {
+        type: 'Type',
+        word: 'Word',
+        meaning: 'Meaning',
+        exampleSentence: 'Example sentence',
+      },
       perfectObject,
       {
+        word: 'Word',
+        meaning: 'Meaning',
+        type: ['Type', 'Type2'],
+        exampleSentence: 'Example sentence',
+      },
+      {
+        word: 'Word',
+        meaning: 'Meaning',
+        type: ['Type', 'Type2'],
+        exampleSentence: 'Example sentence',
+      },
+      {
+        type: '---',
         word: '---',
         meaning: '---',
         exampleSentence: '---',

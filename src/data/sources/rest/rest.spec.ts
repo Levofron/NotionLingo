@@ -135,6 +135,7 @@ describe('getRestSource function', () => {
   describe('getRandomNotionWords endpoint', () => {
     const notionWordMock: INotionWord = {
       word: 'word',
+      type: 'type',
       meaning: 'meaning',
       exampleSentence: 'exampleSentence',
     };
