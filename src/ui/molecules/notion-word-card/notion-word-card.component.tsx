@@ -40,7 +40,7 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
       <Flex
         _hover={{
           bg: 'gray.900',
-          color: 'white',
+          color: 'gray.50',
           borderColor: 'gray.900',
         }}
         alignItems="center"

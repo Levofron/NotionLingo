@@ -20,9 +20,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
   const rotate = useTransform(x, [-rotateWidth, rotateWidth], [-35, 35]);
 
   const handleScreenExit = () => {
-    animControls.start({ x: rotateWidth }).then(() => {
-      onScreenExit();
-    });
+    animControls.start({ x: rotateWidth }).then(onScreenExit);
   };
 
   const getSensitive = () => {

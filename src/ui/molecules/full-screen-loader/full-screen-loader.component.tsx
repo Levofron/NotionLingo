@@ -5,7 +5,7 @@ import { Flex, Spinner } from '@ui/atoms';
 export const FullScreenLoader: FC = (): JSX.Element => (
   <Flex
     alignItems="center"
-    bg="white"
+    bg="gray.50"
     height="full"
     justifyContent="center"
     left={0}
