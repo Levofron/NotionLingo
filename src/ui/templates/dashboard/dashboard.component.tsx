@@ -6,7 +6,7 @@ import { INotionWord } from '@domain/rest/rest.models';
 import { restModule } from '@adapter/modules';
 
 import { Box, Flex, TinderAnimationWrapper } from '@ui/atoms';
-import { FullScreenLoader, NotionWordCard } from '@ui/molecules';
+import { NotionWordCard } from '@ui/molecules';
 
 import { useAxiosAction } from '@infrastructure/utils';
 
@@ -16,8 +16,9 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
   const toast = useToast();
   const [words, setWords] = useState<INotionWord[]>([]);
 
-  const { loading: isGetRandomWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
-    useAxiosAction(restModule.getRandomNotionWords);
+  const { mutateAsync: mutateAsyncGetRandomNotionWords } = useAxiosAction(
+    restModule.getRandomNotionWords,
+  );
 
   const fetchMoreWords = () =>
     mutateAsyncGetRandomNotionWords()
@@ -49,10 +50,6 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
       fetchMoreWords();
     }
   };
-
-  if (words.length === 0 && isGetRandomWordsLoading) {
-    return <FullScreenLoader />;
-  }
 
   return (
     <Box bg="gray.50" height="100%">
