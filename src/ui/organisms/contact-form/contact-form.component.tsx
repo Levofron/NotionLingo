@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 
-import { restModule } from '@adapter/modules';
+import { restModule } from '@adapter';
 
 import {
   Box,
