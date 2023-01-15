@@ -78,10 +78,12 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
             </Text>
           ) : null}
         </Flex>
-        <Text color="gray.500">{meaning}</Text>
+        <Text color="gray.500" noOfLines={{ base: 4, md: 5 }}>
+          {meaning}
+        </Text>
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
-        <Text color="gray.900" p={{ base: 2, sm: 3, md: 4 }}>
+        <Text color="gray.900" noOfLines={{ base: 4, md: 5 }} p={{ base: 2, sm: 3, md: 4 }}>
           &quot;{exampleSentence}&quot;
         </Text>
         <Flex
