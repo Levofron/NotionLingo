@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { FC, useCallback } from 'react';
+import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
+
+import { speechSynthesisModule } from '@adapter';
 
 import { Box, Card, Flex, Heading, Text } from '@ui/atoms';
 
 import { INotionWordCardProps } from './notion-word-card.types';
 
-// TODO - add text reader
 export const NotionWordCard: FC<INotionWordCardProps> = ({
   exampleSentence,
   ipa,
@@ -27,6 +29,11 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
         </Text>
       </Box>
     ));
+  }, []);
+
+  const handleSpeak = useCallback(() => {
+    speechSynthesisModule.cancel();
+    speechSynthesisModule.speak({ text: word });
   }, []);
 
   return (
@@ -51,9 +58,14 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           </Flex>
         ) : null}
         <Flex flexDirection="column">
-          <Heading color="black" fontSize="2xl">
-            {word}
-          </Heading>
+          {speechSynthesisModule.isSupported() ? (
+            <Flex alignItems="center" cursor="pointer" gap={1} onClick={handleSpeak}>
+              <AiTwotoneSound fontSize="20px" />
+              <Heading color="gray.900" fontSize="2xl">
+                {word}
+              </Heading>
+            </Flex>
+          ) : null}
           {ipa ? (
             <Text color="gray.500" fontSize="xs">
               {ipa}
@@ -78,8 +90,8 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           cursor="pointer"
           justifyContent="center"
           maxWidth="120px"
+          minWidth="100px"
           transition="all .3s ease"
-          width="-webkit-fill-available"
           onClick={onClick}
         >
           <BsHeart fontSize="40px" />
