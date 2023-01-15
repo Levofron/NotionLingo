@@ -54,9 +54,11 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           <Heading color="black" fontSize="2xl">
             {word}
           </Heading>
-          <Text color="gray.500" fontSize="xs">
-            {ipa}
-          </Text>
+          {ipa ? (
+            <Text color="gray.500" fontSize="xs">
+              {ipa}
+            </Text>
+          ) : null}
         </Flex>
         <Text color="gray.500">{meaning}</Text>
       </Flex>
