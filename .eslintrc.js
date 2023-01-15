@@ -21,6 +21,7 @@ module.exports = {
       rules: {
         'no-console': 'off',
         'linebreak-style': 0,
+        'no-continue': 'off',
         'consistent-return': 'off',
         'prefer-arrow-callback': 2,
         'operator-linebreak': 'off',

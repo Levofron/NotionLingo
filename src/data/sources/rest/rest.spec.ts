@@ -15,13 +15,13 @@ describe('getRestSource function', () => {
 
     expect(restSource).toEqual({
       healthCheck: expect.any(Function),
-      setSupabaseCookie: expect.any(Function),
       getLoggedUser: expect.any(Function),
-      setNotionApiToken: expect.any(Function),
-      getAvailableNotionPages: expect.any(Function),
       setNotionPageId: expect.any(Function),
-      getRandomNotionWords: expect.any(Function),
+      setNotionApiToken: expect.any(Function),
+      setSupabaseCookie: expect.any(Function),
       sendContactFormData: expect.any(Function),
+      getRandomNotionWords: expect.any(Function),
+      getAvailableNotionPages: expect.any(Function),
     });
   });
 
@@ -134,6 +134,7 @@ describe('getRestSource function', () => {
 
   describe('getRandomNotionWords endpoint', () => {
     const notionWordMock: INotionWord = {
+      ipa: 'ipa',
       word: 'word',
       type: 'type',
       meaning: 'meaning',

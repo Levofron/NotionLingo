@@ -9,6 +9,7 @@ import { INotionWordCardProps } from './notion-word-card.types';
 // TODO - add text reader
 export const NotionWordCard: FC<INotionWordCardProps> = ({
   exampleSentence,
+  ipa,
   meaning,
   onClick,
   type,
@@ -49,9 +50,14 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
             {renderTypes()}
           </Flex>
         ) : null}
-        <Heading color="black" fontSize="2xl">
-          {word}
-        </Heading>
+        <Flex flexDirection="column">
+          <Heading color="black" fontSize="2xl">
+            {word}
+          </Heading>
+          <Text color="gray.500" fontSize="xs">
+            {ipa}
+          </Text>
+        </Flex>
         <Text color="gray.500">{meaning}</Text>
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">

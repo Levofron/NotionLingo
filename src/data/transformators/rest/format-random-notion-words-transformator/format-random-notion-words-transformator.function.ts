@@ -13,10 +13,13 @@ export const formatRandomNotionWordsTransformator = (
     for (const _key of objectKeys(randomNotionWord)) {
       const currentValue = randomNotionWord[_key];
 
+      if (_key === 'ipa') {
+        continue;
+      }
+
       if (!currentValue) {
         randomNotionWord[_key] = EMPTY_FIELD_VALUE;
 
-        // eslint-disable-next-line no-continue
         continue;
       }
 
@@ -24,7 +27,6 @@ export const formatRandomNotionWordsTransformator = (
         if (isString(currentValue)) {
           randomNotionWord[_key] = cleanUpString(currentValue, EMPTY_FIELD_VALUE);
 
-          // eslint-disable-next-line no-continue
           continue;
         }
 
@@ -32,7 +34,6 @@ export const formatRandomNotionWordsTransformator = (
           cleanUpString(_value, EMPTY_FIELD_VALUE),
         );
 
-        // eslint-disable-next-line no-continue
         continue;
       }
 

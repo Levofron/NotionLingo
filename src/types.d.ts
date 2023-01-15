@@ -11,4 +11,10 @@ declare namespace NodeJS {
   }
 }
 
+declare module 'text-to-ipa' {
+  export default {
+    lookup(word: string | null | undefned): { error: 'undefined' | 'multi' | null, text: string | null } | undefined;
+  };
+}
+
 type TThemeMode = 'light' | 'dark';

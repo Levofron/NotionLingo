@@ -36,6 +36,8 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
       });
 
   useEffect(() => {
+    console.log('useEffect');
+
     fetchMoreWords();
   }, []);
 
