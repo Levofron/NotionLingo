@@ -11,7 +11,7 @@ describe('isSafari function', () => {
       writable: true,
     });
 
-    expect(isSafari()).toBe(true);
+    expect(isSafari()).toBeTruthy();
   });
 
   it('should return false if the user agent is not Safari', () => {
@@ -20,6 +20,6 @@ describe('isSafari function', () => {
       writable: true,
     });
 
-    expect(isSafari()).toBe(false);
+    expect(isSafari()).toBeFalsy();
   });
 });

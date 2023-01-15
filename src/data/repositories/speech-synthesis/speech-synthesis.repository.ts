@@ -24,8 +24,8 @@ export const getSpeechSynthesisRepository = (
       });
     }
 
-    const englishVoice = allVoices.find((_voice) => _voice.lang.includes('en-GB'));
-    const voice = options.voice || englishVoice || allVoices[0];
+    const britishVoice = allVoices.find((_voice) => _voice.lang.includes('en-GB'));
+    const voice = options.voice || britishVoice || allVoices[0];
 
     return speechSynthesisSource.speak({ ...options, voice });
   },
