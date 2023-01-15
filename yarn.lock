@@ -9884,6 +9884,7 @@ __metadata:
     react-dom: 18.2.0
     react-icons: ^4.7.1
     react-tsparticles: ^2.7.1
+    text-to-ipa: ^1.0.0
     ts-jest: ^29.0.3
     tslib: ^2.4.1
     tsparticles: ^2.7.1
@@ -13066,6 +13067,13 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
+  languageName: node
+  linkType: hard
+
+"text-to-ipa@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "text-to-ipa@npm:1.0.0"
+  checksum: 147e6fc7b4069b26bb423e45a5bd4d430858dd78da7a62d4d1d08ee20fe050773f6a0a774355c35fc1dbfa32e6260a3d1dc32ccae78cd86596d640467954a5e9
   languageName: node
   linkType: hard
 

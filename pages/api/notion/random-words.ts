@@ -13,6 +13,7 @@ import {
   decrypt,
   getRandomNumber,
   getUserFromRequest,
+  textToIpa,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -118,7 +119,9 @@ const getPagesWithCache = async ({
       startCursor: null,
     });
 
-    memoryCache.put(cacheKey, result, CACHE_TIME);
+    const filteredPages = result.pages.filter(Boolean);
+
+    memoryCache.put(cacheKey, { ...result, pages: filteredPages }, CACHE_TIME);
 
     return result.pages;
   }
@@ -139,7 +142,7 @@ const getPagesWithCache = async ({
     startCursor: nextCursor,
   });
 
-  const allPages = [...cachedPages, ...newPages];
+  const allPages = [...cachedPages, ...newPages].filter(Boolean);
 
   memoryCache.put(cacheKey, { pages: allPages, hasMore, nextCursor: newNextCursor }, CACHE_TIME);
 
@@ -217,16 +220,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
-    // TODO - add IPA
-    const formattedPages = selectedPages.map((_selectedPage) => ({
-      type: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_TYPE_COLUMN_NAMES),
-      word: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES),
-      meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
-      exampleSentence: getTextFromPageProperty(
-        _selectedPage.properties,
-        SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
-      ),
-    }));
+    const formattedPages = selectedPages.map((_selectedPage) => {
+      const word = getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES);
+      const ipa = textToIpa(word as string);
+
+      return {
+        ipa,
+        word,
+        type: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_TYPE_COLUMN_NAMES),
+        meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
+        exampleSentence: getTextFromPageProperty(
+          _selectedPage.properties,
+          SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
+        ),
+      };
+    });
 
     return res.status(200).json(formattedPages);
   } catch (error) {
