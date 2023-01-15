@@ -5,7 +5,7 @@ import { BsHeart } from 'react-icons/bs';
 
 import { speechSynthesisModule } from '@adapter';
 
-import { Box, Card, Flex, Heading, Text } from '@ui/atoms';
+import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
 import { INotionWordCardProps } from './notion-word-card.types';
 
@@ -59,9 +59,15 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
         ) : null}
         <Flex flexDirection="column">
           {speechSynthesisModule.isSupported() ? (
-            <Flex alignItems="center" cursor="pointer" gap={1} onClick={handleSpeak}>
-              <AiTwotoneSound fontSize="20px" />
-              <Heading color="gray.900" fontSize="2xl">
+            <Flex cursor="pointer" gap={1} onClick={handleSpeak}>
+              <Icon as={AiTwotoneSound} color="gray.900" fontSize="20" mt={1} />
+              <Heading
+                color="gray.900"
+                fontSize={{ base: 'xl', sm: '2xl' }}
+                mt={{ base: 0, sm: 0 }}
+                noOfLines={{ base: 2, sm: 3 }}
+                wordBreak="break-word"
+              >
                 {word}
               </Heading>
             </Flex>
