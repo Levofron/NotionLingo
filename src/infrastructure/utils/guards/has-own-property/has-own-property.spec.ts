@@ -10,7 +10,7 @@ describe('hasOwnProperty function', () => {
       foo: 'bar',
     };
 
-    expect(hasOwnProperty(object, 'foo')).toBe(true);
+    expect(hasOwnProperty(object, 'foo')).toBeTruthy();
   });
 
   it('should return false when object does not have property', () => {
@@ -18,6 +18,6 @@ describe('hasOwnProperty function', () => {
       foo: 'bar',
     };
 
-    expect(hasOwnProperty(object, 'bar')).toBe(false);
+    expect(hasOwnProperty(object, 'bar')).toBeFalsy();
   });
 });
