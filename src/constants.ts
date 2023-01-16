@@ -13,6 +13,7 @@ export const SUPPORTED_TYPE_COLUMN_NAMES = ['Type', 'type', 'Category', 'categor
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 export const API_ROUTE_SECRET = process.env.NEXT_PUBLIC_API_ROUTE_SECRET;
 export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+export const UNSPLASH_BASE_URL = process.env.NEXT_PUBLIC_UNSPLASH_BASE_URL;
 export const APPLICATION_ENVIRONMENT = process.env.NEXT_PUBLIC_APP_ENV || 'local';
 
 export const { CRYPTO_ALGORITHM } = process.env;

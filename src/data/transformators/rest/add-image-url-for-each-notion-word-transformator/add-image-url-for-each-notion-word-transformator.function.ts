@@ -2,12 +2,14 @@ import { INotionWord } from '@domain/rest/rest.models';
 
 import { INotionWordResponseItem } from '@data/responses.types';
 
-export const generateImageUrlForEachNotionWord = (
+import { UNSPLASH_BASE_URL } from '@constants';
+
+export const addImageUrlForEachNotionWordTransformator = (
   randomNotionWords: INotionWordResponseItem[],
 ): INotionWord[] =>
   randomNotionWords.map((_notionWord) => {
     const wordToSearch = _notionWord.word.replace(/ /g, '+');
-    const imageUrl = `https://source.unsplash.com/500x300/?${wordToSearch}`;
+    const imageUrl = `${UNSPLASH_BASE_URL}${wordToSearch}`;
 
     return {
       imageUrl,

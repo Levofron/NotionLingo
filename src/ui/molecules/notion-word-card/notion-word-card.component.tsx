@@ -46,7 +46,7 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
         pointerEvents="none"
         position="relative"
       >
-        <Image fill alt="Learning image" src={imageUrl} />
+        <Image fill alt={`Image representing '${word}' word`} src={imageUrl} />
       </Box>
       <Flex flexDirection="column" gap={1} p={{ base: 2, sm: 3, md: 4 }}>
         {hasType ? (

@@ -4,8 +4,8 @@ import { IRestRepository } from '@domain/rest/rest.repository';
 import { IRestSource } from '../../sources/rest/rest.types';
 import { ISupabaseSource } from '../../sources/supabase/supabase.types';
 import {
+  addImageUrlForEachNotionWordTransformator,
   formatRandomNotionWordsTransformator,
-  generateImageUrlForEachNotionWord,
 } from '../../transformators/rest';
 
 export const getRestRepository = (
@@ -47,7 +47,7 @@ export const getRestRepository = (
 
     const transformedData = formatRandomNotionWordsTransformator(data);
 
-    return generateImageUrlForEachNotionWord(transformedData);
+    return addImageUrlForEachNotionWordTransformator(transformedData);
   },
   sendContactFormData: async (data: IContact) => {
     const { data: response } = await restSource.sendContactFormData(data);
