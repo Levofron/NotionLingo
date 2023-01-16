@@ -27,7 +27,7 @@ describe('addImageUrlForEachNotionWordTransformator function', () => {
         word: 'word',
         meaning: 'meaning',
         exampleSentence: 'example sentence',
-        imageUrl: 'https://source.unsplash.com/500x300/?word',
+        imageUrl: 'https://api.unsplash.com/search/photos?query=word',
       },
     ]);
   });

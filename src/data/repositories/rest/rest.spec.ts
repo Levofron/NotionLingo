@@ -173,7 +173,7 @@ describe('getRestRepository function', () => {
         {
           word: 'Word',
           translation: 'Translation, test',
-          imageUrl: 'https://source.unsplash.com/500x300/?Word',
+          imageUrl: 'https://api.unsplash.com/search/photos?query=Word',
         },
       ]);
       expect(restSourceMock.getRandomNotionWords).toHaveBeenCalled();
