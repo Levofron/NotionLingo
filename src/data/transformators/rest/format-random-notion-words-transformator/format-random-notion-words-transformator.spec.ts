@@ -47,6 +47,7 @@ describe('formatRandomNotionWordsTransformator function', () => {
       {
         type: '',
         word: '',
+        ipa: 'ipa',
         // @ts-expect-error
         meaning: null,
         // @ts-expect-error

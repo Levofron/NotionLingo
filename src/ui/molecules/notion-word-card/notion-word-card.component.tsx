@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { FC, useCallback } from 'react';
+import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
 
-import { Box, Card, Flex, Heading, Text } from '@ui/atoms';
+import { speechSynthesisModule } from '@adapter';
+
+import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
 import { INotionWordCardProps } from './notion-word-card.types';
 
-// TODO - add text reader
 export const NotionWordCard: FC<INotionWordCardProps> = ({
   exampleSentence,
   ipa,
@@ -27,6 +29,11 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
         </Text>
       </Box>
     ));
+  }, []);
+
+  const handleSpeak = useCallback(() => {
+    speechSynthesisModule.cancel();
+    speechSynthesisModule.speak({ text: word });
   }, []);
 
   return (
@@ -51,19 +58,32 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           </Flex>
         ) : null}
         <Flex flexDirection="column">
-          <Heading color="black" fontSize="2xl">
-            {word}
-          </Heading>
+          {speechSynthesisModule.isSupported() ? (
+            <Flex cursor="pointer" gap={1} onClick={handleSpeak}>
+              <Icon as={AiTwotoneSound} color="gray.900" fontSize="20" mt={1} />
+              <Heading
+                color="gray.900"
+                fontSize={{ base: 'xl', sm: '2xl' }}
+                mt={{ base: 0, sm: 0 }}
+                noOfLines={{ base: 2, sm: 3 }}
+                wordBreak="break-word"
+              >
+                {word}
+              </Heading>
+            </Flex>
+          ) : null}
           {ipa ? (
             <Text color="gray.500" fontSize="xs">
               {ipa}
             </Text>
           ) : null}
         </Flex>
-        <Text color="gray.500">{meaning}</Text>
+        <Text color="gray.500" noOfLines={{ base: 4, md: 5 }}>
+          {meaning}
+        </Text>
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
-        <Text color="gray.900" p={{ base: 2, sm: 3, md: 4 }}>
+        <Text color="gray.900" noOfLines={{ base: 4, md: 5 }} p={{ base: 2, sm: 3, md: 4 }}>
           &quot;{exampleSentence}&quot;
         </Text>
         <Flex
@@ -78,8 +98,8 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           cursor="pointer"
           justifyContent="center"
           maxWidth="120px"
+          minWidth="100px"
           transition="all .3s ease"
-          width="-webkit-fill-available"
           onClick={onClick}
         >
           <BsHeart fontSize="40px" />

@@ -1,5 +1,7 @@
 import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
 
+import { isSafari } from '@infrastructure/utils';
+
 import { ISpeechSynthesisSource } from '../../sources/speech-synthesis/speech-synthesis.types';
 
 export const getSpeechSynthesisRepository = (
@@ -11,7 +13,21 @@ export const getSpeechSynthesisRepository = (
       return;
     }
 
-    return speechSynthesisSource.speak(options);
+    const allVoices = speechSynthesisSource.getVoices() || [];
+
+    if (isSafari()) {
+      const americanVoice = allVoices.find((_voice) => _voice.lang.includes('en-US'));
+
+      return speechSynthesisSource.speak({
+        ...options,
+        voice: options.voice || americanVoice || allVoices[0],
+      });
+    }
+
+    const britishVoice = allVoices.find((_voice) => _voice.lang.includes('en-GB'));
+    const voice = options.voice || britishVoice || allVoices[0];
+
+    return speechSynthesisSource.speak({ ...options, voice });
   },
   cancel: () => {
     if (!speechSynthesisSource.isSupported()) {
