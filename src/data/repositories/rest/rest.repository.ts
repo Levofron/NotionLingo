@@ -3,7 +3,10 @@ import { IRestRepository } from '@domain/rest/rest.repository';
 
 import { IRestSource } from '../../sources/rest/rest.types';
 import { ISupabaseSource } from '../../sources/supabase/supabase.types';
-import { formatRandomNotionWordsTransformator } from '../../transformators/rest';
+import {
+  formatRandomNotionWordsTransformator,
+  generateImageUrlForEachNotionWord,
+} from '../../transformators/rest';
 
 export const getRestRepository = (
   restSource: IRestSource,
@@ -42,7 +45,9 @@ export const getRestRepository = (
   getRandomNotionWords: async () => {
     const { data } = await restSource.getRandomNotionWords();
 
-    return formatRandomNotionWordsTransformator(data);
+    const transformedData = formatRandomNotionWordsTransformator(data);
+
+    return generateImageUrlForEachNotionWord(transformedData);
   },
   sendContactFormData: async (data: IContact) => {
     const { data: response } = await restSource.sendContactFormData(data);

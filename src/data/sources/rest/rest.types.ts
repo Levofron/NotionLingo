@@ -1,12 +1,14 @@
 import { AxiosResponse } from 'axios';
 
-import { IContact, IHash, INotionPage, INotionWord, IUser } from '@domain/rest/rest.models';
+import { IContact, IHash, INotionPage, IUser } from '@domain/rest/rest.models';
 import { TSession } from '@domain/supabase/supabase.types';
+
+import { INotionWordResponseItem } from '@data/responses.types';
 
 export interface IRestSource {
   getAvailableNotionPages: () => Promise<AxiosResponse<INotionPage[]>>;
   getLoggedUser: () => Promise<AxiosResponse<IUser>>;
-  getRandomNotionWords: () => Promise<AxiosResponse<INotionWord[]>>;
+  getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseItem[]>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   sendContactFormData: (data: IContact) => Promise<AxiosResponse<IContact>>;
   setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;

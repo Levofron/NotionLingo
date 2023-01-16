@@ -11,6 +11,7 @@ import { INotionWordCardProps } from './notion-word-card.types';
 
 export const NotionWordCard: FC<INotionWordCardProps> = ({
   exampleSentence,
+  imageUrl,
   ipa,
   meaning,
   onClick,
@@ -45,11 +46,7 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
         pointerEvents="none"
         position="relative"
       >
-        <Image
-          fill
-          alt="Learning image"
-          src="https://images.pexels.com/photos/247819/pexels-photo-247819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        />
+        <Image fill alt="Learning image" src={imageUrl} />
       </Box>
       <Flex flexDirection="column" gap={1} p={{ base: 2, sm: 3, md: 4 }}>
         {hasType ? (

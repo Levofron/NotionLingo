@@ -138,6 +138,7 @@ describe('getRestSource function', () => {
       word: 'word',
       type: 'type',
       meaning: 'meaning',
+      imageUrl: 'imageUrl',
       exampleSentence: 'exampleSentence',
     };
 

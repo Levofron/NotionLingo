@@ -18,13 +18,13 @@ describe('getRestRepository function', () => {
 
     expect(restRepository).toEqual({
       healthCheck: expect.any(Function),
-      setSupabaseCookie: expect.any(Function),
       getLoggedUser: expect.any(Function),
-      setNotionApiToken: expect.any(Function),
-      getAvailableNotionPages: expect.any(Function),
       setNotionPageId: expect.any(Function),
-      getRandomNotionWords: expect.any(Function),
+      setNotionApiToken: expect.any(Function),
+      setSupabaseCookie: expect.any(Function),
       sendContactFormData: expect.any(Function),
+      getRandomNotionWords: expect.any(Function),
+      getAvailableNotionPages: expect.any(Function),
     });
   });
 
@@ -171,8 +171,9 @@ describe('getRestRepository function', () => {
 
       expect(result).toEqual([
         {
-          translation: 'Translation, test',
           word: 'Word',
+          translation: 'Translation, test',
+          imageUrl: 'https://source.unsplash.com/500x300/?Word',
         },
       ]);
       expect(restSourceMock.getRandomNotionWords).toHaveBeenCalled();
