@@ -1,12 +1,12 @@
-import { INotionWord } from '@domain/rest/rest.models';
-
 import { cleanUpString, isString, objectKeys } from '@infrastructure/utils';
+
+import { INotionWordResponseItem } from '../../../responses.types';
 
 const EMPTY_FIELD_VALUE = '---';
 
 export const formatRandomNotionWordsTransformator = (
-  randomNotionWords: INotionWord[],
-): INotionWord[] =>
+  randomNotionWords: INotionWordResponseItem[],
+): INotionWordResponseItem[] =>
   randomNotionWords.map((_randomNotionWord) => {
     const randomNotionWord = { ..._randomNotionWord };
 

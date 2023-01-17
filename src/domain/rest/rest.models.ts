@@ -14,6 +14,7 @@ export interface IHash {
 
 export interface INotionWord {
   exampleSentence: string;
+  imageUrl: string;
   ipa: string | null;
   meaning: string;
   type: string | string[] | null;

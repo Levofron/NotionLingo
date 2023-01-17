@@ -14,6 +14,7 @@ module.exports = withPWA({
       'lh3.googleusercontent.com',
       'www.paypalobjects.com',
       'images.pexels.com',
+      'source.unsplash.com',
     ],
   },
 });
