@@ -14,16 +14,6 @@ export const ParticlesBackground = () => (
       },
       fpsLimit: 120,
       interactivity: {
-        events: {
-          onhover: {
-            enable: true,
-            mode: 'bubble',
-          },
-          onclick: {
-            enable: true,
-            mode: 'push',
-          },
-        },
         modes: {
           bubble: {
             distance: 250,
@@ -57,7 +47,7 @@ export const ParticlesBackground = () => (
             default: 'bounce',
           },
           random: false,
-          speed: 0.7,
+          speed: 0.2,
           straight: false,
         },
         number: {
