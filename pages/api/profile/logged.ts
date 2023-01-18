@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabaseInstance } from '@infrastructure/config';
+import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   getUserFromRequest,
@@ -15,16 +16,13 @@ const getProfileDetails = (userId: string) =>
     .from('profiles')
     .select('id,email,created_at,notion_api_key,notion_page_id')
     .eq('id', userId)
+    .throwOnError()
     .single();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
 
-  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
-
-  if (profileError) {
-    return res.status(500).json(profileError);
-  }
+  const { data: profileData } = await getProfileDetails(user?.id!);
 
   const hasNotionData = !!profileData?.notion_api_key && !!profileData?.notion_page_id;
 
@@ -37,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     avatarUrl: user?.user_metadata.avatar_url,
   };
 
-  res.status(200).json(userData);
+  res.status(EHttpStatusCode.OK).json(userData);
 };
 
 const middlewareToApply = [

@@ -24,12 +24,6 @@ const getErrorMessageFromAxiosResponse = (error: AxiosError) => {
   if (data && hasOwnProperty(data, 'message')) {
     return data.message as string;
   }
-
-  if (data && hasOwnProperty(data, 'body')) {
-    const parsedBody = JSON.parse(data.body as string);
-
-    return parsedBody.message;
-  }
 };
 
 axiosInstance.interceptors.response.use(

@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiError } from 'next/dist/server/api-utils';
 
 import { supabaseInstance } from '@infrastructure/config';
+import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { isString } from '@infrastructure/utils';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
@@ -27,94 +29,73 @@ const getProfileDetails = (userId: string) =>
     .from('profiles')
     .select('days_in_streak,today_words_streak,last_daily_streak_updated_at,total_learned_words')
     .eq('id', userId)
+    .throwOnError()
     .single();
 
-const updateProfileDetailsDecorator = (userId: string, currentDate: Date) => (data: object) =>
-  supabaseInstance
-    .from('profiles')
-    .update({
-      ...data,
-      last_daily_streak_updated_at: currentDate,
-    })
-    .eq('id', userId);
+const updateProfileDetailsDecorator =
+  (userId: string, currentDate: Date, res: NextApiResponse) => async (data: object) => {
+    const { data: updatedProfileData } = await supabaseInstance
+      .from('profiles')
+      .update({
+        ...data,
+        last_daily_streak_updated_at: currentDate,
+      })
+      .eq('id', userId)
+      .throwOnError()
+      .single();
+
+    return res.status(EHttpStatusCode.OK).json({
+      daysInStreak: updatedProfileData?.days_in_streak,
+      todayWordsStreak: updatedProfileData?.today_words_streak,
+      totalLearnedWords: updatedProfileData?.total_learned_words,
+      lastDailyStreakUpdatedAt: updatedProfileData?.last_daily_streak_updated_at,
+    });
+  };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const user = await getUserFromRequest(req);
-
-  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
-
-  if (profileError) {
-    return res.status(500).json(profileError);
-  }
-
   const { currentDate } = req.query;
 
-  if (!isString(currentDate)) {
-    return res.status(400).json({ message: 'Invalid date' });
-  }
+  const user = await getUserFromRequest(req);
+  const { data: profileData } = await getProfileDetails(user?.id!);
 
-  if (!isIsoDate(currentDate)) {
-    return res.status(400).json({ message: 'Invalid date' });
+  if (!isString(currentDate) || !isIsoDate(currentDate)) {
+    throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'Invalid date');
   }
 
   const currentDateAsDate = new Date(currentDate);
-  const updateProfileDetails = updateProfileDetailsDecorator(user?.id!, currentDateAsDate);
+  const updateProfileDetails = updateProfileDetailsDecorator(user?.id!, currentDateAsDate, res);
 
   if (!isIsoDate(profileData.last_daily_streak_updated_at)) {
-    const { error } = await updateProfileDetails({
+    return updateProfileDetails({
       days_in_streak: 1,
       today_words_streak: 1,
       total_learned_words: 1,
     });
-
-    if (error) {
-      return res.status(500).json(error);
-    }
-
-    return res.status(200).json(profileData);
   }
 
   const lastDailyStreakUpdatedAtAsDate = new Date(profileData.last_daily_streak_updated_at);
 
   if (currentDateAsDate.toDateString() === lastDailyStreakUpdatedAtAsDate.toDateString()) {
-    const { error } = await updateProfileDetails({
+    return updateProfileDetails({
       days_in_streak: 1,
       today_words_streak: profileData.today_words_streak + 1,
       total_learned_words: profileData.total_learned_words + 1,
     });
-
-    if (error) {
-      return res.status(500).json(error);
-    }
-
-    return res.status(200).json(profileData);
   }
 
   if (currentDateAsDate.getTime() - lastDailyStreakUpdatedAtAsDate.getTime() <= 86_400_000) {
-    const { error } = await updateProfileDetails({
+    return updateProfileDetails({
       today_words_streak: 1,
       days_in_streak: profileData.days_in_streak + 1,
       total_learned_words: profileData.total_learned_words + 1,
     });
-
-    if (error) {
-      return res.status(500).json(error);
-    }
-
-    return res.status(200).json(profileData);
   }
 
-  const { error } = await updateProfileDetails({
+  return updateProfileDetails({
     days_in_streak: 1,
     today_words_streak: 1,
     total_learned_words: profileData.total_learned_words + 1,
   });
-
-  if (error) {
-    return res.status(500).json(error);
-  }
-
-  res.status(200).json(profileData);
 };
 
 const middlewareToApply = [
