@@ -61,11 +61,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const updateProfileDetails = updateProfileDetailsDecorator(user?.id!, currentDateAsDate);
 
   if (!isIsoDate(profileData.last_daily_streak_updated_at)) {
-    await updateProfileDetails({
+    const { error } = await updateProfileDetails({
       days_in_streak: 1,
       today_words_streak: 1,
       total_learned_words: 1,
     });
+
+    if (error) {
+      return res.status(500).json(error);
+    }
 
     return res.status(200).json(profileData);
   }
@@ -73,30 +77,42 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const lastDailyStreakUpdatedAtAsDate = new Date(profileData.last_daily_streak_updated_at);
 
   if (currentDateAsDate.toDateString() === lastDailyStreakUpdatedAtAsDate.toDateString()) {
-    await updateProfileDetails({
+    const { error } = await updateProfileDetails({
       days_in_streak: 1,
       today_words_streak: profileData.today_words_streak + 1,
       total_learned_words: profileData.total_learned_words + 1,
     });
 
+    if (error) {
+      return res.status(500).json(error);
+    }
+
     return res.status(200).json(profileData);
   }
 
   if (currentDateAsDate.getTime() - lastDailyStreakUpdatedAtAsDate.getTime() <= 86_400_000) {
-    await updateProfileDetails({
+    const { error } = await updateProfileDetails({
       today_words_streak: 1,
       days_in_streak: profileData.days_in_streak + 1,
       total_learned_words: profileData.total_learned_words + 1,
     });
 
+    if (error) {
+      return res.status(500).json(error);
+    }
+
     return res.status(200).json(profileData);
   }
 
-  await updateProfileDetails({
+  const { error } = await updateProfileDetails({
     days_in_streak: 1,
     today_words_streak: 1,
     total_learned_words: profileData.total_learned_words + 1,
   });
+
+  if (error) {
+    return res.status(500).json(error);
+  }
 
   res.status(200).json(profileData);
 };
