@@ -59,6 +59,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
         zIndex,
         position: 'absolute',
       }}
+      whileDrag={{ scale: 1.1 }}
       onDragEnd={(_, info) => {
         if (Math.abs(info.offset.x) < sensitive || isStarted) {
           animControls.start({ x: 0, y: 0 });
