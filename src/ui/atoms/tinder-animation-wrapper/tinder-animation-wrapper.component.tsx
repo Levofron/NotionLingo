@@ -32,7 +32,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
     }
 
     animControls.start({ x: rotateWidth }).then(onScreenExit);
-  }, [countdown]);
+  }, [isStarted]);
 
   const getSensitive = () => {
     if (windowSize.width < 320) {

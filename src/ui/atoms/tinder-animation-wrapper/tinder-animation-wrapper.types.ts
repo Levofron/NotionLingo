@@ -8,7 +8,7 @@ interface IChildrenProps {
 }
 
 export interface ITinderAnimationWrapperProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
-  children: ({ countdown, onClick }: IChildrenProps) => ReactNode;
+  children: (props: IChildrenProps) => ReactNode;
   isDraggable: boolean;
   onScreenExit: () => void;
   zIndex: number;
