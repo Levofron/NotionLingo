@@ -1,10 +1,13 @@
 export interface IUser {
   avatarUrl: string;
   createdAt: string;
+  daysInStreak: number | null;
   email: string;
   fullName: string;
   hasNotionData: boolean;
   id: string;
+  todayWordsStreak: number | null;
+  totalLearnedWords: number | null;
 }
 
 export interface IHash {
