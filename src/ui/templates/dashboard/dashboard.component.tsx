@@ -5,7 +5,7 @@ import { INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Flex, TinderAnimationWrapper } from '@ui/atoms';
+import { Box, Flex, ParticlesBackground, TinderAnimationWrapper } from '@ui/atoms';
 import { NotionWordCard } from '@ui/molecules';
 
 import { useAxiosAction } from '@infrastructure/utils';
@@ -53,6 +53,7 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
 
   return (
     <Box bg="gray.50" height="100%">
+      <ParticlesBackground />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
           {words.map((_word, _index) => {
