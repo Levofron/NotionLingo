@@ -1,7 +1,7 @@
 import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 
-import { useWindowSize } from '@infrastructure/utils';
+import { useCountdown, useWindowSize } from '@infrastructure/utils';
 
 import { ITinderAnimationWrapperProps } from './tinder-animation-wrapper.types';
 
@@ -13,15 +13,26 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
   ...restProps
 }): JSX.Element => {
   const windowSize = useWindowSize();
+  const { countdown, isEnded, isStarted, start } = useCountdown(5);
   const rotateWidth = useMemo(() => Math.max(windowSize.width, 700), [windowSize.width]);
 
   const x = useMotionValue(0);
   const animControls = useAnimation();
   const rotate = useTransform(x, [-rotateWidth, rotateWidth], [-35, 35]);
 
-  const handleScreenExit = () => {
+  useEffect(() => {
+    if (isDraggable) {
+      start();
+    }
+  }, [isDraggable]);
+
+  const handleScreenExit = useCallback(() => {
+    if (isStarted) {
+      return;
+    }
+
     animControls.start({ x: rotateWidth }).then(onScreenExit);
-  };
+  }, [countdown]);
 
   const getSensitive = () => {
     if (windowSize.width < 320) {
@@ -49,7 +60,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
         position: 'absolute',
       }}
       onDragEnd={(_, info) => {
-        if (Math.abs(info.offset.x) < sensitive) {
+        if (Math.abs(info.offset.x) < sensitive || isStarted) {
           animControls.start({ x: 0, y: 0 });
         } else {
           animControls
@@ -59,7 +70,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
       }}
       {...restProps}
     >
-      {children({ onClick: handleScreenExit })}
+      {children({ onClick: handleScreenExit, countdown, isCountdownEnded: isEnded })}
     </motion.div>
   );
 };
