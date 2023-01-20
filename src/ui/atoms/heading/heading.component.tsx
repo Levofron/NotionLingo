@@ -1,11 +1,19 @@
 import { Heading as ChakraHeading } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, ReactNode, forwardRef } from 'react';
+import Balancer from 'react-wrap-balancer';
 
 import { IHeadingProps } from './heading.types';
 
+const renderChildren = (children: ReactNode, withBalancer?: boolean) =>
+  withBalancer ? <Balancer>{children}</Balancer> : <>{children}</>;
+
 const HeadingComponent: ForwardRefRenderFunction<HTMLParagraphElement, IHeadingProps> = (
-  props,
+  { children, withBalancer = false, ...restProps },
   ref,
-): JSX.Element => <ChakraHeading ref={ref} {...props} />;
+): JSX.Element => (
+  <ChakraHeading ref={ref} {...restProps}>
+    {renderChildren(children, withBalancer)}
+  </ChakraHeading>
+);
 
 export const Heading = forwardRef(HeadingComponent);
