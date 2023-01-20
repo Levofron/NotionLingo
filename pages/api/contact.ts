@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabaseInstance } from '@infrastructure/config';
+import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
@@ -11,17 +12,16 @@ import {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const contactFormData = req.body;
 
-  const { error: contactError } = await supabaseInstance.from('contacts').insert({
-    name: contactFormData.name,
-    email: contactFormData.email,
-    message: contactFormData.message,
-  });
+  await supabaseInstance
+    .from('contacts')
+    .insert({
+      name: contactFormData.name,
+      email: contactFormData.email,
+      message: contactFormData.message,
+    })
+    .throwOnError();
 
-  if (contactError) {
-    return res.status(500).json(contactError);
-  }
-
-  res.status(200).json(contactFormData);
+  res.status(EHttpStatusCode.OK).json(contactFormData);
 };
 
 const middlewareToApply = [

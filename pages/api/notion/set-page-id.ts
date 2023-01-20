@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiError } from 'next/dist/server/api-utils';
 
 import { supabaseInstance } from '@infrastructure/config';
+import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -18,6 +20,7 @@ const getProfileDetails = (userId: string) =>
     .from('profiles')
     .select('notion_api_key,notion_page_id')
     .eq('id', userId)
+    .throwOnError()
     .single();
 
 const updateProfileNotionApiKey = async (userId: string, newNotionPageId: string) =>
@@ -26,6 +29,7 @@ const updateProfileNotionApiKey = async (userId: string, newNotionPageId: string
     .update({
       notion_page_id: newNotionPageId,
     })
+    .throwOnError()
     .eq('id', userId);
 
 const getDatabasePages = async (pageId: string, hashAsString: string) => {
@@ -42,41 +46,27 @@ const getDatabasePages = async (pageId: string, hashAsString: string) => {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { pageId } = req.body;
+
   const user = await getUserFromRequest(req);
-
-  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
-
-  if (profileError) {
-    return res.status(500).json(profileError);
-  }
+  const { data: profileData } = await getProfileDetails(user?.id!);
 
   if (!profileData.notion_api_key) {
-    return res.status(500).json({ message: 'The user does not have a notion api key' });
+    throw new ApiError(
+      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      'The user does not have a notion api key',
+    );
   }
 
-  try {
-    const { pageId } = req.body;
+  const databasePages = await getDatabasePages(pageId, profileData.notion_api_key);
 
-    const databasePages = await getDatabasePages(pageId, profileData.notion_api_key);
-
-    if (databasePages.length === 0) {
-      return res.status(500).json({ message: 'Your words database is empty' });
-    }
-
-    const { error: updateProfileError } = await updateProfileNotionApiKey(user?.id!, pageId);
-
-    if (updateProfileError) {
-      return res.status(500).json(updateProfileError);
-    }
-
-    return res.status(200).json(pageId);
-  } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-
-    return res.status(500).json(error);
+  if (databasePages.length === 0) {
+    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Your words database is empty');
   }
+
+  await updateProfileNotionApiKey(user?.id!, pageId);
+
+  return res.status(EHttpStatusCode.OK).json(pageId);
 };
 
 const middlewareToApply = [

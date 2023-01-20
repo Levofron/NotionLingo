@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabaseInstance } from '@infrastructure/config';
+import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -20,6 +21,7 @@ const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string
       notion_page_id: null,
       notion_api_key: newNotionApiKey,
     })
+    .throwOnError()
     .eq('id', userId);
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -28,24 +30,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const notionClient = createNotionClient(token);
 
-  try {
-    await notionClient.search({
-      query: '84ff1e57-2170-486b-8d31-e163c9069538',
-    });
+  await notionClient.search({
+    query: '84ff1e57-2170-486b-8d31-e163c9069538',
+  });
 
-    const hash = encrypt(token);
-    const hashAsString = JSON.stringify(hash);
+  const hash = encrypt(token);
+  const hashAsString = JSON.stringify(hash);
 
-    const { error: updateProfileError } = await updateProfileNotionApiKey(user?.id!, hashAsString);
+  await updateProfileNotionApiKey(user?.id!, hashAsString);
 
-    if (updateProfileError) {
-      return res.status(500).json(updateProfileError);
-    }
-
-    return res.status(200).json(hash);
-  } catch {
-    return res.status(400).json({ message: 'Invalid API token' });
-  }
+  return res.status(EHttpStatusCode.OK).json(hash);
 };
 
 const middlewareToApply = [

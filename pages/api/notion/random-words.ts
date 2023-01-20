@@ -5,8 +5,10 @@ import {
 } from '@notionhq/client/build/src/api-endpoints';
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiError } from 'next/dist/server/api-utils';
 
 import { supabaseInstance } from '@infrastructure/config';
+import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -57,6 +59,7 @@ const getProfileDetails = (userId: string) =>
     .from('profiles')
     .select('notion_api_key,notion_page_id')
     .eq('id', userId)
+    .throwOnError()
     .single();
 
 const getRandomFivePages = (pages: TPage[]) => {
@@ -190,60 +193,53 @@ const getTextFromPageProperty = (
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
+  const { data: profileData } = await getProfileDetails(user?.id!);
 
-  const { data: profileData, error: profileError } = await getProfileDetails(user?.id!);
-
-  if (profileError) {
-    return res.status(500).json(profileError);
+  if (!profileData.notion_api_key) {
+    throw new ApiError(
+      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      'The user does not have a notion api key',
+    );
   }
 
   if (!profileData.notion_api_key) {
-    return res.status(500).json({ message: 'The user does not have a notion api key' });
+    throw new ApiError(
+      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      'The user does not have a selected notion page id',
+    );
   }
 
-  if (!profileData.notion_page_id) {
-    return res.status(500).json({ message: 'The user does not have a selected notion page id' });
-  }
+  const hash = JSON.parse(profileData.notion_api_key);
+  const notionApiKey = decrypt(hash);
 
-  try {
-    const hash = JSON.parse(profileData.notion_api_key);
-    const notionApiKey = decrypt(hash);
+  const notionClient = createNotionClient(notionApiKey);
 
-    const notionClient = createNotionClient(notionApiKey);
+  const allPages = await getPagesWithCache({
+    notionApiKey,
+    notionClient,
+    profileId: user?.id!,
+    databaseId: profileData.notion_page_id,
+  });
 
-    const allPages = await getPagesWithCache({
-      notionApiKey,
-      notionClient,
-      profileId: user?.id!,
-      databaseId: profileData.notion_page_id,
-    });
+  const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
-    const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
+  const formattedPages = selectedPages.map((_selectedPage) => {
+    const word = getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES);
+    const ipa = textToIpa(word as string);
 
-    const formattedPages = selectedPages.map((_selectedPage) => {
-      const word = getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES);
-      const ipa = textToIpa(word as string);
+    return {
+      ipa,
+      word,
+      type: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_TYPE_COLUMN_NAMES),
+      meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
+      exampleSentence: getTextFromPageProperty(
+        _selectedPage.properties,
+        SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
+      ),
+    };
+  });
 
-      return {
-        ipa,
-        word,
-        type: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_TYPE_COLUMN_NAMES),
-        meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
-        exampleSentence: getTextFromPageProperty(
-          _selectedPage.properties,
-          SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
-        ),
-      };
-    });
-
-    return res.status(200).json(formattedPages);
-  } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-
-    return res.status(500).json(error);
-  }
+  return res.status(EHttpStatusCode.OK).json(formattedPages);
 };
 
 const middlewareToApply = [
