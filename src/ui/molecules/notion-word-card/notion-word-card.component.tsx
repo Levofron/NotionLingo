@@ -10,9 +10,11 @@ import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 import { INotionWordCardProps } from './notion-word-card.types';
 
 export const NotionWordCard: FC<INotionWordCardProps> = ({
+  countdown,
   exampleSentence,
   imageUrl,
   ipa,
+  isCountdownEnded,
   meaning,
   onClick,
   type,
@@ -86,7 +88,7 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           noOfLines={{ base: 4, md: 5 }}
           p={{ base: 2, sm: 3, md: 4 }}
         >
-          &quot;{exampleSentence}&quot;
+          {exampleSentence}
         </Text>
         <Flex
           _hover={{
@@ -104,7 +106,7 @@ export const NotionWordCard: FC<INotionWordCardProps> = ({
           transition="all .3s ease"
           onClick={onClick}
         >
-          <BsHeart fontSize="40px" />
+          {isCountdownEnded ? <BsHeart fontSize="40px" /> : <Text fontSize="xl">{countdown}</Text>}
         </Flex>
       </Flex>
     </Card>
