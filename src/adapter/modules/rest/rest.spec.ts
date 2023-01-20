@@ -9,6 +9,7 @@ describe('restModule object', () => {
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       sendContactFormData: expect.any(Function),
+      increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });

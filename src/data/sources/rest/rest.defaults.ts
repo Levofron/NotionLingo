@@ -6,6 +6,7 @@ export const restEndpoints = {
 
   // profile
   GET_LOGGED_USER: '/profile/logged',
+  INCREASE_DAILY_STREAK: '/profile/increase-daily-streak',
 
   // notion
   SET_NOTION_PAGE_ID: '/notion/set-page-id',

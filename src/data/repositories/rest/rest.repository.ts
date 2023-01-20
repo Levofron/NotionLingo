@@ -54,4 +54,9 @@ export const getRestRepository = (
 
     return response;
   },
+  increaseDailyStreak: async () => {
+    const { data } = await restSource.increaseDailyStreak();
+
+    return data;
+  },
 });

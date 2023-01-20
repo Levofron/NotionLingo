@@ -1,4 +1,10 @@
-export interface IUser {
+export interface IIncreaseDailyStreak {
+  daysInStreak: number | null;
+  todayWordsStreak: number | null;
+  totalLearnedWords: number | null;
+}
+
+export interface IUser extends IIncreaseDailyStreak {
   avatarUrl: string;
   createdAt: string;
   email: string;
