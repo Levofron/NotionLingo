@@ -2,7 +2,12 @@ import { FC } from 'react';
 
 import { Flex, Spinner } from '@ui/atoms';
 
-export const FullScreenLoader: FC = (): JSX.Element => (
+import { IFullScreenLoaderProps } from './full-screen-loader.types';
+
+export const FullScreenLoader: FC<IFullScreenLoaderProps> = ({
+  children,
+  ...restProps
+}): JSX.Element => (
   <Flex
     alignItems="center"
     bg="gray.50"
@@ -13,7 +18,9 @@ export const FullScreenLoader: FC = (): JSX.Element => (
     top={0}
     width="full"
     zIndex="9999"
+    {...restProps}
   >
     <Spinner />
+    {children}
   </Flex>
 );
