@@ -52,7 +52,7 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
   };
 
   return (
-    <Box bg="gray.50" height="100%">
+    <Box bg="gray.50" height="100%" overflow="hidden">
       <ParticlesBackground />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
