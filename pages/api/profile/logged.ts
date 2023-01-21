@@ -14,7 +14,9 @@ import {
 const getProfileDetails = (userId: string) =>
   supabaseInstance
     .from('profiles')
-    .select('id,email,created_at,notion_api_key,notion_page_id')
+    .select(
+      'id,email,created_at,notion_api_key,notion_page_id,days_in_streak,today_words_streak,total_learned_words',
+    )
     .eq('id', userId)
     .throwOnError()
     .single();
@@ -33,6 +35,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     createdAt: profileData.created_at,
     fullName: user?.user_metadata.full_name,
     avatarUrl: user?.user_metadata.avatar_url,
+    daysInStreak: profileData?.days_in_streak,
+    todayWordsStreak: profileData?.today_words_streak,
+    totalLearnedWords: profileData?.total_learned_words,
   };
 
   res.status(EHttpStatusCode.OK).json(userData);
