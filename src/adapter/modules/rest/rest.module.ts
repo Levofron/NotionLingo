@@ -3,6 +3,7 @@ import {
   getLoggedUserUseCase,
   getRandomNotionWordsUseCase,
   healthCheckUseCase,
+  increaseDailyStreakUseCase,
   sendContactFormDataUseCase,
   setNotionApiTokenUseCase,
   setNotionPageIdUseCase,
@@ -29,6 +30,7 @@ export const restModule = {
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
   sendContactFormData: sendContactFormDataUseCase(restRepository).execute,
+  increaseDailyStreak: increaseDailyStreakUseCase(restRepository).execute,
   getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
   getAvailableNotionPages: getAvailableNotionPagesUseCase(restRepository).execute,
 };

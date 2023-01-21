@@ -30,6 +30,7 @@ export const createDevToolsClient = () => {
   console.log('-----------------------------');
   console.log('window.rest.setSupabaseCookie() - to set supabase cookie');
   console.log('window.rest.healthCheck() - to verify if API works correctly');
+  console.log('window.rest.increaseDailyStreak() - to increase daily streak');
   console.log('window.rest.setNotionApiToken(token) - to set a new notion token');
   console.log('window.rest.sendContactFormData(data) - to send contact form data');
   console.log('window.rest.getLoggedUser() - to get all details about logged user');

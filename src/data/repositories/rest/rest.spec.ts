@@ -23,6 +23,7 @@ describe('getRestRepository function', () => {
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       sendContactFormData: expect.any(Function),
+      increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
@@ -202,6 +203,25 @@ describe('getRestRepository function', () => {
 
       expect(result).toEqual(formData);
       expect(restSourceMock.sendContactFormData).toHaveBeenCalledWith(formData);
+    });
+  });
+
+  describe('increaseDailyStreak function', () => {
+    it('should call proper restSource function', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restSourceMock: any = {
+        increaseDailyStreak: jest.fn().mockImplementation(() => ({ data: {} })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseSourceMock: any = {};
+
+      const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
+
+      const result = await restRepository.increaseDailyStreak();
+
+      expect(result).toEqual({});
+      expect(restSourceMock.increaseDailyStreak).toHaveBeenCalled();
     });
   });
 });

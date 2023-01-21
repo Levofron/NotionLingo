@@ -20,6 +20,7 @@ describe('getRestSource function', () => {
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       sendContactFormData: expect.any(Function),
+      increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
@@ -317,6 +318,37 @@ describe('getRestSource function', () => {
         email: 'email',
         message: 'message',
       });
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('increaseDailyStreak endpoint', () => {
+    it('should call proper endpoint', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        get: jest.fn().mockResolvedValue({ data: {} }),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.increaseDailyStreak();
+
+      expect(result).resolves.toEqual({ data: {} });
+      expect(axiosInstanceMock.get).toHaveBeenCalledWith(
+        expect.stringContaining('/profile/increase-daily-streak?currentDate='),
+      );
+    });
+
+    it('should throw error if endpoint fails', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        get: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.increaseDailyStreak();
 
       expect(result).rejects.toThrow('error');
     });

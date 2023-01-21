@@ -2,7 +2,14 @@ import {
   IUseCaseWithSingleParamAndPromiseResult,
   IUseCaseWithoutParamsAndPromiseResult,
 } from '../common.types';
-import { IContact, IHash, INotionPage, INotionWord, IUser } from './rest.models';
+import {
+  IContact,
+  IHash,
+  IIncreaseDailyStreak,
+  INotionPage,
+  INotionWord,
+  IUser,
+} from './rest.models';
 import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
@@ -74,4 +81,14 @@ export const sendContactFormDataUseCase = (
   restRepository: IRestRepository,
 ): TSendContactFormDataUseCase => ({
   execute: (data) => restRepository.sendContactFormData(data),
+});
+
+// increaseDailyStreakUseCase
+export type TIncreaseDailyStreakUseCase =
+  IUseCaseWithoutParamsAndPromiseResult<IIncreaseDailyStreak>;
+
+export const increaseDailyStreakUseCase = (
+  restRepository: IRestRepository,
+): TIncreaseDailyStreakUseCase => ({
+  execute: () => restRepository.increaseDailyStreak(),
 });

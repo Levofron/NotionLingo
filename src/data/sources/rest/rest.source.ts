@@ -51,4 +51,13 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
+  increaseDailyStreak: async () => {
+    const encodedCurrentDate = encodeURIComponent(new Date().toISOString());
+
+    const response = await axiosInstance.get(
+      `${restEndpoints.INCREASE_DAILY_STREAK}?currentDate=${encodedCurrentDate}`,
+    );
+
+    return response;
+  },
 });
