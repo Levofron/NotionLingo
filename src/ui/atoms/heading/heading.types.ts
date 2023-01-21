@@ -1,3 +1,5 @@
 import { HeadingProps } from '@chakra-ui/react';
 
-export interface IHeadingProps extends HeadingProps {}
+export interface IHeadingProps extends HeadingProps {
+  withBalancer?: boolean;
+}
