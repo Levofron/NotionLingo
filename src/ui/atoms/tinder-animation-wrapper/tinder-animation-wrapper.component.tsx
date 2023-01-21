@@ -36,8 +36,8 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
   const x = useMotionValue(0);
   const animControls = useAnimation();
   const rotate = useTransform(x, [-rotateWidth, rotateWidth], [-35, 35]);
-  const rightLearnedLabelOpacity = useTransform(x, [50, sensitive], [0, 200]);
-  const leftLearnedLabelOpacity = useTransform(x, [-50, -sensitive], [0, 200]);
+  const leftLearnedLabelOpacity = useTransform(x, [100, sensitive], [0, 200]);
+  const rightLearnedLabelOpacity = useTransform(x, [-100, -sensitive], [0, 200]);
 
   useEffect(() => {
     if (isDraggable) {
@@ -76,7 +76,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
       }}
       {...restProps}
     >
-      <motion.div style={{ opacity: rightLearnedLabelOpacity }}>
+      <motion.div style={{ opacity: leftLearnedLabelOpacity }}>
         <Icon
           as={BsCheckCircleFill}
           background="white"
@@ -89,7 +89,7 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
           zIndex={zIndex + 1}
         />
       </motion.div>
-      <motion.div style={{ opacity: leftLearnedLabelOpacity }}>
+      <motion.div style={{ opacity: rightLearnedLabelOpacity }}>
         <Icon
           as={BsCheckCircleFill}
           background="white"
