@@ -9884,6 +9884,7 @@ __metadata:
     react-dom: 18.2.0
     react-icons: ^4.7.1
     react-tsparticles: ^2.7.1
+    react-wrap-balancer: ^0.3.0
     text-to-ipa: ^1.0.0
     ts-jest: ^29.0.3
     tslib: ^2.4.1
@@ -11799,6 +11800,15 @@ __metadata:
   peerDependencies:
     react: ">=16"
   checksum: 3e8c65010378e8c329c3a135770455a3fe46e49544cdda8e4e9d091d9a471295ff8f6f46f017e3cbd1e1f830cbad16fa5cab4b9e54eda6b06cf90ff419585514
+  languageName: node
+  linkType: hard
+
+"react-wrap-balancer@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "react-wrap-balancer@npm:0.3.0"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: f0e930889e62af08d00505718273a715184a4992f7003343a4db739f2ac53c94cc6bcdf19785bad373c5a7a3f4b64042c51061d4d4e7b777ec4466eb8b64f5dc
   languageName: node
   linkType: hard
 
