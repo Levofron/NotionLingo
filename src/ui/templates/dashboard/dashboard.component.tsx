@@ -70,7 +70,6 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
           alignItems="center"
           flexDirection="column"
           gap={{ base: 3, sm: 5 }}
-          height="100%"
           justifyContent="center"
         >
           <Text fontWeight="medium" maxWidth="300px" textAlign="center">
