@@ -1,7 +1,7 @@
 import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
-import { GiAnticlockwiseRotation } from 'react-icons/gi';
+import { GiAnticlockwiseRotation, GiClockwiseRotation } from 'react-icons/gi';
 
 import { Icon } from '@ui/atoms';
 
@@ -59,7 +59,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
     animControls.start({ rotateY: isRotated ? -90 : 90 }).then(() => {
       setIsRotated((prev) => !prev);
 
-      animControls.start({ rotateY: isRotated ? 0 : 0 });
+      animControls.start({ rotateY: 0 });
     });
   };
 
@@ -89,7 +89,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
       {...restProps}
     >
       <Icon
-        as={GiAnticlockwiseRotation}
+        as={isRotated ? GiClockwiseRotation : GiAnticlockwiseRotation}
         cursor="pointer"
         display={isDraggable ? 'block' : 'none'}
         fontSize="5xl"
