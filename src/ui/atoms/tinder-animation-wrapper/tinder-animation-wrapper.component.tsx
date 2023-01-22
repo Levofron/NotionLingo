@@ -1,5 +1,8 @@
 import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { FC, useCallback, useEffect, useMemo } from 'react';
+import { BsCheckCircleFill } from 'react-icons/bs';
+
+import { Icon } from '@ui/atoms';
 
 import { useCountdown, useWindowSize } from '@infrastructure/utils';
 
@@ -16,9 +19,25 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
   const { countdown, isEnded, isStarted, start } = useCountdown(5);
   const rotateWidth = useMemo(() => Math.max(windowSize.width, 700), [windowSize.width]);
 
+  const getSensitive = () => {
+    if (windowSize.width < 320) {
+      return 175;
+    }
+
+    if (windowSize.width < 480) {
+      return 250;
+    }
+
+    return 300;
+  };
+
+  const sensitive = useMemo(getSensitive, [windowSize.width]);
+
   const x = useMotionValue(0);
   const animControls = useAnimation();
   const rotate = useTransform(x, [-rotateWidth, rotateWidth], [-35, 35]);
+  const leftLearnedLabelOpacity = useTransform(x, [100, sensitive], [0, 200]);
+  const rightLearnedLabelOpacity = useTransform(x, [-100, -sensitive], [0, 200]);
 
   useEffect(() => {
     if (isDraggable) {
@@ -33,20 +52,6 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
 
     animControls.start({ x: rotateWidth }).then(onScreenExit);
   }, [isStarted]);
-
-  const getSensitive = () => {
-    if (windowSize.width < 320) {
-      return 175;
-    }
-
-    if (windowSize.width < 480) {
-      return 250;
-    }
-
-    return 300;
-  };
-
-  const sensitive = useMemo(getSensitive, [windowSize.width]);
 
   return (
     <motion.div
@@ -71,6 +76,32 @@ export const TinderAnimationWrapper: FC<ITinderAnimationWrapperProps> = ({
       }}
       {...restProps}
     >
+      <motion.div style={{ opacity: leftLearnedLabelOpacity }}>
+        <Icon
+          as={BsCheckCircleFill}
+          background="white"
+          borderRadius="50%"
+          fontSize="5xl"
+          left={3}
+          p={1}
+          position="absolute"
+          top={3}
+          zIndex={zIndex + 1}
+        />
+      </motion.div>
+      <motion.div style={{ opacity: rightLearnedLabelOpacity }}>
+        <Icon
+          as={BsCheckCircleFill}
+          background="white"
+          borderRadius="50%"
+          fontSize="5xl"
+          p={1}
+          position="absolute"
+          right={3}
+          top={3}
+          zIndex={zIndex + 1}
+        />
+      </motion.div>
       {children({ onClick: handleScreenExit, countdown, isCountdownEnded: isEnded })}
     </motion.div>
   );
