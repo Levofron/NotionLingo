@@ -1,5 +1,5 @@
 import { Heading } from '@chakra-ui/react';
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 
 import { speechSynthesisModule } from '@adapter';
 
@@ -14,26 +14,95 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
 } from '@constants';
 
 import { INotionWordCardBackProps } from './notion-word-card-back.types';
 
 export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element => {
-  const [localStorageRate] = useLocalStorage(
+  const [localStorageRate, setLocalStorageRate] = useLocalStorage(
     LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
     DEFAULT_SPEECH_SYNTHESIS_RATE,
   );
-  const [localStoragePitch] = useLocalStorage(
+  const [localStoragePitch, setLocalStoragePitch] = useLocalStorage(
     LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
     DEFAULT_SPEECH_SYNTHESIS_PITCH,
   );
-  const [localStorageVolume] = useLocalStorage(
+  const [localStorageVolume, setLocalStorageVolume] = useLocalStorage(
     LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
     DEFAULT_SPEECH_SYNTHESIS_VOLUME,
   );
+  const [localStorageVoice, setLocalStorageVoice] = useLocalStorage<SpeechSynthesisVoice>(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+  );
 
-  console.log(localStorageRate, localStoragePitch, localStorageVolume);
+  const handlePitchChange = (value: number) => {
+    speechSynthesisModule.cancel();
+    speechSynthesisModule.speak({
+      pitch: value,
+      text: 'Hello, world!',
+      voice: localStorageVoice,
+      rate: Number(localStorageRate),
+      volume: Number(localStorageVolume),
+    });
+
+    setLocalStoragePitch(value.toString());
+  };
+
+  const handleRateChange = (value: number) => {
+    console.log(localStorageVoice);
+
+    speechSynthesisModule.cancel();
+    speechSynthesisModule.speak({
+      rate: value,
+      text: 'Hello, world!',
+      voice: localStorageVoice,
+      pitch: Number(localStoragePitch),
+      volume: Number(localStorageVolume),
+    });
+
+    setLocalStorageRate(value.toString());
+  };
+
+  const handleVolumeChange = (value: number) => {
+    speechSynthesisModule.cancel();
+    speechSynthesisModule.speak({
+      volume: value,
+      text: 'Hello, world!',
+      voice: localStorageVoice,
+      rate: Number(localStorageRate),
+      pitch: Number(localStoragePitch),
+    });
+
+    setLocalStorageVolume(value.toString());
+  };
+
+  const handleVoiceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const foundVoice = speechSynthesisModule
+      .getVoices()
+      .find((_voice) => _voice.name === event.target.value);
+
+    speechSynthesisModule.cancel();
+    speechSynthesisModule.speak({
+      voice: foundVoice,
+      text: 'Hello, world!',
+      rate: Number(localStorageRate),
+      pitch: Number(localStoragePitch),
+      volume: Number(localStorageVolume),
+    });
+
+    const reassignedVoice = {
+      name: foundVoice?.name,
+      lang: foundVoice?.lang,
+      default: foundVoice?.default,
+      voiceURI: foundVoice?.voiceURI,
+      localService: foundVoice?.localService,
+    };
+
+    // @ts-expect-error
+    setLocalStorageVoice(reassignedVoice);
+  };
 
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
@@ -41,8 +110,8 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
         <Heading as="h2" fontSize="xl" mb={5} textAlign="center">
           Edit your settings
         </Heading>
-        <VStack as="form" spacing={5}>
-          <SelectControl label="Select voice">
+        <VStack spacing={5}>
+          <SelectControl label="Voice" value={localStorageVoice?.name} onChange={handleVoiceChange}>
             <option key="placeholder" disabled>
               Select voice...
             </option>
@@ -52,12 +121,34 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
               </option>
             ))}
           </SelectControl>
-          <SliderControl label="Select pitch" max={2} min={0} step={0.1} />
-          <SliderControl label="Select rate" max={10} min={0.1} step={0.1} />
-          <SliderControl label="Select volume" max={1} min={0} step={0.1} />
-          <Button mode="dark" type="submit" width="full">
-            Save settings
-          </Button>
+          <SliderControl
+            defaultValue={Number(localStoragePitch)}
+            label="Pitch"
+            max={2}
+            min={0}
+            step={0.1}
+            value={Number(localStoragePitch)}
+            onChange={handlePitchChange}
+          />
+          <SliderControl
+            defaultValue={Number(localStorageRate)}
+            label="Rate"
+            max={10}
+            min={0.1}
+            step={0.1}
+            value={Number(localStorageRate)}
+            onChange={handleRateChange}
+          />
+          <SliderControl
+            defaultValue={Number(localStorageVolume)}
+            label="Volume"
+            max={1}
+            min={0}
+            step={0.1}
+            value={Number(localStorageVolume)}
+            onChange={handleVolumeChange}
+          />
+          <Button mode="dark">Reset to defaults</Button>
         </VStack>
       </Flex>
     </Card>
