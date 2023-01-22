@@ -19,6 +19,8 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
   const { loading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
     useAxiosAction(restModule.getRandomNotionWords);
 
+  const { mutate: mutateIncreaseDailyStreak } = useAxiosAction(restModule.increaseDailyStreak);
+
   const fetchMoreWords = () =>
     mutateAsyncGetRandomNotionWords()
       .then((_response) => {
@@ -42,8 +44,9 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
     const copiedWords = [...words];
 
     copiedWords.splice(copiedWords.indexOf(notionWord), 1);
-
     setWords(copiedWords);
+
+    mutateIncreaseDailyStreak();
 
     if (copiedWords.length <= 3) {
       fetchMoreWords();

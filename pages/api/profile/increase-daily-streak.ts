@@ -77,7 +77,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (currentDateAsDate.toDateString() === lastDailyStreakUpdatedAtAsDate.toDateString()) {
     return updateProfileDetails({
-      days_in_streak: 1,
       today_words_streak: profileData.today_words_streak + 1,
       total_learned_words: profileData.total_learned_words + 1,
     });
