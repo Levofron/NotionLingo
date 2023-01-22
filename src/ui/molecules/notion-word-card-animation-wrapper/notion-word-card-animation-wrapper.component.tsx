@@ -75,7 +75,6 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
         position: 'absolute',
         pointerEvents: isDraggable ? 'auto' : 'none',
       }}
-      transition={{ type: 'spring', stiffness: 500, damping: 50 }}
       whileDrag={{ scale: 1.1 }}
       onDragEnd={(_, info) => {
         if (Math.abs(info.offset.x) < sensitive || isStarted) {
