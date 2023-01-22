@@ -94,8 +94,9 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
         display={isDraggable ? 'block' : 'none'}
         fontSize="5xl"
         position="absolute"
-        right={-50}
-        top={-50}
+        right="50%"
+        style={{ transform: 'translateX(50%)' }}
+        top="-60px"
         onClick={handleRotateIconClick}
       />
       {!isRotated ? (
