@@ -2,10 +2,15 @@ import { localStorageModule, speechSynthesisModule } from '@adapter';
 
 import { hasOwnProperty, tryParseJson } from '@infrastructure/utils';
 
-const SPEECH_SYNTHESIS_RATE = 'speechSynthesisRate';
-const SPEECH_SYNTHESIS_VOICE = 'speechSynthesisVoice';
-const SPEECH_SYNTHESIS_PITCH = 'speechSynthesisPitch';
-const SPEECH_SYNTHESIS_VOLUME = 'speechSynthesisVolume';
+import {
+  DEFAULT_SPEECH_SYNTHESIS_PITCH,
+  DEFAULT_SPEECH_SYNTHESIS_RATE,
+  DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+} from '@constants';
 
 const checkNumberFieldAndFillIfEmpty = (key: string, value: string) => {
   const valueFromLocalStorage = localStorageModule.getItem(key);
@@ -16,11 +21,22 @@ const checkNumberFieldAndFillIfEmpty = (key: string, value: string) => {
 };
 
 export const fillUpMissedLocalStorageFields = () => {
-  checkNumberFieldAndFillIfEmpty(SPEECH_SYNTHESIS_RATE, '0.8');
-  checkNumberFieldAndFillIfEmpty(SPEECH_SYNTHESIS_PITCH, '1.0');
-  checkNumberFieldAndFillIfEmpty(SPEECH_SYNTHESIS_VOLUME, '1.0');
+  checkNumberFieldAndFillIfEmpty(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+    DEFAULT_SPEECH_SYNTHESIS_RATE,
+  );
+  checkNumberFieldAndFillIfEmpty(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+    DEFAULT_SPEECH_SYNTHESIS_PITCH,
+  );
+  checkNumberFieldAndFillIfEmpty(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+    DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+  );
 
-  const voiceFromLocalStorage = localStorageModule.getItem(SPEECH_SYNTHESIS_VOICE);
+  const voiceFromLocalStorage = localStorageModule.getItem(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+  );
   const parsedVoiceFromLocalStorage = tryParseJson(voiceFromLocalStorage);
 
   if (!parsedVoiceFromLocalStorage || !hasOwnProperty(parsedVoiceFromLocalStorage, 'name')) {
@@ -38,7 +54,7 @@ export const fillUpMissedLocalStorageFields = () => {
         };
 
         localStorageModule.setItem({
-          key: SPEECH_SYNTHESIS_VOICE,
+          key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
           value: JSON.stringify(reassignedVoice),
         });
       }, 0);

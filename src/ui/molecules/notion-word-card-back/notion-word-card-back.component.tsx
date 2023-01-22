@@ -6,10 +6,34 @@ import { speechSynthesisModule } from '@adapter';
 import { Button, Card, Flex, VStack } from '@ui/atoms';
 import { SelectControl, SliderControl } from '@ui/molecules';
 
+import { useLocalStorage } from '@infrastructure/utils';
+
+import {
+  DEFAULT_SPEECH_SYNTHESIS_PITCH,
+  DEFAULT_SPEECH_SYNTHESIS_RATE,
+  DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+} from '@constants';
+
 import { INotionWordCardBackProps } from './notion-word-card-back.types';
 
 export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element => {
-  console.log(speechSynthesisModule.getVoices());
+  const [localStorageRate] = useLocalStorage(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+    DEFAULT_SPEECH_SYNTHESIS_RATE,
+  );
+  const [localStoragePitch] = useLocalStorage(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+    DEFAULT_SPEECH_SYNTHESIS_PITCH,
+  );
+  const [localStorageVolume] = useLocalStorage(
+    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+    DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+  );
+
+  console.log(localStorageRate, localStoragePitch, localStorageVolume);
 
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
