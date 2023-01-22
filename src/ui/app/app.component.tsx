@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { ChakraProvider, LayoutProvider, UserProvider } from '../providers';
+import { ChakraProvider, LayoutProvider, UserProvider, WrapBalancerProvider } from '../providers';
 import { IAppProps } from './app.types';
 import { createDevToolsClient } from './utils';
 
@@ -10,12 +10,14 @@ export const App = ({ Component, pageProps }: IAppProps) => {
   }, []);
 
   return (
-    <ChakraProvider>
-      <UserProvider>
-        <LayoutProvider>
-          <Component {...pageProps} />
-        </LayoutProvider>
-      </UserProvider>
-    </ChakraProvider>
+    <WrapBalancerProvider>
+      <ChakraProvider>
+        <UserProvider>
+          <LayoutProvider>
+            <Component {...pageProps} />
+          </LayoutProvider>
+        </UserProvider>
+      </ChakraProvider>
+    </WrapBalancerProvider>
   );
 };

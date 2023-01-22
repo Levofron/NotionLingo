@@ -5,8 +5,8 @@ import { INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Flex, ParticlesBackground, TinderAnimationWrapper } from '@ui/atoms';
-import { NotionWordCard } from '@ui/molecules';
+import { Box, Button, Flex, ParticlesBackground, Text, TinderAnimationWrapper } from '@ui/atoms';
+import { FullScreenLoader, NotionWordCard } from '@ui/molecules';
 
 import { useAxiosAction } from '@infrastructure/utils';
 
@@ -16,9 +16,8 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
   const toast = useToast();
   const [words, setWords] = useState<INotionWord[]>([]);
 
-  const { mutateAsync: mutateAsyncGetRandomNotionWords } = useAxiosAction(
-    restModule.getRandomNotionWords,
-  );
+  const { loading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
+    useAxiosAction(restModule.getRandomNotionWords);
 
   const { mutate: mutateIncreaseDailyStreak } = useAxiosAction(restModule.increaseDailyStreak);
 
@@ -30,10 +29,10 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
       .catch((_error) => {
         toast({
           title: 'Error',
-          description: _error,
-          status: 'error',
           duration: 5000,
+          status: 'error',
           isClosable: true,
+          description: _error,
         });
       });
 
@@ -49,35 +48,72 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
 
     mutateIncreaseDailyStreak();
 
-    if (copiedWords.length < 3) {
+    if (copiedWords.length <= 3) {
       fetchMoreWords();
     }
+  };
+
+  const renderContainer = () => {
+    if (isGetRandomNotionWordsLoading && words.length === 0) {
+      return (
+        <FullScreenLoader
+          backgroundColor="transparent"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          position="relative"
+        >
+          <Text fontWeight="medium">Loading words...</Text>
+        </FullScreenLoader>
+      );
+    }
+
+    if (words.length === 0) {
+      return (
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          justifyContent="center"
+        >
+          <Text fontWeight="medium" maxWidth="300px" textAlign="center">
+            No words found. Please fill up your Notion database with words.
+          </Text>
+          <Button size={{ base: 'sm', sm: 'md', md: 'lg' }} onClick={fetchMoreWords}>
+            Refetch
+          </Button>
+        </Flex>
+      );
+    }
+
+    return (
+      <Flex alignItems="center" height="100%" justifyContent="center">
+        {words.map((_word, _index) => {
+          const isTopCard = _index === words.length - 1;
+
+          return (
+            <TinderAnimationWrapper
+              key={_word.word}
+              isDraggable={isTopCard}
+              zIndex={_index}
+              onScreenExit={handleNotionWordCardClick(_word)}
+            >
+              {(_additionalProps) => (
+                <Fade in={isTopCard}>
+                  <NotionWordCard {..._word} {..._additionalProps} />
+                </Fade>
+              )}
+            </TinderAnimationWrapper>
+          );
+        })}
+      </Flex>
+    );
   };
 
   return (
     <Box bg="gray.50" height="100%">
       <ParticlesBackground />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
-        <Flex alignItems="center" height="100%" justifyContent="center">
-          {words.map((_word, _index) => {
-            const isTopCard = _index === words.length - 1;
-
-            return (
-              <TinderAnimationWrapper
-                key={_word.word}
-                isDraggable={isTopCard}
-                zIndex={_index}
-                onScreenExit={handleNotionWordCardClick(_word)}
-              >
-                {(_additionalProps) => (
-                  <Fade in={isTopCard}>
-                    <NotionWordCard {..._word} {..._additionalProps} />
-                  </Fade>
-                )}
-              </TinderAnimationWrapper>
-            );
-          })}
-        </Flex>
+        {renderContainer()}
       </Container>
     </Box>
   );
