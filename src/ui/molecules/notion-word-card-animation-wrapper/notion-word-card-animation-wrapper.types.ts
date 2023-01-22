@@ -4,10 +4,12 @@ import { ReactNode } from 'react';
 interface IChildrenProps {
   countdown: number;
   isCountdownEnded: boolean;
+  isRotated: boolean;
   onClick: () => void;
 }
 
-export interface ITinderAnimationWrapperProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
+export interface INotionWordCardAnimationWrapperProps
+  extends Omit<HTMLMotionProps<'div'>, 'children'> {
   children: (props: IChildrenProps) => ReactNode;
   isDraggable: boolean;
   onScreenExit: () => void;

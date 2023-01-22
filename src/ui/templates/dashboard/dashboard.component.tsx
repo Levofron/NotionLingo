@@ -5,8 +5,13 @@ import { INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Button, Flex, ParticlesBackground, Text, TinderAnimationWrapper } from '@ui/atoms';
-import { FullScreenLoader, NotionWordCard } from '@ui/molecules';
+import { Box, Button, Flex, ParticlesBackground, Text } from '@ui/atoms';
+import {
+  FullScreenLoader,
+  NotionWordCardAnimationWrapper,
+  NotionWordCardBack,
+  NotionWordCardFront,
+} from '@ui/molecules';
 
 import { useAxiosAction } from '@infrastructure/utils';
 
@@ -53,7 +58,7 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
     }
   };
 
-  const renderContainer = () => {
+  const renderContent = () => {
     if (isGetRandomNotionWordsLoading && words.length === 0) {
       return (
         <FullScreenLoader
@@ -91,18 +96,24 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
           const isTopCard = _index === words.length - 1;
 
           return (
-            <TinderAnimationWrapper
+            <NotionWordCardAnimationWrapper
               key={_word.word}
               isDraggable={isTopCard}
               zIndex={_index}
               onScreenExit={handleNotionWordCardClick(_word)}
             >
-              {(_additionalProps) => (
-                <Fade in={isTopCard}>
-                  <NotionWordCard {..._word} {..._additionalProps} />
-                </Fade>
+              {({ isRotated, ..._additionalProps }) => (
+                <>
+                  {!isRotated ? (
+                    <Fade in={isTopCard}>
+                      <NotionWordCardFront {..._word} {..._additionalProps} />
+                    </Fade>
+                  ) : (
+                    <NotionWordCardBack />
+                  )}
+                </>
               )}
-            </TinderAnimationWrapper>
+            </NotionWordCardAnimationWrapper>
           );
         })}
       </Flex>
@@ -113,7 +124,7 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
     <Box bg="gray.50" height="100%" overflow="hidden">
       <ParticlesBackground />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
-        {renderContainer()}
+        {renderContent()}
       </Container>
     </Box>
   );
