@@ -57,7 +57,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
 
   const handleRotateIconClick = () => {
     animControls.start({ rotateY: isRotated ? -90 : 90 }).then(() => {
-      setIsRotated((prev) => !prev);
+      setIsRotated((_prevState) => !_prevState);
 
       animControls.start({ rotateY: 0 });
     });
