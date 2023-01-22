@@ -75,7 +75,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
         position: 'absolute',
         pointerEvents: isDraggable ? 'auto' : 'none',
       }}
-      whileDrag={{ scale: 1.1 }}
+      whileDrag={{ scale: 1.05 }}
       onDragEnd={(_, info) => {
         if (Math.abs(info.offset.x) < sensitive || isStarted) {
           animControls.start({ x: 0, y: 0 });
