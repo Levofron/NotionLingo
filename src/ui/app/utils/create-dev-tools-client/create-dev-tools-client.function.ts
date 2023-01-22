@@ -1,4 +1,4 @@
-import { restModule, speechSynthesisModule, supabaseModule } from '@adapter';
+import { localStorageModule, restModule, speechSynthesisModule, supabaseModule } from '@adapter';
 
 import { APPLICATION_ENVIRONMENT } from '@constants';
 
@@ -15,6 +15,9 @@ export const createDevToolsClient = () => {
 
   // @ts-expect-error
   window.synthesis = speechSynthesisModule;
+
+  // @ts-expect-error
+  window.memory = localStorageModule;
 
   console.log('Welcome to Levofron devtools!');
 
@@ -44,4 +47,11 @@ export const createDevToolsClient = () => {
   console.log('window.synthesis.getVoices() - to get all available voices');
   console.log('window.synthesis.isSupported() - to check if speech synthesis is supported');
   console.log('window.synthesis.speak({ pitch, rate, text, voice, volume }) - to speak text');
+
+  // memory
+  console.log('-----------------------------');
+  console.log('window.memory.getItem(key) - to get item from local storage');
+  console.log('window.memory.setItem(key, value) - to set item to local storage');
+  console.log('window.memory.removeItem(key) - to remove item from local storage');
+  console.log('window.memory.isSupported() - to check if local storage is supported');
 };

@@ -19,7 +19,7 @@ describe('createDevToolsClient function', () => {
   afterEach(() => {
     // @ts-expect-error
     // eslint-disable-next-line no-global-assign
-    window = filterOutObjectKeys(window, ['rest', 'supabase']);
+    window = filterOutObjectKeys(window, ['rest', 'supabase', 'synthesis', 'memory']);
   });
 
   it('should assign supabase module to window object', () => {
@@ -72,6 +72,20 @@ describe('createDevToolsClient function', () => {
       increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
+    });
+  });
+
+  it('should assign memory module to window object', () => {
+    createDevToolsClient();
+
+    expect(window).toHaveProperty('memory');
+
+    // @ts-expect-error
+    expect(window.memory).toStrictEqual({
+      getItem: expect.any(Function),
+      setItem: expect.any(Function),
+      removeItem: expect.any(Function),
+      isSupported: expect.any(Function),
     });
   });
 });
