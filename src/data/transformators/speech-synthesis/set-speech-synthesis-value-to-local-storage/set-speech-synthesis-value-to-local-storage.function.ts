@@ -8,7 +8,7 @@ export const setSpeechSynthesisValueToLocalStorage = ({
   min,
   newValue,
 }: ISetSpeechSynthesisValueToLocalStorageParams): void => {
-  if (!newValue) {
+  if (!newValue && newValue !== 0) {
     return localStorageSource.setItem(key, defaultValue.toString());
   }
 
@@ -21,4 +21,6 @@ export const setSpeechSynthesisValueToLocalStorage = ({
   if (newValueAsNumber < min || newValueAsNumber > max) {
     return localStorageSource.setItem(key, defaultValue.toString());
   }
+
+  localStorageSource.setItem(key, newValueAsNumber.toString());
 };

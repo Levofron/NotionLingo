@@ -109,7 +109,7 @@ export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
                       <NotionWordCardFront {..._word} {..._additionalProps} />
                     </Fade>
                   ) : (
-                    <NotionWordCardBack />
+                    <NotionWordCardBack word={_word.word} />
                   )}
                 </>
               )}

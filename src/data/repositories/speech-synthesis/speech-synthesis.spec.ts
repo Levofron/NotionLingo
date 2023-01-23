@@ -68,13 +68,9 @@ describe('getSpeechSynthesisRepository function', () => {
       localStorageSource,
     );
 
-    speechSynthesisRepository.speak({
-      text: 'test',
-    });
+    speechSynthesisRepository.speak('test');
 
-    expect(speechSynthesisSource.speak).toHaveBeenCalledWith({
-      text: 'test',
-    });
+    expect(speechSynthesisSource.speak).toHaveBeenCalledWith('test');
   });
 
   it('should call cancel function', () => {

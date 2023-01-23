@@ -35,7 +35,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   }, []);
 
   const handleSpeak = useCallback(() => {
-    speechSynthesisModule.speak({ text: word });
+    speechSynthesisModule.speak(word);
   }, []);
 
   return (

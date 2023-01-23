@@ -1,5 +1,3 @@
-import { ISpeakOptions } from './speech-synthesis.types';
-
 export interface ISpeechSynthesisRepository {
   cancel: () => void;
   getPitch: () => number;
@@ -12,5 +10,5 @@ export interface ISpeechSynthesisRepository {
   setRate: (rate: number) => void;
   setVoice: (newVoiceName: string) => void;
   setVolume: (volume: number) => void;
-  speak: (options: ISpeakOptions) => void;
+  speak: (text: string) => void;
 }

@@ -1,6 +1,5 @@
 import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../common.types';
 import { ISpeechSynthesisRepository } from './speech-synthesis.repository';
-import { ISpeakOptions } from './speech-synthesis.types';
 
 // isSupportedUseCase
 export type TIsSupportedUseCase = IUseCaseWithoutParams<boolean>;
@@ -12,12 +11,12 @@ export const isSupportedUseCase = (
 });
 
 // speakUseCase
-export type TSpeakUseCase = IUseCaseWithSingleParam<ISpeakOptions, void>;
+export type TSpeakUseCase = IUseCaseWithSingleParam<string, void>;
 
 export const speakUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
 ): TSpeakUseCase => ({
-  execute: (options) => speechSynthesisRepository.speak(options),
+  execute: (text) => speechSynthesisRepository.speak(text),
 });
 
 // cancelUseCase

@@ -1,107 +1,63 @@
 import { Heading } from '@chakra-ui/react';
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 
 import { speechSynthesisModule } from '@adapter';
 
 import { Button, Card, Flex, VStack } from '@ui/atoms';
 import { SelectControl, SliderControl } from '@ui/molecules';
 
-import { useLocalStorage } from '@infrastructure/utils';
-
 import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,
   DEFAULT_SPEECH_SYNTHESIS_RATE,
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
-  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
-  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
-  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
-  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
 } from '@constants';
 
 import { INotionWordCardBackProps } from './notion-word-card-back.types';
 
-export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element => {
-  const [localStorageRate, setLocalStorageRate] = useLocalStorage(
-    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
-    DEFAULT_SPEECH_SYNTHESIS_RATE,
-  );
-  const [localStoragePitch, setLocalStoragePitch] = useLocalStorage(
-    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
-    DEFAULT_SPEECH_SYNTHESIS_PITCH,
-  );
-  const [localStorageVolume, setLocalStorageVolume] = useLocalStorage(
-    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
-    DEFAULT_SPEECH_SYNTHESIS_VOLUME,
-  );
-  const [localStorageVoice, setLocalStorageVoice] = useLocalStorage<SpeechSynthesisVoice>(
-    LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
-  );
+export const NotionWordCardBack: FC<INotionWordCardBackProps> = ({ word }): JSX.Element => {
+  const [rate, setRate] = useState(speechSynthesisModule.getRate());
+  const [pitch, setPitch] = useState(speechSynthesisModule.getPitch());
+  const [volume, setVolume] = useState(speechSynthesisModule.getVolume());
+  const [voice, setVoice] = useState(speechSynthesisModule.getVoice()?.name);
 
   const handlePitchChange = (value: number) => {
-    speechSynthesisModule.cancel();
-    speechSynthesisModule.speak({
-      pitch: value,
-      text: 'Hello, world!',
-      voice: localStorageVoice,
-      rate: Number(localStorageRate),
-      volume: Number(localStorageVolume),
-    });
-
-    setLocalStoragePitch(value);
+    setPitch(value);
+    speechSynthesisModule.setPitch(value);
+    speechSynthesisModule.speak(word);
   };
 
   const handleRateChange = (value: number) => {
-    console.log(localStorageVoice);
-
-    speechSynthesisModule.cancel();
-    speechSynthesisModule.speak({
-      rate: value,
-      text: 'Hello, world!',
-      voice: localStorageVoice,
-      pitch: Number(localStoragePitch),
-      volume: Number(localStorageVolume),
-    });
-
-    setLocalStorageRate(value);
+    setRate(value);
+    speechSynthesisModule.setRate(value);
+    speechSynthesisModule.speak(word);
   };
 
   const handleVolumeChange = (value: number) => {
-    speechSynthesisModule.cancel();
-    speechSynthesisModule.speak({
-      volume: value,
-      text: 'Hello, world!',
-      voice: localStorageVoice,
-      rate: Number(localStorageRate),
-      pitch: Number(localStoragePitch),
-    });
-
-    setLocalStorageVolume(value);
+    setVolume(value);
+    speechSynthesisModule.setVolume(value);
+    speechSynthesisModule.speak(word);
   };
 
   const handleVoiceChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const foundVoice = speechSynthesisModule
-      .getVoices()
-      .find((_voice) => _voice.name === event.target.value);
+    setVoice(event.target.value);
+    speechSynthesisModule.setVoice(event.target.value);
+    speechSynthesisModule.speak(word);
+  };
 
-    speechSynthesisModule.cancel();
-    speechSynthesisModule.speak({
-      voice: foundVoice,
-      text: 'Hello, world!',
-      rate: Number(localStorageRate),
-      pitch: Number(localStoragePitch),
-      volume: Number(localStorageVolume),
-    });
+  const handleResetToDefaults = () => {
+    const defaultVoice = speechSynthesisModule.getVoices()[0].name;
 
-    const reassignedVoice = {
-      name: foundVoice?.name,
-      lang: foundVoice?.lang,
-      default: foundVoice?.default,
-      voiceURI: foundVoice?.voiceURI,
-      localService: foundVoice?.localService,
-    };
+    setVoice(defaultVoice);
+    setRate(DEFAULT_SPEECH_SYNTHESIS_RATE);
+    setPitch(DEFAULT_SPEECH_SYNTHESIS_PITCH);
+    setVolume(DEFAULT_SPEECH_SYNTHESIS_VOLUME);
 
-    // @ts-expect-error
-    setLocalStorageVoice(reassignedVoice);
+    speechSynthesisModule.setVoice(defaultVoice);
+    speechSynthesisModule.setRate(DEFAULT_SPEECH_SYNTHESIS_RATE);
+    speechSynthesisModule.setPitch(DEFAULT_SPEECH_SYNTHESIS_PITCH);
+    speechSynthesisModule.setVolume(DEFAULT_SPEECH_SYNTHESIS_VOLUME);
+
+    speechSynthesisModule.speak(word);
   };
 
   return (
@@ -111,7 +67,7 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
           Edit your settings
         </Heading>
         <VStack spacing={5}>
-          <SelectControl label="Voice" value={localStorageVoice?.name} onChange={handleVoiceChange}>
+          <SelectControl label="Voice" value={voice} onChange={handleVoiceChange}>
             <option key="placeholder" disabled>
               Select voice...
             </option>
@@ -122,33 +78,35 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
             ))}
           </SelectControl>
           <SliderControl
-            defaultValue={Number(localStoragePitch)}
+            defaultValue={speechSynthesisModule.getPitch()}
             label="Pitch"
             max={2}
             min={0}
             step={0.1}
-            value={Number(localStoragePitch)}
+            value={pitch}
             onChange={handlePitchChange}
           />
           <SliderControl
-            defaultValue={Number(localStorageRate)}
+            defaultValue={speechSynthesisModule.getRate()}
             label="Rate"
             max={10}
             min={0.1}
             step={0.1}
-            value={Number(localStorageRate)}
+            value={rate}
             onChange={handleRateChange}
           />
           <SliderControl
-            defaultValue={Number(localStorageVolume)}
+            defaultValue={speechSynthesisModule.getVolume()}
             label="Volume"
             max={1}
             min={0}
             step={0.1}
-            value={Number(localStorageVolume)}
+            value={volume}
             onChange={handleVolumeChange}
           />
-          <Button mode="dark">Reset to defaults</Button>
+          <Button mode="dark" onClick={handleResetToDefaults}>
+            Reset to defaults
+          </Button>
         </VStack>
       </Flex>
     </Card>

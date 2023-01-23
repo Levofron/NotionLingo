@@ -1,1 +1,3 @@
-export interface INotionWordCardBackProps {}
+export interface INotionWordCardBackProps {
+  word: string;
+}
