@@ -26,9 +26,9 @@ export const LINKEDIN_LINK = 'https://linkedin.com/in/pwojtasinski';
 export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/playerony';
 export const PAYPAL_LINK = 'https://www.paypal.com/donate/?hosted_button_id=XQC5QN5G4JJW2';
 
-export const DEFAULT_SPEECH_SYNTHESIS_RATE = '0.8';
-export const DEFAULT_SPEECH_SYNTHESIS_PITCH = '1.0';
-export const DEFAULT_SPEECH_SYNTHESIS_VOLUME = '1.0';
+export const DEFAULT_SPEECH_SYNTHESIS_PITCH = 1;
+export const DEFAULT_SPEECH_SYNTHESIS_VOLUME = 1;
+export const DEFAULT_SPEECH_SYNTHESIS_RATE = 0.8;
 export const DEFAULT_ERROR_MESSAGE = 'Something went wrong';
 
 export const LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE = 'speechSynthesisRate';

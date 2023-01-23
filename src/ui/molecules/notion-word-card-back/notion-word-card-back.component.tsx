@@ -47,7 +47,7 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
       volume: Number(localStorageVolume),
     });
 
-    setLocalStoragePitch(value.toString());
+    setLocalStoragePitch(value);
   };
 
   const handleRateChange = (value: number) => {
@@ -62,7 +62,7 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
       volume: Number(localStorageVolume),
     });
 
-    setLocalStorageRate(value.toString());
+    setLocalStorageRate(value);
   };
 
   const handleVolumeChange = (value: number) => {
@@ -75,7 +75,7 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = (): JSX.Element 
       pitch: Number(localStoragePitch),
     });
 
-    setLocalStorageVolume(value.toString());
+    setLocalStorageVolume(value);
   };
 
   const handleVoiceChange = (event: ChangeEvent<HTMLSelectElement>) => {

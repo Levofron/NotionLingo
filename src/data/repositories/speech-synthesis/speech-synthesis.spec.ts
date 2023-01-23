@@ -6,12 +6,20 @@ describe('getSpeechSynthesisRepository function', () => {
   functionImportTest(getSpeechSynthesisRepository);
 
   it('should return proper object', () => {
-    const speechSynthesisRepository = getSpeechSynthesisRepository({
-      speak: jest.fn(),
-      cancel: jest.fn(),
-      getVoices: jest.fn(),
-      isSupported: jest.fn(),
-    });
+    const speechSynthesisRepository = getSpeechSynthesisRepository(
+      {
+        speak: jest.fn(),
+        cancel: jest.fn(),
+        getVoices: jest.fn(),
+        isSupported: jest.fn(),
+      },
+      {
+        getItem: jest.fn(),
+        setItem: jest.fn(),
+        removeItem: jest.fn(),
+        isSupported: jest.fn(),
+      },
+    );
 
     expect(speechSynthesisRepository).toEqual({
       speak: expect.any(Function),
@@ -22,12 +30,20 @@ describe('getSpeechSynthesisRepository function', () => {
   });
 
   it('should call isSupported function', () => {
-    const speechSynthesisRepository = getSpeechSynthesisRepository({
-      speak: jest.fn(),
-      cancel: jest.fn(),
-      getVoices: jest.fn(),
-      isSupported: jest.fn().mockReturnValue(true),
-    });
+    const speechSynthesisRepository = getSpeechSynthesisRepository(
+      {
+        speak: jest.fn(),
+        cancel: jest.fn(),
+        getVoices: jest.fn(),
+        isSupported: jest.fn().mockReturnValue(true),
+      },
+      {
+        getItem: jest.fn(),
+        setItem: jest.fn(),
+        removeItem: jest.fn(),
+        isSupported: jest.fn(),
+      },
+    );
 
     expect(speechSynthesisRepository.isSupported()).toBeTruthy();
   });
@@ -40,7 +56,17 @@ describe('getSpeechSynthesisRepository function', () => {
       isSupported: jest.fn().mockReturnValue(true),
     };
 
-    const speechSynthesisRepository = getSpeechSynthesisRepository(speechSynthesisSource);
+    const localStorageSource = {
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      removeItem: jest.fn(),
+      isSupported: jest.fn(),
+    };
+
+    const speechSynthesisRepository = getSpeechSynthesisRepository(
+      speechSynthesisSource,
+      localStorageSource,
+    );
 
     speechSynthesisRepository.speak({
       text: 'test',
@@ -59,7 +85,17 @@ describe('getSpeechSynthesisRepository function', () => {
       isSupported: jest.fn().mockReturnValue(true),
     };
 
-    const speechSynthesisRepository = getSpeechSynthesisRepository(speechSynthesisSource);
+    const localStorageSource = {
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      removeItem: jest.fn(),
+      isSupported: jest.fn(),
+    };
+
+    const speechSynthesisRepository = getSpeechSynthesisRepository(
+      speechSynthesisSource,
+      localStorageSource,
+    );
 
     speechSynthesisRepository.cancel();
 
@@ -74,7 +110,17 @@ describe('getSpeechSynthesisRepository function', () => {
       isSupported: jest.fn().mockReturnValue(true),
     };
 
-    const speechSynthesisRepository = getSpeechSynthesisRepository(speechSynthesisSource);
+    const localStorageSource = {
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      removeItem: jest.fn(),
+      isSupported: jest.fn(),
+    };
+
+    const speechSynthesisRepository = getSpeechSynthesisRepository(
+      speechSynthesisSource,
+      localStorageSource,
+    );
 
     speechSynthesisRepository.getVoices();
 

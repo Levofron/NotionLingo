@@ -12,11 +12,11 @@ import {
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
 } from '@constants';
 
-const checkNumberFieldAndFillIfEmpty = (key: string, value: string) => {
+const checkNumberFieldAndFillIfEmpty = (key: string, value: number) => {
   const valueFromLocalStorage = localStorageModule.getItem(key);
 
   if (Number.isNaN(Number(valueFromLocalStorage))) {
-    localStorageModule.setItem({ key, value });
+    localStorageModule.setItem({ key, value: value.toString() });
   }
 };
 
@@ -45,17 +45,10 @@ export const fillUpMissedLocalStorageFields = () => {
         const allVoices = speechSynthesisModule.getVoices();
 
         const firstVoice = allVoices[0];
-        const reassignedVoice = {
-          name: firstVoice.name,
-          lang: firstVoice.lang,
-          default: firstVoice.default,
-          voiceURI: firstVoice.voiceURI,
-          localService: firstVoice.localService,
-        };
 
         localStorageModule.setItem({
           key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
-          value: JSON.stringify(reassignedVoice),
+          value: firstVoice.name,
         });
       }, 0);
     };
