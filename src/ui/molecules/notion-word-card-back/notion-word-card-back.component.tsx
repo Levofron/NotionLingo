@@ -62,11 +62,11 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = ({ word }): JSX.
 
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
-      <Flex flexDirection="column" p={{ base: 2, sm: 3, md: 4 }}>
-        <Heading as="h2" fontSize="xl" mb={5} textAlign="center">
+      <Flex flexDirection="column" p={{ base: 3, md: 4 }}>
+        <Heading as="h2" fontSize="xl" mb={{ base: 3, sm: 4, md: 5 }} textAlign="center">
           Edit your settings
         </Heading>
-        <VStack spacing={5}>
+        <VStack spacing={{ base: 3, sm: 4, md: 5 }}>
           <SelectControl label="Voice" value={voice} onChange={handleVoiceChange}>
             <option key="placeholder" disabled>
               Select voice...
