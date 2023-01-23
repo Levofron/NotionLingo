@@ -108,3 +108,12 @@ export const setVoiceUseCase = (
 ): TSetVoiceUseCase => ({
   execute: (voice) => speechSynthesisRepository.setVoice(voice),
 });
+
+// onVoicesChangedUseCase
+export type TOnVoicesChangedUseCase = IUseCaseWithSingleParam<() => void, void>;
+
+export const onVoicesChangedUseCase = (
+  speechSynthesisRepository: ISpeechSynthesisRepository,
+): TOnVoicesChangedUseCase => ({
+  execute: (callback) => speechSynthesisRepository.onVoicesChanged(callback),
+});

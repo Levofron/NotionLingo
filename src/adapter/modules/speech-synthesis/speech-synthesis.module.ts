@@ -6,6 +6,7 @@ import {
   getVoicesUseCase,
   getVolumeUseCase,
   isSupportedUseCase,
+  onVoicesChangedUseCase,
   setPitchUseCase,
   setRateUseCase,
   setVoiceUseCase,
@@ -40,4 +41,5 @@ export const speechSynthesisModule = {
   getVolume: getVolumeUseCase(speechSynthesisRepository).execute,
   setVolume: setVolumeUseCase(speechSynthesisRepository).execute,
   isSupported: isSupportedUseCase(speechSynthesisRepository).execute,
+  onVoicesChanged: onVoicesChangedUseCase(speechSynthesisRepository).execute,
 };

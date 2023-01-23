@@ -6,6 +6,7 @@ export interface ISpeechSynthesisRepository {
   getVoices: () => SpeechSynthesisVoice[];
   getVolume: () => number;
   isSupported: () => boolean;
+  onVoicesChanged: (callback: () => void) => void;
   setPitch: (pitch: number) => void;
   setRate: (rate: number) => void;
   setVoice: (newVoiceName: string) => void;

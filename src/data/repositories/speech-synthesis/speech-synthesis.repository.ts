@@ -163,5 +163,12 @@ export function getSpeechSynthesisRepository(
 
       localStorageSource.setItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE, newVoiceName);
     },
+    onVoicesChanged: (callback) => {
+      if (!speechSynthesisSource.isSupported()) {
+        return;
+      }
+
+      speechSynthesisSource.onVoicesChanged(callback);
+    },
   };
 }

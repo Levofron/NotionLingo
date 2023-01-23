@@ -14,8 +14,11 @@ export const getSpeechSynthesisSource = (): ISpeechSynthesisSource => ({
   },
   cancel: () => window.speechSynthesis.cancel(),
   getVoices: () => {
-    const allVoices = window.speechSynthesis.getVoices();
+    const allVoices = window.speechSynthesis.getVoices() || [];
 
     return allVoices.filter((_voice) => _voice.lang.includes('en'));
+  },
+  onVoicesChanged: (callback) => {
+    window.speechSynthesis.onvoiceschanged = () => setTimeout(callback, 0);
   },
 });

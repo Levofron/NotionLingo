@@ -54,6 +54,7 @@ export const createDevToolsClient = () => {
   console.log('window.synthesis.setVolume(volume) - to set volume');
   console.log('window.synthesis.getVoices() - to get all available voices');
   console.log('window.synthesis.isSupported() - to check if speech synthesis is supported');
+  console.log('window.synthesis.onVoicesChanged(callback) - to subscribe to voices changes');
   console.log('window.synthesis.speak({ pitch, rate, text, voice, volume }) - to speak text');
 
   // memory

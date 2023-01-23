@@ -2,6 +2,8 @@ import { functionImportTest } from '@infrastructure/utils';
 
 import { getSpeechSynthesisSource } from './speech-synthesis.source';
 
+jest.useFakeTimers();
+
 describe('getSpeechSynthesisSource function', () => {
   functionImportTest(getSpeechSynthesisSource);
 
@@ -13,6 +15,7 @@ describe('getSpeechSynthesisSource function', () => {
       cancel: expect.any(Function),
       getVoices: expect.any(Function),
       isSupported: expect.any(Function),
+      onVoicesChanged: expect.any(Function),
     });
   });
 
@@ -58,7 +61,7 @@ describe('getSpeechSynthesisSource function', () => {
   it('should call getVoices function', () => {
     const speechSynthesisSource = getSpeechSynthesisSource();
 
-    window.speechSynthesis.getVoices = jest.fn();
+    window.speechSynthesis.getVoices = jest.fn().mockReturnValue([]);
 
     speechSynthesisSource.getVoices();
 
