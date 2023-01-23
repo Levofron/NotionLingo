@@ -1,7 +1,15 @@
 import {
   cancelUseCase,
+  getPitchUseCase,
+  getRateUseCase,
+  getVoiceUseCase,
   getVoicesUseCase,
+  getVolumeUseCase,
   isSupportedUseCase,
+  setPitchUseCase,
+  setRateUseCase,
+  setVoiceUseCase,
+  setVolumeUseCase,
   speakUseCase,
 } from '@domain/speech-synthesis/speech-synthesis.use-case';
 
@@ -22,6 +30,14 @@ const speechSynthesisRepository = getSpeechSynthesisRepository(
 export const speechSynthesisModule = {
   speak: speakUseCase(speechSynthesisRepository).execute,
   cancel: cancelUseCase(speechSynthesisRepository).execute,
+  setRate: setRateUseCase(speechSynthesisRepository).execute,
+  getRate: getRateUseCase(speechSynthesisRepository).execute,
+  getPitch: getPitchUseCase(speechSynthesisRepository).execute,
+  getVoice: getVoiceUseCase(speechSynthesisRepository).execute,
+  setPitch: setPitchUseCase(speechSynthesisRepository).execute,
+  setVoice: setVoiceUseCase(speechSynthesisRepository).execute,
   getVoices: getVoicesUseCase(speechSynthesisRepository).execute,
+  getVolume: getVolumeUseCase(speechSynthesisRepository).execute,
+  setVolume: setVolumeUseCase(speechSynthesisRepository).execute,
   isSupported: isSupportedUseCase(speechSynthesisRepository).execute,
 };

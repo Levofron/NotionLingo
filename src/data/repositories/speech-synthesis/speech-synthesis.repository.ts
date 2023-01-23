@@ -14,6 +14,7 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
 } from '@constants';
 
@@ -112,4 +113,51 @@ export const getSpeechSynthesisRepository = (
       defaultValue: DEFAULT_SPEECH_SYNTHESIS_VOLUME,
       key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
     }),
+  setVoice: (newVoiceName: string) => {
+    if (!speechSynthesisSource.isSupported()) {
+      return;
+    }
+
+    const allVoices = speechSynthesisSource.getVoices() || [];
+
+    const newVoice = allVoices.find((_voice) => _voice.name === newVoiceName);
+
+    if (!newVoice && allVoices.length === 0) {
+      return localStorageSource.removeItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE);
+    }
+
+    if (!newVoice) {
+      return localStorageSource.setItem(
+        LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+        allVoices[0].name,
+      );
+    }
+
+    localStorageSource.setItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE, newVoiceName);
+  },
+  getVoice: () => {
+    if (!speechSynthesisSource.isSupported()) {
+      return undefined;
+    }
+
+    const allVoices = speechSynthesisSource.getVoices() || [];
+
+    if (allVoices.length === 0) {
+      return undefined;
+    }
+
+    const storedVoiceName = localStorageSource.getItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE);
+
+    if (!storedVoiceName) {
+      return allVoices[0];
+    }
+
+    const storedVoice = allVoices.find((_voice) => _voice.name === storedVoiceName);
+
+    if (!storedVoice) {
+      return allVoices[0];
+    }
+
+    return storedVoice;
+  },
 });
