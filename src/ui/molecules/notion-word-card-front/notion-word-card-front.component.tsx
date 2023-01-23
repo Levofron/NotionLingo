@@ -35,7 +35,6 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   }, []);
 
   const handleSpeak = useCallback(() => {
-    speechSynthesisModule.cancel();
     speechSynthesisModule.speak({ text: word });
   }, []);
 
@@ -77,7 +76,12 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             </Text>
           ) : null}
         </Flex>
-        <Text withBalancer color="gray.500" noOfLines={{ base: 4, md: 5 }}>
+        <Text
+          withBalancer
+          color="gray.500"
+          fontSize={{ base: 'sm', sm: 'md' }}
+          noOfLines={{ base: 4, md: 5 }}
+        >
           {meaning}
         </Text>
       </Flex>
@@ -85,6 +89,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
         <Text
           withBalancer
           color="gray.900"
+          fontSize={{ base: 'sm', sm: 'md' }}
           noOfLines={{ base: 4, md: 5 }}
           p={{ base: 2, sm: 3, md: 4 }}
         >

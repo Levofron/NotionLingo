@@ -13,6 +13,8 @@ export const getSpeechSynthesisRepository = (
       return;
     }
 
+    speechSynthesisSource.cancel();
+
     const allVoices = speechSynthesisSource.getVoices() || [];
 
     if (isSafari()) {
