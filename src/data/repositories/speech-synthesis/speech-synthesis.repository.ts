@@ -1,7 +1,10 @@
 import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
 
 import { ILocalStorageSource } from '@data/sources/local-storage/local-storage.types';
-import { getSpeechSynthesisValueFromLocalStorage } from '@data/transformators/speech-synthesis';
+import {
+  getSpeechSynthesisValueFromLocalStorage,
+  setSpeechSynthesisValueToLocalStorage,
+} from '@data/transformators/speech-synthesis';
 
 import { isSafari } from '@infrastructure/utils';
 
@@ -78,6 +81,33 @@ export const getSpeechSynthesisRepository = (
     getSpeechSynthesisValueFromLocalStorage({
       min: 0,
       max: 1,
+      localStorageSource,
+      defaultValue: DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+      key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+    }),
+  setPitch: (pitch: number) =>
+    setSpeechSynthesisValueToLocalStorage({
+      min: 0,
+      max: 2,
+      newValue: pitch,
+      localStorageSource,
+      defaultValue: DEFAULT_SPEECH_SYNTHESIS_PITCH,
+      key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+    }),
+  setRate: (rate: number) =>
+    setSpeechSynthesisValueToLocalStorage({
+      min: 0.1,
+      max: 10,
+      newValue: rate,
+      localStorageSource,
+      defaultValue: DEFAULT_SPEECH_SYNTHESIS_RATE,
+      key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+    }),
+  setVolume: (volume: number) =>
+    setSpeechSynthesisValueToLocalStorage({
+      min: 0,
+      max: 1,
+      newValue: volume,
       localStorageSource,
       defaultValue: DEFAULT_SPEECH_SYNTHESIS_VOLUME,
       key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,

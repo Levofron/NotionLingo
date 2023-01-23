@@ -1,6 +1,6 @@
 import { localStorageModule, speechSynthesisModule } from '@adapter';
 
-import { hasOwnProperty, tryParseJson } from '@infrastructure/utils';
+import { isString } from '@infrastructure/utils';
 
 import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,
@@ -37,9 +37,8 @@ export const fillUpMissedLocalStorageFields = () => {
   const voiceFromLocalStorage = localStorageModule.getItem(
     LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
   );
-  const parsedVoiceFromLocalStorage = tryParseJson(voiceFromLocalStorage);
 
-  if (!parsedVoiceFromLocalStorage || !hasOwnProperty(parsedVoiceFromLocalStorage, 'name')) {
+  if (!isString(voiceFromLocalStorage)) {
     window.speechSynthesis.onvoiceschanged = () => {
       setTimeout(() => {
         const allVoices = speechSynthesisModule.getVoices();
