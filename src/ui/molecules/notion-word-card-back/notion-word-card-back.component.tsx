@@ -18,7 +18,7 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = ({ word }): JSX.
   const [rate, setRate] = useState(speechSynthesisModule.getRate());
   const [pitch, setPitch] = useState(speechSynthesisModule.getPitch());
   const [volume, setVolume] = useState(speechSynthesisModule.getVolume());
-  const [voice, setVoice] = useState(speechSynthesisModule.getVoice()?.name);
+  const [voice, setVoice] = useState(speechSynthesisModule.getVoice()?.name || '');
 
   const handlePitchChange = (value: number) => {
     setPitch(value);
@@ -38,9 +38,9 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = ({ word }): JSX.
     speechSynthesisModule.speak(word);
   };
 
-  const handleVoiceChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setVoice(event.target.value);
-    speechSynthesisModule.setVoice(event.target.value);
+  const handleVoiceChange = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
+    setVoice(value);
+    speechSynthesisModule.setVoice(value);
     speechSynthesisModule.speak(word);
   };
 
