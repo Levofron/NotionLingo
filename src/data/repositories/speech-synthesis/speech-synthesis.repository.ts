@@ -34,7 +34,7 @@ export function getSpeechSynthesisRepository(
   const getRate = () =>
     getSpeechSynthesisValueFromLocalStorage({
       min: 0.1,
-      max: 10,
+      max: 2,
       localStorageSource,
       defaultValue: DEFAULT_SPEECH_SYNTHESIS_RATE,
       key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
@@ -126,7 +126,7 @@ export function getSpeechSynthesisRepository(
     setRate: (rate: number) =>
       setSpeechSynthesisValueToLocalStorage({
         min: 0.1,
-        max: 10,
+        max: 2,
         newValue: rate,
         localStorageSource,
         defaultValue: DEFAULT_SPEECH_SYNTHESIS_RATE,

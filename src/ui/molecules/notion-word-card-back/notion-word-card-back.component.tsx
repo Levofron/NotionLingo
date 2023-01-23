@@ -89,7 +89,7 @@ export const NotionWordCardBack: FC<INotionWordCardBackProps> = ({ word }): JSX.
           <SliderControl
             defaultValue={speechSynthesisModule.getRate()}
             label="Rate"
-            max={10}
+            max={2}
             min={0.1}
             step={0.1}
             value={rate}
