@@ -7,9 +7,9 @@ import { speechSynthesisModule } from '@adapter';
 
 import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
-import { INotionWordCardProps } from './notion-word-card.types';
+import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 
-export const NotionWordCard: FC<INotionWordCardProps> = ({
+export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   countdown,
   exampleSentence,
   imageUrl,
