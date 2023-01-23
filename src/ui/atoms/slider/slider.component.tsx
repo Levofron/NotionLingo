@@ -15,7 +15,7 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
 ): JSX.Element => {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const handleChange = (newValue: number): void => {
+  const handleChange = (newValue: number) => {
     setShowTooltip(true);
 
     if (onChange) {
@@ -23,12 +23,16 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
     }
   };
 
+  const handleMouseEnter = () => setShowTooltip(true);
+
+  const handleMouseLeave = () => setShowTooltip(false);
+
   return (
     <ChakraSlider
       ref={ref}
       onChange={handleChange}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       {...restProps}
     >
       <SliderTrack bg="gray.50" border="1px solid" borderColor="gray.900" borderRadius={0}>
