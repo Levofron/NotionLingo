@@ -43,7 +43,15 @@ export const createDevToolsClient = () => {
 
   // synthesis
   console.log('-----------------------------');
+  console.log('window.synthesis.getRate() - to get rate');
+  console.log('window.synthesis.getPitch() - to get pitch');
+  console.log('window.synthesis.getVoice() - to get voice');
+  console.log('window.synthesis.getVolume() - to get volume');
+  console.log('window.synthesis.setRate(rate) - to set rate');
   console.log('window.synthesis.cancel() - to cancel speaking');
+  console.log('window.synthesis.setPitch(pitch) - to set pitch');
+  console.log('window.synthesis.setVoice(voice) - to set voice');
+  console.log('window.synthesis.setVolume(volume) - to set volume');
   console.log('window.synthesis.getVoices() - to get all available voices');
   console.log('window.synthesis.isSupported() - to check if speech synthesis is supported');
   console.log('window.synthesis.speak({ pitch, rate, text, voice, volume }) - to speak text');
