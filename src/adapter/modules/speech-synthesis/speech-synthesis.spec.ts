@@ -15,6 +15,7 @@ describe('speechSynthesisModule object', () => {
       getVolume: expect.any(Function),
       setVolume: expect.any(Function),
       isSupported: expect.any(Function),
+      onVoicesChanged: expect.any(Function),
     });
   });
 });
