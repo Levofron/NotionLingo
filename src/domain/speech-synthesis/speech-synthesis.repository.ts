@@ -1,8 +1,15 @@
-import { ISpeakOptions } from './speech-synthesis.types';
-
 export interface ISpeechSynthesisRepository {
   cancel: () => void;
+  getPitch: () => number;
+  getRate: () => number;
+  getVoice: () => SpeechSynthesisVoice | undefined;
   getVoices: () => SpeechSynthesisVoice[];
+  getVolume: () => number;
   isSupported: () => boolean;
-  speak: (options: ISpeakOptions) => void;
+  onVoicesChanged: (callback: () => void) => void;
+  setPitch: (pitch: number) => void;
+  setRate: (rate: number) => void;
+  setVoice: (newVoiceName: string) => void;
+  setVolume: (volume: number) => void;
+  speak: (text: string) => void;
 }

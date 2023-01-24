@@ -1,6 +1,6 @@
 import { isString, tryCatchWrapper } from '@infrastructure/utils';
 
-export function tryParseJson<T = unknown>(jsonString: string): T | null {
+export function tryParseJson<T = unknown>(jsonString: string | null | undefined): T | null {
   if (!isString(jsonString)) {
     return null;
   }

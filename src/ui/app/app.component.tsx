@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 
 import { ChakraProvider, LayoutProvider, UserProvider, WrapBalancerProvider } from '../providers';
 import { IAppProps } from './app.types';
-import { createDevToolsClient } from './utils';
+import { createDevToolsClient, fillUpMissedLocalStorageFields } from './utils';
 
 export const App = ({ Component, pageProps }: IAppProps) => {
   useEffect(() => {
     createDevToolsClient();
+    fillUpMissedLocalStorageFields();
   }, []);
 
   return (

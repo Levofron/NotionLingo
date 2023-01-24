@@ -1,48 +1,174 @@
 import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
 
-import { isSafari } from '@infrastructure/utils';
+import { ILocalStorageSource } from '@data/sources/local-storage/local-storage.types';
+import {
+  getSpeechSynthesisValueFromLocalStorage,
+  setSpeechSynthesisValueToLocalStorage,
+} from '@data/transformators/speech-synthesis';
+
+import {
+  DEFAULT_SPEECH_SYNTHESIS_PITCH,
+  DEFAULT_SPEECH_SYNTHESIS_RATE,
+  DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+  LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+} from '@constants';
 
 import { ISpeechSynthesisSource } from '../../sources/speech-synthesis/speech-synthesis.types';
 
-export const getSpeechSynthesisRepository = (
+export function getSpeechSynthesisRepository(
   speechSynthesisSource: ISpeechSynthesisSource,
-): ISpeechSynthesisRepository => ({
-  isSupported: () => speechSynthesisSource.isSupported(),
-  speak: (options) => {
-    if (!speechSynthesisSource.isSupported()) {
-      return;
-    }
+  localStorageSource: ILocalStorageSource,
+): ISpeechSynthesisRepository {
+  const getPitch = () =>
+    getSpeechSynthesisValueFromLocalStorage({
+      min: 0,
+      max: 2,
+      localStorageSource,
+      defaultValue: DEFAULT_SPEECH_SYNTHESIS_PITCH,
+      key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+    });
 
-    speechSynthesisSource.cancel();
+  const getRate = () =>
+    getSpeechSynthesisValueFromLocalStorage({
+      min: 0.1,
+      max: 2,
+      localStorageSource,
+      defaultValue: DEFAULT_SPEECH_SYNTHESIS_RATE,
+      key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+    });
+
+  const getVolume = () =>
+    getSpeechSynthesisValueFromLocalStorage({
+      min: 0,
+      max: 1,
+      localStorageSource,
+      defaultValue: DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+      key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+    });
+
+  const getVoice = () => {
+    if (!speechSynthesisSource.isSupported()) {
+      return undefined;
+    }
 
     const allVoices = speechSynthesisSource.getVoices() || [];
 
-    if (isSafari()) {
-      const americanVoice = allVoices.find((_voice) => _voice.lang.includes('en-US'));
-
-      return speechSynthesisSource.speak({
-        ...options,
-        voice: options.voice || americanVoice || allVoices[0],
-      });
+    if (allVoices.length === 0) {
+      return undefined;
     }
 
-    const britishVoice = allVoices.find((_voice) => _voice.lang.includes('en-GB'));
-    const voice = options.voice || britishVoice || allVoices[0];
+    const storedVoiceName = localStorageSource.getItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE);
 
-    return speechSynthesisSource.speak({ ...options, voice });
-  },
-  cancel: () => {
-    if (!speechSynthesisSource.isSupported()) {
-      return;
+    if (!storedVoiceName) {
+      return allVoices[0];
     }
 
-    return speechSynthesisSource.cancel();
-  },
-  getVoices: () => {
-    if (!speechSynthesisSource.isSupported()) {
-      return [];
+    const storedVoice = allVoices.find((_voice) => _voice.name === storedVoiceName);
+
+    if (!storedVoice) {
+      return allVoices[0];
     }
 
-    return speechSynthesisSource.getVoices();
-  },
-});
+    return storedVoice;
+  };
+
+  return {
+    getRate,
+    getPitch,
+    getVoice,
+    getVolume,
+    isSupported: () => speechSynthesisSource.isSupported(),
+    speak: (text) => {
+      if (!speechSynthesisSource.isSupported()) {
+        return;
+      }
+
+      speechSynthesisSource.cancel();
+
+      setTimeout(
+        () =>
+          speechSynthesisSource.speak({
+            text,
+            rate: getRate(),
+            voice: getVoice(),
+            pitch: getPitch(),
+            volume: getVolume(),
+          }),
+        0,
+      );
+    },
+    cancel: () => {
+      if (!speechSynthesisSource.isSupported()) {
+        return;
+      }
+
+      return speechSynthesisSource.cancel();
+    },
+    getVoices: () => {
+      if (!speechSynthesisSource.isSupported()) {
+        return [];
+      }
+
+      return speechSynthesisSource.getVoices();
+    },
+    setPitch: (pitch: number) =>
+      setSpeechSynthesisValueToLocalStorage({
+        min: 0,
+        max: 2,
+        newValue: pitch,
+        localStorageSource,
+        defaultValue: DEFAULT_SPEECH_SYNTHESIS_PITCH,
+        key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_PITCH,
+      }),
+    setRate: (rate: number) =>
+      setSpeechSynthesisValueToLocalStorage({
+        min: 0.1,
+        max: 2,
+        newValue: rate,
+        localStorageSource,
+        defaultValue: DEFAULT_SPEECH_SYNTHESIS_RATE,
+        key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
+      }),
+    setVolume: (volume: number) =>
+      setSpeechSynthesisValueToLocalStorage({
+        min: 0,
+        max: 1,
+        newValue: volume,
+        localStorageSource,
+        defaultValue: DEFAULT_SPEECH_SYNTHESIS_VOLUME,
+        key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
+      }),
+    setVoice: (newVoiceName: string) => {
+      if (!speechSynthesisSource.isSupported()) {
+        return;
+      }
+
+      const allVoices = speechSynthesisSource.getVoices() || [];
+
+      const newVoice = allVoices.find((_voice) => _voice.name === newVoiceName);
+
+      if (!newVoice && allVoices.length === 0) {
+        return localStorageSource.removeItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE);
+      }
+
+      if (!newVoice) {
+        return localStorageSource.setItem(
+          LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+          allVoices[0].name,
+        );
+      }
+
+      localStorageSource.setItem(LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE, newVoiceName);
+    },
+    onVoicesChanged: (callback) => {
+      if (!speechSynthesisSource.isSupported()) {
+        return;
+      }
+
+      speechSynthesisSource.onVoicesChanged(callback);
+    },
+  };
+}
