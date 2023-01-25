@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import { FC } from 'react';
 
 import { SidebarWithHeader } from '@ui/organisms';
 import { HomeTemplate } from '@ui/templates';
 
-export const HomePage: FC = (): JSX.Element => (
+export const HomePage = (): JSX.Element => (
   <>
     <Head>
       <title>Levofron</title>

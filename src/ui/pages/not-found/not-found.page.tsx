@@ -1,3 +1,1 @@
-import { FC } from 'react';
-
-export const NotFoundPage: FC = (): JSX.Element => <div className="block">NotFound</div>;
+export const NotFoundPage = (): JSX.Element => <div className="block">NotFound</div>;

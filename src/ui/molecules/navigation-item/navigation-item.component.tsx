@@ -41,7 +41,7 @@ export const NavigationItem: FC<INavigationItemProps> = ({
             }}
             as={icon}
             color="gray.900"
-            fontSize="16"
+            fontSize="18"
             mr="4"
           />
         )}
