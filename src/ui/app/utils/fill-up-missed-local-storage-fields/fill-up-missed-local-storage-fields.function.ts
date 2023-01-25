@@ -17,13 +17,15 @@ export const fillUpMissedLocalStorageFields = () => {
     );
 
     if (!voiceFromLocalStorage) {
-      const allVoices = speechSynthesisModule.getVoices();
+      const selectedVoice = speechSynthesisModule.getVoice();
 
-      const firstVoice = allVoices[0];
+      if (!selectedVoice) {
+        return;
+      }
 
       localStorageModule.setItem({
         key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
-        value: firstVoice.name,
+        value: selectedVoice?.name,
       });
     }
   });
