@@ -41,7 +41,11 @@ export const AccountSettingsTemplate = (): JSX.Element => {
             <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
               Days in streak: <b>{user?.daysInStreak}</b>
             </Text>
-            <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={8}>
+            <Text
+              color="gray.900"
+              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
+              mb={{ base: 5, sm: 8 }}
+            >
               Total learned words: <b>{user?.totalLearnedWords}</b>
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
