@@ -1,11 +1,9 @@
-import { FC } from 'react';
-
 import { Footer, GettingStarted, HomeHero, LogoExplanation, TryItNow } from '@ui/molecules';
 import { ContactForm } from '@ui/organisms';
 
 import { useUser } from '@infrastructure/utils';
 
-export const HomeTemplate: FC = (): JSX.Element => {
+export const HomeTemplate = (): JSX.Element => {
   const { user } = useUser();
 
   return (
