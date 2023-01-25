@@ -1,5 +1,5 @@
 import { Container, Fade, useToast } from '@chakra-ui/react';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { INotionWord } from '@domain/rest/rest.models';
 
@@ -15,9 +15,7 @@ import {
 
 import { useAxiosAction } from '@infrastructure/utils';
 
-import { IDashboardProps } from './dashboard.types';
-
-export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
+export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();
   const [words, setWords] = useState<INotionWord[]>([]);
 

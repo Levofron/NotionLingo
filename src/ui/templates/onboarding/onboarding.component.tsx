@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Flex, TabPanels, Tabs, Text } from '@ui/atoms';
 import {
@@ -10,9 +10,7 @@ import {
 } from '@ui/molecules';
 import { OnboardingStepFive, OnboardingStepFour } from '@ui/organisms';
 
-import { IOnboardingTemplateProps } from './onboarding.types';
-
-export const OnboardingTemplate: FC<IOnboardingTemplateProps> = (): JSX.Element => {
+export const OnboardingTemplate = (): JSX.Element => {
   const verifyDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
   const selectNotionPageTabRef = useRef<HTMLButtonElement | null>(null);
   const validateIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
