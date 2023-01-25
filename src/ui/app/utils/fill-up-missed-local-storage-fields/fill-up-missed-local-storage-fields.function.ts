@@ -5,6 +5,10 @@ import { isString } from '@infrastructure/utils';
 import { LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE } from '@constants';
 
 export const fillUpMissedLocalStorageFields = () => {
+  if (!localStorageModule.isSupported() || !speechSynthesisModule.isSupported()) {
+    return;
+  }
+
   speechSynthesisModule.getRate();
   speechSynthesisModule.getPitch();
   speechSynthesisModule.getVolume();
