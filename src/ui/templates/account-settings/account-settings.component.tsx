@@ -49,10 +49,12 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               Total learned words: <b>{user?.totalLearnedWords}</b>
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
-            <Button leftIcon={<BiReset />} mb={2}>
+            <Button leftIcon={<BiReset />} mb={2} size={{ base: 'sm', sm: 'md' }}>
               Reset Notion integration
             </Button>
-            <Button leftIcon={<AiFillDelete />}>Delete Account</Button>
+            <Button leftIcon={<AiFillDelete />} size={{ base: 'sm', sm: 'md' }}>
+              Delete Account
+            </Button>
           </Card>
         </Flex>
       </Container>
