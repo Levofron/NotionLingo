@@ -12,9 +12,11 @@ export const fillUpMissedLocalStorageFields = () => {
   speechSynthesisModule.getVolume();
 
   speechSynthesisModule.onVoicesChanged(() => {
-    const voiceFromLocalStorage = speechSynthesisModule.getVoice();
+    const voiceFromLocalStorage = localStorageModule.getItem(
+      LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
+    );
 
-    if (!voiceFromLocalStorage?.name) {
+    if (!voiceFromLocalStorage) {
       const allVoices = speechSynthesisModule.getVoices();
 
       const firstVoice = allVoices[0];
