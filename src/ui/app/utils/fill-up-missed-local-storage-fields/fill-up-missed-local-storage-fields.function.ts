@@ -1,7 +1,5 @@
 import { localStorageModule, speechSynthesisModule } from '@adapter';
 
-import { isString } from '@infrastructure/utils';
-
 import { LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE } from '@constants';
 
 export const fillUpMissedLocalStorageFields = () => {
@@ -13,10 +11,10 @@ export const fillUpMissedLocalStorageFields = () => {
   speechSynthesisModule.getPitch();
   speechSynthesisModule.getVolume();
 
-  const voiceFromLocalStorage = speechSynthesisModule.getVoice();
+  speechSynthesisModule.onVoicesChanged(() => {
+    const voiceFromLocalStorage = speechSynthesisModule.getVoice();
 
-  if (!isString(voiceFromLocalStorage)) {
-    speechSynthesisModule.onVoicesChanged(() => {
+    if (!voiceFromLocalStorage?.name) {
       const allVoices = speechSynthesisModule.getVoices();
 
       const firstVoice = allVoices[0];
@@ -25,6 +23,6 @@ export const fillUpMissedLocalStorageFields = () => {
         key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
         value: firstVoice.name,
       });
-    });
-  }
+    }
+  });
 };
