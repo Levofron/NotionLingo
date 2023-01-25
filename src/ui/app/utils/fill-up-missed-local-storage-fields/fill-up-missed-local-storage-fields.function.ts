@@ -18,11 +18,7 @@ export const fillUpMissedLocalStorageFields = () => {
 
     const selectedVoice = speechSynthesisModule.getVoice();
 
-    if (voiceFromLocalStorage !== selectedVoice?.name) {
-      if (!selectedVoice) {
-        return;
-      }
-
+    if (selectedVoice && voiceFromLocalStorage !== selectedVoice.name) {
       localStorageModule.setItem({
         key: LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
         value: selectedVoice?.name,
