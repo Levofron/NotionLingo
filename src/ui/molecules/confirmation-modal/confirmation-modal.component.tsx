@@ -5,6 +5,7 @@ import Balancer from 'react-wrap-balancer';
 import {
   AlertDialog,
   Button,
+  Card,
   Flex,
   ModalBody,
   ModalContent,
@@ -44,7 +45,7 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
   return (
     <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent as={Card} borderRadius={0} boxShadow="6px 6px 0 var(--chakra-colors-gray-900)">
         <ModalHeader textAlign="center">{title}</ModalHeader>
         <ModalBody textAlign="center">
           <Balancer>{description}</Balancer>
