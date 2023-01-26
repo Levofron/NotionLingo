@@ -92,3 +92,12 @@ export const increaseDailyStreakUseCase = (
 ): TIncreaseDailyStreakUseCase => ({
   execute: () => restRepository.increaseDailyStreak(),
 });
+
+// resetNotionIntegrationUseCase
+export type TResetNotionIntegrationUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+
+export const resetNotionIntegrationUseCase = (
+  restRepository: IRestRepository,
+): TResetNotionIntegrationUseCase => ({
+  execute: () => restRepository.resetNotionIntegration(),
+});

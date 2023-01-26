@@ -18,6 +18,4 @@ export const createDevToolsClient = () => {
 
   // @ts-expect-error
   window.synthesis = speechSynthesisModule;
-
-  console.log('Welcome to Levofron devtools!');
 };

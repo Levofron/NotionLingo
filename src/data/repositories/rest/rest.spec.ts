@@ -25,6 +25,7 @@ describe('getRestRepository function', () => {
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      resetNotionIntegration: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
   });
@@ -222,6 +223,24 @@ describe('getRestRepository function', () => {
 
       expect(result).toEqual({});
       expect(restSourceMock.increaseDailyStreak).toHaveBeenCalled();
+    });
+  });
+
+  describe('resetNotionIntegration function', () => {
+    it('should call proper restSource function', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restSourceMock: any = {
+        resetNotionIntegration: jest.fn().mockImplementation(() => ({ data: {} })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseSourceMock: any = {};
+
+      const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
+
+      await restRepository.resetNotionIntegration();
+
+      expect(restSourceMock.resetNotionIntegration).toHaveBeenCalled();
     });
   });
 });

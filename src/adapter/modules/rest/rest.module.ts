@@ -4,6 +4,7 @@ import {
   getRandomNotionWordsUseCase,
   healthCheckUseCase,
   increaseDailyStreakUseCase,
+  resetNotionIntegrationUseCase,
   sendContactFormDataUseCase,
   setNotionApiTokenUseCase,
   setNotionPageIdUseCase,
@@ -32,5 +33,6 @@ export const restModule = {
   sendContactFormData: sendContactFormDataUseCase(restRepository).execute,
   increaseDailyStreak: increaseDailyStreakUseCase(restRepository).execute,
   getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
+  resetNotionIntegration: resetNotionIntegrationUseCase(restRepository).execute,
   getAvailableNotionPages: getAvailableNotionPagesUseCase(restRepository).execute,
 };

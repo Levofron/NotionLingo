@@ -22,6 +22,7 @@ describe('getRestSource function', () => {
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      resetNotionIntegration: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
   });
@@ -349,6 +350,35 @@ describe('getRestSource function', () => {
       const restSource = getRestSource(axiosInstanceMock);
 
       const result = restSource.increaseDailyStreak();
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('resetNotionIntegration endpoint', () => {
+    it('should call proper endpoint', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        get: jest.fn().mockResolvedValue({ data: {} }),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.resetNotionIntegration();
+
+      expect(result).resolves.toEqual({ data: {} });
+      expect(axiosInstanceMock.get).toHaveBeenCalledWith('/profile/reset-notion-integration');
+    });
+
+    it('should throw error if endpoint fails', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        get: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.resetNotionIntegration();
 
       expect(result).rejects.toThrow('error');
     });

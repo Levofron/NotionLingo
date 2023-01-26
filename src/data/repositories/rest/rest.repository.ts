@@ -59,4 +59,7 @@ export const getRestRepository = (
 
     return data;
   },
+  resetNotionIntegration: async () => {
+    await restSource.resetNotionIntegration();
+  },
 });

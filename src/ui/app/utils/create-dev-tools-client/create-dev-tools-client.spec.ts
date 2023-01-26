@@ -2,19 +2,8 @@ import { filterOutObjectKeys, functionImportTest } from '@infrastructure/utils';
 
 import { createDevToolsClient } from './create-dev-tools-client.function';
 
-const consoleMock = jest.fn();
-const originalConsoleLog = console.log;
-
 describe('createDevToolsClient function', () => {
   functionImportTest(createDevToolsClient);
-
-  beforeAll(() => {
-    console.log = consoleMock;
-  });
-
-  afterAll(() => {
-    console.log = originalConsoleLog;
-  });
 
   afterEach(() => {
     // @ts-expect-error
@@ -52,6 +41,7 @@ describe('createDevToolsClient function', () => {
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      resetNotionIntegration: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
   });
@@ -62,16 +52,20 @@ describe('createDevToolsClient function', () => {
     expect(window).toHaveProperty('synthesis');
 
     // @ts-expect-error
-    expect(window.rest).toStrictEqual({
-      healthCheck: expect.any(Function),
-      getLoggedUser: expect.any(Function),
-      setNotionPageId: expect.any(Function),
-      setNotionApiToken: expect.any(Function),
-      setSupabaseCookie: expect.any(Function),
-      sendContactFormData: expect.any(Function),
-      increaseDailyStreak: expect.any(Function),
-      getRandomNotionWords: expect.any(Function),
-      getAvailableNotionPages: expect.any(Function),
+    expect(window.synthesis).toStrictEqual({
+      speak: expect.any(Function),
+      cancel: expect.any(Function),
+      getRate: expect.any(Function),
+      setRate: expect.any(Function),
+      getPitch: expect.any(Function),
+      getVoice: expect.any(Function),
+      setVoice: expect.any(Function),
+      setPitch: expect.any(Function),
+      getVolume: expect.any(Function),
+      setVolume: expect.any(Function),
+      getVoices: expect.any(Function),
+      isSupported: expect.any(Function),
+      onVoicesChanged: expect.any(Function),
     });
   });
 

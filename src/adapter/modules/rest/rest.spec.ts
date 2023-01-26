@@ -11,6 +11,7 @@ describe('restModule object', () => {
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      resetNotionIntegration: expect.any(Function),
       getAvailableNotionPages: expect.any(Function),
     });
   });

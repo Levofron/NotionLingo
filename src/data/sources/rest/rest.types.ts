@@ -17,6 +17,7 @@ export interface IRestSource {
   getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseItem[]>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   increaseDailyStreak: () => Promise<AxiosResponse<IIncreaseDailyStreak>>;
+  resetNotionIntegration: () => Promise<void>;
   sendContactFormData: (data: IContact) => Promise<AxiosResponse<IContact>>;
   setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
   setNotionPageId: (pageId: string) => Promise<AxiosResponse<string>>;
