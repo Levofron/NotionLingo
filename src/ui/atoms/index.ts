@@ -18,6 +18,7 @@ export * from './button/button.component';
 export * from './drawer/drawer.component';
 export * from './vstack/vstack.component';
 export * from './select/select.component';
+export * from './counter/counter.component';
 export * from './heading/heading.component';
 export * from './divider/divider.component';
 export * from './spinner/spinner.component';
