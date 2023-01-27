@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { isString } from '@infrastructure/utils';
+import { isError, isString } from '@infrastructure/utils';
 
 import { DEFAULT_ERROR_MESSAGE } from '@constants';
 
@@ -20,7 +20,7 @@ export const useAxiosAction = <TParam, TResponse>(callback: TCallback<TParam, TR
             reject(_error);
           }
 
-          if (_error instanceof Error) {
+          if (isError(_error)) {
             reject(_error.message);
           }
 

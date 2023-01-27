@@ -1,3 +1,4 @@
+export * from './is-error/is-error.function';
 export * from './is-string/is-string.function';
 export * from './is-object/is-object.function';
 export * from './object-keys/object-keys.function';
