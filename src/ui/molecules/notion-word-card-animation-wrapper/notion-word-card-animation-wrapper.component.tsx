@@ -3,6 +3,8 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { GiAnticlockwiseRotation, GiClockwiseRotation } from 'react-icons/gi';
 
+import { localStorageModule, speechSynthesisModule } from '@adapter';
+
 import { Icon } from '@ui/atoms';
 
 import { useCountdown, useWindowSize } from '@infrastructure/utils';
@@ -63,6 +65,9 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
     });
   };
 
+  const shouldEnableRotateIcon =
+    localStorageModule.isSupported() && speechSynthesisModule.isSupported();
+
   return (
     <motion.div
       animate={animControls}
@@ -87,17 +92,19 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
       }}
       {...restProps}
     >
-      <Icon
-        as={isRotated ? GiClockwiseRotation : GiAnticlockwiseRotation}
-        cursor="pointer"
-        display={isDraggable ? 'block' : 'none'}
-        fontSize="5xl"
-        position="absolute"
-        right="50%"
-        style={{ transform: 'translateX(50%)' }}
-        top="-60px"
-        onClick={handleRotateIconClick}
-      />
+      {shouldEnableRotateIcon ? (
+        <Icon
+          as={isRotated ? GiClockwiseRotation : GiAnticlockwiseRotation}
+          cursor="pointer"
+          display={isDraggable ? 'block' : 'none'}
+          fontSize="5xl"
+          position="absolute"
+          right="50%"
+          style={{ transform: 'translateX(50%)' }}
+          top="-60px"
+          onClick={handleRotateIconClick}
+        />
+      ) : null}
       {!isRotated ? (
         <>
           <motion.div style={{ opacity: leftLearnedLabelOpacity }}>

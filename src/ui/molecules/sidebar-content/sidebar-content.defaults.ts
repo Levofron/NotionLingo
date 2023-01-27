@@ -1,4 +1,5 @@
-import { FiHome } from 'react-icons/fi';
+import { BiDonateHeart } from 'react-icons/bi';
+import { FiHome, FiSettings } from 'react-icons/fi';
 import { MdOutlinePrivacyTip } from 'react-icons/md';
 import { RxDashboard } from 'react-icons/rx';
 import { TiDocumentText } from 'react-icons/ti';
@@ -20,6 +21,18 @@ export const sidebarItems: Array<ISidebarItem & { shouldHaveNotionData: boolean 
     name: 'Terms & Conditions',
     icon: TiDocumentText,
     href: ERoutes.TERMS,
+    shouldHaveNotionData: false,
+  },
+  {
+    name: 'Account Settings',
+    icon: FiSettings,
+    href: ERoutes.ACCOUNT_SETTINGS,
+    shouldHaveNotionData: true,
+  },
+  {
+    name: 'Donate',
+    icon: BiDonateHeart,
+    href: ERoutes.DONATE,
     shouldHaveNotionData: false,
   },
 ];

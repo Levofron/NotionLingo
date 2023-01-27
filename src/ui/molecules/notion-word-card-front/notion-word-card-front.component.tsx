@@ -3,7 +3,7 @@ import { FC, useCallback } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
 
-import { speechSynthesisModule } from '@adapter';
+import { localStorageModule, speechSynthesisModule } from '@adapter';
 
 import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
@@ -38,6 +38,9 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
     speechSynthesisModule.speak(word);
   }, []);
 
+  const shouldEnableSpeechFeature =
+    localStorageModule.isSupported() && speechSynthesisModule.isSupported();
+
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
       <Box
@@ -56,7 +59,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           </Flex>
         ) : null}
         <Flex flexDirection="column">
-          {speechSynthesisModule.isSupported() ? (
+          {shouldEnableSpeechFeature ? (
             <Flex cursor="pointer" gap={1} width="fit-content" onClick={handleSpeak}>
               <Icon as={AiTwotoneSound} color="gray.900" fontSize="20" mt={1} />
               <Heading
@@ -69,7 +72,17 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
                 {word}
               </Heading>
             </Flex>
-          ) : null}
+          ) : (
+            <Heading
+              color="gray.900"
+              fontSize={{ base: 'xl', sm: '2xl' }}
+              mt={{ base: 0, sm: 0 }}
+              noOfLines={{ base: 2, sm: 3 }}
+              wordBreak="break-word"
+            >
+              {word}
+            </Heading>
+          )}
           {ipa ? (
             <Text color="gray.500" fontSize="xs">
               {ipa}

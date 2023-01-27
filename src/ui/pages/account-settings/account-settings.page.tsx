@@ -3,18 +3,19 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { FullScreenLoader } from '@ui/molecules';
-import { OnboardingTemplate } from '@ui/templates';
+import { SidebarWithHeader } from '@ui/organisms';
+import { AccountSettingsTemplate } from '@ui/templates';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useUser } from '@infrastructure/utils';
 
-export const OnboardingPage = (): JSX.Element => {
+export const AccountSettingsPage = (): JSX.Element => {
   const router = useRouter();
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (!isLoading && user?.hasNotionData === true) {
-      router.push(ERoutes.DASHBOARD);
+    if (!isLoading && user?.hasNotionData === false) {
+      router.push(ERoutes.ONBOARDING);
     }
   }, [user, isLoading]);
 
@@ -23,7 +24,8 @@ export const OnboardingPage = (): JSX.Element => {
       <Head>
         <title>Levofron</title>
       </Head>
-      {isLoading && !user ? <FullScreenLoader /> : <OnboardingTemplate />}
+      <SidebarWithHeader />
+      {isLoading && !user ? <FullScreenLoader /> : <AccountSettingsTemplate />}
     </>
   );
 };

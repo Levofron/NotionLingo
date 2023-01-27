@@ -1,11 +1,11 @@
-import { Container, Fade, useToast } from '@chakra-ui/react';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { Fade, useToast } from '@chakra-ui/react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { IIncreaseDailyStreak, INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Flex, ParticlesBackground } from '@ui/atoms';
+import { Box, Container, Flex, ParticlesBackground } from '@ui/atoms';
 import {
   DashboardEmptyWordsMessage,
   DashboardProfileDetails,
@@ -17,9 +17,7 @@ import {
 
 import { useAxiosAction, useUser } from '@infrastructure/utils';
 
-import { IDashboardProps } from './dashboard.types';
-
-export const DashboardTemplate: FC<IDashboardProps> = (): JSX.Element => {
+export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();
   const { user } = useUser();
   const [words, setWords] = useState<INotionWord[]>([]);
