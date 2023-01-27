@@ -120,6 +120,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           cursor="pointer"
           justifyContent="center"
           maxWidth="120px"
+          minHeight="50px"
           minWidth="100px"
           transition="all .3s ease"
           onClick={onClick}

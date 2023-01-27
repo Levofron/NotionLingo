@@ -1,43 +1,57 @@
-import { Container, Fade, useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Fade, useToast } from '@chakra-ui/react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { INotionWord } from '@domain/rest/rest.models';
+import { IIncreaseDailyStreak, INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Button, Flex, ParticlesBackground, Text } from '@ui/atoms';
+import { Box, Container, Flex, ParticlesBackground } from '@ui/atoms';
 import {
-  FullScreenLoader,
+  DashboardEmptyWordsMessage,
+  DashboardProfileDetails,
+  DashboardWordsLoader,
   NotionWordCardAnimationWrapper,
   NotionWordCardBack,
   NotionWordCardFront,
 } from '@ui/molecules';
 
-import { useAxiosAction } from '@infrastructure/utils';
+import { useAxiosAction, useUser } from '@infrastructure/utils';
 
 export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();
+  const { user } = useUser();
   const [words, setWords] = useState<INotionWord[]>([]);
+
+  const [dailyStreakData, setDailyStreakData] = useState<IIncreaseDailyStreak>({
+    daysInStreak: user?.daysInStreak || 0,
+    todayWordsStreak: user?.todayWordsStreak || 0,
+    totalLearnedWords: user?.totalLearnedWords || 0,
+  });
 
   const { loading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
     useAxiosAction(restModule.getRandomNotionWords);
 
-  const { mutate: mutateIncreaseDailyStreak } = useAxiosAction(restModule.increaseDailyStreak);
+  const { mutateAsync: mutateAsyncIncreaseDailyStreak } = useAxiosAction(
+    restModule.increaseDailyStreak,
+  );
 
-  const fetchMoreWords = () =>
-    mutateAsyncGetRandomNotionWords()
-      .then((_response) => {
-        setWords((_prevState) => [..._response, ..._prevState]);
-      })
-      .catch((_error) => {
-        toast({
-          title: 'Error',
-          duration: 5000,
-          status: 'error',
-          isClosable: true,
-          description: _error,
-        });
-      });
+  const fetchMoreWords = useCallback(
+    () =>
+      mutateAsyncGetRandomNotionWords()
+        .then((_response) => {
+          setWords((_prevState) => [..._response, ..._prevState]);
+        })
+        .catch((_error) => {
+          toast({
+            title: 'Error',
+            duration: 5000,
+            status: 'error',
+            isClosable: true,
+            description: _error,
+          });
+        }),
+    [setWords],
+  );
 
   useEffect(() => {
     fetchMoreWords();
@@ -49,7 +63,9 @@ export const DashboardTemplate = (): JSX.Element => {
     copiedWords.splice(copiedWords.indexOf(notionWord), 1);
     setWords(copiedWords);
 
-    mutateIncreaseDailyStreak();
+    mutateAsyncIncreaseDailyStreak().then((_response) => {
+      setDailyStreakData(_response);
+    });
 
     if (copiedWords.length <= 3) {
       fetchMoreWords();
@@ -58,34 +74,11 @@ export const DashboardTemplate = (): JSX.Element => {
 
   const renderContent = () => {
     if (isGetRandomNotionWordsLoading && words.length === 0) {
-      return (
-        <FullScreenLoader
-          backgroundColor="transparent"
-          flexDirection="column"
-          gap={{ base: 3, sm: 5 }}
-          position="relative"
-        >
-          <Text fontWeight="medium">Loading words...</Text>
-        </FullScreenLoader>
-      );
+      return <DashboardWordsLoader />;
     }
 
     if (words.length === 0) {
-      return (
-        <Flex
-          alignItems="center"
-          flexDirection="column"
-          gap={{ base: 3, sm: 5 }}
-          justifyContent="center"
-        >
-          <Text fontWeight="medium" maxWidth="300px" textAlign="center">
-            No words found. Please fill up your Notion database with words.
-          </Text>
-          <Button size={{ base: 'sm', sm: 'md', md: 'lg' }} onClick={fetchMoreWords}>
-            Refetch
-          </Button>
-        </Flex>
-      );
+      return <DashboardEmptyWordsMessage onRefetch={fetchMoreWords} />;
     }
 
     return (
@@ -122,6 +115,7 @@ export const DashboardTemplate = (): JSX.Element => {
     <Box bg="gray.50" height="100%" overflow="hidden">
       <ParticlesBackground />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
+        <DashboardProfileDetails {...dailyStreakData} />
         {renderContent()}
       </Container>
     </Box>

@@ -55,14 +55,27 @@ export const AccountSettingsTemplate = (): JSX.Element => {
             <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
               Days in streak: <b>{user?.daysInStreak}</b>
             </Text>
-            <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={8}>
+            <Text
+              color="gray.900"
+              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
+              mb={{ base: 5, sm: 8 }}
+            >
               Total learned words: <b>{user?.totalLearnedWords}</b>
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
-            <Button leftIcon={<BiReset />} mb={2} onClick={resetIntegrationModalRef.current?.open}>
+            <Button
+              leftIcon={<BiReset />}
+              mb={2}
+              size={{ base: 'sm', sm: 'md' }}
+              onClick={resetIntegrationModalRef.current?.open}
+            >
               Reset Notion integration
             </Button>
-            <Button leftIcon={<AiFillDelete />} onClick={deleteAccountModalRef.current?.open}>
+            <Button
+              leftIcon={<AiFillDelete />}
+              size={{ base: 'sm', sm: 'md' }}
+              onClick={deleteAccountModalRef.current?.open}
+            >
               Delete Account
             </Button>
           </Card>
