@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiReset } from 'react-icons/bi';
 
@@ -12,15 +13,28 @@ import {
   ParticlesBackground,
   Text,
 } from '@ui/atoms';
+import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
 
 import { useUser } from '@infrastructure/utils';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
   const { user } = useUser();
+  const deleteAccountModalRef = useRef<IConfirmationModalRef>(null);
+  const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
 
   return (
     <Box bg="gray.50" height="100%" overflow="hidden">
       <ParticlesBackground />
+      <ConfirmationModal
+        ref={deleteAccountModalRef}
+        description="Do you really want to delete you account? This action cannot be undone!"
+        onConfirm={deleteAccountModalRef.current?.close}
+      />
+      <ConfirmationModal
+        ref={resetIntegrationModalRef}
+        description="Do you really want to reset you Notion integration?"
+        onConfirm={resetIntegrationModalRef.current?.close}
+      />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
           <Card alignItems="center" display="flex" p={{ base: 2, sm: 3, md: 4 }}>
@@ -49,10 +63,19 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               Total learned words: <b>{user?.totalLearnedWords}</b>
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
-            <Button leftIcon={<BiReset />} mb={2} size={{ base: 'sm', sm: 'md' }}>
+            <Button
+              leftIcon={<BiReset />}
+              mb={2}
+              size={{ base: 'sm', sm: 'md' }}
+              onClick={resetIntegrationModalRef.current?.open}
+            >
               Reset Notion integration
             </Button>
-            <Button leftIcon={<AiFillDelete />} size={{ base: 'sm', sm: 'md' }}>
+            <Button
+              leftIcon={<AiFillDelete />}
+              size={{ base: 'sm', sm: 'md' }}
+              onClick={deleteAccountModalRef.current?.open}
+            >
               Delete Account
             </Button>
           </Card>
