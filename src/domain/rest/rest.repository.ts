@@ -13,6 +13,7 @@ export interface IRestRepository {
   getRandomNotionWords: () => Promise<INotionWord[]>;
   healthCheck: () => Promise<string>;
   increaseDailyStreak: () => Promise<IIncreaseDailyStreak>;
+  resetNotionIntegration: () => Promise<void>;
   sendContactFormData: (data: IContact) => Promise<IContact>;
   setNotionApiToken: (token: string) => Promise<IHash>;
   setNotionPageId: (pageId: string) => Promise<string>;

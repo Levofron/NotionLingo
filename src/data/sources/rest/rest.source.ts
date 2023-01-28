@@ -3,61 +3,39 @@ import { AxiosInstance } from 'axios';
 import { IContact } from '@domain/rest/rest.models';
 import { TSession } from '@domain/supabase/supabase.types';
 
-import { restEndpoints } from './rest.defaults';
+import { ERestEndpoints } from './rest.defaults';
 import { IRestSource } from './rest.types';
 
 export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
-  healthCheck: async () => {
-    const response = await axiosInstance.get(restEndpoints.HEALTH_CHECK);
-
-    return response;
-  },
+  healthCheck: () => axiosInstance.get(ERestEndpoints.HEALTH_CHECK),
   setSupabaseCookie: async (supabaseSession: TSession | null) => {
-    axiosInstance.post(restEndpoints.SET_SUPABASE_COOKIE, {
+    axiosInstance.post(ERestEndpoints.SET_SUPABASE_COOKIE, {
       session: supabaseSession,
       event: supabaseSession ? 'SIGNED_IN' : 'SIGNED_OUT',
     });
   },
-  getLoggedUser: async () => {
-    const response = await axiosInstance.get(restEndpoints.GET_LOGGED_USER);
-
-    return response;
-  },
+  getLoggedUser: () => axiosInstance.get(ERestEndpoints.GET_LOGGED_USER),
   setNotionApiToken: async (token: string) => {
     const trimmedToken = token.trim();
-    const response = await axiosInstance.post(restEndpoints.SET_NOTION_API_TOKEN, {
+    const response = await axiosInstance.post(ERestEndpoints.SET_NOTION_API_TOKEN, {
       token: trimmedToken,
     });
 
     return response;
   },
-  getAvailableNotionPages: async () => {
-    const response = await axiosInstance.get(restEndpoints.GET_AVAILABLE_NOTION_PAGES);
-
-    return response;
-  },
-  setNotionPageId: async (pageId: string) => {
-    const response = await axiosInstance.post(restEndpoints.SET_NOTION_PAGE_ID, { pageId });
-
-    return response;
-  },
-  getRandomNotionWords: async () => {
-    const response = await axiosInstance.get(restEndpoints.GET_RANDOM_NOTION_WORDS);
-
-    return response;
-  },
-  sendContactFormData: async (data: IContact) => {
-    const response = await axiosInstance.post(restEndpoints.CONTACT, data);
-
-    return response;
-  },
+  getAvailableNotionPages: () => axiosInstance.get(ERestEndpoints.GET_AVAILABLE_NOTION_PAGES),
+  setNotionPageId: (pageId: string) =>
+    axiosInstance.post(ERestEndpoints.SET_NOTION_PAGE_ID, { pageId }),
+  getRandomNotionWords: () => axiosInstance.get(ERestEndpoints.GET_RANDOM_NOTION_WORDS),
+  sendContactFormData: (data: IContact) => axiosInstance.post(ERestEndpoints.CONTACT, data),
   increaseDailyStreak: async () => {
     const encodedCurrentDate = encodeURIComponent(new Date().toISOString());
 
     const response = await axiosInstance.get(
-      `${restEndpoints.INCREASE_DAILY_STREAK}?currentDate=${encodedCurrentDate}`,
+      `${ERestEndpoints.INCREASE_DAILY_STREAK}?currentDate=${encodedCurrentDate}`,
     );
 
     return response;
   },
+  resetNotionIntegration: async () => axiosInstance.get(ERestEndpoints.RESET_NOTION_INTEGRATION),
 });

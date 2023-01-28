@@ -14,7 +14,7 @@ import {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
 
-  const { data: updatedProfileData } = await supabaseInstance
+  await supabaseInstance
     .from('profiles')
     .update({
       notion_api_key: null,
@@ -24,10 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .throwOnError()
     .single();
 
-  return res.status(EHttpStatusCode.OK).json({
-    notionApiKey: updatedProfileData?.notion_api_key,
-    notionPageId: updatedProfileData?.notion_page_id,
-  });
+  return res.status(EHttpStatusCode.OK);
 };
 
 const middlewareToApply = [
