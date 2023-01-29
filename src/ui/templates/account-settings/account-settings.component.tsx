@@ -45,8 +45,8 @@ export const AccountSettingsTemplate = (): JSX.Element => {
           toast({
             duration: 3000,
             status: 'success',
-            title: 'Notion integration has been reset!',
-            description: 'You can connect your Notion account after closing this modal.',
+            title: 'Success!',
+            description: 'Notion integration has been reset!',
             onCloseComplete: () => {
               endCountdown();
               router.push(ERoutes.ONBOARDING);
