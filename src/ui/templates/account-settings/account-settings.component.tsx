@@ -54,17 +54,15 @@ export const AccountSettingsTemplate = (): JSX.Element => {
           });
         });
       })
-      .catch((_error) => {
+      .catch((_error) =>
         toast({
           duration: 3000,
           status: 'error',
           title: 'Error!',
           description: _error,
-        });
-      })
-      .finally(() => {
-        resetIntegrationModalRef.current?.close();
-      });
+        }),
+      )
+      .finally(resetIntegrationModalRef.current?.close);
 
   return (
     <Box bg="gray.50" height="100%" overflow="hidden">
