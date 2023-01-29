@@ -28,9 +28,19 @@ export const useCountdown = (seconds: number) => {
     setIntervalId(newIntervalId);
   };
 
+  const end = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+
+    setIntervalId(undefined);
+    setCountdown(0);
+  };
+
   const isEnded = countdown <= 0;
 
   return {
+    end,
     start,
     isEnded,
     countdown,

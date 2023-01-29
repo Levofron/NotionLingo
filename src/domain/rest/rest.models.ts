@@ -11,7 +11,6 @@ export interface IUser extends IIncreaseDailyStreak {
   email: string;
   fullName: string;
   hasNotionData: boolean;
-  id: string;
   todayWordsStreak: number | null;
   totalLearnedWords: number | null;
 }

@@ -43,8 +43,8 @@ export const DashboardTemplate = (): JSX.Element => {
         })
         .catch((_error) => {
           toast({
-            title: 'Error',
             duration: 5000,
+            title: 'Error!',
             status: 'error',
             isClosable: true,
             description: _error,

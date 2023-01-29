@@ -19,10 +19,6 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const [user, setUser] = useState<(TUser & IUser) | null>(null);
 
   const getUserProfile = async () => {
-    if (user) {
-      return;
-    }
-
     setIsLoading(true);
     const sessionUser = supabaseModule.getUser();
 
@@ -52,10 +48,17 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     setUser(null);
   };
 
+  const resetNotionData = () =>
+    setUser((_prevUser) => ({
+      ..._prevUser!,
+      hasNotionData: false,
+    }));
+
   const providerValue = {
     user,
     logout,
     isLoading,
+    resetNotionData,
     isUserAuthenticated: !!user,
     loginViaGoogle: supabaseModule.loginViaGoogle,
   };

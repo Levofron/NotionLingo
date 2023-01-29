@@ -24,6 +24,7 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
     cancelButtonText = 'No',
     confirmButtonText = 'Yes',
     description = 'This action cannot be undone',
+    isConfirmLoading,
     onConfirm,
     title = 'Are you sure?',
   },
@@ -42,8 +43,14 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
     [],
   );
 
+  const handleClose = () => {
+    if (isConfirmLoading) {
+      onClose();
+    }
+  };
+
   return (
-    <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+    <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent as={Card} borderRadius={0} boxShadow="6px 6px 0 var(--chakra-colors-gray-900)">
         <ModalHeader textAlign="center">{title}</ModalHeader>
@@ -51,10 +58,10 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
           <Balancer>{description}</Balancer>
         </ModalBody>
         <ModalFooter alignItems="center" as={Flex} justifyContent="center">
-          <Button ref={cancelRef} mode="light" onClick={onClose}>
+          <Button ref={cancelRef} disabled={isConfirmLoading} mode="light" onClick={onClose}>
             {cancelButtonText}
           </Button>
-          <Button ml={3} mode="dark" onClick={onConfirm}>
+          <Button isLoading={isConfirmLoading} ml={3} mode="dark" onClick={onConfirm}>
             {confirmButtonText}
           </Button>
         </ModalFooter>

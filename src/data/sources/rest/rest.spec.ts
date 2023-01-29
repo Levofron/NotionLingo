@@ -98,7 +98,6 @@ describe('getRestSource function', () => {
 
   describe('getLoggedUser endpoint', () => {
     const userMock: IUser = {
-      id: 'id',
       email: 'email',
       daysInStreak: 1,
       todayWordsStreak: 1,

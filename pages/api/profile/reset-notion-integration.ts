@@ -17,14 +17,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await supabaseInstance
     .from('profiles')
     .update({
-      notion_api_key: null,
-      notion_page_id: null,
+      // notion_api_key: null,
+      // notion_page_id: null,
+      days_in_streak: 5,
     })
     .eq('id', user?.id)
     .throwOnError()
     .single();
 
-  return res.status(EHttpStatusCode.OK);
+  return res.status(EHttpStatusCode.OK).send('ok');
 };
 
 const middlewareToApply = [
