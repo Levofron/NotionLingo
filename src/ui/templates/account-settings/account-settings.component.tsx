@@ -116,7 +116,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               size={{ base: 'sm', sm: 'md' }}
               onClick={resetIntegrationModalRef.current?.open}
             >
-              Reset Notion integration ({countdown})
+              {`Reset Notion integration${isStarted ? ` (${countdown})` : ''}`}
             </Button>
             <Button
               disabled={isResetNotionIntegrationLoading}
