@@ -17,9 +17,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await supabaseInstance
     .from('profiles')
     .update({
-      // notion_api_key: null,
-      // notion_page_id: null,
-      days_in_streak: 5,
+      notion_api_key: null,
+      notion_page_id: null,
     })
     .eq('id', user?.id)
     .throwOnError()

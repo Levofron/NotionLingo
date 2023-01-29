@@ -43,11 +43,7 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
     [],
   );
 
-  const handleClose = () => {
-    if (isConfirmLoading) {
-      onClose();
-    }
-  };
+  const handleClose = () => !isConfirmLoading && onClose();
 
   return (
     <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={handleClose}>
