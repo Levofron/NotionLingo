@@ -19,6 +19,10 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const [user, setUser] = useState<(TUser & IUser) | null>(null);
 
   const getUserProfile = async () => {
+    if (user) {
+      return;
+    }
+
     setIsLoading(true);
     const sessionUser = supabaseModule.getUser();
 
