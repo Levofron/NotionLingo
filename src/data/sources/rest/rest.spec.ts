@@ -16,6 +16,7 @@ describe('getRestSource function', () => {
     expect(restSource).toEqual({
       healthCheck: expect.any(Function),
       getLoggedUser: expect.any(Function),
+      deleteProfile: expect.any(Function),
       setNotionPageId: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
@@ -378,6 +379,35 @@ describe('getRestSource function', () => {
       const restSource = getRestSource(axiosInstanceMock);
 
       const result = restSource.resetNotionIntegration();
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('deleteProfile endpoint', () => {
+    it('should call proper endpoint', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        delete: jest.fn().mockResolvedValue({ data: {} }),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.deleteProfile();
+
+      expect(result).resolves.toEqual({ data: {} });
+      expect(axiosInstanceMock.delete).toHaveBeenCalledWith('/profile/delete');
+    });
+
+    it('should throw error if endpoint fails', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        delete: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restSource = getRestSource(axiosInstanceMock);
+
+      const result = restSource.deleteProfile();
 
       expect(result).rejects.toThrow('error');
     });

@@ -19,6 +19,7 @@ describe('getRestRepository function', () => {
     expect(restRepository).toEqual({
       healthCheck: expect.any(Function),
       getLoggedUser: expect.any(Function),
+      deleteProfile: expect.any(Function),
       setNotionPageId: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
@@ -241,6 +242,27 @@ describe('getRestRepository function', () => {
       await restRepository.resetNotionIntegration();
 
       expect(restSourceMock.resetNotionIntegration).toHaveBeenCalled();
+    });
+  });
+
+  describe('deleteProfile function', () => {
+    it('should call proper restSource function', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restSourceMock: any = {
+        deleteProfile: jest.fn().mockImplementation(() => ({ data: {} })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseSourceMock: any = {
+        logout: jest.fn(),
+      };
+
+      const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
+
+      await restRepository.deleteProfile();
+
+      expect(supabaseSourceMock.logout).toHaveBeenCalled();
+      expect(restSourceMock.deleteProfile).toHaveBeenCalled();
     });
   });
 });

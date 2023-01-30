@@ -101,3 +101,10 @@ export const resetNotionIntegrationUseCase = (
 ): TResetNotionIntegrationUseCase => ({
   execute: () => restRepository.resetNotionIntegration(),
 });
+
+// deleteProfileUseCase
+export type TDeleteProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+
+export const deleteProfileUseCase = (restRepository: IRestRepository): TDeleteProfileUseCase => ({
+  execute: () => restRepository.deleteProfile(),
+});

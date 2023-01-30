@@ -37,5 +37,6 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
-  resetNotionIntegration: async () => axiosInstance.get(ERestEndpoints.RESET_NOTION_INTEGRATION),
+  resetNotionIntegration: () => axiosInstance.get(ERestEndpoints.RESET_NOTION_INTEGRATION),
+  deleteProfile: () => axiosInstance.delete(ERestEndpoints.DELETE_PROFILE),
 });

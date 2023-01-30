@@ -62,4 +62,9 @@ export const getRestRepository = (
   resetNotionIntegration: async () => {
     await restSource.resetNotionIntegration();
   },
+  deleteProfile: async () => {
+    await restSource.deleteProfile();
+
+    supabaseSource.logout();
+  },
 });

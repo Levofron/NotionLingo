@@ -1,4 +1,5 @@
 import {
+  deleteProfileUseCase,
   getAvailableNotionPagesUseCase,
   getLoggedUserUseCase,
   getRandomNotionWordsUseCase,
@@ -27,6 +28,7 @@ const restRepository = getRestRepository(restSource, supabaseSource);
 export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
   getLoggedUser: getLoggedUserUseCase(restRepository).execute,
+  deleteProfile: deleteProfileUseCase(restRepository).execute,
   setNotionPageId: setNotionPageIdUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
