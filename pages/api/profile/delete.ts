@@ -24,9 +24,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const supabaseService = getServiceSupabase();
 
-  const response = await supabaseService.auth.api.deleteUser(user?.id!);
+  await supabaseService.auth.api.deleteUser(user?.id!);
 
-  res.status(EHttpStatusCode.OK).json(response);
+  res.status(EHttpStatusCode.OK).json({ userId: user?.id });
 };
 
 const middlewareToApply = [
