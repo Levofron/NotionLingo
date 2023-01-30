@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getServiceSupabase, supabaseInstance } from '@infrastructure/config';
+import { getSupabaseService, supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .throwOnError()
     .eq('id', user?.id);
 
-  const supabaseService = getServiceSupabase();
+  const supabaseService = getSupabaseService();
 
   await supabaseService.auth.api.deleteUser(user?.id!);
 
