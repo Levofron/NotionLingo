@@ -67,8 +67,8 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
       )
       .catch((_error) => {
         toast({
-          title: 'Error',
           duration: 5000,
+          title: 'Error!',
           status: 'error',
           description: _error,
           onCloseComplete: () => {

@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .throwOnError()
     .single();
 
-  return res.status(EHttpStatusCode.OK);
+  return res.status(EHttpStatusCode.OK).send('ok');
 };
 
 const middlewareToApply = [

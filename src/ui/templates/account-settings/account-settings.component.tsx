@@ -1,6 +1,10 @@
+import { useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiReset } from 'react-icons/bi';
+
+import { restModule } from '@adapter';
 
 import {
   Avatar,
@@ -15,12 +19,50 @@ import {
 } from '@ui/atoms';
 import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
 
-import { useUser } from '@infrastructure/utils';
+import { ERoutes } from '@infrastructure/types/routes';
+import { useAxiosAction, useCountdown, useUser } from '@infrastructure/utils';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
-  const { user } = useUser();
+  const toast = useToast();
+  const router = useRouter();
+  const { resetNotionData, user } = useUser();
+  const { countdown, end: endCountdown, isStarted, start: startCountdown } = useCountdown(3);
   const deleteAccountModalRef = useRef<IConfirmationModalRef>(null);
   const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
+
+  const {
+    loading: isResetNotionIntegrationLoading,
+    mutateAsync: mutateAsyncResetNotionIntegration,
+  } = useAxiosAction(restModule.resetNotionIntegration);
+
+  const handleConfirmResetNotionIntegration = () =>
+    mutateAsyncResetNotionIntegration()
+      .then(() => {
+        startCountdown();
+        resetNotionData();
+
+        setTimeout(() => {
+          toast({
+            duration: 3000,
+            status: 'success',
+            title: 'Success!',
+            description: 'Notion integration has been reset!',
+            onCloseComplete: () => {
+              endCountdown();
+              router.push(ERoutes.ONBOARDING);
+            },
+          });
+        });
+      })
+      .catch((_error) =>
+        toast({
+          duration: 3000,
+          status: 'error',
+          title: 'Error!',
+          description: _error,
+        }),
+      )
+      .finally(resetIntegrationModalRef.current?.close);
 
   return (
     <Box bg="gray.50" height="100%" overflow="hidden">
@@ -33,7 +75,8 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       <ConfirmationModal
         ref={resetIntegrationModalRef}
         description="Do you really want to reset you Notion integration?"
-        onConfirm={resetIntegrationModalRef.current?.close}
+        isConfirmLoading={isResetNotionIntegrationLoading}
+        onConfirm={handleConfirmResetNotionIntegration}
       />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
@@ -64,14 +107,17 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
             <Button
+              disabled={isStarted}
+              isLoading={isResetNotionIntegrationLoading}
               leftIcon={<BiReset />}
               mb={2}
               size={{ base: 'sm', sm: 'md' }}
               onClick={resetIntegrationModalRef.current?.open}
             >
-              Reset Notion integration
+              {`Reset Notion integration${isStarted ? ` (${countdown})` : ''}`}
             </Button>
             <Button
+              disabled={isResetNotionIntegrationLoading}
               leftIcon={<AiFillDelete />}
               size={{ base: 'sm', sm: 'md' }}
               onClick={deleteAccountModalRef.current?.open}

@@ -52,10 +52,17 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     setUser(null);
   };
 
+  const resetNotionData = () =>
+    setUser((_prevUser) => ({
+      ..._prevUser!,
+      hasNotionData: false,
+    }));
+
   const providerValue = {
     user,
     logout,
     isLoading,
+    resetNotionData,
     isUserAuthenticated: !!user,
     loginViaGoogle: supabaseModule.loginViaGoogle,
   };
