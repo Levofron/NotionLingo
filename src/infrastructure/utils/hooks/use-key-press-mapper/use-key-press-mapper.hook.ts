@@ -10,7 +10,7 @@ export const useKeyPressMapper = (
   const handleKeyPress = debounce((event: KeyboardEvent) => {
     event.preventDefault();
 
-    if (isBlocked) {
+    if (isBlocked || !keyMappers?.length) {
       return;
     }
 
