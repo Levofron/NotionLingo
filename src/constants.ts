@@ -16,8 +16,7 @@ export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export const UNSPLASH_BASE_URL = process.env.NEXT_PUBLIC_UNSPLASH_BASE_URL;
 export const APPLICATION_ENVIRONMENT = process.env.NEXT_PUBLIC_APP_ENV || 'local';
 
-export const { CRYPTO_ALGORITHM } = process.env;
-export const { CRYPTO_SECRET_KEY } = process.env;
+export const { CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY, SUPABASE_SERVICE_ROLE } = process.env;
 
 export const GITHUB_LINK = 'https://github.com/playerony';
 export const CONTACT_EMAIL = 'pawel.wojtasinski.1995@gmail.com;';
