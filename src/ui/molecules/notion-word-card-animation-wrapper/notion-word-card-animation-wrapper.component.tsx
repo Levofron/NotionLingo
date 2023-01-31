@@ -67,14 +67,8 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
 
   useKeyPressMapper(
     [
-      {
-        key: 'Space',
-        callback: handleScreenExit,
-      },
-      {
-        key: 'KeyR',
-        callback: handleRotateIconClick,
-      },
+      ['Space', handleScreenExit],
+      ['KeyR', handleRotateIconClick],
     ],
     !isDraggable,
   );

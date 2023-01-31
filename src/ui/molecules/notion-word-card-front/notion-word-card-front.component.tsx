@@ -41,19 +41,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
     speechSynthesisModule.speak(word);
   }, []);
 
-  useKeyPressMapper(
-    [
-      {
-        key: 'KeyP',
-        callback: handleSpeak,
-      },
-      {
-        key: 'KeyS',
-        callback: handleSpeak,
-      },
-    ],
-    !isTopCard,
-  );
+  useKeyPressMapper([[['KeyP', 'KeyS'], handleSpeak]], !isTopCard);
 
   const shouldEnableSpeechFeature =
     localStorageModule.isSupported() && speechSynthesisModule.isSupported();

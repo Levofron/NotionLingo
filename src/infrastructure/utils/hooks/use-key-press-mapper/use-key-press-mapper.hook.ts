@@ -1,9 +1,12 @@
 import { debounce } from '@infrastructure/utils';
 
 import { useEventListener } from '../use-event-listener/use-event-listener.hook';
-import { IKeyMapper } from './use-key-press-mapper.types';
+import { TAvailableKeys } from './use-key-press-mapper.types';
 
-export const useKeyPressMapper = (keyMappers: IKeyMapper[], isBlocked?: boolean) => {
+export const useKeyPressMapper = (
+  keyMappers: [TAvailableKeys | TAvailableKeys[], () => void][],
+  isBlocked?: boolean,
+) => {
   const handleKeyPress = debounce((event: KeyboardEvent) => {
     event.preventDefault();
 
@@ -11,10 +14,12 @@ export const useKeyPressMapper = (keyMappers: IKeyMapper[], isBlocked?: boolean)
       return;
     }
 
-    const foundKeyMapper = keyMappers.find((_keyMapper) => _keyMapper.key === event.code);
+    const foundKeyMapper = keyMappers.find(([keys]) =>
+      Array.isArray(keys) ? keys.includes(event.code as TAvailableKeys) : keys === event.code,
+    );
 
     if (foundKeyMapper) {
-      foundKeyMapper.callback();
+      foundKeyMapper[1]();
     }
   }, 300);
 

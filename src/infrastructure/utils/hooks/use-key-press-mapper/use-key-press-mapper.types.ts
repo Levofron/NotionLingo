@@ -1,4 +1,1 @@
-export interface IKeyMapper {
-  callback: () => void;
-  key: 'KeyS' | 'KeyP' | 'KeyR' | 'Space';
-}
+export type TAvailableKeys = 'KeyS' | 'KeyP' | 'KeyR' | 'Space';
