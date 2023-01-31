@@ -18,7 +18,7 @@ export const useKeyPressMapper = (
       Array.isArray(keys) ? keys.includes(event.code as TAvailableKeys) : keys === event.code,
     );
 
-    if (foundKeyMapper) {
+    if (foundKeyMapper && foundKeyMapper.length > 0) {
       foundKeyMapper[1]();
     }
   }, 300);
