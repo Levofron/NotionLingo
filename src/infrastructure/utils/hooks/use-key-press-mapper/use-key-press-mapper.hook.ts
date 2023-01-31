@@ -11,10 +11,10 @@ export const useKeyPressMapper = (keyMappers: IKeyMapper[], isBlocked?: boolean)
       return;
     }
 
-    const keyMapper = keyMappers.find((keyMapper) => keyMapper.key === event.code);
+    const foundKeyMapper = keyMappers.find((_keyMapper) => _keyMapper.key === event.code);
 
-    if (keyMapper) {
-      keyMapper.callback();
+    if (foundKeyMapper) {
+      foundKeyMapper.callback();
     }
   }, 300);
 
