@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { IoArrowForward } from 'react-icons/io5';
 
 import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@ui/atoms';
@@ -9,10 +9,23 @@ import { useUser } from '@infrastructure/utils';
 
 export const TryItNow: FC = (): JSX.Element => {
   const router = useRouter();
-  const { isLoading, user } = useUser();
+  const { isLoading, loginViaGoogle, user } = useUser();
 
-  const handleGetStartedClick = () =>
-    router.push(user?.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+  const handleActionButtonClick = () => {
+    if (!user) {
+      return loginViaGoogle();
+    }
+
+    router.push(user.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+  };
+
+  const buttonLabel = useMemo(() => {
+    if (!user) {
+      return 'Create an account';
+    }
+
+    return user.hasNotionData === true ? 'Go to dashboard' : 'Get started';
+  }, [user]);
 
   return (
     <Box bg="white">
@@ -33,9 +46,9 @@ export const TryItNow: FC = (): JSX.Element => {
                 isLoading={isLoading}
                 rightIcon={<IoArrowForward />}
                 size="lg"
-                onClick={handleGetStartedClick}
+                onClick={handleActionButtonClick}
               >
-                Get Started
+                {buttonLabel}
               </Button>
             </Flex>
           </SimpleGrid>

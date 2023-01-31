@@ -1,10 +1,10 @@
 import { IUser } from '@domain/rest/rest.models';
-import { IOAuthResponse, TUser } from '@domain/supabase/supabase.types';
+import { TUser } from '@domain/supabase/supabase.types';
 
 export interface IUserContextValue {
   isLoading: boolean;
   isUserAuthenticated: boolean;
-  loginViaGoogle: () => Promise<IOAuthResponse>;
+  loginViaGoogle: () => Promise<void>;
   logout: () => void;
   resetNotionData: () => void;
   user: (TUser & IUser) | null;
