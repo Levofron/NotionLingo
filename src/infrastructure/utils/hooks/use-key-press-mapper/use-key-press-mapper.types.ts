@@ -1,4 +1,4 @@
 export interface IKeyMapper {
   callback: () => void;
-  key: string;
+  key: 'KeyS' | 'KeyP' | 'KeyR' | 'Space';
 }
