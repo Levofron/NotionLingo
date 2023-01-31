@@ -149,7 +149,13 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
           </motion.div>
         </>
       ) : null}
-      {children({ onClick: handleScreenExit, countdown, isCountdownEnded: isEnded, isRotated })}
+      {children({
+        countdown,
+        isRotated,
+        isTopCard: isDraggable,
+        onClick: handleScreenExit,
+        isCountdownEnded: isEnded,
+      })}
     </motion.div>
   );
 };

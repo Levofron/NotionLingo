@@ -97,7 +97,7 @@ export const DashboardTemplate = (): JSX.Element => {
                 <>
                   {!isRotated ? (
                     <Fade in={isTopCard}>
-                      <NotionWordCardFront {..._word} isTopCard={isTopCard} {..._additionalProps} />
+                      <NotionWordCardFront {..._word} {..._additionalProps} />
                     </Fade>
                   ) : (
                     <NotionWordCardBack word={_word.word} />
