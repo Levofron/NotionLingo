@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { IUser } from '@domain/rest/rest.models';
@@ -6,6 +7,7 @@ import { TUser } from '@domain/supabase/supabase.types';
 import { restModule, supabaseModule } from '@adapter';
 
 import { UserContext } from '@infrastructure/context';
+import { ERoutes } from '@infrastructure/types/routes';
 
 import { IUserProviderProps } from './user-provider.types';
 
@@ -15,6 +17,7 @@ const delay = (time: number) =>
   });
 
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<(TUser & IUser) | null>(null);
 
@@ -50,6 +53,7 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     await restModule.setSupabaseCookie();
 
     setUser(null);
+    router.push(ERoutes.HOME);
   };
 
   const resetNotionData = () =>
