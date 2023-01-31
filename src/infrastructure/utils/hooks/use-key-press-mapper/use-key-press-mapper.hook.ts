@@ -3,11 +3,11 @@ import { debounce } from '@infrastructure/utils';
 import { useEventListener } from '../use-event-listener/use-event-listener.hook';
 import { IKeyMapper } from './use-key-press-mapper.types';
 
-export const useKeyPressMapper = (keyMappers: IKeyMapper[], blocked?: boolean) => {
+export const useKeyPressMapper = (keyMappers: IKeyMapper[], isBlocked?: boolean) => {
   const handleKeyPress = debounce((event: KeyboardEvent) => {
     event.preventDefault();
 
-    if (blocked) {
+    if (isBlocked) {
       return;
     }
 
@@ -16,7 +16,7 @@ export const useKeyPressMapper = (keyMappers: IKeyMapper[], blocked?: boolean) =
     if (keyMapper) {
       keyMapper.callback();
     }
-  }, 500);
+  }, 300);
 
   useEventListener('keypress', handleKeyPress);
 };
