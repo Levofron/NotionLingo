@@ -78,6 +78,12 @@ const getRandomFivePages = (pages: TPage[]) => {
 
     const selectedPage = copiedPages[randomIndex];
 
+    if (!selectedPage) {
+      i -= 1;
+
+      continue;
+    }
+
     result = [...result, selectedPage];
 
     delete copiedPages[randomIndex];
