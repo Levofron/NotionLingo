@@ -7,6 +7,8 @@ import { localStorageModule, speechSynthesisModule } from '@adapter';
 
 import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
+import { useKeyPressMapper } from '@infrastructure/utils';
+
 import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 
 export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
@@ -15,6 +17,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   imageUrl,
   ipa,
   isCountdownEnded,
+  isTopCard,
   meaning,
   onClick,
   type,
@@ -37,6 +40,8 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   const handleSpeak = useCallback(() => {
     speechSynthesisModule.speak(word);
   }, []);
+
+  useKeyPressMapper([[['KeyP', 'KeyS'], handleSpeak]], !isTopCard);
 
   const shouldEnableSpeechFeature =
     localStorageModule.isSupported() && speechSynthesisModule.isSupported();

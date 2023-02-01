@@ -5,6 +5,7 @@ interface IChildrenProps {
   countdown: number;
   isCountdownEnded: boolean;
   isRotated: boolean;
+  isTopCard: boolean;
   onClick: () => void;
 }
 

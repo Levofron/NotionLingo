@@ -7,7 +7,7 @@ import { localStorageModule, speechSynthesisModule } from '@adapter';
 
 import { Icon } from '@ui/atoms';
 
-import { useCountdown, useWindowSize } from '@infrastructure/utils';
+import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/utils';
 
 import { INotionWordCardAnimationWrapperProps } from './notion-word-card-animation-wrapper.types';
 
@@ -64,6 +64,14 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
       animControls.start({ rotateY: 0 });
     });
   };
+
+  useKeyPressMapper(
+    [
+      ['Space', handleScreenExit],
+      ['KeyR', handleRotateIconClick],
+    ],
+    !isDraggable,
+  );
 
   const shouldEnableRotateIcon =
     localStorageModule.isSupported() && speechSynthesisModule.isSupported();
@@ -135,7 +143,13 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
           </motion.div>
         </>
       ) : null}
-      {children({ onClick: handleScreenExit, countdown, isCountdownEnded: isEnded, isRotated })}
+      {children({
+        countdown,
+        isRotated,
+        isTopCard: isDraggable,
+        onClick: handleScreenExit,
+        isCountdownEnded: isEnded,
+      })}
     </motion.div>
   );
 };

@@ -6,3 +6,4 @@ export * from './use-window-size/use-window-size.hook';
 export * from './use-axios-action/use-axios-action.hook';
 export * from './use-local-storage/use-local-storage.hook';
 export * from './use-event-listener/use-event-listener.hook';
+export * from './use-key-press-mapper/use-key-press-mapper.hook';
