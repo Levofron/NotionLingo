@@ -14,7 +14,7 @@ export const DashboardPage = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || router.pathname === ERoutes.DASHBOARD) {
       return;
     }
 

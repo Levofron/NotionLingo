@@ -13,7 +13,7 @@ export const OnboardingPage = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || router.pathname === ERoutes.ONBOARDING) {
       return;
     }
 
