@@ -8,6 +8,7 @@ import {
 } from './rest.models';
 
 export interface IRestRepository {
+  deleteProfile: () => Promise<void>;
   getAvailableNotionPages: () => Promise<INotionPage[]>;
   getLoggedUser: () => Promise<IUser>;
   getRandomNotionWords: () => Promise<INotionWord[]>;

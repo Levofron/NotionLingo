@@ -12,6 +12,7 @@ import { TSession } from '@domain/supabase/supabase.types';
 import { INotionWordResponseItem } from '@data/responses.types';
 
 export interface IRestSource {
+  deleteProfile: () => Promise<void>;
   getAvailableNotionPages: () => Promise<AxiosResponse<INotionPage[]>>;
   getLoggedUser: () => Promise<AxiosResponse<IUser>>;
   getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseItem[]>>;

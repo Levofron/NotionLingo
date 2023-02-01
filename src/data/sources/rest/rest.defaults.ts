@@ -1,5 +1,6 @@
 export enum ERestEndpoints {
   CONTACT = '/contact',
+  DELETE_PROFILE = '/profile/delete',
   GET_AVAILABLE_NOTION_PAGES = '/notion/available-pages',
   GET_LOGGED_USER = '/profile/logged',
   GET_RANDOM_NOTION_WORDS = '/notion/random-words',
