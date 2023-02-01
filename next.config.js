@@ -2,7 +2,7 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NEXT_PUBLIC_APP_ENV === 'local',
+  disable: ['local', 'test'].includes(process.env.NEXT_PUBLIC_APP_ENV),
 });
 
 module.exports = withPWA({
@@ -10,11 +10,11 @@ module.exports = withPWA({
   reactStrictMode: false,
   images: {
     domains: [
-      'www.buymeacoffee.com',
-      'lh3.googleusercontent.com',
-      'www.paypalobjects.com',
       'images.pexels.com',
       'source.unsplash.com',
+      'www.buymeacoffee.com',
+      'www.paypalobjects.com',
+      'lh3.googleusercontent.com',
     ],
   },
 });
