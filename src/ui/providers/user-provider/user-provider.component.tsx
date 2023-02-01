@@ -56,6 +56,12 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     router.push(ERoutes.HOME);
   };
 
+  const loginViaGoogle = async () => {
+    await supabaseModule.loginViaGoogle();
+
+    router.push(ERoutes.ONBOARDING);
+  };
+
   const resetNotionData = () =>
     setUser((_prevUser) => ({
       ..._prevUser!,
@@ -66,9 +72,9 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     user,
     logout,
     isLoading,
+    loginViaGoogle,
     resetNotionData,
     isUserAuthenticated: !!user,
-    loginViaGoogle: supabaseModule.loginViaGoogle,
   };
 
   return <UserContext.Provider value={providerValue}>{children}</UserContext.Provider>;

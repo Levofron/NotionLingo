@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import {
   Box,
@@ -17,10 +17,23 @@ import { useUser } from '@infrastructure/utils';
 
 export const HomeHero: FC = (): JSX.Element => {
   const router = useRouter();
-  const { isLoading, user } = useUser();
+  const { isLoading, loginViaGoogle, user } = useUser();
 
-  const handleGetStartedClick = () =>
-    router.push(user?.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+  const handleActionButtonClick = () => {
+    if (!user) {
+      return loginViaGoogle();
+    }
+
+    router.push(user.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+  };
+
+  const buttonLabel = useMemo(() => {
+    if (!user) {
+      return 'Create an account';
+    }
+
+    return user.hasNotionData === true ? 'Go to dashboard' : 'Get started';
+  }, [user]);
 
   return (
     <Box bg="gray.50" position="relative">
@@ -54,9 +67,9 @@ export const HomeHero: FC = (): JSX.Element => {
             size={{ base: 'sm', sm: 'md', md: 'lg' }}
             variant="primary"
             width="fit-content"
-            onClick={handleGetStartedClick}
+            onClick={handleActionButtonClick}
           >
-            Get Started
+            {buttonLabel}
           </Button>
         </Flex>
       </Container>
