@@ -5,7 +5,7 @@ import { OfflineTemplate } from '@ui/templates';
 export const OfflinePage = (): JSX.Element => (
   <>
     <Head>
-      <title>Levofrom</title>
+      <title>Levofron</title>
     </Head>
     <OfflineTemplate />
   </>
