@@ -14,7 +14,17 @@ export const DashboardPage = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (!isLoading && user?.hasNotionData === false) {
+    if (isLoading || router.pathname === ERoutes.DASHBOARD) {
+      return;
+    }
+
+    if (!user) {
+      router.push(ERoutes.HOME);
+
+      return;
+    }
+
+    if (user.hasNotionData === false) {
       router.push(ERoutes.ONBOARDING);
     }
   }, [user, isLoading]);
@@ -25,7 +35,11 @@ export const DashboardPage = (): JSX.Element => {
         <title>Levofron</title>
       </Head>
       <SidebarWithHeader />
-      {isLoading && !user ? <FullScreenLoader /> : <DashboardTemplate />}
+      {!user || user.hasNotionData === false || isLoading ? (
+        <FullScreenLoader />
+      ) : (
+        <DashboardTemplate />
+      )}
     </>
   );
 };
