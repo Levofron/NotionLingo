@@ -1,5 +1,6 @@
 import { Fade, useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
+import { FiRefreshCcw } from 'react-icons/fi';
 
 import { IIncreaseDailyStreak, INotionWord } from '@domain/rest/rest.models';
 
@@ -92,12 +93,23 @@ export const DashboardTemplate = (): JSX.Element => {
           alignItems="center"
           flexDirection="column"
           gap={{ base: 3, sm: 5 }}
+          height="100%"
           justifyContent="center"
         >
-          <Text fontWeight="medium" maxWidth="300px" textAlign="center">
-            No words found. Please fill up your Notion database with words.
+          <Text
+            withBalancer
+            fontSize={{ base: 'md', sm: 'xl' }}
+            fontWeight="medium"
+            maxWidth="350px"
+            textAlign="center"
+          >
+            No words found. Please fill up your <b>Notion</b> database with words.
           </Text>
-          <Button size={{ base: 'sm', sm: 'md', md: 'lg' }} onClick={fetchMoreWords}>
+          <Button
+            leftIcon={<FiRefreshCcw />}
+            size={{ base: 'sm', sm: 'md', md: 'lg' }}
+            onClick={fetchMoreWords}
+          >
             Refetch
           </Button>
         </Flex>
