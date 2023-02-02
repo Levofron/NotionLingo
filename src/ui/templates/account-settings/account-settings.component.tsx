@@ -25,8 +25,21 @@ import { useAxiosAction, useCountdown, useUser } from '@infrastructure/utils';
 export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
-  const { resetNotionData, user } = useUser();
-  const { countdown, end: endCountdown, isStarted, start: startCountdown } = useCountdown(3);
+
+  const { logout, resetNotionData, user } = useUser();
+  const {
+    countdown: resetNotionIntegrationCountdown,
+    end: endResetNotionIntegrationCountdown,
+    isStarted: isResetNotionIntegrationCountdownStarted,
+    start: startResetNotionIntegrationCountdown,
+  } = useCountdown(5);
+  const {
+    countdown: deleteProfileCountdown,
+    end: endDeleteProfileCountdown,
+    isStarted: isDeleteProfileCountdownStarted,
+    start: startDeleteProfileCountdown,
+  } = useCountdown(5);
+
   const deleteAccountModalRef = useRef<IConfirmationModalRef>(null);
   const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
 
@@ -35,28 +48,32 @@ export const AccountSettingsTemplate = (): JSX.Element => {
     mutateAsync: mutateAsyncResetNotionIntegration,
   } = useAxiosAction(restModule.resetNotionIntegration);
 
+  const { loading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } = useAxiosAction(
+    restModule.deleteProfile,
+  );
+
   const handleConfirmResetNotionIntegration = () =>
     mutateAsyncResetNotionIntegration()
       .then(() => {
-        startCountdown();
-        resetNotionData();
+        startResetNotionIntegrationCountdown();
 
         setTimeout(() => {
           toast({
-            duration: 3000,
+            duration: 5000,
             status: 'success',
             title: 'Success!',
             description: 'Notion integration has been reset!',
             onCloseComplete: () => {
-              endCountdown();
+              resetNotionData();
               router.push(ERoutes.ONBOARDING);
+              endResetNotionIntegrationCountdown();
             },
           });
         });
       })
       .catch((_error) =>
         toast({
-          duration: 3000,
+          duration: 5000,
           status: 'error',
           title: 'Error!',
           description: _error,
@@ -64,13 +81,43 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       )
       .finally(resetIntegrationModalRef.current?.close);
 
+  const handleConfirmDeleteProfile = () =>
+    mutateAsyncDeleteProfile()
+      .then(() => {
+        startDeleteProfileCountdown();
+
+        setTimeout(() => {
+          toast({
+            duration: 5000,
+            status: 'success',
+            title: 'Success!',
+            description: 'Account has been deleted!',
+            onCloseComplete: () => {
+              logout();
+              resetNotionData();
+              endDeleteProfileCountdown();
+            },
+          });
+        });
+      })
+      .catch((_error) =>
+        toast({
+          duration: 5000,
+          status: 'error',
+          title: 'Error!',
+          description: _error,
+        }),
+      )
+      .finally(deleteAccountModalRef.current?.close);
+
   return (
     <Box bg="gray.50" height="100%" overflow="hidden">
       <ParticlesBackground />
       <ConfirmationModal
         ref={deleteAccountModalRef}
         description="Do you really want to delete you account? This action cannot be undone!"
-        onConfirm={deleteAccountModalRef.current?.close}
+        isConfirmLoading={isDeleteProfileLoading}
+        onConfirm={handleConfirmDeleteProfile}
       />
       <ConfirmationModal
         ref={resetIntegrationModalRef}
@@ -107,22 +154,29 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
             <Button
-              disabled={isStarted}
+              disabled={isDeleteProfileCountdownStarted || isResetNotionIntegrationCountdownStarted}
               isLoading={isResetNotionIntegrationLoading}
               leftIcon={<BiReset />}
               mb={2}
               size={{ base: 'sm', sm: 'md' }}
-              onClick={resetIntegrationModalRef.current?.open}
+              onClick={() => resetIntegrationModalRef.current?.open()}
             >
-              {`Reset Notion integration${isStarted ? ` (${countdown})` : ''}`}
+              {`Reset Notion integration${
+                isResetNotionIntegrationCountdownStarted
+                  ? ` (${resetNotionIntegrationCountdown})`
+                  : ''
+              }`}
             </Button>
             <Button
-              disabled={isResetNotionIntegrationLoading}
+              disabled={isDeleteProfileCountdownStarted || isResetNotionIntegrationCountdownStarted}
+              isLoading={isDeleteProfileLoading}
               leftIcon={<AiFillDelete />}
               size={{ base: 'sm', sm: 'md' }}
-              onClick={deleteAccountModalRef.current?.open}
+              onClick={() => deleteAccountModalRef.current?.open()}
             >
-              Delete Account
+              {`Delete Account${
+                isDeleteProfileCountdownStarted ? ` (${deleteProfileCountdown})` : ''
+              }`}
             </Button>
           </Card>
         </Flex>

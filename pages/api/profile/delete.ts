@@ -28,7 +28,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .update({
       is_deleted: true,
     })
-    .throwOnError()
     .eq('id', user?.id);
 
   res.status(EHttpStatusCode.OK).json({ userId: user?.id });
