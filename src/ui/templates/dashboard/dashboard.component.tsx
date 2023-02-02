@@ -5,11 +5,10 @@ import { IIncreaseDailyStreak, INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Container, Flex, ParticlesBackground } from '@ui/atoms';
+import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
 import {
-  DashboardEmptyWordsMessage,
   DashboardProfileDetails,
-  DashboardWordsLoader,
+  FullScreenLoader,
   NotionWordCardAnimationWrapper,
   NotionWordCardBack,
   NotionWordCardFront,
@@ -74,11 +73,35 @@ export const DashboardTemplate = (): JSX.Element => {
 
   const renderContent = () => {
     if (isGetRandomNotionWordsLoading && words.length === 0) {
-      return <DashboardWordsLoader />;
+      return (
+        <FullScreenLoader
+          backgroundColor="transparent"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          position="relative"
+          zIndex={1}
+        >
+          <Text fontWeight="medium">Loading words...</Text>
+        </FullScreenLoader>
+      );
     }
 
     if (words.length === 0) {
-      return <DashboardEmptyWordsMessage onRefetch={fetchMoreWords} />;
+      return (
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          justifyContent="center"
+        >
+          <Text fontWeight="medium" maxWidth="300px" textAlign="center">
+            No words found. Please fill up your Notion database with words.
+          </Text>
+          <Button size={{ base: 'sm', sm: 'md', md: 'lg' }} onClick={fetchMoreWords}>
+            Refetch
+          </Button>
+        </Flex>
+      );
     }
 
     return (
