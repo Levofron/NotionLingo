@@ -1,4 +1,4 @@
-import { Footer, GettingStarted, HomeHero, LogoExplanation, TryItNow } from '@ui/molecules';
+import { Faq, Footer, GettingStarted, HomeHero, TryItNow } from '@ui/molecules';
 import { ContactForm } from '@ui/organisms';
 
 import { useUser } from '@infrastructure/utils';
@@ -11,7 +11,7 @@ export const HomeTemplate = (): JSX.Element => {
       <HomeHero />
       <GettingStarted />
       <TryItNow />
-      <LogoExplanation />
+      <Faq />
       <ContactForm email={user?.email} fullName={user?.fullName} />
       <Footer />
     </div>

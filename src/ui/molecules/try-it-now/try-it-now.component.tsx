@@ -33,7 +33,7 @@ export const TryItNow: FC = (): JSX.Element => {
         <Card bg="white" px={{ base: 4, md: 10 }} py={10}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
             <Box>
-              <Heading as="h3" mb={2}>
+              <Heading as="h3" fontSize="4xl" mb={2}>
                 Start using your Notion dictionary today
               </Heading>
               <Text color="gray.900" fontSize="lg">

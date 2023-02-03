@@ -136,9 +136,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               size="xl"
               src={user?.avatarUrl}
             />
-            <Heading fontFamily="body" fontSize="2xl">
-              {user?.fullName}
-            </Heading>
+            <Heading fontSize="2xl">{user?.fullName}</Heading>
             <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={4}>
               {user?.email}
             </Text>

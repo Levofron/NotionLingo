@@ -7,7 +7,16 @@ import { STEPS } from './getting-started.defaults';
 export const GettingStarted: FC = (): JSX.Element => (
   <Box bg="gray.900">
     <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
-      <Heading as="h3" color="gray.50" mb={{ base: 14, sm: 16 }} textAlign="center">
+      <Heading
+        as="h3"
+        color="gray.50"
+        fontSize={{
+          base: '4xl',
+          md: '5xl',
+        }}
+        mb={{ base: 14, sm: 16 }}
+        textAlign="center"
+      >
         Getting started in <TextUnderline mode="light">3 easy steps</TextUnderline>
       </Heading>
       <Flex
@@ -40,7 +49,7 @@ export const GettingStarted: FC = (): JSX.Element => (
             >
               0{index + 1}
             </Card>
-            <Heading color="gray.50" fontFamily="heading" fontSize="xl" pt={2}>
+            <Heading color="gray.50" pt={2}>
               {step.title}
             </Heading>
             <Text color="gray.300">{step.text}</Text>
