@@ -5,8 +5,7 @@ import { exec } from 'node:child_process';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
-  assignRequestTokenToSupabaseSessionMiddleware,
-  validateIfUserIsLoggedInMiddleware,
+  validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
@@ -90,8 +89,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
   validateRouteSecretMiddleware,
-  validateIfUserIsLoggedInMiddleware,
-  assignRequestTokenToSupabaseSessionMiddleware,
+  validateIfParametersExistsMiddleware('query', ['word']),
 ];
 
 export default withMiddleware(handler)(middlewareToApply);
