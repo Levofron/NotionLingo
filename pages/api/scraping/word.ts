@@ -53,15 +53,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const additionalExamples: string[] = [];
   const meaningAndExamples: { examples: string[]; meaning: string }[] = [];
 
+  const word = $('.dhw').first().text().trim();
+
   $('.def-block').each((_, element) => {
-    const meaning = $(element).find('.def').text();
+    const meaning = $(element).find('.def').text().trim();
 
     const examples: string[] = [];
 
     $(element)
       .find('.examp')
       .each((_, exElement) => {
-        examples.push($(exElement).text());
+        examples.push($(exElement).text().trim());
       });
 
     meaningAndExamples.push({
@@ -70,11 +72,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   });
 
-  $('.deg').each((_, element) => {
-    additionalExamples.push($(element).text());
+  $('.degs').each((_, element) => {
+    $(element)
+      .find('.deg')
+      .each((_, element) => {
+        additionalExamples.push($(element).text().trim());
+      });
   });
 
   res.status(EHttpStatusCode.OK).json({
+    word,
     meaningAndExamples,
     additionalExamples,
   });
