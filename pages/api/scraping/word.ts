@@ -11,6 +11,11 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
+interface IMeaningWithExamples {
+  examples: string[];
+  meaning: string;
+}
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const response = await new Promise<string>((resolve, reject) => {
     exec(
@@ -50,7 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const $ = load(response as string);
 
   const additionalExamples: string[] = [];
-  const meaningAndExamples: { examples: string[]; meaning: string }[] = [];
+  const meaningAndExamples: IMeaningWithExamples[] = [];
 
   const word = $('.dhw').first().text().trim();
 
