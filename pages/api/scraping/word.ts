@@ -48,7 +48,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   });
 
-  if (response.length === 0) {
+  if (!response || response.trim().length === 0) {
     throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'Word not found');
   }
 
