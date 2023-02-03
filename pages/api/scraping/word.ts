@@ -1,5 +1,6 @@
 import { load } from 'cheerio';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiError } from 'next/dist/server/api-utils';
 import { exec } from 'node:child_process';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
@@ -12,7 +13,7 @@ import {
 } from '@infrastructure/utils/node';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const response = await new Promise((resolve, reject) => {
+  const response = await new Promise<string>((resolve, reject) => {
     exec(
       `
       curl 'https://dictionary.cambridge.org/dictionary/english/${req.query.word}' \
@@ -44,7 +45,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   });
 
-  console.log(response);
+  if (response.length === 0) {
+    throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'Word not found');
+  }
+
   const $ = load(response as string);
 
   const additionalExamples: string[] = [];
