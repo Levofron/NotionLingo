@@ -26,7 +26,13 @@ export const Faq = (): JSX.Element => (
       >
         Frequently asked questions
       </Heading>
-      <Accordion allowToggle borderBottomWidth={1} borderColor="gray.900" borderTopWidth={1}>
+      <Accordion
+        allowToggle
+        borderBottomWidth={1}
+        borderColor="gray.900"
+        borderTopWidth={1}
+        defaultIndex={2}
+      >
         {QUESTIONS_AND_ANSWERS.map(({ answer, question }) => (
           <AccordionItem
             key={question}
