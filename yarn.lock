@@ -9876,6 +9876,7 @@ __metadata:
     memory-cache: ^0.2.0
     next: 13.0.1
     next-pwa: ^5.6.0
+    next-seo: ^5.15.0
     plop: ^3.1.1
     prettier: ^2.7.1
     prettier-package-json: ^2.7.0
@@ -10588,6 +10589,17 @@ __metadata:
   peerDependencies:
     next: ">=9.0.0"
   checksum: 47f249a819ed4ec98d2c68f47f7789a0e83b82e7c5ef9a3be330162b609ce82c2467de4a75cafac6a0720c4527dea5f251428fda799d64cd11cdba319012cc9b
+  languageName: node
+  linkType: hard
+
+"next-seo@npm:^5.15.0":
+  version: 5.15.0
+  resolution: "next-seo@npm:5.15.0"
+  peerDependencies:
+    next: ^8.1.1-canary.54 || >=9.0.0
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 05b0769d9c9abcc6a0179e5d724e87b1a3a7591a9c2caa4ef5b791769fcf868cb97fbcd90264106101cf7fbc073b0375ab90026aa519d2e899fbabea12cafbfb
   languageName: node
   linkType: hard
 
