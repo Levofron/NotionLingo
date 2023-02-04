@@ -1,4 +1,4 @@
 export interface IOptions {
-  element?: Window | undefined;
+  element?: Window | HTMLElement | undefined;
   options?: boolean | AddEventListenerOptions;
 }
