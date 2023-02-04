@@ -1,6 +1,6 @@
 import { useMediaQuery } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC, useCallback, useState } from 'react';
+import { FC, useState } from 'react';
 import { BsArrowUpCircle } from 'react-icons/bs';
 
 import { useEventListener } from '@infrastructure/utils';
@@ -18,11 +18,13 @@ export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JS
       behavior: 'smooth',
     });
 
-  const updateScrollPosition = useCallback(() => {
-    setScrollPosition(containerRef?.current?.scrollTop || 0);
-  }, []);
-
-  useEventListener('scroll', updateScrollPosition, { element: containerRef?.current! });
+  useEventListener(
+    'scroll',
+    () => {
+      setScrollPosition(containerRef?.current?.scrollTop || 0);
+    },
+    { element: containerRef?.current! },
+  );
 
   return (
     <AnimatePresence>
