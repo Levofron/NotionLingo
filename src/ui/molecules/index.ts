@@ -19,9 +19,7 @@ export * from './available-notion-page/available-notion-page.component';
 export * from './onboarding-step-three/onboarding-step-three.component';
 export * from './notion-word-card-back/notion-word-card-back.component';
 export * from './notion-word-card-front/notion-word-card-front.component';
-export * from './dashboard-words-loader/dashboard-words-loader.component';
 export * from './dashboard-profile-details/dashboard-profile-details.component';
-export * from './dashboard-empty-words-message/dashboard-empty-words-message.component';
 export * from './notion-word-card-animation-wrapper/notion-word-card-animation-wrapper.component';
 
 export * from './confirmation-modal/confirmation-modal.types';

@@ -1,15 +1,15 @@
 import { Fade, useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
+import { FiRefreshCcw } from 'react-icons/fi';
 
 import { IIncreaseDailyStreak, INotionWord } from '@domain/rest/rest.models';
 
 import { restModule } from '@adapter';
 
-import { Box, Container, Flex, ParticlesBackground } from '@ui/atoms';
+import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
 import {
-  DashboardEmptyWordsMessage,
   DashboardProfileDetails,
-  DashboardWordsLoader,
+  FullScreenLoader,
   NotionWordCardAnimationWrapper,
   NotionWordCardBack,
   NotionWordCardFront,
@@ -74,11 +74,46 @@ export const DashboardTemplate = (): JSX.Element => {
 
   const renderContent = () => {
     if (isGetRandomNotionWordsLoading && words.length === 0) {
-      return <DashboardWordsLoader />;
+      return (
+        <FullScreenLoader
+          backgroundColor="transparent"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          position="relative"
+          zIndex={1}
+        >
+          <Text fontWeight="medium">Loading words...</Text>
+        </FullScreenLoader>
+      );
     }
 
     if (words.length === 0) {
-      return <DashboardEmptyWordsMessage onRefetch={fetchMoreWords} />;
+      return (
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          height="100%"
+          justifyContent="center"
+        >
+          <Text
+            withBalancer
+            fontSize={{ base: 'md', sm: 'xl' }}
+            fontWeight="medium"
+            maxWidth="350px"
+            textAlign="center"
+          >
+            No words found. Please fill up your <b>Notion</b> database with words.
+          </Text>
+          <Button
+            leftIcon={<FiRefreshCcw />}
+            size={{ base: 'sm', sm: 'md', md: 'lg' }}
+            onClick={fetchMoreWords}
+          >
+            Refetch
+          </Button>
+        </Flex>
+      );
     }
 
     return (
