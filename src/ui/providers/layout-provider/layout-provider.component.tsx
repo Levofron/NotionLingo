@@ -5,7 +5,7 @@ import { BackToTopButton, Box } from '@ui/atoms';
 import { ILayoutProviderProps } from './layout-provider.types';
 
 export const LayoutProvider: FC<ILayoutProviderProps> = ({ children }): JSX.Element => {
-  const scrollableContainerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -16,16 +16,9 @@ export const LayoutProvider: FC<ILayoutProviderProps> = ({ children }): JSX.Elem
           height: 100%;
         }
       `}</style>
-      <Box
-        ref={scrollableContainerRef}
-        bg="gray.50"
-        height="100%"
-        id="scrollable-container"
-        overflow="scroll"
-        width="100%"
-      >
+      <Box ref={containerRef} bg="gray.50" height="100%" overflow="scroll" width="100%">
         {children}
-        <BackToTopButton containerRef={scrollableContainerRef} />
+        <BackToTopButton containerRef={containerRef} />
       </Box>
     </>
   );
