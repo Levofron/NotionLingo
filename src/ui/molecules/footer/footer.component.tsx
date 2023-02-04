@@ -54,16 +54,24 @@ export const Footer: FC = (): JSX.Element => {
                 alt="Buy Me A Coffee"
                 height={40}
                 src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg"
-                width={142.47}
+                width={150}
               />
             </ChakraNextLink>
-            <ChakraNextLink href={PAYPAL_LINK} target="_blank">
+            <ChakraNextLink
+              href={PAYPAL_LINK}
+              style={{
+                backgroundColor: 'white',
+                padding: '2px',
+                borderRadius: '6px',
+                width: '150px',
+              }}
+              target="_blank"
+            >
               <NextImage
                 alt="PayPal"
                 height={40}
                 src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-color.svg"
-                style={{ borderRadius: '6px' }}
-                width={142.47}
+                width={146}
               />
             </ChakraNextLink>
           </Stack>
