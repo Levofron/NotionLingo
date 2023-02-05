@@ -1,4 +1,5 @@
 export * from './home/home.component';
+export * from './terms/terms.component';
 export * from './donate/donate.component';
 export * from './offline/offline.component';
 export * from './dashboard/dashboard.component';
