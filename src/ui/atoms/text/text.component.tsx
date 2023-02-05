@@ -5,7 +5,7 @@ import Balancer from 'react-wrap-balancer';
 import { ITextProps } from './text.types';
 
 const renderChildren = (children: ReactNode, withBalancer?: boolean) =>
-  withBalancer ? <Balancer>{children}</Balancer> : <>{children}</>;
+  withBalancer ? <Balancer ratio={1}>{children}</Balancer> : <>{children}</>;
 
 const TextComponent: ForwardRefRenderFunction<HTMLParagraphElement, ITextProps> = (
   { children, withBalancer = false, ...restProps },

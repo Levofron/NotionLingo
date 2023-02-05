@@ -5,7 +5,7 @@ import Balancer from 'react-wrap-balancer';
 import { IHeadingProps } from './heading.types';
 
 const renderChildren = (children: ReactNode, withBalancer?: boolean) =>
-  withBalancer ? <Balancer>{children}</Balancer> : <>{children}</>;
+  withBalancer ? <Balancer ratio={0}>{children}</Balancer> : <>{children}</>;
 
 const HeadingComponent: ForwardRefRenderFunction<HTMLParagraphElement, IHeadingProps> = (
   { children, withBalancer = false, ...restProps },
