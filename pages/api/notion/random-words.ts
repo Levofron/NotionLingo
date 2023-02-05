@@ -214,7 +214,7 @@ const getMeaningAndExampleSentenceSuggestion = ({
   meaningAndExamples,
   word,
 }: IScrapingWordApiResponse) => {
-  if (!meaningAndExamples || meaningAndExamples?.length === 0) {
+  if (!meaningAndExamples?.length) {
     return null;
   }
 
@@ -228,7 +228,7 @@ const getMeaningAndExampleSentenceSuggestion = ({
   if (foundMeaningAndExample) {
     return {
       word,
-      ...foundMeaningAndExample,
+      meaning: foundMeaningAndExample.meaning,
       example: foundMeaningAndExample.examples[0],
     };
   }
@@ -301,7 +301,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         try {
           const response = await wordScraping(word as string);
 
-          console.log(word, response);
           const meaningAndExampleSentenceSuggestion =
             getMeaningAndExampleSentenceSuggestion(response);
 
