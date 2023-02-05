@@ -246,8 +246,8 @@ const getMeaningAndExampleSentenceSuggestion = ({
   if (foundMeaningWithoutExamples) {
     return {
       word,
-      ...foundMeaningWithoutExamples,
       example: additionalExamples[0],
+      meaning: foundMeaningWithoutExamples.meaning,
     };
   }
 
