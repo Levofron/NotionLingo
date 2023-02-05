@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 import { Box, Container, Flex, Heading, Text } from '@ui/atoms';
 
-import { TERMS } from './terms.defaults';
+import { IAgreementsProps } from './agreements.types';
 
-export const Terms = (): JSX.Element => (
+export const Agreements: FC<IAgreementsProps> = ({ agreements, heading }): JSX.Element => (
   <Box bg="gray.50">
     <Container maxW="3xl" pt={{ base: 66, md: 74 }}>
       <Flex
@@ -20,10 +22,10 @@ export const Terms = (): JSX.Element => (
           }}
           textAlign="center"
         >
-          Terms and Conditions
+          {heading}
         </Heading>
         <Flex flexDirection="column" gap={{ base: 5, sm: 6, md: 8 }}>
-          {TERMS.map(({ content, title }) => (
+          {agreements.map(({ content, title }) => (
             <Flex key={content} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
               {title ? (
                 <Heading color="gray.900" textAlign="left">
