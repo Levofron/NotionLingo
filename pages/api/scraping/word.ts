@@ -4,6 +4,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 import { exec } from 'node:child_process';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { cleanUpString } from '@infrastructure/utils';
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
@@ -16,11 +17,20 @@ interface IMeaningWithExamples {
   meaning: string;
 }
 
+const parseWord = (word: string) => {
+  const lowerCasedWord = cleanUpString(word).toLowerCase();
+  const wordWithoutSpaces = lowerCasedWord.replaceAll(' ', '+');
+
+  return wordWithoutSpaces;
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const parsedWord = parseWord(req.query.word as string);
+
   const response = await new Promise<string>((resolve, reject) => {
     exec(
       `
-      curl 'https://dictionary.cambridge.org/dictionary/english/${req.query.word}' \
+      curl 'https://dictionary.cambridge.org/dictionary/english/${parsedWord}' \
         -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
         -H 'Accept-Language: pl,en-GB;q=0.9,en;q=0.8,en-US;q=0.7' \
         -H 'Cache-Control: no-cache' \
@@ -49,7 +59,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (!response || response.trim().length === 0) {
-    throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'Word not found');
+    throw new ApiError(EHttpStatusCode.BAD_REQUEST, `Word not found - "${parsedWord}"`);
   }
 
   const $ = load(response as string);
@@ -82,6 +92,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .each((_, element) => {
         additionalExamples.push($(element).text().trim());
       });
+  });
+
+  console.log('API RESPONSE', {
+    word,
+    meaningAndExamples,
+    additionalExamples,
   });
 
   res.status(EHttpStatusCode.OK).json({
