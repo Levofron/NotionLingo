@@ -32,9 +32,11 @@ export function useEventListener<K extends keyof WindowEventMap>(
       }
     };
 
+    // @ts-expect-error
     element.addEventListener(eventName, eventListener, addEventListenerOptions);
 
     return () => {
+      // @ts-expect-error
       element.removeEventListener(eventName, eventListener, addEventListenerOptions);
     };
   }, [eventName, options]);
