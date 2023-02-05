@@ -59,7 +59,7 @@ export const getWordDetailsFromCambridgeDictionary = async (string: string) => {
   });
 
   if (!response || response.trim().length === 0) {
-    throw new ApiError(EHttpStatusCode.BAD_REQUEST, `Word not found - "${parsedWord}"`);
+    throw new ApiError(EHttpStatusCode.BAD_REQUEST, `Word not found - ${parsedWord}`);
   }
 
   const $ = load(response as string);
