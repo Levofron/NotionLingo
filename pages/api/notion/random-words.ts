@@ -7,7 +7,7 @@ import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { axiosInstance, supabaseInstance } from '@infrastructure/config';
+import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
 import {
@@ -30,8 +30,10 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
+import { wordScraping } from '../scraping/word';
+
 const PAGE_SIZE = 100;
-const RECORDS_TO_RETURN = 5;
+const RECORDS_TO_RETURN = 50;
 const CACHE_TIME = 1000 * 60 * 60;
 
 type TPage = PageObjectResponse | PartialPageObjectResponse;
@@ -207,17 +209,6 @@ const getTextFromPagePropertyDecorator =
     throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
   };
 
-const scrapWord = async (word: string) => {
-  const response = await axiosInstance.get<IScrapingWordApiResponse>(
-    'http://localhost:3000/api/scraping/word',
-    {
-      params: { word },
-    },
-  );
-
-  return response.data;
-};
-
 const getMeaningAndExampleSentenceSuggestion = ({
   additionalExamples,
   meaningAndExamples,
@@ -308,7 +299,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!meaning || !exampleSentence) {
         try {
-          const response = await scrapWord(word as string);
+          const response = await wordScraping(word as string);
 
           console.log(word, response);
           const meaningAndExampleSentenceSuggestion =

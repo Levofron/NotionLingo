@@ -24,8 +24,8 @@ const parseWord = (word: string) => {
   return wordWithoutSpaces;
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const parsedWord = parseWord(req.query.word as string);
+export const wordScraping = async (string: string) => {
+  const parsedWord = parseWord(string);
 
   const response = await new Promise<string>((resolve, reject) => {
     exec(
@@ -94,17 +94,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
   });
 
-  console.log('API RESPONSE', {
+  return {
     word,
     meaningAndExamples,
     additionalExamples,
-  });
+  };
+};
 
-  res.status(EHttpStatusCode.OK).json({
-    word,
-    meaningAndExamples,
-    additionalExamples,
-  });
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const response = await wordScraping(req.query.word as string);
+
+  res.status(EHttpStatusCode.OK).json(response);
 };
 
 const middlewareToApply = [
