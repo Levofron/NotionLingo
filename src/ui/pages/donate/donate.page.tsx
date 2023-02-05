@@ -14,7 +14,7 @@ export const DonatePage = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading || router.pathname === ERoutes.DONATE) {
+    if (isLoading === undefined || (isLoading && router.pathname === ERoutes.DONATE)) {
       return;
     }
 
@@ -35,11 +35,7 @@ export const DonatePage = (): JSX.Element => {
         <title>Levofron</title>
       </Head>
       <SidebarWithHeader />
-      {!user || user.hasNotionData === false || isLoading ? (
-        <FullScreenLoader />
-      ) : (
-        <DonateTemplate />
-      )}
+      {!user || user.hasNotionData === false ? <FullScreenLoader /> : <DonateTemplate />}
     </>
   );
 };

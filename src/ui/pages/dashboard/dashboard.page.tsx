@@ -14,7 +14,7 @@ export const DashboardPage = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading || router.pathname === ERoutes.DASHBOARD) {
+    if (isLoading === undefined || (isLoading && router.pathname === ERoutes.DASHBOARD)) {
       return;
     }
 
@@ -35,11 +35,7 @@ export const DashboardPage = (): JSX.Element => {
         <title>Levofron</title>
       </Head>
       <SidebarWithHeader />
-      {!user || user.hasNotionData === false || isLoading ? (
-        <FullScreenLoader />
-      ) : (
-        <DashboardTemplate />
-      )}
+      {!user || user.hasNotionData === false ? <FullScreenLoader /> : <DashboardTemplate />}
     </>
   );
 };

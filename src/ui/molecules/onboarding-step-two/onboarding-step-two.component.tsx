@@ -34,7 +34,7 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
         <List spacing={{ base: 3, md: 5 }} w="100%">
           <ListItem display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-            <Text>
+            <Text withBalancer>
               Visit{' '}
               <ChakraNextLink href="https://www.notion.com/my-integrations" target="_blank">
                 https://www.notion.com/my-integrations
@@ -59,13 +59,6 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
           <ListItem display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
             <Text>
-              In the <TextUnderline>Content Capabilities</TextUnderline> section leave only{' '}
-              <TextUnderline>Read content</TextUnderline> as the marked option.
-            </Text>
-          </ListItem>
-          <ListItem display="flex">
-            <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-            <Text>
               In the <TextUnderline>Use Capabilities</TextUnderline> check{' '}
               <TextUnderline>No user information</TextUnderline> option.
             </Text>
@@ -77,11 +70,12 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
             </Text>
           </ListItem>
           <ListItem display="flex">
-            <Text>
+            <Text withBalancer>
               On the next page, you’ll find your Notion integration token, also called an API key.
-              You’ll need this token. Please click <TextUnderline>Show</TextUnderline> button and
-              then <TextUnderline>Copy</TextUnderline>. This action is going to save your token in
-              your clipboard.
+              You’ll need this token. Please click <TextUnderline>Show</TextUnderline> button under
+              the <TextUnderline>Internal Integration Token</TextUnderline> input label and then{' '}
+              <TextUnderline>Copy</TextUnderline>. This action is going to save your token in your
+              clipboard.
             </Text>
           </ListItem>
         </List>

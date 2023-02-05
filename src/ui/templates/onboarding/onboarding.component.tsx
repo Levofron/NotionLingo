@@ -101,7 +101,7 @@ export const OnboardingTemplate = (): JSX.Element => {
         >
           Configure your Notion integration
         </Text>
-        <Text color="gray.400" fontSize={{ sm: 'sm', md: 'lg' }} fontWeight="normal">
+        <Text withBalancer color="gray.400" fontSize={{ sm: 'sm', md: 'lg' }} fontWeight="normal">
           This information will let us know from which Notion page we should use to get your
           vocabulary.
         </Text>

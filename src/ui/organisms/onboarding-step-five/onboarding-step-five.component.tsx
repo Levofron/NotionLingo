@@ -62,7 +62,7 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
     if (!availableNotionPagesData?.length) {
       return (
         <Flex alignItems="center" flexDirection="column">
-          <Text color="red.400" fontSize="sm" fontWeight="normal" textAlign="center">
+          <Text withBalancer color="red.400" fontSize="sm" fontWeight="normal" textAlign="center">
             No available Notion pages were found. Please verify if your database has data or
             contains correct column names!
           </Text>
@@ -91,7 +91,7 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
         <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
           Select a Notion page
         </Text>
-        <Text color="gray.400" fontSize="sm" fontWeight="normal">
+        <Text withBalancer color="gray.400" fontSize="sm" fontWeight="normal">
           Please indicate from which Notion page we should use to get your vocabulary.
         </Text>
       </Flex>
