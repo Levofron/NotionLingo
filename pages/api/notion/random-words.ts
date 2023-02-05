@@ -310,8 +310,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             word,
             meaning,
             exampleSentence,
+            wordSuggestion: meaningAndExampleSentenceSuggestion?.word,
             meaningSuggestion: meaningAndExampleSentenceSuggestion?.meaning,
-            wordCorrectionSuggestion: meaningAndExampleSentenceSuggestion?.word,
             exampleSentenceSuggestion: meaningAndExampleSentenceSuggestion?.example,
           };
         } catch (error) {
