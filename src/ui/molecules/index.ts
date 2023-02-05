@@ -1,3 +1,4 @@
+export * from './faq/faq.component';
 export * from './footer/footer.component';
 export * from './header/header.component';
 export * from './home-hero/home-hero.component';
@@ -9,7 +10,6 @@ export * from './navigation-item/navigation-item.component';
 export * from './sidebar-content/sidebar-content.component';
 export * from './getting-started/getting-started.component';
 export * from './textarea-control/textarea-control.component';
-export * from './logo-explanation/logo-explanation.component';
 export * from './full-screen-loader/full-screen-loader.component';
 export * from './confirmation-modal/confirmation-modal.component';
 export * from './onboarding-step-two/onboarding-step-two.component';

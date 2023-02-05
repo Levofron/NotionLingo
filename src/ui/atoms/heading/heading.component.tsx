@@ -11,7 +11,7 @@ const HeadingComponent: ForwardRefRenderFunction<HTMLParagraphElement, IHeadingP
   { children, withBalancer = false, ...restProps },
   ref,
 ): JSX.Element => (
-  <ChakraHeading ref={ref} {...restProps}>
+  <ChakraHeading ref={ref} fontFamily="heading" fontSize="xl" {...restProps}>
     {renderChildren(children, withBalancer)}
   </ChakraHeading>
 );

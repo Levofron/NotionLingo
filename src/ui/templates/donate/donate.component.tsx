@@ -19,20 +19,20 @@ export const DonateTemplate = (): JSX.Element => (
     <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
       <Flex alignItems="center" height="100%" justifyContent="center">
         <Card maxW="400px" p={{ base: 2, sm: 3, md: 4 }}>
-          <Heading fontFamily="body" fontSize="2xl" mb={2}>
+          <Heading fontSize="2xl" mb={2}>
             Donations
           </Heading>
           <Text withBalancer color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={4}>
             This service is available for free and will be also in the future. If you use and
             appreciate this service, please consider supporting this project financially.
           </Text>
-          <Heading fontFamily="body" fontSize="2xl" mb={2}>
+          <Heading fontSize="2xl" mb={2}>
             Buy Me a Coffee
           </Heading>
           <Text withBalancer color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={4}>
             To us Buy Me a Coffee, click on the <b>Buy Me a Coffee</b> button below.
           </Text>
-          <Heading fontFamily="body" fontSize="2xl" mb={2}>
+          <Heading fontSize="2xl" mb={2}>
             Paypal
           </Heading>
           <Text
