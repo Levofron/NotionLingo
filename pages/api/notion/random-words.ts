@@ -30,10 +30,10 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
-import { wordScraping } from '../scraping/word';
+import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
 
 const PAGE_SIZE = 100;
-const RECORDS_TO_RETURN = 50;
+const RECORDS_TO_RETURN = 5;
 const CACHE_TIME = 1000 * 60 * 60;
 
 type TPage = PageObjectResponse | PartialPageObjectResponse;
@@ -299,7 +299,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!meaning || !exampleSentence) {
         try {
-          const response = await wordScraping(word as string);
+          const response = await getWordDetailsFromCambridgeDictionary(word as string);
 
           const meaningAndExampleSentenceSuggestion =
             getMeaningAndExampleSentenceSuggestion(response);

@@ -24,7 +24,7 @@ const parseWord = (word: string) => {
   return wordWithoutSpaces;
 };
 
-export const wordScraping = async (string: string) => {
+export const getWordDetailsFromCambridgeDictionary = async (string: string) => {
   const parsedWord = parseWord(string);
 
   const response = await new Promise<string>((resolve, reject) => {
@@ -102,7 +102,7 @@ export const wordScraping = async (string: string) => {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const response = await wordScraping(req.query.word as string);
+  const response = await getWordDetailsFromCambridgeDictionary(req.query.word as string);
 
   res.status(EHttpStatusCode.OK).json(response);
 };
