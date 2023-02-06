@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Levofron",
-  "short_name": "Levofron",
+  "name": "NotionLingo",
+  "short_name": "NotionLingo",
   "description": "Improve vocabulary with your Notion database",
   "icons": [
     {

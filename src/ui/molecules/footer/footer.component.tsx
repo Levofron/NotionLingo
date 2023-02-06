@@ -96,7 +96,7 @@ export const Footer: FC = (): JSX.Element => {
           align="center"
         >
           <Text color="gray.50" fontFamily="monospace" fontSize="2xl" fontWeight="bold">
-            Levofron
+            NotionLingo
           </Text>
         </Flex>
         <Text color="gray.50" pt={6} textAlign="center">

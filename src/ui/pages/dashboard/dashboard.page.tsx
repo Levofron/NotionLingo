@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { SEO } from '@ui/atoms';
 import { FullScreenLoader } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { DashboardTemplate } from '@ui/templates';
@@ -31,9 +31,7 @@ export const DashboardPage = (): JSX.Element => {
 
   return (
     <>
-      <Head>
-        <title>Levofron</title>
-      </Head>
+      <SEO noFollow noIndex title="Account Settings" />
       <SidebarWithHeader />
       {!user || user.hasNotionData === false || isLoading ? (
         <FullScreenLoader />
