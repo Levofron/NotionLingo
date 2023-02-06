@@ -25,7 +25,7 @@ export const Footer: FC = (): JSX.Element => {
               Legal
             </Text>
             <ChakraNextLink color="gray.50" href={ERoutes.PRIVACY_POLICY}>
-              Privacy & Policy
+              Privacy Policy
             </ChakraNextLink>
             <ChakraNextLink color="gray.50" href={ERoutes.TERMS}>
               Terms & Conditions
