@@ -5,4 +5,5 @@ export * from './offline/offline.component';
 export * from './dashboard/dashboard.component';
 export * from './not-found/not-found.component';
 export * from './onboarding/onboarding.component';
+export * from './privacy-policy/privacy-policy.component';
 export * from './account-settings/account-settings.component';
