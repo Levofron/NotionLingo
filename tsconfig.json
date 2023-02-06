@@ -24,6 +24,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["."],
+  "include": ["**/*"],
   "exclude": ["node_modules"]
 }
