@@ -1,5 +1,6 @@
 export * from './box/box.component';
 export * from './tab/tab.component';
+export * from './seo/seo.component';
 export * from './tabs/tabs.component';
 export * from './card/card.component';
 export * from './show/show.component';
