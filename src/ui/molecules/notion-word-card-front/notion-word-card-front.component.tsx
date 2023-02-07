@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
+import { FcIdea } from 'react-icons/fc';
 
 import { localStorageModule, speechSynthesisModule } from '@adapter';
 
@@ -11,14 +12,19 @@ import { useKeyPressMapper } from '@infrastructure/utils';
 
 import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 
+const hasSuggestion = (original: string, suggestion?: string) =>
+  !!suggestion && suggestion.length > 0 && suggestion !== original;
+
 export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   countdown,
   exampleSentence,
+  exampleSentenceSuggestion,
   imageUrl,
   ipa,
   isCountdownEnded,
   isTopCard,
   meaning,
+  meaningSuggestion,
   onClick,
   type,
   word,
@@ -43,8 +49,20 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
 
   useKeyPressMapper([[['KeyP', 'KeyS'], handleSpeak]], !isTopCard);
 
-  const shouldEnableSpeechFeature =
-    localStorageModule.isSupported() && speechSynthesisModule.isSupported();
+  const shouldEnableSpeechFeature = useMemo(
+    () => localStorageModule.isSupported() && speechSynthesisModule.isSupported(),
+    [],
+  );
+
+  const hasMeaningSuggestion = useMemo(
+    () => hasSuggestion(meaning, meaningSuggestion),
+    [meaningSuggestion],
+  );
+
+  const hasExampleSentenceSuggestion = useMemo(
+    () => hasSuggestion(exampleSentence, exampleSentenceSuggestion),
+    [exampleSentenceSuggestion],
+  );
 
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
@@ -100,19 +118,25 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           fontSize={{ base: 'sm', sm: 'md' }}
           noOfLines={{ base: 4, md: 5 }}
         >
-          {meaning}
+          {hasMeaningSuggestion ? <Icon as={FcIdea} cursor="pointer" fontSize="30px" /> : meaning}
         </Text>
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
-        <Text
-          withBalancer
-          color="gray.900"
-          fontSize={{ base: 'sm', sm: 'md' }}
-          noOfLines={{ base: 4, md: 5 }}
-          p={{ base: 2, sm: 3, md: 4 }}
-        >
-          {exampleSentence}
-        </Text>
+        <Flex gap={1} width="fit-content">
+          <Text
+            withBalancer
+            color="gray.900"
+            fontSize={{ base: 'sm', sm: 'md' }}
+            noOfLines={{ base: 4, md: 5 }}
+            p={{ base: 2, sm: 3, md: 4 }}
+          >
+            {hasExampleSentenceSuggestion ? (
+              <Icon as={FcIdea} cursor="pointer" fontSize="30px" />
+            ) : (
+              exampleSentence
+            )}
+          </Text>
+        </Flex>
         <Flex
           _hover={{
             bg: 'gray.900',
