@@ -1,6 +1,18 @@
 import { capitalizeFirstLetter, isString } from '@infrastructure/utils';
 
-export const cleanUpString = (string: unknown, toReturnWhenEmpty: string = ''): string => {
+import { IOptions } from './clean-up-string.types';
+
+const defaultOptions: Required<IOptions> = {
+  shouldCapitalizeFirstLetter: true,
+  toReturnWhenEmpty: '',
+};
+
+export const cleanUpString = (string: unknown, options: IOptions = defaultOptions): string => {
+  const {
+    shouldCapitalizeFirstLetter = defaultOptions.shouldCapitalizeFirstLetter,
+    toReturnWhenEmpty = defaultOptions.toReturnWhenEmpty,
+  } = options;
+
   if (!isString(string)) {
     return toReturnWhenEmpty;
   }
@@ -14,6 +26,9 @@ export const cleanUpString = (string: unknown, toReturnWhenEmpty: string = ''): 
   const stringAsLowerCase = trimmedString.toLowerCase();
   const stringWithoutMultipleSpaces = stringAsLowerCase.replaceAll(/\s+/g, ' ');
   const stringWithoutWhitespaces = stringWithoutMultipleSpaces.replaceAll(/[\t\n\r]/g, ' ');
+  const stringWithoutLastColon = stringWithoutWhitespaces.replace(/:$/, '').trim();
 
-  return capitalizeFirstLetter(stringWithoutWhitespaces);
+  return shouldCapitalizeFirstLetter
+    ? capitalizeFirstLetter(stringWithoutLastColon)
+    : stringWithoutLastColon;
 };

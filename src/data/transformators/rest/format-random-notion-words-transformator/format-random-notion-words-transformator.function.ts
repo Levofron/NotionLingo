@@ -25,19 +25,17 @@ export const formatRandomNotionWordsTransformator = (
 
       if (_key === 'type') {
         if (isString(currentValue)) {
-          randomNotionWord[_key] = cleanUpString(currentValue, EMPTY_FIELD_VALUE);
+          randomNotionWord[_key] = cleanUpString(currentValue);
 
           continue;
         }
 
-        randomNotionWord[_key] = currentValue.map((_value) =>
-          cleanUpString(_value, EMPTY_FIELD_VALUE),
-        );
+        randomNotionWord[_key] = currentValue.map((_value) => cleanUpString(_value));
 
         continue;
       }
 
-      randomNotionWord[_key] = cleanUpString(currentValue, EMPTY_FIELD_VALUE);
+      randomNotionWord[_key] = cleanUpString(currentValue);
     }
 
     return randomNotionWord;
