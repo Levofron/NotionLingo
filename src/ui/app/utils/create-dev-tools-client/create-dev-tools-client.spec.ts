@@ -35,6 +35,7 @@ describe('createDevToolsClient function', () => {
     expect(window.rest).toStrictEqual({
       healthCheck: expect.any(Function),
       getLoggedUser: expect.any(Function),
+      deleteProfile: expect.any(Function),
       setNotionPageId: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
