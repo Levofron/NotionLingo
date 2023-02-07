@@ -9,6 +9,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { cleanUpString } from '@infrastructure/utils';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -28,6 +29,8 @@ import {
   SUPPORTED_TYPE_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
+
+import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
@@ -52,6 +55,17 @@ interface IGetPagesResult {
   hasMore: boolean;
   nextCursor: string | null;
   pages: TPage[];
+}
+
+interface IMeaningWithExamples {
+  examples: string[];
+  meaning: string;
+}
+
+interface IScrapingWordApiResponse {
+  additionalExamples: string[];
+  meaningAndExamples: IMeaningWithExamples[];
+  word: string;
 }
 
 const getProfileDetails = (userId: string) =>
@@ -158,43 +172,86 @@ const getPagesWithCache = async ({
   return allPages;
 };
 
-const getTextFromPageProperty = (
-  pageProperties: PageObjectResponse['properties'],
-  propertyNames: string[],
-) => {
-  let selectedPageProperties = pageProperties[propertyNames[0]];
+const getTextFromPagePropertyDecorator =
+  (pageProperties: PageObjectResponse['properties']) => (propertyNames: string[]) => {
+    let selectedPageProperties = pageProperties[propertyNames[0]];
 
-  if (!selectedPageProperties) {
-    for (const _propertyName of propertyNames) {
-      if (pageProperties[_propertyName]) {
-        selectedPageProperties = pageProperties[_propertyName];
+    if (!selectedPageProperties) {
+      for (const _propertyName of propertyNames) {
+        if (pageProperties[_propertyName]) {
+          selectedPageProperties = pageProperties[_propertyName];
 
-        break;
+          break;
+        }
       }
     }
-  }
 
-  if (!selectedPageProperties) {
+    if (!selectedPageProperties) {
+      return null;
+    }
+
+    if (selectedPageProperties.type === 'title') {
+      return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
+    }
+
+    if (selectedPageProperties.type === 'rich_text') {
+      return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
+    }
+
+    if (selectedPageProperties.type === 'multi_select') {
+      return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
+    }
+
+    if (selectedPageProperties.type === 'select') {
+      return selectedPageProperties.select?.name || '';
+    }
+
+    throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
+  };
+
+const getMeaningAndExampleSentenceSuggestion = ({
+  additionalExamples,
+  meaningAndExamples,
+  word,
+}: IScrapingWordApiResponse) => {
+  if (!meaningAndExamples?.length) {
     return null;
   }
 
-  if (selectedPageProperties.type === 'title') {
-    return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
+  const foundMeaningAndExample = meaningAndExamples.find((_meaningAndExample) => {
+    const parsedMeaning = cleanUpString(_meaningAndExample.meaning);
+    const hasExampels = _meaningAndExample.examples.length > 0;
+
+    return !!parsedMeaning && hasExampels;
+  });
+
+  if (foundMeaningAndExample) {
+    return {
+      word,
+      meaning: foundMeaningAndExample.meaning,
+      example: foundMeaningAndExample.examples[0],
+    };
   }
 
-  if (selectedPageProperties.type === 'rich_text') {
-    return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
+  if (additionalExamples.length === 0) {
+    return null;
   }
 
-  if (selectedPageProperties.type === 'multi_select') {
-    return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
+  const foundMeaningWithoutExamples = meaningAndExamples.find((_meaningAndExample) => {
+    const parsedMeaning = cleanUpString(_meaningAndExample.meaning);
+
+    return !!parsedMeaning;
+  });
+
+  if (foundMeaningWithoutExamples) {
+    return {
+      word,
+      example: additionalExamples[0],
+      meaning: foundMeaningWithoutExamples.meaning,
+    };
   }
 
-  if (selectedPageProperties.type === 'select') {
-    return selectedPageProperties.select?.name || '';
-  }
-
-  throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
+  return null;
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -229,21 +286,48 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
-  const formattedPages = selectedPages.map((_selectedPage) => {
-    const word = getTextFromPageProperty(_selectedPage.properties, SUPPORTED_WORD_COLUMN_NAMES);
-    const ipa = textToIpa(word as string);
+  const formattedPages = await Promise.all(
+    selectedPages.map(async (_selectedPage) => {
+      const getTextFromPageProperty = getTextFromPagePropertyDecorator(_selectedPage.properties);
 
-    return {
-      ipa,
-      word,
-      type: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_TYPE_COLUMN_NAMES),
-      meaning: getTextFromPageProperty(_selectedPage.properties, SUPPORTED_MEANING_COLUMN_NAMES),
-      exampleSentence: getTextFromPageProperty(
-        _selectedPage.properties,
-        SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
-      ),
-    };
-  });
+      const word = getTextFromPageProperty(SUPPORTED_WORD_COLUMN_NAMES);
+      const type = getTextFromPageProperty(SUPPORTED_TYPE_COLUMN_NAMES);
+      const meaning = getTextFromPageProperty(SUPPORTED_MEANING_COLUMN_NAMES);
+      const exampleSentence = getTextFromPageProperty(SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES);
+
+      const ipa = textToIpa(word as string);
+
+      if (!meaning || !exampleSentence) {
+        try {
+          const response = await getWordDetailsFromCambridgeDictionary(word as string);
+
+          const meaningAndExampleSentenceSuggestion =
+            getMeaningAndExampleSentenceSuggestion(response);
+
+          return {
+            ipa,
+            type,
+            word,
+            meaning,
+            exampleSentence,
+            wordSuggestion: meaningAndExampleSentenceSuggestion?.word,
+            meaningSuggestion: meaningAndExampleSentenceSuggestion?.meaning,
+            exampleSentenceSuggestion: meaningAndExampleSentenceSuggestion?.example,
+          };
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      return {
+        ipa,
+        type,
+        word,
+        meaning,
+        exampleSentence,
+      };
+    }),
+  );
 
   return res.status(EHttpStatusCode.OK).json(formattedPages);
 };
