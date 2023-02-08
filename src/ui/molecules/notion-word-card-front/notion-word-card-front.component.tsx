@@ -114,15 +114,6 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           ) : null}
         </Flex>
         {hasMeaningSuggestion ? (
-          <Text
-            withBalancer
-            color="gray.500"
-            fontSize={{ base: 'sm', sm: 'md' }}
-            noOfLines={{ base: 4, md: 5 }}
-          >
-            {meaning}
-          </Text>
-        ) : (
           <Box position="relative">
             <Button position="absolute" right={0} size="xs" top={-6}>
               Apply suggestion
@@ -135,24 +126,23 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
               noOfLines={{ base: 4, md: 5 }}
               p={{ base: 1, sm: 2 }}
             >
-              &quot;{meaning}&quot;
+              {meaningSuggestion}
             </Text>
           </Box>
+        ) : (
+          <Text
+            withBalancer
+            color="gray.500"
+            fontSize={{ base: 'sm', sm: 'md' }}
+            noOfLines={{ base: 4, md: 5 }}
+          >
+            {meaning}
+          </Text>
         )}
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
         <Flex gap={1} width="fit-content">
           {hasExampleSentenceSuggestion ? (
-            <Text
-              withBalancer
-              color="gray.900"
-              fontSize={{ base: 'sm', sm: 'md' }}
-              noOfLines={{ base: 4, md: 5 }}
-              p={{ base: 2, sm: 3, md: 4 }}
-            >
-              {exampleSentence}
-            </Text>
-          ) : (
             <Flex
               flexDirection="column"
               p={{ base: 2, sm: 3, md: 4 }}
@@ -168,9 +158,19 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
                 noOfLines={{ base: 4, md: 5 }}
                 p={{ base: 1, sm: 2 }}
               >
-                &quot;{exampleSentence}&quot;
+                {exampleSentenceSuggestion}
               </Text>
             </Flex>
+          ) : (
+            <Text
+              withBalancer
+              color="gray.900"
+              fontSize={{ base: 'sm', sm: 'md' }}
+              noOfLines={{ base: 4, md: 5 }}
+              p={{ base: 2, sm: 3, md: 4 }}
+            >
+              {exampleSentence}
+            </Text>
           )}
         </Flex>
         <Flex
