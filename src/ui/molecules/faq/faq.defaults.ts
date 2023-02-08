@@ -5,11 +5,13 @@ export const QUESTIONS_AND_ANSWERS = [
       "Levofron is a cutting-edge app that allows users to easily learn new words and phrases from their own Notion database. Our intuitive platform integrates with the user's Notion database and provides a seamless experience for enhancing their vocabulary.",
   },
   {
+    headerBalancer: true,
     question: 'What are the benefits of using Levofron?',
     answer:
       'Levofron offers several benefits to its users, including support for text-to-speech APIs, auto-generated images for each word, IPA text generation for each word, and basic statistics such as learned words, total learned words, and days in streak. Additionally, Levofron has a fast API that is ideal for large libraries of words (750 words or more).',
   },
   {
+    headerBalancer: true,
     question: 'What is the meaning behind the Levofron logo?',
     answer:
       'The name Levofron is derived from the words "Learn", "Vocabulary", "From", and "Notion". The logo is meant to symbolize the integration of learning and vocabulary with the power of Notion.',
@@ -25,6 +27,7 @@ export const QUESTIONS_AND_ANSWERS = [
       'Getting started with Levofron is easy. Simply download the application, create an account, and follow the setup instructions to start integrating your Notion database with your personal library of words.',
   },
   {
+    headerBalancer: true,
     question: 'Do I need to have a Notion account to use Levofron?',
     answer: 'Yes, a Notion account is required to use Levofron.',
   },
@@ -39,6 +42,7 @@ export const QUESTIONS_AND_ANSWERS = [
       'Users have the option to remove their Levofron account by accessing the relevant settings in the account-settings page on the Levofron website. No need to contact the support team.',
   },
   {
+    headerBalancer: true,
     question: 'How can I reset my Notion integration with Levofron?',
     answer:
       'Users have the option to reset their Notion integration with Levofron by accessing the relevant settings in the account - settings page on the Levofron website.No need to contact the support team.',
