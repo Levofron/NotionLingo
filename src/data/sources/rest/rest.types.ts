@@ -6,6 +6,7 @@ import {
   IIncreaseDailyStreak,
   INotionPage,
   IUser,
+  IWordSuggestions,
 } from '@domain/rest/rest.models';
 import { TSession } from '@domain/supabase/supabase.types';
 
@@ -16,6 +17,7 @@ export interface IRestSource {
   getAvailableNotionPages: () => Promise<AxiosResponse<INotionPage[]>>;
   getLoggedUser: () => Promise<AxiosResponse<IUser>>;
   getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseItem[]>>;
+  getWordSuggestions: (word: string) => Promise<AxiosResponse<IWordSuggestions>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   increaseDailyStreak: () => Promise<AxiosResponse<IIncreaseDailyStreak>>;
   resetNotionIntegration: () => Promise<void>;

@@ -67,4 +67,9 @@ export const getRestRepository = (
 
     supabaseSource.logout();
   },
+  getWordSuggestions: async (word: string) => {
+    const { data } = await restSource.getWordSuggestions(word);
+
+    return data;
+  },
 });

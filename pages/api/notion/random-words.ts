@@ -30,7 +30,7 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
-import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
+import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
