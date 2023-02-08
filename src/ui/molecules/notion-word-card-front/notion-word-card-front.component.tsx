@@ -2,11 +2,10 @@ import Image from 'next/image';
 import { FC, useCallback, useMemo } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
-import { FcIdea } from 'react-icons/fc';
 
 import { localStorageModule, speechSynthesisModule } from '@adapter';
 
-import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
+import { Box, Button, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
 import { useKeyPressMapper } from '@infrastructure/utils';
 
@@ -17,17 +16,19 @@ const hasSuggestion = (original: string, suggestion?: string) =>
 
 export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   countdown,
-  exampleSentence,
-  exampleSentenceSuggestion,
-  imageUrl,
-  ipa,
   isCountdownEnded,
   isTopCard,
-  meaning,
-  meaningSuggestion,
+  notionWord: {
+    exampleSentence,
+    exampleSentenceSuggestion,
+    imageUrl,
+    ipa,
+    meaning,
+    meaningSuggestion,
+    type,
+    word,
+  },
   onClick,
-  type,
-  word,
 }): JSX.Element => {
   const hasType = type && type.length > 0;
 
@@ -112,30 +113,65 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             </Text>
           ) : null}
         </Flex>
-        <Text
-          withBalancer
-          color="gray.500"
-          fontSize={{ base: 'sm', sm: 'md' }}
-          noOfLines={{ base: 4, md: 5 }}
-        >
-          {hasMeaningSuggestion ? <Icon as={FcIdea} cursor="pointer" fontSize="30px" /> : meaning}
-        </Text>
+        {hasMeaningSuggestion ? (
+          <Text
+            withBalancer
+            color="gray.500"
+            fontSize={{ base: 'sm', sm: 'md' }}
+            noOfLines={{ base: 4, md: 5 }}
+          >
+            {meaning}
+          </Text>
+        ) : (
+          <Box position="relative">
+            <Button position="absolute" right={0} size="xs" top={-6}>
+              Apply suggestion
+            </Button>
+            <Text
+              border="2px solid"
+              borderColor="gray.900"
+              color="gray.900"
+              fontSize={{ base: 'sm', sm: 'md' }}
+              noOfLines={{ base: 4, md: 5 }}
+              p={{ base: 1, sm: 2 }}
+            >
+              &quot;{meaning}&quot;
+            </Text>
+          </Box>
+        )}
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
         <Flex gap={1} width="fit-content">
-          <Text
-            withBalancer
-            color="gray.900"
-            fontSize={{ base: 'sm', sm: 'md' }}
-            noOfLines={{ base: 4, md: 5 }}
-            p={{ base: 2, sm: 3, md: 4 }}
-          >
-            {hasExampleSentenceSuggestion ? (
-              <Icon as={FcIdea} cursor="pointer" fontSize="30px" />
-            ) : (
-              exampleSentence
-            )}
-          </Text>
+          {hasExampleSentenceSuggestion ? (
+            <Text
+              withBalancer
+              color="gray.900"
+              fontSize={{ base: 'sm', sm: 'md' }}
+              noOfLines={{ base: 4, md: 5 }}
+              p={{ base: 2, sm: 3, md: 4 }}
+            >
+              {exampleSentence}
+            </Text>
+          ) : (
+            <Flex
+              flexDirection="column"
+              p={{ base: 2, sm: 3, md: 4 }}
+              position="relative"
+              width="full"
+            >
+              <Button size="xs">Apply suggestion</Button>
+              <Text
+                border="2px solid"
+                borderColor="gray.900"
+                color="gray.900"
+                fontSize={{ base: 'sm', sm: 'md' }}
+                noOfLines={{ base: 4, md: 5 }}
+                p={{ base: 1, sm: 2 }}
+              >
+                &quot;{exampleSentence}&quot;
+              </Text>
+            </Flex>
+          )}
         </Flex>
         <Flex
           _hover={{
