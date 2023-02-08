@@ -18,7 +18,7 @@ const delay = (time: number) =>
 
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>();
   const [user, setUser] = useState<(TUser & IUser) | null>(null);
 
   const getUserProfile = async () => {

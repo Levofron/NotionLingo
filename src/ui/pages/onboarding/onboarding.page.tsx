@@ -13,17 +13,17 @@ export const OnboardingPage = (): JSX.Element => {
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading || router.pathname === ERoutes.ONBOARDING) {
+    if (isLoading === undefined || (isLoading && router.pathname === ERoutes.ONBOARDING)) {
       return;
     }
 
-    if (!user) {
+    if (!user && !isLoading) {
       router.push(ERoutes.HOME);
 
       return;
     }
 
-    if (user.hasNotionData === true) {
+    if (user?.hasNotionData === true) {
       router.push(ERoutes.DASHBOARD);
     }
   }, [user, isLoading]);
@@ -31,11 +31,7 @@ export const OnboardingPage = (): JSX.Element => {
   return (
     <>
       <SEO noFollow noIndex title="Onboarding" />
-      {!user || user.hasNotionData === true || isLoading ? (
-        <FullScreenLoader />
-      ) : (
-        <OnboardingTemplate />
-      )}
+      {!user || user.hasNotionData === true ? <FullScreenLoader /> : <OnboardingTemplate />}
     </>
   );
 };

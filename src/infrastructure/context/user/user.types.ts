@@ -2,7 +2,7 @@ import { IUser } from '@domain/rest/rest.models';
 import { TUser } from '@domain/supabase/supabase.types';
 
 export interface IUserContextValue {
-  isLoading: boolean;
+  isLoading: boolean | undefined;
   isUserAuthenticated: boolean;
   loginViaGoogle: () => Promise<void>;
   logout: () => void;
