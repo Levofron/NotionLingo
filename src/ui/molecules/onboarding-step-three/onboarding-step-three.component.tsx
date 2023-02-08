@@ -15,7 +15,7 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
       <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
         Share a database with your integration
       </Text>
-      <Text color="gray.400" fontSize="sm" fontWeight="normal">
+      <Text withBalancer color="gray.400" fontSize="sm" fontWeight="normal">
         Now that you have created an integration, you need to grant it access to a database. To keep
         your information secure, integrations do not have access to any pages or databases in the
         workspace at first. You must share specific pages with an integration in order for the API
@@ -27,7 +27,7 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
         <List spacing={{ base: 3, md: 5 }} w="100%">
           <ListItem display="flex">
             <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-            <Text>
+            <Text withBalancer>
               Go to the database page in your workspace (the one with the vocabulary you want to
               share).
             </Text>
@@ -52,7 +52,7 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
             </Text>
           </ListItem>
           <ListItem display="flex">
-            <Text>Your integration now has permission to read the database.</Text>
+            <Text>Your integration now has permission to do actions on the database.</Text>
           </ListItem>
         </List>
       </Flex>

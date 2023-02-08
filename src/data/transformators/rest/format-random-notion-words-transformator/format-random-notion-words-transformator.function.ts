@@ -2,7 +2,9 @@ import { cleanUpString, isString, objectKeys } from '@infrastructure/utils';
 
 import { INotionWordResponseItem } from '../../../responses.types';
 
-const EMPTY_FIELD_VALUE = '---';
+const cleanUpStringOptions = {
+  toReturnWhenEmpty: '---',
+};
 
 export const formatRandomNotionWordsTransformator = (
   randomNotionWords: INotionWordResponseItem[],
@@ -18,26 +20,26 @@ export const formatRandomNotionWordsTransformator = (
       }
 
       if (!currentValue) {
-        randomNotionWord[_key] = EMPTY_FIELD_VALUE;
+        randomNotionWord[_key] = cleanUpStringOptions.toReturnWhenEmpty;
 
         continue;
       }
 
       if (_key === 'type') {
         if (isString(currentValue)) {
-          randomNotionWord[_key] = cleanUpString(currentValue, EMPTY_FIELD_VALUE);
+          randomNotionWord[_key] = cleanUpString(currentValue, cleanUpStringOptions);
 
           continue;
         }
 
         randomNotionWord[_key] = currentValue.map((_value) =>
-          cleanUpString(_value, EMPTY_FIELD_VALUE),
+          cleanUpString(_value, cleanUpStringOptions),
         );
 
         continue;
       }
 
-      randomNotionWord[_key] = cleanUpString(currentValue, EMPTY_FIELD_VALUE);
+      randomNotionWord[_key] = cleanUpString(currentValue, cleanUpStringOptions);
     }
 
     return randomNotionWord;

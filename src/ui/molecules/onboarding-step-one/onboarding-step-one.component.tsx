@@ -30,7 +30,13 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
   return (
     <TabPanel mx="auto" p={0} w={{ sm: '500px', md: '600px', lg: '650px' }}>
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
-        <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
+        <Text
+          withBalancer
+          color="gray.700"
+          fontSize={{ sm: 'xl', md: '2xl' }}
+          fontWeight="bold"
+          mb="4px"
+        >
           Does your Notion database with vocabulary valid?
         </Text>
         <Text color="gray.400" fontSize="sm" fontWeight="normal">
@@ -42,35 +48,36 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
           <List spacing={{ base: 3, md: 5 }} w="100%">
             <ListItem display="flex">
               <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-              <Text>
+              <Text withBalancer>
                 Go to the database page in your workspace (the one with the vocabulary you want to
                 share).
               </Text>
             </ListItem>
             <ListItem display="flex">
               <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-              <Text>
-                It requires three columns in your database to work. The first is responsible for the
-                word, the second for its meaning, and the third for the example of use.
+              <Text withBalancer>
+                It requires three columns in your database to work. The first is responsible for the{' '}
+                <b>word</b>, the second for its <b>meaning</b>, and the third one with the{' '}
+                <b>example sentence</b>.
               </Text>
             </ListItem>
             <ListItem display="flex">
               <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-              <Text>
+              <Text withBalancer>
                 Please make sure that the database has the column name with word. We support only
                 the following names: {supportedWordColumnNamesAsList}
               </Text>
             </ListItem>
             <ListItem display="flex">
               <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-              <Text>
+              <Text withBalancer>
                 Please make sure that the database has the column name with meaning of the word. We
                 support only the following names: {supportedMeaningColumnNamesAsList}
               </Text>
             </ListItem>
             <ListItem display="flex">
               <ListIcon as={BsFillArrowRightCircleFill} mt="5px" />
-              <Text>
+              <Text withBalancer>
                 Please make sure that the database has the column name with an example sentence of
                 the word. We support only the following names:{' '}
                 {supportedExampleSentenceColumnNamesAsList}
