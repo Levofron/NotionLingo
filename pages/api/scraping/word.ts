@@ -30,7 +30,7 @@ export const getWordDetailsFromCambridgeDictionary = async (string: string) => {
   const response = await new Promise<string>((resolve, reject) => {
     exec(
       `
-      curl 'https://dictionary.cambridge.org/dictionary/english/${parsedWord}' \
+      curl -Ls 'https://dictionary.cambridge.org/dictionary/english/${parsedWord}' \
         -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
         -H 'Accept-Language: pl,en-GB;q=0.9,en;q=0.8,en-US;q=0.7' \
         -H 'Cache-Control: no-cache' \
