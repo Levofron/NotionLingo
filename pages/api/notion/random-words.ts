@@ -7,7 +7,6 @@ import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
 import {
@@ -30,6 +29,7 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
+import { getProfileById } from '../profile/get';
 import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
 
 const PAGE_SIZE = 100;
@@ -67,14 +67,6 @@ interface IScrapingWordApiResponse {
   meaningAndExamples: IMeaningWithExamples[];
   word: string;
 }
-
-const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select('notion_api_key,notion_page_id')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
 
 const getRandomFivePages = (pages: TPage[]) => {
   const amountOfRecords = pages.length;
@@ -256,7 +248,7 @@ const getMeaningAndExampleSentenceSuggestion = ({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-  const { data: profileData } = await getProfileDetails(user?.id!);
+  const profileData = await getProfileById(user?.id!);
 
   if (!profileData.notion_api_key) {
     throw new ApiError(
