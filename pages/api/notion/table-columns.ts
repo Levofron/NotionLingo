@@ -2,7 +2,6 @@ import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { isObject, objectKeys } from '@infrastructure/utils';
 import {
@@ -17,13 +16,7 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
-const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select('notion_api_key,notion_page_id')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
+import { getProfileById } from '../profile/get';
 
 const parsePropertiesToResponse = (properties: DatabaseObjectResponse['properties']) => {
   const parsedProperties = objectKeys(properties).map((_key) => {
@@ -54,7 +47,7 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-  const { data: profileData } = await getProfileDetails(user?.id!);
+  const profileData = await getProfileById(user?.id!);
 
   if (!profileData.notion_api_key) {
     throw new ApiError(
