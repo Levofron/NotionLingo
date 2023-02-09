@@ -23,7 +23,7 @@ export const getProfileById = async (userId: string) => {
   return data;
 };
 
-const getUserById = (userId: string) => {
+const getUserMetadataById = (userId: string) => {
   const supabaseService = getSupabaseService();
 
   return supabaseService.auth.api.getUserById(userId);
@@ -31,7 +31,7 @@ const getUserById = (userId: string) => {
 
 export const getProfileAndUserMetadataById = async (userId: string) => {
   const profileData = await getProfileById(userId);
-  const { data: user, error: userError } = await getUserById(userId);
+  const { data: user, error: userError } = await getUserMetadataById(userId);
 
   if (userError) {
     throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, userError.message);
