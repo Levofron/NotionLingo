@@ -28,7 +28,6 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
 
     if (property.type === 'multi_select') {
       return {
-        id: property.id,
         columnName: _key,
         type: property.type,
         options: property.multi_select.options.map((_option) => _option.name),
@@ -36,13 +35,12 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
     }
 
     return {
-      id: property.id,
       columnName: _key,
       type: property.type,
     };
   });
 
-  return parsedProperties;
+  return parsedProperties.filter(Boolean);
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
