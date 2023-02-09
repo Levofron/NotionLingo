@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
@@ -11,20 +10,11 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
-const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select(
-      'id,email,created_at,notion_api_key,notion_page_id,days_in_streak,today_words_streak,total_learned_words',
-    )
-    .eq('id', userId)
-    .throwOnError()
-    .single();
+import { getProfileById } from './get';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-
-  const { data: profileData } = await getProfileDetails(user?.id!);
+  const profileData = await getProfileById(user?.id!);
 
   const hasNotionData = !!profileData?.notion_api_key && !!profileData?.notion_page_id;
 

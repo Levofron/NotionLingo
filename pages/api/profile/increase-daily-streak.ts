@@ -14,6 +14,8 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
+import { getProfileById } from './get';
+
 const isIsoDate = (string: string) => {
   if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(string)) {
     return false;
@@ -23,14 +25,6 @@ const isIsoDate = (string: string) => {
 
   return date instanceof Date && !Number.isNaN(date) && date.toISOString() === string;
 };
-
-const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select('days_in_streak,today_words_streak,last_daily_streak_updated_at,total_learned_words')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
 
 const updateProfileDetailsDecorator =
   (userId: string, currentDate: Date, res: NextApiResponse) => async (data: object) => {
@@ -56,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { currentDate } = req.query;
 
   const user = await getUserFromRequest(req);
-  const { data: profileData } = await getProfileDetails(user?.id!);
+  const profileData = await getProfileById(user?.id!);
 
   if (!isString(currentDate) || !isIsoDate(currentDate)) {
     throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'Invalid date');
