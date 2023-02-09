@@ -9,7 +9,6 @@ import {
   createNotionClient,
   decrypt,
   getUserFromRequest,
-  isValidNotionPageSchema,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -78,13 +77,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new ApiError(
       EHttpStatusCode.INTERNAL_SERVER_ERROR,
       'The user does not have any available pages',
-    );
-  }
-
-  if (!isValidNotionPageSchema(foundDatabase.properties)) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a valid notion page schema',
     );
   }
 
