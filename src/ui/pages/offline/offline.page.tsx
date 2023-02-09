@@ -1,12 +1,9 @@
-import Head from 'next/head';
-
+import { SEO } from '@ui/atoms';
 import { OfflineTemplate } from '@ui/templates';
 
 export const OfflinePage = (): JSX.Element => (
   <>
-    <Head>
-      <title>Levofron</title>
-    </Head>
+    <SEO noFollow noIndex title="Offline" />
     <OfflineTemplate />
   </>
 );

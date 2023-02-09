@@ -1,13 +1,10 @@
-import Head from 'next/head';
-
+import { SEO } from '@ui/atoms';
 import { SidebarWithHeader } from '@ui/organisms';
 import { TermsTemplate } from '@ui/templates';
 
 export const TermsPage = (): JSX.Element => (
   <>
-    <Head>
-      <title>Levofron</title>
-    </Head>
+    <SEO title="Terms and Conditions" />
     <SidebarWithHeader />
     <TermsTemplate />
   </>
