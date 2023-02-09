@@ -29,7 +29,7 @@ const getUserById = (userId: string) => {
   return supabaseService.auth.api.getUserById(userId);
 };
 
-export const getProfileDetailsByUserId = async (userId: string) => {
+export const getProfileAndUserMetadataById = async (userId: string) => {
   const profileData = await getProfileById(userId);
   const { data: user, error: userError } = await getUserById(userId);
 
@@ -54,7 +54,7 @@ export const getProfileDetailsByUserId = async (userId: string) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const userId = req.query.id as string;
-  const profileDetails = await getProfileDetailsByUserId(userId);
+  const profileDetails = await getProfileAndUserMetadataById(userId);
 
   res.status(EHttpStatusCode.OK).json(profileDetails);
 };
