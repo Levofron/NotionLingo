@@ -15,7 +15,11 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
-import { SUPPORTED_WORD_COLUMN_NAMES } from '@constants';
+import {
+  SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
+  SUPPORTED_MEANING_COLUMN_NAMES,
+  SUPPORTED_WORD_COLUMN_NAMES,
+} from '@constants';
 
 import { getProfileById } from '../profile/get';
 
@@ -49,6 +53,14 @@ export const getAvailableDatabases = async (notionApiKey: string) => {
   return availableDatabases as DatabaseObjectResponse[];
 };
 
+const getPosition = (isWord: boolean, isMeaning: boolean) => {
+  if (isWord) {
+    return 1;
+  }
+
+  return isMeaning ? 2 : 3;
+};
+
 const parsePropertiesToResponse = (properties: DatabaseObjectResponse['properties']) => {
   const parsedProperties = objectKeys(properties).map((_key) => {
     const property = properties[_key];
@@ -59,7 +71,7 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
 
     if (property.type === 'multi_select') {
       return {
-        position: 3,
+        position: 4,
         columnName: _key,
         type: property.type,
         options: property.multi_select.options.map((_option) => _option.name),
@@ -67,15 +79,21 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
     }
 
     const isWord = SUPPORTED_WORD_COLUMN_NAMES.includes(_key);
+    const isMeaning = SUPPORTED_MEANING_COLUMN_NAMES.includes(_key);
+    const isExampleSentence = SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES.includes(_key);
+
+    if (!isWord && !isMeaning && !isExampleSentence) {
+      return null;
+    }
 
     return {
       columnName: _key,
       type: property.type,
-      position: isWord ? 1 : 2,
+      position: getPosition(isWord, isMeaning),
     };
   });
 
-  return parsedProperties.filter(Boolean);
+  return parsedProperties.filter(Boolean).sort((a, b) => a!.position - b!.position);
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
