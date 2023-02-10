@@ -17,7 +17,7 @@ import {
 
 import { getProfileById } from '../profile/get';
 
-const getProfileDataWithNotionDataCheck = async (userId: string) => {
+export const getProfileDataWithNotionDataCheck = async (userId: string) => {
   const profileData = await getProfileById(userId);
 
   if (!profileData.notion_api_key) {

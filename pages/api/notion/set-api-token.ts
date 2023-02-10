@@ -30,10 +30,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { token } = req.body;
 
   const user = await getUserFromRequest(req);
+  const availableDatabases = await getAvailableDatabases(token);
 
-  const databases = await getAvailableDatabases(token);
-
-  if (databases.length === 0) {
+  if (!availableDatabases?.length) {
     throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Your words database is empty');
   }
 

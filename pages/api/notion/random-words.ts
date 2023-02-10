@@ -5,7 +5,6 @@ import {
 } from '@notionhq/client/build/src/api-endpoints';
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
@@ -29,8 +28,8 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
-import { getProfileById } from '../profile/get';
 import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
+import { getProfileDataWithNotionDataCheck } from './table-columns';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
@@ -248,21 +247,7 @@ const getMeaningAndExampleSentenceSuggestion = ({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-  const profileData = await getProfileById(user?.id!);
-
-  if (!profileData.notion_api_key) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a notion api key',
-    );
-  }
-
-  if (!profileData.notion_api_key) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a selected notion page id',
-    );
-  }
+  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
   const hash = JSON.parse(profileData.notion_api_key);
   const notionApiKey = decrypt(hash);
