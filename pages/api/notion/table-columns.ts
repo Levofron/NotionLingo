@@ -40,7 +40,7 @@ const getProfileDataWithNotionDataCheck = async (userId: string) => {
 export const getAvailableDatabases = async (notionApiKey: string) => {
   const notionClient = createNotionClient(notionApiKey);
 
-  const { results: availableDatabases } = await notionClient.search({
+  const { results: availableDatabases = [] } = await notionClient.search({
     filter: { value: 'database', property: 'object' },
   });
 
