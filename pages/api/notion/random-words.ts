@@ -222,7 +222,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     notionApiKey,
     notionClient,
     profileId: user?.id!,
-    databaseId: profileData.notion_page_id,
+    databaseId: profileData.notion_database_id,
   });
 
   const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];

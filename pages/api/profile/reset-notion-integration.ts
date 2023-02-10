@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .from('profiles')
     .update({
       notion_api_key: null,
-      notion_page_id: null,
+      notion_database_id: null,
     })
     .eq('id', user?.id)
     .throwOnError()

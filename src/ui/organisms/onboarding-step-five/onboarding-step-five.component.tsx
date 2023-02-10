@@ -5,7 +5,7 @@ import { FC, useEffect } from 'react';
 import { restModule } from '@adapter';
 
 import { Button, Flex, Spinner, TabPanel, Text } from '@ui/atoms';
-import { AvailableNotionPage } from '@ui/molecules';
+import { AvailableNotionDatabase } from '@ui/molecules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction } from '@infrastructure/utils';
@@ -16,23 +16,23 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   onBackToFirstStepClick,
 }): JSX.Element => {
   const {
-    data: availableNotionPagesData,
-    loading: isAvailableNotionPagesLoading,
-    mutate: mutateAvailableNotionPages,
-  } = useAxiosAction(restModule.getAvailableNotionPages);
+    data: availableNotionDatabasesData,
+    loading: isAvailableNotionDatabasesLoading,
+    mutate: mutateAvailableNotionDatabases,
+  } = useAxiosAction(restModule.getAvailableNotionDatabases);
 
-  const { loading: isSetNotionPageIdLoading, mutateAsync: mutateAsyncSetNotionPageId } =
-    useAxiosAction(restModule.setNotionPageId);
+  const { loading: isSetNotionDatabaseIdLoading, mutateAsync: mutateAsyncSetNotionDatabaseId } =
+    useAxiosAction(restModule.setNotionDatabaseId);
 
   const toast = useToast();
   const router = useRouter();
 
   useEffect(() => {
-    mutateAvailableNotionPages();
+    mutateAvailableNotionDatabases();
   }, []);
 
-  const handleAvailableNotionPageClick = async (pageId: string) => {
-    mutateAsyncSetNotionPageId(pageId)
+  const handleAvailableNotionDatabaseClick = async (pageId: string) => {
+    mutateAsyncSetNotionDatabaseId(pageId)
       .then(() =>
         toast({
           duration: 5000,
@@ -54,12 +54,12 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
       });
   };
 
-  const renderAvailableNotionPages = () => {
-    if (isAvailableNotionPagesLoading) {
+  const renderAvailableNotionDatabases = () => {
+    if (isAvailableNotionDatabasesLoading) {
       return <Spinner size="lg" />;
     }
 
-    if (!availableNotionPagesData?.length) {
+    if (!availableNotionDatabasesData?.length) {
       return (
         <Flex alignItems="center" flexDirection="column">
           <Text withBalancer color="red.400" fontSize="sm" fontWeight="normal" textAlign="center">
@@ -75,12 +75,12 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
       );
     }
 
-    return availableNotionPagesData?.map((_availableNotionPage) => (
-      <AvailableNotionPage
-        key={_availableNotionPage.id}
-        availableNotionPage={_availableNotionPage}
-        isLoading={isSetNotionPageIdLoading}
-        onClick={handleAvailableNotionPageClick}
+    return availableNotionDatabasesData?.map((_availableNotionDatabase) => (
+      <AvailableNotionDatabase
+        key={_availableNotionDatabase.id}
+        availableNotionDatabase={_availableNotionDatabase}
+        isLoading={isSetNotionDatabaseIdLoading}
+        onClick={handleAvailableNotionDatabaseClick}
       />
     ));
   };
@@ -89,10 +89,10 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
     <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
         <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
-          Select a Notion page
+          Select a Notion database
         </Text>
         <Text withBalancer color="gray.400" fontSize="sm" fontWeight="normal">
-          Please indicate from which Notion page we should use to get your vocabulary.
+          Please indicate from which Notion database we should use to get your vocabulary.
         </Text>
       </Flex>
       <Flex
@@ -102,7 +102,7 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
         mt={{ base: '25px', md: '40px' }}
         w="100%"
       >
-        {renderAvailableNotionPages()}
+        {renderAvailableNotionDatabases()}
       </Flex>
     </TabPanel>
   );

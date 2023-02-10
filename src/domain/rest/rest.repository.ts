@@ -2,14 +2,14 @@ import {
   IContact,
   IHash,
   IIncreaseDailyStreak,
-  INotionPage,
+  INotionDatabase,
   INotionWord,
   IUser,
 } from './rest.models';
 
 export interface IRestRepository {
   deleteProfile: () => Promise<void>;
-  getAvailableNotionPages: () => Promise<INotionPage[]>;
+  getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
   getLoggedUser: () => Promise<IUser>;
   getRandomNotionWords: () => Promise<INotionWord[]>;
   healthCheck: () => Promise<string>;
@@ -17,6 +17,6 @@ export interface IRestRepository {
   resetNotionIntegration: () => Promise<void>;
   sendContactFormData: (data: IContact) => Promise<IContact>;
   setNotionApiToken: (token: string) => Promise<IHash>;
-  setNotionPageId: (pageId: string) => Promise<string>;
+  setNotionDatabaseId: (databaseId: string) => Promise<string>;
   setSupabaseCookie: () => Promise<void>;
 }

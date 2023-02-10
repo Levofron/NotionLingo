@@ -1,4 +1,4 @@
-import { IContact, IHash, INotionPage, INotionWord, IUser } from '@domain/rest/rest.models';
+import { IContact, IHash, INotionDatabase, INotionWord, IUser } from '@domain/rest/rest.models';
 
 import { functionImportTest } from '@infrastructure/utils';
 
@@ -17,14 +17,14 @@ describe('getRestSource function', () => {
       healthCheck: expect.any(Function),
       getLoggedUser: expect.any(Function),
       deleteProfile: expect.any(Function),
-      setNotionPageId: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
+      setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
-      getAvailableNotionPages: expect.any(Function),
+      getAvailableNotionDatabases: expect.any(Function),
     });
   });
 
@@ -216,8 +216,8 @@ describe('getRestSource function', () => {
     });
   });
 
-  describe('getAvailableNotionPages endpoint', () => {
-    const notionPageMock: INotionPage = {
+  describe('getAvailableNotionDatabases endpoint', () => {
+    const notionDatabaseMock: INotionDatabase = {
       id: 'id',
       url: 'url',
       title: 'title',
@@ -225,20 +225,20 @@ describe('getRestSource function', () => {
       lastEditedTime: 'lastEditedTime',
     };
 
-    it('should call proper endpoint and return available notion pages', () => {
-      const availableNotionPages = [notionPageMock];
+    it('should call proper endpoint and return available notion databases', () => {
+      const availableNotionDatabases = [notionDatabaseMock];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const axiosInstanceMock: any = {
-        get: jest.fn().mockResolvedValue({ data: availableNotionPages }),
+        get: jest.fn().mockResolvedValue({ data: availableNotionDatabases }),
       };
 
       const restSource = getRestSource(axiosInstanceMock);
 
-      const result = restSource.getAvailableNotionPages();
+      const result = restSource.getAvailableNotionDatabases();
 
-      expect(result).resolves.toEqual({ data: availableNotionPages });
-      expect(axiosInstanceMock.get).toHaveBeenCalledWith('/notion/available-pages');
+      expect(result).resolves.toEqual({ data: availableNotionDatabases });
+      expect(axiosInstanceMock.get).toHaveBeenCalledWith('/notion/available-databases');
     });
 
     it('should throw error if endpoint fails', () => {
@@ -249,28 +249,28 @@ describe('getRestSource function', () => {
 
       const restSource = getRestSource(axiosInstanceMock);
 
-      const result = restSource.getAvailableNotionPages();
+      const result = restSource.getAvailableNotionDatabases();
 
       expect(result).rejects.toThrow('error');
     });
   });
 
-  describe('setNotionPageId endpoint', () => {
+  describe('setNotionDatabaseId endpoint', () => {
     it('should call proper endpoint with proper data', () => {
-      const pageId = '05805c32-7393-44fe-9cf8-0f91b42f8bf5';
+      const databaseId = '05805c32-7393-44fe-9cf8-0f91b42f8bf5';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const axiosInstanceMock: any = {
-        post: jest.fn().mockResolvedValue({ data: pageId }),
+        post: jest.fn().mockResolvedValue({ data: databaseId }),
       };
 
       const restSource = getRestSource(axiosInstanceMock);
 
-      const result = restSource.setNotionPageId('pageId');
+      const result = restSource.setNotionDatabaseId('databaseId');
 
-      expect(result).resolves.toEqual({ data: pageId });
-      expect(axiosInstanceMock.post).toHaveBeenCalledWith('/notion/set-page-id', {
-        pageId: 'pageId',
+      expect(result).resolves.toEqual({ data: databaseId });
+      expect(axiosInstanceMock.post).toHaveBeenCalledWith('/notion/set-database-id', {
+        databaseId: 'databaseId',
       });
     });
 
@@ -282,7 +282,7 @@ describe('getRestSource function', () => {
 
       const restSource = getRestSource(axiosInstanceMock);
 
-      const result = restSource.setNotionPageId('pageId');
+      const result = restSource.setNotionDatabaseId('databaseId');
 
       expect(result).rejects.toThrow('error');
     });

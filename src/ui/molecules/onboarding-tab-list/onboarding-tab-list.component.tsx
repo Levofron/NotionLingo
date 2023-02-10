@@ -10,7 +10,7 @@ const width = { sm: '72px', md: '150px', lg: '180px' };
 export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
   activeTabs,
   createNotionIntegrationTabRef,
-  selectNotionPageTabRef,
+  selectNotionDatabaseTabRef,
   shareDatabaseIntegrationTabRef,
   validateIntegrationTabRef,
   verifyDatabaseTabRef,
@@ -18,7 +18,7 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
   const isCreateIntegrationTabActive = activeTabs.createNotionIntegration;
   const isShareDatabaseIntegrationTabActive = activeTabs.shareDatabaseIntegration;
   const isValidateIntegrationTabActive = activeTabs.validateIntegration;
-  const isSelectPageTabActive = activeTabs.selectNotionPage;
+  const isSelectPageTabActive = activeTabs.selectNotionDatabase;
   const isVerifyDatabaseTabActive = activeTabs.verifyDatabase;
 
   return (
@@ -139,7 +139,7 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           />
         </Flex>
       </Tab>
-      <Tab ref={selectNotionPageTabRef} w={width}>
+      <Tab ref={selectNotionDatabaseTabRef} w={width}>
         <Flex
           _before={{
             content: "''",
