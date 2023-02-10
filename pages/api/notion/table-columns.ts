@@ -15,6 +15,8 @@ import {
   withMiddleware,
 } from '@infrastructure/utils/node';
 
+import { SUPPORTED_WORD_COLUMN_NAMES } from '@constants';
+
 import { getProfileById } from '../profile/get';
 
 export const getProfileDataWithNotionDataCheck = async (userId: string) => {
@@ -57,15 +59,19 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
 
     if (property.type === 'multi_select') {
       return {
+        position: 3,
         columnName: _key,
         type: property.type,
         options: property.multi_select.options.map((_option) => _option.name),
       };
     }
 
+    const isWord = SUPPORTED_WORD_COLUMN_NAMES.includes(_key);
+
     return {
       columnName: _key,
       type: property.type,
+      position: isWord ? 1 : 2,
     };
   });
 
