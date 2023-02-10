@@ -30,6 +30,7 @@ import {
 
 import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
 import { getProfileDataWithNotionDataCheck } from './table-columns';
+import { getTextFromPagePropertyInstance } from './update';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
@@ -163,43 +164,6 @@ const getPagesWithCache = async ({
   return allPages;
 };
 
-const getTextFromPagePropertyDecorator =
-  (pageProperties: PageObjectResponse['properties']) => (propertyNames: string[]) => {
-    let selectedPageProperties = pageProperties[propertyNames[0]];
-
-    if (!selectedPageProperties) {
-      for (const _propertyName of propertyNames) {
-        if (pageProperties[_propertyName]) {
-          selectedPageProperties = pageProperties[_propertyName];
-
-          break;
-        }
-      }
-    }
-
-    if (!selectedPageProperties) {
-      return null;
-    }
-
-    if (selectedPageProperties.type === 'title') {
-      return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'rich_text') {
-      return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'multi_select') {
-      return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
-    }
-
-    if (selectedPageProperties.type === 'select') {
-      return selectedPageProperties.select?.name || '';
-    }
-
-    throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
-  };
-
 const getMeaningAndExampleSentenceSuggestion = ({
   additionalExamples,
   meaningAndExamples,
@@ -265,7 +229,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const formattedPages = await Promise.all(
     selectedPages.map(async (_selectedPage) => {
-      const getTextFromPageProperty = getTextFromPagePropertyDecorator(_selectedPage.properties);
+      const getTextFromPageProperty = getTextFromPagePropertyInstance(_selectedPage.properties);
 
       const { id } = _selectedPage;
       const word = getTextFromPageProperty(SUPPORTED_WORD_COLUMN_NAMES);

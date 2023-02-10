@@ -1,8 +1,9 @@
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
-import { cleanUpString } from '@infrastructure/utils';
+import { cleanUpString, hasOwnProperty } from '@infrastructure/utils';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -34,6 +35,45 @@ const generateColumnEditObject = (columnName: string, type: string, newValue: st
     },
   };
 };
+
+export const getTextFromPagePropertyInstance =
+  (pageProperties: PageObjectResponse['properties']) => (propertyNames: string | string[]) => {
+    const parsedPropertyNames = Array.isArray(propertyNames) ? propertyNames : [propertyNames];
+
+    let selectedPageProperties = pageProperties[parsedPropertyNames[0]];
+
+    if (!selectedPageProperties) {
+      for (const _propertyName of parsedPropertyNames) {
+        if (pageProperties[_propertyName]) {
+          selectedPageProperties = pageProperties[_propertyName];
+
+          break;
+        }
+      }
+    }
+
+    if (!selectedPageProperties) {
+      return null;
+    }
+
+    if (selectedPageProperties.type === 'title') {
+      return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
+    }
+
+    if (selectedPageProperties.type === 'rich_text') {
+      return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
+    }
+
+    if (selectedPageProperties.type === 'multi_select') {
+      return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
+    }
+
+    if (selectedPageProperties.type === 'select') {
+      return selectedPageProperties.select?.name || '';
+    }
+
+    throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
+  };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
@@ -84,7 +124,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     parsedExampleSentence,
   );
 
-  await notionClient.pages.update({
+  const result = await notionClient.pages.update({
     page_id: id,
     // @ts-expect-error
     properties: {
@@ -93,7 +133,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return res.status(EHttpStatusCode.OK).json({ meaningColumn, exampleSentenceColumn });
+  if (!hasOwnProperty(result, 'properties')) {
+    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Something went wrong');
+  }
+
+  const properties = result?.properties as PageObjectResponse['properties'];
+  const getTextFromPageProperty = getTextFromPagePropertyInstance(properties);
+
+  const meaningText = getTextFromPageProperty([meaningColumn.columnName]);
+  const exampleSentenceText = getTextFromPageProperty([exampleSentenceColumn.columnName]);
+
+  return res.status(EHttpStatusCode.OK).json({
+    id: result.id,
+    meaning: meaningText,
+    exampleSentence: exampleSentenceText,
+  });
 };
 
 const middlewareToApply = [
