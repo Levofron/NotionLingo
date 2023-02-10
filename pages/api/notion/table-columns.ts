@@ -37,11 +37,8 @@ const getProfileDataWithNotionDataCheck = async (userId: string) => {
   return profileData;
 };
 
-const getAvailableDatabases = async (notionApiKey: string) => {
-  const hash = JSON.parse(notionApiKey);
-  const decryptedNotionApiKey = decrypt(hash);
-
-  const notionClient = createNotionClient(decryptedNotionApiKey);
+export const getAvailableDatabases = async (notionApiKey: string) => {
+  const notionClient = createNotionClient(notionApiKey);
 
   const { results: availableDatabases } = await notionClient.search({
     filter: { value: 'database', property: 'object' },
@@ -79,7 +76,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
-  const availableDatabases = await getAvailableDatabases(profileData.notion_api_key);
+  const hash = JSON.parse(profileData?.notion_api_key);
+  const notionApiKey = decrypt(hash);
+
+  const availableDatabases = await getAvailableDatabases(notionApiKey);
 
   const foundDatabase = availableDatabases.find(
     (_database) => _database.id === profileData.notion_page_id,

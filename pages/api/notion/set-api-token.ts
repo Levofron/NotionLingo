@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiError } from 'next/dist/server/api-utils';
 
 import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
-  createNotionClient,
   encrypt,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
@@ -13,6 +13,8 @@ import {
   validateRouteSecretMiddleware,
   withMiddleware,
 } from '@infrastructure/utils/node';
+
+import { getAvailableDatabases } from './table-columns';
 
 const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string) =>
   supabaseInstance
@@ -28,11 +30,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { token } = req.body;
 
   const user = await getUserFromRequest(req);
-  const notionClient = createNotionClient(token);
 
-  await notionClient.search({
-    query: '84ff1e57-2170-486b-8d31-e163c9069538',
-  });
+  const databases = await getAvailableDatabases(token);
+
+  if (databases.length === 0) {
+    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Your words database is empty');
+  }
 
   const hash = encrypt(token);
   const hashAsString = JSON.stringify(hash);
