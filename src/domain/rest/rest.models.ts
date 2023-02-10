@@ -22,9 +22,12 @@ export interface IHash {
 
 export interface INotionWord {
   exampleSentence: string;
+  exampleSentenceSuggestion?: string;
+  id: string;
   imageUrl: string;
   ipa: string | null;
   meaning: string;
+  meaningSuggestion?: string;
   type: string | string[] | null;
   word: string;
 }

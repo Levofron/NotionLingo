@@ -1,27 +1,34 @@
 import Image from 'next/image';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
 
 import { localStorageModule, speechSynthesisModule } from '@adapter';
 
-import { Box, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
+import { Box, Button, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
 import { useKeyPressMapper } from '@infrastructure/utils';
 
 import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 
+const hasSuggestion = (original: string, suggestion?: string) =>
+  !!suggestion && suggestion.length > 0 && suggestion !== original;
+
 export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   countdown,
-  exampleSentence,
-  imageUrl,
-  ipa,
   isCountdownEnded,
   isTopCard,
-  meaning,
+  notionWord: {
+    exampleSentence,
+    exampleSentenceSuggestion,
+    imageUrl,
+    ipa,
+    meaning,
+    meaningSuggestion,
+    type,
+    word,
+  },
   onClick,
-  type,
-  word,
 }): JSX.Element => {
   const hasType = type && type.length > 0;
 
@@ -43,8 +50,20 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
 
   useKeyPressMapper([[['KeyP', 'KeyS'], handleSpeak]], !isTopCard);
 
-  const shouldEnableSpeechFeature =
-    localStorageModule.isSupported() && speechSynthesisModule.isSupported();
+  const shouldEnableSpeechFeature = useMemo(
+    () => localStorageModule.isSupported() && speechSynthesisModule.isSupported(),
+    [],
+  );
+
+  const hasMeaningSuggestion = useMemo(
+    () => hasSuggestion(meaning, meaningSuggestion),
+    [meaningSuggestion],
+  );
+
+  const hasExampleSentenceSuggestion = useMemo(
+    () => hasSuggestion(exampleSentence, exampleSentenceSuggestion),
+    [exampleSentenceSuggestion],
+  );
 
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
@@ -94,25 +113,66 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             </Text>
           ) : null}
         </Flex>
-        <Text
-          withBalancer
-          color="gray.500"
-          fontSize={{ base: 'sm', sm: 'md' }}
-          noOfLines={{ base: 4, md: 5 }}
-        >
-          {meaning}
-        </Text>
+        {hasMeaningSuggestion ? (
+          <Box position="relative">
+            <Button position="absolute" right={0} size="xs" top={-6}>
+              Apply suggestion
+            </Button>
+            <Text
+              border="2px solid"
+              borderColor="gray.900"
+              color="gray.900"
+              fontSize={{ base: 'sm', sm: 'md' }}
+              noOfLines={{ base: 4, md: 5 }}
+              p={{ base: 1, sm: 2 }}
+            >
+              {meaningSuggestion}
+            </Text>
+          </Box>
+        ) : (
+          <Text
+            withBalancer
+            color="gray.500"
+            fontSize={{ base: 'sm', sm: 'md' }}
+            noOfLines={{ base: 4, md: 5 }}
+          >
+            {meaning}
+          </Text>
+        )}
       </Flex>
       <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
-        <Text
-          withBalancer
-          color="gray.900"
-          fontSize={{ base: 'sm', sm: 'md' }}
-          noOfLines={{ base: 4, md: 5 }}
-          p={{ base: 2, sm: 3, md: 4 }}
-        >
-          {exampleSentence}
-        </Text>
+        <Flex gap={1} width="fit-content">
+          {hasExampleSentenceSuggestion ? (
+            <Flex
+              flexDirection="column"
+              p={{ base: 2, sm: 3, md: 4 }}
+              position="relative"
+              width="full"
+            >
+              <Button size="xs">Apply suggestion</Button>
+              <Text
+                border="2px solid"
+                borderColor="gray.900"
+                color="gray.900"
+                fontSize={{ base: 'sm', sm: 'md' }}
+                noOfLines={{ base: 4, md: 5 }}
+                p={{ base: 1, sm: 2 }}
+              >
+                {exampleSentenceSuggestion}
+              </Text>
+            </Flex>
+          ) : (
+            <Text
+              withBalancer
+              color="gray.900"
+              fontSize={{ base: 'sm', sm: 'md' }}
+              noOfLines={{ base: 4, md: 5 }}
+              p={{ base: 2, sm: 3, md: 4 }}
+            >
+              {exampleSentence}
+            </Text>
+          )}
+        </Flex>
         <Flex
           _hover={{
             bg: 'gray.900',

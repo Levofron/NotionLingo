@@ -139,12 +139,15 @@ describe('getRestSource function', () => {
 
   describe('getRandomNotionWords endpoint', () => {
     const notionWordMock: INotionWord = {
+      id: 'id',
       ipa: 'ipa',
       word: 'word',
       type: 'type',
       meaning: 'meaning',
       imageUrl: 'imageUrl',
       exampleSentence: 'exampleSentence',
+      meaningSuggestion: 'meaningSuggestion',
+      exampleSentenceSuggestion: 'exampleSentenceSuggestion',
     };
 
     it('should call proper endpoint and return five notion words', () => {

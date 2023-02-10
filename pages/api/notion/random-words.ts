@@ -282,6 +282,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     selectedPages.map(async (_selectedPage) => {
       const getTextFromPageProperty = getTextFromPagePropertyDecorator(_selectedPage.properties);
 
+      const { id } = _selectedPage;
       const word = getTextFromPageProperty(SUPPORTED_WORD_COLUMN_NAMES);
       const type = getTextFromPageProperty(SUPPORTED_TYPE_COLUMN_NAMES);
       const meaning = getTextFromPageProperty(SUPPORTED_MEANING_COLUMN_NAMES);
@@ -297,12 +298,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             getMeaningAndExampleSentenceSuggestion(response);
 
           return {
+            id,
             ipa,
             type,
             word,
             meaning,
             exampleSentence,
-            wordSuggestion: meaningAndExampleSentenceSuggestion?.word,
             meaningSuggestion: meaningAndExampleSentenceSuggestion?.meaning,
             exampleSentenceSuggestion: meaningAndExampleSentenceSuggestion?.example,
           };
@@ -312,6 +313,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       return {
+        id,
         ipa,
         type,
         word,
