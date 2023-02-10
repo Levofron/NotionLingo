@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { cleanUpString } from '@infrastructure/utils';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -16,13 +17,34 @@ import {
 
 import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 
+const generateColumnEditObject = (columnName: string, type: string, newValue: string) => {
+  if (!newValue) {
+    return null;
+  }
+
+  return {
+    [columnName]: {
+      [type]: [
+        {
+          text: {
+            content: newValue,
+          },
+        },
+      ],
+    },
+  };
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
   const { exampleSentence, id, meaning } = req.body;
 
-  if (!meaning && !exampleSentence) {
+  const parsedMeaning = cleanUpString(meaning);
+  const parsedExampleSentence = cleanUpString(exampleSentence);
+
+  if (!parsedMeaning && !parsedExampleSentence) {
     throw new ApiError(
       EHttpStatusCode.BAD_REQUEST,
       'You need to provide at least one of the following parameters: meaning, exampleSentence',
@@ -50,33 +72,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const meaningColumnEdit = meaning
-    ? {
-        [meaningColumn.columnName]: {
-          [meaningColumn.type]: [
-            {
-              text: {
-                content: meaning,
-              },
-            },
-          ],
-        },
-      }
-    : null;
+  const meaningColumnEdit = generateColumnEditObject(
+    meaningColumn.columnName,
+    meaningColumn.type,
+    parsedMeaning,
+  );
 
-  const exampleSentenceColumnEdit = exampleSentence
-    ? {
-        [exampleSentenceColumn.columnName]: {
-          [exampleSentenceColumn.type]: [
-            {
-              text: {
-                content: exampleSentence,
-              },
-            },
-          ],
-        },
-      }
-    : null;
+  const exampleSentenceColumnEdit = generateColumnEditObject(
+    exampleSentenceColumn.columnName,
+    exampleSentenceColumn.type,
+    parsedExampleSentence,
+  );
 
   await notionClient.pages.update({
     page_id: id,
