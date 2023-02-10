@@ -31,8 +31,8 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
     mutateAvailableNotionDatabases();
   }, []);
 
-  const handleAvailableNotionDatabaseClick = async (pageId: string) => {
-    mutateAsyncSetNotionDatabaseId(pageId)
+  const handleAvailableNotionDatabaseClick = async (databaseId: string) => {
+    mutateAsyncSetNotionDatabaseId(databaseId)
       .then(() =>
         toast({
           duration: 5000,

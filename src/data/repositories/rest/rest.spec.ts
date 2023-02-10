@@ -137,11 +137,11 @@ describe('getRestRepository function', () => {
 
   describe('setNotionDatabaseId function', () => {
     it('should call proper restSource function', async () => {
-      const pageId = 'pageId';
+      const databaseId = 'databaseId';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restSourceMock: any = {
-        setNotionDatabaseId: jest.fn().mockImplementation((pageId) => ({ data: pageId })),
+        setNotionDatabaseId: jest.fn().mockImplementation((databaseId) => ({ data: databaseId })),
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -149,10 +149,10 @@ describe('getRestRepository function', () => {
 
       const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
 
-      const result = await restRepository.setNotionDatabaseId(pageId);
+      const result = await restRepository.setNotionDatabaseId(databaseId);
 
-      expect(result).toEqual(pageId);
-      expect(restSourceMock.setNotionDatabaseId).toHaveBeenCalledWith(pageId);
+      expect(result).toEqual(databaseId);
+      expect(restSourceMock.setNotionDatabaseId).toHaveBeenCalledWith(databaseId);
     });
   });
 
