@@ -17,6 +17,39 @@ import {
 
 import { getProfileById } from '../profile/get';
 
+const getProfileDataWithNotionDataCheck = async (userId: string) => {
+  const profileData = await getProfileById(userId);
+
+  if (!profileData.notion_api_key) {
+    throw new ApiError(
+      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      'The user does not have a notion api key',
+    );
+  }
+
+  if (!profileData.notion_api_key) {
+    throw new ApiError(
+      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      'The user does not have a selected notion page id',
+    );
+  }
+
+  return profileData;
+};
+
+const getAvailableDatabases = async (notionApiKey: string) => {
+  const hash = JSON.parse(notionApiKey);
+  const decryptedNotionApiKey = decrypt(hash);
+
+  const notionClient = createNotionClient(decryptedNotionApiKey);
+
+  const { results: availableDatabases } = await notionClient.search({
+    filter: { value: 'database', property: 'object' },
+  });
+
+  return availableDatabases as DatabaseObjectResponse[];
+};
+
 const parsePropertiesToResponse = (properties: DatabaseObjectResponse['properties']) => {
   const parsedProperties = objectKeys(properties).map((_key) => {
     const property = properties[_key];
@@ -44,30 +77,9 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-  const profileData = await getProfileById(user?.id!);
+  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
-  if (!profileData.notion_api_key) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a notion api key',
-    );
-  }
-
-  if (!profileData.notion_api_key) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a selected notion page id',
-    );
-  }
-
-  const hash = JSON.parse(profileData.notion_api_key);
-  const notionApiKey = decrypt(hash);
-
-  const notionClient = createNotionClient(notionApiKey);
-
-  const { results: availableDatabases } = await notionClient.search({
-    filter: { value: 'database', property: 'object' },
-  });
+  const availableDatabases = await getAvailableDatabases(profileData.notion_api_key);
 
   const foundDatabase = availableDatabases.find(
     (_database) => _database.id === profileData.notion_page_id,
@@ -80,7 +92,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  return res.status(200).json(parsePropertiesToResponse(foundDatabase.properties));
+  const parsedDatabaseProperties = parsePropertiesToResponse(foundDatabase.properties);
+
+  return res.status(200).json(parsedDatabaseProperties);
 };
 
 const middlewareToApply = [
