@@ -87,7 +87,10 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
     }
 
     return {
+      isWord,
+      isMeaning,
       columnName: _key,
+      isExampleSentence,
       type: property.type,
       position: getPosition(isWord, isMeaning),
     };
@@ -96,17 +99,11 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
   return parsedProperties.filter(Boolean).sort((a, b) => a!.position - b!.position);
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const user = await getUserFromRequest(req);
-  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
-
-  const hash = JSON.parse(profileData?.notion_api_key);
-  const notionApiKey = decrypt(hash);
-
+export const getTableColumns = async (notionApiKey: string, notionPageId: string) => {
   const availableDatabases = await getAvailableDatabases(notionApiKey);
 
   const foundDatabase = availableDatabases.find(
-    (_database) => _database.id === profileData.notion_page_id,
+    (_database) => _database.id === notionPageId,
   ) as DatabaseObjectResponse;
 
   if (!foundDatabase) {
@@ -116,9 +113,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const parsedDatabaseProperties = parsePropertiesToResponse(foundDatabase.properties);
+  return parsePropertiesToResponse(foundDatabase.properties);
+};
 
-  return res.status(200).json(parsedDatabaseProperties);
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const user = await getUserFromRequest(req);
+  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
+
+  const hash = JSON.parse(profileData?.notion_api_key);
+  const notionApiKey = decrypt(hash);
+
+  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_page_id);
+
+  return res.status(200).json(tableColumns);
 };
 
 const middlewareToApply = [
