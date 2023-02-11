@@ -15,13 +15,9 @@ import {
 } from '@infrastructure/utils/node';
 
 import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
-import { generateColumnEditObject } from './update';
+import { getTitleOrRichTextProperty } from './update';
 
-const generateMultiSelectColumnEditObject = (
-  columnName: string,
-  type: string,
-  newValue: string,
-) => {
+const getMultiSelectProperty = (columnName: string, type: string, newValue: string) => {
   if (!newValue) {
     return null;
   }
@@ -99,8 +95,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const type = _tableColumn?.type;
     const columnName = _tableColumn?.columnName;
     const cleanedStringValue = cleanUpString(requestBody[columnName!]);
+
     const generateColumnEditObjectFunction =
-      type !== 'multi_select' ? generateColumnEditObject : generateMultiSelectColumnEditObject;
+      type !== 'multi_select' ? getTitleOrRichTextProperty : getMultiSelectProperty;
 
     const newValue = generateColumnEditObjectFunction(columnName!, type!, cleanedStringValue);
 
