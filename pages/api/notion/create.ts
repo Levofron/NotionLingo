@@ -72,7 +72,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     (_tableColumn) => _tableColumn?.type === 'multi_select',
   );
 
-  if (multiSelectTableColumns?.length) {
+  if (multiSelectTableColumns.length > 0) {
     for (const _multiSelectTableColumn of multiSelectTableColumns) {
       if (!_multiSelectTableColumn) {
         continue;
@@ -96,10 +96,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const columnName = _tableColumn?.columnName;
     const cleanedStringValue = cleanUpString(requestBody[columnName!]);
 
-    const generateColumnEditObjectFunction =
+    const getColumnProperty =
       type !== 'multi_select' ? getTitleOrRichTextProperty : getMultiSelectProperty;
 
-    const newValue = generateColumnEditObjectFunction(columnName!, type!, cleanedStringValue);
+    const newValue = getColumnProperty(columnName!, type!, cleanedStringValue);
 
     return {
       ..._accumulator,
@@ -114,7 +114,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     properties: newNotionRecordProperties,
   });
 
-  return res.status(EHttpStatusCode.OK).json(result);
+  return res.status(EHttpStatusCode.OK).json({
+    id: result.id,
+    properties: requestBody,
+  });
 };
 
 const middlewareToApply = [
