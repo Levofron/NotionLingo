@@ -57,7 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return isInvalid || isInvalidType;
   });
 
-  if (invalidTableColumns?.length !== 0) {
+  if (invalidTableColumns.length > 0) {
     const invalidTableColumnsAsString = invalidTableColumns
       .map((_tableColumn) => _tableColumn?.columnName)
       .join(', ');
