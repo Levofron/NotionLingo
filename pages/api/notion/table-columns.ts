@@ -33,7 +33,7 @@ export const getProfileDataWithNotionDataCheck = async (userId: string) => {
     );
   }
 
-  if (!profileData.notion_api_key) {
+  if (!profileData.notion_database_id) {
     throw new ApiError(
       EHttpStatusCode.INTERNAL_SERVER_ERROR,
       'The user does not have a selected notion database id',
