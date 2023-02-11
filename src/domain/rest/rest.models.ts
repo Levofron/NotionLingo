@@ -32,7 +32,7 @@ export interface INotionWord {
   word: string;
 }
 
-export interface INotionPage {
+export interface INotionDatabase {
   createdTime: string;
   id: string;
   lastEditedTime: string;

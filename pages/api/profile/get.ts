@@ -37,7 +37,7 @@ export const getProfileAndUserMetadataById = async (userId: string) => {
     throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, userError.message);
   }
 
-  const hasNotionData = !!profileData?.notion_api_key && !!profileData?.notion_page_id;
+  const hasNotionData = !!profileData?.notion_api_key && !!profileData?.notion_database_id;
 
   return {
     hasNotionData,

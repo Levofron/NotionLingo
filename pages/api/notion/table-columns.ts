@@ -33,10 +33,10 @@ export const getProfileDataWithNotionDataCheck = async (userId: string) => {
     );
   }
 
-  if (!profileData.notion_api_key) {
+  if (!profileData.notion_database_id) {
     throw new ApiError(
       EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a selected notion page id',
+      'The user does not have a selected notion database id',
     );
   }
 
@@ -99,11 +99,11 @@ const parsePropertiesToResponse = (properties: DatabaseObjectResponse['propertie
   return parsedProperties.filter(Boolean).sort((a, b) => a!.position - b!.position);
 };
 
-export const getTableColumns = async (notionApiKey: string, notionPageId: string) => {
+export const getTableColumns = async (notionApiKey: string, notionDatabaseId: string) => {
   const availableDatabases = await getAvailableDatabases(notionApiKey);
 
   const foundDatabase = availableDatabases.find(
-    (_database) => _database.id === notionPageId,
+    (_database) => _database.id === notionDatabaseId,
   ) as DatabaseObjectResponse;
 
   if (!foundDatabase) {
@@ -123,7 +123,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const hash = JSON.parse(profileData?.notion_api_key);
   const notionApiKey = decrypt(hash);
 
-  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_page_id);
+  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_database_id);
 
   return res.status(200).json(tableColumns);
 };

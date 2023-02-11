@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 
 export interface IActiveTabs {
   createNotionIntegration: boolean;
-  selectNotionPage: boolean;
+  selectNotionDatabase: boolean;
   shareDatabaseIntegration: boolean;
   validateIntegration: boolean;
   verifyDatabase: boolean;
@@ -11,7 +11,7 @@ export interface IActiveTabs {
 export interface IOnboardingTabListProps {
   activeTabs: IActiveTabs;
   createNotionIntegrationTabRef: RefObject<HTMLButtonElement>;
-  selectNotionPageTabRef: RefObject<HTMLButtonElement>;
+  selectNotionDatabaseTabRef: RefObject<HTMLButtonElement>;
   shareDatabaseIntegrationTabRef: RefObject<HTMLButtonElement>;
   validateIntegrationTabRef: RefObject<HTMLButtonElement>;
   verifyDatabaseTabRef: RefObject<HTMLButtonElement>;

@@ -100,7 +100,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     page_id: id,
   });
 
-  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_page_id);
+  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_database_id);
 
   const meaningColumn = tableColumns.find((tableColumn) => tableColumn?.isMeaning);
   const exampleSentenceColumn = tableColumns.find((tableColumn) => tableColumn?.isExampleSentence);

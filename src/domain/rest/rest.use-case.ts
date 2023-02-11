@@ -6,7 +6,7 @@ import {
   IContact,
   IHash,
   IIncreaseDailyStreak,
-  INotionPage,
+  INotionDatabase,
   INotionWord,
   IUser,
 } from './rest.models';
@@ -44,22 +44,24 @@ export const setNotionApiTokenUseCase = (
   execute: (token) => restRepository.setNotionApiToken(token),
 });
 
-// getAvailableNotionPagesUseCase
-export type TGetAvailableNotionPagesUseCase = IUseCaseWithoutParamsAndPromiseResult<INotionPage[]>;
+// getAvailableNotionDatabasesUseCase
+export type TGetAvailableNotionDatabasesUseCase = IUseCaseWithoutParamsAndPromiseResult<
+  INotionDatabase[]
+>;
 
-export const getAvailableNotionPagesUseCase = (
+export const getAvailableNotionDatabasesUseCase = (
   restRepository: IRestRepository,
-): TGetAvailableNotionPagesUseCase => ({
-  execute: () => restRepository.getAvailableNotionPages(),
+): TGetAvailableNotionDatabasesUseCase => ({
+  execute: () => restRepository.getAvailableNotionDatabases(),
 });
 
-// setNotionPageIdUseCase
-export type TSetNotionPageIdUseCase = IUseCaseWithSingleParamAndPromiseResult<string, string>;
+// setNotionDatabaseIdUseCase
+export type TSetNotionDatabaseIdUseCase = IUseCaseWithSingleParamAndPromiseResult<string, string>;
 
-export const setNotionPageIdUseCase = (
+export const setNotionDatabaseIdUseCase = (
   restRepository: IRestRepository,
-): TSetNotionPageIdUseCase => ({
-  execute: (pageId) => restRepository.setNotionPageId(pageId),
+): TSetNotionDatabaseIdUseCase => ({
+  execute: (databaseId) => restRepository.setNotionDatabaseId(databaseId),
 });
 
 // getRandomNotionWordsUseCase

@@ -6,7 +6,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   decrypt,
   getUserFromRequest,
-  isValidNotionPageSchema,
+  isValidNotionDatabaseSchema,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -32,11 +32,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const availableDatabases = await getAvailableDatabases(notionApiKey);
 
-  const filteredAvailableDatabases = availableDatabases.filter((_availablePage) =>
-    isValidNotionPageSchema(_availablePage.properties),
+  const filteredAvailableDatabases = availableDatabases.filter((_database) =>
+    isValidNotionDatabaseSchema(_database.properties),
   );
 
-  const parsedAvailablePages = filteredAvailableDatabases.map((_database) => ({
+  const mappedAvailableDatabases = filteredAvailableDatabases.map((_database) => ({
     id: _database.id,
     url: _database.url,
     createdTime: _database.created_time,
@@ -44,7 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     lastEditedTime: _database.last_edited_time,
   }));
 
-  return res.status(200).json(parsedAvailablePages);
+  return res.status(200).json(mappedAvailableDatabases);
 };
 
 const middlewareToApply = [

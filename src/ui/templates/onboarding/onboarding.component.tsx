@@ -12,8 +12,8 @@ import { OnboardingStepFive, OnboardingStepFour } from '@ui/organisms';
 
 export const OnboardingTemplate = (): JSX.Element => {
   const verifyDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
-  const selectNotionPageTabRef = useRef<HTMLButtonElement | null>(null);
   const validateIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
+  const selectNotionDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
   const createNotionIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
   const shareDatabaseIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
 
@@ -22,7 +22,7 @@ export const OnboardingTemplate = (): JSX.Element => {
     createNotionIntegration: false,
     shareDatabaseIntegration: false,
     validateIntegration: false,
-    selectNotionPage: false,
+    selectNotionDatabase: false,
   });
 
   const displayVerifyDatabaseTab = () => {
@@ -33,7 +33,7 @@ export const OnboardingTemplate = (): JSX.Element => {
       createNotionIntegration: false,
       shareDatabaseIntegration: false,
       validateIntegration: false,
-      selectNotionPage: false,
+      selectNotionDatabase: false,
     });
   };
 
@@ -45,7 +45,7 @@ export const OnboardingTemplate = (): JSX.Element => {
       createNotionIntegration: true,
       shareDatabaseIntegration: false,
       validateIntegration: false,
-      selectNotionPage: false,
+      selectNotionDatabase: false,
     });
   };
 
@@ -57,7 +57,7 @@ export const OnboardingTemplate = (): JSX.Element => {
       createNotionIntegration: true,
       shareDatabaseIntegration: true,
       validateIntegration: false,
-      selectNotionPage: false,
+      selectNotionDatabase: false,
     });
   };
 
@@ -69,19 +69,19 @@ export const OnboardingTemplate = (): JSX.Element => {
       createNotionIntegration: true,
       shareDatabaseIntegration: true,
       validateIntegration: true,
-      selectNotionPage: false,
+      selectNotionDatabase: false,
     });
   };
 
-  const displaySelectNotionPageTab = () => {
-    selectNotionPageTabRef.current?.click();
+  const displaySelectNotionDatabaseTab = () => {
+    selectNotionDatabaseTabRef.current?.click();
 
     setActiveTabs({
       verifyDatabase: true,
       createNotionIntegration: true,
       shareDatabaseIntegration: true,
       validateIntegration: true,
-      selectNotionPage: true,
+      selectNotionDatabase: true,
     });
   };
 
@@ -102,7 +102,7 @@ export const OnboardingTemplate = (): JSX.Element => {
           Configure your Notion integration
         </Text>
         <Text withBalancer color="gray.400" fontSize={{ sm: 'sm', md: 'lg' }} fontWeight="normal">
-          This information will let us know from which Notion page we should use to get your
+          This information will let us know from which Notion database we should use to get your
           vocabulary.
         </Text>
       </Flex>
@@ -116,7 +116,7 @@ export const OnboardingTemplate = (): JSX.Element => {
         <OnboardingTabList
           activeTabs={activeTabs}
           createNotionIntegrationTabRef={createNotionIntegrationTabRef}
-          selectNotionPageTabRef={selectNotionPageTabRef}
+          selectNotionDatabaseTabRef={selectNotionDatabaseTabRef}
           shareDatabaseIntegrationTabRef={shareDatabaseIntegrationTabRef}
           validateIntegrationTabRef={validateIntegrationTabRef}
           verifyDatabaseTabRef={verifyDatabaseTabRef}
@@ -132,10 +132,10 @@ export const OnboardingTemplate = (): JSX.Element => {
             onPreviousButtonClick={displayCreateNotionIntegrationTab}
           />
           <OnboardingStepFour
-            onNextButtonClick={displaySelectNotionPageTab}
+            onNextButtonClick={displaySelectNotionDatabaseTab}
             onPreviousButtonClick={displayShareDatabaseIntegrationTab}
           />
-          {activeTabs.selectNotionPage ? (
+          {activeTabs.selectNotionDatabase ? (
             <OnboardingStepFive onBackToFirstStepClick={displayVerifyDatabaseTab} />
           ) : null}
         </TabPanels>

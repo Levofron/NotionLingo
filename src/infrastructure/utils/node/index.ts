@@ -6,7 +6,7 @@ export * from './with-middleware/with-middleware.function';
 export * from './get-random-number/get-random-number.function';
 export * from './create-notion-client/create-notion-client.function';
 export * from './get-user-from-request/get-user-from-request.function';
-export * from './is-valid-notion-page-schema/is-valid-notion-page-schema.function';
+export * from './is-valid-notion-database-schema/is-valid-notion-database-schema.function';
 export * from './validate-route-secret-middleware/validate-route-secret-middleware.function';
 export * from './validate-request-method-middleware/validate-request-method-middleware.function';
 export * from './validate-if-user-is-logged-in-middleware/validate-if-user-is-logged-in-middleware.function';
