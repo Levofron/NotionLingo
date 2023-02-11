@@ -15,26 +15,13 @@ import {
 } from '@infrastructure/utils/node';
 
 import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
+import { generateColumnEditObject } from './update';
 
-const generateColumnEditObject = (columnName: string, type: string, newValue: string) => {
-  if (!newValue) {
-    return null;
-  }
-
-  return {
-    [columnName]: {
-      [type]: [
-        {
-          text: {
-            content: newValue,
-          },
-        },
-      ],
-    },
-  };
-};
-
-const generateMultiSelectEditObject = (columnName: string, type: string, newValue: string) => {
+const generateMultiSelectColumnEditObject = (
+  columnName: string,
+  type: string,
+  newValue: string,
+) => {
   if (!newValue) {
     return null;
   }
@@ -85,37 +72,40 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const multiSelectValues = tableColumns.filter(
+  const multiSelectTableColumns = tableColumns.filter(
     (_tableColumn) => _tableColumn?.type === 'multi_select',
   );
 
-  if (multiSelectValues?.length) {
-    for (const _multiSelectValue of multiSelectValues) {
-      const multiSelectValue = requestBody[_multiSelectValue?.columnName!];
+  if (multiSelectTableColumns?.length) {
+    for (const _multiSelectTableColumn of multiSelectTableColumns) {
+      if (!_multiSelectTableColumn) {
+        continue;
+      }
 
-      const isValidOption = _multiSelectValue?.options?.includes(multiSelectValue);
+      const multiSelectValue = requestBody[_multiSelectTableColumn.columnName!];
+
+      const isValidOption = _multiSelectTableColumn.options?.includes(multiSelectValue);
 
       if (!isValidOption) {
         throw new ApiError(
           EHttpStatusCode.BAD_REQUEST,
-          `The provided value for the column "${_multiSelectValue?.columnName}" is not valid`,
+          `The provided value for the column "${_multiSelectTableColumn.columnName}" is not valid`,
         );
       }
     }
   }
 
-  const requestBodyWithFormattedValues = tableColumns.reduce((acc, _tableColumn) => {
+  const newNotionRecordProperties = tableColumns.reduce((_accumulator, _tableColumn) => {
     const type = _tableColumn?.type;
     const columnName = _tableColumn?.columnName;
     const cleanedStringValue = cleanUpString(requestBody[columnName!]);
+    const generateColumnEditObjectFunction =
+      type !== 'multi_select' ? generateColumnEditObject : generateMultiSelectColumnEditObject;
 
-    const newValue =
-      type !== 'multi_select'
-        ? generateColumnEditObject(columnName!, type!, cleanedStringValue)
-        : generateMultiSelectEditObject(columnName!, type!, cleanedStringValue);
+    const newValue = generateColumnEditObjectFunction(columnName!, type!, cleanedStringValue);
 
     return {
-      ...acc,
+      ..._accumulator,
       ...newValue,
     };
   }, {});
@@ -124,7 +114,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     parent: {
       database_id: profileData.notion_database_id,
     },
-    properties: requestBodyWithFormattedValues,
+    properties: newNotionRecordProperties,
   });
 
   return res.status(EHttpStatusCode.OK).json(result);

@@ -18,7 +18,7 @@ import {
 
 import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 
-const generateColumnEditObject = (columnName: string, type: string, newValue: string) => {
+export const generateColumnEditObject = (columnName: string, type: string, newValue: string) => {
   if (!newValue) {
     return null;
   }
