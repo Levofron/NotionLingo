@@ -145,8 +145,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   return res.status(EHttpStatusCode.OK).json({
     id: result.id,
-    meaning: meaningText,
-    exampleSentence: exampleSentenceText,
+    properties: {
+      meaning: meaningText,
+      exampleSentence: exampleSentenceText,
+    },
   });
 };
 
