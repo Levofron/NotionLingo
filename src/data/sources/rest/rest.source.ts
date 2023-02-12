@@ -40,4 +40,13 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
   },
   resetNotionIntegration: () => axiosInstance.get(ERestEndpoints.RESET_NOTION_INTEGRATION),
   deleteProfile: () => axiosInstance.delete(ERestEndpoints.DELETE_PROFILE),
+  getWordSuggestions: async (word: string) => {
+    const encodedCurrentDate = encodeURIComponent(word);
+
+    const response = await axiosInstance.get(
+      `${ERestEndpoints.GET_WORD_SUGGESTIONS}?word=${encodedCurrentDate}`,
+    );
+
+    return response;
+  },
 });

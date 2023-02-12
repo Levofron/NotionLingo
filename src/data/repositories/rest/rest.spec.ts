@@ -22,6 +22,7 @@ describe('getRestRepository function', () => {
       deleteProfile: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
+      getWordSuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
@@ -263,6 +264,27 @@ describe('getRestRepository function', () => {
 
       expect(supabaseSourceMock.logout).toHaveBeenCalled();
       expect(restSourceMock.deleteProfile).toHaveBeenCalled();
+    });
+  });
+
+  describe('getWordSuggestions function', () => {
+    it('should call proper restSource function', async () => {
+      const suggestions = ['suggestion1', 'suggestion2'];
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restSourceMock: any = {
+        getWordSuggestions: jest.fn().mockImplementation(() => ({ data: suggestions })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseSourceMock: any = {};
+
+      const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
+
+      const result = await restRepository.getWordSuggestions('word');
+
+      expect(result).toEqual(suggestions);
+      expect(restSourceMock.getWordSuggestions).toHaveBeenCalledWith('word');
     });
   });
 });

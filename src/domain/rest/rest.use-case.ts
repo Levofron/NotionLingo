@@ -9,6 +9,7 @@ import {
   INotionDatabase,
   INotionWord,
   IUser,
+  IWordSuggestions,
 } from './rest.models';
 import { IRestRepository } from './rest.repository';
 
@@ -109,4 +110,16 @@ export type TDeleteProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
 export const deleteProfileUseCase = (restRepository: IRestRepository): TDeleteProfileUseCase => ({
   execute: () => restRepository.deleteProfile(),
+});
+
+// getWordSuggestionsUseCase
+export type TGetWordSuggestionsUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  string,
+  IWordSuggestions
+>;
+
+export const getWordSuggestionsUseCase = (
+  restRepository: IRestRepository,
+): TGetWordSuggestionsUseCase => ({
+  execute: (word) => restRepository.getWordSuggestions(word),
 });

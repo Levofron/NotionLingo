@@ -45,3 +45,14 @@ export interface IContact {
   message: string;
   name: string;
 }
+
+interface IMeaningWithExamples {
+  examples: string[];
+  meaning: string;
+}
+
+export interface IWordSuggestions {
+  additionalExamples: string[];
+  meaningAndExamples: IMeaningWithExamples[];
+  word: string;
+}

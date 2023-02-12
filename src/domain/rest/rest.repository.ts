@@ -5,6 +5,7 @@ import {
   INotionDatabase,
   INotionWord,
   IUser,
+  IWordSuggestions,
 } from './rest.models';
 
 export interface IRestRepository {
@@ -12,6 +13,7 @@ export interface IRestRepository {
   getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
   getLoggedUser: () => Promise<IUser>;
   getRandomNotionWords: () => Promise<INotionWord[]>;
+  getWordSuggestions: (word: string) => Promise<IWordSuggestions>;
   healthCheck: () => Promise<string>;
   increaseDailyStreak: () => Promise<IIncreaseDailyStreak>;
   resetNotionIntegration: () => Promise<void>;

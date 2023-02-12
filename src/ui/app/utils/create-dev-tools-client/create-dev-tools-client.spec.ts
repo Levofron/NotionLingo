@@ -38,6 +38,7 @@ describe('createDevToolsClient function', () => {
       deleteProfile: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
+      getWordSuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
