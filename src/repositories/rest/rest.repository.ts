@@ -6,6 +6,7 @@ import { IRestRepository } from '@domain/repositories/rest.repository';
 import {
   addImageUrlForEachNotionWordTransformator,
   formatRandomNotionWordsTransformator,
+  formatWordSuggestions,
 } from './utils';
 
 export const getRestRepository = (
@@ -70,6 +71,6 @@ export const getRestRepository = (
   getWordSuggestions: async (word: string) => {
     const { data } = await restApi.getWordSuggestions(word);
 
-    return data;
+    return formatWordSuggestions(data);
   },
 });
