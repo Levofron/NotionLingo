@@ -1,4 +1,4 @@
-import { INotionWord } from '@domain/rest/rest.models';
+import { INotionWord } from '@domain/entities/rest.types';
 
 export interface INotionWordCardFrontProps {
   countdown: number;

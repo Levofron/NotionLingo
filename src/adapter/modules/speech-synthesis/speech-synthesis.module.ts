@@ -1,5 +1,8 @@
+import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
+import { getSpeechSynthesisApi } from '@api/speech-synthesis/speech-synthesis.api';
+import { getSpeechSynthesisRepository } from '@repositories/speech-synthesis/speech-synthesis.repository';
+
 import {
-  cancelUseCase,
   getPitchUseCase,
   getRateUseCase,
   getVoiceUseCase,
@@ -12,25 +15,17 @@ import {
   setVoiceUseCase,
   setVolumeUseCase,
   speakUseCase,
-} from '@domain/speech-synthesis/speech-synthesis.use-case';
+} from '@domain/use-cases/speech-synthesis.use-cases';
 
-import { getSpeechSynthesisRepository } from '@data/repositories/speech-synthesis/speech-synthesis.repository';
-import { getLocalStorageSource } from '@data/sources/local-storage/local-storage.source';
-import { getSpeechSynthesisSource } from '@data/sources/speech-synthesis/speech-synthesis.source';
-
-// sources
-const localStorageSource = getLocalStorageSource();
-const speechSynthesisSource = getSpeechSynthesisSource();
+// apis
+const localStorageApi = getLocalStorageApi();
+const speechSynthesisApi = getSpeechSynthesisApi();
 
 // repositories
-const speechSynthesisRepository = getSpeechSynthesisRepository(
-  speechSynthesisSource,
-  localStorageSource,
-);
+const speechSynthesisRepository = getSpeechSynthesisRepository(speechSynthesisApi, localStorageApi);
 
 export const speechSynthesisModule = {
   speak: speakUseCase(speechSynthesisRepository).execute,
-  cancel: cancelUseCase(speechSynthesisRepository).execute,
   setRate: setRateUseCase(speechSynthesisRepository).execute,
   getRate: getRateUseCase(speechSynthesisRepository).execute,
   getPitch: getPitchUseCase(speechSynthesisRepository).execute,

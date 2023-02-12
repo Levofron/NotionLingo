@@ -1,21 +1,21 @@
+import { getSupabaseApi } from '@api/supabase/supabase.api';
+import { getSupabaseRepository } from '@repositories/supabase/supabase.repository';
+
 import {
   getSessionUseCase,
   getUserUseCase,
   loginViaGoogleUseCase,
   logoutUseCase,
   onAuthStateChangeUseCase,
-} from '@domain/supabase/supabase.use-case';
-
-import { getSupabaseRepository } from '@data/repositories/supabase/supabase.repository';
-import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
+} from '@domain/use-cases/supabase.use-cases';
 
 import { supabaseInstance } from '@infrastructure/config';
 
-// sources
-const supabaseSource = getSupabaseSource(supabaseInstance);
+// apis
+const supabaseApi = getSupabaseApi(supabaseInstance);
 
 // repositories
-const supabaseRepository = getSupabaseRepository(supabaseSource);
+const supabaseRepository = getSupabaseRepository(supabaseApi);
 
 export const supabaseModule = {
   logout: logoutUseCase(supabaseRepository).execute,

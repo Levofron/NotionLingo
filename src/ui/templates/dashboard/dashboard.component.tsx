@@ -2,7 +2,7 @@ import { Fade, useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
-import { IIncreaseDailyStreak, INotionWord } from '@domain/rest/rest.models';
+import { IIncreaseDailyStreak, INotionWord } from '@domain/entities/rest.types';
 
 import { restModule } from '@adapter';
 

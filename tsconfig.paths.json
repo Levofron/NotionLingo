@@ -4,8 +4,10 @@
     "paths": {
       "@ui/*": ["./src/ui/*"],
       "@ui": ["./src/ui"],
-      "@data/*": ["./src/data/*"],
-      "@data": ["./src/data"],
+      "@api/*": ["./src/api/*"],
+      "@api": ["./src/api"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@repositories": ["./src/repositories"],
       "@domain/*": ["./src/domain/*"],
       "@domain": ["./src/domain"],
       "@adapter/*": ["./src/adapter/*"],

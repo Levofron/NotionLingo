@@ -4,7 +4,6 @@ describe('speechSynthesisModule object', () => {
   it('should return proper object', () => {
     expect(speechSynthesisModule).toEqual({
       speak: expect.any(Function),
-      cancel: expect.any(Function),
       setRate: expect.any(Function),
       getRate: expect.any(Function),
       getPitch: expect.any(Function),

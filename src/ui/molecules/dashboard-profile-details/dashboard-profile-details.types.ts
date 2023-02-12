@@ -1,3 +1,3 @@
-import { IIncreaseDailyStreak } from '@domain/rest/rest.models';
+import { IIncreaseDailyStreak } from '@domain/entities/rest.types';
 
 export interface IDashboardProfileDetailsProps extends IIncreaseDailyStreak {}

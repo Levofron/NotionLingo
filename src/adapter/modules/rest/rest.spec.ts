@@ -4,8 +4,8 @@ describe('restModule object', () => {
   it('should return proper object', () => {
     expect(restModule).toEqual({
       healthCheck: expect.any(Function),
-      getLoggedUser: expect.any(Function),
       deleteProfile: expect.any(Function),
+      getLoggedProfile: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       getWordSuggestions: expect.any(Function),
