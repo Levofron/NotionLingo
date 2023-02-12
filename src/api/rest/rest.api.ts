@@ -48,4 +48,9 @@ export const getRestApi = (axiosInstance: AxiosInstance): IRestApi => ({
 
     return response;
   },
+  updateNotionWord: async (data) => {
+    const response = await axiosInstance.post(ERestEndpoints.UPDATE_NOTION_WORD, data);
+
+    return response;
+  },
 });

@@ -6,9 +6,9 @@ describe('getLocalStorageApi function', () => {
   functionImportTest(getLocalStorageApi);
 
   it('should return an object with the expected properties', () => {
-    const localStorageSource = getLocalStorageApi();
+    const localStorageApi = getLocalStorageApi();
 
-    expect(localStorageSource).toEqual({
+    expect(localStorageApi).toEqual({
       getItem: expect.any(Function),
       setItem: expect.any(Function),
       removeItem: expect.any(Function),
@@ -19,51 +19,51 @@ describe('getLocalStorageApi function', () => {
   it('should call isSupported function', () => {
     // @ts-expect-error
     delete window.localStorage;
-    const localStorageSource = getLocalStorageApi();
+    const localStorageApi = getLocalStorageApi();
 
-    expect(localStorageSource.isSupported()).toBeFalsy();
+    expect(localStorageApi.isSupported()).toBeFalsy();
 
     // @ts-expect-error
     window.localStorage = {};
 
-    expect(localStorageSource.isSupported()).toBeTruthy();
+    expect(localStorageApi.isSupported()).toBeTruthy();
   });
 
   it('should call getItem function', () => {
-    const localStorageSource = getLocalStorageApi();
+    const localStorageApi = getLocalStorageApi();
 
     // @ts-expect-error
     window.localStorage = {
       getItem: jest.fn(),
     };
 
-    localStorageSource.getItem('key');
+    localStorageApi.getItem('key');
 
     expect(window.localStorage.getItem).toHaveBeenCalledWith('key');
   });
 
   it('should call setItem function', () => {
-    const localStorageSource = getLocalStorageApi();
+    const localStorageApi = getLocalStorageApi();
 
     // @ts-expect-error
     window.localStorage = {
       setItem: jest.fn(),
     };
 
-    localStorageSource.setItem('key', 'value');
+    localStorageApi.setItem('key', 'value');
 
     expect(window.localStorage.setItem).toHaveBeenCalledWith('key', 'value');
   });
 
   it('should call removeItem function', () => {
-    const localStorageSource = getLocalStorageApi();
+    const localStorageApi = getLocalStorageApi();
 
     // @ts-expect-error
     window.localStorage = {
       removeItem: jest.fn(),
     };
 
-    localStorageSource.removeItem('key');
+    localStorageApi.removeItem('key');
 
     expect(window.localStorage.removeItem).toHaveBeenCalledWith('key');
   });

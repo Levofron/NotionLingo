@@ -55,3 +55,9 @@ export interface IWordSuggestions {
   meaningAndExamples: IMeaningWithExamples[];
   word: string;
 }
+
+export interface IUpdateNotionWordRequest {
+  exampleSentence?: string;
+  id: string;
+  meaning?: string;
+}

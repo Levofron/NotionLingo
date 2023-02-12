@@ -9,9 +9,9 @@ describe('getSupabaseApi function', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const supabaseInstanceMock: any = {};
 
-    const supabaseSource = getSupabaseApi(supabaseInstanceMock);
+    const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
-    expect(supabaseSource).toEqual({
+    expect(supabaseApi).toEqual({
       signIn: expect.any(Function),
       logout: expect.any(Function),
       getUser: expect.any(Function),
@@ -28,9 +28,9 @@ describe('getSupabaseApi function', () => {
       },
     };
 
-    const supabaseSource = getSupabaseApi(supabaseInstanceMock);
+    const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
-    supabaseSource.signIn('google');
+    supabaseApi.signIn('google');
 
     expect(supabaseInstanceMock.auth.signIn).toHaveBeenCalledWith({
       provider: 'google',
@@ -45,9 +45,9 @@ describe('getSupabaseApi function', () => {
       },
     };
 
-    const supabaseSource = getSupabaseApi(supabaseInstanceMock);
+    const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
-    supabaseSource.logout();
+    supabaseApi.logout();
 
     expect(supabaseInstanceMock.auth.signOut).toHaveBeenCalled();
   });
@@ -62,11 +62,11 @@ describe('getSupabaseApi function', () => {
       },
     };
 
-    const supabaseSource = getSupabaseApi(supabaseInstanceMock);
+    const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
     supabaseInstanceMock.auth.user.mockReturnValue(userMock);
 
-    const user = supabaseSource.getUser();
+    const user = supabaseApi.getUser();
 
     expect(user).toEqual(userMock);
   });
@@ -81,11 +81,11 @@ describe('getSupabaseApi function', () => {
       },
     };
 
-    const supabaseSource = getSupabaseApi(supabaseInstanceMock);
+    const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
     supabaseInstanceMock.auth.session.mockReturnValue(sessionMock);
 
-    const session = supabaseSource.getSession();
+    const session = supabaseApi.getSession();
 
     expect(session).toEqual(sessionMock);
   });
@@ -100,9 +100,9 @@ describe('getSupabaseApi function', () => {
       },
     };
 
-    const supabaseSource = getSupabaseApi(supabaseInstanceMock);
+    const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
-    supabaseSource.onAuthStateChange(callbackMock);
+    supabaseApi.onAuthStateChange(callbackMock);
 
     expect(supabaseInstanceMock.auth.onAuthStateChange).toHaveBeenCalledWith(callbackMock);
   });

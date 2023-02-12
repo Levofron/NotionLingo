@@ -17,11 +17,12 @@ describe('getRestApi function', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const axiosInstanceMock: any = {};
 
-    const restSource = getRestApi(axiosInstanceMock);
+    const restApi = getRestApi(axiosInstanceMock);
 
-    expect(restSource).toEqual({
+    expect(restApi).toEqual({
       healthCheck: expect.any(Function),
       deleteProfile: expect.any(Function),
+      updateNotionWord: expect.any(Function),
       getLoggedProfile: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
@@ -45,9 +46,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: isoDate }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.healthCheck();
+      const result = restApi.healthCheck();
 
       expect(result).resolves.toEqual({ data: isoDate });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith('/health-check');
@@ -59,9 +60,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.healthCheck();
+      const result = restApi.healthCheck();
 
       expect(result).rejects.toThrow('error');
     });
@@ -74,9 +75,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockResolvedValue(undefined),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.setSupabaseCookie(null);
+      const result = restApi.setSupabaseCookie(null);
 
       expect(result).resolves.toBeUndefined();
       expect(axiosInstanceMock.post).toHaveBeenCalledWith('/set-supabase-cookie', {
@@ -91,10 +92,10 @@ describe('getRestApi function', () => {
         post: jest.fn().mockResolvedValue(undefined),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const result = restSource.setSupabaseCookie({} as any);
+      const result = restApi.setSupabaseCookie({} as any);
 
       expect(result).resolves.toBeUndefined();
       expect(axiosInstanceMock.post).toHaveBeenCalledWith('/set-supabase-cookie', {
@@ -122,9 +123,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: userMock }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getLoggedProfile();
+      const result = restApi.getLoggedProfile();
 
       expect(result).resolves.toEqual({ data: userMock });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith('/profile/logged');
@@ -136,9 +137,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getLoggedProfile();
+      const result = restApi.getLoggedProfile();
 
       expect(result).rejects.toThrow('error');
     });
@@ -165,9 +166,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: fiveNotionWords }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getRandomNotionWords();
+      const result = restApi.getRandomNotionWords();
 
       expect(result).resolves.toEqual({ data: fiveNotionWords });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith('/notion/random-words');
@@ -179,9 +180,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getRandomNotionWords();
+      const result = restApi.getRandomNotionWords();
 
       expect(result).rejects.toThrow('error');
     });
@@ -199,9 +200,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockResolvedValue({ data: hashMock }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.setNotionApiToken('token');
+      const result = restApi.setNotionApiToken('token');
 
       expect(result).resolves.toEqual({ data: hashMock });
       expect(axiosInstanceMock.post).toHaveBeenCalledWith('/notion/set-api-token', {
@@ -215,9 +216,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.setNotionApiToken('token');
+      const result = restApi.setNotionApiToken('token');
 
       expect(result).rejects.toThrow('error');
     });
@@ -240,9 +241,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: availableNotionDatabases }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getAvailableNotionDatabases();
+      const result = restApi.getAvailableNotionDatabases();
 
       expect(result).resolves.toEqual({ data: availableNotionDatabases });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith('/notion/available-databases');
@@ -254,9 +255,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getAvailableNotionDatabases();
+      const result = restApi.getAvailableNotionDatabases();
 
       expect(result).rejects.toThrow('error');
     });
@@ -271,9 +272,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockResolvedValue({ data: databaseId }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.setNotionDatabaseId('databaseId');
+      const result = restApi.setNotionDatabaseId('databaseId');
 
       expect(result).resolves.toEqual({ data: databaseId });
       expect(axiosInstanceMock.post).toHaveBeenCalledWith('/notion/set-database-id', {
@@ -287,9 +288,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.setNotionDatabaseId('databaseId');
+      const result = restApi.setNotionDatabaseId('databaseId');
 
       expect(result).rejects.toThrow('error');
     });
@@ -308,9 +309,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockResolvedValue({ data: contactFormDataMock }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.sendContactFormData(contactFormDataMock);
+      const result = restApi.sendContactFormData(contactFormDataMock);
 
       expect(result).resolves.toEqual({ data: contactFormDataMock });
       expect(axiosInstanceMock.post).toHaveBeenCalledWith('/contact', contactFormDataMock);
@@ -322,9 +323,9 @@ describe('getRestApi function', () => {
         post: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.sendContactFormData({
+      const result = restApi.sendContactFormData({
         name: 'name',
         email: 'email',
         message: 'message',
@@ -341,9 +342,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: {} }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.increaseDailyStreak();
+      const result = restApi.increaseDailyStreak();
 
       expect(result).resolves.toEqual({ data: {} });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith(
@@ -357,9 +358,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.increaseDailyStreak();
+      const result = restApi.increaseDailyStreak();
 
       expect(result).rejects.toThrow('error');
     });
@@ -372,9 +373,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: {} }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.resetNotionIntegration();
+      const result = restApi.resetNotionIntegration();
 
       expect(result).resolves.toEqual({ data: {} });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith('/profile/reset-notion-integration');
@@ -386,9 +387,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.resetNotionIntegration();
+      const result = restApi.resetNotionIntegration();
 
       expect(result).rejects.toThrow('error');
     });
@@ -401,9 +402,9 @@ describe('getRestApi function', () => {
         delete: jest.fn().mockResolvedValue({ data: {} }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.deleteProfile();
+      const result = restApi.deleteProfile();
 
       expect(result).resolves.toEqual({ data: {} });
       expect(axiosInstanceMock.delete).toHaveBeenCalledWith('/profile/delete');
@@ -415,9 +416,9 @@ describe('getRestApi function', () => {
         delete: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.deleteProfile();
+      const result = restApi.deleteProfile();
 
       expect(result).rejects.toThrow('error');
     });
@@ -430,9 +431,9 @@ describe('getRestApi function', () => {
         get: jest.fn().mockResolvedValue({ data: {} }),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getWordSuggestions('suit up');
+      const result = restApi.getWordSuggestions('suit up');
 
       expect(result).resolves.toEqual({ data: {} });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith(
@@ -446,9 +447,41 @@ describe('getRestApi function', () => {
         get: jest.fn().mockRejectedValue(new Error('error')),
       };
 
-      const restSource = getRestApi(axiosInstanceMock);
+      const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restSource.getWordSuggestions('word');
+      const result = restApi.getWordSuggestions('word');
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('updateNotionWord endpoint', () => {
+    it('should call proper endpoint', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        post: jest.fn().mockResolvedValue({ data: {} }),
+      };
+
+      const restApi = getRestApi(axiosInstanceMock);
+
+      const result = restApi.updateNotionWord({ id: 'id', meaning: 'meaning' });
+
+      expect(result).resolves.toEqual({ data: {} });
+      expect(axiosInstanceMock.post).toHaveBeenCalledWith('/notion/update', {
+        id: 'id',
+        meaning: 'meaning',
+      });
+    });
+
+    it('should throw error if endpoint fails', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        post: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restApi = getRestApi(axiosInstanceMock);
+
+      const result = restApi.updateNotionWord({ id: 'id', meaning: 'meaning' });
 
       expect(result).rejects.toThrow('error');
     });

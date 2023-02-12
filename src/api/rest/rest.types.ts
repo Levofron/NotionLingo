@@ -7,6 +7,7 @@ import {
   IIncreaseDailyStreak,
   INotionDatabase,
   IProfile,
+  IUpdateNotionWordRequest,
   IWordSuggestions,
 } from '@domain/entities/rest.types';
 
@@ -34,6 +35,7 @@ export enum ERestEndpoints {
   SET_NOTION_API_TOKEN = '/notion/set-api-token',
   SET_NOTION_DATABASE_ID = '/notion/set-database-id',
   SET_SUPABASE_COOKIE = '/set-supabase-cookie',
+  UPDATE_NOTION_WORD = '/notion/update',
 }
 
 export interface IRestApi {
@@ -49,4 +51,7 @@ export interface IRestApi {
   setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
   setNotionDatabaseId: (databaseId: string) => Promise<AxiosResponse<string>>;
   setSupabaseCookie: (supabaseSession: Session | null) => Promise<void>;
+  updateNotionWord: (
+    data: IUpdateNotionWordRequest,
+  ) => Promise<AxiosResponse<INotionWordResponseRecord>>;
 }

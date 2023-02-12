@@ -5,6 +5,7 @@ import {
   INotionDatabase,
   INotionWord,
   IProfile,
+  IUpdateNotionWordRequest,
   IWordSuggestions,
 } from '../entities/rest.types';
 
@@ -21,4 +22,5 @@ export interface IRestRepository {
   setNotionApiToken: (token: string) => Promise<IHash>;
   setNotionDatabaseId: (databaseId: string) => Promise<string>;
   setSupabaseCookie: () => Promise<void>;
+  updateNotionWord: (data: IUpdateNotionWordRequest) => Promise<string>;
 }

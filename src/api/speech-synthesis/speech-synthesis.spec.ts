@@ -8,9 +8,9 @@ describe('getSpeechSynthesisApi function', () => {
   functionImportTest(getSpeechSynthesisApi);
 
   it('should return proper object', () => {
-    const speechSynthesisSource = getSpeechSynthesisApi();
+    const speechSynthesisApi = getSpeechSynthesisApi();
 
-    expect(speechSynthesisSource).toEqual({
+    expect(speechSynthesisApi).toEqual({
       speak: expect.any(Function),
       cancel: expect.any(Function),
       getVoices: expect.any(Function),
@@ -20,24 +20,24 @@ describe('getSpeechSynthesisApi function', () => {
   });
 
   it('should call isSupported function', () => {
-    const speechSynthesisSource = getSpeechSynthesisApi();
+    const speechSynthesisApi = getSpeechSynthesisApi();
 
-    expect(speechSynthesisSource.isSupported()).toBeFalsy();
+    expect(speechSynthesisApi.isSupported()).toBeFalsy();
 
     // @ts-expect-error
     window.speechSynthesis = {};
 
-    expect(speechSynthesisSource.isSupported()).toBeTruthy();
+    expect(speechSynthesisApi.isSupported()).toBeTruthy();
   });
 
   it('should call speak function', () => {
-    const speechSynthesisSource = getSpeechSynthesisApi();
+    const speechSynthesisApi = getSpeechSynthesisApi();
 
     window.speechSynthesis.speak = jest.fn();
 
     window.SpeechSynthesisUtterance = jest.fn();
 
-    speechSynthesisSource.speak({
+    speechSynthesisApi.speak({
       text: 'test',
     });
 
@@ -49,21 +49,21 @@ describe('getSpeechSynthesisApi function', () => {
   });
 
   it('should call cancel function', () => {
-    const speechSynthesisSource = getSpeechSynthesisApi();
+    const speechSynthesisApi = getSpeechSynthesisApi();
 
     window.speechSynthesis.cancel = jest.fn();
 
-    speechSynthesisSource.cancel();
+    speechSynthesisApi.cancel();
 
     expect(window.speechSynthesis.cancel).toHaveBeenCalled();
   });
 
   it('should call getVoices function', () => {
-    const speechSynthesisSource = getSpeechSynthesisApi();
+    const speechSynthesisApi = getSpeechSynthesisApi();
 
     window.speechSynthesis.getVoices = jest.fn().mockReturnValue([]);
 
-    speechSynthesisSource.getVoices();
+    speechSynthesisApi.getVoices();
 
     expect(window.speechSynthesis.getVoices).toHaveBeenCalled();
   });

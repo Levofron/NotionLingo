@@ -6,6 +6,7 @@ describe('restModule object', () => {
       healthCheck: expect.any(Function),
       deleteProfile: expect.any(Function),
       getLoggedProfile: expect.any(Function),
+      updateNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       getWordSuggestions: expect.any(Function),
