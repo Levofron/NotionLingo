@@ -18,7 +18,7 @@ interface IMeaningWithExamples {
 }
 
 const parseWord = (word: string) => {
-  const lowerCasedWord = cleanUpString(word).toLowerCase();
+  const lowerCasedWord = cleanUpString(word, { shouldCapitalizeFirstLetter: false });
   const wordWithoutSpaces = lowerCasedWord.replaceAll(' ', '+');
 
   return wordWithoutSpaces;

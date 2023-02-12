@@ -32,13 +32,13 @@ export const getRestRepository = (
 
     return data;
   },
-  getAvailableNotionPages: async () => {
-    const { data } = await restSource.getAvailableNotionPages();
+  getAvailableNotionDatabases: async () => {
+    const { data } = await restSource.getAvailableNotionDatabases();
 
     return data;
   },
-  setNotionPageId: async (pageId: string) => {
-    const { data } = await restSource.setNotionPageId(pageId);
+  setNotionDatabaseId: async (databaseId: string) => {
+    const { data } = await restSource.setNotionDatabaseId(databaseId);
 
     return data;
   },
@@ -66,5 +66,10 @@ export const getRestRepository = (
     await restSource.deleteProfile();
 
     supabaseSource.logout();
+  },
+  getWordSuggestions: async (word: string) => {
+    const { data } = await restSource.getWordSuggestions(word);
+
+    return data;
   },
 });

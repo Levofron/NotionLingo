@@ -1,14 +1,15 @@
 import {
   deleteProfileUseCase,
-  getAvailableNotionPagesUseCase,
+  getAvailableNotionDatabasesUseCase,
   getLoggedUserUseCase,
   getRandomNotionWordsUseCase,
+  getWordSuggestionsUseCase,
   healthCheckUseCase,
   increaseDailyStreakUseCase,
   resetNotionIntegrationUseCase,
   sendContactFormDataUseCase,
   setNotionApiTokenUseCase,
-  setNotionPageIdUseCase,
+  setNotionDatabaseIdUseCase,
   setSupabaseCookieUseCase,
 } from '@domain/rest/rest.use-case';
 
@@ -29,12 +30,13 @@ export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
   getLoggedUser: getLoggedUserUseCase(restRepository).execute,
   deleteProfile: deleteProfileUseCase(restRepository).execute,
-  setNotionPageId: setNotionPageIdUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
+  getWordSuggestions: getWordSuggestionsUseCase(restRepository).execute,
   sendContactFormData: sendContactFormDataUseCase(restRepository).execute,
   increaseDailyStreak: increaseDailyStreakUseCase(restRepository).execute,
+  setNotionDatabaseId: setNotionDatabaseIdUseCase(restRepository).execute,
   getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
   resetNotionIntegration: resetNotionIntegrationUseCase(restRepository).execute,
-  getAvailableNotionPages: getAvailableNotionPagesUseCase(restRepository).execute,
+  getAvailableNotionDatabases: getAvailableNotionDatabasesUseCase(restRepository).execute,
 };

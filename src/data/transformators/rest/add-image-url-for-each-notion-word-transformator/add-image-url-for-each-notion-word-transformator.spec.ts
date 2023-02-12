@@ -10,11 +10,14 @@ describe('addImageUrlForEachNotionWordTransformator function', () => {
   it('should return proper object', () => {
     const randomNotionWordsMock: INotionWordResponseItem[] = [
       {
+        id: 'id',
         ipa: 'ipa',
         type: 'type',
         word: 'word',
         meaning: 'meaning',
         exampleSentence: 'example sentence',
+        meaningSuggestion: 'meaning suggestion',
+        exampleSentenceSuggestion: 'example sentence suggestion',
       },
     ];
 
@@ -22,11 +25,14 @@ describe('addImageUrlForEachNotionWordTransformator function', () => {
 
     expect(result).toEqual([
       {
+        id: 'id',
         ipa: 'ipa',
         type: 'type',
         word: 'word',
         meaning: 'meaning',
         exampleSentence: 'example sentence',
+        meaningSuggestion: 'meaning suggestion',
+        exampleSentenceSuggestion: 'example sentence suggestion',
         imageUrl: 'https://api.unsplash.com/search/photos?query=word',
       },
     ]);

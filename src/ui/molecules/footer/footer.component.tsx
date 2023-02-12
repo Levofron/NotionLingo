@@ -25,7 +25,7 @@ export const Footer: FC = (): JSX.Element => {
               Legal
             </Text>
             <ChakraNextLink color="gray.50" href={ERoutes.PRIVACY_POLICY}>
-              Privacy & Policy
+              Privacy Policy
             </ChakraNextLink>
             <ChakraNextLink color="gray.50" href={ERoutes.TERMS}>
               Terms & Conditions
@@ -96,7 +96,7 @@ export const Footer: FC = (): JSX.Element => {
           align="center"
         >
           <Text color="gray.50" fontFamily="monospace" fontSize="2xl" fontWeight="bold">
-            Levofron
+            NotionLingo
           </Text>
         </Flex>
         <Text color="gray.50" pt={6} textAlign="center">
