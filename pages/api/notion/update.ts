@@ -18,7 +18,7 @@ import {
 
 import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 
-const generateColumnEditObject = (columnName: string, type: string, newValue: string) => {
+export const getTitleOrRichTextProperty = (columnName: string, type: string, newValue: string) => {
   if (!newValue) {
     return null;
   }
@@ -112,13 +112,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const meaningColumnEdit = generateColumnEditObject(
+  const meaningColumnEdit = getTitleOrRichTextProperty(
     meaningColumn.columnName,
     meaningColumn.type,
     parsedMeaning,
   );
 
-  const exampleSentenceColumnEdit = generateColumnEditObject(
+  const exampleSentenceColumnEdit = getTitleOrRichTextProperty(
     exampleSentenceColumn.columnName,
     exampleSentenceColumn.type,
     parsedExampleSentence,
@@ -145,8 +145,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   return res.status(EHttpStatusCode.OK).json({
     id: result.id,
-    meaning: meaningText,
-    exampleSentence: exampleSentenceText,
+    properties: {
+      meaning: meaningText,
+      exampleSentence: exampleSentenceText,
+    },
   });
 };
 
