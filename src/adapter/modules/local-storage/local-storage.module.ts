@@ -1,18 +1,18 @@
+import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
+import { getLocalStorageRepository } from '@repositories/local-storage/local-storage.repository';
+
 import {
   getItemUseCase,
   isSupportedUseCase,
   removeItemUseCase,
   setItemUseCase,
-} from '@domain/local-storage/local-storage.use-case';
+} from '@domain/use-cases/local-storage.use-cases';
 
-import { getLocalStorageRepository } from '@data/repositories/local-storage/local-storage.repository';
-import { getLocalStorageSource } from '@data/sources/local-storage/local-storage.source';
-
-// sources
-const localStorageSource = getLocalStorageSource();
+// apis
+const localStorageApi = getLocalStorageApi();
 
 // repositories
-const localStorageRepository = getLocalStorageRepository(localStorageSource);
+const localStorageRepository = getLocalStorageRepository(localStorageApi);
 
 export const localStorageModule = {
   getItem: getItemUseCase(localStorageRepository).execute,

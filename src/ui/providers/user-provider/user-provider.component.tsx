@@ -1,8 +1,8 @@
+import { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { IUser } from '@domain/rest/rest.models';
-import { TUser } from '@domain/supabase/supabase.types';
+import { IProfile } from '@domain/entities/rest.types';
 
 import { restModule, supabaseModule } from '@adapter';
 
@@ -19,7 +19,7 @@ const delay = (time: number) =>
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>();
-  const [user, setUser] = useState<(TUser & IUser) | null>(null);
+  const [user, setUser] = useState<(User & IProfile) | null>(null);
 
   const getUserProfile = async () => {
     if (user) {
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
       // TODO - wtf is this? xD
       await delay(1000);
 
-      const response = await restModule.getLoggedUser();
+      const response = await restModule.getLoggedProfile();
 
       setUser({ ...sessionUser, ...response });
     }

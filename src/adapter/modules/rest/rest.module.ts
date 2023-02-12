@@ -1,7 +1,11 @@
+import { getRestApi } from '@api/rest/rest.api';
+import { getSupabaseApi } from '@api/supabase/supabase.api';
+import { getRestRepository } from '@repositories/rest/rest.repository';
+
 import {
   deleteProfileUseCase,
   getAvailableNotionDatabasesUseCase,
-  getLoggedUserUseCase,
+  getLoggedProfileUseCase,
   getRandomNotionWordsUseCase,
   healthCheckUseCase,
   increaseDailyStreakUseCase,
@@ -10,25 +14,21 @@ import {
   setNotionApiTokenUseCase,
   setNotionDatabaseIdUseCase,
   setSupabaseCookieUseCase,
-} from '@domain/rest/rest.use-case';
-
-import { getRestRepository } from '@data/repositories/rest/rest.repository';
-import { getRestSource } from '@data/sources/rest/rest.source';
-import { getSupabaseSource } from '@data/sources/supabase/supabase.source';
+} from '@domain/use-cases/rest.use-cases';
 
 import { axiosInstance, supabaseInstance } from '@infrastructure/config';
 
-// sources
-const restSource = getRestSource(axiosInstance);
-const supabaseSource = getSupabaseSource(supabaseInstance);
+// apis
+const restApi = getRestApi(axiosInstance);
+const supabaseApi = getSupabaseApi(supabaseInstance);
 
 // repositories
-const restRepository = getRestRepository(restSource, supabaseSource);
+const restRepository = getRestRepository(restApi, supabaseApi);
 
 export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
-  getLoggedUser: getLoggedUserUseCase(restRepository).execute,
   deleteProfile: deleteProfileUseCase(restRepository).execute,
+  getLoggedProfile: getLoggedProfileUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
   sendContactFormData: sendContactFormDataUseCase(restRepository).execute,

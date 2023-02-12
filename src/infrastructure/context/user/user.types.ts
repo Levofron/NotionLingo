@@ -1,5 +1,6 @@
-import { IUser } from '@domain/rest/rest.models';
-import { TUser } from '@domain/supabase/supabase.types';
+import { User } from '@supabase/supabase-js';
+
+import { IProfile } from '@domain/entities/rest.types';
 
 export interface IUserContextValue {
   isLoading: boolean | undefined;
@@ -7,5 +8,5 @@ export interface IUserContextValue {
   loginViaGoogle: () => Promise<void>;
   logout: () => void;
   resetNotionData: () => void;
-  user: (TUser & IUser) | null;
+  user: (User & IProfile) | null;
 }
