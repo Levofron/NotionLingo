@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { SEO } from '@ui/atoms';
 import { FullScreenLoader } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { AccountSettingsTemplate } from '@ui/templates';
@@ -21,9 +21,7 @@ export const AccountSettingsPage = (): JSX.Element => {
 
   return (
     <>
-      <Head>
-        <title>Levofron</title>
-      </Head>
+      <SEO noFollow noIndex title="Account Settings" />
       <SidebarWithHeader />
       {isLoading && !user ? <FullScreenLoader /> : <AccountSettingsTemplate />}
     </>

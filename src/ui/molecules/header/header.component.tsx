@@ -55,7 +55,7 @@ export const Header: FC<IHeaderProps> = ({
             fontWeight="bold"
             onClick={redirectToHome}
           >
-            Levofron
+            NotionLingo
           </Text>
         </Flex>
         <Button

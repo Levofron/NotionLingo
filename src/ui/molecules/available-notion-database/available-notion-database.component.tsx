@@ -12,30 +12,30 @@ import {
   Text,
 } from '@ui/atoms';
 
-import { IAvailableNotionPageProps } from './available-notion-page.types';
+import { IAvailableNotionDatabaseProps } from './available-notion-database.types';
 
-export const AvailableNotionPage: FC<IAvailableNotionPageProps> = ({
-  availableNotionPage,
+export const AvailableNotionDatabase: FC<IAvailableNotionDatabaseProps> = ({
+  availableNotionDatabase,
   isLoading,
   onClick,
 }): JSX.Element => {
-  const handleClick = useCallback(() => onClick(availableNotionPage.id), []);
+  const handleClick = useCallback(() => onClick(availableNotionDatabase.id), []);
 
   return (
     <Card>
       <CardBody>
         <Stack spacing="3">
-          <Heading size="lg">{availableNotionPage.title}</Heading>
+          <Heading size="lg">{availableNotionDatabase.title}</Heading>
           <Text>
-            <b>Created:</b> {availableNotionPage.createdTime.split(/[ t]/i, 1)[0]}
+            <b>Created:</b> {availableNotionDatabase.createdTime.split(/[ t]/i, 1)[0]}
           </Text>
           <Text>
-            <b>Last edited:</b> {availableNotionPage.lastEditedTime.split(/[ t]/i, 1)[0]}
+            <b>Last edited:</b> {availableNotionDatabase.lastEditedTime.split(/[ t]/i, 1)[0]}
           </Text>
           <Text>
             <b>Url:</b>{' '}
-            <ChakraNextLink href={availableNotionPage.url} target="_blank">
-              {availableNotionPage.url}
+            <ChakraNextLink href={availableNotionDatabase.url} target="_blank">
+              {availableNotionDatabase.url}
             </ChakraNextLink>
           </Text>
         </Stack>

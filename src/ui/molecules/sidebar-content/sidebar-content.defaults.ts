@@ -12,7 +12,7 @@ export const sidebarItems: Array<ISidebarItem & { shouldHaveNotionData: boolean 
   { name: 'Home', icon: FiHome, href: ERoutes.HOME, shouldHaveNotionData: false },
   { name: 'Dashboard', icon: RxDashboard, href: ERoutes.DASHBOARD, shouldHaveNotionData: true },
   {
-    name: 'Privacy & Policy',
+    name: 'Privacy Policy',
     icon: MdOutlinePrivacyTip,
     href: ERoutes.PRIVACY_POLICY,
     shouldHaveNotionData: false,

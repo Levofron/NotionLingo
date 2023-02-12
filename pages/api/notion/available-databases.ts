@@ -1,32 +1,24 @@
-import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
-  createNotionClient,
   decrypt,
   getUserFromRequest,
-  isValidNotionPageSchema,
+  isValidNotionDatabaseSchema,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
 } from '@infrastructure/utils/node';
 
-const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select('notion_api_key')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
+import { getProfileById } from '../profile/get';
+import { getAvailableDatabases } from './table-columns';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-  const { data: profileData } = await getProfileDetails(user?.id!);
+  const profileData = await getProfileById(user?.id!);
 
   if (!profileData.notion_api_key) {
     throw new ApiError(
@@ -38,25 +30,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const hash = JSON.parse(profileData.notion_api_key);
   const notionApiKey = decrypt(hash);
 
-  const notionClient = createNotionClient(notionApiKey);
+  const availableDatabases = await getAvailableDatabases(notionApiKey);
 
-  const { results: availablePages } = await notionClient.search({
-    filter: { value: 'database', property: 'object' },
-  });
-
-  const filteredAvailablePages = (availablePages as DatabaseObjectResponse[]).filter(
-    (_availablePage) => isValidNotionPageSchema(_availablePage.properties),
+  const filteredAvailableDatabases = availableDatabases.filter((_database) =>
+    isValidNotionDatabaseSchema(_database.properties),
   );
 
-  const parsedAvailablePages = filteredAvailablePages.map((_page) => ({
-    id: _page.id,
-    url: _page.url,
-    createdTime: _page.created_time,
-    title: _page.title[0].plain_text,
-    lastEditedTime: _page.last_edited_time,
+  const mappedAvailableDatabases = filteredAvailableDatabases.map((_database) => ({
+    id: _database.id,
+    url: _database.url,
+    createdTime: _database.created_time,
+    title: _database.title[0].plain_text,
+    lastEditedTime: _database.last_edited_time,
   }));
 
-  return res.status(200).json(parsedAvailablePages);
+  return res.status(200).json(mappedAvailableDatabases);
 };
 
 const middlewareToApply = [

@@ -1,7 +1,8 @@
+import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from 'react-icons/io';
+
 import {
   Accordion,
   AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
@@ -24,7 +25,7 @@ export const Faq = (): JSX.Element => (
         mb={{ base: 14, sm: 16 }}
         textAlign="center"
       >
-        Frequently asked questions
+        FAQ
       </Heading>
       <Accordion
         allowToggle
@@ -33,22 +34,40 @@ export const Faq = (): JSX.Element => (
         borderTopWidth={1}
         defaultIndex={2}
       >
-        {QUESTIONS_AND_ANSWERS.map(({ answer, question }) => (
+        {QUESTIONS_AND_ANSWERS.map(({ answer, headerBalancer, question }) => (
           <AccordionItem
             key={question}
             borderBottomWidth={1}
             borderColor="gray.900"
             borderTopWidth={1}
           >
-            <AccordionButton justifyContent="space-between" py={{ base: 4, sm: 6 }} width="100%">
-              <Heading color="gray.900" textAlign="left">
-                {question}
-              </Heading>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <Text withBalancer>{answer}</Text>
-            </AccordionPanel>
+            {({ isExpanded }) => (
+              <>
+                <AccordionButton
+                  justifyContent="space-between"
+                  pb={{ base: 6, sm: 8 }}
+                  pt={{ base: 4, sm: 6 }}
+                  width="100%"
+                >
+                  <Heading
+                    color="gray.900"
+                    fontSize={{ base: 'md', sm: 'xl', md: '2xl' }}
+                    textAlign="left"
+                    withBalancer={headerBalancer}
+                  >
+                    {question}
+                  </Heading>
+                  {isExpanded ? (
+                    <IoMdRemoveCircleOutline fontSize="30px" min="30px" />
+                  ) : (
+                    <IoMdAddCircleOutline fontSize="30px" min="30px" />
+                  )}
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  <Text withBalancer>{answer}</Text>
+                </AccordionPanel>
+              </>
+            )}
           </AccordionItem>
         ))}
       </Accordion>

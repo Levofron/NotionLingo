@@ -5,9 +5,7 @@ import {
 } from '@notionhq/client/build/src/api-endpoints';
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
 import {
@@ -31,6 +29,8 @@ import {
 } from '@constants';
 
 import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
+import { getProfileDataWithNotionDataCheck } from './table-columns';
+import { getTextFromPagePropertyInstance } from './update';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
@@ -67,14 +67,6 @@ interface IScrapingWordApiResponse {
   meaningAndExamples: IMeaningWithExamples[];
   word: string;
 }
-
-const getProfileDetails = (userId: string) =>
-  supabaseInstance
-    .from('profiles')
-    .select('notion_api_key,notion_page_id')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
 
 const getRandomFivePages = (pages: TPage[]) => {
   const amountOfRecords = pages.length;
@@ -172,43 +164,6 @@ const getPagesWithCache = async ({
   return allPages;
 };
 
-const getTextFromPagePropertyDecorator =
-  (pageProperties: PageObjectResponse['properties']) => (propertyNames: string[]) => {
-    let selectedPageProperties = pageProperties[propertyNames[0]];
-
-    if (!selectedPageProperties) {
-      for (const _propertyName of propertyNames) {
-        if (pageProperties[_propertyName]) {
-          selectedPageProperties = pageProperties[_propertyName];
-
-          break;
-        }
-      }
-    }
-
-    if (!selectedPageProperties) {
-      return null;
-    }
-
-    if (selectedPageProperties.type === 'title') {
-      return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'rich_text') {
-      return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'multi_select') {
-      return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
-    }
-
-    if (selectedPageProperties.type === 'select') {
-      return selectedPageProperties.select?.name || '';
-    }
-
-    throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
-  };
-
 const getMeaningAndExampleSentenceSuggestion = ({
   additionalExamples,
   meaningAndExamples,
@@ -256,21 +211,7 @@ const getMeaningAndExampleSentenceSuggestion = ({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-  const { data: profileData } = await getProfileDetails(user?.id!);
-
-  if (!profileData.notion_api_key) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a notion api key',
-    );
-  }
-
-  if (!profileData.notion_api_key) {
-    throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
-      'The user does not have a selected notion page id',
-    );
-  }
+  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
   const hash = JSON.parse(profileData.notion_api_key);
   const notionApiKey = decrypt(hash);
@@ -281,15 +222,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     notionApiKey,
     notionClient,
     profileId: user?.id!,
-    databaseId: profileData.notion_page_id,
+    databaseId: profileData.notion_database_id,
   });
 
   const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
 
   const formattedPages = await Promise.all(
     selectedPages.map(async (_selectedPage) => {
-      const getTextFromPageProperty = getTextFromPagePropertyDecorator(_selectedPage.properties);
+      const getTextFromPageProperty = getTextFromPagePropertyInstance(_selectedPage.properties);
 
+      const { id } = _selectedPage;
       const word = getTextFromPageProperty(SUPPORTED_WORD_COLUMN_NAMES);
       const type = getTextFromPageProperty(SUPPORTED_TYPE_COLUMN_NAMES);
       const meaning = getTextFromPageProperty(SUPPORTED_MEANING_COLUMN_NAMES);
@@ -305,12 +247,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             getMeaningAndExampleSentenceSuggestion(response);
 
           return {
+            id,
             ipa,
             type,
             word,
             meaning,
             exampleSentence,
-            wordSuggestion: meaningAndExampleSentenceSuggestion?.word,
             meaningSuggestion: meaningAndExampleSentenceSuggestion?.meaning,
             exampleSentenceSuggestion: meaningAndExampleSentenceSuggestion?.example,
           };
@@ -320,6 +262,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       return {
+        id,
         ipa,
         type,
         word,

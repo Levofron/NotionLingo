@@ -15,7 +15,7 @@ export const formatRandomNotionWordsTransformator = (
     for (const _key of objectKeys(randomNotionWord)) {
       const currentValue = randomNotionWord[_key];
 
-      if (_key === 'ipa') {
+      if (['ipa', 'id'].includes(_key)) {
         continue;
       }
 

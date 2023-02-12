@@ -1,12 +1,12 @@
 import { functionImportTest } from '@infrastructure/utils';
 
-import { isValidNotionPageSchema } from './is-valid-notion-page-schema.function';
+import { isValidNotionDatabaseSchema } from './is-valid-notion-database-schema.function';
 
-describe('isValidNotionPageSchema function', () => {
-  functionImportTest(isValidNotionPageSchema);
+describe('isValidNotionDatabaseSchema function', () => {
+  functionImportTest(isValidNotionDatabaseSchema);
 
-  it('should return true if page properties are valid', () => {
-    const result = isValidNotionPageSchema({
+  it('should return true if database properties are valid', () => {
+    const result = isValidNotionDatabaseSchema({
       Word: {
         type: 'title',
         name: 'Word',
@@ -24,8 +24,8 @@ describe('isValidNotionPageSchema function', () => {
     expect(result).toBeTruthy();
   });
 
-  it('should return false if page properties are invalid', () => {
-    const result = isValidNotionPageSchema({
+  it('should return false if database properties are invalid', () => {
+    const result = isValidNotionDatabaseSchema({
       Word: {
         type: 'title',
         name: 'Word',

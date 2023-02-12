@@ -1,12 +1,9 @@
-import Head from 'next/head';
-
+import { SEO } from '@ui/atoms';
 import { NotFoundTemplate } from '@ui/templates';
 
 export const NotFoundPage = (): JSX.Element => (
   <>
-    <Head>
-      <title>Levofron</title>
-    </Head>
+    <SEO noFollow noIndex title="Not found" />
     <NotFoundTemplate />
   </>
 );

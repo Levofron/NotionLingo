@@ -23,9 +23,10 @@ export const getRestSource = (axiosInstance: AxiosInstance): IRestSource => ({
 
     return response;
   },
-  getAvailableNotionPages: () => axiosInstance.get(ERestEndpoints.GET_AVAILABLE_NOTION_PAGES),
-  setNotionPageId: (pageId: string) =>
-    axiosInstance.post(ERestEndpoints.SET_NOTION_PAGE_ID, { pageId }),
+  getAvailableNotionDatabases: () =>
+    axiosInstance.get(ERestEndpoints.GET_AVAILABLE_NOTION_DATABASES),
+  setNotionDatabaseId: (databaseId: string) =>
+    axiosInstance.post(ERestEndpoints.SET_NOTION_DATABASE_ID, { databaseId }),
   getRandomNotionWords: () => axiosInstance.get(ERestEndpoints.GET_RANDOM_NOTION_WORDS),
   sendContactFormData: (data: IContact) => axiosInstance.post(ERestEndpoints.CONTACT, data),
   increaseDailyStreak: async () => {

@@ -20,15 +20,15 @@ describe('getRestRepository function', () => {
       healthCheck: expect.any(Function),
       getLoggedUser: expect.any(Function),
       deleteProfile: expect.any(Function),
-      setNotionPageId: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       getWordSuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
+      setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
-      getAvailableNotionPages: expect.any(Function),
+      getAvailableNotionDatabases: expect.any(Function),
     });
   });
 
@@ -115,13 +115,13 @@ describe('getRestRepository function', () => {
     });
   });
 
-  describe('getAvailableNotionPages function', () => {
+  describe('getAvailableNotionDatabases function', () => {
     it('should call proper restSource function', async () => {
       const pages = [{ id: 'id', title: 'title' }];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restSourceMock: any = {
-        getAvailableNotionPages: jest.fn().mockImplementation(() => ({ data: pages })),
+        getAvailableNotionDatabases: jest.fn().mockImplementation(() => ({ data: pages })),
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -129,20 +129,20 @@ describe('getRestRepository function', () => {
 
       const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
 
-      const result = await restRepository.getAvailableNotionPages();
+      const result = await restRepository.getAvailableNotionDatabases();
 
       expect(result).toEqual(pages);
-      expect(restSourceMock.getAvailableNotionPages).toHaveBeenCalled();
+      expect(restSourceMock.getAvailableNotionDatabases).toHaveBeenCalled();
     });
   });
 
-  describe('setNotionPageId function', () => {
+  describe('setNotionDatabaseId function', () => {
     it('should call proper restSource function', async () => {
-      const pageId = 'pageId';
+      const databaseId = 'databaseId';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restSourceMock: any = {
-        setNotionPageId: jest.fn().mockImplementation((pageId) => ({ data: pageId })),
+        setNotionDatabaseId: jest.fn().mockImplementation((databaseId) => ({ data: databaseId })),
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -150,10 +150,10 @@ describe('getRestRepository function', () => {
 
       const restRepository = getRestRepository(restSourceMock, supabaseSourceMock);
 
-      const result = await restRepository.setNotionPageId(pageId);
+      const result = await restRepository.setNotionDatabaseId(databaseId);
 
-      expect(result).toEqual(pageId);
-      expect(restSourceMock.setNotionPageId).toHaveBeenCalledWith(pageId);
+      expect(result).toEqual(databaseId);
+      expect(restSourceMock.setNotionDatabaseId).toHaveBeenCalledWith(databaseId);
     });
   });
 
