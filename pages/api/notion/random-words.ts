@@ -28,7 +28,7 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@constants';
 
-import { getWordDetailsFromCambridgeDictionary } from '../scraping/word';
+import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
 import { getProfileDataWithNotionDataCheck } from './table-columns';
 import { getTextFromPagePropertyInstance } from './update';
 

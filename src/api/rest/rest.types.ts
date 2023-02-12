@@ -7,6 +7,7 @@ import {
   IIncreaseDailyStreak,
   INotionDatabase,
   IProfile,
+  IWordSuggestions,
 } from '@domain/entities/rest.types';
 
 export interface INotionWordResponseRecord {
@@ -26,6 +27,7 @@ export enum ERestEndpoints {
   GET_AVAILABLE_NOTION_DATABASES = '/notion/available-databases',
   GET_LOGGED_PROFILE = '/profile/logged',
   GET_RANDOM_NOTION_WORDS = '/notion/random-words',
+  GET_WORD_SUGGESTIONS = '/cambridge-dictionary/find',
   HEALTH_CHECK = '/health-check',
   INCREASE_DAILY_STREAK = '/profile/increase-daily-streak',
   RESET_NOTION_INTEGRATION = '/profile/reset-notion-integration',
@@ -39,6 +41,7 @@ export interface IRestApi {
   getAvailableNotionDatabases: () => Promise<AxiosResponse<INotionDatabase[]>>;
   getLoggedProfile: () => Promise<AxiosResponse<IProfile>>;
   getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseRecord[]>>;
+  getWordSuggestions: (word: string) => Promise<AxiosResponse<IWordSuggestions>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   increaseDailyStreak: () => Promise<AxiosResponse<IIncreaseDailyStreak>>;
   resetNotionIntegration: () => Promise<void>;
