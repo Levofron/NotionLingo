@@ -31,6 +31,7 @@ describe('getRestApi function', () => {
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      getNotionTableColumns: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
       getAvailableNotionDatabases: expect.any(Function),
     });
@@ -482,6 +483,35 @@ describe('getRestApi function', () => {
       const restApi = getRestApi(axiosInstanceMock);
 
       const result = restApi.updateNotionWord({ id: 'id', meaning: 'meaning' });
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('getNotionTableColumns endpoint', () => {
+    it('should call proper endpoint', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        get: jest.fn().mockResolvedValue({ data: {} }),
+      };
+
+      const restApi = getRestApi(axiosInstanceMock);
+
+      const result = restApi.getNotionTableColumns();
+
+      expect(result).resolves.toEqual({ data: {} });
+      expect(axiosInstanceMock.get).toHaveBeenCalledWith('/notion/table-columns');
+    });
+
+    it('should throw error if endpoint fails', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        get: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restApi = getRestApi(axiosInstanceMock);
+
+      const result = restApi.getNotionTableColumns();
 
       expect(result).rejects.toThrow('error');
     });

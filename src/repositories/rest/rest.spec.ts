@@ -28,6 +28,7 @@ describe('getRestRepository function', () => {
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      getNotionTableColumns: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
       getAvailableNotionDatabases: expect.any(Function),
     });
@@ -312,6 +313,27 @@ describe('getRestRepository function', () => {
         meaning: 'meaning',
         exampleSentence: 'exampleSentence',
       });
+    });
+  });
+
+  describe('getNotionTableColumns function', () => {
+    it('should call proper restApi function', async () => {
+      const columns = ['column1', 'column2'];
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restApiMock: any = {
+        getNotionTableColumns: jest.fn().mockImplementation(() => ({ data: columns })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseApiMock: any = {};
+
+      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+
+      const result = await restRepository.getNotionTableColumns();
+
+      expect(result).toEqual(columns);
+      expect(restApiMock.getNotionTableColumns).toHaveBeenCalled();
     });
   });
 });

@@ -7,12 +7,14 @@ import {
   IProfile,
   IUpdateNotionWordRequest,
   IWordSuggestions,
+  TNotionTableColumn,
 } from '../entities/rest.types';
 
 export interface IRestRepository {
   deleteProfile: () => Promise<void>;
   getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
   getLoggedProfile: () => Promise<IProfile>;
+  getNotionTableColumns: () => Promise<TNotionTableColumn[]>;
   getRandomNotionWords: () => Promise<INotionWord[]>;
   getWordSuggestions: (word: string) => Promise<IWordSuggestions>;
   healthCheck: () => Promise<string>;

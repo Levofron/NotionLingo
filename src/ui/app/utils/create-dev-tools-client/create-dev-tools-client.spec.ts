@@ -44,6 +44,7 @@ describe('createDevToolsClient function', () => {
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
+      getNotionTableColumns: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
       getAvailableNotionDatabases: expect.any(Function),
     });

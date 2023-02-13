@@ -77,4 +77,9 @@ export const getRestRepository = (
 
     return response.id;
   },
+  getNotionTableColumns: async () => {
+    const { data } = await restApi.getNotionTableColumns();
+
+    return data;
+  },
 });

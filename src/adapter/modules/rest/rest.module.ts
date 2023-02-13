@@ -6,6 +6,7 @@ import {
   deleteProfileUseCase,
   getAvailableNotionDatabasesUseCase,
   getLoggedProfileUseCase,
+  getNotionTableColumnsUseCase,
   getRandomNotionWordsUseCase,
   getWordSuggestionsUseCase,
   healthCheckUseCase,
@@ -39,6 +40,7 @@ export const restModule = {
   increaseDailyStreak: increaseDailyStreakUseCase(restRepository).execute,
   setNotionDatabaseId: setNotionDatabaseIdUseCase(restRepository).execute,
   getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
+  getNotionTableColumns: getNotionTableColumnsUseCase(restRepository).execute,
   resetNotionIntegration: resetNotionIntegrationUseCase(restRepository).execute,
   getAvailableNotionDatabases: getAvailableNotionDatabasesUseCase(restRepository).execute,
 };
