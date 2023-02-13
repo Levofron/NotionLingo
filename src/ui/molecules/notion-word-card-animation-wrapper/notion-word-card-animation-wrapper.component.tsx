@@ -105,11 +105,11 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
           as={isRotated ? GiClockwiseRotation : GiAnticlockwiseRotation}
           cursor="pointer"
           display={isDraggable ? 'block' : 'none'}
-          fontSize="5xl"
+          fontSize={{ base: '4xl', md: '5xl' }}
           position="absolute"
           right="50%"
           style={{ transform: 'translateX(50%)' }}
-          top="-60px"
+          top={{ base: '-45px', md: '-60px' }}
           onClick={handleRotateIconClick}
         />
       ) : null}
@@ -120,7 +120,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
               as={BsCheckCircleFill}
               background="white"
               borderRadius="50%"
-              fontSize="5xl"
+              fontSize={{ base: '4xl', sm: '5xl' }}
               left={3}
               p={1}
               position="absolute"
@@ -133,7 +133,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
               as={BsCheckCircleFill}
               background="white"
               borderRadius="50%"
-              fontSize="5xl"
+              fontSize={{ base: '4xl', sm: '5xl' }}
               p={1}
               position="absolute"
               right={3}

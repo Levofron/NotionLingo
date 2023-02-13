@@ -17,6 +17,7 @@ const hasSuggestion = (original: string, suggestion?: string) =>
 export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   countdown,
   isCountdownEnded,
+  isLoading,
   isTopCard,
   notionWord: {
     exampleSentence,
@@ -28,6 +29,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
     type,
     word,
   },
+  onApplySuggestions,
   onClick,
 }): JSX.Element => {
   const hasType = type && type.length > 0;
@@ -55,18 +57,24 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
     [],
   );
 
-  const hasMeaningSuggestion = useMemo(
-    () => hasSuggestion(meaning, meaningSuggestion),
-    [meaningSuggestion],
-  );
-
-  const hasExampleSentenceSuggestion = useMemo(
-    () => hasSuggestion(exampleSentence, exampleSentenceSuggestion),
-    [exampleSentenceSuggestion],
-  );
+  const hasMeaningSuggestion = hasSuggestion(meaning, meaningSuggestion);
+  const hasExampleSentenceSuggestion = hasSuggestion(exampleSentence, exampleSentenceSuggestion);
 
   return (
     <Card w={{ base: 300, sm: 350, md: 400 }}>
+      {hasMeaningSuggestion || hasExampleSentenceSuggestion ? (
+        <Button
+          display={isTopCard ? 'flex' : 'none'}
+          isLoading={isLoading}
+          position="absolute"
+          right={{ base: 0, sm: 3 }}
+          size={{ base: 'xs', md: 'sm' }}
+          top={{ base: '-40px', md: '-55px' }}
+          onClick={onApplySuggestions}
+        >
+          Apply suggestions
+        </Button>
+      ) : null}
       <Box
         borderBottom="2px solid"
         borderColor="gray.900"
@@ -114,21 +122,16 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           ) : null}
         </Flex>
         {hasMeaningSuggestion ? (
-          <Box position="relative">
-            <Button position="absolute" right={0} size="xs" top={-6}>
-              Apply suggestion
-            </Button>
-            <Text
-              border="2px solid"
-              borderColor="gray.900"
-              color="gray.900"
-              fontSize={{ base: 'sm', sm: 'md' }}
-              noOfLines={{ base: 4, md: 5 }}
-              p={{ base: 1, sm: 2 }}
-            >
-              {meaningSuggestion}
-            </Text>
-          </Box>
+          <Text
+            border="2px solid"
+            borderColor="gray.900"
+            color="gray.900"
+            fontSize={{ base: 'sm', sm: 'md' }}
+            noOfLines={{ base: 4, md: 5 }}
+            p={{ base: 1, sm: 2 }}
+          >
+            {meaningSuggestion}
+          </Text>
         ) : (
           <Text
             withBalancer
@@ -149,7 +152,6 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
               position="relative"
               width="full"
             >
-              <Button size="xs">Apply suggestion</Button>
               <Text
                 border="2px solid"
                 borderColor="gray.900"
