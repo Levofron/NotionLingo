@@ -50,7 +50,7 @@ export const DashboardTemplate = (): JSX.Element => {
         })
         .catch((_error) => {
           toast({
-            duration: 5000,
+            duration: 3000,
             title: 'Error!',
             status: 'error',
             isClosable: true,
@@ -103,7 +103,7 @@ export const DashboardTemplate = (): JSX.Element => {
         setWords(copiedWords);
 
         toast({
-          duration: 5000,
+          duration: 3000,
           title: 'Success!',
           status: 'success',
           isClosable: true,
@@ -112,7 +112,7 @@ export const DashboardTemplate = (): JSX.Element => {
       })
       .catch((_error) => {
         toast({
-          duration: 5000,
+          duration: 3000,
           title: 'Error!',
           status: 'error',
           isClosable: true,
