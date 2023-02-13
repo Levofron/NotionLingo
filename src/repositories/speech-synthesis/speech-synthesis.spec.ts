@@ -57,7 +57,7 @@ describe('getSpeechSynthesisRepository function', () => {
   });
 
   it('should call speak function', () => {
-    const localStorageSource = {
+    const localStorageApi = {
       getItem: jest.fn(),
       setItem: jest.fn(),
       removeItem: jest.fn(),
@@ -66,7 +66,7 @@ describe('getSpeechSynthesisRepository function', () => {
 
     const speechSynthesisRepository = getSpeechSynthesisRepository(
       BASE_SPEECH_SYNTHESIS_SOURCE_MOCK,
-      localStorageSource,
+      localStorageApi,
     );
 
     speechSynthesisRepository.speak('test');
@@ -83,7 +83,7 @@ describe('getSpeechSynthesisRepository function', () => {
   });
 
   it('should call getVoices function', () => {
-    const localStorageSource = {
+    const localStorageApi = {
       getItem: jest.fn(),
       setItem: jest.fn(),
       removeItem: jest.fn(),
@@ -92,7 +92,7 @@ describe('getSpeechSynthesisRepository function', () => {
 
     const speechSynthesisRepository = getSpeechSynthesisRepository(
       BASE_SPEECH_SYNTHESIS_SOURCE_MOCK,
-      localStorageSource,
+      localStorageApi,
     );
 
     speechSynthesisRepository.getVoices();

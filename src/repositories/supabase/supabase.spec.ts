@@ -7,9 +7,9 @@ describe('getSupabaseRepository function', () => {
 
   it('should return proper object', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const supabaseSourceMock: any = {};
+    const supabaseApiMock: any = {};
 
-    const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
+    const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
     expect(supabaseRepository).toEqual({
       loginViaGoogle: expect.any(Function),
@@ -23,30 +23,30 @@ describe('getSupabaseRepository function', () => {
   describe('loginViaGoogle function', () => {
     it('should call signIn function with proper params', async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseSourceMock: any = {
+      const supabaseApiMock: any = {
         signIn: jest.fn(),
       };
 
-      const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
+      const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
       await supabaseRepository.loginViaGoogle();
 
-      expect(supabaseSourceMock.signIn).toHaveBeenCalledWith('google');
+      expect(supabaseApiMock.signIn).toHaveBeenCalledWith('google');
     });
   });
 
   describe('logout function', () => {
     it('should call logout function', async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseSourceMock: any = {
+      const supabaseApiMock: any = {
         logout: jest.fn(),
       };
 
-      const supabaseRepository = await getSupabaseRepository(supabaseSourceMock);
+      const supabaseRepository = await getSupabaseRepository(supabaseApiMock);
 
       supabaseRepository.logout();
 
-      expect(supabaseSourceMock.logout).toHaveBeenCalled();
+      expect(supabaseApiMock.logout).toHaveBeenCalled();
     });
   });
 
@@ -55,16 +55,16 @@ describe('getSupabaseRepository function', () => {
       const userMock = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseSourceMock: any = {
+      const supabaseApiMock: any = {
         getUser: jest.fn().mockReturnValue(userMock),
       };
 
-      const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
+      const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
       const result = supabaseRepository.getUser();
 
       expect(result).toEqual(userMock);
-      expect(supabaseSourceMock.getUser).toHaveBeenCalled();
+      expect(supabaseApiMock.getUser).toHaveBeenCalled();
     });
   });
 
@@ -73,16 +73,16 @@ describe('getSupabaseRepository function', () => {
       const sessionMock = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseSourceMock: any = {
+      const supabaseApiMock: any = {
         getSession: jest.fn().mockReturnValue(sessionMock),
       };
 
-      const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
+      const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
       const result = supabaseRepository.getSession();
 
       expect(result).toEqual(sessionMock);
-      expect(supabaseSourceMock.getSession).toHaveBeenCalled();
+      expect(supabaseApiMock.getSession).toHaveBeenCalled();
     });
   });
 
@@ -91,15 +91,15 @@ describe('getSupabaseRepository function', () => {
       const callbackMock = jest.fn();
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseSourceMock: any = {
+      const supabaseApiMock: any = {
         onAuthStateChange: jest.fn(),
       };
 
-      const supabaseRepository = getSupabaseRepository(supabaseSourceMock);
+      const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
       supabaseRepository.onAuthStateChange(callbackMock);
 
-      expect(supabaseSourceMock.onAuthStateChange).toHaveBeenCalledWith(callbackMock);
+      expect(supabaseApiMock.onAuthStateChange).toHaveBeenCalledWith(callbackMock);
     });
   });
 });

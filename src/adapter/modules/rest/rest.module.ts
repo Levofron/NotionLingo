@@ -15,6 +15,7 @@ import {
   setNotionApiTokenUseCase,
   setNotionDatabaseIdUseCase,
   setSupabaseCookieUseCase,
+  updateNotionWordUseCase,
 } from '@domain/use-cases/rest.use-cases';
 
 import { axiosInstance, supabaseInstance } from '@infrastructure/config';
@@ -30,6 +31,7 @@ export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
   deleteProfile: deleteProfileUseCase(restRepository).execute,
   getLoggedProfile: getLoggedProfileUseCase(restRepository).execute,
+  updateNotionWord: updateNotionWordUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
   getWordSuggestions: getWordSuggestionsUseCase(restRepository).execute,

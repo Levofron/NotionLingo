@@ -5,6 +5,7 @@ import {
   INotionDatabase,
   INotionWord,
   IProfile,
+  IUpdateNotionWordRequest,
   IWordSuggestions,
 } from '../entities/rest.types';
 import { IRestRepository } from '../repositories/rest.repository';
@@ -124,4 +125,16 @@ export const getWordSuggestionsUseCase = (
   restRepository: IRestRepository,
 ): TGetWordSuggestionsUseCase => ({
   execute: (word) => restRepository.getWordSuggestions(word),
+});
+
+// updateNotionWordUseCase
+export type TUpdateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  IUpdateNotionWordRequest,
+  string
+>;
+
+export const updateNotionWordUseCase = (
+  restRepository: IRestRepository,
+): TUpdateNotionWordUseCase => ({
+  execute: (word) => restRepository.updateNotionWord(word),
 });

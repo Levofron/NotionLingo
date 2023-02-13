@@ -27,7 +27,7 @@ export const getRestRepository = (
 
     return data;
   },
-  setNotionApiToken: async (token: string) => {
+  setNotionApiToken: async (token) => {
     const { data } = await restApi.setNotionApiToken(token);
 
     return data;
@@ -37,7 +37,7 @@ export const getRestRepository = (
 
     return data;
   },
-  setNotionDatabaseId: async (databaseId: string) => {
+  setNotionDatabaseId: async (databaseId) => {
     const { data } = await restApi.setNotionDatabaseId(databaseId);
 
     return data;
@@ -67,9 +67,14 @@ export const getRestRepository = (
 
     supabaseApi.logout();
   },
-  getWordSuggestions: async (word: string) => {
+  getWordSuggestions: async (word) => {
     const { data } = await restApi.getWordSuggestions(word);
 
     return data;
+  },
+  updateNotionWord: async (data) => {
+    const { data: response } = await restApi.updateNotionWord(data);
+
+    return response.id;
   },
 });
