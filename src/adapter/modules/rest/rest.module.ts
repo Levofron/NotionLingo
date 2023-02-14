@@ -3,6 +3,7 @@ import { getSupabaseApi } from '@api/supabase/supabase.api';
 import { getRestRepository } from '@repositories/rest/rest.repository';
 
 import {
+  createNotionWordUseCase,
   deleteProfileUseCase,
   getAvailableNotionDatabasesUseCase,
   getLoggedProfileUseCase,
@@ -33,6 +34,7 @@ export const restModule = {
   deleteProfile: deleteProfileUseCase(restRepository).execute,
   getLoggedProfile: getLoggedProfileUseCase(restRepository).execute,
   updateNotionWord: updateNotionWordUseCase(restRepository).execute,
+  createNotionWord: createNotionWordUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
   getWordSuggestions: getWordSuggestionsUseCase(restRepository).execute,

@@ -50,4 +50,5 @@ export const getRestApi = (axiosInstance: AxiosInstance): IRestApi => ({
   },
   updateNotionWord: (data) => axiosInstance.post(ERestEndpoints.UPDATE_NOTION_WORD, data),
   getNotionTableColumns: () => axiosInstance.get(ERestEndpoints.GET_NOTION_TABLE_COLUMNS),
+  createNotionWord: (data) => axiosInstance.post(ERestEndpoints.CREATE_NOTION_WORD, data),
 });

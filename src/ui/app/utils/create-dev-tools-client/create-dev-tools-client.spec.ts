@@ -37,6 +37,7 @@ describe('createDevToolsClient function', () => {
       deleteProfile: expect.any(Function),
       getLoggedProfile: expect.any(Function),
       updateNotionWord: expect.any(Function),
+      createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       getWordSuggestions: expect.any(Function),
