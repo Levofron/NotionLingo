@@ -61,3 +61,19 @@ export interface IUpdateNotionWordRequest {
   id: string;
   meaning?: string;
 }
+
+export type TNotionTableColumn =
+  | {
+      columnName: string;
+      isExampleSentence: boolean;
+      isMeaning: boolean;
+      isWord: boolean;
+      position: number;
+      type: 'title' | 'rich_text';
+    }
+  | {
+      columnName: string;
+      options: string[];
+      position: number;
+      type: 'multi_select';
+    };

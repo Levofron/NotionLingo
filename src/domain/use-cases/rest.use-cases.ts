@@ -7,6 +7,7 @@ import {
   IProfile,
   IUpdateNotionWordRequest,
   IWordSuggestions,
+  TNotionTableColumn,
 } from '../entities/rest.types';
 import { IRestRepository } from '../repositories/rest.repository';
 import {
@@ -137,4 +138,15 @@ export const updateNotionWordUseCase = (
   restRepository: IRestRepository,
 ): TUpdateNotionWordUseCase => ({
   execute: (word) => restRepository.updateNotionWord(word),
+});
+
+// getNotionTableColumnsUseCase
+export type TGetNotionTableColumnsUseCase = IUseCaseWithoutParamsAndPromiseResult<
+  TNotionTableColumn[]
+>;
+
+export const getNotionTableColumnsUseCase = (
+  restRepository: IRestRepository,
+): TGetNotionTableColumnsUseCase => ({
+  execute: () => restRepository.getNotionTableColumns(),
 });
