@@ -37,33 +37,41 @@ export const FindWordTemplate = (): JSX.Element => {
               onChange={handleInputChange}
             />
           </Flex>
-          <Heading as="h1" color="gray.900" fontSize="4xl">
-            {getWordSuggestionsData?.word}
-          </Heading>
-          <Text color="gray.900" fontSize="lg">
-            Meaning and examples
-          </Text>
+          {getWordSuggestionsData?.word ? (
+            <>
+              <Heading as="h1" color="gray.900" fontSize="4xl">
+                {getWordSuggestionsData?.word}
+              </Heading>
+              <Text color="gray.900" fontSize="lg">
+                Meaning and examples
+              </Text>
+            </>
+          ) : null}
           {getWordSuggestionsData?.meaningAndExamples ? (
             <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
-              {getWordSuggestionsData.meaningAndExamples.map(({ examples, meaning }, _index) => (
-                <Flex
-                  key={`${meaning}-${examples.join('-')}`}
-                  flexDirection="column"
-                  gap={{ base: 1, sm: 2, md: 4 }}
-                >
-                  <Heading color="gray.900" textAlign="left">
-                    {meaning}
-                  </Heading>
-                  {examples.map((example) => (
-                    <Text key={example} withBalancer fontWeight="light">
-                      {example}
-                    </Text>
-                  ))}
-                  {_index !== getWordSuggestionsData.meaningAndExamples.length - 1 ? (
-                    <Divider bg="gray.900" height="1px" width="100%" />
-                  ) : null}
-                </Flex>
-              ))}
+              {getWordSuggestionsData.meaningAndExamples.map(({ examples, meaning }, _index) => {
+                const example = examples[0] || getWordSuggestionsData.additionalExamples[0];
+
+                return (
+                  <Flex
+                    key={`${meaning}-${examples.join('-')}`}
+                    flexDirection="column"
+                    gap={{ base: 1, sm: 2, md: 4 }}
+                  >
+                    <Heading color="gray.900" textAlign="left">
+                      {meaning}
+                    </Heading>
+                    {example ? (
+                      <Text key={example} withBalancer fontWeight="light">
+                        {example}
+                      </Text>
+                    ) : null}
+                    {_index !== getWordSuggestionsData.meaningAndExamples.length - 1 ? (
+                      <Divider bg="gray.900" height="1px" width="100%" />
+                    ) : null}
+                  </Flex>
+                );
+              })}
             </Flex>
           ) : null}
         </Flex>
