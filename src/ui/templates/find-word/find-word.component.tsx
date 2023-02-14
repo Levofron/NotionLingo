@@ -24,28 +24,27 @@ export const FindWordTemplate = (): JSX.Element => {
   return (
     <Box bg="gray.50" height="100%">
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
-        <Flex alignItems="center" flexDirection="column" gap={{ base: 5, sm: 6, md: 8 }}>
-          <Flex direction="column" mt={{ base: '25px', md: '40px' }} w="100%">
-            <InputControl
-              isRequired
-              errorMessage={getWordSuggestionsError || undefined}
-              isDisabled={isGetWordSuggestionsLoading}
-              isLoading={isGetWordSuggestionsLoading}
-              label="Search for a word"
-              name="searchWord"
-              placeholder="Your search word"
-              onChange={handleInputChange}
-            />
-          </Flex>
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          gap={{ base: 5, sm: 6, md: 8 }}
+          pb={{ base: 14, sm: 20 }}
+          pt={{ base: 6, sm: 10 }}
+        >
+          <InputControl
+            isRequired
+            errorMessage={getWordSuggestionsError || undefined}
+            isDisabled={isGetWordSuggestionsLoading}
+            isLoading={isGetWordSuggestionsLoading}
+            label="Search for a word"
+            name="searchWord"
+            placeholder="Your search word"
+            onChange={handleInputChange}
+          />
           {getWordSuggestionsData?.word ? (
-            <>
-              <Heading as="h1" color="gray.900" fontSize="4xl">
-                {getWordSuggestionsData?.word}
-              </Heading>
-              <Text color="gray.900" fontSize="lg">
-                Meaning and examples
-              </Text>
-            </>
+            <Heading as="h1" color="gray.900" fontSize="4xl">
+              {getWordSuggestionsData?.word}
+            </Heading>
           ) : null}
           {getWordSuggestionsData?.meaningAndExamples ? (
             <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
@@ -58,7 +57,7 @@ export const FindWordTemplate = (): JSX.Element => {
                     flexDirection="column"
                     gap={{ base: 1, sm: 2, md: 4 }}
                   >
-                    <Heading color="gray.900" textAlign="left">
+                    <Heading withBalancer color="gray.900" textAlign="left">
                       {meaning}
                     </Heading>
                     {example ? (
