@@ -12,14 +12,18 @@ export const FindWordTemplate = (): JSX.Element => {
     data: getWordSuggestionsData,
     error: getWordSuggestionsError,
     loading: isGetWordSuggestionsLoading,
-    mutateAsync: mutateAsyncGetWordSuggestions,
+    mutate: mutateGetWordSuggestions,
   } = useAxiosAction(restModule.getWordSuggestions);
 
-  const handleInputChange = debounce(async (event: ChangeEvent<HTMLInputElement>) => {
-    const result = await mutateAsyncGetWordSuggestions(event.target.value);
-
-    console.log(result);
+  const handleInputChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
+    mutateGetWordSuggestions(event.target.value);
   }, 1000);
+
+  const isEmpty =
+    getWordSuggestionsData &&
+    !getWordSuggestionsData?.meaningAndExamples?.length &&
+    !getWordSuggestionsData?.word &&
+    !getWordSuggestionsData?.additionalExamples.length;
 
   return (
     <Box bg="gray.50" height="100%">
@@ -46,17 +50,16 @@ export const FindWordTemplate = (): JSX.Element => {
               {getWordSuggestionsData?.word}
             </Heading>
           ) : null}
-          {getWordSuggestionsData?.meaningAndExamples ? (
+          {!isEmpty ? (
             <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
-              {getWordSuggestionsData.meaningAndExamples.map(({ examples, meaning }, _index) => {
+              {getWordSuggestionsData?.meaningAndExamples.map(({ examples, meaning }, _index) => {
                 const example = examples[0] || getWordSuggestionsData.additionalExamples[0];
+                const isLastIndex = _index === getWordSuggestionsData.meaningAndExamples.length - 1;
+
+                const key = `${meaning}-${example}-${_index}`;
 
                 return (
-                  <Flex
-                    key={`${meaning}-${examples.join('-')}`}
-                    flexDirection="column"
-                    gap={{ base: 1, sm: 2, md: 4 }}
-                  >
+                  <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
                     <Heading withBalancer color="gray.900" textAlign="left">
                       {meaning}
                     </Heading>
@@ -65,14 +68,30 @@ export const FindWordTemplate = (): JSX.Element => {
                         {example}
                       </Text>
                     ) : null}
-                    {_index !== getWordSuggestionsData.meaningAndExamples.length - 1 ? (
-                      <Divider bg="gray.900" height="1px" width="100%" />
-                    ) : null}
+                    {!isLastIndex ? <Divider bg="gray.900" height="1px" width="100%" /> : null}
                   </Flex>
                 );
               })}
             </Flex>
-          ) : null}
+          ) : (
+            <Flex
+              alignItems="center"
+              flexDirection="column"
+              gap={{ base: 3, sm: 5 }}
+              height="100%"
+              justifyContent="center"
+            >
+              <Text
+                withBalancer
+                fontSize={{ base: 'md', sm: 'xl' }}
+                fontWeight="medium"
+                maxWidth="350px"
+                textAlign="center"
+              >
+                No meaning and examples found.
+              </Text>
+            </Flex>
+          )}
         </Flex>
       </Container>
     </Box>
