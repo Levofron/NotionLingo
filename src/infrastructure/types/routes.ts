@@ -1,5 +1,6 @@
 export enum ERoutes {
   ACCOUNT_SETTINGS = '/account-settings',
+  ADD_WORD = '/add-word',
   DASHBOARD = '/dashboard',
   DONATE = '/donate',
   FIND_WORD = '/find-word',

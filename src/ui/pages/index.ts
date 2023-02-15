@@ -2,6 +2,7 @@ export * as homePage from './home/home.page';
 export * as termsPage from './terms/terms.page';
 export * as donatePage from './donate/donate.page';
 export * as offlinePage from './offline/offline.page';
+export * as addWordPage from './add-word/add-word.page';
 export * as notFoundPage from './not-found/not-found.page';
 export * as findWordPage from './find-word/find-word.page';
 export * as dashboardPage from './dashboard/dashboard.page';
