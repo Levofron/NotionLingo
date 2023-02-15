@@ -1,5 +1,6 @@
+import { useClipboard, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useLayoutEffect } from 'react';
+import { ChangeEvent, useEffect, useLayoutEffect } from 'react';
 
 import { restModule } from '@adapter/modules';
 
@@ -10,7 +11,22 @@ import { ERoutes } from '@infrastructure/types/routes';
 import { debounce, isString, useAxiosAction } from '@infrastructure/utils';
 
 export const FindWordTemplate = (): JSX.Element => {
+  const toast = useToast();
   const router = useRouter();
+  const { onCopy, setValue, value } = useClipboard('');
+
+  useEffect(() => {
+    if (value) {
+      onCopy();
+
+      toast({
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+        description: 'Copied to clipboard',
+      });
+    }
+  }, [value]);
 
   const {
     data: getWordSuggestionsData,
@@ -37,6 +53,8 @@ export const FindWordTemplate = (): JSX.Element => {
     !getWordSuggestionsData?.word &&
     !getWordSuggestionsData?.additionalExamples.length;
 
+  const handleCopy = (string: string) => () => setValue(string);
+
   return (
     <Box bg="gray.50" height="100%">
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
@@ -59,8 +77,14 @@ export const FindWordTemplate = (): JSX.Element => {
             onChange={handleInputChange}
           />
           {getWordSuggestionsData?.word ? (
-            <Heading as="h1" color="gray.900" fontSize="4xl">
-              {getWordSuggestionsData?.word}
+            <Heading
+              as="h1"
+              color="gray.900"
+              cursor="pointer"
+              fontSize="4xl"
+              onClick={handleCopy(getWordSuggestionsData.word)}
+            >
+              {getWordSuggestionsData.word}
             </Heading>
           ) : null}
           {!isEmpty ? (
@@ -78,14 +102,24 @@ export const FindWordTemplate = (): JSX.Element => {
 
                 return (
                   <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
-                    <Heading withBalancer color="gray.900" textAlign="left">
+                    <Heading
+                      withBalancer
+                      color="gray.900"
+                      cursor="pointer"
+                      textAlign="left"
+                      onClick={handleCopy(meaning)}
+                    >
                       {meaning}
                     </Heading>
-                    {example ? (
-                      <Text key={example} withBalancer fontWeight="light">
-                        {example}
-                      </Text>
-                    ) : null}
+                    <Text
+                      key={example}
+                      withBalancer
+                      cursor="pointer"
+                      fontWeight="light"
+                      onClick={handleCopy(example)}
+                    >
+                      {example}
+                    </Text>
                     {!isLastIndex ? <Divider bg="gray.900" height="1px" width="100%" /> : null}
                   </Flex>
                 );
