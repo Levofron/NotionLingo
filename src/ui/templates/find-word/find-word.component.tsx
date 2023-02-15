@@ -1,13 +1,17 @@
-import { ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
+import { ChangeEvent, useLayoutEffect } from 'react';
 
 import { restModule } from '@adapter/modules';
 
 import { Box, Container, Divider, Flex, Heading, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
 
-import { debounce, useAxiosAction } from '@infrastructure/utils';
+import { ERoutes } from '@infrastructure/types/routes';
+import { debounce, isString, useAxiosAction } from '@infrastructure/utils';
 
 export const FindWordTemplate = (): JSX.Element => {
+  const router = useRouter();
+
   const {
     data: getWordSuggestionsData,
     error: getWordSuggestionsError,
@@ -15,8 +19,16 @@ export const FindWordTemplate = (): JSX.Element => {
     mutate: mutateGetWordSuggestions,
   } = useAxiosAction(restModule.getWordSuggestions);
 
-  const handleInputChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
-    mutateGetWordSuggestions(event.target.value);
+  useLayoutEffect(() => {
+    if (isString(router.query.word)) {
+      mutateGetWordSuggestions(router.query.word);
+    }
+  }, [!!router.query.word]);
+
+  const handleInputChange = debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    mutateGetWordSuggestions(value);
+
+    router.push(ERoutes.FIND_WORD, { query: { word: value } }, { shallow: true });
   }, 1000);
 
   const isEmpty =
@@ -37,6 +49,7 @@ export const FindWordTemplate = (): JSX.Element => {
         >
           <InputControl
             isRequired
+            defaultValue={router.query.word || ''}
             errorMessage={getWordSuggestionsError || undefined}
             isDisabled={isGetWordSuggestionsLoading}
             isLoading={isGetWordSuggestionsLoading}
@@ -54,6 +67,11 @@ export const FindWordTemplate = (): JSX.Element => {
             <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
               {getWordSuggestionsData?.meaningAndExamples.map(({ examples, meaning }, _index) => {
                 const example = examples[0] || getWordSuggestionsData.additionalExamples[0];
+
+                if (!example || !meaning) {
+                  return null;
+                }
+
                 const isLastIndex = _index === getWordSuggestionsData.meaningAndExamples.length - 1;
 
                 const key = `${meaning}-${example}-${_index}`;
