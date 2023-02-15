@@ -11,6 +11,7 @@ import {
 } from '../entities/rest.types';
 
 export interface IRestRepository {
+  createNotionWord: (data: Record<string, string>) => Promise<string>;
   deleteProfile: () => Promise<void>;
   getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
   getLoggedProfile: () => Promise<IProfile>;

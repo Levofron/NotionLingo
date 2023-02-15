@@ -24,6 +24,7 @@ describe('getRestApi function', () => {
       deleteProfile: expect.any(Function),
       updateNotionWord: expect.any(Function),
       getLoggedProfile: expect.any(Function),
+      createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       getWordSuggestions: expect.any(Function),
@@ -512,6 +513,38 @@ describe('getRestApi function', () => {
       const restApi = getRestApi(axiosInstanceMock);
 
       const result = restApi.getNotionTableColumns();
+
+      expect(result).rejects.toThrow('error');
+    });
+  });
+
+  describe('createNotionWord endpoint', () => {
+    it('should call proper endpoint', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        post: jest.fn().mockResolvedValue({ data: {} }),
+      };
+
+      const restApi = getRestApi(axiosInstanceMock);
+
+      const result = restApi.createNotionWord({ word: 'word', meaning: 'meaning' });
+
+      expect(result).resolves.toEqual({ data: {} });
+      expect(axiosInstanceMock.post).toHaveBeenCalledWith('/notion/create', {
+        word: 'word',
+        meaning: 'meaning',
+      });
+    });
+
+    it('should throw error if endpoint fails', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosInstanceMock: any = {
+        post: jest.fn().mockRejectedValue(new Error('error')),
+      };
+
+      const restApi = getRestApi(axiosInstanceMock);
+
+      const result = restApi.createNotionWord({ word: 'word', meaning: 'meaning' });
 
       expect(result).rejects.toThrow('error');
     });

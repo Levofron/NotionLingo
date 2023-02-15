@@ -25,6 +25,7 @@ export interface INotionWordResponseRecord {
 
 export enum ERestEndpoints {
   CONTACT = '/contact',
+  CREATE_NOTION_WORD = '/notion/create',
   DELETE_PROFILE = '/profile/delete',
   GET_AVAILABLE_NOTION_DATABASES = '/notion/available-databases',
   GET_LOGGED_PROFILE = '/profile/logged',
@@ -41,6 +42,9 @@ export enum ERestEndpoints {
 }
 
 export interface IRestApi {
+  createNotionWord: (
+    data: Record<string, string>,
+  ) => Promise<AxiosResponse<INotionWordResponseRecord>>;
   deleteProfile: () => Promise<void>;
   getAvailableNotionDatabases: () => Promise<AxiosResponse<INotionDatabase[]>>;
   getLoggedProfile: () => Promise<AxiosResponse<IProfile>>;

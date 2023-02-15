@@ -83,4 +83,9 @@ export const getRestRepository = (
 
     return data;
   },
+  createNotionWord: async (data) => {
+    const { data: response } = await restApi.createNotionWord(data);
+
+    return response.id;
+  },
 });

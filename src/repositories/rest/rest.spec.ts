@@ -21,6 +21,7 @@ describe('getRestRepository function', () => {
       deleteProfile: expect.any(Function),
       getLoggedProfile: expect.any(Function),
       updateNotionWord: expect.any(Function),
+      createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
       getWordSuggestions: expect.any(Function),
@@ -334,6 +335,32 @@ describe('getRestRepository function', () => {
 
       expect(result).toEqual(columns);
       expect(restApiMock.getNotionTableColumns).toHaveBeenCalled();
+    });
+  });
+
+  describe('createNotionWord function', () => {
+    it('should call proper restApi function', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restApiMock: any = {
+        createNotionWord: jest.fn().mockImplementation(() => ({ data: {} })),
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const supabaseApiMock: any = {};
+
+      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+
+      await restRepository.createNotionWord({
+        word: 'word',
+        meaning: 'meaning',
+        exampleSentence: 'exampleSentence',
+      });
+
+      expect(restApiMock.createNotionWord).toHaveBeenCalledWith({
+        word: 'word',
+        meaning: 'meaning',
+        exampleSentence: 'exampleSentence',
+      });
     });
   });
 });

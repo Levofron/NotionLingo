@@ -150,3 +150,15 @@ export const getNotionTableColumnsUseCase = (
 ): TGetNotionTableColumnsUseCase => ({
   execute: () => restRepository.getNotionTableColumns(),
 });
+
+// createNotionWordUseCase
+export type TCreateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  Record<string, string>,
+  string
+>;
+
+export const createNotionWordUseCase = (
+  restRepository: IRestRepository,
+): TCreateNotionWordUseCase => ({
+  execute: (word) => restRepository.createNotionWord(word),
+});
