@@ -1,14 +1,20 @@
 import { useClipboard, useToast } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useLayoutEffect } from 'react';
+import { BsPlusCircle } from 'react-icons/bs';
 
 import { restModule } from '@adapter/modules';
 
-import { Box, Container, Divider, Flex, Heading, Text } from '@ui/atoms';
+import { Box, Container, Divider, Flex, Heading, Icon, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { debounce, isString, useAxiosAction } from '@infrastructure/utils';
+
+const handleAddNotionWordClick = (word: string, meaning: string, example: string) => () => {
+  console.log(word, meaning, example);
+};
 
 export const FindWordTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -102,24 +108,50 @@ export const FindWordTemplate = (): JSX.Element => {
 
                 return (
                   <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
-                    <Heading
-                      withBalancer
-                      color="gray.900"
-                      cursor="pointer"
-                      textAlign="left"
-                      onClick={handleCopy(meaning)}
-                    >
-                      {meaning}
-                    </Heading>
-                    <Text
-                      key={example}
-                      withBalancer
-                      cursor="pointer"
-                      fontWeight="light"
-                      onClick={handleCopy(example)}
-                    >
-                      {example}
-                    </Text>
+                    <Flex alignItems="flex-start" gap={{ base: 1, sm: 2, md: 4 }}>
+                      <motion.button
+                        animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+                        whileHover={{
+                          scale: 1.2,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{ scale: 1 }}
+                      >
+                        <Icon
+                          as={BsPlusCircle}
+                          bg="gray.50"
+                          borderRadius="999px"
+                          cursor="pointer"
+                          fontSize={{ base: '5xl', md: '6xl' }}
+                          p={1}
+                          onClick={handleAddNotionWordClick(
+                            getWordSuggestionsData.word,
+                            meaning,
+                            example,
+                          )}
+                        />
+                      </motion.button>
+                      <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
+                        <Heading
+                          withBalancer
+                          color="gray.900"
+                          cursor="pointer"
+                          textAlign="left"
+                          onClick={handleCopy(meaning)}
+                        >
+                          {meaning}
+                        </Heading>
+                        <Text
+                          key={example}
+                          withBalancer
+                          cursor="pointer"
+                          fontWeight="light"
+                          onClick={handleCopy(example)}
+                        >
+                          {example}
+                        </Text>
+                      </Flex>
+                    </Flex>
                     {!isLastIndex ? <Divider bg="gray.900" height="1px" width="100%" /> : null}
                   </Flex>
                 );
