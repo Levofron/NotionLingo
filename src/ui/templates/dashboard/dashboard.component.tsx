@@ -2,7 +2,11 @@ import { Fade, useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
-import { IIncreaseDailyStreak, INotionWord } from '@domain/entities/rest.types';
+import {
+  IIncreaseDailyStreak,
+  INotionWord,
+  IUpdateNotionWordRequest,
+} from '@domain/entities/rest.types';
 
 import { restModule } from '@adapter';
 
@@ -35,6 +39,9 @@ export const DashboardTemplate = (): JSX.Element => {
     restModule.increaseDailyStreak,
   );
 
+  const { loading: isUpdateNotionWordLoading, mutateAsync: mutateAsyncUpdateNotionWord } =
+    useAxiosAction(restModule.updateNotionWord);
+
   const fetchMoreWords = useCallback(
     () =>
       mutateAsyncGetRandomNotionWords()
@@ -43,7 +50,7 @@ export const DashboardTemplate = (): JSX.Element => {
         })
         .catch((_error) => {
           toast({
-            duration: 5000,
+            duration: 3000,
             title: 'Error!',
             status: 'error',
             isClosable: true,
@@ -71,6 +78,47 @@ export const DashboardTemplate = (): JSX.Element => {
       fetchMoreWords();
     }
   };
+
+  const handleApplySuggestion = (data: IUpdateNotionWordRequest) => () =>
+    mutateAsyncUpdateNotionWord(data)
+      .then((_udpatedRecordId) => {
+        const copiedWords = [...words];
+
+        const foundWord = copiedWords.find((_word) => _word.id === _udpatedRecordId);
+
+        if (!foundWord) {
+          return;
+        }
+
+        const foundWordIndex = copiedWords.indexOf(foundWord);
+
+        const updatedWord: INotionWord = {
+          ...foundWord,
+          meaning: data.meaning || foundWord.meaning,
+          exampleSentence: data.exampleSentence || foundWord.exampleSentence,
+        };
+
+        copiedWords[foundWordIndex] = updatedWord;
+
+        setWords(copiedWords);
+
+        toast({
+          duration: 3000,
+          title: 'Success!',
+          status: 'success',
+          isClosable: true,
+          description: 'Suggestions applied!',
+        });
+      })
+      .catch((_error) => {
+        toast({
+          duration: 3000,
+          title: 'Error!',
+          status: 'error',
+          isClosable: true,
+          description: _error,
+        });
+      });
 
   const renderContent = () => {
     if (isGetRandomNotionWordsLoading && words.length === 0) {
@@ -132,7 +180,16 @@ export const DashboardTemplate = (): JSX.Element => {
                 <>
                   {!isRotated ? (
                     <Fade in={isTopCard}>
-                      <NotionWordCardFront notionWord={_word} {..._additionalProps} />
+                      <NotionWordCardFront
+                        isLoading={isTopCard && isUpdateNotionWordLoading}
+                        notionWord={_word}
+                        onApplySuggestions={handleApplySuggestion({
+                          id: _word.id,
+                          meaning: _word.meaningSuggestion,
+                          exampleSentence: _word.exampleSentenceSuggestion,
+                        })}
+                        {..._additionalProps}
+                      />
                     </Fade>
                   ) : (
                     <NotionWordCardBack word={_word.word} />
