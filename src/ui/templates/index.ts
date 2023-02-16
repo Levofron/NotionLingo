@@ -2,6 +2,7 @@ export * from './home/home.component';
 export * from './terms/terms.component';
 export * from './donate/donate.component';
 export * from './offline/offline.component';
+export * from './add-word/add-word.component';
 export * from './dashboard/dashboard.component';
 export * from './not-found/not-found.component';
 export * from './find-word/find-word.component';
