@@ -4,8 +4,6 @@ import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiReset } from 'react-icons/bi';
 
-import { restModule } from '@adapter';
-
 import {
   Avatar,
   Box,
@@ -18,6 +16,8 @@ import {
   Text,
 } from '@ui/atoms';
 import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
+
+import { restModule } from '@adapter';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction, useCountdown, useUser } from '@infrastructure/utils';

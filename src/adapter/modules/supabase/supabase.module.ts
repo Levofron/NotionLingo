@@ -1,5 +1,6 @@
-import { getSupabaseApi } from '@api/supabase/supabase.api';
 import { getSupabaseRepository } from '@repositories/supabase/supabase.repository';
+
+import { getSupabaseApi } from '@api/supabase/supabase.api';
 
 import {
   getSessionUseCase,

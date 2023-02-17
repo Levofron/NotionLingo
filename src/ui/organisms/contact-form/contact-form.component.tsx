@@ -3,8 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 
-import { restModule } from '@adapter';
-
 import {
   Box,
   Button,
@@ -18,6 +16,8 @@ import {
   VStack,
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
+
+import { restModule } from '@adapter';
 
 import { useAxiosAction, useForm } from '@infrastructure/utils';
 

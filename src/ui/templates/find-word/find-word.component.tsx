@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useLayoutEffect } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
-import { restModule } from '@adapter/modules';
-
 import { Box, Container, Divider, Flex, Heading, Icon, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { debounce, isString, useAxiosAction } from '@infrastructure/utils';

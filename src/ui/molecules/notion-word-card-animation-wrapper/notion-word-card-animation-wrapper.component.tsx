@@ -3,9 +3,9 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { GiAnticlockwiseRotation, GiClockwiseRotation } from 'react-icons/gi';
 
-import { localStorageModule, speechSynthesisModule } from '@adapter';
-
 import { Icon } from '@ui/atoms';
+
+import { localStorageModule, speechSynthesisModule } from '@adapter';
 
 import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/utils';
 
