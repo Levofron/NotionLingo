@@ -131,10 +131,12 @@ export const OnboardingTemplate = (): JSX.Element => {
             onNextButtonClick={displayValidateIntegrationTab}
             onPreviousButtonClick={displayCreateNotionIntegrationTab}
           />
-          <OnboardingStepFour
-            onNextButtonClick={displaySelectNotionDatabaseTab}
-            onPreviousButtonClick={displayShareDatabaseIntegrationTab}
-          />
+          {activeTabs.validateIntegration ? (
+            <OnboardingStepFour
+              onNextButtonClick={displaySelectNotionDatabaseTab}
+              onPreviousButtonClick={displayShareDatabaseIntegrationTab}
+            />
+          ) : null}
           {activeTabs.selectNotionDatabase ? (
             <OnboardingStepFive onBackToFirstStepClick={displayVerifyDatabaseTab} />
           ) : null}
