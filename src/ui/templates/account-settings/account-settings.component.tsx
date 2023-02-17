@@ -17,7 +17,7 @@ import {
 } from '@ui/atoms';
 import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
 
-import { restModule } from '@adapter';
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction, useCountdown, useUser } from '@infrastructure/utils';

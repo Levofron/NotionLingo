@@ -5,7 +5,7 @@ import { GiAnticlockwiseRotation, GiClockwiseRotation } from 'react-icons/gi';
 
 import { Icon } from '@ui/atoms';
 
-import { localStorageModule, speechSynthesisModule } from '@adapter';
+import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
 import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/utils';
 

@@ -4,7 +4,7 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { Button, Flex, TabPanel, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
 
-import { restModule } from '@adapter';
+import { restModule } from '@adapter/modules';
 
 import { debounce, useAxiosAction } from '@infrastructure/utils';
 

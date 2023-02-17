@@ -2,7 +2,7 @@ import { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { restModule, supabaseModule } from '@adapter';
+import { restModule, supabaseModule } from '@adapter/modules';
 
 import { IProfile } from '@domain/entities/rest.types';
 

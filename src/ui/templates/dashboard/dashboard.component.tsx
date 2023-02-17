@@ -11,7 +11,7 @@ import {
   NotionWordCardFront,
 } from '@ui/molecules';
 
-import { restModule } from '@adapter';
+import { restModule } from '@adapter/modules';
 
 import {
   IIncreaseDailyStreak,

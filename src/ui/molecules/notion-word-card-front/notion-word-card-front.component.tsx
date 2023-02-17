@@ -5,7 +5,7 @@ import { BsHeart } from 'react-icons/bs';
 
 import { Box, Button, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
-import { localStorageModule, speechSynthesisModule } from '@adapter';
+import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
 import { useKeyPressMapper } from '@infrastructure/utils';
 

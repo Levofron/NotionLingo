@@ -17,7 +17,7 @@ import {
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
-import { restModule } from '@adapter';
+import { restModule } from '@adapter/modules';
 
 import { useAxiosAction, useForm } from '@infrastructure/utils';
 

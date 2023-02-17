@@ -5,7 +5,7 @@ import { FC, useEffect } from 'react';
 import { Button, Flex, Spinner, TabPanel, Text } from '@ui/atoms';
 import { AvailableNotionDatabase } from '@ui/molecules';
 
-import { restModule } from '@adapter';
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction } from '@infrastructure/utils';
