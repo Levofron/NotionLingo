@@ -1,4 +1,4 @@
-import { useClipboard, useToast } from '@chakra-ui/react';
+import { useClipboard } from '@chakra-ui/react';
 import { FC, useEffect, useState } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
@@ -19,7 +19,7 @@ import {
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
-import { useAxiosAction, useForm } from '@infrastructure/utils';
+import { useAxiosAction, useForm, useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
@@ -54,9 +54,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
 
     mutateAsyncSendContactFormData(_values)
       .then(() =>
-        toast({
-          duration: 5000,
-          status: 'success',
+        toast.success({
           title: 'Thank you!',
           description: "We'll get back to you soon!",
           onCloseComplete: () => {
@@ -66,10 +64,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
         }),
       )
       .catch((_error) => {
-        toast({
-          duration: 5000,
-          title: 'Error!',
-          status: 'error',
+        toast.error({
           description: _error,
           onCloseComplete: () => {
             setDisableForm(false);

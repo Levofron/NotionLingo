@@ -1,4 +1,4 @@
-import { Fade, useToast } from '@chakra-ui/react';
+import { Fade } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
@@ -19,7 +19,7 @@ import {
   NotionWordCardFront,
 } from '@ui/molecules';
 
-import { useAxiosAction, useUser } from '@infrastructure/utils';
+import { useAxiosAction, useToast, useUser } from '@infrastructure/utils';
 
 export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -45,18 +45,12 @@ export const DashboardTemplate = (): JSX.Element => {
   const fetchMoreWords = useCallback(
     () =>
       mutateAsyncGetRandomNotionWords()
-        .then((_response) => {
-          setWords((_prevState) => [..._response, ..._prevState]);
-        })
-        .catch((_error) => {
-          toast({
-            duration: 3000,
-            title: 'Error!',
-            status: 'error',
-            isClosable: true,
+        .then((_response) => setWords((_prevState) => [..._response, ..._prevState]))
+        .catch((_error) =>
+          toast.error({
             description: _error,
-          });
-        }),
+          }),
+        ),
     [setWords],
   );
 
@@ -102,23 +96,17 @@ export const DashboardTemplate = (): JSX.Element => {
 
         setWords(copiedWords);
 
-        toast({
+        toast.success({
           duration: 3000,
-          title: 'Success!',
-          status: 'success',
-          isClosable: true,
           description: 'Suggestions applied!',
         });
       })
-      .catch((_error) => {
-        toast({
+      .catch((_error) =>
+        toast.error({
           duration: 3000,
-          title: 'Error!',
-          status: 'error',
-          isClosable: true,
           description: _error,
-        });
-      });
+        }),
+      );
 
   const renderContent = () => {
     if (isGetRandomNotionWordsLoading && words.length === 0) {
