@@ -24,7 +24,7 @@ describe('formatWordSuggestions function', () => {
     const formattedWordSuggestions = formatWordSuggestions(wordSuggestions);
 
     expect(formattedWordSuggestions).toEqual({
-      additionalExamples: ['Example 1', 'example 2'],
+      additionalExamples: ['Example 1', 'Example 2'],
       meaningAndExamples: [
         {
           meaning: 'Meaning 1',

@@ -22,7 +22,7 @@ import { useAxiosAction } from '@infrastructure/utils';
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
-  const { loading: isHealthCheckLoading, mutateAsync: mutateAsyncHealthCheck } = useAxiosAction(
+  const { isLoading: isHealthCheckLoading, mutateAsync: mutateAsyncHealthCheck } = useAxiosAction(
     restModule.healthCheck,
   );
 

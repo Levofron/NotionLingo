@@ -23,7 +23,7 @@ export const AddWordTemplate = (): JSX.Element => {
   const {
     data: getNotionTableColumsData,
     error: getNotionTableColumsError,
-    loading: isGetNotionTableColumsLoading,
+    isLoading: isGetNotionTableColumsLoading,
     mutate: mutateGetNotionTableColumns,
     reset: resetGetNotionTableColumns,
   } = useAxiosAction(restModule.getNotionTableColumns);

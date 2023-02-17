@@ -44,13 +44,12 @@ export const AccountSettingsTemplate = (): JSX.Element => {
   const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
 
   const {
-    loading: isResetNotionIntegrationLoading,
+    isLoading: isResetNotionIntegrationLoading,
     mutateAsync: mutateAsyncResetNotionIntegration,
   } = useAxiosAction(restModule.resetNotionIntegration);
 
-  const { loading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } = useAxiosAction(
-    restModule.deleteProfile,
-  );
+  const { isLoading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } =
+    useAxiosAction(restModule.deleteProfile);
 
   const handleConfirmResetNotionIntegration = () =>
     mutateAsyncResetNotionIntegration()
