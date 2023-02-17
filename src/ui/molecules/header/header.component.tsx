@@ -45,8 +45,8 @@ export const Header: FC<IHeaderProps> = ({
           <IconButton
             aria-label="Open menu"
             disabled={isLoading}
-            icon={!isOpen ? <FaHamburger size="20px" /> : <TfiClose size="20px" />}
-            onClick={!isOpen ? onOpen : onClose}
+            icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
+            onClick={isOpen ? onClose : onOpen}
           />
           <Text
             cursor={isHome ? 'default' : 'pointer'}
@@ -63,9 +63,9 @@ export const Header: FC<IHeaderProps> = ({
           isLoading={isLoading}
           size={{ base: 'sm', sm: 'md', md: 'lg' }}
           width={{ base: '80px', sm: '100px' }}
-          onClick={!isUserAuthenticated ? loginViaGoogle : logout}
+          onClick={isUserAuthenticated ? logout : loginViaGoogle}
         >
-          {!isUserAuthenticated ? 'Sign In' : 'Sign Out'}
+          {isUserAuthenticated ? 'Sign Out' : 'Sign In'}
         </Button>
       </Container>
     </Flex>

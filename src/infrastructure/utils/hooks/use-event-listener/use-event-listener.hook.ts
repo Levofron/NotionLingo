@@ -17,7 +17,7 @@ export function useEventListener<K extends keyof WindowEventMap>(
 
   useEffect(() => {
     const isBooleanOptions = isBoolean(options);
-    const windowElement = typeof window !== 'undefined' ? window : undefined;
+    const windowElement = typeof window === 'undefined' ? undefined : window;
 
     const addEventListenerOptions = isBooleanOptions ? options : options?.options;
     const element = isBooleanOptions ? windowElement : options?.element || windowElement;

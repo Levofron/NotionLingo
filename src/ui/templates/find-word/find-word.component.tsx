@@ -93,7 +93,25 @@ export const FindWordTemplate = (): JSX.Element => {
               {getWordSuggestionsData.word}
             </Heading>
           ) : null}
-          {!isEmpty ? (
+          {isEmpty ? (
+            <Flex
+              alignItems="center"
+              flexDirection="column"
+              gap={{ base: 3, sm: 5 }}
+              height="100%"
+              justifyContent="center"
+            >
+              <Text
+                withBalancer
+                fontSize={{ base: 'md', sm: 'xl' }}
+                fontWeight="medium"
+                maxWidth="350px"
+                textAlign="center"
+              >
+                No meaning and examples found.
+              </Text>
+            </Flex>
+          ) : (
             <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
               {getWordSuggestionsData?.meaningAndExamples.map(({ examples, meaning }, _index) => {
                 const example = examples[0] || getWordSuggestionsData.additionalExamples[0];
@@ -152,28 +170,10 @@ export const FindWordTemplate = (): JSX.Element => {
                         </Text>
                       </Flex>
                     </Flex>
-                    {!isLastIndex ? <Divider bg="gray.900" height="1px" width="100%" /> : null}
+                    {isLastIndex ? null : <Divider bg="gray.900" height="1px" width="100%" />}
                   </Flex>
                 );
               })}
-            </Flex>
-          ) : (
-            <Flex
-              alignItems="center"
-              flexDirection="column"
-              gap={{ base: 3, sm: 5 }}
-              height="100%"
-              justifyContent="center"
-            >
-              <Text
-                withBalancer
-                fontSize={{ base: 'md', sm: 'xl' }}
-                fontWeight="medium"
-                maxWidth="350px"
-                textAlign="center"
-              >
-                No meaning and examples found.
-              </Text>
             </Flex>
           )}
         </Flex>

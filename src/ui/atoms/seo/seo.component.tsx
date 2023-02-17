@@ -21,11 +21,11 @@ const getFullUrl = (url?: string) => {
 };
 
 export const SEO: FC<ISEOProps> = ({
+  description = DEFAULT_DESCRIPTION,
   noFollow,
   noIndex,
   title,
   url,
-  description = DEFAULT_DESCRIPTION,
 }): JSX.Element => {
   const fullUrl = getFullUrl(url);
   const fullTitle = getTitle(title);
