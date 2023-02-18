@@ -1,11 +1,11 @@
 import { Session, User } from '@supabase/supabase-js';
 
 import {
-  ILogoutResponse,
   IOAuthResponse,
   IOnAuthStateChangeResponse,
   TOnAuthStateChangeCallback,
 } from '../entities/supabase.types';
+import { IRestRepository } from '../repositories/rest.repository';
 import { ISupabaseRepository } from '../repositories/supabase.repository';
 import {
   IUseCaseWithSingleParam,
@@ -23,10 +23,16 @@ export const loginViaGoogleUseCase = (
 });
 
 // logoutUseCase
-export type TLogoutUseCase = IUseCaseWithoutParamsAndPromiseResult<ILogoutResponse>;
+export type TLogoutUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
-export const logoutUseCase = (supabaseRepository: ISupabaseRepository): TLogoutUseCase => ({
-  execute: () => supabaseRepository.logout(),
+export const logoutUseCase = (
+  supabaseRepository: ISupabaseRepository,
+  restRepository: IRestRepository,
+): TLogoutUseCase => ({
+  execute: async () => {
+    await supabaseRepository.logout();
+    await restRepository.setSupabaseCookie();
+  },
 });
 
 // getUserUseCase

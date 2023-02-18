@@ -9,6 +9,11 @@ import {
   formatWordSuggestions,
 } from './utils';
 
+const delay = (time: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+
 export const getRestRepository = (
   restApi: IRestApi,
   supabaseApi: ISupabaseApi,
@@ -22,6 +27,7 @@ export const getRestRepository = (
     const session = await supabaseApi.getSession();
 
     await restApi.setSupabaseCookie(session);
+    await delay(100);
   },
   getLoggedProfile: async () => {
     const { data } = await restApi.getLoggedProfile();
