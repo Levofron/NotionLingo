@@ -3,9 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import { BsArrowUpCircle } from 'react-icons/bs';
 
+import { Icon } from '@ui/atoms';
+
 import { useEventListener } from '@infrastructure/utils';
 
-import { Icon } from '..';
 import { IBackToTopButtonProps } from './back-to-top-button.types';
 
 export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JSX.Element => {
