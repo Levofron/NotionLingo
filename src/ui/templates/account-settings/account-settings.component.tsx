@@ -3,8 +3,6 @@ import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiReset } from 'react-icons/bi';
 
-import { restModule } from '@adapter';
-
 import {
   Avatar,
   Box,
@@ -17,6 +15,8 @@ import {
   Text,
 } from '@ui/atoms';
 import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction, useCountdown, useToast, useUser } from '@infrastructure/utils';
@@ -43,13 +43,12 @@ export const AccountSettingsTemplate = (): JSX.Element => {
   const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
 
   const {
-    loading: isResetNotionIntegrationLoading,
+    isLoading: isResetNotionIntegrationLoading,
     mutateAsync: mutateAsyncResetNotionIntegration,
   } = useAxiosAction(restModule.resetNotionIntegration);
 
-  const { loading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } = useAxiosAction(
-    restModule.deleteProfile,
-  );
+  const { isLoading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } =
+    useAxiosAction(restModule.deleteProfile);
 
   const handleConfirmResetNotionIntegration = () =>
     mutateAsyncResetNotionIntegration()

@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { RiWifiOffLine } from 'react-icons/ri';
 
-import { restModule } from '@adapter/modules';
-
 import {
   Box,
   Button,
@@ -15,13 +13,15 @@ import {
   Text,
 } from '@ui/atoms';
 
+import { restModule } from '@adapter/modules';
+
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction, useToast } from '@infrastructure/utils';
 
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
-  const { loading: isHealthCheckLoading, mutateAsync: mutateAsyncHealthCheck } = useAxiosAction(
+  const { isLoading: isHealthCheckLoading, mutateAsync: mutateAsyncHealthCheck } = useAxiosAction(
     restModule.healthCheck,
   );
 

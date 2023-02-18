@@ -2,14 +2,6 @@ import { Fade } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
-import {
-  IIncreaseDailyStreak,
-  INotionWord,
-  IUpdateNotionWordRequest,
-} from '@domain/entities/rest.types';
-
-import { restModule } from '@adapter';
-
 import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
 import {
   DashboardProfileDetails,
@@ -18,6 +10,14 @@ import {
   NotionWordCardBack,
   NotionWordCardFront,
 } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
+
+import {
+  IIncreaseDailyStreak,
+  INotionWord,
+  IUpdateNotionWordRequest,
+} from '@domain/entities/rest.types';
 
 import { useAxiosAction, useToast, useUser } from '@infrastructure/utils';
 
@@ -32,14 +32,14 @@ export const DashboardTemplate = (): JSX.Element => {
     totalLearnedWords: user?.totalLearnedWords || 0,
   });
 
-  const { loading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
+  const { isLoading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
     useAxiosAction(restModule.getRandomNotionWords);
 
   const { mutateAsync: mutateAsyncIncreaseDailyStreak } = useAxiosAction(
     restModule.increaseDailyStreak,
   );
 
-  const { loading: isUpdateNotionWordLoading, mutateAsync: mutateAsyncUpdateNotionWord } =
+  const { isLoading: isUpdateNotionWordLoading, mutateAsync: mutateAsyncUpdateNotionWord } =
     useAxiosAction(restModule.updateNotionWord);
 
   const fetchMoreWords = useCallback(
@@ -64,9 +64,7 @@ export const DashboardTemplate = (): JSX.Element => {
     copiedWords.splice(copiedWords.indexOf(notionWord), 1);
     setWords(copiedWords);
 
-    mutateAsyncIncreaseDailyStreak().then((_response) => {
-      setDailyStreakData(_response);
-    });
+    mutateAsyncIncreaseDailyStreak().then(setDailyStreakData);
 
     if (copiedWords.length <= 3) {
       fetchMoreWords();
@@ -166,7 +164,9 @@ export const DashboardTemplate = (): JSX.Element => {
             >
               {({ isRotated, ..._additionalProps }) => (
                 <>
-                  {!isRotated ? (
+                  {isRotated ? (
+                    <NotionWordCardBack word={_word.word} />
+                  ) : (
                     <Fade in={isTopCard}>
                       <NotionWordCardFront
                         isLoading={isTopCard && isUpdateNotionWordLoading}
@@ -179,8 +179,6 @@ export const DashboardTemplate = (): JSX.Element => {
                         {..._additionalProps}
                       />
                     </Fade>
-                  ) : (
-                    <NotionWordCardBack word={_word.word} />
                   )}
                 </>
               )}

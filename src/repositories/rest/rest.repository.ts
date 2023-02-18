@@ -71,6 +71,8 @@ export const getRestRepository = (
   getWordSuggestions: async (word) => {
     const { data } = await restApi.getWordSuggestions(word);
 
+    console.log(data);
+
     return formatWordSuggestions(data);
   },
   updateNotionWord: async (data) => {

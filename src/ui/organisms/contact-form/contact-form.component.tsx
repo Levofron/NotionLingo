@@ -3,8 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 
-import { restModule } from '@adapter';
-
 import {
   Box,
   Button,
@@ -19,6 +17,8 @@ import {
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
+import { restModule } from '@adapter/modules';
+
 import { useAxiosAction, useForm, useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
@@ -30,7 +30,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
   const [disableForm, setDisableForm] = useState(false);
   const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
   const {
-    loading: isSendContactFormDataLoading,
+    isLoading: isSendContactFormDataLoading,
     mutateAsync: mutateAsyncSendContactFormData,
     reset: resetSendContactFormData,
   } = useAxiosAction(restModule.sendContactFormData);

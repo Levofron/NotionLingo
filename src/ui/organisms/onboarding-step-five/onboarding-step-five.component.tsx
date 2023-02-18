@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
-import { restModule } from '@adapter';
-
 import { Button, Flex, Spinner, TabPanel, Text } from '@ui/atoms';
 import { AvailableNotionDatabase } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction, useToast } from '@infrastructure/utils';
@@ -16,11 +16,11 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
 }): JSX.Element => {
   const {
     data: availableNotionDatabasesData,
-    loading: isAvailableNotionDatabasesLoading,
+    isLoading: isAvailableNotionDatabasesLoading,
     mutate: mutateAvailableNotionDatabases,
   } = useAxiosAction(restModule.getAvailableNotionDatabases);
 
-  const { loading: isSetNotionDatabaseIdLoading, mutateAsync: mutateAsyncSetNotionDatabaseId } =
+  const { isLoading: isSetNotionDatabaseIdLoading, mutateAsync: mutateAsyncSetNotionDatabaseId } =
     useAxiosAction(restModule.setNotionDatabaseId);
 
   const toast = useToast();

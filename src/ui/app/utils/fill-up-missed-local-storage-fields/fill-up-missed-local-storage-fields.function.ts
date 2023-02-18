@@ -1,4 +1,4 @@
-import { localStorageModule, speechSynthesisModule } from '@adapter';
+import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
 import { LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE } from '@constants';
 

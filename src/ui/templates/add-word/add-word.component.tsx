@@ -1,8 +1,6 @@
 import { FormEvent, useEffect } from 'react';
 import { BiErrorAlt } from 'react-icons/bi';
 
-import { restModule } from '@adapter/modules';
-
 import {
   Box,
   Button,
@@ -17,13 +15,15 @@ import {
 } from '@ui/atoms';
 import { FullScreenLoader, InputControl, SelectControl } from '@ui/molecules';
 
+import { restModule } from '@adapter/modules';
+
 import { useAxiosAction } from '@infrastructure/utils';
 
 export const AddWordTemplate = (): JSX.Element => {
   const {
     data: getNotionTableColumsData,
     error: getNotionTableColumsError,
-    loading: isGetNotionTableColumsLoading,
+    isLoading: isGetNotionTableColumsLoading,
     mutate: mutateGetNotionTableColumns,
     reset: resetGetNotionTableColumns,
   } = useAxiosAction(restModule.getNotionTableColumns);

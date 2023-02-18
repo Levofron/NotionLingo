@@ -3,9 +3,9 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { GiAnticlockwiseRotation, GiClockwiseRotation } from 'react-icons/gi';
 
-import { localStorageModule, speechSynthesisModule } from '@adapter';
-
 import { Icon } from '@ui/atoms';
+
+import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
 import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/utils';
 
@@ -113,7 +113,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
           onClick={handleRotateIconClick}
         />
       ) : null}
-      {!isRotated ? (
+      {isRotated ? null : (
         <>
           <motion.div style={{ opacity: leftLearnedLabelOpacity }}>
             <Icon
@@ -142,7 +142,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
             />
           </motion.div>
         </>
-      ) : null}
+      )}
       {children({
         countdown,
         isRotated,

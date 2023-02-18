@@ -1,10 +1,10 @@
 import { Heading } from '@chakra-ui/react';
 import { ChangeEvent, FC, useState } from 'react';
 
-import { speechSynthesisModule } from '@adapter';
-
 import { Button, Card, Flex, VStack } from '@ui/atoms';
 import { SelectControl, SliderControl } from '@ui/molecules';
+
+import { speechSynthesisModule } from '@adapter/modules';
 
 import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,

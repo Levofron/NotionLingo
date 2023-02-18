@@ -1,6 +1,7 @@
+import { getRestRepository } from '@repositories/rest/rest.repository';
+
 import { getRestApi } from '@api/rest/rest.api';
 import { getSupabaseApi } from '@api/supabase/supabase.api';
-import { getRestRepository } from '@repositories/rest/rest.repository';
 
 import {
   createNotionWordUseCase,

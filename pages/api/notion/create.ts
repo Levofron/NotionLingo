@@ -97,7 +97,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const cleanedStringValue = cleanUpString(requestBody[columnName!]);
 
     const getColumnProperty =
-      type !== 'multi_select' ? getTitleOrRichTextProperty : getMultiSelectProperty;
+      type === 'multi_select' ? getMultiSelectProperty : getTitleOrRichTextProperty;
 
     const newValue = getColumnProperty(columnName!, type!, cleanedStringValue);
 
