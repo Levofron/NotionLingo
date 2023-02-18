@@ -2,8 +2,6 @@ import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { RiWifiOffLine } from 'react-icons/ri';
 
-import { restModule } from '@adapter/modules';
-
 import {
   Box,
   Button,
@@ -15,6 +13,8 @@ import {
   Stack,
   Text,
 } from '@ui/atoms';
+
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction } from '@infrastructure/utils';

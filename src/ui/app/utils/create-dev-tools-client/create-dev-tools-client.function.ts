@@ -1,4 +1,9 @@
-import { localStorageModule, restModule, speechSynthesisModule, supabaseModule } from '@adapter';
+import {
+  localStorageModule,
+  restModule,
+  speechSynthesisModule,
+  supabaseModule,
+} from '@adapter/modules';
 
 import { APPLICATION_ENVIRONMENT } from '@constants';
 

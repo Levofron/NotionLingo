@@ -3,9 +3,9 @@ import { FC, useCallback, useMemo } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
 
-import { localStorageModule, speechSynthesisModule } from '@adapter';
-
 import { Box, Button, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
+
+import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
 import { useKeyPressMapper } from '@infrastructure/utils';
 

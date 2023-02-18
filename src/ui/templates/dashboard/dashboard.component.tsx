@@ -2,14 +2,6 @@ import { Fade, useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
-import {
-  IIncreaseDailyStreak,
-  INotionWord,
-  IUpdateNotionWordRequest,
-} from '@domain/entities/rest.types';
-
-import { restModule } from '@adapter';
-
 import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
 import {
   DashboardProfileDetails,
@@ -18,6 +10,14 @@ import {
   NotionWordCardBack,
   NotionWordCardFront,
 } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
+
+import {
+  IIncreaseDailyStreak,
+  INotionWord,
+  IUpdateNotionWordRequest,
+} from '@domain/entities/rest.types';
 
 import { useAxiosAction, useUser } from '@infrastructure/utils';
 

@@ -1,5 +1,6 @@
-import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
 import { getLocalStorageRepository } from '@repositories/local-storage/local-storage.repository';
+
+import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
 
 import {
   getItemUseCase,

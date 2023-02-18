@@ -1,8 +1,6 @@
 import { FormEvent, useEffect } from 'react';
 import { BiErrorAlt } from 'react-icons/bi';
 
-import { restModule } from '@adapter/modules';
-
 import {
   Box,
   Button,
@@ -16,6 +14,8 @@ import {
   VStack,
 } from '@ui/atoms';
 import { FullScreenLoader, InputControl, SelectControl } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
 
 import { useAxiosAction } from '@infrastructure/utils';
 

@@ -1,10 +1,10 @@
 import { ChangeEvent, FC } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 
-import { restModule } from '@adapter';
-
 import { Button, Flex, TabPanel, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
 
 import { debounce, useAxiosAction } from '@infrastructure/utils';
 

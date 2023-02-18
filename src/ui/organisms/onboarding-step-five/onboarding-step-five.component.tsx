@@ -2,10 +2,10 @@ import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
-import { restModule } from '@adapter';
-
 import { Button, Flex, Spinner, TabPanel, Text } from '@ui/atoms';
 import { AvailableNotionDatabase } from '@ui/molecules';
+
+import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useAxiosAction } from '@infrastructure/utils';
