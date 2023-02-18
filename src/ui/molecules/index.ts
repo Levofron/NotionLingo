@@ -13,6 +13,7 @@ export * from './getting-started/getting-started.component';
 export * from './textarea-control/textarea-control.component';
 export * from './full-screen-loader/full-screen-loader.component';
 export * from './confirmation-modal/confirmation-modal.component';
+export * from './back-to-top-button/back-to-top-button.component';
 export * from './onboarding-step-two/onboarding-step-two.component';
 export * from './onboarding-tab-list/onboarding-tab-list.component';
 export * from './onboarding-step-one/onboarding-step-one.component';

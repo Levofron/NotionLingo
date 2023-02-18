@@ -1,6 +1,7 @@
 import { FC, useRef } from 'react';
 
-import { BackToTopButton, Box } from '@ui/atoms';
+import { Box } from '@ui/atoms';
+import { BackToTopButton } from '@ui/molecules';
 
 import { ILayoutProviderProps } from './layout-provider.types';
 

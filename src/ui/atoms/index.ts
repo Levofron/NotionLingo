@@ -48,7 +48,6 @@ export * from './accordion-panel/accordion-panel.component';
 export * from './accordion-button/accordion-button.component';
 export * from './chakra-next-link/chakra-next-link.component';
 export * from './form-error-message/form-error-message.component';
-export * from './back-to-top-button/back-to-top-button.component';
 export * from './particles-background/particles-background.component';
 
 export * from './box/box.types';
