@@ -1,5 +1,5 @@
 import { CardFooter as ChakraCardFooter } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { ICardFooterProps } from './card-footer.types';
 
@@ -8,4 +8,6 @@ const CardFooterComponent: ForwardRefRenderFunction<HTMLDivElement, ICardFooterP
   ref,
 ): JSX.Element => <ChakraCardFooter ref={ref} {...props} />;
 
-export const CardFooter = forwardRef(CardFooterComponent);
+export const CardFooter = memo(forwardRef(CardFooterComponent));
+
+export default CardFooter;

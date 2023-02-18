@@ -1,5 +1,5 @@
 import { ModalBody as ChakraModalBody } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { IModalBodyProps } from './modal-body.types';
 
@@ -8,4 +8,6 @@ const ModalBodyComponent: ForwardRefRenderFunction<HTMLDivElement, IModalBodyPro
   ref,
 ): JSX.Element => <ChakraModalBody ref={ref} {...props} />;
 
-export const ModalBody = forwardRef(ModalBodyComponent);
+export const ModalBody = memo(forwardRef(ModalBodyComponent));
+
+export default ModalBody;

@@ -1,5 +1,5 @@
 import { Textarea as ChakraTextarea } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { ITextareaProps } from './textarea.types';
 
@@ -24,4 +24,6 @@ const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextarea
   );
 };
 
-export const Textarea = forwardRef(TextareaComponent);
+export const Textarea = memo(forwardRef(TextareaComponent));
+
+export default Textarea;

@@ -8,6 +8,7 @@ import { useEventListener } from '@infrastructure/utils';
 import { Icon } from '..';
 import { IBackToTopButtonProps } from './back-to-top-button.types';
 
+// TODO - move to molecules
 export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JSX.Element => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
@@ -58,3 +59,5 @@ export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JS
     </AnimatePresence>
   );
 };
+
+export default BackToTopButton;

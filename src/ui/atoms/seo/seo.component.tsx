@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 import { APP_NAME, DEFAULT_DESCRIPTION, SEO_KEYWORDS, WEBSITE_URL } from './seo.defaults';
 import { ISEOProps } from './seo.types';
@@ -20,7 +20,7 @@ const getFullUrl = (url?: string) => {
   return `${WEBSITE_URL}${url}`;
 };
 
-export const SEO: FC<ISEOProps> = ({
+const SEOComponent: FC<ISEOProps> = ({
   description = DEFAULT_DESCRIPTION,
   noFollow,
   noIndex,
@@ -159,3 +159,7 @@ export const SEO: FC<ISEOProps> = ({
     />
   );
 };
+
+export const SEO = memo(SEOComponent);
+
+export default SEO;

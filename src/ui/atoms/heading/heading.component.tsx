@@ -1,5 +1,5 @@
 import { Heading as ChakraHeading } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, ReactNode, forwardRef } from 'react';
+import { ForwardRefRenderFunction, ReactNode, forwardRef, memo } from 'react';
 import Balancer from 'react-wrap-balancer';
 
 import { IHeadingProps } from './heading.types';
@@ -16,4 +16,6 @@ const HeadingComponent: ForwardRefRenderFunction<HTMLParagraphElement, IHeadingP
   </ChakraHeading>
 );
 
-export const Heading = forwardRef(HeadingComponent);
+export const Heading = memo(forwardRef(HeadingComponent));
+
+export default Heading;

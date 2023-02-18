@@ -1,5 +1,5 @@
 import { Input as ChakraInput } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { IInputProps } from './input.types';
 
@@ -24,4 +24,6 @@ const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = 
   );
 };
 
-export const Input = forwardRef(InputComponent);
+export const Input = memo(forwardRef(InputComponent));
+
+export default Input;

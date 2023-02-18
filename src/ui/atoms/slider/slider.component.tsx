@@ -5,7 +5,7 @@ import {
   SliderTrack,
   Tooltip,
 } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef, useState } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo, useState } from 'react';
 
 import { ISliderProps } from './slider.types';
 
@@ -53,4 +53,6 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
   );
 };
 
-export const Slider = forwardRef(SliderComponent);
+export const Slider = memo(forwardRef(SliderComponent));
+
+export default Slider;

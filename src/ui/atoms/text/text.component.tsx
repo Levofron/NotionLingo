@@ -1,5 +1,5 @@
 import { Text as ChakraText } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, ReactNode, forwardRef } from 'react';
+import { ForwardRefRenderFunction, ReactNode, forwardRef, memo } from 'react';
 import Balancer from 'react-wrap-balancer';
 
 import { ITextProps } from './text.types';
@@ -16,4 +16,6 @@ const TextComponent: ForwardRefRenderFunction<HTMLParagraphElement, ITextProps> 
   </ChakraText>
 );
 
-export const Text = forwardRef(TextComponent);
+export const Text = memo(forwardRef(TextComponent));
+
+export default Text;

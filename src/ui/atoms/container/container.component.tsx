@@ -1,5 +1,5 @@
 import { Container as ChakraContainer } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { IContainerProps } from './container.types';
 
@@ -8,4 +8,6 @@ const ContainerComponent: ForwardRefRenderFunction<HTMLDivElement, IContainerPro
   ref,
 ): JSX.Element => <ChakraContainer ref={ref} {...props} />;
 
-export const Container = forwardRef(ContainerComponent);
+export const Container = memo(forwardRef(ContainerComponent));
+
+export default Container;
