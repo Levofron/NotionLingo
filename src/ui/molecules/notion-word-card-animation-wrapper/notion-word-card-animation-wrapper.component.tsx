@@ -113,7 +113,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
           onClick={handleRotateIconClick}
         />
       ) : null}
-      {!isRotated ? (
+      {isRotated ? null : (
         <>
           <motion.div style={{ opacity: leftLearnedLabelOpacity }}>
             <Icon
@@ -142,7 +142,7 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
             />
           </motion.div>
         </>
-      ) : null}
+      )}
       {children({
         countdown,
         isRotated,
