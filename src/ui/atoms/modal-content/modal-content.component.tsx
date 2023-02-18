@@ -1,5 +1,5 @@
 import { ModalContent as ChakraModalContent } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { IModalContentProps } from './modal-content.types';
 
@@ -8,4 +8,6 @@ const ModalContentComponent: ForwardRefRenderFunction<HTMLElement, IModalContent
   ref,
 ): JSX.Element => <ChakraModalContent ref={ref} {...props} />;
 
-export const ModalContent = forwardRef(ModalContentComponent);
+export const ModalContent = memo(forwardRef(ModalContentComponent));
+
+export default ModalContent;

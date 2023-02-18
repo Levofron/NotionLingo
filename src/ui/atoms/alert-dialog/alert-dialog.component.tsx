@@ -6,3 +6,5 @@ import { IAlertDialogProps } from './alert-dialog.types';
 export const AlertDialog: FC<IAlertDialogProps> = (props): JSX.Element => (
   <ChakraAlertDialog isCentered motionPreset="slideInBottom" {...props} />
 );
+
+export default AlertDialog;

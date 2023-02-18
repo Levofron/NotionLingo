@@ -1,5 +1,5 @@
 import { Card as ChakraCard } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { ICardProps } from './card.types';
 
@@ -22,4 +22,6 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
   );
 };
 
-export const Card = forwardRef(CardComponent);
+export const Card = memo(forwardRef(CardComponent));
+
+export default Card;

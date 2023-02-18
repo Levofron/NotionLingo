@@ -1,5 +1,5 @@
 import { Select as ChakraSelect } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { ISelectProps } from './select.types';
 
@@ -19,4 +19,6 @@ const SelectComponent: ForwardRefRenderFunction<HTMLSelectElement, ISelectProps>
   />
 );
 
-export const Select = forwardRef(SelectComponent);
+export const Select = memo(forwardRef(SelectComponent));
+
+export default Select;

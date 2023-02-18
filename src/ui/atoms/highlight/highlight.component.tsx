@@ -17,3 +17,5 @@ export const Highlight: FC<IHighlightProps> = ({ styles, ...restProps }): JSX.El
     {...restProps}
   />
 );
+
+export default Highlight;

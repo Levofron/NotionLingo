@@ -1,6 +1,6 @@
 import { Link as ChakraLink } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { TChakraNextLinkProps } from './chakra-next-link.types';
 
@@ -15,4 +15,6 @@ const ChakraNextLinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, TChak
   </NextLink>
 );
 
-export const ChakraNextLink = forwardRef(ChakraNextLinkComponent);
+export const ChakraNextLink = memo(forwardRef(ChakraNextLinkComponent));
+
+export default ChakraNextLink;
