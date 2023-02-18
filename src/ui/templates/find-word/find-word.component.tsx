@@ -37,7 +37,7 @@ export const FindWordTemplate = (): JSX.Element => {
   const {
     data: getWordSuggestionsData,
     error: getWordSuggestionsError,
-    loading: isGetWordSuggestionsLoading,
+    isLoading: isGetWordSuggestionsLoading,
     mutate: mutateGetWordSuggestions,
   } = useAxiosAction(restModule.getWordSuggestions);
 

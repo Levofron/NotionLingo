@@ -30,7 +30,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
   const [disableForm, setDisableForm] = useState(false);
   const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
   const {
-    loading: isSendContactFormDataLoading,
+    isLoading: isSendContactFormDataLoading,
     mutateAsync: mutateAsyncSendContactFormData,
     reset: resetSendContactFormData,
   } = useAxiosAction(restModule.sendContactFormData);

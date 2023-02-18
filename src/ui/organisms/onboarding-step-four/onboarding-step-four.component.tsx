@@ -17,7 +17,7 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
   const {
     data: setNotionApiTokenData,
     error: setNotionApiTokenError,
-    loading: isSetNotionApiTokenLoading,
+    isLoading: isSetNotionApiTokenLoading,
     mutateAsync: mutateAsyncSetNotionApiToken,
   } = useAxiosAction(restModule.setNotionApiToken);
 

@@ -272,7 +272,20 @@ describe('getRestRepository function', () => {
 
   describe('getWordSuggestions function', () => {
     it('should call proper restApi function', async () => {
-      const suggestions = ['suggestion1', 'suggestion2'];
+      const suggestions = {
+        additionalExamples: ['Example 1', 'Example 2'],
+        meaningAndExamples: [
+          {
+            meaning: 'Meaning 1',
+            examples: ['Example 1', 'Example 2'],
+          },
+          {
+            meaning: 'Meaning 2',
+            examples: ['Example 1', 'Example 2'],
+          },
+        ],
+        word: 'Word',
+      };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restApiMock: any = {
