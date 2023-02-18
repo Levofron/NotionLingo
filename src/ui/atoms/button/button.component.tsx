@@ -1,5 +1,5 @@
 import { Button as ChakraButton } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { variantToStylesMapper } from './button.defaults';
 import { IButtonProps } from './button.types';
@@ -17,4 +17,6 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
   />
 );
 
-export const Button = forwardRef(ButtonComponent);
+export const Button = memo(forwardRef(ButtonComponent));
+
+export default Button;

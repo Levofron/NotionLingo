@@ -1,5 +1,5 @@
 import { AccordionButton as ChakraAccordionButton } from '@chakra-ui/react';
-import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { IAccordionButtonProps } from './accordion-button.types';
 
@@ -8,4 +8,6 @@ const AccordionButtonComponent: ForwardRefRenderFunction<
   IAccordionButtonProps
 > = (props, ref): JSX.Element => <ChakraAccordionButton ref={ref} {...props} />;
 
-export const AccordionButton = forwardRef(AccordionButtonComponent);
+export const AccordionButton = memo(forwardRef(AccordionButtonComponent));
+
+export default AccordionButton;
