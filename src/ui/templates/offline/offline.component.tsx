@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { RiWifiOffLine } from 'react-icons/ri';
 
@@ -17,7 +16,7 @@ import {
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction } from '@infrastructure/utils';
+import { useAxiosAction, useToast } from '@infrastructure/utils';
 
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -30,11 +29,7 @@ export const OfflineTemplate = (): JSX.Element => {
     mutateAsyncHealthCheck()
       .then(() => router.push(ERoutes.HOME))
       .catch((_error) =>
-        toast({
-          duration: 9000,
-          title: 'Error!',
-          status: 'error',
-          isClosable: true,
+        toast.error({
           description: _error,
         }),
       );

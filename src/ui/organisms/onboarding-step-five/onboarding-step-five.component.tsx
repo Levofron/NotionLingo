@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
@@ -8,7 +7,7 @@ import { AvailableNotionDatabase } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction } from '@infrastructure/utils';
+import { useAxiosAction, useToast } from '@infrastructure/utils';
 
 import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
 
@@ -34,24 +33,16 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   const handleAvailableNotionDatabaseClick = async (databaseId: string) => {
     mutateAsyncSetNotionDatabaseId(databaseId)
       .then(() =>
-        toast({
-          duration: 5000,
-          status: 'success',
-          title: 'Success!',
+        toast.success({
+          onCloseComplete: () => router.push(ERoutes.DASHBOARD),
           description: 'You have successfully connected your Notion page!',
-          onCloseComplete: () => {
-            router.push(ERoutes.DASHBOARD);
-          },
         }),
       )
-      .catch((_error) => {
-        toast({
-          duration: 5000,
-          status: 'error',
-          title: 'Error!',
+      .catch((_error) =>
+        toast.error({
           description: _error,
-        });
-      });
+        }),
+      );
   };
 
   const renderAvailableNotionDatabases = () => {

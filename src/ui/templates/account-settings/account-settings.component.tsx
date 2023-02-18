@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
@@ -20,7 +19,7 @@ import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction, useCountdown, useUser } from '@infrastructure/utils';
+import { useAxiosAction, useCountdown, useToast, useUser } from '@infrastructure/utils';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -57,10 +56,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
         startResetNotionIntegrationCountdown();
 
         setTimeout(() => {
-          toast({
-            duration: 5000,
-            status: 'success',
-            title: 'Success!',
+          toast.success({
             description: 'Notion integration has been reset!',
             onCloseComplete: () => {
               resetNotionData();
@@ -71,10 +67,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
         });
       })
       .catch((_error) =>
-        toast({
-          duration: 5000,
-          status: 'error',
-          title: 'Error!',
+        toast.error({
           description: _error,
         }),
       )
@@ -86,10 +79,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
         startDeleteProfileCountdown();
 
         setTimeout(() => {
-          toast({
-            duration: 5000,
-            status: 'success',
-            title: 'Success!',
+          toast.success({
             description: 'Account has been deleted!',
             onCloseComplete: () => {
               logout();
@@ -97,13 +87,10 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               endDeleteProfileCountdown();
             },
           });
-        });
+        }, 0);
       })
       .catch((_error) =>
-        toast({
-          duration: 5000,
-          status: 'error',
-          title: 'Error!',
+        toast.error({
           description: _error,
         }),
       )

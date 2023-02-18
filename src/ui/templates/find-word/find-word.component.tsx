@@ -1,4 +1,4 @@
-import { useClipboard, useToast } from '@chakra-ui/react';
+import { useClipboard } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useLayoutEffect } from 'react';
@@ -10,7 +10,7 @@ import { InputControl } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { debounce, isString, useAxiosAction } from '@infrastructure/utils';
+import { debounce, isString, useAxiosAction, useToast } from '@infrastructure/utils';
 
 const handleAddNotionWordClick = (word: string, meaning: string, example: string) => () => {
   console.log(word, meaning, example);
@@ -25,10 +25,8 @@ export const FindWordTemplate = (): JSX.Element => {
     if (value) {
       onCopy();
 
-      toast({
-        status: 'info',
+      toast.info({
         duration: 2000,
-        isClosable: true,
         description: 'Copied to clipboard',
       });
     }
