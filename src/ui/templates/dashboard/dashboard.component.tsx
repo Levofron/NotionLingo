@@ -139,11 +139,7 @@ export const DashboardTemplate = (): JSX.Element => {
           >
             No words found. Please fill up your <b>Notion</b> database with words.
           </Text>
-          <Button
-            leftIcon={<FiRefreshCcw />}
-            size={{ base: 'sm', sm: 'md', md: 'lg' }}
-            onClick={fetchMoreWords}
-          >
+          <Button leftIcon={<FiRefreshCcw />} onClick={fetchMoreWords}>
             Refetch
           </Button>
         </Flex>

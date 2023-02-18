@@ -12,6 +12,7 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
     ref={ref}
     borderRadius={0}
     borderWidth="2px"
+    size={{ base: 'sm', sm: 'md', md: 'lg' }}
     {...variantToStylesMapper[mode]}
     {...restProps}
   />

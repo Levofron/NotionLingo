@@ -64,8 +64,6 @@ export const HomeHero: FC = (): JSX.Element => {
           <Button
             isDisabled={isLoading}
             isLoading={isLoading}
-            size={{ base: 'sm', sm: 'md', md: 'lg' }}
-            variant="primary"
             width="fit-content"
             onClick={handleActionButtonClick}
           >
