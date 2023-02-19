@@ -8,18 +8,19 @@ import { IProfile } from '@domain/entities/rest.types';
 
 import { UserContext } from '@infrastructure/context';
 import { ERoutes } from '@infrastructure/types/routes';
+import { useAxiosAction } from '@infrastructure/utils';
 
 import { IUserProviderProps } from './user-provider.types';
-
-const delay = (time: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
 
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>();
   const [user, setUser] = useState<(User & IProfile) | null>(null);
+
+  const { mutateAsync: mutateAsyncGetLoggedProfile } = useAxiosAction(restModule.getLoggedProfile);
+  const { mutateAsync: mutateAsyncSetSupabaseCookie } = useAxiosAction(
+    restModule.setSupabaseCookie,
+  );
 
   const getUserProfile = async () => {
     if (user) {
@@ -30,11 +31,8 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     const sessionUser = supabaseModule.getUser();
 
     if (sessionUser) {
-      await restModule.setSupabaseCookie();
-      // TODO - wtf is this? xD
-      await delay(1000);
-
-      const response = await restModule.getLoggedProfile();
+      await mutateAsyncSetSupabaseCookie();
+      const response = await mutateAsyncGetLoggedProfile();
 
       setUser({ ...sessionUser, ...response });
     }
@@ -50,7 +48,6 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
 
   const logout = async () => {
     await supabaseModule.logout();
-    await restModule.setSupabaseCookie();
 
     setUser(null);
     router.push(ERoutes.HOME);
