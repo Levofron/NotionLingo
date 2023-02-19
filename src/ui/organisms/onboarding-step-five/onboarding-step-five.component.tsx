@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
 import { Button, Flex, Spinner, TabPanel, Text } from '@ui/atoms';
@@ -6,8 +5,7 @@ import { AvailableNotionDatabase } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useAxios, useToast } from '@infrastructure/utils';
+import { useAxios, useRouter, useToast } from '@infrastructure/utils';
 
 import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
 
@@ -24,17 +22,15 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
     useAxios(restModule.setNotionDatabaseId);
 
   const toast = useToast();
-  const router = useRouter();
+  const { redirectToDashboard } = useRouter();
 
-  useEffect(() => {
-    mutateAvailableNotionDatabases();
-  }, []);
+  useEffect(mutateAvailableNotionDatabases, []);
 
   const handleAvailableNotionDatabaseClick = async (databaseId: string) => {
     mutateAsyncSetNotionDatabaseId(databaseId)
       .then(() =>
         toast.success({
-          onCloseComplete: () => router.push(ERoutes.DASHBOARD),
+          onCloseComplete: redirectToDashboard,
           description: 'You have successfully connected your Notion page!',
         }),
       )

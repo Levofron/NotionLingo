@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { BiErrorAlt } from 'react-icons/bi';
 
@@ -9,11 +8,10 @@ import { AddWordTemplate } from '@ui/templates';
 
 import { restModule } from '@adapter/modules';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useAxios } from '@infrastructure/utils';
+import { useAxios, useRouter } from '@infrastructure/utils';
 
 export const AddWordPage = (): JSX.Element => {
-  const router = useRouter();
+  const { redirectToHome } = useRouter();
 
   const { data, error, isLoading, mutate, reset } = useAxios(restModule.getNotionTableColumns);
 
@@ -23,8 +21,6 @@ export const AddWordPage = (): JSX.Element => {
     reset();
     mutate();
   };
-
-  const handleRedirectToHome = () => router.push(ERoutes.HOME);
 
   const renderContent = () => {
     if (isLoading || !data) {
@@ -47,7 +43,7 @@ export const AddWordPage = (): JSX.Element => {
           errorMessage={error}
           icon={BiErrorAlt}
           title="Error occured :("
-          onRedirectToHomeButtonClick={handleRedirectToHome}
+          onRedirectToHomeButtonClick={redirectToHome}
           onRefetchButtonClick={handleRefetch}
         />
       );

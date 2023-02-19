@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { SEO } from '@ui/atoms';
@@ -6,28 +5,27 @@ import { FullScreenLoader } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { DonateTemplate } from '@ui/templates';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 export const DonatePage = (): JSX.Element => {
-  const router = useRouter();
+  const { isDonate, redirectToHome, redirectToOnboarding } = useRouter();
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading === undefined || (isLoading && router.pathname === ERoutes.DONATE)) {
+    if (isLoading === undefined || (isLoading && isDonate)) {
       return;
     }
 
     if (!user) {
-      router.push(ERoutes.HOME);
+      redirectToHome();
 
       return;
     }
 
     if (user.hasNotionData === false) {
-      router.push(ERoutes.ONBOARDING);
+      redirectToOnboarding();
     }
-  }, [user, isLoading]);
+  }, [user, isLoading, isDonate]);
 
   return (
     <>

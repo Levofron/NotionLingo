@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiReset } from 'react-icons/bi';
@@ -18,12 +17,11 @@ import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useAxios, useCountdown, useToast, useUser } from '@infrastructure/utils';
+import { useAxios, useCountdown, useRouter, useToast, useUser } from '@infrastructure/utils';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();
-  const router = useRouter();
+  const { redirectToOnboarding } = useRouter();
 
   const { logout, resetNotionData, user } = useUser();
   const {
@@ -61,7 +59,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
             description: 'Notion integration has been reset!',
             onCloseComplete: () => {
               resetNotionData();
-              router.push(ERoutes.ONBOARDING);
+              redirectToOnboarding();
               endResetNotionIntegrationCountdown();
             },
           });

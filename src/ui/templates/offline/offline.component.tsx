@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { RiWifiOffLine } from 'react-icons/ri';
 
 import { Box, Flex, ParticlesBackground } from '@ui/atoms';
@@ -6,17 +5,16 @@ import { DisplayError } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useAxios, useToast } from '@infrastructure/utils';
+import { useAxios, useRouter, useToast } from '@infrastructure/utils';
 
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();
-  const router = useRouter();
+  const { redirectToHome } = useRouter();
   const { isLoading, mutateAsync } = useAxios(restModule.healthCheck);
 
   const handleRedirectToHome = () =>
     mutateAsync()
-      .then(() => router.push(ERoutes.HOME))
+      .then(redirectToHome)
       .catch((_error) =>
         toast.error({
           description: _error,

@@ -1,7 +1,8 @@
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import { ChakraNextLink, Flex, Icon } from '@ui/atoms';
+
+import { useRouter } from '@infrastructure/utils';
 
 import { INavigationItemProps } from './navigation-item.types';
 
@@ -11,10 +12,9 @@ export const NavigationItem: FC<INavigationItemProps> = ({
   icon,
   ...restProps
 }) => {
-  const router = useRouter();
-  const isActive = router.pathname === href;
+  const { isSamePath } = useRouter();
 
-  if (isActive) {
+  if (isSamePath(href)) {
     return null;
   }
 

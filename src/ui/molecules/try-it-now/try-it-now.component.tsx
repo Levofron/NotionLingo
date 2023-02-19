@@ -1,14 +1,12 @@
-import { useRouter } from 'next/router';
 import { FC, useMemo } from 'react';
 import { IoArrowForward } from 'react-icons/io5';
 
 import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@ui/atoms';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 export const TryItNow: FC = (): JSX.Element => {
-  const router = useRouter();
+  const { redirectToDashboard, redirectToOnboarding } = useRouter();
   const { isLoading, loginViaGoogle, user } = useUser();
 
   const handleActionButtonClick = () => {
@@ -16,7 +14,11 @@ export const TryItNow: FC = (): JSX.Element => {
       return loginViaGoogle();
     }
 
-    router.push(user.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+    if (user.hasNotionData === true) {
+      return redirectToDashboard();
+    }
+
+    redirectToOnboarding();
   };
 
   const buttonLabel = useMemo(() => {
