@@ -1,7 +1,7 @@
 import { useClipboard } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useLayoutEffect } from 'react';
+import { queryTypes, useQueryState } from 'next-usequerystate';
+import { ChangeEvent, useEffect } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
 import { Box, Container, Divider, Flex, Heading, Icon, Text } from '@ui/atoms';
@@ -9,7 +9,6 @@ import { InputControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { ERoutes } from '@infrastructure/types/routes';
 import { debounce, isString, useAxiosAction, useToast } from '@infrastructure/utils';
 
 const handleAddNotionWordClick = (word: string, meaning: string, example: string) => () => {
@@ -18,8 +17,8 @@ const handleAddNotionWordClick = (word: string, meaning: string, example: string
 
 export const FindWordTemplate = (): JSX.Element => {
   const toast = useToast();
-  const router = useRouter();
   const { onCopy, setValue, value } = useClipboard('');
+  const [word, setWord] = useQueryState('word', queryTypes.string);
 
   useEffect(() => {
     if (value) {
@@ -39,16 +38,16 @@ export const FindWordTemplate = (): JSX.Element => {
     mutate: mutateGetWordSuggestions,
   } = useAxiosAction(restModule.getWordSuggestions);
 
-  useLayoutEffect(() => {
-    if (isString(router.query.word)) {
-      mutateGetWordSuggestions(router.query.word);
+  useEffect(() => {
+    if (isString(word)) {
+      mutateGetWordSuggestions(word);
     }
-  }, [!!router.query.word]);
+  }, [!!word]);
 
   const handleInputChange = debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     mutateGetWordSuggestions(value);
 
-    router.push(ERoutes.FIND_WORD, { query: { word: value } }, { shallow: true });
+    setWord(value);
   }, 1000);
 
   const isEmpty =
@@ -71,7 +70,7 @@ export const FindWordTemplate = (): JSX.Element => {
         >
           <InputControl
             isRequired
-            defaultValue={router.query.word || ''}
+            defaultValue={word || ''}
             errorMessage={getWordSuggestionsError || undefined}
             isDisabled={isGetWordSuggestionsLoading}
             isLoading={isGetWordSuggestionsLoading}
