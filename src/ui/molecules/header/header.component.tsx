@@ -1,12 +1,10 @@
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { FaHamburger } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 
 import { Button, Container, Flex, IconButton, Text } from '@ui/atoms';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 import { IHeaderProps } from './header.types';
 
@@ -16,12 +14,8 @@ export const Header: FC<IHeaderProps> = ({
   onOpen,
   ...restProps
 }): JSX.Element => {
-  const router = useRouter();
+  const { isHome, redirectToHome } = useRouter();
   const { isLoading, isUserAuthenticated, loginViaGoogle, logout } = useUser();
-
-  const isHome = router.pathname === ERoutes.HOME;
-
-  const redirectToHome = () => !isHome && router.push(ERoutes.HOME);
 
   return (
     <Flex
