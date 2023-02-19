@@ -45,7 +45,6 @@ export const TryItNow: FC = (): JSX.Element => {
                 isDisabled={isLoading}
                 isLoading={isLoading}
                 rightIcon={<IoArrowForward />}
-                size="lg"
                 onClick={handleActionButtonClick}
               >
                 {buttonLabel}

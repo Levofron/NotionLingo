@@ -61,7 +61,6 @@ export const Header: FC<IHeaderProps> = ({
         <Button
           disabled={isLoading}
           isLoading={isLoading}
-          size={{ base: 'sm', sm: 'md', md: 'lg' }}
           width={{ base: '80px', sm: '100px' }}
           onClick={isUserAuthenticated ? logout : loginViaGoogle}
         >

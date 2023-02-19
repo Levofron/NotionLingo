@@ -142,7 +142,6 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               isLoading={isResetNotionIntegrationLoading}
               leftIcon={<BiReset />}
               mb={2}
-              size={{ base: 'sm', sm: 'md' }}
               onClick={() => resetIntegrationModalRef.current?.open()}
             >
               {`Reset Notion integration${
@@ -155,7 +154,6 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               disabled={isDeleteProfileCountdownStarted || isResetNotionIntegrationCountdownStarted}
               isLoading={isDeleteProfileLoading}
               leftIcon={<AiFillDelete />}
-              size={{ base: 'sm', sm: 'md' }}
               onClick={() => deleteAccountModalRef.current?.open()}
             >
               {`Delete Account${
