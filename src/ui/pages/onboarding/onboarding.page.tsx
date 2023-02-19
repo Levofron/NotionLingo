@@ -1,32 +1,30 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { SEO } from '@ui/atoms';
 import { FullScreenLoader } from '@ui/molecules';
 import { OnboardingTemplate } from '@ui/templates';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 export const OnboardingPage = (): JSX.Element => {
-  const router = useRouter();
+  const { isOnboarding, redirectToDashboard, redirectToHome } = useRouter();
   const { isLoading, user } = useUser();
 
   useEffect(() => {
-    if (isLoading === undefined || (isLoading && router.pathname === ERoutes.ONBOARDING)) {
+    if (isLoading === undefined || (isLoading && isOnboarding)) {
       return;
     }
 
     if (!user && !isLoading) {
-      router.push(ERoutes.HOME);
+      redirectToHome();
 
       return;
     }
 
     if (user?.hasNotionData === true) {
-      router.push(ERoutes.DASHBOARD);
+      redirectToDashboard();
     }
-  }, [user, isLoading]);
+  }, [user, isLoading, isOnboarding]);
 
   return (
     <>

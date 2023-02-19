@@ -1,5 +1,4 @@
 import { User } from '@supabase/supabase-js';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { restModule, supabaseModule } from '@adapter/modules';
@@ -7,13 +6,13 @@ import { restModule, supabaseModule } from '@adapter/modules';
 import { IProfile } from '@domain/entities/rest.types';
 
 import { UserContext } from '@infrastructure/context';
-import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction } from '@infrastructure/utils';
+import { useAxiosAction, useRouter } from '@infrastructure/utils';
 
 import { IUserProviderProps } from './user-provider.types';
 
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
-  const router = useRouter();
+  const { redirectToHome, redirectToOnboarding } = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>();
   const [user, setUser] = useState<(User & IProfile) | null>(null);
 
@@ -50,13 +49,13 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     await supabaseModule.logout();
 
     setUser(null);
-    router.push(ERoutes.HOME);
+    redirectToHome();
   };
 
   const loginViaGoogle = async () => {
     await supabaseModule.loginViaGoogle();
 
-    router.push(ERoutes.ONBOARDING);
+    redirectToOnboarding();
   };
 
   const resetNotionData = () =>

@@ -1,15 +1,12 @@
-import { useRouter } from 'next/router';
 import { TbError404 } from 'react-icons/tb';
 
 import { Box, Flex, ParticlesBackground } from '@ui/atoms';
 import { DisplayError } from '@ui/molecules';
 
-import { ERoutes } from '@infrastructure/types/routes';
+import { useRouter } from '@infrastructure/utils';
 
 export const NotFoundTemplate = (): JSX.Element => {
-  const router = useRouter();
-
-  const handleRedirectToHome = () => router.push(ERoutes.HOME);
+  const { redirectToHome } = useRouter();
 
   return (
     <Box bg="gray.50" height="100%" overflow="hidden">
@@ -19,7 +16,7 @@ export const NotFoundTemplate = (): JSX.Element => {
           errorMessage="This page was not found. You may have mistyped the address or the page may have moved."
           icon={TbError404}
           title="Page not found :("
-          onRedirectToHomeButtonClick={handleRedirectToHome}
+          onRedirectToHomeButtonClick={redirectToHome}
         />
       </Flex>
     </Box>

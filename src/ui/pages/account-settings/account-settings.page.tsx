@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { SEO } from '@ui/atoms';
@@ -6,16 +5,15 @@ import { FullScreenLoader } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { AccountSettingsTemplate } from '@ui/templates';
 
-import { ERoutes } from '@infrastructure/types/routes';
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 export const AccountSettingsPage = (): JSX.Element => {
-  const router = useRouter();
   const { isLoading, user } = useUser();
+  const { redirectToOnboarding } = useRouter();
 
   useEffect(() => {
     if (!isLoading && user?.hasNotionData === false) {
-      router.push(ERoutes.ONBOARDING);
+      redirectToOnboarding();
     }
   }, [user, isLoading]);
 

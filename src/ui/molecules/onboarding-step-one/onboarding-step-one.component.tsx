@@ -1,9 +1,10 @@
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import { Button, Flex, List, ListIcon, ListItem, TabPanel, Text } from '@ui/atoms';
+
+import { useRouter } from '@infrastructure/utils';
 
 import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
@@ -25,7 +26,7 @@ const supportedExampleSentenceColumnNamesAsList = mapColumnNamesToComponents(
 export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
   onNextButtonClick,
 }): JSX.Element => {
-  const router = useRouter();
+  const { back } = useRouter();
 
   return (
     <TabPanel mx="auto" p={0} w={{ sm: '500px', md: '600px', lg: '650px' }}>
@@ -86,11 +87,7 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
           </List>
         </Flex>
         <Flex justify="space-between" mt="24px">
-          <Button
-            leftIcon={<FaChevronLeft size="10px" />}
-            variant="secondary"
-            onClick={router.back}
-          >
+          <Button leftIcon={<FaChevronLeft size="10px" />} variant="secondary" onClick={back}>
             <Text fontSize="xs" fontWeight="bold">
               BACK
             </Text>
