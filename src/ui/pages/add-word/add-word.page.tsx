@@ -10,14 +10,12 @@ import { AddWordTemplate } from '@ui/templates';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction } from '@infrastructure/utils';
+import { useAxios } from '@infrastructure/utils';
 
 export const AddWordPage = (): JSX.Element => {
   const router = useRouter();
 
-  const { data, error, isLoading, mutate, reset } = useAxiosAction(
-    restModule.getNotionTableColumns,
-  );
+  const { data, error, isLoading, mutate, reset } = useAxios(restModule.getNotionTableColumns);
 
   useEffect(mutate, []);
 

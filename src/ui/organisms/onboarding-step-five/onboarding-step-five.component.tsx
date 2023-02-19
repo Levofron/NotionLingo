@@ -7,7 +7,7 @@ import { AvailableNotionDatabase } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction, useToast } from '@infrastructure/utils';
+import { useAxios, useToast } from '@infrastructure/utils';
 
 import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
 
@@ -18,10 +18,10 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
     data: availableNotionDatabasesData,
     isLoading: isAvailableNotionDatabasesLoading,
     mutate: mutateAvailableNotionDatabases,
-  } = useAxiosAction(restModule.getAvailableNotionDatabases);
+  } = useAxios(restModule.getAvailableNotionDatabases);
 
   const { isLoading: isSetNotionDatabaseIdLoading, mutateAsync: mutateAsyncSetNotionDatabaseId } =
-    useAxiosAction(restModule.setNotionDatabaseId);
+    useAxios(restModule.setNotionDatabaseId);
 
   const toast = useToast();
   const router = useRouter();

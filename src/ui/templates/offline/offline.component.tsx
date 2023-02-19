@@ -7,12 +7,12 @@ import { DisplayError } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction, useToast } from '@infrastructure/utils';
+import { useAxios, useToast } from '@infrastructure/utils';
 
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
-  const { isLoading, mutateAsync } = useAxiosAction(restModule.healthCheck);
+  const { isLoading, mutateAsync } = useAxios(restModule.healthCheck);
 
   const handleRedirectToHome = () =>
     mutateAsync()

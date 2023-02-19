@@ -19,7 +19,7 @@ import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxiosAction, useCountdown, useToast, useUser } from '@infrastructure/utils';
+import { useAxios, useCountdown, useToast, useUser } from '@infrastructure/utils';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -45,10 +45,11 @@ export const AccountSettingsTemplate = (): JSX.Element => {
   const {
     isLoading: isResetNotionIntegrationLoading,
     mutateAsync: mutateAsyncResetNotionIntegration,
-  } = useAxiosAction(restModule.resetNotionIntegration);
+  } = useAxios(restModule.resetNotionIntegration);
 
-  const { isLoading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } =
-    useAxiosAction(restModule.deleteProfile);
+  const { isLoading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } = useAxios(
+    restModule.deleteProfile,
+  );
 
   const handleConfirmResetNotionIntegration = () =>
     mutateAsyncResetNotionIntegration()

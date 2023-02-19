@@ -5,12 +5,12 @@ import { InputControl, SelectControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { useAxiosAction } from '@infrastructure/utils';
+import { useAxios } from '@infrastructure/utils';
 
 import { IAddWordTemplateProps } from './add-word.types';
 
 export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JSX.Element => {
-  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxiosAction(restModule.createNotionWord);
+  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxios(restModule.createNotionWord);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (event: FormEvent<any>) => {
