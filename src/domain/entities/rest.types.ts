@@ -41,8 +41,8 @@ export interface INotionDatabase {
 
 export interface IContact {
   email: string;
+  fullName: string;
   message: string;
-  name: string;
 }
 
 interface IMeaningWithExamples {

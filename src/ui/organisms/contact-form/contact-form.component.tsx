@@ -1,4 +1,5 @@
 import { useClipboard } from '@chakra-ui/react';
+import { useFormik } from 'formik';
 import { FC, useEffect, useState } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
@@ -19,60 +20,70 @@ import { InputControl, TextareaControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { useAxiosAction, useForm, useToast } from '@infrastructure/utils';
+import { useAxiosAction, useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
+import { contactFormValidationSchema } from './contact-form.defaults';
 import { IContactFormProps } from './contact-form.types';
 
 export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Element => {
   const toast = useToast();
   const [disableForm, setDisableForm] = useState(false);
   const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
+
   const {
     isLoading: isSendContactFormDataLoading,
     mutateAsync: mutateAsyncSendContactFormData,
     reset: resetSendContactFormData,
   } = useAxiosAction(restModule.sendContactFormData);
 
-  const { generateFieldProps, onSubmitWrapper, reset, setValue } = useForm({
-    initialValues: { email: email || '', name: fullName || '', message: '' },
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      message: '',
+      fullName: '',
+    },
+    isInitialValid: true,
+    validateOnBlur: false,
+    validateOnMount: false,
+    validateOnChange: true,
+    validationSchema: contactFormValidationSchema,
+    onSubmit: (_values) => {
+      setDisableForm(true);
+
+      mutateAsyncSendContactFormData(_values)
+        .then(() =>
+          toast.success({
+            title: 'Thank you!',
+            description: "We'll get back to you soon!",
+            onCloseComplete: () => {
+              formik.resetForm();
+              setDisableForm(false);
+            },
+          }),
+        )
+        .catch((_error) => {
+          toast.error({
+            description: _error,
+            onCloseComplete: () => {
+              setDisableForm(false);
+              resetSendContactFormData();
+            },
+          });
+        });
+    },
   });
 
   useEffect(() => {
     if (email) {
-      setValue('email', email);
+      formik.setFieldValue('email', email, true);
     }
 
     if (fullName) {
-      setValue('name', fullName);
+      formik.setFieldValue('fullName', fullName, true);
     }
   }, [email, fullName]);
-
-  const handleSubmit = onSubmitWrapper((_values) => {
-    setDisableForm(true);
-
-    mutateAsyncSendContactFormData(_values)
-      .then(() =>
-        toast.success({
-          title: 'Thank you!',
-          description: "We'll get back to you soon!",
-          onCloseComplete: () => {
-            reset();
-            setDisableForm(false);
-          },
-        }),
-      )
-      .catch((_error) => {
-        toast.error({
-          description: _error,
-          onCloseComplete: () => {
-            setDisableForm(false);
-            resetSendContactFormData();
-          },
-        });
-      });
-  });
 
   const shouldDisableForm = isSendContactFormDataLoading || disableForm;
 
@@ -132,34 +143,54 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
               </ChakraNextLink>
             </Stack>
             <Card minW={{ base: 'unset', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
-              <VStack as="form" spacing={5} onSubmit={handleSubmit}>
-                <InputControl
-                  isDisabled={shouldDisableForm}
-                  mode="light"
-                  {...generateFieldProps('name')}
-                />
-                <InputControl
-                  isDisabled={shouldDisableForm}
-                  mode="light"
-                  {...generateFieldProps('email')}
-                />
-                <TextareaControl
-                  isDisabled={shouldDisableForm}
-                  mode="light"
-                  resize="none"
-                  rows={6}
-                  {...generateFieldProps('message')}
-                />
-                <Button
-                  isDisabled={shouldDisableForm}
-                  isLoading={isSendContactFormDataLoading}
-                  mode="light"
-                  type="submit"
-                  width="full"
-                >
-                  Send Message
-                </Button>
-              </VStack>
+              <form onSubmit={formik.handleSubmit}>
+                <Flex flexDirection="column" gap={5}>
+                  <InputControl
+                    isRequired
+                    errorMessage={formik.errors.fullName}
+                    isDisabled={shouldDisableForm}
+                    label="Full Name"
+                    mode="light"
+                    name="fullName"
+                    value={formik.values.fullName}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                  />
+                  <InputControl
+                    isRequired
+                    errorMessage={formik.errors.email}
+                    isDisabled={shouldDisableForm}
+                    label="Email"
+                    mode="light"
+                    name="email"
+                    value={formik.values.email}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                  />
+                  <TextareaControl
+                    isRequired
+                    errorMessage={formik.errors.message}
+                    isDisabled={shouldDisableForm}
+                    label="Message"
+                    mode="light"
+                    name="message"
+                    resize="none"
+                    rows={6}
+                    value={formik.values.message}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                  />
+                  <Button
+                    isDisabled={shouldDisableForm}
+                    isLoading={isSendContactFormDataLoading}
+                    mode="light"
+                    type="submit"
+                    width="full"
+                  >
+                    Send Message
+                  </Button>
+                </Flex>
+              </form>
             </Card>
           </Stack>
         </VStack>
