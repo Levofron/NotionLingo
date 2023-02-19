@@ -16,6 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .from('contacts')
     .insert({
       email: contactFormData.email,
+      // TODO - rename in DB
       name: contactFormData.fullName,
       message: contactFormData.message,
     })
