@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await supabaseInstance
     .from('contacts')
     .insert({
-      name: contactFormData.name,
+      fullName: contactFormData.name,
       email: contactFormData.email,
       message: contactFormData.message,
     })
