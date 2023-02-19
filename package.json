@@ -56,6 +56,7 @@
     "next": "13.1.6",
     "next-pwa": "^5.6.0",
     "next-seo": "^5.15.0",
+    "next-usequerystate": "^1.7.2",
     "react": "18.2.0",
     "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "18.2.0",

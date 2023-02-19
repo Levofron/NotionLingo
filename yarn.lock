@@ -10189,6 +10189,7 @@ __metadata:
     next: 13.1.6
     next-pwa: ^5.6.0
     next-seo: ^5.15.0
+    next-usequerystate: ^1.7.2
     plop: ^3.1.2
     prettier: ^2.8.4
     prettier-package-json: ^2.8.0
@@ -10919,6 +10920,17 @@ __metadata:
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
   checksum: 83b5cf36027a53ee6d8b7f9c0782f2ba87f4858d977342bfc3c20c21629290a2111f8374d13a81221179603ffc4364f38374b5655d17b6a8f8a8c77bdea4fe8b
+  languageName: node
+  linkType: hard
+
+"next-usequerystate@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "next-usequerystate@npm:1.7.2"
+  peerDependencies:
+    next: "*"
+    react: "*"
+    react-dom: "*"
+  checksum: d5031722fbb5fa67f5f5ed783d1143ef1781f991e2b2070bdf7a9dfe98e968eacde8ccf93c10abf610a7b28e55a7c7734c16180f584fca258c8ebe38c4f44252
   languageName: node
   linkType: hard
 
