@@ -9,14 +9,12 @@ import { InputControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { debounce, isString, useAxiosAction, useToast } from '@infrastructure/utils';
-
-const handleAddNotionWordClick = (word: string, meaning: string, example: string) => () => {
-  console.log(word, meaning, example);
-};
+import { ERoutes } from '@infrastructure/types/routes';
+import { debounce, isString, useAxiosAction, useRouter, useToast } from '@infrastructure/utils';
 
 export const FindWordTemplate = (): JSX.Element => {
   const toast = useToast();
+  const router = useRouter();
   const { onCopy, setValue, value } = useClipboard('');
   const [word, setWord] = useQueryState('word', queryTypes.string);
 
@@ -49,6 +47,16 @@ export const FindWordTemplate = (): JSX.Element => {
 
     setWord(value);
   }, 1000);
+
+  const handleAddNotionWordClick = (word: string, meaning: string, exampleSentence: string) => () =>
+    router.push({
+      pathname: ERoutes.ADD_WORD,
+      query: {
+        word,
+        meaning,
+        exampleSentence,
+      },
+    });
 
   const isEmpty =
     getWordSuggestionsData &&
