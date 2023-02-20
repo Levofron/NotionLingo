@@ -301,9 +301,9 @@ describe('getRestApi function', () => {
   describe('sendContactFormData endpoint', () => {
     it('should call proper endpoint with proper data', () => {
       const contactFormDataMock: IContact = {
-        name: 'name',
         email: 'email',
         message: 'message',
+        fullName: 'fullName',
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -328,9 +328,9 @@ describe('getRestApi function', () => {
       const restApi = getRestApi(axiosInstanceMock);
 
       const result = restApi.sendContactFormData({
-        name: 'name',
         email: 'email',
         message: 'message',
+        fullName: 'fullName',
       });
 
       expect(result).rejects.toThrow('error');
