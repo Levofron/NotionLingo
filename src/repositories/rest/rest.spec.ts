@@ -190,9 +190,9 @@ describe('getRestRepository function', () => {
   describe('sendContactFormData function', () => {
     it('should call proper restApi function', async () => {
       const formData: IContact = {
-        name: 'name',
         email: 'email',
         message: 'message',
+        fullName: 'fullName',
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
