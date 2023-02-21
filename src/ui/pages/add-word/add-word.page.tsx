@@ -8,14 +8,12 @@ import { AddWordTemplate } from '@ui/templates';
 
 import { restModule } from '@adapter/modules';
 
-import { useAxiosAction, useRouter } from '@infrastructure/utils';
+import { useAxios, useRouter } from '@infrastructure/utils';
 
 export const AddWordPage = (): JSX.Element => {
   const { redirectToHome } = useRouter();
 
-  const { data, error, isLoading, mutate, reset } = useAxiosAction(
-    restModule.getNotionTableColumns,
-  );
+  const { data, error, isLoading, mutate, reset } = useAxios(restModule.getNotionTableColumns);
 
   useEffect(mutate, []);
 

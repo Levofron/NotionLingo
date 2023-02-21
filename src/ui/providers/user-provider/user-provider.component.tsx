@@ -6,7 +6,7 @@ import { restModule, supabaseModule } from '@adapter/modules';
 import { IProfile } from '@domain/entities/rest.types';
 
 import { UserContext } from '@infrastructure/context';
-import { useAxiosAction, useRouter } from '@infrastructure/utils';
+import { useAxios, useRouter } from '@infrastructure/utils';
 
 import { IUserProviderProps } from './user-provider.types';
 
@@ -16,10 +16,8 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>();
   const [user, setUser] = useState<(User & IProfile) | null>(null);
 
-  const { mutateAsync: mutateAsyncGetLoggedProfile } = useAxiosAction(restModule.getLoggedProfile);
-  const { mutateAsync: mutateAsyncSetSupabaseCookie } = useAxiosAction(
-    restModule.setSupabaseCookie,
-  );
+  const { mutateAsync: mutateAsyncGetLoggedProfile } = useAxios(restModule.getLoggedProfile);
+  const { mutateAsync: mutateAsyncSetSupabaseCookie } = useAxios(restModule.setSupabaseCookie);
 
   const getUserProfile = async () => {
     if (user) {

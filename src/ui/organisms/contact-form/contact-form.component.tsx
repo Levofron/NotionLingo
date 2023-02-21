@@ -1,6 +1,6 @@
 import { useClipboard } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 
@@ -20,7 +20,7 @@ import { InputControl, TextareaControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { useAxiosAction, useToast } from '@infrastructure/utils';
+import { useAxios, useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
@@ -29,14 +29,13 @@ import { IContactFormProps } from './contact-form.types';
 
 export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Element => {
   const toast = useToast();
-  const [disableForm, setDisableForm] = useState(false);
   const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
 
   const {
     isLoading: isSendContactFormDataLoading,
     mutateAsync: mutateAsyncSendContactFormData,
     reset: resetSendContactFormData,
-  } = useAxiosAction(restModule.sendContactFormData);
+  } = useAxios(restModule.sendContactFormData);
 
   const formik = useFormik({
     initialValues: {
@@ -50,26 +49,18 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
     validateOnChange: true,
     validationSchema: contactFormValidationSchema,
     onSubmit: (_values) => {
-      setDisableForm(true);
-
       mutateAsyncSendContactFormData(_values)
         .then(() =>
           toast.success({
             title: 'Thank you!',
             description: "We'll get back to you soon!",
-            onCloseComplete: () => {
-              formik.resetForm();
-              setDisableForm(false);
-            },
+            onCloseComplete: formik.resetForm,
           }),
         )
         .catch((_error) => {
           toast.error({
             description: _error,
-            onCloseComplete: () => {
-              setDisableForm(false);
-              resetSendContactFormData();
-            },
+            onCloseComplete: resetSendContactFormData,
           });
         });
     },
@@ -84,8 +75,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
       formik.setFieldValue('fullName', fullName, true);
     }
   }, [email, fullName]);
-
-  const shouldDisableForm = isSendContactFormDataLoading || disableForm;
 
   return (
     <Flex align="center" bg="gray.900" id="contact" justify="center">
@@ -148,7 +137,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   <InputControl
                     isRequired
                     errorMessage={formik.errors.fullName}
-                    isDisabled={shouldDisableForm}
                     label="Full Name"
                     mode="light"
                     name="fullName"
@@ -159,7 +147,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   <InputControl
                     isRequired
                     errorMessage={formik.errors.email}
-                    isDisabled={shouldDisableForm}
                     label="Email"
                     mode="light"
                     name="email"
@@ -170,7 +157,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                   <TextareaControl
                     isRequired
                     errorMessage={formik.errors.message}
-                    isDisabled={shouldDisableForm}
                     label="Message"
                     mode="light"
                     name="message"
@@ -181,7 +167,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
                     onChange={formik.handleChange}
                   />
                   <Button
-                    isDisabled={shouldDisableForm}
                     isLoading={isSendContactFormDataLoading}
                     mode="light"
                     type="submit"

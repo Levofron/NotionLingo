@@ -10,7 +10,7 @@ import { InputControl } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { debounce, isString, useAxiosAction, useRouter, useToast } from '@infrastructure/utils';
+import { debounce, isString, useAxios, useRouter, useToast } from '@infrastructure/utils';
 
 export const FindWordTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -34,7 +34,7 @@ export const FindWordTemplate = (): JSX.Element => {
     error: getWordSuggestionsError,
     isLoading: isGetWordSuggestionsLoading,
     mutate: mutateGetWordSuggestions,
-  } = useAxiosAction(restModule.getWordSuggestions);
+  } = useAxios(restModule.getWordSuggestions);
 
   useEffect(() => {
     if (isString(word)) {
