@@ -1,61 +1,91 @@
-import { FC, FormEvent } from 'react';
+import { useFormik } from 'formik';
+import { FC } from 'react';
 
-import { Button, Card, VStack } from '@ui/atoms';
+import { Button, Card, Flex } from '@ui/atoms';
 import { InputControl, SelectControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { useAxios } from '@infrastructure/utils';
+import { getInitialFormValuesFromTableColumns } from '@domain/utils/rest';
 
+import { useAxios, useToast } from '@infrastructure/utils';
+
+import { getAddWordFormValidationSchema } from './add-word.defaults';
 import { IAddWordTemplateProps } from './add-word.types';
 
 export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JSX.Element => {
   const { mutateAsync: mutateAsyncCreateNotionWord } = useAxios(restModule.createNotionWord);
+  const toast = useToast();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = (event: FormEvent<any>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData.entries()) as Record<string, string>;
-
-    mutateAsyncCreateNotionWord(data);
-  };
+  const formik = useFormik({
+    isInitialValid: true,
+    validateOnBlur: false,
+    validateOnMount: false,
+    validateOnChange: true,
+    validationSchema: getAddWordFormValidationSchema(tableColumns),
+    initialValues: getInitialFormValuesFromTableColumns(tableColumns),
+    onSubmit: (_values) => {
+      mutateAsyncCreateNotionWord(_values)
+        .then(() =>
+          toast.success({
+            description: 'Word saved!',
+            onCloseComplete: formik.resetForm,
+          }),
+        )
+        .catch((_error) =>
+          toast.error({
+            description: _error,
+          }),
+        );
+    },
+  });
 
   return (
     <Card minW={{ base: 'unset', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
-      <VStack as="form" spacing={5} onSubmit={handleSubmit}>
-        {tableColumns.map((_column) => {
-          const shouldRenderSelect = _column.type === 'multi_select';
+      <form onSubmit={formik.handleSubmit}>
+        <Flex flexDirection="column" gap={5}>
+          {tableColumns.map((_column) => {
+            const shouldRenderSelect = _column.type === 'multi_select';
 
-          if (shouldRenderSelect) {
+            if (shouldRenderSelect) {
+              return (
+                <SelectControl
+                  key={_column.columnName}
+                  isRequired
+                  errorMessage={formik.errors[_column.columnName]}
+                  label={_column.columnName}
+                  name={_column.columnName}
+                  value={formik.values[_column.columnName]}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                >
+                  {_column.options.map((_option) => (
+                    <option key={_option} value={_option}>
+                      {_option}
+                    </option>
+                  ))}
+                </SelectControl>
+              );
+            }
+
             return (
-              <SelectControl
+              <InputControl
                 key={_column.columnName}
+                errorMessage={formik.errors[_column.columnName]}
+                isRequired={_column.isWord}
                 label={_column.columnName}
                 name={_column.columnName}
-              >
-                {_column.options.map((_option) => (
-                  <option key={_option} value={_option}>
-                    {_option}
-                  </option>
-                ))}
-              </SelectControl>
+                value={formik.values[_column.columnName]}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
             );
-          }
-
-          return (
-            <InputControl
-              key={_column.columnName}
-              isRequired
-              label={_column.columnName}
-              name={_column.columnName}
-            />
-          );
-        })}
-        <Button type="submit" width="full">
-          Save word
-        </Button>
-      </VStack>
+          })}
+          <Button type="submit" width="full">
+            Add word
+          </Button>
+        </Flex>
+      </form>
     </Card>
   );
 };

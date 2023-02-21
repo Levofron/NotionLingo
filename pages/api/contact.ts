@@ -15,8 +15,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await supabaseInstance
     .from('contacts')
     .insert({
-      name: contactFormData.name,
       email: contactFormData.email,
+      // TODO - rename in DB
+      name: contactFormData.fullName,
       message: contactFormData.message,
     })
     .throwOnError();
@@ -27,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const middlewareToApply = [
   validateRequestMethodMiddleware('POST'),
   validateRouteSecretMiddleware,
-  validateIfParametersExistsMiddleware('body', ['name', 'email', 'message']),
+  validateIfParametersExistsMiddleware('body', ['email', 'fullName', 'message']),
 ];
 
 export default withMiddleware(handler)(middlewareToApply);
