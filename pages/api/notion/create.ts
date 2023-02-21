@@ -1,3 +1,4 @@
+import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
@@ -113,6 +114,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     properties: newNotionRecordProperties,
   });
+
+  memoryCache.clear();
 
   return res.status(EHttpStatusCode.OK).json({
     id: result.id,

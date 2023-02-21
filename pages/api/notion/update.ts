@@ -1,4 +1,5 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
@@ -142,6 +143,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const meaningText = getTextFromPageProperty([meaningColumn.columnName]);
   const exampleSentenceText = getTextFromPageProperty([exampleSentenceColumn.columnName]);
+
+  memoryCache.clear();
 
   return res.status(EHttpStatusCode.OK).json({
     id: result.id,
