@@ -115,7 +115,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     properties: newNotionRecordProperties,
   });
 
-  memoryCache.clear();
+  const cacheKeyObject = {
+    profileId: user!.id,
+    databaseId: profileData.notion_database_id,
+    notionApiKey,
+  };
+
+  const cacheKey = JSON.stringify(cacheKeyObject);
+
+  memoryCache.del(cacheKey);
 
   return res.status(EHttpStatusCode.OK).json({
     id: result.id,
