@@ -2,15 +2,15 @@ import { act, renderHook } from '@testing-library/react-hooks';
 
 import { functionImportTest } from '@infrastructure/utils';
 
-import { useAxiosAction } from './use-axios-action.hook';
+import { useAxios } from './use-axios.hook';
 
-describe('useAxiosAction hook', () => {
-  functionImportTest(useAxiosAction);
+describe('useAxios hook', () => {
+  functionImportTest(useAxios);
 
   it('should return isLoading, error, data and mutate function', () => {
     const axiosAction = jest.fn().mockResolvedValue({ data: 'data' });
 
-    const { result } = renderHook(() => useAxiosAction(axiosAction));
+    const { result } = renderHook(() => useAxios(axiosAction));
 
     expect(result.current).toEqual({
       data: expect.any(Object),
@@ -26,7 +26,7 @@ describe('useAxiosAction hook', () => {
   it('should call axios action', async () => {
     const axiosAction = jest.fn().mockResolvedValue({ data: 'data' });
 
-    const { result } = renderHook(() => useAxiosAction(axiosAction));
+    const { result } = renderHook(() => useAxios(axiosAction));
 
     act(() => {
       result.current.mutate();
@@ -38,7 +38,7 @@ describe('useAxiosAction hook', () => {
   it('should set isLoading to true when axios action is called', async () => {
     const axiosAction = jest.fn().mockResolvedValue({ data: 'data' });
 
-    const { result } = renderHook(() => useAxiosAction(axiosAction));
+    const { result } = renderHook(() => useAxios(axiosAction));
 
     expect(result.current.isLoading).toBeFalsy();
 
@@ -52,7 +52,7 @@ describe('useAxiosAction hook', () => {
   it('should set isLoading to false when axios action is resolved', async () => {
     const axiosAction = jest.fn().mockResolvedValue({ data: 'data' });
 
-    const { result } = renderHook(() => useAxiosAction(axiosAction));
+    const { result } = renderHook(() => useAxios(axiosAction));
 
     act(() => {
       result.current.mutate();

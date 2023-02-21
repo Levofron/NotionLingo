@@ -6,7 +6,7 @@ import { DEFAULT_ERROR_MESSAGE } from '@constants';
 
 type TCallback<TParam, TResponse> = (...params: TParam[]) => Promise<TResponse>;
 
-export const useAxiosAction = <TParam, TResponse>(callback: TCallback<TParam, TResponse>) => {
+export const useAxios = <TParam, TResponse>(callback: TCallback<TParam, TResponse>) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<TResponse | null>(null);

@@ -6,7 +6,7 @@ import { InputControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { debounce, useAxiosAction } from '@infrastructure/utils';
+import { debounce, useAxios } from '@infrastructure/utils';
 
 import { IOnboardingStepFourProps } from './onboarding-step-four.types';
 
@@ -19,7 +19,7 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
     error: setNotionApiTokenError,
     isLoading: isSetNotionApiTokenLoading,
     mutateAsync: mutateAsyncSetNotionApiToken,
-  } = useAxiosAction(restModule.setNotionApiToken);
+  } = useAxios(restModule.setNotionApiToken);
 
   const handleInputChange = debounce(async (event: ChangeEvent<HTMLInputElement>) => {
     const result = await mutateAsyncSetNotionApiToken(event.target.value);

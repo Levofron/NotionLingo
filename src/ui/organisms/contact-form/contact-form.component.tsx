@@ -20,7 +20,7 @@ import { InputControl, TextareaControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { useAxiosAction, useToast } from '@infrastructure/utils';
+import { useAxios, useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
@@ -35,7 +35,7 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
     isLoading: isSendContactFormDataLoading,
     mutateAsync: mutateAsyncSendContactFormData,
     reset: resetSendContactFormData,
-  } = useAxiosAction(restModule.sendContactFormData);
+  } = useAxios(restModule.sendContactFormData);
 
   const formik = useFormik({
     initialValues: {

@@ -8,15 +8,14 @@ import { restModule } from '@adapter/modules';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/utils/rest';
 
-import { useAxiosAction, useToast } from '@infrastructure/utils';
+import { useAxios, useToast } from '@infrastructure/utils';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
 import { IAddWordTemplateProps } from './add-word.types';
 
 export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JSX.Element => {
+  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxios(restModule.createNotionWord);
   const toast = useToast();
-
-  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxiosAction(restModule.createNotionWord);
 
   const formik = useFormik({
     isInitialValid: true,

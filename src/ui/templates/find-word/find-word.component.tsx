@@ -9,7 +9,7 @@ import { InputControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
-import { debounce, isString, useAxiosAction, useToast } from '@infrastructure/utils';
+import { debounce, isString, useAxios, useToast } from '@infrastructure/utils';
 
 const handleAddNotionWordClick = (word: string, meaning: string, example: string) => () => {
   console.log(word, meaning, example);
@@ -36,7 +36,7 @@ export const FindWordTemplate = (): JSX.Element => {
     error: getWordSuggestionsError,
     isLoading: isGetWordSuggestionsLoading,
     mutate: mutateGetWordSuggestions,
-  } = useAxiosAction(restModule.getWordSuggestions);
+  } = useAxios(restModule.getWordSuggestions);
 
   useEffect(() => {
     if (isString(word)) {

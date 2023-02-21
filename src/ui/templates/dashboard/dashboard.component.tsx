@@ -19,7 +19,7 @@ import {
   IUpdateNotionWordRequest,
 } from '@domain/entities/rest.types';
 
-import { useAxiosAction, useToast, useUser } from '@infrastructure/utils';
+import { useAxios, useToast, useUser } from '@infrastructure/utils';
 
 export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -33,14 +33,12 @@ export const DashboardTemplate = (): JSX.Element => {
   });
 
   const { isLoading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
-    useAxiosAction(restModule.getRandomNotionWords);
+    useAxios(restModule.getRandomNotionWords);
 
-  const { mutateAsync: mutateAsyncIncreaseDailyStreak } = useAxiosAction(
-    restModule.increaseDailyStreak,
-  );
+  const { mutateAsync: mutateAsyncIncreaseDailyStreak } = useAxios(restModule.increaseDailyStreak);
 
   const { isLoading: isUpdateNotionWordLoading, mutateAsync: mutateAsyncUpdateNotionWord } =
-    useAxiosAction(restModule.updateNotionWord);
+    useAxios(restModule.updateNotionWord);
 
   const fetchMoreWords = useCallback(
     () =>
