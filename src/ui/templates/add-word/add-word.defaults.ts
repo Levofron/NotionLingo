@@ -9,7 +9,7 @@ export const getAddWordFormValidationSchema = (tableColumns: TNotionTableColumn[
         _column.columnName,
         _column.type === 'multi_select'
           ? string().oneOf(_column.options).required()
-          : string().max(_column.isWord ? 50 : 100, 'Too Long!'),
+          : string().max(_column.isWord ? 50 : 200, 'Too Long!'),
       ]),
     ),
   );

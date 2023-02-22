@@ -125,9 +125,8 @@ export const FindWordTemplate = (): JSX.Element => {
                   return null;
                 }
 
-                const isLastIndex = _index === getWordSuggestionsData.meaningAndExamples.length - 1;
-
                 const key = `${meaning}-${example}-${_index}`;
+                const isLastIndex = _index === getWordSuggestionsData.meaningAndExamples.length - 1;
 
                 return (
                   <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
