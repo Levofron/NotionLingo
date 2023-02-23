@@ -17,7 +17,8 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
   const toast = useToast();
   const router = useRouter();
 
-  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxios(restModule.createNotionWord);
+  const { isLoading: isCreateNotionWordLoading, mutateAsync: mutateAsyncCreateNotionWord } =
+    useAxios(restModule.createNotionWord);
 
   const formik = useFormik({
     isInitialValid: true,
@@ -31,12 +32,16 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
     ),
     onSubmit: (_values) => {
       mutateAsyncCreateNotionWord(_values)
-        .then(() =>
+        .then(() => {
+          const initialValues = getInitialFormValuesFromTableColumns(tableColumns);
+
+          formik.setValues(initialValues);
+          router.redirectWithReplaceToAddWord();
+
           toast.success({
             description: 'Word saved!',
-            onCloseComplete: formik.resetForm,
-          }),
-        )
+          });
+        })
         .catch((_error) =>
           toast.error({
             description: _error,
@@ -86,7 +91,7 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
               />
             );
           })}
-          <Button type="submit" width="full">
+          <Button isLoading={isCreateNotionWordLoading} type="submit" width="full">
             Add word
           </Button>
         </Flex>

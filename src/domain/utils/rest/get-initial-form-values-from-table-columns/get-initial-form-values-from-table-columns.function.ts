@@ -1,8 +1,12 @@
 import { TNotionTableColumn } from '@domain/entities/rest.types';
 
-const getFieldValue = (queryParams: Record<string, string>, column: TNotionTableColumn) => {
+const getFieldValue = (column: TNotionTableColumn, queryParams?: Record<string, string>) => {
   if (column.type === 'multi_select') {
     return column.options[0];
+  }
+
+  if (!queryParams) {
+    return '';
   }
 
   if (column.isWord) {
@@ -22,12 +26,12 @@ const getFieldValue = (queryParams: Record<string, string>, column: TNotionTable
 
 export const getInitialFormValuesFromTableColumns = (
   tableColumns: TNotionTableColumn[],
-  queryParams: Record<string, string>,
+  queryParams?: Record<string, string>,
 ) =>
   tableColumns.reduce(
     (_accumulator, column) => ({
       ..._accumulator,
-      [column.columnName]: getFieldValue(queryParams, column),
+      [column.columnName]: getFieldValue(column, queryParams),
     }),
     {} as Record<string, string>,
   );

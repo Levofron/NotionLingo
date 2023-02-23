@@ -13,6 +13,8 @@ export const useRouter = () => {
     [router.push, isSamePath],
   );
 
+  const redirectWithReplace = useCallback((path: string) => router.replace(path), [router.replace]);
+
   const isHome = useMemo(() => isSamePath(ERoutes.HOME), [isSamePath]);
 
   const isDonate = useMemo(() => isSamePath(ERoutes.DONATE), [isSamePath]);
@@ -26,6 +28,11 @@ export const useRouter = () => {
   const redirectToDashboard = useCallback(() => redirectTo(ERoutes.DASHBOARD), [redirectTo]);
 
   const redirectToOnboarding = useCallback(() => redirectTo(ERoutes.ONBOARDING), [redirectTo]);
+
+  const redirectWithReplaceToAddWord = useCallback(
+    () => redirectWithReplace(ERoutes.ADD_WORD),
+    [redirectWithReplace],
+  );
 
   return {
     isHome,
@@ -41,5 +48,6 @@ export const useRouter = () => {
     redirectToDashboard,
     redirectToOnboarding,
     pathname: router.pathname,
+    redirectWithReplaceToAddWord,
   };
 };
