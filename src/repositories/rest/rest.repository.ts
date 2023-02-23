@@ -27,7 +27,7 @@ export const getRestRepository = (
     const session = await supabaseApi.getSession();
 
     await restApi.setSupabaseCookie(session);
-    await delay(100);
+    await delay(1000);
   },
   getLoggedProfile: async () => {
     const { data } = await restApi.getLoggedProfile();
