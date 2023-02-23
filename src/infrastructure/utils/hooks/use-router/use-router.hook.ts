@@ -31,6 +31,7 @@ export const useRouter = () => {
     isHome,
     isDonate,
     isSamePath,
+    redirectTo,
     isDashboard,
     isOnboarding,
     redirectToHome,

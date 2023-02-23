@@ -1,37 +1,20 @@
-import { useEffect } from 'react';
-
 import { SEO } from '@ui/atoms';
-import { FullScreenLoader } from '@ui/molecules';
+import { withCheckIfUserLogged } from '@ui/hoc';
 import { SidebarWithHeader } from '@ui/organisms';
 import { DonateTemplate } from '@ui/templates';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { ERoutes } from '@infrastructure/types/routes';
 
-export const DonatePage = (): JSX.Element => {
-  const { isDonate, redirectToHome, redirectToOnboarding } = useRouter();
-  const { isLoading, user } = useUser();
+const DonatePageComponent = (): JSX.Element => (
+  <>
+    <SEO noFollow noIndex title="Donate" />
+    <SidebarWithHeader />
+    <DonateTemplate />
+  </>
+);
 
-  useEffect(() => {
-    if (isLoading === undefined || (isLoading && isDonate)) {
-      return;
-    }
-
-    if (!user) {
-      redirectToHome();
-
-      return;
-    }
-
-    if (user.hasNotionData === false) {
-      redirectToOnboarding();
-    }
-  }, [user, isLoading, isDonate]);
-
-  return (
-    <>
-      <SEO noFollow noIndex title="Donate" />
-      <SidebarWithHeader />
-      {!user || user.hasNotionData === false ? <FullScreenLoader /> : <DonateTemplate />}
-    </>
-  );
-};
+export const DonatePage = withCheckIfUserLogged(DonatePageComponent, {
+  currentPageUrl: ERoutes.DONATE,
+  redirectUrlOnError: ERoutes.ONBOARDING,
+  shouldHaveNotionData: true,
+});
