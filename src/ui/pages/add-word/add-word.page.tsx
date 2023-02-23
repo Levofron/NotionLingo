@@ -2,15 +2,17 @@ import { useEffect } from 'react';
 import { BiErrorAlt } from 'react-icons/bi';
 
 import { Box, Flex, ParticlesBackground, SEO, Text } from '@ui/atoms';
+import { withCheckIfUserLogged } from '@ui/hoc';
 import { DisplayError, FullScreenLoader } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { AddWordTemplate } from '@ui/templates';
 
 import { restModule } from '@adapter/modules';
 
+import { ERoutes } from '@infrastructure/types/routes';
 import { useAxios, useRouter } from '@infrastructure/utils';
 
-export const AddWordPage = (): JSX.Element => {
+const AddWordPageComponent = (): JSX.Element => {
   const { redirectToHome } = useRouter();
 
   const { data, error, isLoading, mutate, reset } = useAxios(restModule.getNotionTableColumns);
@@ -65,3 +67,9 @@ export const AddWordPage = (): JSX.Element => {
     </>
   );
 };
+
+export const AddWordPage = withCheckIfUserLogged(AddWordPageComponent, {
+  currentPageUrl: ERoutes.ADD_WORD,
+  redirectUrlOnError: ERoutes.ONBOARDING,
+  shouldHaveNotionData: true,
+});

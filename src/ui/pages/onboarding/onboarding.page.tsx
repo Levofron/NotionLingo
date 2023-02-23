@@ -1,35 +1,18 @@
-import { useEffect } from 'react';
-
 import { SEO } from '@ui/atoms';
-import { FullScreenLoader } from '@ui/molecules';
+import { withCheckIfUserLogged } from '@ui/hoc';
 import { OnboardingTemplate } from '@ui/templates';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { ERoutes } from '@infrastructure/types/routes';
 
-export const OnboardingPage = (): JSX.Element => {
-  const { isOnboarding, redirectToDashboard, redirectToHome } = useRouter();
-  const { isLoading, user } = useUser();
+const OnboardingPageComponent = (): JSX.Element => (
+  <>
+    <SEO noFollow noIndex title="Onboarding" />
+    <OnboardingTemplate />
+  </>
+);
 
-  useEffect(() => {
-    if (isLoading === undefined || (isLoading && isOnboarding)) {
-      return;
-    }
-
-    if (!user && !isLoading) {
-      redirectToHome();
-
-      return;
-    }
-
-    if (user?.hasNotionData === true) {
-      redirectToDashboard();
-    }
-  }, [user, isLoading, isOnboarding]);
-
-  return (
-    <>
-      <SEO noFollow noIndex title="Onboarding" />
-      {!user || user.hasNotionData === true ? <FullScreenLoader /> : <OnboardingTemplate />}
-    </>
-  );
-};
+export const OnboardingPage = withCheckIfUserLogged(OnboardingPageComponent, {
+  currentPageUrl: ERoutes.ONBOARDING,
+  redirectUrlOnError: ERoutes.DASHBOARD,
+  shouldHaveNotionData: false,
+});
