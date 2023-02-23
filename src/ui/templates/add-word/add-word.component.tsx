@@ -8,14 +8,16 @@ import { restModule } from '@adapter/modules';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/utils/rest';
 
-import { useAxios, useToast } from '@infrastructure/utils';
+import { useAxios, useRouter, useToast } from '@infrastructure/utils';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
 import { IAddWordTemplateProps } from './add-word.types';
 
 export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JSX.Element => {
-  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxios(restModule.createNotionWord);
   const toast = useToast();
+  const router = useRouter();
+
+  const { mutateAsync: mutateAsyncCreateNotionWord } = useAxios(restModule.createNotionWord);
 
   const formik = useFormik({
     isInitialValid: true,
@@ -23,7 +25,10 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
     validateOnMount: false,
     validateOnChange: true,
     validationSchema: getAddWordFormValidationSchema(tableColumns),
-    initialValues: getInitialFormValuesFromTableColumns(tableColumns),
+    initialValues: getInitialFormValuesFromTableColumns(
+      tableColumns,
+      router.query as Record<string, string>,
+    ),
     onSubmit: (_values) => {
       mutateAsyncCreateNotionWord(_values)
         .then(() =>

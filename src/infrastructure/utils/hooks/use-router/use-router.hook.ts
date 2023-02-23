@@ -36,6 +36,7 @@ export const useRouter = () => {
     redirectToHome,
     back: router.back,
     push: router.push,
+    query: router.query,
     redirectToDashboard,
     redirectToOnboarding,
     pathname: router.pathname,
