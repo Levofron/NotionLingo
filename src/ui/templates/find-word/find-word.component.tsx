@@ -1,4 +1,3 @@
-import { useClipboard } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { queryTypes, useQueryState } from 'next-usequerystate';
 import { ChangeEvent, useEffect } from 'react';
@@ -10,24 +9,20 @@ import { InputControl } from '@ui/molecules';
 import { restModule } from '@adapter/modules';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { debounce, isString, useAxios, useRouter, useToast } from '@infrastructure/utils';
+import {
+  debounce,
+  isString,
+  useAxios,
+  useCopyToClipboard,
+  useRouter,
+  useToast,
+} from '@infrastructure/utils';
 
 export const FindWordTemplate = (): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
-  const { onCopy, setValue, value } = useClipboard('');
+  const { copyToClipboard } = useCopyToClipboard();
   const [word, setWord] = useQueryState('word', queryTypes.string);
-
-  useEffect(() => {
-    if (value) {
-      onCopy();
-
-      toast.info({
-        duration: 2000,
-        description: 'Copied to clipboard',
-      });
-    }
-  }, [value]);
 
   const {
     data: getWordSuggestionsData,
@@ -64,7 +59,13 @@ export const FindWordTemplate = (): JSX.Element => {
     !getWordSuggestionsData?.word &&
     !getWordSuggestionsData?.additionalExamples.length;
 
-  const handleCopy = (string: string) => () => setValue(string);
+  const handleCopy = (string: string) => async () =>
+    copyToClipboard(string).then(() =>
+      toast.info({
+        duration: 2000,
+        description: 'Copied to clipboard',
+      }),
+    );
 
   return (
     <Box bg="gray.50" height="100%">
