@@ -64,6 +64,11 @@ const SEOComponent: FC<ISEOProps> = ({
           href: '/apple-touch-icon.png',
           sizes: '180x180',
         },
+        {
+          rel: 'mask-icon',
+          href: '/safari-pinned-tab.svg',
+          color: '#000000',
+        },
       ]}
       additionalMetaTags={[
         {
@@ -125,6 +130,14 @@ const SEOComponent: FC<ISEOProps> = ({
         {
           name: 'keywords',
           content: SEO_KEYWORDS.sort().join(', '),
+        },
+        {
+          name: 'msapplication-TileColor',
+          content: '#f7f7f7',
+        },
+        {
+          name: 'theme-color',
+          content: '#f7f7f7',
         },
       ]}
       canonical={url}
