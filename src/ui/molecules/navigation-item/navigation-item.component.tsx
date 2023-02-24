@@ -32,6 +32,7 @@ export const NavigationItem: FC<INavigationItemProps> = ({
         cursor="pointer"
         p="4"
         role="group"
+        textDecoration="none"
         {...restProps}
       >
         {icon && (
