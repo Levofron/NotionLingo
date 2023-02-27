@@ -1,8 +1,9 @@
+import NextImage from 'next/image';
 import { FC } from 'react';
 import { FaHamburger } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 
-import { Button, Container, Flex, IconButton, Text } from '@ui/atoms';
+import { Button, Container, Flex, IconButton } from '@ui/atoms';
 
 import { useRouter, useUser } from '@infrastructure/utils';
 
@@ -35,23 +36,25 @@ export const Header: FC<IHeaderProps> = ({
       {...restProps}
     >
       <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl" p={0}>
-        <Flex alignItems="center" gap={{ base: 3, sm: 5 }}>
-          <IconButton
-            aria-label="Open menu"
-            disabled={isLoading}
-            icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <Text
-            cursor={isHome ? 'default' : 'pointer'}
-            fontFamily="monospace"
-            fontSize={{ base: 'xl', sm: '2xl' }}
-            fontWeight="bold"
-            onClick={redirectToHome}
-          >
-            NotionLingo
-          </Text>
-        </Flex>
+        <IconButton
+          aria-label="Open menu"
+          disabled={isLoading}
+          icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
+          onClick={isOpen ? onClose : onOpen}
+        />
+        <NextImage
+          alt="Owl Logo Black"
+          height={50}
+          src="owl-logo-black.svg"
+          style={{
+            cursor: isHome ? 'default' : 'pointer',
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+          width={50}
+          onClick={redirectToHome}
+        />
         <Button
           disabled={isLoading}
           isLoading={isLoading}
