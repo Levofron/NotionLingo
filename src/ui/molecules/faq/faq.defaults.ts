@@ -8,23 +8,18 @@ export const QUESTIONS_AND_ANSWERS = [
     headerBalancer: true,
     question: 'What are the benefits of using NotionLingo?',
     answer:
-      'NotionLingo offers several benefits to its users, including support for text-to-speech APIs, auto-generated images for each word, IPA text generation for each word, and basic statistics such as learned words, total learned words, and days in streak. Additionally, NotionLingo has a fast API that is ideal for large libraries of words (750 words or more).',
+      'NotionLingo offers customizable language learning through features such as text-to-speech APIs, auto-generated images and IPA text generation for each word, basic statistics, and an intuitive interface for finding, creating, and updating words. It also has a fast API ideal for large libraries of words. These features make NotionLingo a great choice for language learners who want to personalize their vocabulary lists and track their progress in an engaging and efficient way.',
   },
   {
     headerBalancer: true,
-    question: 'What is the meaning behind the NotionLingo logo?',
+    question: 'What is the meaning behind the NotionLingo name?',
     answer:
-      'The name NotionLingo is derived from the words "Learn", "Vocabulary", "From", and "Notion". The logo is meant to symbolize the integration of learning and vocabulary with the power of Notion.',
-  },
-  {
-    question: 'How secure is my data with NotionLingo?',
-    answer:
-      "NotionLingo requires only read-only access to the user's Notion database and all user-provided security keys are encrypted. The security of its users' data is a top priority for NotionLingo.",
+      "NotionLingo is a language learning platform that combines the words 'Notion' and 'Lingo' to reflect its customizable approach to language learning, as well as its goal of providing an engaging and effective experience. The name references the popular productivity app Notion and the language learning app DuoLingo, and represents NotionLingo's commitment to personalized learning and gamification.",
   },
   {
     question: 'How can I get started with NotionLingo?',
     answer:
-      'Getting started with NotionLingo is easy. Simply download the application, create an account, and follow the setup instructions to start integrating your Notion database with your personal library of words.',
+      'Getting started with NotionLingo is easy. Simply create an account, and follow the setup instructions to start integrating your Notion database with our outstanding functionalities.',
   },
   {
     headerBalancer: true,
@@ -34,17 +29,22 @@ export const QUESTIONS_AND_ANSWERS = [
   {
     question: 'Is NotionLingo free to use?',
     answer:
-      'Yes, NotionLingo is completely free to use and support is provided through donations. Donations can be made through Buy-Me-A-Coffee or PayPal.How can I remove my NotionLingo account?',
+      'Yes, NotionLingo is completely free to use and support is provided through donations. Donations can be made through Buy-Me-A-Coffee or PayPal. How can I remove my NotionLingo account?',
   },
   {
     question: 'How can I remove my NotionLingo account?',
     answer:
-      'Users have the option to remove their NotionLingo account by accessing the relevant settings in the account-settings page on the NotionLingo website. No need to contact the support team.',
+      'Users have the option to remove their NotionLingo account by accessing the relevant settings in the account-settings page. No need to contact the support team.',
   },
   {
     headerBalancer: true,
     question: 'How can I reset my Notion integration with NotionLingo?',
     answer:
-      'Users have the option to reset their Notion integration with NotionLingo by accessing the relevant settings in the account - settings page on the NotionLingo website.No need to contact the support team.',
+      'Users have the option to reset their Notion integration with NotionLingo by accessing the relevant settings in the account-settings page on the NotionLingo website. No need to contact the support team.',
+  },
+  {
+    question: 'How can I contact the NotionLingo support team?',
+    answer:
+      "If you have more questions about NotionLingo or any of its features, we encourage you to use the contact form below to get in touch with us. Our team is always happy to assist you with any questions or concerns you may have, and we strive to provide prompt and helpful support to all our users. So, whether you need help with using the app or have a suggestion for a new feature, feel free to reach out to us using the contact form, and we'll get back to you as soon as possible.",
   },
 ];
