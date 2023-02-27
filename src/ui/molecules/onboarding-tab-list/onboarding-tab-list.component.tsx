@@ -23,7 +23,7 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
 
   return (
     <TabList display="flex" justifyContent="center" pointerEvents="none">
-      <Tab ref={verifyDatabaseTabRef} w={width}>
+      <Tab ref={verifyDatabaseTabRef} width={width}>
         <Flex
           _before={{
             content: "''",
@@ -44,15 +44,15 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           <Icon
             as={BsCircleFill}
             color={isVerifyDatabaseTabActive ? 'gray.700' : 'gray.300'}
-            h={isVerifyDatabaseTabActive ? '16px' : '12px'}
+            height={isVerifyDatabaseTabActive ? '16px' : '12px'}
             mb="8px"
             transition="all .3s ease"
-            w={isVerifyDatabaseTabActive ? '16px' : '12px'}
+            width={isVerifyDatabaseTabActive ? '16px' : '12px'}
             zIndex={1}
           />
         </Flex>
       </Tab>
-      <Tab ref={createNotionIntegrationTabRef} w={width}>
+      <Tab ref={createNotionIntegrationTabRef} width={width}>
         <Flex
           _before={{
             content: "''",
@@ -73,15 +73,15 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           <Icon
             as={BsCircleFill}
             color={isCreateIntegrationTabActive ? 'gray.700' : 'gray.300'}
-            h={isCreateIntegrationTabActive ? '16px' : '12px'}
+            height={isCreateIntegrationTabActive ? '16px' : '12px'}
             mb="8px"
             transition="all .3s ease"
-            w={isCreateIntegrationTabActive ? '16px' : '12px'}
+            width={isCreateIntegrationTabActive ? '16px' : '12px'}
             zIndex={1}
           />
         </Flex>
       </Tab>
-      <Tab ref={shareDatabaseIntegrationTabRef} w={width}>
+      <Tab ref={shareDatabaseIntegrationTabRef} width={width}>
         <Flex
           _before={{
             content: "''",
@@ -102,15 +102,15 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           <Icon
             as={BsCircleFill}
             color={isShareDatabaseIntegrationTabActive ? 'gray.700' : 'gray.300'}
-            h={isShareDatabaseIntegrationTabActive ? '16px' : '12px'}
+            height={isShareDatabaseIntegrationTabActive ? '16px' : '12px'}
             mb="8px"
             transition="all .3s ease"
-            w={isShareDatabaseIntegrationTabActive ? '16px' : '12px'}
+            width={isShareDatabaseIntegrationTabActive ? '16px' : '12px'}
             zIndex={1}
           />
         </Flex>
       </Tab>
-      <Tab ref={validateIntegrationTabRef} w={width}>
+      <Tab ref={validateIntegrationTabRef} width={width}>
         <Flex
           _before={{
             content: "''",
@@ -131,15 +131,15 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           <Icon
             as={BsCircleFill}
             color={isValidateIntegrationTabActive ? 'gray.700' : 'gray.300'}
-            h={isValidateIntegrationTabActive ? '16px' : '12px'}
+            height={isValidateIntegrationTabActive ? '16px' : '12px'}
             mb="8px"
             transition="all .3s ease"
-            w={isValidateIntegrationTabActive ? '16px' : '12px'}
+            width={isValidateIntegrationTabActive ? '16px' : '12px'}
             zIndex={1}
           />
         </Flex>
       </Tab>
-      <Tab ref={selectNotionDatabaseTabRef} w={width}>
+      <Tab ref={selectNotionDatabaseTabRef} width={width}>
         <Flex
           _before={{
             content: "''",
@@ -159,10 +159,10 @@ export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
           <Icon
             as={BsCircleFill}
             color={isSelectPageTabActive ? 'gray.700' : 'gray.300'}
-            h={isSelectPageTabActive ? '16px' : '12px'}
+            height={isSelectPageTabActive ? '16px' : '12px'}
             mb="8px"
             transition="all .3s ease"
-            w={isSelectPageTabActive ? '16px' : '12px'}
+            width={isSelectPageTabActive ? '16px' : '12px'}
             zIndex={1}
           />
         </Flex>

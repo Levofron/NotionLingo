@@ -42,10 +42,10 @@ export const GettingStarted: FC = (): JSX.Element => (
               color="gray.50"
               fontSize="lg"
               fontWeight={700}
-              h={20}
+              height={20}
               justify="center"
               mode="light"
-              w={20}
+              width={20}
             >
               0{index + 1}
             </Card>

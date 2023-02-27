@@ -30,7 +30,7 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
   }, 1000);
 
   return (
-    <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
+    <TabPanel mx="auto" width={{ sm: '500px', md: '600px', lg: '650px' }}>
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
         <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
           Validate your integration
