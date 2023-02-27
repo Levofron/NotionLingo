@@ -20,7 +20,7 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
   onNextButtonClick,
   onPreviousButtonClick,
 }): JSX.Element => (
-  <TabPanel mx="auto" p={0} w={{ sm: '500px', md: '600px', lg: '650px' }}>
+  <TabPanel mx="auto" p={0} width={{ sm: '500px', md: '600px', lg: '650px' }}>
     <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
       <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
         Create a Notion integration

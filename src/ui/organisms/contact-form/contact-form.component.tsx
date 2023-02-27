@@ -1,6 +1,5 @@
 import { useClipboard } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import { FC, useEffect } from 'react';
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 
@@ -25,9 +24,8 @@ import { useAxios, useToast } from '@infrastructure/utils';
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
 import { contactFormValidationSchema } from './contact-form.defaults';
-import { IContactFormProps } from './contact-form.types';
 
-export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Element => {
+export const ContactForm = (): JSX.Element => {
   const toast = useToast();
   const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
 
@@ -65,16 +63,6 @@ export const ContactForm: FC<IContactFormProps> = ({ email, fullName }): JSX.Ele
         });
     },
   });
-
-  useEffect(() => {
-    if (email) {
-      formik.setFieldValue('email', email, true);
-    }
-
-    if (fullName) {
-      formik.setFieldValue('fullName', fullName, true);
-    }
-  }, [email, fullName]);
 
   return (
     <Flex align="center" bg="gray.900" id="contact" justify="center">

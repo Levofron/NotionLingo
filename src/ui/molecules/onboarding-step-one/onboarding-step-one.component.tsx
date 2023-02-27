@@ -29,7 +29,7 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
   const { back } = useRouter();
 
   return (
-    <TabPanel mx="auto" p={0} w={{ sm: '500px', md: '600px', lg: '650px' }}>
+    <TabPanel mx="auto" p={0} width={{ sm: '500px', md: '600px', lg: '650px' }}>
       <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
         <Text
           withBalancer

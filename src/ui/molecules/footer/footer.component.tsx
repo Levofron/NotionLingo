@@ -61,7 +61,7 @@ export const Footer: FC = (): JSX.Element => {
               href={PAYPAL_LINK}
               style={{
                 backgroundColor: 'white',
-                padding: '2px',
+                padding: '3px 10px',
                 borderRadius: '6px',
                 width: '150px',
               }}

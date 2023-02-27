@@ -73,8 +73,15 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   };
 
   return (
-    <TabPanel mx="auto" w={{ sm: '500px', md: '600px', lg: '650px' }}>
-      <Flex align="center" direction="column" justify="center" mx="auto" textAlign="center" w="80%">
+    <TabPanel mx="auto" width={{ sm: '500px', md: '600px', lg: '650px' }}>
+      <Flex
+        align="center"
+        direction="column"
+        justify="center"
+        mx="auto"
+        textAlign="center"
+        width="80%"
+      >
         <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
           Select a Notion database
         </Text>
@@ -87,7 +94,7 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
         direction="column"
         gap={5}
         mt={{ base: '25px', md: '40px' }}
-        w="100%"
+        width="100%"
       >
         {renderAvailableNotionDatabases()}
       </Flex>

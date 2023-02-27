@@ -61,7 +61,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   const hasExampleSentenceSuggestion = hasSuggestion(exampleSentence, exampleSentenceSuggestion);
 
   return (
-    <Card w={{ base: 300, sm: 350, md: 400 }}>
+    <Card width={{ base: 300, sm: 350, md: 400 }}>
       {hasMeaningSuggestion || hasExampleSentenceSuggestion ? (
         <Button
           display={isTopCard ? 'flex' : 'none'}
@@ -78,7 +78,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
       <Box
         borderBottom="2px solid"
         borderColor="gray.900"
-        h={{ base: '180px', sm: '205px', md: '240px' }}
+        height={{ base: '180px', sm: '205px', md: '240px' }}
         pointerEvents="none"
         position="relative"
       >

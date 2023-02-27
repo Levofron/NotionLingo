@@ -1,19 +1,14 @@
+import { Box } from '@ui/atoms';
 import { Faq, Footer, GettingStarted, HomeHero, TryItNow } from '@ui/molecules';
 import { ContactForm } from '@ui/organisms';
 
-import { useUser } from '@infrastructure/utils';
-
-export const HomeTemplate = (): JSX.Element => {
-  const { user } = useUser();
-
-  return (
-    <div>
-      <HomeHero />
-      <GettingStarted />
-      <TryItNow />
-      <Faq />
-      <ContactForm email={user?.email} fullName={user?.fullName} />
-      <Footer />
-    </div>
-  );
-};
+export const HomeTemplate = (): JSX.Element => (
+  <Box bg="gray.50" h="100%" w="100%">
+    <HomeHero />
+    <GettingStarted />
+    <TryItNow />
+    <Faq />
+    <ContactForm />
+    <Footer />
+  </Box>
+);
