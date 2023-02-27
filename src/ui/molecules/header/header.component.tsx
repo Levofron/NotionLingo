@@ -1,11 +1,10 @@
-import NextImage from 'next/image';
 import { FC } from 'react';
 import { FaHamburger } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 
 import { Button, Container, Flex, IconButton } from '@ui/atoms';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { useUser } from '@infrastructure/utils';
 
 import { IHeaderProps } from './header.types';
 
@@ -15,7 +14,6 @@ export const Header: FC<IHeaderProps> = ({
   onOpen,
   ...restProps
 }): JSX.Element => {
-  const { isHome, redirectToHome } = useRouter();
   const { isLoading, isUserAuthenticated, loginViaGoogle, logout } = useUser();
 
   return (
@@ -41,19 +39,6 @@ export const Header: FC<IHeaderProps> = ({
           disabled={isLoading}
           icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
           onClick={isOpen ? onClose : onOpen}
-        />
-        <NextImage
-          alt="Owl Logo Black"
-          height={50}
-          src="owl-logo-black.svg"
-          style={{
-            cursor: isHome ? 'default' : 'pointer',
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
-          }}
-          width={50}
-          onClick={redirectToHome}
         />
         <Button
           disabled={isLoading}

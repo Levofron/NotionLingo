@@ -95,7 +95,7 @@ export const Footer: FC = (): JSX.Element => {
           }}
           align="center"
         >
-          <NextImage alt="Owl Logo White" height={60} src="owl-logo-white.svg" width={60} />
+          <NextImage alt="Logo White" height={60} src="logo-white.svg" width={60} />
         </Flex>
         <Text color="gray.50" pt={6} textAlign="center">
           © {currentYear} Paweł Wojtasiński. All rights reserved.
