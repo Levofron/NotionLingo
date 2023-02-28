@@ -45,6 +45,7 @@ export * from './modal-overlay/modal-overlay.component';
 export * from './text-underline/text-underline.component';
 export * from './accordion-item/accordion-item.component';
 export * from './accordion-panel/accordion-panel.component';
+export * from './form-helper-text/form-helper-text.component';
 export * from './accordion-button/accordion-button.component';
 export * from './chakra-next-link/chakra-next-link.component';
 export * from './form-error-message/form-error-message.component';

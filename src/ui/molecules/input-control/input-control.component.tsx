@@ -1,7 +1,13 @@
-import { FormHelperText } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { FormControl, FormErrorMessage, FormLabel, Input, Spinner } from '@ui/atoms';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Spinner,
+} from '@ui/atoms';
 
 import { IInputControlProps } from './input-control.types';
 
