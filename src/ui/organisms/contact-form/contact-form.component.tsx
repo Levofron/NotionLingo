@@ -121,7 +121,7 @@ export const ContactForm = (): JSX.Element => {
             </Stack>
             <Card minW={{ base: 'unset', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
               <form onSubmit={formik.handleSubmit}>
-                <Flex flexDirection="column" gap={5}>
+                <Flex flexDirection="column" gap="3px">
                   <InputControl
                     isRequired
                     errorMessage={formik.errors.fullName}
