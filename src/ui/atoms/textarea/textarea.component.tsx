@@ -13,12 +13,13 @@ const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextarea
   return (
     <ChakraTextarea
       ref={ref}
-      _hover={{ borderColor: color }}
+      _hover={{ borderColor: color, borderWidth: 1 }}
       _placeholder={{ color }}
       borderColor={color}
       borderRadius={0}
       color={color}
       focusBorderColor={color}
+      style={{ boxShadow: 'none' }}
       {...restProps}
     />
   );
