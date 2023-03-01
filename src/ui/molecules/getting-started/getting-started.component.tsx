@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { ForwardRefRenderFunction, forwardRef } from 'react';
 
 import { Box, Card, Container, Flex, Heading, Stack, Text, TextUnderline } from '@ui/atoms';
 
 import { STEPS } from './getting-started.defaults';
 
-export const GettingStarted: FC = (): JSX.Element => (
-  <Box bg="gray.900">
+const GettingStartedComponent: ForwardRefRenderFunction<HTMLDivElement> = (_, ref): JSX.Element => (
+  <Box ref={ref} bg="gray.900">
     <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading
         as="h3"
@@ -59,3 +59,5 @@ export const GettingStarted: FC = (): JSX.Element => (
     </Container>
   </Box>
 );
+
+export const GettingStarted = forwardRef(GettingStartedComponent);
