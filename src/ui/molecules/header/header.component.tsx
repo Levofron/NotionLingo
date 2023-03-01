@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { FaHamburger } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 
-import { Button, Container, Flex, IconButton, Text } from '@ui/atoms';
+import { Button, Container, Flex, IconButton } from '@ui/atoms';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { useUser } from '@infrastructure/utils';
 
 import { IHeaderProps } from './header.types';
 
@@ -14,7 +14,6 @@ export const Header: FC<IHeaderProps> = ({
   onOpen,
   ...restProps
 }): JSX.Element => {
-  const { isHome, redirectToHome } = useRouter();
   const { isLoading, isUserAuthenticated, loginViaGoogle, logout } = useUser();
 
   return (
@@ -35,23 +34,12 @@ export const Header: FC<IHeaderProps> = ({
       {...restProps}
     >
       <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl" p={0}>
-        <Flex alignItems="center" gap={{ base: 3, sm: 5 }}>
-          <IconButton
-            aria-label="Open menu"
-            disabled={isLoading}
-            icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <Text
-            cursor={isHome ? 'default' : 'pointer'}
-            fontFamily="monospace"
-            fontSize={{ base: 'xl', sm: '2xl' }}
-            fontWeight="bold"
-            onClick={redirectToHome}
-          >
-            NotionLingo
-          </Text>
-        </Flex>
+        <IconButton
+          aria-label="Open menu"
+          disabled={isLoading}
+          icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
+          onClick={isOpen ? onClose : onOpen}
+        />
         <Button
           disabled={isLoading}
           isLoading={isLoading}
