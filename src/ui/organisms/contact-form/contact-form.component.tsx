@@ -157,6 +157,7 @@ export const ContactForm = (): JSX.Element => {
                   <Button
                     isLoading={isSendContactFormDataLoading}
                     mode="light"
+                    mt={2}
                     type="submit"
                     width="full"
                   >

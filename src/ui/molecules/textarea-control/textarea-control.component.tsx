@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { FormControl, FormErrorMessage, FormLabel, Textarea } from '@ui/atoms';
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Textarea } from '@ui/atoms';
 
 import { ITextareaControlProps } from './textarea-control.types';
 
@@ -14,9 +14,17 @@ export const TextareaControl: FC<ITextareaControlProps> = ({
 }): JSX.Element => (
   <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
     {label ? (
-      <FormLabel color={mode === 'light' ? 'gray.50' : 'gray.900'}>{label}</FormLabel>
+      <FormLabel color={mode === 'light' ? 'gray.50' : 'gray.900'} mb="3px">
+        {label}
+      </FormLabel>
     ) : null}
     <Textarea mode={mode} {...textareaProps} />
-    {errorMessage ? <FormErrorMessage>{errorMessage}</FormErrorMessage> : null}
+    {errorMessage ? (
+      <FormErrorMessage height={4} lineHeight="normal" mt="3px">
+        {errorMessage}
+      </FormErrorMessage>
+    ) : (
+      <FormHelperText height={4} mt="3px" />
+    )}
   </FormControl>
 );
