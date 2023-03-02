@@ -22,12 +22,16 @@ export const InputControl: FC<IInputControlProps> = ({
 }): JSX.Element => (
   <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
     {label ? (
-      <FormLabel color={mode === 'light' ? 'gray.50' : 'gray.900'} mb="3px">
+      <FormLabel
+        color={mode === 'light' ? 'gray.50' : 'gray.900'}
+        fontSize={{ base: 'sm', sm: 'md' }}
+        mb="3px"
+      >
         {label}
         {isLoading ? <Spinner ml="5px" size="xs" /> : null}
       </FormLabel>
     ) : null}
-    <Input mode={mode} {...inputProps} />
+    <Input mode={mode} size={{ base: 'sm', sm: 'md' }} {...inputProps} />
     {errorMessage ? (
       <FormErrorMessage height={4} lineHeight="normal" mt="3px">
         {errorMessage}
