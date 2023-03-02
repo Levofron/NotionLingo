@@ -9,13 +9,16 @@ import {
   Heading,
   Highlight,
   ParticlesBackground,
+  Stack,
   Text,
 } from '@ui/atoms';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useUser } from '@infrastructure/utils';
 
-export const HomeHero: FC = (): JSX.Element => {
+import { IHomeHeroProps } from './home-hero.types';
+
+export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
   const router = useRouter();
   const { isLoading, loginViaGoogle, user } = useUser();
 
@@ -34,6 +37,12 @@ export const HomeHero: FC = (): JSX.Element => {
 
     return user.hasNotionData === true ? 'Go to dashboard' : 'Get started';
   }, [user]);
+
+  const handleLearnMoreClick = () => {
+    if (gettingStartedRef?.current) {
+      gettingStartedRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <Box bg="gray.50" position="relative">
@@ -61,14 +70,29 @@ export const HomeHero: FC = (): JSX.Element => {
             Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to
             easily learn new words and phrases from your own <b>Notion</b> database!
           </Text>
-          <Button
-            isDisabled={isLoading}
-            isLoading={isLoading}
-            width="fit-content"
-            onClick={handleActionButtonClick}
+          <Stack
+            align="center"
+            alignSelf="center"
+            direction="column"
+            position="relative"
+            spacing={{ base: 2, sm: 3 }}
           >
-            {buttonLabel}
-          </Button>
+            <Button
+              isDisabled={isLoading}
+              isLoading={isLoading}
+              width="fit-content"
+              onClick={handleActionButtonClick}
+            >
+              {buttonLabel}
+            </Button>
+            <Text
+              cursor="pointer"
+              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
+              onClick={handleLearnMoreClick}
+            >
+              Learn more
+            </Text>
+          </Stack>
         </Flex>
       </Container>
     </Box>
