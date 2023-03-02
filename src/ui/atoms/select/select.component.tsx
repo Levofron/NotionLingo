@@ -12,9 +12,9 @@ const SelectComponent: ForwardRefRenderFunction<HTMLSelectElement, ISelectProps>
     _hover={{ borderColor: 'gray.900' }}
     _placeholder={{ color: 'gray.900' }}
     borderColor="gray.900"
-    borderRadius={0}
     color="gray.900"
     focusBorderColor="gray.900"
+    style={{ boxShadow: 'none', borderRadius: 0 }}
     {...props}
   />
 );
