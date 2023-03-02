@@ -145,11 +145,12 @@ export const ContactForm = (): JSX.Element => {
                   <TextareaControl
                     isRequired
                     errorMessage={formik.errors.message}
+                    height={115}
                     label="Message"
                     mode="light"
                     name="message"
                     resize="none"
-                    rows={6}
+                    rows={5}
                     value={formik.values.message}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
