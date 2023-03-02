@@ -16,10 +16,9 @@ const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = 
       _hover={{ borderColor: color, borderWidth: 1 }}
       _placeholder={{ color }}
       borderColor={color}
-      borderRadius={0}
       color={color}
       focusBorderColor={color}
-      style={{ boxShadow: 'none' }}
+      style={{ boxShadow: 'none', borderRadius: 0 }}
       {...restProps}
     />
   );
