@@ -53,7 +53,7 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
   return (
     <Card minW={{ base: 'unset', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
       <form onSubmit={formik.handleSubmit}>
-        <Flex flexDirection="column" gap={5}>
+        <Flex flexDirection="column" gap="3px">
           {tableColumns.map((_column) => {
             const shouldRenderSelect = _column.type === 'multi_select';
 
@@ -91,7 +91,7 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
               />
             );
           })}
-          <Button isLoading={isCreateNotionWordLoading} type="submit" width="full">
+          <Button isLoading={isCreateNotionWordLoading} mt={2} type="submit" width="full">
             Add word
           </Button>
         </Flex>
