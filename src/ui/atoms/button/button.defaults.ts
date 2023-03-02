@@ -17,6 +17,6 @@ export const variantToStylesMapper: Record<TThemeMode, IButtonProps> = {
     },
     bg: 'gray.50',
     color: 'gray.900',
-    borderColor: 'gray.50',
+    borderColor: 'gray.900',
   },
 };

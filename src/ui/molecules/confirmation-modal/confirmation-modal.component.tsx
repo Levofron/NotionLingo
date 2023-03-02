@@ -49,15 +49,29 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
     <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent as={Card} borderRadius={0} boxShadow="6px 6px 0 var(--chakra-colors-gray-900)">
-        <ModalHeader textAlign="center">{title}</ModalHeader>
+        <ModalHeader fontSize="xl" textAlign="center">
+          {title}
+        </ModalHeader>
         <ModalBody textAlign="center">
           <Balancer ratio={0}>{description}</Balancer>
         </ModalBody>
         <ModalFooter alignItems="center" as={Flex} justifyContent="center">
-          <Button ref={cancelRef} disabled={isConfirmLoading} mode="light" onClick={onClose}>
+          <Button
+            ref={cancelRef}
+            disabled={isConfirmLoading}
+            mode="light"
+            size={{ base: 'sm', sm: 'md' }}
+            onClick={onClose}
+          >
             {cancelButtonText}
           </Button>
-          <Button isLoading={isConfirmLoading} ml={3} mode="dark" onClick={onConfirm}>
+          <Button
+            isLoading={isConfirmLoading}
+            ml={3}
+            mode="dark"
+            size={{ base: 'sm', sm: 'md' }}
+            onClick={onConfirm}
+          >
             {confirmButtonText}
           </Button>
         </ModalFooter>
