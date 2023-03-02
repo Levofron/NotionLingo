@@ -21,12 +21,12 @@ export const SelectControl: FC<ISelectControlProps> = ({
 }): JSX.Element => (
   <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
     {label ? (
-      <FormLabel color="gray.900" mb="3px">
+      <FormLabel color="gray.900" fontSize={{ base: 'sm', sm: 'md' }} mb="3px">
         {label}
         {isLoading ? <Spinner ml="5px" size="xs" /> : null}
       </FormLabel>
     ) : null}
-    <Select {...selectProps} />
+    <Select size={{ base: 'sm', sm: 'md' }} {...selectProps} />
     {errorMessage ? (
       <FormErrorMessage height={4} lineHeight="normal" mt="3px">
         {errorMessage}
