@@ -18,10 +18,7 @@ export const Faq = (): JSX.Element => (
     <Container maxW="3xl" py={{ base: 14, sm: 20, md: 32 }}>
       <Heading
         color="gray.900"
-        fontSize={{
-          base: '4xl',
-          md: '5xl',
-        }}
+        fontSize={{ base: '3xl', sm: '4xl' }}
         mb={{ base: 14, sm: 16 }}
         textAlign="center"
       >
@@ -45,26 +42,28 @@ export const Faq = (): JSX.Element => (
               <>
                 <AccordionButton
                   justifyContent="space-between"
-                  pb={{ base: 6, sm: 8 }}
-                  pt={{ base: 4, sm: 6 }}
+                  pb={{ base: 4, sm: 8 }}
+                  pt={{ base: 2, sm: 6 }}
                   width="100%"
                 >
                   <Heading
                     color="gray.900"
-                    fontSize={{ base: 'md', sm: 'xl', md: '2xl' }}
+                    fontSize={{ base: 'md', sm: 'xl' }}
                     textAlign="left"
                     withBalancer={headerBalancer}
                   >
                     {question}
                   </Heading>
                   {isExpanded ? (
-                    <IoMdRemoveCircleOutline fontSize="30px" min="30px" />
+                    <IoMdRemoveCircleOutline fontSize="25px" style={{ width: '25px' }} />
                   ) : (
-                    <IoMdAddCircleOutline fontSize="30px" min="30px" />
+                    <IoMdAddCircleOutline fontSize="25px" style={{ width: '25px' }} />
                   )}
                 </AccordionButton>
-                <AccordionPanel pb={4}>
-                  <Text withBalancer>{answer}</Text>
+                <AccordionPanel pb={{ base: 2, sm: 4 }}>
+                  <Text withBalancer fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
+                    {answer}
+                  </Text>
                 </AccordionPanel>
               </>
             )}

@@ -65,16 +65,10 @@ export const ContactForm = (): JSX.Element => {
   });
 
   return (
-    <Flex align="center" bg="gray.900" id="contact" justify="center">
-      <Box borderRadius="lg" m={{ base: 5, md: 16, lg: 10 }} p={{ base: 5, lg: 16 }}>
+    <Flex align="center" bg="gray.900" justify="center">
+      <Box m={{ base: 5, md: 16, lg: 10 }} p={{ base: 5, lg: 16 }}>
         <VStack spacing={{ base: 4, md: 8, lg: 20 }}>
-          <Heading
-            color="gray.50"
-            fontSize={{
-              base: '4xl',
-              md: '5xl',
-            }}
-          >
+          <Heading color="gray.50" fontSize={{ base: '3xl', sm: '4xl' }}>
             Get in Touch
           </Heading>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 4, md: 8, lg: 20 }}>
@@ -119,7 +113,7 @@ export const ContactForm = (): JSX.Element => {
                 />
               </ChakraNextLink>
             </Stack>
-            <Card minW={{ base: 'unset', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
+            <Card minW={{ base: '300px', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
               <form onSubmit={formik.handleSubmit}>
                 <Flex flexDirection="column" gap="3px">
                   <InputControl
