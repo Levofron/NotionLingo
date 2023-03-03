@@ -4,7 +4,7 @@ import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 import { ITextareaProps } from './textarea.types';
 
 const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextareaProps> = (
-  { mode = 'dark', ...restProps },
+  { mode = 'dark', style, ...restProps },
   ref,
 ): JSX.Element => {
   const isDarkMode = mode === 'dark';
@@ -16,10 +16,9 @@ const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextarea
       _hover={{ borderColor: color, borderWidth: 1 }}
       _placeholder={{ color }}
       borderColor={color}
-      borderRadius={0}
       color={color}
       focusBorderColor={color}
-      style={{ boxShadow: 'none' }}
+      style={{ boxShadow: 'none', borderRadius: 0, ...style }}
       {...restProps}
     />
   );
