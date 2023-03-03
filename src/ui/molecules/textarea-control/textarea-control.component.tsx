@@ -23,8 +23,10 @@ export const TextareaControl: FC<ITextareaControlProps> = ({
       </FormLabel>
     ) : null}
     <Textarea
+      fontSize={{ base: 'sm', sm: 'md' }}
       mode={mode}
-      size={{ base: 'sm', sm: 'md' }}
+      pl={{ base: 3, sm: 4 }}
+      pr={{ base: 3, sm: 4 }}
       style={{ height: 115 }}
       {...textareaProps}
     />
