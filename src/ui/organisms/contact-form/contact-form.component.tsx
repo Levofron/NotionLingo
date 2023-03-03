@@ -17,13 +17,15 @@ import {
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { localStorageModule, restModule } from '@adapter/modules';
 
 import { useAxios, useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
 
 import { contactFormValidationSchema } from './contact-form.defaults';
+
+const LAST_CONTACT_FORM_SUBMISSION_KEY = 'lastContactFormSubmission';
 
 export const ContactForm = (): JSX.Element => {
   const toast = useToast();
@@ -47,6 +49,27 @@ export const ContactForm = (): JSX.Element => {
     validateOnChange: true,
     validationSchema: contactFormValidationSchema,
     onSubmit: (_values) => {
+      const lastContactFormSubmission = localStorageModule.getItem(
+        LAST_CONTACT_FORM_SUBMISSION_KEY,
+      );
+
+      if (lastContactFormSubmission) {
+        const lastContactFormSubmissionDate = new Date(
+          Number.parseInt(lastContactFormSubmission, 10),
+        );
+        const currentDate = new Date();
+
+        if (currentDate.getTime() - lastContactFormSubmissionDate.getTime() < 60_000) {
+          toast.error({
+            title: 'Error',
+            duration: 1000,
+            description: 'Please wait a minute before sending another request.',
+          });
+
+          return;
+        }
+      }
+
       mutateAsyncSendContactFormData(_values)
         .then(() =>
           toast.success({
@@ -55,12 +78,18 @@ export const ContactForm = (): JSX.Element => {
             onCloseComplete: formik.resetForm,
           }),
         )
-        .catch((_error) => {
+        .catch((_error) =>
           toast.error({
             description: _error,
             onCloseComplete: resetSendContactFormData,
-          });
-        });
+          }),
+        )
+        .finally(() =>
+          localStorageModule.setItem({
+            key: LAST_CONTACT_FORM_SUBMISSION_KEY,
+            value: Date.now().toString(),
+          }),
+        );
     },
   });
 
@@ -145,7 +174,6 @@ export const ContactForm = (): JSX.Element => {
                   <TextareaControl
                     isRequired
                     errorMessage={formik.errors.message}
-                    height={115}
                     label="Message"
                     mode="light"
                     name="message"
