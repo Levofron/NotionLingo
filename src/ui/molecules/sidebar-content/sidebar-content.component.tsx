@@ -30,15 +30,15 @@ export const SidebarContent: FC<ISidebarContentProps> = ({
       }}
       left={0}
       minH={{ base: 'calc(100vh - 66px)', sm: 'calc(100vh - 74px)' }}
-      p={3}
+      p={{ base: 2, sm: 3 }}
       position="fixed"
-      top={{ base: 66, md: 74 }}
+      top={{ base: 58, sm: 66, md: 74 }}
       transition="3s ease"
       w="full"
       zIndex={9999}
       {...restProps}
     >
-      <Container as={Flex} flexDirection="column" gap={3} maxW="6xl" p={0}>
+      <Container as={Flex} flexDirection="column" gap={{ base: 2, sm: 3 }} maxW="6xl" p={0}>
         {filteredSidebarItems.map(({ href, icon, name }) => (
           <NavigationItem key={name} href={href} icon={icon}>
             {name}

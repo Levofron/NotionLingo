@@ -186,7 +186,7 @@ export const DashboardTemplate = (): JSX.Element => {
   return (
     <Box bg="gray.50" height="100%" overflow="hidden">
       <ParticlesBackground />
-      <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
+      <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
         <DashboardProfileDetails {...dailyStreakData} />
         {renderContent()}
       </Container>

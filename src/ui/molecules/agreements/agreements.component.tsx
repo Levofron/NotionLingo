@@ -6,7 +6,7 @@ import { IAgreementsProps } from './agreements.types';
 
 export const Agreements: FC<IAgreementsProps> = ({ agreements, heading }): JSX.Element => (
   <Box bg="gray.50">
-    <Container maxW="3xl" pt={{ base: 66, md: 74 }}>
+    <Container maxW="3xl" pt={{ base: 58, sm: 66, md: 74 }}>
       <Flex
         alignItems="center"
         flexDirection="column"

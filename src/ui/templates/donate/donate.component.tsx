@@ -16,7 +16,7 @@ import { BUY_ME_A_COFFEE_LINK, PAYPAL_LINK } from '@constants';
 export const DonateTemplate = (): JSX.Element => (
   <Box bg="gray.50" height="100%" overflow="hidden">
     <ParticlesBackground />
-    <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
+    <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
       <Flex alignItems="center" height="100%" justifyContent="center">
         <Card maxW="400px" p={{ base: 2, sm: 3, md: 4 }}>
           <Heading fontSize="2xl" mb={2}>

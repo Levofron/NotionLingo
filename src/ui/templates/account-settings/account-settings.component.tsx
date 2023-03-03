@@ -110,7 +110,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
         isConfirmLoading={isResetNotionIntegrationLoading}
         onConfirm={handleConfirmResetNotionIntegration}
       />
-      <Container height="100%" maxW="6xl" position="relative" pt={{ base: 66, md: 74 }}>
+      <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
           <Card alignItems="center" display="flex" p={{ base: 2, sm: 3, md: 4 }}>
             <Avatar

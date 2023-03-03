@@ -26,7 +26,7 @@ export const Header: FC<IHeaderProps> = ({
         backdropFilter: 'saturate(180%) blur(5px)',
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
-      p={3}
+      p={{ base: 2, sm: 3 }}
       pos="fixed"
       top="0"
       w="full"
