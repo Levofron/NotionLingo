@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { IoArrowForward } from 'react-icons/io5';
 
 import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@ui/atoms';
 
@@ -32,23 +31,18 @@ export const TryItNow: FC = (): JSX.Element => {
   return (
     <Box bg="white">
       <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
-        <Card bg="white" px={{ base: 4, md: 10 }} py={10}>
+        <Card bg="white" p={{ base: 4, md: 10 }}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
             <Box>
-              <Heading as="h3" fontSize="4xl" mb={2}>
+              <Heading as="h3" fontSize={{ base: '3xl', sm: '4xl' }} mb={2}>
                 Start using your Notion dictionary today
               </Heading>
-              <Text color="gray.900" fontSize="lg">
+              <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
                 and expand your vocabulary, elevate your skills!
               </Text>
             </Box>
             <Flex align="center" justify="center" w="full">
-              <Button
-                isDisabled={isLoading}
-                isLoading={isLoading}
-                rightIcon={<IoArrowForward />}
-                onClick={handleActionButtonClick}
-              >
+              <Button isLoading={isLoading} onClick={handleActionButtonClick}>
                 {buttonLabel}
               </Button>
             </Flex>

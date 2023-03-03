@@ -77,27 +77,32 @@ export const Footer: FC = (): JSX.Element => {
           </Stack>
         </SimpleGrid>
       </Container>
-      <Box py={10}>
+      <Box py={{ base: 6, sm: 10 }}>
         <Flex
           _after={{
             content: '""',
-            borderBottom: '2px solid',
+            borderBottom: '1px solid',
             borderColor: 'gray.50',
             flexGrow: 1,
-            ml: 8,
+            ml: 4,
           }}
           _before={{
             content: '""',
-            borderBottom: '2px solid',
+            borderBottom: '1px solid',
             borderColor: 'gray.50',
             flexGrow: 1,
-            mr: 8,
+            mr: 4,
           }}
           align="center"
         >
-          <NextImage alt="Logo White" height={60} src="logo-white.svg" width={60} />
+          <NextImage alt="Logo White" height={50} src="logo-white.svg" width={50} />
         </Flex>
-        <Text color="gray.50" pt={6} textAlign="center">
+        <Text
+          color="gray.50"
+          fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
+          pt={{ base: 2, sm: 6 }}
+          textAlign="center"
+        >
           © {currentYear} Paweł Wojtasiński. All rights reserved.
         </Text>
       </Box>

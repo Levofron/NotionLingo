@@ -1,4 +1,4 @@
-import { Card as ChakraCard } from '@chakra-ui/react';
+import { Card as ChakraCard, useMediaQuery } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { ICardProps } from './card.types';
@@ -7,7 +7,10 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
   { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => {
+  const [isSmallerThan400] = useMediaQuery('(max-width: 400px)');
+
   const isDarkMode = mode === 'dark';
+  const boxShadowSize = isSmallerThan400 ? '3px' : '6px';
 
   return (
     <ChakraCard
@@ -16,7 +19,9 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
       border="2px"
       borderColor={isDarkMode ? 'gray.900' : 'gray.50'}
       borderRadius={0}
-      boxShadow={`6px 6px 0 var(--chakra-colors-gray-${isDarkMode ? '900' : '50'})`}
+      boxShadow={`${boxShadowSize} ${boxShadowSize} 0 var(--chakra-colors-gray-${
+        isDarkMode ? '900' : '50'
+      })`}
       {...restProps}
     />
   );
