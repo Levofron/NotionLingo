@@ -43,9 +43,7 @@ export const AvailableNotionDatabase: FC<IAvailableNotionDatabaseProps> = ({
       <Divider />
       <CardFooter>
         <Button isLoading={isLoading} onClick={handleClick}>
-          <Text fontSize="xs" fontWeight="bold">
-            Select
-          </Text>
+          Select
         </Button>
       </CardFooter>
     </Card>

@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react';
 
-import { Flex, TabPanels, Tabs, Text } from '@ui/atoms';
+import { Flex, Heading, TabPanels, Tabs, Text } from '@ui/atoms';
+import { IActiveTabs, OnboardingTabList } from '@ui/molecules';
 import {
-  IActiveTabs,
+  OnboardingStepFive,
+  OnboardingStepFour,
   OnboardingStepOne,
   OnboardingStepThree,
   OnboardingStepTwo,
-  OnboardingTabList,
-} from '@ui/molecules';
-import { OnboardingStepFive, OnboardingStepFour } from '@ui/organisms';
+} from '@ui/organisms';
 
 export const OnboardingTemplate = (): JSX.Element => {
   const verifyDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
@@ -93,15 +93,15 @@ export const OnboardingTemplate = (): JSX.Element => {
       py={{ base: '20px', sm: '25px', md: '55px' }}
     >
       <Flex direction="column" textAlign="center">
-        <Text
+        <Heading
           color="gray.700"
           fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
           fontWeight="bold"
           mb="8px"
         >
           Configure your Notion integration
-        </Text>
-        <Text withBalancer color="gray.400" fontSize={{ sm: 'sm', md: 'lg' }} fontWeight="normal">
+        </Heading>
+        <Text withBalancer color="gray.400" fontWeight="normal">
           This information will let us know from which Notion database we should use to get your
           vocabulary.
         </Text>

@@ -97,12 +97,7 @@ export const Footer: FC = (): JSX.Element => {
         >
           <NextImage alt="Logo White" height={50} src="logo-white.svg" width={50} />
         </Flex>
-        <Text
-          color="gray.50"
-          fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
-          pt={{ base: 2, sm: 6 }}
-          textAlign="center"
-        >
+        <Text color="gray.50" pt={{ base: 2, sm: 6 }} textAlign="center">
           © {currentYear} Paweł Wojtasiński. All rights reserved.
         </Text>
       </Box>

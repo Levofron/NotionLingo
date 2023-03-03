@@ -1,7 +1,7 @@
 import { ChangeEvent, FC } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 
-import { Button, Flex, TabPanel, Text } from '@ui/atoms';
+import { Button, Flex, Icon, TabPanel, Text } from '@ui/atoms';
 import { InputControl } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
@@ -35,7 +35,7 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
         <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
           Validate your integration
         </Text>
-        <Text color="gray.400" fontSize="sm" fontWeight="normal">
+        <Text color="gray.400" fontWeight="normal">
           Paste your copied integration token below to validate your integration.
         </Text>
       </Flex>
@@ -53,14 +53,12 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
       </Flex>
       <Button
         isDisabled={isSetNotionApiTokenLoading || !!setNotionApiTokenData}
-        leftIcon={<FaChevronLeft size="10px" />}
+        leftIcon={<Icon as={FaChevronLeft} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+        mode="light"
         mt="48px"
-        variant="secondary"
         onClick={onPreviousButtonClick}
       >
-        <Text fontSize="xs" fontWeight="bold">
-          PREV
-        </Text>
+        Back
       </Button>
     </TabPanel>
   );

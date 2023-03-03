@@ -37,9 +37,7 @@ export const TryItNow: FC = (): JSX.Element => {
               <Heading as="h3" fontSize={{ base: '3xl', sm: '4xl' }} mb={2}>
                 Start using your Notion dictionary today
               </Heading>
-              <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
-                and expand your vocabulary, elevate your skills!
-              </Text>
+              <Text color="gray.900">and expand your vocabulary, elevate your skills!</Text>
             </Box>
             <Flex align="center" justify="center" w="full">
               <Button isLoading={isLoading} onClick={handleActionButtonClick}>

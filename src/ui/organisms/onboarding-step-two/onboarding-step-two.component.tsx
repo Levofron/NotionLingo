@@ -6,6 +6,7 @@ import {
   Button,
   ChakraNextLink,
   Flex,
+  Icon,
   List,
   ListIcon,
   ListItem,
@@ -25,7 +26,7 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
       <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
         Create a Notion integration
       </Text>
-      <Text color="gray.400" fontSize="sm" fontWeight="normal">
+      <Text color="gray.400" fontWeight="normal">
         A Notion integration lets you connect information in Notion to other software.
       </Text>
     </Flex>
@@ -82,18 +83,17 @@ export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = ({
       </Flex>
       <Flex justify="space-between" mt="24px">
         <Button
-          leftIcon={<FaChevronLeft size="10px" />}
-          variant="secondary"
+          leftIcon={<Icon as={FaChevronLeft} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+          mode="light"
           onClick={onPreviousButtonClick}
         >
-          <Text fontSize="xs" fontWeight="bold">
-            PREV
-          </Text>
+          Back
         </Button>
-        <Button rightIcon={<FaChevronRight size="10px" />} onClick={onNextButtonClick}>
-          <Text fontSize="xs" fontWeight="bold">
-            NEXT
-          </Text>
+        <Button
+          rightIcon={<Icon as={FaChevronRight} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+          onClick={onNextButtonClick}
+        >
+          Next
         </Button>
       </Flex>
     </Flex>

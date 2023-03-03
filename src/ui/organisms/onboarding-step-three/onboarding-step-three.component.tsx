@@ -2,7 +2,17 @@ import { FC } from 'react';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-import { Button, Flex, List, ListIcon, ListItem, TabPanel, Text, TextUnderline } from '@ui/atoms';
+import {
+  Button,
+  Flex,
+  Icon,
+  List,
+  ListIcon,
+  ListItem,
+  TabPanel,
+  Text,
+  TextUnderline,
+} from '@ui/atoms';
 
 import { IOnboardingStepThreeProps } from './onboarding-step-three.types';
 
@@ -15,7 +25,7 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
       <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
         Share a database with your integration
       </Text>
-      <Text withBalancer color="gray.400" fontSize="sm" fontWeight="normal">
+      <Text withBalancer color="gray.400" fontWeight="normal">
         Now that you have created an integration, you need to grant it access to a database. To keep
         your information secure, integrations do not have access to any pages or databases in the
         workspace at first. You must share specific pages with an integration in order for the API
@@ -58,18 +68,17 @@ export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = ({
       </Flex>
       <Flex justify="space-between" mt="24px">
         <Button
-          leftIcon={<FaChevronLeft size="10px" />}
-          variant="secondary"
+          leftIcon={<Icon as={FaChevronLeft} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+          mode="light"
           onClick={onPreviousButtonClick}
         >
-          <Text fontSize="xs" fontWeight="bold">
-            PREV
-          </Text>
+          Back
         </Button>
-        <Button rightIcon={<FaChevronRight size="10px" />} onClick={onNextButtonClick}>
-          <Text fontSize="xs" fontWeight="bold">
-            NEXT
-          </Text>
+        <Button
+          rightIcon={<Icon as={FaChevronRight} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+          onClick={onNextButtonClick}
+        >
+          Next
         </Button>
       </Flex>
     </Flex>

@@ -66,7 +66,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
               Expand your vocabulary, elevate your skills
             </Highlight>
           </Heading>
-          <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
+          <Text color="gray.900">
             Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to
             easily learn new words and phrases from your own <b>Notion</b> database!
           </Text>
@@ -85,11 +85,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
             >
               {buttonLabel}
             </Button>
-            <Text
-              cursor="pointer"
-              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
-              onClick={handleLearnMoreClick}
-            >
+            <Text cursor="pointer" onClick={handleLearnMoreClick}>
               Learn more
             </Text>
           </Stack>

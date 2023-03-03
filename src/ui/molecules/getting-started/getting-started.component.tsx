@@ -49,9 +49,7 @@ const GettingStartedComponent: ForwardRefRenderFunction<HTMLDivElement> = (_, re
             <Heading color="gray.50" pt={2}>
               {step.title}
             </Heading>
-            <Text color="gray.300" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
-              {step.text}
-            </Text>
+            <Text color="gray.300">{step.text}</Text>
           </Stack>
         ))}
       </Flex>

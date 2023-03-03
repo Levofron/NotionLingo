@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-import { Button, Flex, List, ListIcon, ListItem, TabPanel, Text } from '@ui/atoms';
+import { Button, Flex, Icon, List, ListIcon, ListItem, TabPanel, Text } from '@ui/atoms';
 
 import { useRouter } from '@infrastructure/utils';
 
@@ -40,7 +40,7 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
         >
           Does your Notion database with vocabulary valid?
         </Text>
-        <Text color="gray.400" fontSize="sm" fontWeight="normal">
+        <Text color="gray.400" fontWeight="normal">
           So far we only support specific column names.
         </Text>
       </Flex>
@@ -87,15 +87,18 @@ export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
           </List>
         </Flex>
         <Flex justify="space-between" mt="24px">
-          <Button leftIcon={<FaChevronLeft size="10px" />} variant="secondary" onClick={back}>
-            <Text fontSize="xs" fontWeight="bold">
-              BACK
-            </Text>
+          <Button
+            leftIcon={<Icon as={FaChevronLeft} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+            mode="light"
+            onClick={back}
+          >
+            Back
           </Button>
-          <Button rightIcon={<FaChevronRight size="10px" />} onClick={onNextButtonClick}>
-            <Text fontSize="xs" fontWeight="bold">
-              NEXT
-            </Text>
+          <Button
+            rightIcon={<Icon as={FaChevronRight} fontSize={{ base: 11, sm: 13, md: 14 }} />}
+            onClick={onNextButtonClick}
+          >
+            Next
           </Button>
         </Flex>
       </Flex>
