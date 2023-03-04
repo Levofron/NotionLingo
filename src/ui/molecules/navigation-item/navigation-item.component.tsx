@@ -30,7 +30,7 @@ export const NavigationItem: FC<INavigationItemProps> = ({
         borderColor="gray.900"
         color="gray.900"
         cursor="pointer"
-        p="4"
+        p={{ base: 3, sm: 4 }}
         role="group"
         textDecoration="none"
         {...restProps}
