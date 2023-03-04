@@ -61,9 +61,7 @@ export const Faq = (): JSX.Element => (
                   )}
                 </AccordionButton>
                 <AccordionPanel pb={{ base: 2, sm: 4 }}>
-                  <Text withBalancer fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
-                    {answer}
-                  </Text>
+                  <Text withBalancer>{answer}</Text>
                 </AccordionPanel>
               </>
             )}

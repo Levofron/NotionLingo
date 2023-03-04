@@ -122,17 +122,13 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               src={user?.avatarUrl}
             />
             <Heading fontSize="2xl">{user?.fullName}</Heading>
-            <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={4}>
+            <Text color="gray.900" mb={4}>
               {user?.email}
             </Text>
-            <Text color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
+            <Text color="gray.900">
               Days in streak: <b>{user?.daysInStreak}</b>
             </Text>
-            <Text
-              color="gray.900"
-              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
-              mb={{ base: 5, sm: 8 }}
-            >
+            <Text color="gray.900" mb={{ base: 5, sm: 8 }}>
               Total learned words: <b>{user?.totalLearnedWords}</b>
               {user?.totalLearnedWords ? '!' : ''}
             </Text>

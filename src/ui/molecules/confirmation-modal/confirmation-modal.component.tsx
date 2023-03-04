@@ -51,7 +51,7 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
       <ModalContent as={Card} borderRadius={0} boxShadow="6px 6px 0 var(--chakra-colors-gray-900)">
         <ModalHeader textAlign="center">{title}</ModalHeader>
         <ModalBody textAlign="center">
-          <Balancer ratio={0}>{description}</Balancer>
+          <Balancer>{description}</Balancer>
         </ModalBody>
         <ModalFooter alignItems="center" as={Flex} justifyContent="center">
           <Button ref={cancelRef} disabled={isConfirmLoading} mode="light" onClick={onClose}>

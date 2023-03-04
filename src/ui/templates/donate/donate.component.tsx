@@ -22,25 +22,20 @@ export const DonateTemplate = (): JSX.Element => (
           <Heading fontSize="2xl" mb={2}>
             Donations
           </Heading>
-          <Text withBalancer color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={4}>
+          <Text withBalancer color="gray.900" mb={4}>
             This service is available for free and will be also in the future. If you use and
             appreciate this service, please consider supporting this project financially.
           </Text>
           <Heading fontSize="2xl" mb={2}>
             Buy Me a Coffee
           </Heading>
-          <Text withBalancer color="gray.900" fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} mb={4}>
+          <Text withBalancer color="gray.900" mb={4}>
             To us Buy Me a Coffee, click on the <b>Buy Me a Coffee</b> button below.
           </Text>
           <Heading fontSize="2xl" mb={2}>
             Paypal
           </Heading>
-          <Text
-            withBalancer
-            color="gray.900"
-            fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
-            mb={{ base: 5, sm: 8 }}
-          >
+          <Text withBalancer color="gray.900" mb={{ base: 5, sm: 8 }}>
             To use PayPal, click on the <b>PayPal</b> button below.
           </Text>
           <Flex
@@ -68,12 +63,7 @@ export const DonateTemplate = (): JSX.Element => (
               />
             </ChakraNextLink>
           </Flex>
-          <Text
-            color="gray.900"
-            fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
-            fontWeight="bold"
-            textAlign="center"
-          >
+          <Text color="gray.900" fontWeight="bold" textAlign="center">
             I appreciate your support!
           </Text>
         </Card>
