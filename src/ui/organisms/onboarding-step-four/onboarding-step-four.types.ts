@@ -1,4 +1,4 @@
-export interface IOnboardingStepFourProps {
-  onNextButtonClick: () => void;
-  onPreviousButtonClick: () => void;
-}
+import { IOnboardingStepLayoutProps } from '@ui/molecules';
+
+export interface IOnboardingStepFourProps
+  extends Required<Pick<IOnboardingStepLayoutProps, 'onBackButtonClick' | 'onNextButtonClick'>> {}

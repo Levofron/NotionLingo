@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 
-import { Button, Flex, Spinner, TabPanel, Text } from '@ui/atoms';
-import { AvailableNotionDatabase } from '@ui/molecules';
+import { Button, Flex, Spinner, Text } from '@ui/atoms';
+import { AvailableNotionDatabase, OnboardingStepLayout } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
@@ -10,7 +10,7 @@ import { useAxios, useRouter, useToast } from '@infrastructure/utils';
 import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
 
 export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
-  onBackToFirstStepClick,
+  onBackButtonClick,
 }): JSX.Element => {
   const {
     data: availableNotionDatabasesData,
@@ -53,9 +53,9 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
             No available Notion pages were found. Please verify if your database has data or
             contains correct column names!
           </Text>
-          <Button mt="48px" onClick={onBackToFirstStepClick}>
+          <Button mt="48px" onClick={onBackButtonClick}>
             <Text fontSize="xs" fontWeight="bold">
-              BACK TO FIRST STEP
+              Back to first step
             </Text>
           </Button>
         </Flex>
@@ -73,31 +73,13 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   };
 
   return (
-    <TabPanel mx="auto" width={{ sm: '500px', md: '600px', lg: '650px' }}>
-      <Flex
-        align="center"
-        direction="column"
-        justify="center"
-        mx="auto"
-        textAlign="center"
-        width="80%"
-      >
-        <Text color="gray.700" fontSize={{ sm: 'xl', md: '2xl' }} fontWeight="bold" mb="4px">
-          Select a Notion database
-        </Text>
-        <Text withBalancer color="gray.400" fontSize="sm" fontWeight="normal">
-          Please indicate from which Notion database we should use to get your vocabulary.
-        </Text>
-      </Flex>
-      <Flex
-        alignItems="center"
-        direction="column"
-        gap={5}
-        mt={{ base: '25px', md: '40px' }}
-        width="100%"
-      >
+    <OnboardingStepLayout
+      subtitle="Please indicate from which Notion database we should use to get your vocabulary."
+      title="Select a Notion database"
+    >
+      <Flex alignItems="center" direction="column" gap={5} width="100%">
         {renderAvailableNotionDatabases()}
       </Flex>
-    </TabPanel>
+    </OnboardingStepLayout>
   );
 };
