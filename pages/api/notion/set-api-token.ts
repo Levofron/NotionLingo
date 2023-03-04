@@ -3,6 +3,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   encrypt,
@@ -12,7 +13,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 import { getAvailableDatabases } from './table-columns';
 

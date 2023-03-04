@@ -4,6 +4,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { isObject, objectKeys } from '@infrastructure/utils';
+
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -13,7 +14,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,

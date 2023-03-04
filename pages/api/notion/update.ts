@@ -5,6 +5,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString, hasOwnProperty } from '@infrastructure/utils';
+
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -15,7 +16,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 

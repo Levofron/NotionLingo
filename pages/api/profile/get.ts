@@ -3,6 +3,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { getSupabaseService, supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   validateIfParametersExistsMiddleware,
@@ -10,7 +11,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 export const getProfileById = async (userId: string) => {
   const { data } = await supabaseInstance

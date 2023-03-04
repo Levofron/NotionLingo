@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   decrypt,
@@ -11,7 +12,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 import { getProfileById } from '../profile/get';
 import { getAvailableDatabases } from './table-columns';
