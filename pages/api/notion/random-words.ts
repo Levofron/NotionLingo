@@ -6,9 +6,9 @@ import {
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
 
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,

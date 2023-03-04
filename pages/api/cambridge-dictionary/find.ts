@@ -3,9 +3,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 import { exec } from 'node:child_process';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
 
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
