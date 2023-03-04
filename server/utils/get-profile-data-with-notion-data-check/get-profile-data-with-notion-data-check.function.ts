@@ -1,6 +1,6 @@
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 
 import { getProfileById } from '..';
 

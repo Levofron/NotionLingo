@@ -13,7 +13,9 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getProfileDataWithNotionDataCheck,
   getRandomNumber,
+  getTextFromPagePropertyInstance,
   getUserFromRequest,
   textToIpa,
   validateIfUserIsLoggedInMiddleware,
@@ -30,8 +32,6 @@ import {
 } from '@config/constants';
 
 import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
-import { getProfileDataWithNotionDataCheck } from './table-columns';
-import { getTextFromPagePropertyInstance } from './update';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
