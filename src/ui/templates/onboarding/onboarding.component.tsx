@@ -124,21 +124,21 @@ export const OnboardingTemplate = (): JSX.Element => {
         <TabPanels maxW={{ md: '90%', lg: '100%' }} mt={{ base: '10px', md: '24px' }} mx="auto">
           <OnboardingStepOne onNextButtonClick={displayCreateNotionIntegrationTab} />
           <OnboardingStepTwo
+            onBackButtonClick={displayVerifyDatabaseTab}
             onNextButtonClick={displayShareDatabaseIntegrationTab}
-            onPreviousButtonClick={displayVerifyDatabaseTab}
           />
           <OnboardingStepThree
+            onBackButtonClick={displayCreateNotionIntegrationTab}
             onNextButtonClick={displayValidateIntegrationTab}
-            onPreviousButtonClick={displayCreateNotionIntegrationTab}
           />
           {activeTabs.validateIntegration ? (
             <OnboardingStepFour
+              onBackButtonClick={displayShareDatabaseIntegrationTab}
               onNextButtonClick={displaySelectNotionDatabaseTab}
-              onPreviousButtonClick={displayShareDatabaseIntegrationTab}
             />
           ) : null}
           {activeTabs.selectNotionDatabase ? (
-            <OnboardingStepFive onBackToFirstStepClick={displayVerifyDatabaseTab} />
+            <OnboardingStepFive onBackButtonClick={displayVerifyDatabaseTab} />
           ) : null}
         </TabPanels>
       </Tabs>
