@@ -6,6 +6,7 @@ import { isString } from '@infrastructure/utils';
 
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
+  getProfileById,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
@@ -15,8 +16,6 @@ import {
 } from '@server/utils';
 
 import { supabaseInstance } from '@config/supabase/supabase.instance';
-
-import { getProfileById } from './get';
 
 const isIsoDate = (string: string) => {
   if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(string)) {

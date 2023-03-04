@@ -7,6 +7,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getProfileById,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
@@ -16,8 +17,6 @@ import {
 } from '@server/utils';
 
 import { supabaseInstance } from '@config/supabase/supabase.instance';
-
-import { getProfileById } from '../profile/get';
 
 const updateProfileNotionApiKey = async (userId: string, newNotionDatabaseId: string) =>
   supabaseInstance

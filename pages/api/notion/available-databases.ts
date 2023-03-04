@@ -6,6 +6,7 @@ import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   decrypt,
+  getProfileById,
   getUserFromRequest,
   isValidNotionDatabaseSchema,
   validateIfUserIsLoggedInMiddleware,
@@ -14,7 +15,6 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { getProfileById } from '../profile/get';
 import { getAvailableDatabases } from './table-columns';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

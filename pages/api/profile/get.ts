@@ -5,6 +5,7 @@ import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
+  getProfileById,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
@@ -12,18 +13,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { getSupabaseService, supabaseInstance } from '@config/supabase/supabase.instance';
-
-export const getProfileById = async (userId: string) => {
-  const { data } = await supabaseInstance
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
-
-  return data;
-};
+import { getSupabaseService } from '@config/supabase/supabase.instance';
 
 const getUserMetadataById = (userId: string) => {
   const supabaseService = getSupabaseService();

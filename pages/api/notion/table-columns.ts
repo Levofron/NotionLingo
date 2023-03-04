@@ -9,6 +9,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getProfileById,
   getUserFromRequest,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
@@ -21,8 +22,6 @@ import {
   SUPPORTED_MEANING_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@config/constants';
-
-import { getProfileById } from '../profile/get';
 
 export const getProfileDataWithNotionDataCheck = async (userId: string) => {
   const profileData = await getProfileById(userId);
