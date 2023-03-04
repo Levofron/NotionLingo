@@ -5,3 +5,6 @@ export * from './sidebar-with-header/sidebar-with-header.component';
 export * from './onboarding-step-five/onboarding-step-five.component';
 export * from './onboarding-step-four/onboarding-step-four.component';
 export * from './onboarding-step-three/onboarding-step-three.component';
+export * from './notion-word-card-back/notion-word-card-back.component';
+export * from './notion-word-card-front/notion-word-card-front.component';
+export * from './notion-word-card-animation-wrapper/notion-word-card-animation-wrapper.component';

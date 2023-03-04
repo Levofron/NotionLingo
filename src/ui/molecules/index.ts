@@ -16,11 +16,8 @@ export * from './full-screen-loader/full-screen-loader.component';
 export * from './confirmation-modal/confirmation-modal.component';
 export * from './back-to-top-button/back-to-top-button.component';
 export * from './onboarding-tab-list/onboarding-tab-list.component';
-export * from './notion-word-card-back/notion-word-card-back.component';
-export * from './notion-word-card-front/notion-word-card-front.component';
 export * from './available-notion-database/available-notion-database.component';
 export * from './dashboard-profile-details/dashboard-profile-details.component';
-export * from './notion-word-card-animation-wrapper/notion-word-card-animation-wrapper.component';
 
 export * from './confirmation-modal/confirmation-modal.types';
 export * from './onboarding-tab-list/onboarding-tab-list.types';
