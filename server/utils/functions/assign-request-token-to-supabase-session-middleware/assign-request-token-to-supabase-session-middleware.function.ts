@@ -1,7 +1,7 @@
 import cookie from 'cookie';
 import { NextApiRequest } from 'next';
 
-import { supabaseInstance } from '@infrastructure/config';
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 import { getUserFromRequest } from '..';
 

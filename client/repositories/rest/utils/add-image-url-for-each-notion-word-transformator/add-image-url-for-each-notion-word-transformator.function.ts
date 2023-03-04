@@ -2,7 +2,7 @@ import { INotionWordResponseRecord } from '@api/rest/rest.types';
 
 import { INotionWord } from '@domain/entities/rest.types';
 
-import { UNSPLASH_BASE_URL } from '@constants';
+import { UNSPLASH_BASE_URL } from '@config/constants';
 
 export const addImageUrlForEachNotionWordTransformator = (
   randomNotionWords: INotionWordResponseRecord[],

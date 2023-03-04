@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { getSupabaseService, supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 
 import {
@@ -12,6 +11,8 @@ import {
   validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
+
+import { getSupabaseService, supabaseInstance } from '@config/supabase/supabase.instance';
 
 export const getProfileById = async (userId: string) => {
   const { data } = await supabaseInstance

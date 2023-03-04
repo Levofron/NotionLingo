@@ -11,7 +11,7 @@ import {
   LINKEDIN_LINK,
   PAYPAL_LINK,
   TWITTER_LINK,
-} from '@constants';
+} from '@config/constants';
 
 // TODO - generate some logo for SEO
 export const HomePage = (): JSX.Element => (

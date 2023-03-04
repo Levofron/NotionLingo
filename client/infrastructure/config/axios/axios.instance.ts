@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
 import { hasOwnProperty } from '@infrastructure/utils';
 
-import { API_ROUTE_SECRET, DEFAULT_ERROR_MESSAGE } from '@constants';
+import { API_ROUTE_SECRET, DEFAULT_ERROR_MESSAGE } from '@config/constants';
 
 export const axiosConfiguration: AxiosRequestConfig = {
   baseURL: '/api',
