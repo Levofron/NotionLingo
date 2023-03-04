@@ -3,13 +3,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
 import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
+import { DashboardProfileDetails, FullScreenLoader } from '@ui/molecules';
 import {
-  DashboardProfileDetails,
-  FullScreenLoader,
   NotionWordCardAnimationWrapper,
   NotionWordCardBack,
   NotionWordCardFront,
-} from '@ui/molecules';
+} from '@ui/organisms';
 
 import { restModule } from '@adapter/modules';
 
