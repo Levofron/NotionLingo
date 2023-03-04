@@ -2,9 +2,9 @@ import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { isObject, objectKeys } from '@infrastructure/utils';
 
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
