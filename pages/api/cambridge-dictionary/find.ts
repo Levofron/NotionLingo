@@ -5,12 +5,13 @@ import { exec } from 'node:child_process';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString } from '@infrastructure/utils';
+
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 interface IMeaningWithExamples {
   examples: string[];

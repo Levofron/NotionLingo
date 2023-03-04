@@ -18,6 +18,7 @@
     "^@domain/(.*)$",
     "^@infrastructure",
     "^@infrastructure/(.*)$",
+    "^@server/(.*)$",
     "^@constants",
     "([.]svg|[.]jpg|[.]jpeg|[.]gif|[.]png)$",
     "^[./]",

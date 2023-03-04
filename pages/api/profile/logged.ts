@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   getUserFromRequest,
@@ -8,7 +9,7 @@ import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 import { getProfileAndUserMetadataById } from './get';
 
