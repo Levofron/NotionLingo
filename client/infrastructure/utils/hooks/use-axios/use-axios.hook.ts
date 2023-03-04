@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { isError as isErrorTypeGuard, isString } from '@infrastructure/utils';
 
-import { DEFAULT_ERROR_MESSAGE } from '@constants';
+import { DEFAULT_ERROR_MESSAGE } from '@config/constants';
 
 type TCallback<TParam, TResponse> = (...params: TParam[]) => Promise<TResponse>;
 

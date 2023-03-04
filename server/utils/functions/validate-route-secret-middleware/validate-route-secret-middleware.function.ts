@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { API_ROUTE_SECRET } from '@constants';
+import { API_ROUTE_SECRET } from '@config/constants';
 
 export const validateRouteSecretMiddleware = (req: NextApiRequest, res: NextApiResponse) => {
   if (req.headers.authorization !== API_ROUTE_SECRET) {

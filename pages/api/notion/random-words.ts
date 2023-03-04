@@ -27,7 +27,7 @@ import {
   SUPPORTED_MEANING_COLUMN_NAMES,
   SUPPORTED_TYPE_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
-} from '@constants';
+} from '@config/constants';
 
 import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
 import { getProfileDataWithNotionDataCheck } from './table-columns';

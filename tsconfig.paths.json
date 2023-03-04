@@ -15,7 +15,8 @@
       "@infrastructure/*": ["./client/infrastructure/*"],
       "@infrastructure": ["./client/infrastructure"],
       "@server/*": ["./server/*"],
-      "@constants": ["./config/constants"]
+      "@config/*": ["./config/*"],
+      "@config": ["./config"]
     }
   }
 }

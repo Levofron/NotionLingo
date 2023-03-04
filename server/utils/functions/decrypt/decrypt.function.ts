@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import { CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY } from '@constants';
+import { CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY } from '@config/constants';
 
 import { IHash } from './decrypt.type';
 

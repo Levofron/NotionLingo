@@ -11,7 +11,7 @@ import {
   LINKEDIN_LINK,
   PAYPAL_LINK,
   TWITTER_LINK,
-} from '@constants';
+} from '@config/constants';
 
 export const Footer: FC = (): JSX.Element => {
   const currentYear = new Date().getUTCFullYear();

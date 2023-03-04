@@ -2,7 +2,7 @@ import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
   SUPPORTED_MEANING_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
-} from '@constants';
+} from '@config/constants';
 
 import {
   IDatabaseProperties,

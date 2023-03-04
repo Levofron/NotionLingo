@@ -11,7 +11,7 @@ import {
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_RATE,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE,
   LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOLUME,
-} from '@constants';
+} from '@config/constants';
 
 import {
   getSpeechSynthesisValueFromLocalStorage,

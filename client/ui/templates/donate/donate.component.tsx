@@ -11,7 +11,7 @@ import {
   Text,
 } from '@ui/atoms';
 
-import { BUY_ME_A_COFFEE_LINK, PAYPAL_LINK } from '@constants';
+import { BUY_ME_A_COFFEE_LINK, PAYPAL_LINK } from '@config/constants';
 
 export const DonateTemplate = (): JSX.Element => (
   <Box bg="gray.50" height="100%" overflow="hidden">

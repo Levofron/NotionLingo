@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
 import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { isString } from '@infrastructure/utils';
 
@@ -14,6 +13,8 @@ import {
   validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
+
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 import { getProfileById } from './get';
 

@@ -21,7 +21,7 @@ import { localStorageModule, restModule } from '@adapter/modules';
 
 import { useAxios, useToast } from '@infrastructure/utils';
 
-import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@constants';
+import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@config/constants';
 
 import { contactFormValidationSchema } from './contact-form.defaults';
 

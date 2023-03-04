@@ -1,6 +1,6 @@
 import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
-import { LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE } from '@constants';
+import { LOCAL_STORAGE_KEY_SPEECH_SYNTHESIS_VOICE } from '@config/constants';
 
 export const fillUpMissedLocalStorageFields = () => {
   if (!localStorageModule.isSupported() || !speechSynthesisModule.isSupported()) {

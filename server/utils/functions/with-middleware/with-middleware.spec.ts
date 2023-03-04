@@ -1,6 +1,6 @@
 import { functionImportTest } from '@infrastructure/utils';
 
-import { API_ROUTE_SECRET } from '@constants';
+import { API_ROUTE_SECRET } from '@config/constants';
 
 import { validateRequestMethodMiddleware, validateRouteSecretMiddleware } from '..';
 import { withMiddleware } from './with-middleware.function';
