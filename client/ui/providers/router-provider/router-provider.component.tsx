@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { localStorageModule } from '@adapter/modules';
 
@@ -29,8 +29,21 @@ const updateStorePathValues = () => {
   localStorageModule.setItem({ key: CURRENT_PATH_KEY, value: window.location.pathname });
 };
 
+const useIsFirstRender = () => {
+  const isFirst = useRef(true);
+
+  if (isFirst.current) {
+    isFirst.current = false;
+
+    return true;
+  }
+
+  return isFirst.current;
+};
+
 export const RouterProvider: FC<IRouterProviderProps> = ({ children }): JSX.Element => {
   const router = useRouter();
+  const isFirstRender = useIsFirstRender();
 
   useEffect(() => {
     if (!localStorageModule.isSupported()) return;
@@ -39,7 +52,11 @@ export const RouterProvider: FC<IRouterProviderProps> = ({ children }): JSX.Elem
     localStorageModule.setItem({ key: CURRENT_PATH_KEY, value: window.location.pathname });
   }, []);
 
-  useEffect(updateStorePathValues, [router.asPath]);
+  useEffect(() => {
+    if (!isFirstRender) {
+      updateStorePathValues();
+    }
+  }, [router.asPath]);
 
   return (
     <RouterContext.Provider value={{ getCurrentPath, getPreviousPath }}>
