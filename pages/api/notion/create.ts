@@ -9,6 +9,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  generateMemoryCacheKey,
   getNotionTableColumns,
   getProfileDataWithNotionDataCheck,
   getUserFromRequest,
@@ -117,13 +118,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     properties: newNotionRecordProperties,
   });
 
-  const cacheKeyObject = {
-    profileId: user!.id,
-    databaseId: profileData.notion_database_id,
-    notionApiKey,
-  };
-
-  const cacheKey = JSON.stringify(cacheKeyObject);
+  const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
 
   memoryCache.del(cacheKey);
 
