@@ -1,5 +1,5 @@
 import { queryTypes, useQueryState } from 'next-usequerystate';
-import { ChangeEvent, FC, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect, useRef } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
 import { Container, Divider, Flex, Heading, Text } from '@ui/atoms';
@@ -24,8 +24,15 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
 }): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
   const { copyToClipboard } = useCopyToClipboard();
   const [word, setWord] = useQueryState('word', queryTypes.string);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const {
     data: getWordSuggestionsData,
@@ -80,6 +87,7 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
         pt={{ base: 6, sm: 10 }}
       >
         <InputControl
+          ref={inputRef}
           isRequired
           defaultValue={word || ''}
           errorMessage={getWordSuggestionsError || undefined}

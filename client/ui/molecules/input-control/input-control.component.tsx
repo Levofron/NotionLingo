@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ForwardRefRenderFunction, forwardRef } from 'react';
 
 import {
   FormControl,
@@ -11,15 +11,10 @@ import {
 
 import { IInputControlProps } from './input-control.types';
 
-export const InputControl: FC<IInputControlProps> = ({
-  errorMessage,
-  isDisabled,
-  isLoading,
-  isRequired,
-  label,
-  mode,
-  ...inputProps
-}): JSX.Element => (
+const InputControlComponent: ForwardRefRenderFunction<HTMLInputElement, IInputControlProps> = (
+  { errorMessage, isDisabled, isLoading, isRequired, label, mode, ...inputProps },
+  ref,
+): JSX.Element => (
   <FormControl isDisabled={isDisabled} isInvalid={!!errorMessage} isRequired={isRequired}>
     {label ? (
       <FormLabel
@@ -31,7 +26,7 @@ export const InputControl: FC<IInputControlProps> = ({
         {isLoading ? <Spinner ml="5px" size="xs" /> : null}
       </FormLabel>
     ) : null}
-    <Input mode={mode} size={{ base: 'sm', sm: 'md' }} {...inputProps} />
+    <Input ref={ref} mode={mode} size={{ base: 'sm', sm: 'md' }} {...inputProps} />
     {errorMessage ? (
       <FormErrorMessage height={4} lineHeight="normal" mt="3px">
         {errorMessage}
@@ -41,3 +36,5 @@ export const InputControl: FC<IInputControlProps> = ({
     )}
   </FormControl>
 );
+
+export const InputControl = forwardRef(InputControlComponent);
