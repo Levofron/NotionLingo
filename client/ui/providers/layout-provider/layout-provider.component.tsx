@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react';
 
 import { Box } from '@ui/atoms';
-import { BackToTopButton } from '@ui/molecules';
+import { BackToTopButton } from '@ui/organisms';
 
 import { ILayoutProviderProps } from './layout-provider.types';
 

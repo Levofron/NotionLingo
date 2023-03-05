@@ -4,7 +4,7 @@ const inquirerDirectory = require('inquirer-directory');
 module.exports = (plop) => {
   plop.addPrompt('directory', inquirerDirectory);
   plop.addHelper('absPath', (_absPath) =>
-    path.resolve(plop.getPlopfilePath(), '../../../client', _absPath),
+    path.resolve(plop.getPlopfilePath(), '../../../client/ui', _absPath),
   );
   plop.addPartial(
     'componentNameInBracesPartial',
@@ -21,13 +21,13 @@ module.exports = (plop) => {
       {
         type: 'list',
         name: 'type',
-        choices: ['component', 'layout', 'template', 'page'],
+        choices: ['component', 'page'],
         message: 'What type of component do you want to generate?',
       },
       {
         name: 'path',
         type: 'directory',
-        basePath: './client',
+        basePath: './client/ui',
         message: 'Where would you like to put this component?',
       },
     ],

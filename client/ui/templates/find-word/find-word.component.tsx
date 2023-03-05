@@ -1,10 +1,9 @@
-import { motion } from 'framer-motion';
 import { queryTypes, useQueryState } from 'next-usequerystate';
 import { ChangeEvent, FC, useEffect } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
-import { Container, Divider, Flex, Heading, Icon, Text } from '@ui/atoms';
-import { InputControl } from '@ui/molecules';
+import { Container, Divider, Flex, Heading, Text } from '@ui/atoms';
+import { InputControl, MotionIconButton } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
@@ -136,28 +135,14 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
                 <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
                   <Flex alignItems="flex-start" gap={{ base: 1, sm: 2, md: 4 }}>
                     {isUserAuthenticated ? (
-                      <motion.button
-                        animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-                        whileHover={{
-                          scale: 1.2,
-                          transition: { duration: 0.2 },
-                        }}
-                        whileTap={{ scale: 1 }}
-                      >
-                        <Icon
-                          as={BsPlusCircle}
-                          bg="gray.50"
-                          borderRadius="999px"
-                          cursor="pointer"
-                          fontSize={{ base: '5xl', md: '6xl' }}
-                          p={1}
-                          onClick={handleAddNotionWordClick(
-                            getWordSuggestionsData.word,
-                            meaning,
-                            example,
-                          )}
-                        />
-                      </motion.button>
+                      <MotionIconButton
+                        icon={BsPlusCircle}
+                        onClick={handleAddNotionWordClick(
+                          getWordSuggestionsData.word,
+                          meaning,
+                          example,
+                        )}
+                      />
                     ) : null}
                     <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }} w="100%">
                       <Heading
