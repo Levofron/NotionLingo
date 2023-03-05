@@ -8,8 +8,8 @@ import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
-  decrypt,
   generateMemoryCacheKey,
+  getNotionApiKeyFromProfile,
   getNotionTableColumns,
   getProfileDataWithNotionDataCheck,
   getUserFromRequest,
@@ -42,9 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
-  const hash = JSON.parse(profileData?.notion_api_key);
-  const notionApiKey = decrypt(hash);
-
+  const notionApiKey = getNotionApiKeyFromProfile(profileData);
   const notionClient = createNotionClient(notionApiKey);
   const tableColumns = await getNotionTableColumns(notionApiKey, profileData.notion_database_id);
 

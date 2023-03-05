@@ -1,9 +1,13 @@
+import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
+  generateMemoryCacheKey,
+  getNotionApiKeyFromProfile,
+  getProfileDataWithNotionDataCheck,
   getUserFromRequest,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
@@ -15,6 +19,7 @@ import { getSupabaseService, supabaseInstance } from '@config/supabase/supabase.
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
+  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
   const supabaseService = getSupabaseService();
 
@@ -30,6 +35,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       is_deleted: true,
     })
     .eq('id', user?.id);
+
+  const notionApiKey = getNotionApiKeyFromProfile(profileData);
+  const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
+
+  memoryCache.del(cacheKey);
 
   res.status(EHttpStatusCode.OK).json({ userId: user?.id });
 };
