@@ -11,6 +11,7 @@ export * from './get-notion-table-columns/get-notion-table-columns.function';
 export * from './generate-memory-cache-key/generate-memory-cache-key.function';
 export * from './get-available-notion-databases/get-available-notion-databases.function';
 export * from './is-valid-notion-database-schema/is-valid-notion-database-schema.function';
+export * from './get-notion-api-key-from-profile/get-notion-api-key-from-profile.function';
 export * from './validate-route-secret-middleware/validate-route-secret-middleware.function';
 export * from './validate-request-method-middleware/validate-request-method-middleware.function';
 export * from './get-text-from-page-property-instance/get-text-from-page-property-instance.function';

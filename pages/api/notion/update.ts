@@ -9,7 +9,7 @@ import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
-  decrypt,
+  getNotionApiKeyFromProfile,
   getNotionTableColumns,
   getProfileDataWithNotionDataCheck,
   getTextFromPagePropertyInstance,
@@ -57,9 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const hash = JSON.parse(profileData?.notion_api_key);
-  const notionApiKey = decrypt(hash);
-
+  const notionApiKey = getNotionApiKeyFromProfile(profileData);
   const notionClient = createNotionClient(notionApiKey);
 
   await notionClient.pages.retrieve({
@@ -108,7 +106,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const meaningText = getTextFromPageProperty([meaningColumn.columnName]);
   const exampleSentenceText = getTextFromPageProperty([exampleSentenceColumn.columnName]);
-
   const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
 
   memoryCache.del(cacheKey);
