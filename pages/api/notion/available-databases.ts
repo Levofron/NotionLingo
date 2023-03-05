@@ -5,6 +5,8 @@ import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   decrypt,
+  getAvailableNotionDatabases,
+  getProfileById,
   getUserFromRequest,
   isValidNotionDatabaseSchema,
   validateIfUserIsLoggedInMiddleware,
@@ -12,9 +14,6 @@ import {
   validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
-
-import { getProfileById } from '../profile/get';
-import { getAvailableDatabases } from './table-columns';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
@@ -30,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const hash = JSON.parse(profileData.notion_api_key);
   const notionApiKey = decrypt(hash);
 
-  const availableDatabases = await getAvailableDatabases(notionApiKey);
+  const availableDatabases = await getAvailableNotionDatabases(notionApiKey);
 
   const filteredAvailableDatabases = availableDatabases.filter((_database) =>
     isValidNotionDatabaseSchema(_database.properties),

@@ -4,7 +4,7 @@ const inquirerDirectory = require('inquirer-directory');
 module.exports = (plop) => {
   plop.addPrompt('directory', inquirerDirectory);
   plop.addHelper('absPath', (_absPath) =>
-    path.resolve(plop.getPlopfilePath(), '../../../client', _absPath),
+    path.resolve(plop.getPlopfilePath(), '../../..', _absPath),
   );
 
   plop.setGenerator('function', {
@@ -16,8 +16,8 @@ module.exports = (plop) => {
       },
       {
         name: 'path',
+        basePath: '.',
         type: 'directory',
-        basePath: './client',
         message: 'Where would you like to put this function?',
       },
     ],

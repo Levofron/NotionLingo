@@ -10,6 +10,9 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getNotionTableColumns,
+  getProfileDataWithNotionDataCheck,
+  getTextFromPagePropertyInstance,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
@@ -17,8 +20,6 @@ import {
   validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
-
-import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 
 export const getTitleOrRichTextProperty = (columnName: string, type: string, newValue: string) => {
   if (!newValue) {
@@ -37,45 +38,6 @@ export const getTitleOrRichTextProperty = (columnName: string, type: string, new
     },
   };
 };
-
-export const getTextFromPagePropertyInstance =
-  (pageProperties: PageObjectResponse['properties']) => (propertyNames: string | string[]) => {
-    const parsedPropertyNames = Array.isArray(propertyNames) ? propertyNames : [propertyNames];
-
-    let selectedPageProperties = pageProperties[parsedPropertyNames[0]];
-
-    if (!selectedPageProperties) {
-      for (const _propertyName of parsedPropertyNames) {
-        if (pageProperties[_propertyName]) {
-          selectedPageProperties = pageProperties[_propertyName];
-
-          break;
-        }
-      }
-    }
-
-    if (!selectedPageProperties) {
-      return null;
-    }
-
-    if (selectedPageProperties.type === 'title') {
-      return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'rich_text') {
-      return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'multi_select') {
-      return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
-    }
-
-    if (selectedPageProperties.type === 'select') {
-      return selectedPageProperties.select?.name || '';
-    }
-
-    throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
-  };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
@@ -102,7 +64,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     page_id: id,
   });
 
-  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_database_id);
+  const tableColumns = await getNotionTableColumns(notionApiKey, profileData.notion_database_id);
 
   const meaningColumn = tableColumns.find((tableColumn) => tableColumn?.isMeaning);
   const exampleSentenceColumn = tableColumns.find((tableColumn) => tableColumn?.isExampleSentence);

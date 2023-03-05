@@ -9,6 +9,8 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getNotionTableColumns,
+  getProfileDataWithNotionDataCheck,
   getUserFromRequest,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
@@ -16,7 +18,6 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 import { getTitleOrRichTextProperty } from './update';
 
 const getMultiSelectProperty = (columnName: string, type: string, newValue: string) => {
@@ -44,7 +45,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const notionApiKey = decrypt(hash);
 
   const notionClient = createNotionClient(notionApiKey);
-  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_database_id);
+  const tableColumns = await getNotionTableColumns(notionApiKey, profileData.notion_database_id);
 
   const requestBodyKeys = Object.keys(requestBody);
 

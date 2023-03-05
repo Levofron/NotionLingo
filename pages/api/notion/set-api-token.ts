@@ -5,6 +5,7 @@ import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   encrypt,
+  getAvailableNotionDatabases,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
@@ -14,8 +15,6 @@ import {
 } from '@server/utils';
 
 import { supabaseInstance } from '@config/supabase/supabase.instance';
-
-import { getAvailableDatabases } from './table-columns';
 
 const updateProfileNotionApiKey = async (userId: string, newNotionApiKey: string) =>
   supabaseInstance
@@ -31,7 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { token } = req.body;
 
   const user = await getUserFromRequest(req);
-  const availableDatabases = await getAvailableDatabases(token);
+  const availableDatabases = await getAvailableNotionDatabases(token);
 
   if (!availableDatabases?.length) {
     throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Your words database is empty');
