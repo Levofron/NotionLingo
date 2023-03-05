@@ -13,6 +13,7 @@ import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  generateMemoryCacheKey,
   getProfileDataWithNotionDataCheck,
   getRandomNumber,
   getTextFromPagePropertyInstance,
@@ -40,15 +41,15 @@ const CACHE_TIME = 1000 * 60 * 60;
 type TPage = PageObjectResponse | PartialPageObjectResponse;
 
 interface IGetPagesParams {
-  databaseId: string;
   notionClient: Client;
+  notionDatabaseId: string;
   startCursor: string | null;
 }
 
 interface IGetPagesWithCacheParams {
-  databaseId: string;
   notionApiKey: string;
   notionClient: Client;
+  notionDatabaseId: string;
   profileId: string;
 }
 
@@ -100,13 +101,13 @@ const getRandomFivePages = (pages: TPage[]) => {
 };
 
 const getPages = async ({
-  databaseId,
   notionClient,
+  notionDatabaseId,
   startCursor,
 }: IGetPagesParams): Promise<IGetPagesResult> => {
   const database = await notionClient.databases.query({
     start_cursor: startCursor || undefined,
-    database_id: databaseId,
+    database_id: notionDatabaseId,
     page_size: PAGE_SIZE,
   });
 
@@ -114,23 +115,17 @@ const getPages = async ({
 };
 
 const getPagesWithCache = async ({
-  databaseId,
   notionApiKey,
   notionClient,
+  notionDatabaseId,
   profileId,
 }: IGetPagesWithCacheParams) => {
-  const cacheKeyObject = {
-    profileId,
-    databaseId,
-    notionApiKey,
-  };
-
-  const cacheKey = JSON.stringify(cacheKeyObject);
+  const cacheKey = generateMemoryCacheKey(profileId, notionDatabaseId, notionApiKey);
   const cachedGetPagesResult = memoryCache.get(cacheKey) as IGetPagesResult | null;
 
   if (!cachedGetPagesResult) {
     const result = await getPages({
-      databaseId,
+      notionDatabaseId,
       notionClient,
       startCursor: null,
     });
@@ -153,7 +148,7 @@ const getPagesWithCache = async ({
     nextCursor: newNextCursor,
     pages: newPages,
   } = await getPages({
-    databaseId,
+    notionDatabaseId,
     notionClient,
     startCursor: nextCursor,
   });
@@ -223,7 +218,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     notionApiKey,
     notionClient,
     profileId: user?.id!,
-    databaseId: profileData.notion_database_id,
+    notionDatabaseId: profileData.notion_database_id,
   });
 
   const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];

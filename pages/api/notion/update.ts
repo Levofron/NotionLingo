@@ -21,6 +21,8 @@ import {
   withMiddleware,
 } from '@server/utils';
 
+import { generateMemoryCacheKey } from '../../../server/utils/generate-memory-cache-key/generate-memory-cache-key.function';
+
 export const getTitleOrRichTextProperty = (columnName: string, type: string, newValue: string) => {
   if (!newValue) {
     return null;
@@ -107,13 +109,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const meaningText = getTextFromPageProperty([meaningColumn.columnName]);
   const exampleSentenceText = getTextFromPageProperty([exampleSentenceColumn.columnName]);
 
-  const cacheKeyObject = {
-    profileId: user!.id,
-    databaseId: profileData.notion_database_id,
-    notionApiKey,
-  };
-
-  const cacheKey = JSON.stringify(cacheKeyObject);
+  const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
 
   memoryCache.del(cacheKey);
 

@@ -8,6 +8,7 @@ export * from './get-random-number/get-random-number.function';
 export * from './create-notion-client/create-notion-client.function';
 export * from './get-user-from-request/get-user-from-request.function';
 export * from './get-notion-table-columns/get-notion-table-columns.function';
+export * from './generate-memory-cache-key/generate-memory-cache-key.function';
 export * from './get-available-notion-databases/get-available-notion-databases.function';
 export * from './is-valid-notion-database-schema/is-valid-notion-database-schema.function';
 export * from './validate-route-secret-middleware/validate-route-secret-middleware.function';
