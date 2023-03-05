@@ -1,10 +1,12 @@
 import { useRouter as useNextRouter } from 'next/router';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 
+import { RouterContext } from '@infrastructure/context';
 import { ERoutes } from '@infrastructure/types/routes';
 
 export const useRouter = () => {
   const router = useNextRouter();
+  const routerContext = useContext(RouterContext);
 
   const isSamePath = useCallback((path: string) => router.pathname === path, [router.pathname]);
 
@@ -34,7 +36,7 @@ export const useRouter = () => {
     [redirectWithReplace],
   );
 
-  return {
+  return Object.freeze({
     isHome,
     isDonate,
     isSamePath,
@@ -47,7 +49,8 @@ export const useRouter = () => {
     query: router.query,
     redirectToDashboard,
     redirectToOnboarding,
-    pathname: router.pathname,
     redirectWithReplaceToAddWord,
-  };
+    getCurrentPath: routerContext?.getCurrentPath,
+    getPreviousPath: routerContext?.getPreviousPath,
+  });
 };
