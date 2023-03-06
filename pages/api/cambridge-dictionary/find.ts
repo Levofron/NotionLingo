@@ -1,12 +1,12 @@
 import { load } from 'cheerio';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
-import { exec } from 'node:child_process';
 
 import { cleanUpString } from '@infrastructure/utils';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
+  executeCommand,
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -28,9 +28,8 @@ const parseWord = (word: string) => {
 export const getWordDetailsFromCambridgeDictionary = async (string: string) => {
   const parsedWord = parseWord(string);
 
-  const response = await new Promise<string>((resolve, reject) => {
-    exec(
-      `
+  const response = await executeCommand(
+    `
       curl -Ls 'https://dictionary.cambridge.org/dictionary/english/${parsedWord}' \
         -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
         -H 'Accept-Language: pl,en-GB;q=0.9,en;q=0.8,en-US;q=0.7' \
@@ -49,15 +48,7 @@ export const getWordDetailsFromCambridgeDictionary = async (string: string) => {
         -H 'sec-ch-ua-platform: "macOS"' \
         --compressed
     `,
-      (error, stdout) => {
-        if (error) {
-          reject(error.message);
-        }
-
-        resolve(stdout);
-      },
-    );
-  });
+  );
 
   if (!response || response.trim().length === 0) {
     throw new ApiError(EHttpStatusCode.BAD_REQUEST, `Word not found - ${parsedWord}`);
