@@ -23,7 +23,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();
   const { redirectToOnboarding } = useRouter();
 
-  const { logout, resetNotionData, user } = useUser();
+  const { logout, setNotionData, user } = useUser();
   const {
     countdown: resetNotionIntegrationCountdown,
     end: endResetNotionIntegrationCountdown,
@@ -54,16 +54,16 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       .then(() => {
         startResetNotionIntegrationCountdown();
 
-        setTimeout(() => {
+        setTimeout(() =>
           toast.success({
             description: 'Notion integration has been reset!',
             onCloseComplete: () => {
-              resetNotionData();
+              setNotionData(false);
               redirectToOnboarding();
               endResetNotionIntegrationCountdown();
             },
-          });
-        });
+          }),
+        );
       })
       .catch((_error) =>
         toast.error({
@@ -82,7 +82,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
             description: 'Account has been deleted!',
             onCloseComplete: () => {
               logout();
-              resetNotionData();
+              setNotionData(false);
               endDeleteProfileCountdown();
             },
           });
