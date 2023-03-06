@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
 import { BsHeart } from 'react-icons/bs';
 
@@ -11,8 +11,14 @@ import { useKeyPressMapper } from '@infrastructure/utils';
 
 import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 
+const shouldEnableSpeechFeature =
+  localStorageModule.isSupported() && speechSynthesisModule.isSupported();
+
 const hasSuggestion = (original: string, suggestion?: string) =>
   !!suggestion && suggestion.length > 0 && suggestion !== original;
+
+const handleSpeak = (phrase: string) => () =>
+  shouldEnableSpeechFeature && speechSynthesisModule.speak(phrase);
 
 export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
   countdown,
@@ -46,17 +52,9 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
     ));
   }, []);
 
-  const handleSpeak = useCallback(() => {
-    speechSynthesisModule.speak(word);
-  }, []);
+  useKeyPressMapper([[['KeyP', 'KeyS'], handleSpeak(word)]], !isTopCard);
 
-  useKeyPressMapper([[['KeyP', 'KeyS'], handleSpeak]], !isTopCard);
-
-  const shouldEnableSpeechFeature = useMemo(
-    () => localStorageModule.isSupported() && speechSynthesisModule.isSupported(),
-    [],
-  );
-
+  const cursor = shouldEnableSpeechFeature ? 'pointer' : 'default';
   const hasMeaningSuggestion = hasSuggestion(meaning, meaningSuggestion);
   const hasExampleSentenceSuggestion = hasSuggestion(exampleSentence, exampleSentenceSuggestion);
 
@@ -92,7 +90,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
         ) : null}
         <Flex flexDirection="column">
           {shouldEnableSpeechFeature ? (
-            <Flex cursor="pointer" gap={1} width="fit-content" onClick={handleSpeak}>
+            <Flex cursor="pointer" gap={1} width="fit-content" onClick={handleSpeak(word)}>
               <Icon as={AiTwotoneSound} color="gray.900" fontSize="20" mt={1} />
               <Heading
                 color="gray.900"
@@ -126,9 +124,11 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             border="2px solid"
             borderColor="gray.900"
             color="gray.900"
+            cursor={cursor}
             fontSize={{ base: 'sm', sm: 'md' }}
             noOfLines={{ base: 4, md: 5 }}
             p={{ base: 1, sm: 2 }}
+            onClick={handleSpeak(meaningSuggestion!)}
           >
             {meaningSuggestion}
           </Text>
@@ -136,8 +136,10 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           <Text
             withBalancer
             color="gray.500"
+            cursor={cursor}
             fontSize={{ base: 'sm', sm: 'md' }}
             noOfLines={{ base: 4, md: 5 }}
+            onClick={handleSpeak(meaning)}
           >
             {meaning}
           </Text>
@@ -156,9 +158,11 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
                 border="2px solid"
                 borderColor="gray.900"
                 color="gray.900"
+                cursor={cursor}
                 fontSize={{ base: 'sm', sm: 'md' }}
                 noOfLines={{ base: 4, md: 5 }}
                 p={{ base: 1, sm: 2 }}
+                onClick={handleSpeak(exampleSentenceSuggestion!)}
               >
                 {exampleSentenceSuggestion}
               </Text>
@@ -167,9 +171,11 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             <Text
               withBalancer
               color="gray.900"
+              cursor={cursor}
               fontSize={{ base: 'sm', sm: 'md' }}
               noOfLines={{ base: 4, md: 5 }}
               p={{ base: 2, sm: 3, md: 4 }}
+              onClick={handleSpeak(exampleSentence!)}
             >
               {exampleSentence}
             </Text>
