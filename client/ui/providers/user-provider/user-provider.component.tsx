@@ -62,14 +62,14 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
       hasNotionData: false,
     }));
 
-  const providerValue = {
+  const providerValue = Object.freeze({
     user,
     logout,
     isLoading,
     loginViaGoogle,
     resetNotionData,
     isUserAuthenticated: !!user,
-  };
+  });
 
   return <UserContext.Provider value={providerValue}>{children}</UserContext.Provider>;
 };
