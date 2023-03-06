@@ -8,6 +8,7 @@ import { restModule } from '@adapter/modules';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/utils/rest';
 
+import { ERoutes } from '@infrastructure/types/routes';
 import { useAxios, useRouter, useToast } from '@infrastructure/utils';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
@@ -19,6 +20,8 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
 
   const { isLoading: isCreateNotionWordLoading, mutateAsync: mutateAsyncCreateNotionWord } =
     useAxios(restModule.createNotionWord);
+
+  const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
 
   const formik = useFormik({
     isInitialValid: true,
@@ -39,8 +42,15 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
           router.redirectWithReplaceToAddWord();
 
           toast.success({
+            duration: 2000,
             description: 'Word saved!',
           });
+
+          if (isFindWordAsPreviousPath) {
+            setTimeout(() => {
+              router.redirectTo(ERoutes.FIND_WORD);
+            }, 2000);
+          }
         })
         .catch((_error) =>
           toast.error({
