@@ -31,7 +31,7 @@ export enum ERestEndpoints {
   GET_LOGGED_PROFILE = '/profile/logged',
   GET_NOTION_TABLE_COLUMNS = '/notion/table-columns',
   GET_RANDOM_NOTION_WORDS = '/notion/random-words',
-  GET_WORD_SUGGESTIONS = '/cambridge-dictionary/find',
+  GET_WORD_SUGGESTIONS = '/dictionary/find',
   HEALTH_CHECK = '/health-check',
   INCREASE_DAILY_STREAK = '/profile/increase-daily-streak',
   RESET_NOTION_INTEGRATION = '/profile/reset-notion-integration',
