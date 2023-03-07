@@ -438,9 +438,7 @@ describe('getRestApi function', () => {
       const result = restApi.getWordSuggestions('suit up');
 
       expect(result).resolves.toEqual({ data: {} });
-      expect(axiosInstanceMock.get).toHaveBeenCalledWith(
-        '/cambridge-dictionary/find?word=suit%20up',
-      );
+      expect(axiosInstanceMock.get).toHaveBeenCalledWith('/dictionary/find?word=suit%20up');
     });
 
     it('should throw error if endpoint fails', async () => {

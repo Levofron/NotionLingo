@@ -32,7 +32,7 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@config/constants';
 
-import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
+import { getWordDetailsFromDictionary } from '../dictionary/find';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
@@ -237,7 +237,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!meaning || !exampleSentence) {
         try {
-          const response = await getWordDetailsFromCambridgeDictionary(word as string);
+          const response = await getWordDetailsFromDictionary(word as string);
 
           const meaningAndExampleSentenceSuggestion =
             getMeaningAndExampleSentenceSuggestion(response);
