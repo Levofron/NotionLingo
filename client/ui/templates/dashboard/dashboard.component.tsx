@@ -17,6 +17,7 @@ import {
   INotionWord,
   IUpdateNotionWordRequest,
 } from '@domain/entities/rest.types';
+import { removeNotionWordFromArray } from '@domain/utils/rest';
 
 import { useAxios, useToast, useUser } from '@infrastructure/utils';
 
@@ -55,17 +56,15 @@ export const DashboardTemplate = (): JSX.Element => {
     fetchMoreWords();
   }, []);
 
-  // TODO - handle this in domain
   const handleNotionWordCardClick = (notionWord: INotionWord) => () => {
-    const copiedWords = [...words];
+    const newWords = removeNotionWordFromArray(words, notionWord);
 
-    copiedWords.splice(copiedWords.indexOf(notionWord), 1);
-    setWords(copiedWords);
+    setWords(newWords);
 
     speechSynthesisModule.cancel();
     mutateAsyncIncreaseDailyStreak().then(setDailyStreakData);
 
-    if (copiedWords.length <= 3) {
+    if (newWords.length <= 3) {
       fetchMoreWords();
     }
   };
