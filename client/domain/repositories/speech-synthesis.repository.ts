@@ -1,4 +1,5 @@
 export interface ISpeechSynthesisRepository {
+  cancel: () => void;
   getPitch: () => number;
   getRate: () => number;
   getVoice: () => SpeechSynthesisVoice | undefined;
