@@ -35,20 +35,20 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
   }, []);
 
   const {
-    data: getWordSuggestionsData,
-    error: getWordSuggestionsError,
-    isLoading: isGetWordSuggestionsLoading,
-    mutate: mutateGetWordSuggestions,
-  } = useAxios(restModule.getWordSuggestions);
+    data: getDictionarySuggestionsData,
+    error: getDictionarySuggestionsError,
+    isLoading: isGetDictionarySuggestionsLoading,
+    mutate: mutateGetDictionarySuggestions,
+  } = useAxios(restModule.getDictionarySuggestions);
 
   useEffect(() => {
     if (isString(word)) {
-      mutateGetWordSuggestions(word);
+      mutateGetDictionarySuggestions(word);
     }
   }, [!!word]);
 
   const handleInputChange = debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    mutateGetWordSuggestions(value);
+    mutateGetDictionarySuggestions(value);
 
     setWord(value);
   }, 1000);
@@ -62,12 +62,6 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
         exampleSentence,
       },
     });
-
-  const isEmpty =
-    getWordSuggestionsData &&
-    !getWordSuggestionsData?.meaningAndExamples?.length &&
-    !getWordSuggestionsData?.word &&
-    !getWordSuggestionsData?.additionalExamples.length;
 
   const handleCopy = (string: string) => async () =>
     copyToClipboard(string).then(() =>
@@ -90,54 +84,30 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
           ref={inputRef}
           isRequired
           defaultValue={word || ''}
-          errorMessage={getWordSuggestionsError || undefined}
-          isDisabled={isGetWordSuggestionsLoading}
-          isLoading={isGetWordSuggestionsLoading}
+          errorMessage={getDictionarySuggestionsError || undefined}
+          isDisabled={isGetDictionarySuggestionsLoading}
+          isLoading={isGetDictionarySuggestionsLoading}
           label="Search for a word"
           name="searchWord"
           placeholder="Your search word"
           onChange={handleInputChange}
         />
-        {getWordSuggestionsData?.word ? (
+        {getDictionarySuggestionsData?.word ? (
           <Heading
             as="h1"
             color="gray.900"
             cursor="pointer"
             fontSize="4xl"
-            onClick={handleCopy(getWordSuggestionsData.word)}
+            onClick={handleCopy(getDictionarySuggestionsData.word)}
           >
-            {getWordSuggestionsData.word}
+            {getDictionarySuggestionsData.word}
           </Heading>
         ) : null}
-        {isEmpty ? (
-          <Flex
-            alignItems="center"
-            flexDirection="column"
-            gap={{ base: 3, sm: 5 }}
-            height="100%"
-            justifyContent="center"
-          >
-            <Text
-              withBalancer
-              fontSize={{ base: 'md', sm: 'xl' }}
-              fontWeight="medium"
-              maxWidth="350px"
-              textAlign="center"
-            >
-              No meaning and examples found.
-            </Text>
-          </Flex>
-        ) : (
+        {getDictionarySuggestionsData ? (
           <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }} w="100%">
-            {getWordSuggestionsData?.meaningAndExamples.map(({ examples, meaning }, _index) => {
-              const example = examples[0] || getWordSuggestionsData.additionalExamples[0];
-
-              if (!example || !meaning) {
-                return null;
-              }
-
+            {getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
               const key = `${meaning}-${example}-${_index}`;
-              const isLastIndex = _index === getWordSuggestionsData.meaningAndExamples.length - 1;
+              const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
 
               return (
                 <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
@@ -146,7 +116,7 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
                       <MotionIconButton
                         icon={BsPlusCircle}
                         onClick={handleAddNotionWordClick(
-                          getWordSuggestionsData.word,
+                          getDictionarySuggestionsData.word,
                           meaning,
                           example,
                         )}
@@ -177,6 +147,24 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
                 </Flex>
               );
             })}
+          </Flex>
+        ) : (
+          <Flex
+            alignItems="center"
+            flexDirection="column"
+            gap={{ base: 3, sm: 5 }}
+            height="100%"
+            justifyContent="center"
+          >
+            <Text
+              withBalancer
+              fontSize={{ base: 'md', sm: 'xl' }}
+              fontWeight="medium"
+              maxWidth="350px"
+              textAlign="center"
+            >
+              No meaning and examples found.
+            </Text>
           </Flex>
         )}
       </Flex>

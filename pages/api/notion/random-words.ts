@@ -6,8 +6,6 @@ import {
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { cleanUpString } from '@infrastructure/utils';
-
 import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
@@ -57,17 +55,6 @@ interface IGetPagesResult {
   hasMore: boolean;
   nextCursor: string | null;
   pages: TPage[];
-}
-
-interface IMeaningWithExamples {
-  examples: string[];
-  meaning: string;
-}
-
-interface IScrapingWordApiResponse {
-  additionalExamples: string[];
-  meaningAndExamples: IMeaningWithExamples[];
-  word: string;
 }
 
 const getRandomFivePages = (pages: TPage[]) => {
@@ -160,51 +147,6 @@ const getPagesWithCache = async ({
   return allPages;
 };
 
-const getMeaningAndExampleSentenceSuggestion = ({
-  additionalExamples,
-  meaningAndExamples,
-  word,
-}: IScrapingWordApiResponse) => {
-  if (!meaningAndExamples?.length) {
-    return null;
-  }
-
-  const foundMeaningAndExample = meaningAndExamples.find((_meaningAndExample) => {
-    const parsedMeaning = cleanUpString(_meaningAndExample.meaning);
-    const hasExampels = _meaningAndExample.examples.length > 0;
-
-    return !!parsedMeaning && hasExampels;
-  });
-
-  if (foundMeaningAndExample) {
-    return {
-      word,
-      meaning: foundMeaningAndExample.meaning,
-      example: foundMeaningAndExample.examples[0],
-    };
-  }
-
-  if (additionalExamples.length === 0) {
-    return null;
-  }
-
-  const foundMeaningWithoutExamples = meaningAndExamples.find((_meaningAndExample) => {
-    const parsedMeaning = cleanUpString(_meaningAndExample.meaning);
-
-    return !!parsedMeaning;
-  });
-
-  if (foundMeaningWithoutExamples) {
-    return {
-      word,
-      example: additionalExamples[0],
-      meaning: foundMeaningWithoutExamples.meaning,
-    };
-  }
-
-  return null;
-};
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
@@ -239,9 +181,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         try {
           const response = await getWordDetailsFromDictionary(word as string);
 
-          const meaningAndExampleSentenceSuggestion =
-            getMeaningAndExampleSentenceSuggestion(response);
-
           return {
             id,
             ipa,
@@ -249,8 +188,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             word,
             meaning,
             exampleSentence,
-            meaningSuggestion: meaningAndExampleSentenceSuggestion?.meaning,
-            exampleSentenceSuggestion: meaningAndExampleSentenceSuggestion?.example,
+            meaningSuggestion: response?.suggestions[0]?.meaning,
+            exampleSentenceSuggestion: response?.suggestions[0]?.example,
           };
         } catch (error) {
           console.error(error);

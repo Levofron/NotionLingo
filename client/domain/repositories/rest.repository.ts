@@ -1,12 +1,12 @@
 import {
   IContact,
+  IDictionarySuggestions,
   IHash,
   IIncreaseDailyStreak,
   INotionDatabase,
   INotionWord,
   IProfile,
   IUpdateNotionWordRequest,
-  IWordSuggestions,
   TNotionTableColumn,
 } from '../entities/rest.types';
 
@@ -14,10 +14,10 @@ export interface IRestRepository {
   createNotionWord: (data: Record<string, string>) => Promise<string>;
   deleteProfile: () => Promise<void>;
   getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
+  getDictionarySuggestions: (word: string) => Promise<IDictionarySuggestions | null>;
   getLoggedProfile: () => Promise<IProfile>;
   getNotionTableColumns: () => Promise<TNotionTableColumn[]>;
   getRandomNotionWords: () => Promise<INotionWord[]>;
-  getWordSuggestions: (word: string) => Promise<IWordSuggestions>;
   healthCheck: () => Promise<string>;
   increaseDailyStreak: () => Promise<IIncreaseDailyStreak>;
   resetNotionIntegration: () => Promise<void>;

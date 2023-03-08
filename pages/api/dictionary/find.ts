@@ -6,6 +6,7 @@ import { cleanUpString } from '@infrastructure/utils';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
+  dictionaryResponseToMeaningAndExampleArray,
   executeCommand,
   shuffleArray,
   validateIfParametersExistsMiddleware,
@@ -154,11 +155,15 @@ export const getWordDetailsFromDictionary = async (string: string) => {
   }
 
   if (hasMerriamWebsterResponse && !hasCambridgeDictionaryResponse) {
-    return webscrapMerriamWebster(merriamWebsterResponse);
+    const result = await webscrapMerriamWebster(merriamWebsterResponse);
+
+    return dictionaryResponseToMeaningAndExampleArray(result);
   }
 
   if (!hasMerriamWebsterResponse && hasCambridgeDictionaryResponse) {
-    return webscrapCambridgeDictionary(cambridgeDictionaryResponse);
+    const result = await webscrapCambridgeDictionary(merriamWebsterResponse);
+
+    return dictionaryResponseToMeaningAndExampleArray(result);
   }
 
   const webscrapMerriamWebsterResponse = await webscrapMerriamWebster(merriamWebsterResponse);
@@ -166,7 +171,7 @@ export const getWordDetailsFromDictionary = async (string: string) => {
     cambridgeDictionaryResponse,
   );
 
-  return {
+  const result = {
     word: webscrapCambridgeDictionaryResponse.word,
     meaningAndExamples: shuffleArray([
       ...webscrapMerriamWebsterResponse.meaningAndExamples,
@@ -174,6 +179,8 @@ export const getWordDetailsFromDictionary = async (string: string) => {
     ]),
     additionalExamples: webscrapCambridgeDictionaryResponse.additionalExamples,
   };
+
+  return dictionaryResponseToMeaningAndExampleArray(result);
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

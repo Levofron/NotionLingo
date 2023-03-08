@@ -1,12 +1,12 @@
 import {
   IContact,
+  IDictionarySuggestions,
   IHash,
   IIncreaseDailyStreak,
   INotionDatabase,
   INotionWord,
   IProfile,
   IUpdateNotionWordRequest,
-  IWordSuggestions,
   TNotionTableColumn,
 } from '../entities/rest.types';
 import { IRestRepository } from '../repositories/rest.repository';
@@ -116,16 +116,16 @@ export const deleteProfileUseCase = (restRepository: IRestRepository): TDeletePr
   execute: () => restRepository.deleteProfile(),
 });
 
-// getWordSuggestionsUseCase
-export type TGetWordSuggestionsUseCase = IUseCaseWithSingleParamAndPromiseResult<
+// getDictionarySuggestionsUseCase
+export type TGetDictionarySuggestionsUseCaseUseCase = IUseCaseWithSingleParamAndPromiseResult<
   string,
-  IWordSuggestions
+  IDictionarySuggestions | null
 >;
 
-export const getWordSuggestionsUseCase = (
+export const getDictionarySuggestionsUseCase = (
   restRepository: IRestRepository,
-): TGetWordSuggestionsUseCase => ({
-  execute: (word) => restRepository.getWordSuggestions(word),
+): TGetDictionarySuggestionsUseCaseUseCase => ({
+  execute: (word) => restRepository.getDictionarySuggestions(word),
 });
 
 // updateNotionWordUseCase
