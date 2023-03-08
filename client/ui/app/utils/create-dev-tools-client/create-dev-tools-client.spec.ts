@@ -59,6 +59,7 @@ describe('createDevToolsClient function', () => {
     // @ts-expect-error
     expect(window.synthesis).toStrictEqual({
       speak: expect.any(Function),
+      cancel: expect.any(Function),
       getRate: expect.any(Function),
       setRate: expect.any(Function),
       getPitch: expect.any(Function),

@@ -10,7 +10,7 @@ import {
   NotionWordCardFront,
 } from '@ui/organisms';
 
-import { restModule } from '@adapter/modules';
+import { restModule, speechSynthesisModule } from '@adapter/modules';
 
 import {
   IIncreaseDailyStreak,
@@ -55,12 +55,14 @@ export const DashboardTemplate = (): JSX.Element => {
     fetchMoreWords();
   }, []);
 
+  // TODO - handle this in domain
   const handleNotionWordCardClick = (notionWord: INotionWord) => () => {
     const copiedWords = [...words];
 
     copiedWords.splice(copiedWords.indexOf(notionWord), 1);
     setWords(copiedWords);
 
+    speechSynthesisModule.cancel();
     mutateAsyncIncreaseDailyStreak().then(setDailyStreakData);
 
     if (copiedWords.length <= 3) {
@@ -68,6 +70,7 @@ export const DashboardTemplate = (): JSX.Element => {
     }
   };
 
+  // TODO - move this logic to domain
   const handleApplySuggestion = (data: IUpdateNotionWordRequest) => () =>
     mutateAsyncUpdateNotionWord(data)
       .then((_udpatedRecordId) => {
