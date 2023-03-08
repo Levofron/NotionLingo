@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formatDictionarySuggestions function should return same object with cleaned up strings 1`] = `
+{
+  "suggestions": [
+    {
+      "example": "Example 1",
+      "meaning": "Meaning 1",
+    },
+    {
+      "example": "Example 1",
+      "meaning": "Meaning 2",
+    },
+  ],
+  "word": "Word",
+}
+`;

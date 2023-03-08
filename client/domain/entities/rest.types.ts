@@ -45,14 +45,13 @@ export interface IContact {
   message: string;
 }
 
-interface IMeaningWithExamples {
-  examples: string[];
+interface IDictionarySuggestion {
+  example: string;
   meaning: string;
 }
 
-export interface IWordSuggestions {
-  additionalExamples: string[];
-  meaningAndExamples: IMeaningWithExamples[];
+export interface IDictionarySuggestions {
+  suggestions: IDictionarySuggestion[];
   word: string;
 }
 

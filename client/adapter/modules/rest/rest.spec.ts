@@ -10,13 +10,13 @@ describe('restModule object', () => {
       createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
-      getWordSuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getNotionTableColumns: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
+      getDictionarySuggestions: expect.any(Function),
       getAvailableNotionDatabases: expect.any(Function),
     });
   });
