@@ -77,8 +77,6 @@ export const getRestRepository = (
   getDictionarySuggestions: async (word) => {
     const { data } = await restApi.getDictionarySuggestions(word);
 
-    console.log('data', data);
-
     if (!data?.suggestions?.length) {
       return null;
     }
