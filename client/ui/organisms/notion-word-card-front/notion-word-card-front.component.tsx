@@ -134,7 +134,6 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           </Text>
         ) : (
           <Text
-            withBalancer
             color="gray.500"
             cursor={cursor}
             fontSize={{ base: 'sm', sm: 'md' }}
@@ -169,7 +168,6 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             </Flex>
           ) : (
             <Text
-              withBalancer
               color="gray.900"
               cursor={cursor}
               fontSize={{ base: 'sm', sm: 'md' }}
