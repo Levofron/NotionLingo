@@ -5,13 +5,23 @@ export const dictionaryResponseToMeaningAndExampleArray = ({
   meaningAndExamples,
   word,
 }: IDictionaryResponse) => {
-  const suggestions = meaningAndExamples.map(({ examples, meaning }) => ({
-    meaning,
-    example: examples?.length ? examples[0] : additionalExamples[0] || '',
-  }));
+  const suggestions = meaningAndExamples
+    .map(({ examples, meaning }) => {
+      const example = examples?.length ? examples[0] : additionalExamples[0] || '';
+
+      if (!example) {
+        return null;
+      }
+
+      return {
+        meaning,
+        example: examples?.length ? examples[0] : additionalExamples[0] || '',
+      };
+    })
+    .filter(Boolean);
 
   return {
     word,
-    suggestions,
+    suggestions: suggestions.slice(0, 10),
   };
 };
