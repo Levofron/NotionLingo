@@ -50,6 +50,6 @@ describe('cleanUpString function', () => {
 
   it('should return string with removed last colon when input is string with last colon', () => {
     expect(cleanUpString('  test:  ')).toBe('Test');
-    expect(cleanUpString('  test :  ')).toBe('Test');
+    expect(cleanUpString(' : test :  ')).toBe('Test');
   });
 });
