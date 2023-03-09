@@ -1,5 +1,5 @@
 import { queryTypes, useQueryState } from 'next-usequerystate';
-import { ChangeEvent, FC, useEffect, useRef } from 'react';
+import { ChangeEvent, Children, FC, useEffect, useRef } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
 import { Container, Divider, Flex, Heading, Text } from '@ui/atoms';
@@ -97,56 +97,58 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
             as="h1"
             color="gray.900"
             cursor="pointer"
-            fontSize="4xl"
+            fontSize={{ base: '3xl', sm: '4xl' }}
             onClick={handleCopy(getDictionarySuggestionsData.word)}
           >
             {getDictionarySuggestionsData.word}
           </Heading>
         ) : null}
         {getDictionarySuggestionsData ? (
-          <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }} w="100%">
-            {getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
-              const key = `${meaning}-${example}-${_index}`;
-              const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
+          <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
+            {Children.toArray(
+              getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
+                const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
 
-              return (
-                <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
-                  <Flex alignItems="flex-start" gap={{ base: 1, sm: 2, md: 4 }}>
-                    {isUserAuthenticated ? (
-                      <MotionIconButton
-                        icon={BsPlusCircle}
-                        onClick={handleAddNotionWordClick(
-                          getDictionarySuggestionsData.word,
-                          meaning,
-                          example,
-                        )}
-                      />
-                    ) : null}
-                    <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }} w="100%">
-                      <Heading
-                        withBalancer
-                        color="gray.900"
-                        cursor="pointer"
-                        textAlign="left"
-                        onClick={handleCopy(meaning)}
-                      >
-                        {meaning}
-                      </Heading>
-                      <Text
-                        key={example}
-                        withBalancer
-                        cursor="pointer"
-                        fontWeight="light"
-                        onClick={handleCopy(example)}
-                      >
-                        {example}
-                      </Text>
+                return (
+                  <Flex flexDirection="column" gap={{ base: 2, md: 4 }}>
+                    <Flex alignItems="flex-start" gap={{ base: 2, md: 4 }}>
+                      {isUserAuthenticated ? (
+                        <MotionIconButton
+                          icon={BsPlusCircle}
+                          onClick={handleAddNotionWordClick(
+                            getDictionarySuggestionsData.word,
+                            meaning,
+                            example,
+                          )}
+                        />
+                      ) : null}
+                      <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
+                        <Heading
+                          withBalancer
+                          color="gray.900"
+                          cursor="pointer"
+                          fontSize={{ base: 'md', sm: 'xl' }}
+                          textAlign="left"
+                          onClick={handleCopy(meaning)}
+                        >
+                          {meaning}
+                        </Heading>
+                        <Text
+                          key={example}
+                          withBalancer
+                          cursor="pointer"
+                          fontWeight="light"
+                          onClick={handleCopy(example)}
+                        >
+                          {example}
+                        </Text>
+                      </Flex>
                     </Flex>
+                    {isLastIndex ? null : <Divider bg="gray.900" height="1px" width="100%" />}
                   </Flex>
-                  {isLastIndex ? null : <Divider bg="gray.900" height="1px" width="100%" />}
-                </Flex>
-              );
-            })}
+                );
+              }),
+            )}
           </Flex>
         ) : (
           <Flex
