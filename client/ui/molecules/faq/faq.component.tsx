@@ -13,7 +13,7 @@ import {
 import { QUESTIONS_AND_ANSWERS } from './faq.defaults';
 
 export const Faq = (): JSX.Element => (
-  <Container maxW="3xl" py={{ base: 14, sm: 20, md: 32 }}>
+  <Container maxW="3xl" py={{ base: 14, sm: 20, md: 40 }}>
     <Heading
       color="gray.900"
       fontSize={{ base: '3xl', sm: '4xl' }}

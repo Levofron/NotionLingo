@@ -6,12 +6,12 @@ import { STEPS } from './getting-started.defaults';
 
 const GettingStartedComponent: ForwardRefRenderFunction<HTMLDivElement> = (_, ref): JSX.Element => (
   <Box ref={ref} bg="gray.900">
-    <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
+    <Container maxW="6xl" py={{ base: 14, sm: 20, md: 40 }}>
       <Heading
         as="h3"
         color="gray.50"
         fontSize={{ base: '3xl', sm: '4xl' }}
-        mb={{ base: 14, sm: 16 }}
+        mb={{ base: 14, sm: 20 }}
         textAlign="center"
       >
         Getting started in <TextUnderline mode="light">3 easy steps</TextUnderline>
@@ -31,7 +31,7 @@ const GettingStartedComponent: ForwardRefRenderFunction<HTMLDivElement> = (_, re
             maxW={{ base: 'full', md: 'xs' }}
             mt={{ base: 10, md: 0 }}
             px={4}
-            spacing={{ base: 2, sm: 4 }}
+            spacing={{ base: 4, sm: 6 }}
             textAlign={{ base: 'left', md: 'center' }}
           >
             <Card
@@ -46,10 +46,10 @@ const GettingStartedComponent: ForwardRefRenderFunction<HTMLDivElement> = (_, re
             >
               0{index + 1}
             </Card>
-            <Heading color="gray.50" pt={2}>
-              {step.title}
-            </Heading>
-            <Text color="gray.300">{step.text}</Text>
+            <Flex flexDirection="column" gap={{ base: 2, sm: 3 }}>
+              <Heading color="gray.50">{step.title}</Heading>
+              <Text color="gray.300">{step.text}</Text>
+            </Flex>
           </Stack>
         ))}
       </Flex>
