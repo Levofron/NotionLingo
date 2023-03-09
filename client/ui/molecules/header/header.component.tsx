@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FaHamburger } from 'react-icons/fa';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import { TfiClose } from 'react-icons/tfi';
 
 import { Button, Container, Flex, IconButton } from '@ui/atoms';
@@ -37,7 +37,7 @@ export const Header: FC<IHeaderProps> = ({
         <IconButton
           aria-label="Open menu"
           disabled={isLoading}
-          icon={isOpen ? <TfiClose size="20px" /> : <FaHamburger size="20px" />}
+          icon={isOpen ? <TfiClose size="20px" /> : <RxHamburgerMenu size="20px" />}
           onClick={isOpen ? onClose : onOpen}
         />
         <Button
