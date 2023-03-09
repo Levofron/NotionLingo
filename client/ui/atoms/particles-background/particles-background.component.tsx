@@ -14,15 +14,22 @@ export const ParticlesBackground = () => (
       },
       fpsLimit: 120,
       interactivity: {
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'bubble',
+          },
+        },
         modes: {
           bubble: {
             distance: 250,
             duration: 2,
-            size: 6,
-            opacity: 0.4,
+            size: 0,
+            opacity: 0,
           },
-          push: {
-            particles_nb: 5,
+          repulse: {
+            distance: 400,
+            duration: 4,
           },
         },
         retina_detect: true,
@@ -31,40 +38,29 @@ export const ParticlesBackground = () => (
         color: {
           value: '#000',
         },
-        links: {
-          color: '#000',
-          distance: 150,
-          enable: true,
-          opacity: 0.5,
-          width: 1,
+        number: {
+          value: 160,
+          density: {
+            enable: false,
+          },
         },
-        collisions: {
-          enable: true,
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            speed: 4,
+            size_min: 0.3,
+          },
+        },
+        line_linked: {
+          enable: false,
         },
         move: {
           enable: true,
-          outModes: {
-            default: 'bounce',
-          },
-          random: false,
-          speed: 0.2,
-          straight: false,
-        },
-        number: {
-          density: {
-            enable: true,
-            area: 800,
-          },
-          value: 80,
-        },
-        opacity: {
-          value: 0.5,
-        },
-        shape: {
-          type: 'circle',
-        },
-        size: {
-          value: { min: 1, max: 5 },
+          random: true,
+          speed: 1,
+          direction: 'top',
+          out_mode: 'out',
         },
       },
       detectRetina: true,
