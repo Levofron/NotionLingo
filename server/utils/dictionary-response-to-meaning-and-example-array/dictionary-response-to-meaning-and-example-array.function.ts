@@ -15,13 +15,13 @@ export const dictionaryResponseToMeaningAndExampleArray = ({
 
       const example = examples?.length ? examples[0] : additionalExamples[0] || '';
 
-      if (!example) {
+      if (!example || !meaning) {
         return null;
       }
 
       return {
         meaning,
-        example: examples?.length ? examples[0] : additionalExamples[0] || '',
+        example,
       };
     })
     .filter(Boolean);
