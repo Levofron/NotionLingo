@@ -6,7 +6,13 @@ export const dictionaryResponseToMeaningAndExampleArray = ({
   word,
 }: IDictionaryResponse) => {
   const suggestions = meaningAndExamples
-    .map(({ examples, meaning }) => {
+    .map((_meaningAndExample) => {
+      if (!_meaningAndExample) {
+        return null;
+      }
+
+      const { examples, meaning } = _meaningAndExample;
+
       const example = examples?.length ? examples[0] : additionalExamples[0] || '';
 
       if (!example) {
