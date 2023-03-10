@@ -47,8 +47,8 @@ export const SidebarContent: FC<ISidebarContentProps> = ({
         p={0}
         pt={10}
       >
-        {filteredSidebarItems.map(({ href, name }, _index) => (
-          <NavigationItem key={name} href={href} index={_index}>
+        {filteredSidebarItems.map(({ href, name }) => (
+          <NavigationItem key={name} href={href}>
             {name}
           </NavigationItem>
         ))}
