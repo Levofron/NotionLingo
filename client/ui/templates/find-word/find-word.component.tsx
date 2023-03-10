@@ -85,7 +85,6 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
           isRequired
           defaultValue={word || ''}
           errorMessage={getDictionarySuggestionsError || undefined}
-          isDisabled={isGetDictionarySuggestionsLoading}
           isLoading={isGetDictionarySuggestionsLoading}
           label="Search for a word"
           name="searchWord"
