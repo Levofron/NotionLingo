@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { Box, Container, Flex } from '@ui/atoms';
+import { Box, Flex } from '@ui/atoms';
 import { NavigationItem } from '@ui/molecules';
 
 import { useUser } from '@infrastructure/utils';
@@ -28,23 +28,31 @@ export const SidebarContent: FC<ISidebarContentProps> = ({
         backdropFilter: 'saturate(180%) blur(5px)',
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
+      height={{ base: 'calc(100vh - 58px)', sm: 'calc(100vh - 66px)', md: 'calc(100vh - 74px)' }}
       left={0}
-      minH={{ base: 'calc(100vh - 66px)', sm: 'calc(100vh - 74px)' }}
       p={{ base: 2, sm: 3 }}
       position="fixed"
       top={{ base: 58, sm: 66, md: 74 }}
-      transition="3s ease"
       w="full"
-      zIndex={9999}
+      zIndex={20}
       {...restProps}
     >
-      <Container as={Flex} flexDirection="column" gap={{ base: 2, sm: 3 }} maxW="6xl" p={0}>
-        {filteredSidebarItems.map(({ href, icon, name }) => (
-          <NavigationItem key={name} href={href} icon={icon}>
+      <Flex
+        alignItems="center"
+        flexDirection="column"
+        gap={{ base: 3, sm: 4 }}
+        justifyContent="center"
+        margin="0 auto"
+        maxW="6xl"
+        p={0}
+        pt={10}
+      >
+        {filteredSidebarItems.map(({ href, name }, _index) => (
+          <NavigationItem key={name} href={href} index={_index}>
             {name}
           </NavigationItem>
         ))}
-      </Container>
+      </Flex>
     </Box>
   );
 };

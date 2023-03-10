@@ -1,17 +1,13 @@
+import { motion } from 'framer-motion';
 import { FC } from 'react';
 
-import { ChakraNextLink, Flex, Icon } from '@ui/atoms';
+import { ChakraNextLink, Heading } from '@ui/atoms';
 
 import { useRouter } from '@infrastructure/utils';
 
 import { INavigationItemProps } from './navigation-item.types';
 
-export const NavigationItem: FC<INavigationItemProps> = ({
-  children,
-  href,
-  icon,
-  ...restProps
-}) => {
+export const NavigationItem: FC<INavigationItemProps> = ({ children, href }) => {
   const { isSamePath } = useRouter();
 
   if (isSamePath(href)) {
@@ -19,35 +15,24 @@ export const NavigationItem: FC<INavigationItemProps> = ({
   }
 
   return (
-    <ChakraNextLink _focus={{ boxShadow: 'none' }} href={href} style={{ textDecoration: 'none' }}>
-      <Flex
+    <ChakraNextLink _focus={{ boxShadow: 'none' }} href={href}>
+      <Heading
         _hover={{
-          bg: 'gray.900',
-          color: 'gray.50',
+          transform: 'scale(1.1)',
         }}
-        align="center"
-        border="2px solid"
-        borderColor="gray.900"
+        as={motion.span}
         color="gray.900"
         cursor="pointer"
-        p={{ base: 3, sm: 4 }}
+        display="block"
+        fontSize={{ base: '3xl', sm: '4xl' }}
         role="group"
+        textAlign="center"
         textDecoration="none"
-        {...restProps}
+        transition="all .3s ease"
+        userSelect="none"
       >
-        {icon && (
-          <Icon
-            _groupHover={{
-              color: 'gray.50',
-            }}
-            as={icon}
-            color="gray.900"
-            fontSize={{ base: 18, sm: 19 }}
-            mr={{ base: 3, sm: 4 }}
-          />
-        )}
         {children}
-      </Flex>
+      </Heading>
     </ChakraNextLink>
   );
 };

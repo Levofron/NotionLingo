@@ -13,7 +13,7 @@ export const MotionIconButton: FC<TMotionIconButtonProps> = ({
   <motion.button
     animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
     whileHover={{
-      scale: 1.2,
+      scale: 1.1,
       transition: { duration: 0.2 },
     }}
     whileTap={{ scale: 1 }}
