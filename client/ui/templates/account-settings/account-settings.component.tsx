@@ -2,18 +2,8 @@ import { useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiReset } from 'react-icons/bi';
 
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Heading,
-  ParticlesBackground,
-  Text,
-} from '@ui/atoms';
-import { ConfirmationModal, IConfirmationModalRef } from '@ui/molecules';
+import { Avatar, Button, Card, Container, Flex, Heading, Text } from '@ui/atoms';
+import { ConfirmationModal, IConfirmationModalRef, ParticlesBackgroundLayout } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
@@ -96,8 +86,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       .finally(deleteAccountModalRef.current?.close);
 
   return (
-    <Box bg="gray.50" height="100%" overflow="hidden">
-      <ParticlesBackground />
+    <ParticlesBackgroundLayout height="100%">
       <ConfirmationModal
         ref={deleteAccountModalRef}
         description="Do you really want to delete you account? This action cannot be undone!"
@@ -158,6 +147,6 @@ export const AccountSettingsTemplate = (): JSX.Element => {
           </Card>
         </Flex>
       </Container>
-    </Box>
+    </ParticlesBackgroundLayout>
   );
 };
