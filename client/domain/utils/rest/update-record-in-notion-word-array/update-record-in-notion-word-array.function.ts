@@ -24,7 +24,6 @@ export const updateRecordInNotionWordArray = (
     exampleSentence: updatedNotionWord.exampleSentence || foundWord.exampleSentence,
   };
 
-  console.log(updatedWord);
   copiedNotionWords[foundWordIndex] = updatedWord;
 
   return copiedNotionWords;
