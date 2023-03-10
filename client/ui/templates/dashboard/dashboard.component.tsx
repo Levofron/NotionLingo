@@ -2,8 +2,12 @@ import { Fade } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
-import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
-import { DashboardProfileDetails, FullScreenLoader } from '@ui/molecules';
+import { Button, Container, Flex, Text } from '@ui/atoms';
+import {
+  DashboardProfileDetails,
+  FullScreenLoader,
+  ParticlesBackgroundLayout,
+} from '@ui/molecules';
 import {
   NotionWordCardAnimationWrapper,
   NotionWordCardBack,
@@ -185,12 +189,11 @@ export const DashboardTemplate = (): JSX.Element => {
   };
 
   return (
-    <Box bg="gray.50" height="100%" overflow="hidden">
-      <ParticlesBackground />
+    <ParticlesBackgroundLayout height="100%">
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
         <DashboardProfileDetails {...dailyStreakData} />
         {renderContent()}
       </Container>
-    </Box>
+    </ParticlesBackgroundLayout>
   );
 };
