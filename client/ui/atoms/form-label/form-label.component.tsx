@@ -9,5 +9,3 @@ const FormLabelComponent: ForwardRefRenderFunction<HTMLLabelElement, IFormLabelP
 ): JSX.Element => <ChakraFormLabel ref={ref} {...props} />;
 
 export const FormLabel = memo(forwardRef(FormLabelComponent));
-
-export default FormLabel;

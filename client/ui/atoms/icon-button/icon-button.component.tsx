@@ -18,5 +18,3 @@ const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IIconButt
 );
 
 export const IconButton = memo(forwardRef(IconButtonComponent));
-
-export default IconButton;

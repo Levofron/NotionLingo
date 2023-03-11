@@ -174,5 +174,3 @@ const SEOComponent: FC<ISEOProps> = ({
 };
 
 export const SEO = memo(SEOComponent);
-
-export default SEO;

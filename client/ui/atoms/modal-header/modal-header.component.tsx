@@ -9,5 +9,3 @@ const ModalHeaderComponent: ForwardRefRenderFunction<HTMLElement, IModalHeaderPr
 ): JSX.Element => <ChakraModalHeader ref={ref} {...props} />;
 
 export const ModalHeader = memo(forwardRef(ModalHeaderComponent));
-
-export default ModalHeader;

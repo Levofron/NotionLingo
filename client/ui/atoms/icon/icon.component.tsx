@@ -9,5 +9,3 @@ const IconComponent: ForwardRefRenderFunction<SVGSVGElement, IIconProps> = (
 ): JSX.Element => <ChakraIcon ref={ref} {...props} />;
 
 export const Icon = memo(forwardRef(IconComponent));
-
-export default Icon;

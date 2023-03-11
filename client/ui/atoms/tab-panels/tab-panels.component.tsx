@@ -9,5 +9,3 @@ const TabPanelsComponent: ForwardRefRenderFunction<HTMLDivElement, ITabPanelsPro
 ): JSX.Element => <ChakraTabPanels ref={ref} {...props} />;
 
 export const TabPanels = memo(forwardRef(TabPanelsComponent));
-
-export default TabPanels;

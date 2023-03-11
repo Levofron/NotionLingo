@@ -9,5 +9,3 @@ const DividerComponent: ForwardRefRenderFunction<HTMLHRElement, IDividerProps> =
 ): JSX.Element => <ChakraDivider ref={ref} {...props} />;
 
 export const Divider = memo(forwardRef(DividerComponent));
-
-export default Divider;

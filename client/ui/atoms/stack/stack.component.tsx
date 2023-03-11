@@ -9,5 +9,3 @@ const StackComponent: ForwardRefRenderFunction<HTMLDivElement, IStackProps> = (
 ): JSX.Element => <ChakraStack ref={ref} {...props} />;
 
 export const Stack = memo(forwardRef(StackComponent));
-
-export default Stack;

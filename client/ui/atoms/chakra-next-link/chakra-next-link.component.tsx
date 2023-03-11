@@ -16,5 +16,3 @@ const ChakraNextLinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, TChak
 );
 
 export const ChakraNextLink = memo(forwardRef(ChakraNextLinkComponent));
-
-export default ChakraNextLink;

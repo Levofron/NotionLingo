@@ -9,5 +9,3 @@ const AccordionItemComponent: ForwardRefRenderFunction<HTMLDivElement, IAccordio
 ): JSX.Element => <ChakraAccordionItem ref={ref} {...props} />;
 
 export const AccordionItem = memo(forwardRef(AccordionItemComponent));
-
-export default AccordionItem;

@@ -28,5 +28,3 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
 };
 
 export const Card = memo(forwardRef(CardComponent));
-
-export default Card;

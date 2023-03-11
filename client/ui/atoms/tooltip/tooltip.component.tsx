@@ -9,5 +9,3 @@ const TooltipComponent: ForwardRefRenderFunction<HTMLDivElement, ITooltipProps> 
 ): JSX.Element => <ChakraTooltip ref={ref} {...props} />;
 
 export const Tooltip = memo(forwardRef(TooltipComponent));
-
-export default Tooltip;

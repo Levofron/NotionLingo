@@ -17,5 +17,3 @@ const TextComponent: ForwardRefRenderFunction<HTMLParagraphElement, ITextProps> 
 );
 
 export const Text = memo(forwardRef(TextComponent));
-
-export default Text;

@@ -25,5 +25,3 @@ const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextarea
 };
 
 export const Textarea = memo(forwardRef(TextareaComponent));
-
-export default Textarea;

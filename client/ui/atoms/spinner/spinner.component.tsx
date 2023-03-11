@@ -17,5 +17,3 @@ const SpinnerComponent: ForwardRefRenderFunction<HTMLDivElement, ISpinnerProps> 
 );
 
 export const Spinner = memo(forwardRef(SpinnerComponent));
-
-export default Spinner;

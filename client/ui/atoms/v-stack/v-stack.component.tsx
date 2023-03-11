@@ -9,5 +9,3 @@ const VStackComponent: ForwardRefRenderFunction<HTMLDivElement, IVStackProps> = 
 ): JSX.Element => <ChakraVStack ref={ref} {...props} />;
 
 export const VStack = memo(forwardRef(VStackComponent));
-
-export default VStack;

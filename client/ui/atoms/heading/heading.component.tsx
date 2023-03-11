@@ -17,5 +17,3 @@ const HeadingComponent: ForwardRefRenderFunction<HTMLParagraphElement, IHeadingP
 );
 
 export const Heading = memo(forwardRef(HeadingComponent));
-
-export default Heading;

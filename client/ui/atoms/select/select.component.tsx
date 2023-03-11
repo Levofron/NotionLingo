@@ -20,5 +20,3 @@ const SelectComponent: ForwardRefRenderFunction<HTMLSelectElement, ISelectProps>
 );
 
 export const Select = memo(forwardRef(SelectComponent));
-
-export default Select;

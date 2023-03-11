@@ -9,5 +9,3 @@ const FlexComponent: ForwardRefRenderFunction<HTMLDivElement, IFlexProps> = (
 ): JSX.Element => <ChakraFlex ref={ref} {...props} />;
 
 export const Flex = memo(forwardRef(FlexComponent));
-
-export default Flex;

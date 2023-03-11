@@ -19,5 +19,3 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
 );
 
 export const Button = memo(forwardRef(ButtonComponent));
-
-export default Button;

@@ -54,5 +54,3 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
 };
 
 export const Slider = memo(forwardRef(SliderComponent));
-
-export default Slider;
