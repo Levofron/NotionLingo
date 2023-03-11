@@ -26,7 +26,7 @@ export const DisplayError: FC<IDisplayErrorProps> = ({
         </Button>
       ) : null}
       <Button isLoading={isLoading} onClick={onRedirectToHomeButtonClick}>
-        Take me to the home page
+        Back to home
       </Button>
     </Flex>
   </Card>
