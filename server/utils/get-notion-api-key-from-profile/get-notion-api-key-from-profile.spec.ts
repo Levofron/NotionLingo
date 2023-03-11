@@ -2,7 +2,6 @@ import { functionImportTest } from '@infrastructure/utils';
 
 import { getNotionApiKeyFromProfile } from './get-notion-api-key-from-profile.function';
 
-// TODO - add more tests
 describe('getNotionApiKeyFromProfile function', () => {
   functionImportTest(getNotionApiKeyFromProfile);
 
