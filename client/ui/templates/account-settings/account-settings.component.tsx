@@ -85,6 +85,11 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       )
       .finally(deleteAccountModalRef.current?.close);
 
+  const isDisabledButton =
+    isDeleteProfileCountdownStarted ||
+    isResetNotionIntegrationCountdownStarted ||
+    !user?.hasNotionData;
+
   return (
     <ParticlesBackgroundLayout height="100%">
       <ConfirmationModal
@@ -122,7 +127,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               {user?.totalLearnedWords ? '!' : ''}
             </Text>
             <Button
-              disabled={isDeleteProfileCountdownStarted || isResetNotionIntegrationCountdownStarted}
+              isDisabled={isDisabledButton}
               isLoading={isResetNotionIntegrationLoading}
               leftIcon={<BiReset />}
               mb={2}
@@ -135,7 +140,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
               }`}
             </Button>
             <Button
-              disabled={isDeleteProfileCountdownStarted || isResetNotionIntegrationCountdownStarted}
+              isDisabled={isDisabledButton}
               isLoading={isDeleteProfileLoading}
               leftIcon={<AiFillDelete />}
               onClick={() => deleteAccountModalRef.current?.open()}

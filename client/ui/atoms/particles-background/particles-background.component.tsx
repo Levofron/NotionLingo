@@ -3,8 +3,8 @@ import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
 export const ParticlesBackground = () => {
-  const [isSmallerThan1024] = useMediaQuery('(max-width: 1024px)');
   const [isSmallerThan600] = useMediaQuery('(max-width: 600px)');
+  const [isSmallerThan1024] = useMediaQuery('(max-width: 1024px)');
 
   const getBubbleNumber = () => {
     if (isSmallerThan600) {
@@ -41,8 +41,6 @@ export const ParticlesBackground = () => {
 
     return 300;
   };
-
-  console.log(getBubbleDistance());
 
   return (
     <Particles
