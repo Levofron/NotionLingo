@@ -36,5 +36,4 @@ async function generateSitemap() {
   fs.writeFileSync(`${publicDirectoryPath}/sitemap.xml`, sitemap);
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
 generateSitemap();
