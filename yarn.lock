@@ -10143,6 +10143,7 @@ __metadata:
     lint-staged: ^13.1.2
     memory-cache: ^0.2.0
     next: 13.1.6
+    next-axiom: ^0.17.0
     next-pwa: ^5.6.0
     next-seo: ^5.15.0
     next-usequerystate: ^1.7.2
@@ -10850,6 +10851,17 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
+  languageName: node
+  linkType: hard
+
+"next-axiom@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "next-axiom@npm:0.17.0"
+  dependencies:
+    whatwg-fetch: ^3.6.2
+  peerDependencies:
+    next: ^12.1.4 || ^13
+  checksum: fce4193be1ce49a704b80b12ae85b1e5c5a574eede1cd363c4f1ed7b704192a4ad90e99f7d1e90ae92fdd923f7e7a4a61c15b6a58dc86ede4f472ee456b92029
   languageName: node
   linkType: hard
 
@@ -14692,6 +14704,13 @@ __metadata:
   dependencies:
     iconv-lite: 0.6.3
   checksum: 7087810c410aa9b689cbd6af8773341a53cdc1f3aae2a882c163bd5522ec8ca4cdfc269aef417a5792f411807d5d77d50df4c24e3abb00bb60192858a40cc675
+  languageName: node
+  linkType: hard
+
+"whatwg-fetch@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "whatwg-fetch@npm:3.6.2"
+  checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed
   languageName: node
   linkType: hard
 
