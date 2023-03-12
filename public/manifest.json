@@ -1,4 +1,9 @@
 {
+  "theme_color": "#f7f7f7",
+  "background_color": "#f7f7f7",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
   "name": "NotionLingo",
   "short_name": "NotionLingo",
   "description": "Improve vocabulary with your Notion database",
@@ -13,8 +18,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#f7f7f7",
-  "background_color": "#f7f7f7",
-  "display": "standalone"
+  ]
 }
