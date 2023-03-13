@@ -1,5 +1,5 @@
-const fs = require('node:fs');
-const path = require('node:path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 const getPath = (destination) => {
   const currentDirectory = process.cwd();
@@ -55,9 +55,9 @@ const convertNamesToEnumBody = (names) =>
     .join(',\n');
 
 const writeEnumToRoutesFile = (enumContent) => {
-  const path = getRouteTypesDirectoryPath();
+  const directoryPath = getRouteTypesDirectoryPath();
 
-  fs.writeFileSync(path, enumContent);
+  fs.writeFileSync(directoryPath, enumContent);
 };
 
 const main = async () => {

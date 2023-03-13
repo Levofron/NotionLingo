@@ -8,7 +8,6 @@ import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   dictionaryResponseToMeaningAndExampleArray,
   executeCommand,
-  shuffleArray,
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -156,10 +155,10 @@ export const getWordDetailsFromDictionary = async (string: string) => {
 
   const result = {
     word: webscrapCambridgeDictionaryResponse.word,
-    meaningAndExamples: shuffleArray([
-      ...webscrapMerriamWebsterResponse.meaningAndExamples,
+    meaningAndExamples: [
       ...webscrapCambridgeDictionaryResponse.meaningAndExamples,
-    ]),
+      ...webscrapMerriamWebsterResponse.meaningAndExamples,
+    ],
     additionalExamples: webscrapCambridgeDictionaryResponse.additionalExamples,
   };
 
