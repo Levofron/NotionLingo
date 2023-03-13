@@ -7,10 +7,10 @@ import {
   createNotionWordUseCase,
   deleteProfileUseCase,
   getAvailableNotionDatabasesUseCase,
+  getDictionarySuggestionsUseCase,
   getLoggedProfileUseCase,
   getNotionTableColumnsUseCase,
   getRandomNotionWordsUseCase,
-  getWordSuggestionsUseCase,
   healthCheckUseCase,
   increaseDailyStreakUseCase,
   resetNotionIntegrationUseCase,
@@ -21,7 +21,9 @@ import {
   updateNotionWordUseCase,
 } from '@domain/use-cases/rest.use-cases';
 
-import { axiosInstance, supabaseInstance } from '@infrastructure/config';
+import { axiosInstance } from '@infrastructure/config';
+
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 // apis
 const restApi = getRestApi(axiosInstance);
@@ -38,12 +40,12 @@ export const restModule = {
   createNotionWord: createNotionWordUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
   setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
-  getWordSuggestions: getWordSuggestionsUseCase(restRepository).execute,
   sendContactFormData: sendContactFormDataUseCase(restRepository).execute,
   increaseDailyStreak: increaseDailyStreakUseCase(restRepository).execute,
   setNotionDatabaseId: setNotionDatabaseIdUseCase(restRepository).execute,
   getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
   getNotionTableColumns: getNotionTableColumnsUseCase(restRepository).execute,
   resetNotionIntegration: resetNotionIntegrationUseCase(restRepository).execute,
+  getDictionarySuggestions: getDictionarySuggestionsUseCase(restRepository).execute,
   getAvailableNotionDatabases: getAvailableNotionDatabasesUseCase(restRepository).execute,
 };

@@ -1,5 +1,3 @@
-import { IconType } from 'react-icons';
-
 import { IBoxProps } from '@ui/atoms';
 
 export interface ISidebarContentProps extends IBoxProps {
@@ -8,6 +6,5 @@ export interface ISidebarContentProps extends IBoxProps {
 
 export interface ISidebarItem {
   href: string;
-  icon: IconType;
   name: string;
 }

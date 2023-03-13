@@ -7,6 +7,6 @@ export interface IUserContextValue {
   isUserAuthenticated: boolean;
   loginViaGoogle: () => Promise<void>;
   logout: () => void;
-  resetNotionData: () => void;
+  setNotionData: (hasNotionData: boolean) => void;
   user: (User & IProfile) | null;
 }

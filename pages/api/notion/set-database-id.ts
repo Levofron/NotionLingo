@@ -1,21 +1,21 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  getProfileById,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
-import { getProfileById } from '../profile/get';
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 const updateProfileNotionApiKey = async (userId: string, newNotionDatabaseId: string) =>
   supabaseInstance

@@ -2,7 +2,7 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,
   DEFAULT_SPEECH_SYNTHESIS_RATE,
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
-} from '@constants';
+} from '@config/constants';
 
 import { ISpeechSynthesisRepository } from '../repositories/speech-synthesis.repository';
 import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from './common.types';
@@ -28,6 +28,21 @@ export const speakUseCase = (
     }
 
     speechSynthesisRepository.speak(text);
+  },
+});
+
+// cancelUseCase
+export type TCancelUseCase = IUseCaseWithoutParams<void>;
+
+export const cancelUseCase = (
+  speechSynthesisRepository: ISpeechSynthesisRepository,
+): TCancelUseCase => ({
+  execute: () => {
+    if (!speechSynthesisRepository.isSupported()) {
+      return;
+    }
+
+    speechSynthesisRepository.cancel();
   },
 });
 

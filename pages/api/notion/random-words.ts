@@ -6,31 +6,31 @@ import {
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
-import { cleanUpString } from '@infrastructure/utils';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
   decrypt,
+  generateMemoryCacheKey,
+  getProfileDataWithNotionDataCheck,
   getRandomNumber,
+  getTextFromPagePropertyInstance,
   getUserFromRequest,
   textToIpa,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
   SUPPORTED_MEANING_COLUMN_NAMES,
   SUPPORTED_TYPE_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
-} from '@constants';
+} from '@config/constants';
 
-import { getWordDetailsFromCambridgeDictionary } from '../cambridge-dictionary/find';
-import { getProfileDataWithNotionDataCheck } from './table-columns';
-import { getTextFromPagePropertyInstance } from './update';
+import { getWordDetailsFromDictionary } from '../dictionary/find';
 
 const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
@@ -39,15 +39,15 @@ const CACHE_TIME = 1000 * 60 * 60;
 type TPage = PageObjectResponse | PartialPageObjectResponse;
 
 interface IGetPagesParams {
-  databaseId: string;
   notionClient: Client;
+  notionDatabaseId: string;
   startCursor: string | null;
 }
 
 interface IGetPagesWithCacheParams {
-  databaseId: string;
   notionApiKey: string;
   notionClient: Client;
+  notionDatabaseId: string;
   profileId: string;
 }
 
@@ -55,17 +55,6 @@ interface IGetPagesResult {
   hasMore: boolean;
   nextCursor: string | null;
   pages: TPage[];
-}
-
-interface IMeaningWithExamples {
-  examples: string[];
-  meaning: string;
-}
-
-interface IScrapingWordApiResponse {
-  additionalExamples: string[];
-  meaningAndExamples: IMeaningWithExamples[];
-  word: string;
 }
 
 const getRandomFivePages = (pages: TPage[]) => {
@@ -99,13 +88,13 @@ const getRandomFivePages = (pages: TPage[]) => {
 };
 
 const getPages = async ({
-  databaseId,
   notionClient,
+  notionDatabaseId,
   startCursor,
 }: IGetPagesParams): Promise<IGetPagesResult> => {
   const database = await notionClient.databases.query({
     start_cursor: startCursor || undefined,
-    database_id: databaseId,
+    database_id: notionDatabaseId,
     page_size: PAGE_SIZE,
   });
 
@@ -113,23 +102,17 @@ const getPages = async ({
 };
 
 const getPagesWithCache = async ({
-  databaseId,
   notionApiKey,
   notionClient,
+  notionDatabaseId,
   profileId,
 }: IGetPagesWithCacheParams) => {
-  const cacheKeyObject = {
-    profileId,
-    databaseId,
-    notionApiKey,
-  };
-
-  const cacheKey = JSON.stringify(cacheKeyObject);
+  const cacheKey = generateMemoryCacheKey(profileId, notionDatabaseId, notionApiKey);
   const cachedGetPagesResult = memoryCache.get(cacheKey) as IGetPagesResult | null;
 
   if (!cachedGetPagesResult) {
     const result = await getPages({
-      databaseId,
+      notionDatabaseId,
       notionClient,
       startCursor: null,
     });
@@ -152,7 +135,7 @@ const getPagesWithCache = async ({
     nextCursor: newNextCursor,
     pages: newPages,
   } = await getPages({
-    databaseId,
+    notionDatabaseId,
     notionClient,
     startCursor: nextCursor,
   });
@@ -162,51 +145,6 @@ const getPagesWithCache = async ({
   memoryCache.put(cacheKey, { pages: allPages, hasMore, nextCursor: newNextCursor }, CACHE_TIME);
 
   return allPages;
-};
-
-const getMeaningAndExampleSentenceSuggestion = ({
-  additionalExamples,
-  meaningAndExamples,
-  word,
-}: IScrapingWordApiResponse) => {
-  if (!meaningAndExamples?.length) {
-    return null;
-  }
-
-  const foundMeaningAndExample = meaningAndExamples.find((_meaningAndExample) => {
-    const parsedMeaning = cleanUpString(_meaningAndExample.meaning);
-    const hasExampels = _meaningAndExample.examples.length > 0;
-
-    return !!parsedMeaning && hasExampels;
-  });
-
-  if (foundMeaningAndExample) {
-    return {
-      word,
-      meaning: foundMeaningAndExample.meaning,
-      example: foundMeaningAndExample.examples[0],
-    };
-  }
-
-  if (additionalExamples.length === 0) {
-    return null;
-  }
-
-  const foundMeaningWithoutExamples = meaningAndExamples.find((_meaningAndExample) => {
-    const parsedMeaning = cleanUpString(_meaningAndExample.meaning);
-
-    return !!parsedMeaning;
-  });
-
-  if (foundMeaningWithoutExamples) {
-    return {
-      word,
-      example: additionalExamples[0],
-      meaning: foundMeaningWithoutExamples.meaning,
-    };
-  }
-
-  return null;
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -222,7 +160,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     notionApiKey,
     notionClient,
     profileId: user?.id!,
-    databaseId: profileData.notion_database_id,
+    notionDatabaseId: profileData.notion_database_id,
   });
 
   const selectedPages = getRandomFivePages(allPages) as PageObjectResponse[];
@@ -241,10 +179,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!meaning || !exampleSentence) {
         try {
-          const response = await getWordDetailsFromCambridgeDictionary(word as string);
-
-          const meaningAndExampleSentenceSuggestion =
-            getMeaningAndExampleSentenceSuggestion(response);
+          const response = await getWordDetailsFromDictionary(word as string);
 
           return {
             id,
@@ -253,8 +188,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             word,
             meaning,
             exampleSentence,
-            meaningSuggestion: meaningAndExampleSentenceSuggestion?.meaning,
-            exampleSentenceSuggestion: meaningAndExampleSentenceSuggestion?.example,
+            meaningSuggestion: response?.suggestions[0]?.meaning,
+            exampleSentenceSuggestion: response?.suggestions[0]?.example,
           };
         } catch (error) {
           console.error(error);

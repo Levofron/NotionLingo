@@ -1,30 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { supabaseInstance } from '@infrastructure/config';
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { isString } from '@infrastructure/utils';
+
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
+  getProfileById,
   getUserFromRequest,
+  isIsoDate,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
-import { getProfileById } from './get';
-
-const isIsoDate = (string: string) => {
-  if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(string)) {
-    return false;
-  }
-
-  const date = new Date(string);
-
-  return date instanceof Date && !Number.isNaN(date) && date.toISOString() === string;
-};
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 const updateProfileDetailsDecorator =
   (userId: string, currentDate: Date, res: NextApiResponse) => async (data: object) => {

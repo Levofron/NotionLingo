@@ -10,7 +10,7 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,
   DEFAULT_SPEECH_SYNTHESIS_RATE,
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
-} from '@constants';
+} from '@config/constants';
 
 import { INotionWordCardBackProps } from './notion-word-card-back.types';
 

@@ -3,21 +3,25 @@ import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString, hasOwnProperty } from '@infrastructure/utils';
+
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
-  decrypt,
+  getNotionApiKeyFromProfile,
+  getNotionTableColumns,
+  getProfileDataWithNotionDataCheck,
+  getTextFromPagePropertyInstance,
   getUserFromRequest,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
-import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
+import { generateMemoryCacheKey } from '../../../server/utils/generate-memory-cache-key/generate-memory-cache-key.function';
 
 export const getTitleOrRichTextProperty = (columnName: string, type: string, newValue: string) => {
   if (!newValue) {
@@ -37,45 +41,6 @@ export const getTitleOrRichTextProperty = (columnName: string, type: string, new
   };
 };
 
-export const getTextFromPagePropertyInstance =
-  (pageProperties: PageObjectResponse['properties']) => (propertyNames: string | string[]) => {
-    const parsedPropertyNames = Array.isArray(propertyNames) ? propertyNames : [propertyNames];
-
-    let selectedPageProperties = pageProperties[parsedPropertyNames[0]];
-
-    if (!selectedPageProperties) {
-      for (const _propertyName of parsedPropertyNames) {
-        if (pageProperties[_propertyName]) {
-          selectedPageProperties = pageProperties[_propertyName];
-
-          break;
-        }
-      }
-    }
-
-    if (!selectedPageProperties) {
-      return null;
-    }
-
-    if (selectedPageProperties.type === 'title') {
-      return selectedPageProperties.title.map((_title) => _title.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'rich_text') {
-      return selectedPageProperties.rich_text.map((_richText) => _richText.plain_text).join('');
-    }
-
-    if (selectedPageProperties.type === 'multi_select') {
-      return selectedPageProperties.multi_select.map((_multiSelect) => _multiSelect.name);
-    }
-
-    if (selectedPageProperties.type === 'select') {
-      return selectedPageProperties.select?.name || '';
-    }
-
-    throw new Error(`Unsupported "${selectedPageProperties.type}" type`);
-  };
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
@@ -92,16 +57,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const hash = JSON.parse(profileData?.notion_api_key);
-  const notionApiKey = decrypt(hash);
-
+  const notionApiKey = getNotionApiKeyFromProfile(profileData);
   const notionClient = createNotionClient(notionApiKey);
 
   await notionClient.pages.retrieve({
     page_id: id,
   });
 
-  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_database_id);
+  const tableColumns = await getNotionTableColumns(notionApiKey, profileData.notion_database_id);
 
   const meaningColumn = tableColumns.find((tableColumn) => tableColumn?.isMeaning);
   const exampleSentenceColumn = tableColumns.find((tableColumn) => tableColumn?.isExampleSentence);
@@ -143,14 +106,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const meaningText = getTextFromPageProperty([meaningColumn.columnName]);
   const exampleSentenceText = getTextFromPageProperty([exampleSentenceColumn.columnName]);
-
-  const cacheKeyObject = {
-    profileId: user!.id,
-    databaseId: profileData.notion_database_id,
-    notionApiKey,
-  };
-
-  const cacheKey = JSON.stringify(cacheKeyObject);
+  const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
 
   memoryCache.del(cacheKey);
 

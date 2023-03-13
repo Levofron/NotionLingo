@@ -24,13 +24,13 @@ describe('getRestRepository function', () => {
       createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
-      getWordSuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getNotionTableColumns: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
+      getDictionarySuggestions: expect.any(Function),
       getAvailableNotionDatabases: expect.any(Function),
     });
   });
@@ -270,18 +270,17 @@ describe('getRestRepository function', () => {
     });
   });
 
-  describe('getWordSuggestions function', () => {
+  describe('getDictionarySuggestions function', () => {
     it('should call proper restApi function', async () => {
-      const suggestions = {
-        additionalExamples: ['Example 1', 'Example 2'],
-        meaningAndExamples: [
+      const data = {
+        suggestions: [
           {
             meaning: 'Meaning 1',
-            examples: ['Example 1', 'Example 2'],
+            example: 'Example 1',
           },
           {
             meaning: 'Meaning 2',
-            examples: ['Example 1', 'Example 2'],
+            example: 'Example 1',
           },
         ],
         word: 'Word',
@@ -289,7 +288,7 @@ describe('getRestRepository function', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restApiMock: any = {
-        getWordSuggestions: jest.fn().mockImplementation(() => ({ data: suggestions })),
+        getDictionarySuggestions: jest.fn().mockImplementation(() => ({ data })),
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -297,10 +296,10 @@ describe('getRestRepository function', () => {
 
       const restRepository = getRestRepository(restApiMock, supabaseApiMock);
 
-      const result = await restRepository.getWordSuggestions('word');
+      const result = await restRepository.getDictionarySuggestions('word');
 
-      expect(result).toEqual(suggestions);
-      expect(restApiMock.getWordSuggestions).toHaveBeenCalledWith('word');
+      expect(result).toEqual(data);
+      expect(restApiMock.getDictionarySuggestions).toHaveBeenCalledWith('word');
     });
   });
 

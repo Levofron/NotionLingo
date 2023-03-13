@@ -5,8 +5,8 @@ import { IRestRepository } from '@domain/repositories/rest.repository';
 
 import {
   addImageUrlForEachNotionWordTransformator,
+  formatDictionarySuggestions,
   formatRandomNotionWordsTransformator,
-  formatWordSuggestions,
 } from './utils';
 
 const delay = (time: number) =>
@@ -74,10 +74,14 @@ export const getRestRepository = (
 
     supabaseApi.logout();
   },
-  getWordSuggestions: async (word) => {
-    const { data } = await restApi.getWordSuggestions(word);
+  getDictionarySuggestions: async (word) => {
+    const { data } = await restApi.getDictionarySuggestions(word);
 
-    return formatWordSuggestions(data);
+    if (!data?.suggestions?.length) {
+      return null;
+    }
+
+    return formatDictionarySuggestions(data);
   },
   updateNotionWord: async (data) => {
     const { data: response } = await restApi.updateNotionWord(data);

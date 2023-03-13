@@ -5,7 +5,7 @@ import {
   supabaseModule,
 } from '@adapter/modules';
 
-import { APPLICATION_ENVIRONMENT } from '@constants';
+import { APPLICATION_ENVIRONMENT } from '@config/constants';
 
 export const createDevToolsClient = () => {
   if (!['test', 'local'].includes(APPLICATION_ENVIRONMENT)) {

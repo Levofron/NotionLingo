@@ -1,78 +1,116 @@
+import { useMediaQuery } from '@chakra-ui/react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
-export const ParticlesBackground = () => (
-  <Particles
-    id="tsparticles"
-    init={loadFull}
-    options={{
-      fullScreen: false,
-      background: {
-        color: {
-          value: 'transparent',
-        },
-      },
-      fpsLimit: 120,
-      interactivity: {
-        modes: {
-          bubble: {
-            distance: 250,
-            duration: 2,
-            size: 6,
-            opacity: 0.4,
+export const ParticlesBackground = () => {
+  const [isSmallerThan600] = useMediaQuery('(max-width: 600px)');
+  const [isSmallerThan1024] = useMediaQuery('(max-width: 1024px)');
+
+  const getBubbleNumber = () => {
+    if (isSmallerThan600) {
+      return 40;
+    }
+
+    if (isSmallerThan1024) {
+      return 80;
+    }
+
+    return 160;
+  };
+
+  const getBubbleDistance = () => {
+    if (isSmallerThan600) {
+      return 50;
+    }
+
+    if (isSmallerThan1024) {
+      return 120;
+    }
+
+    return 200;
+  };
+
+  const getBubbleRepulseDistance = () => {
+    if (isSmallerThan600) {
+      return 100;
+    }
+
+    if (isSmallerThan1024) {
+      return 200;
+    }
+
+    return 300;
+  };
+
+  return (
+    <Particles
+      id="tsparticles"
+      init={loadFull}
+      options={{
+        fullScreen: false,
+        background: {
+          color: {
+            value: 'transparent',
           },
-          push: {
-            particles_nb: 5,
+        },
+        fpsLimit: 120,
+        interactivity: {
+          events: {
+            onhover: {
+              enable: true,
+              mode: 'bubble',
+            },
           },
-        },
-        retina_detect: true,
-      },
-      particles: {
-        color: {
-          value: '#000',
-        },
-        links: {
-          color: '#000',
-          distance: 150,
-          enable: true,
-          opacity: 0.5,
-          width: 1,
-        },
-        collisions: {
-          enable: true,
-        },
-        move: {
-          enable: true,
-          outModes: {
-            default: 'bounce',
+          modes: {
+            bubble: {
+              distance: getBubbleDistance(),
+              duration: 2,
+              size: 0,
+              opacity: 0,
+            },
+            repulse: {
+              distance: getBubbleRepulseDistance(),
+              duration: 4,
+            },
           },
-          random: false,
-          speed: 0.2,
-          straight: false,
+          retina_detect: true,
         },
-        number: {
-          density: {
+        particles: {
+          color: {
+            value: '#000',
+          },
+          number: {
+            value: getBubbleNumber(),
+            density: {
+              enable: false,
+            },
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              speed: 4,
+              size_min: 0.3,
+            },
+          },
+          line_linked: {
+            enable: false,
+          },
+          move: {
             enable: true,
-            area: 800,
+            random: true,
+            speed: 1,
+            direction: 'top',
+            out_mode: 'out',
           },
-          value: 80,
         },
-        opacity: {
-          value: 0.5,
-        },
-        shape: {
-          type: 'circle',
-        },
-        size: {
-          value: { min: 1, max: 5 },
-        },
-      },
-      detectRetina: true,
-    }}
-    style={{
-      position: 'absolute',
-    }}
-  />
-);
+        detectRetina: true,
+      }}
+      style={{
+        position: 'absolute',
+      }}
+    />
+  );
+};
 
 export default ParticlesBackground;

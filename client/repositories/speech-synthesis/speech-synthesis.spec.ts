@@ -28,6 +28,7 @@ describe('getSpeechSynthesisRepository function', () => {
 
     expect(speechSynthesisRepository).toEqual({
       speak: expect.any(Function),
+      cancel: expect.any(Function),
       getRate: expect.any(Function),
       setRate: expect.any(Function),
       getPitch: expect.any(Function),
@@ -98,5 +99,23 @@ describe('getSpeechSynthesisRepository function', () => {
     speechSynthesisRepository.getVoices();
 
     expect(BASE_SPEECH_SYNTHESIS_SOURCE_MOCK.getVoices).toHaveBeenCalled();
+  });
+
+  it('should call cancel function', () => {
+    const localStorageApi = {
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      removeItem: jest.fn(),
+      isSupported: jest.fn(),
+    };
+
+    const speechSynthesisRepository = getSpeechSynthesisRepository(
+      BASE_SPEECH_SYNTHESIS_SOURCE_MOCK,
+      localStorageApi,
+    );
+
+    speechSynthesisRepository.cancel();
+
+    expect(BASE_SPEECH_SYNTHESIS_SOURCE_MOCK.cancel).toHaveBeenCalled();
   });
 });

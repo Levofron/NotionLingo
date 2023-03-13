@@ -10,7 +10,7 @@ import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
   SUPPORTED_MEANING_COLUMN_NAMES,
   SUPPORTED_WORD_COLUMN_NAMES,
-} from '@constants';
+} from '@config/constants';
 
 import { IOnboardingStepOneProps } from './onboarding-step-one.types';
 import { mapColumnNamesToComponents } from './utils';
@@ -26,13 +26,14 @@ const supportedExampleSentenceColumnNamesAsList = mapColumnNamesToComponents(
 export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
   onNextButtonClick,
 }): JSX.Element => {
-  const { back } = useRouter();
+  const { redirectToHome } = useRouter();
 
   return (
     <OnboardingStepLayout
+      backButtonLabel="Back to home"
       subtitle="So far we only support specific column names."
       title="Does your Notion database with vocabulary valid?"
-      onBackButtonClick={back}
+      onBackButtonClick={redirectToHome}
       onNextButtonClick={onNextButtonClick}
     >
       <Flex direction={{ sm: 'column', md: 'row' }} mb="24px" w="100%">

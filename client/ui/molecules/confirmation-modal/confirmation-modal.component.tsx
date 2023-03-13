@@ -58,7 +58,7 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
         <ModalFooter alignItems="center" as={Flex} justifyContent="center">
           <Button
             ref={cancelRef}
-            disabled={isConfirmLoading}
+            isDisabled={isConfirmLoading}
             mode="light"
             size={{ base: 'sm', sm: 'md' }}
             onClick={onClose}
