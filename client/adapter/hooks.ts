@@ -96,7 +96,7 @@ export const useDictionarySuggestions = () => {
     dictionarySuggestions: data,
     getDictionarySuggestions: mutate,
     dictionarySuggestionsError: error,
-    isGetDictionarySuggestionsLoading: isLoading,
+    isDictionarySuggestionsLoading: isLoading,
   };
 };
 

@@ -39,7 +39,7 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
     dictionarySuggestions,
     dictionarySuggestionsError,
     getDictionarySuggestions,
-    isGetDictionarySuggestionsLoading,
+    isDictionarySuggestionsLoading,
   } = useDictionarySuggestions();
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
           isRequired
           defaultValue={queryStateWord || ''}
           errorMessage={dictionarySuggestionsError || undefined}
-          isLoading={isGetDictionarySuggestionsLoading}
+          isLoading={isDictionarySuggestionsLoading}
           label="Search for a word"
           name="searchWord"
           placeholder="Your search word"
