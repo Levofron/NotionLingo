@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dictionaryResponseToMeaningAndExampleArray function should return same object with cleaned up strings 1`] = `
+{
+  "suggestions": [
+    {
+      "example": "example 1",
+      "meaning": "meaning 1",
+    },
+    {
+      "example": "example 1",
+      "meaning": "meaning 2",
+    },
+    {
+      "example": "example 3",
+      "meaning": "meaning 3",
+    },
+  ],
+  "word": "word",
+}
+`;

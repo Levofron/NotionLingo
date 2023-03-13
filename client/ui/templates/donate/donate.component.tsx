@@ -1,21 +1,12 @@
 import NextImage from 'next/image';
 
-import {
-  Box,
-  Card,
-  ChakraNextLink,
-  Container,
-  Flex,
-  Heading,
-  ParticlesBackground,
-  Text,
-} from '@ui/atoms';
+import { Card, ChakraNextLink, Container, Flex, Heading, Text } from '@ui/atoms';
+import { ParticlesBackgroundLayout } from '@ui/molecules';
 
 import { BUY_ME_A_COFFEE_LINK, PAYPAL_LINK } from '@config/constants';
 
 export const DonateTemplate = (): JSX.Element => (
-  <Box bg="gray.50" height="100%" overflow="hidden">
-    <ParticlesBackground />
+  <ParticlesBackgroundLayout height="100%">
     <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
       <Flex alignItems="center" height="100%" justifyContent="center">
         <Card maxW="400px" p={{ base: 2, sm: 3, md: 4 }}>
@@ -69,5 +60,5 @@ export const DonateTemplate = (): JSX.Element => (
         </Card>
       </Flex>
     </Container>
-  </Box>
+  </ParticlesBackgroundLayout>
 );

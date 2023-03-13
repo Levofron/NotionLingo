@@ -10,12 +10,12 @@ out
 build
 coverage
 node_modules
+scripts/node
 
 .eslintrc.js
 next.config.js
 commitlint.config.js
 
-# PWA files
 **/public/sw.js
 **/public/workbox-*.js
 **/public/worker-*.js

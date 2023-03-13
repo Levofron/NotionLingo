@@ -56,20 +56,20 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     redirectToOnboarding();
   };
 
-  const resetNotionData = () =>
+  const setNotionData = (hasNotionData: boolean) =>
     setUser((_prevUser) => ({
       ..._prevUser!,
-      hasNotionData: false,
+      hasNotionData,
     }));
 
-  const providerValue = {
+  const providerValue = Object.freeze({
     user,
     logout,
     isLoading,
+    setNotionData,
     loginViaGoogle,
-    resetNotionData,
     isUserAuthenticated: !!user,
-  };
+  });
 
   return <UserContext.Provider value={providerValue}>{children}</UserContext.Provider>;
 };

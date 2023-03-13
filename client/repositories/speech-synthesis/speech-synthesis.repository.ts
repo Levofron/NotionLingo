@@ -138,5 +138,6 @@ export function getSpeechSynthesisRepository(
     onVoicesChanged: (callback) => {
       speechSynthesisApi.onVoicesChanged(callback);
     },
+    cancel: speechSynthesisApi.cancel,
   };
 }

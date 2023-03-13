@@ -3,12 +3,12 @@ import { AxiosResponse } from 'axios';
 
 import {
   IContact,
+  IDictionarySuggestions,
   IHash,
   IIncreaseDailyStreak,
   INotionDatabase,
   IProfile,
   IUpdateNotionWordRequest,
-  IWordSuggestions,
   TNotionTableColumn,
 } from '@domain/entities/rest.types';
 
@@ -28,10 +28,10 @@ export enum ERestEndpoints {
   CREATE_NOTION_WORD = '/notion/create',
   DELETE_PROFILE = '/profile/delete',
   GET_AVAILABLE_NOTION_DATABASES = '/notion/available-databases',
+  GET_DICTIONARY_SUGGESTIONS = '/dictionary/find',
   GET_LOGGED_PROFILE = '/profile/logged',
   GET_NOTION_TABLE_COLUMNS = '/notion/table-columns',
   GET_RANDOM_NOTION_WORDS = '/notion/random-words',
-  GET_WORD_SUGGESTIONS = '/cambridge-dictionary/find',
   HEALTH_CHECK = '/health-check',
   INCREASE_DAILY_STREAK = '/profile/increase-daily-streak',
   RESET_NOTION_INTEGRATION = '/profile/reset-notion-integration',
@@ -47,10 +47,10 @@ export interface IRestApi {
   ) => Promise<AxiosResponse<INotionWordResponseRecord>>;
   deleteProfile: () => Promise<void>;
   getAvailableNotionDatabases: () => Promise<AxiosResponse<INotionDatabase[]>>;
+  getDictionarySuggestions: (word: string) => Promise<AxiosResponse<IDictionarySuggestions>>;
   getLoggedProfile: () => Promise<AxiosResponse<IProfile>>;
   getNotionTableColumns: () => Promise<AxiosResponse<TNotionTableColumn[]>>;
   getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseRecord[]>>;
-  getWordSuggestions: (word: string) => Promise<AxiosResponse<IWordSuggestions>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   increaseDailyStreak: () => Promise<AxiosResponse<IIncreaseDailyStreak>>;
   resetNotionIntegration: () => Promise<void>;

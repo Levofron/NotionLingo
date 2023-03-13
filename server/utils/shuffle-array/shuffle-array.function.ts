@@ -1,6 +1,6 @@
 import { getRandomNumber } from '..';
 
-export const shuffleArray = (array: unknown[]) => {
+export const shuffleArray = <T>(array: T[]) => {
   const copiedArray = [...array];
 
   for (let i = copiedArray.length - 1; i > 0; i -= 1) {

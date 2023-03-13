@@ -1,10 +1,9 @@
-import { motion } from 'framer-motion';
 import { queryTypes, useQueryState } from 'next-usequerystate';
-import { ChangeEvent, FC, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect, useRef } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
-import { Container, Divider, Flex, Heading, Icon, Text } from '@ui/atoms';
-import { InputControl } from '@ui/molecules';
+import { Container, Divider, Flex, Heading, Text } from '@ui/atoms';
+import { InputControl, MotionIconButton } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
@@ -14,6 +13,7 @@ import {
   isString,
   useAxios,
   useCopyToClipboard,
+  useIsFirstRender,
   useRouter,
   useToast,
 } from '@infrastructure/utils';
@@ -25,26 +25,34 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
 }): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
+  const isFirstRender = useIsFirstRender();
+  const inputRef = useRef<HTMLInputElement>(null);
   const { copyToClipboard } = useCopyToClipboard();
-  const [word, setWord] = useQueryState('word', queryTypes.string);
-
-  const {
-    data: getWordSuggestionsData,
-    error: getWordSuggestionsError,
-    isLoading: isGetWordSuggestionsLoading,
-    mutate: mutateGetWordSuggestions,
-  } = useAxios(restModule.getWordSuggestions);
+  const [queryStateWord, setQueryStateWord] = useQueryState('word', queryTypes.string);
 
   useEffect(() => {
-    if (isString(word)) {
-      mutateGetWordSuggestions(word);
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
-  }, [!!word]);
+  }, []);
+
+  const {
+    data: getDictionarySuggestionsData,
+    error: getDictionarySuggestionsError,
+    isLoading: isGetDictionarySuggestionsLoading,
+    mutate: mutateGetDictionarySuggestions,
+  } = useAxios(restModule.getDictionarySuggestions);
+
+  useEffect(() => {
+    if (isFirstRender && isString(queryStateWord)) {
+      mutateGetDictionarySuggestions(queryStateWord);
+    }
+  }, [!!queryStateWord]);
 
   const handleInputChange = debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    mutateGetWordSuggestions(value);
+    mutateGetDictionarySuggestions(value);
 
-    setWord(value);
+    setQueryStateWord(value);
   }, 1000);
 
   const handleAddNotionWordClick = (word: string, meaning: string, exampleSentence: string) => () =>
@@ -56,12 +64,6 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
         exampleSentence,
       },
     });
-
-  const isEmpty =
-    getWordSuggestionsData &&
-    !getWordSuggestionsData?.meaningAndExamples?.length &&
-    !getWordSuggestionsData?.word &&
-    !getWordSuggestionsData?.additionalExamples.length;
 
   const handleCopy = (string: string) => async () =>
     copyToClipboard(string).then(() =>
@@ -81,89 +83,52 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
         pt={{ base: 6, sm: 10 }}
       >
         <InputControl
+          ref={inputRef}
           isRequired
-          defaultValue={word || ''}
-          errorMessage={getWordSuggestionsError || undefined}
-          isDisabled={isGetWordSuggestionsLoading}
-          isLoading={isGetWordSuggestionsLoading}
+          defaultValue={queryStateWord || ''}
+          errorMessage={getDictionarySuggestionsError || undefined}
+          isLoading={isGetDictionarySuggestionsLoading}
           label="Search for a word"
           name="searchWord"
           placeholder="Your search word"
           onChange={handleInputChange}
         />
-        {getWordSuggestionsData?.word ? (
+        {getDictionarySuggestionsData?.word ? (
           <Heading
             as="h1"
             color="gray.900"
             cursor="pointer"
-            fontSize="4xl"
-            onClick={handleCopy(getWordSuggestionsData.word)}
+            fontSize={{ base: '3xl', sm: '4xl' }}
+            onClick={handleCopy(getDictionarySuggestionsData.word)}
           >
-            {getWordSuggestionsData.word}
+            {getDictionarySuggestionsData.word}
           </Heading>
         ) : null}
-        {isEmpty ? (
-          <Flex
-            alignItems="center"
-            flexDirection="column"
-            gap={{ base: 3, sm: 5 }}
-            height="100%"
-            justifyContent="center"
-          >
-            <Text
-              withBalancer
-              fontSize={{ base: 'md', sm: 'xl' }}
-              fontWeight="medium"
-              maxWidth="350px"
-              textAlign="center"
-            >
-              No meaning and examples found.
-            </Text>
-          </Flex>
-        ) : (
-          <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }} w="100%">
-            {getWordSuggestionsData?.meaningAndExamples.map(({ examples, meaning }, _index) => {
-              const example = examples[0] || getWordSuggestionsData.additionalExamples[0];
-
-              if (!example || !meaning) {
-                return null;
-              }
-
-              const key = `${meaning}-${example}-${_index}`;
-              const isLastIndex = _index === getWordSuggestionsData.meaningAndExamples.length - 1;
+        {getDictionarySuggestionsData ? (
+          <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
+            {getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
+              const key = `${getDictionarySuggestionsData.word}-${meaning}-${example}`;
+              const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
 
               return (
-                <Flex key={key} flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }}>
-                  <Flex alignItems="flex-start" gap={{ base: 1, sm: 2, md: 4 }}>
+                <Flex key={key} flexDirection="column" gap={{ base: 2, md: 4 }}>
+                  <Flex alignItems="flex-start" gap={{ base: 2, md: 4 }}>
                     {isUserAuthenticated ? (
-                      <motion.button
-                        animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-                        whileHover={{
-                          scale: 1.2,
-                          transition: { duration: 0.2 },
-                        }}
-                        whileTap={{ scale: 1 }}
-                      >
-                        <Icon
-                          as={BsPlusCircle}
-                          bg="gray.50"
-                          borderRadius="999px"
-                          cursor="pointer"
-                          fontSize={{ base: '5xl', md: '6xl' }}
-                          p={1}
-                          onClick={handleAddNotionWordClick(
-                            getWordSuggestionsData.word,
-                            meaning,
-                            example,
-                          )}
-                        />
-                      </motion.button>
+                      <MotionIconButton
+                        icon={BsPlusCircle}
+                        onClick={handleAddNotionWordClick(
+                          getDictionarySuggestionsData.word,
+                          meaning,
+                          example,
+                        )}
+                      />
                     ) : null}
-                    <Flex flexDirection="column" gap={{ base: 1, sm: 2, md: 4 }} w="100%">
+                    <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
                       <Heading
                         withBalancer
                         color="gray.900"
                         cursor="pointer"
+                        fontSize={{ base: 'md', sm: 'xl' }}
                         textAlign="left"
                         onClick={handleCopy(meaning)}
                       >
@@ -184,6 +149,24 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
                 </Flex>
               );
             })}
+          </Flex>
+        ) : (
+          <Flex
+            alignItems="center"
+            flexDirection="column"
+            gap={{ base: 3, sm: 5 }}
+            height="100%"
+            justifyContent="center"
+          >
+            <Text
+              withBalancer
+              fontSize={{ base: 'md', sm: 'xl' }}
+              fontWeight="medium"
+              maxWidth="350px"
+              textAlign="center"
+            >
+              No meaning and examples found.
+            </Text>
           </Flex>
         )}
       </Flex>

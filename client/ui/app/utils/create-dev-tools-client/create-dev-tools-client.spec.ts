@@ -1,4 +1,4 @@
-import { filterOutObjectKeys, functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/utils';
 
 import { createDevToolsClient } from './create-dev-tools-client.function';
 
@@ -7,8 +7,13 @@ describe('createDevToolsClient function', () => {
 
   afterEach(() => {
     // @ts-expect-error
-    // eslint-disable-next-line no-global-assign
-    window = filterOutObjectKeys(window, ['rest', 'supabase', 'synthesis', 'memory']);
+    delete window.rest;
+    // @ts-expect-error
+    delete window.supabase;
+    // @ts-expect-error
+    delete window.synthesis;
+    // @ts-expect-error
+    delete window.memory;
   });
 
   it('should assign supabase module to window object', () => {
@@ -40,13 +45,13 @@ describe('createDevToolsClient function', () => {
       createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
-      getWordSuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
       getRandomNotionWords: expect.any(Function),
       getNotionTableColumns: expect.any(Function),
       resetNotionIntegration: expect.any(Function),
+      getDictionarySuggestions: expect.any(Function),
       getAvailableNotionDatabases: expect.any(Function),
     });
   });
@@ -59,6 +64,7 @@ describe('createDevToolsClient function', () => {
     // @ts-expect-error
     expect(window.synthesis).toStrictEqual({
       speak: expect.any(Function),
+      cancel: expect.any(Function),
       getRate: expect.any(Function),
       setRate: expect.any(Function),
       getPitch: expect.any(Function),

@@ -1,6 +1,8 @@
 export * from './decrypt/decrypt.function';
 export * from './encrypt/encrypt.function';
+export * from './is-iso-date/is-iso-date.function';
 export * from './text-to-ipa/text-to-ipa.function';
+export * from './execute-command/execute-command.function';
 export * from './shuffle-array/shuffle-array.function';
 export * from './with-middleware/with-middleware.function';
 export * from './get-profile-by-id/get-profile-by-id.function';
@@ -18,4 +20,5 @@ export * from './get-text-from-page-property-instance/get-text-from-page-propert
 export * from './get-profile-data-with-notion-data-check/get-profile-data-with-notion-data-check.function';
 export * from './validate-if-user-is-logged-in-middleware/validate-if-user-is-logged-in-middleware.function';
 export * from './validate-if-parameters-exists-middleware/validate-if-parameters-exists-middleware.function';
+export * from './dictionary-response-to-meaning-and-example-array/dictionary-response-to-meaning-and-example-array.function';
 export * from './assign-request-token-to-supabase-session-middleware/assign-request-token-to-supabase-session-middleware.function';
