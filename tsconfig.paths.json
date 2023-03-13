@@ -2,19 +2,21 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./src/ui/*"],
-      "@ui": ["./src/ui"],
-      "@adapter/*": ["./src/adapter/*"],
-      "@adapter": ["./src/adapter"],
-      "@repositories/*": ["./src/repositories/*"],
-      "@repositories": ["./src/repositories"],
-      "@api/*": ["./src/api/*"],
-      "@api": ["./src/api"],
-      "@domain/*": ["./src/domain/*"],
-      "@domain": ["./src/domain"],
-      "@infrastructure/*": ["./src/infrastructure/*"],
-      "@infrastructure": ["./src/infrastructure"],
-      "@constants": ["./src/constants"]
+      "@ui/*": ["./client/ui/*"],
+      "@ui": ["./client/ui"],
+      "@adapter/*": ["./client/adapter/*"],
+      "@adapter": ["./client/adapter"],
+      "@repositories/*": ["./client/repositories/*"],
+      "@repositories": ["./client/repositories"],
+      "@api/*": ["./client/api/*"],
+      "@api": ["./client/api"],
+      "@domain/*": ["./client/domain/*"],
+      "@domain": ["./client/domain"],
+      "@infrastructure/*": ["./client/infrastructure/*"],
+      "@infrastructure": ["./client/infrastructure"],
+      "@server/*": ["./server/*"],
+      "@config/*": ["./config/*"],
+      "@config": ["./config"]
     }
   }
 }

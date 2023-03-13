@@ -1,13 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { supabaseInstance } from '@infrastructure/config';
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
+
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const contactFormData = req.body;

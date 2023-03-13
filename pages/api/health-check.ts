@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
 const handler = (_: NextApiRequest, res: NextApiResponse) => {
   const currentDate = new Date();

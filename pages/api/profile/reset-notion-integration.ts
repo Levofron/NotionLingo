@@ -1,18 +1,24 @@
+import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { supabaseInstance } from '@infrastructure/config';
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
+  generateMemoryCacheKey,
+  getNotionApiKeyFromProfile,
+  getProfileDataWithNotionDataCheck,
   getUserFromRequest,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
+
+import { supabaseInstance } from '@config/supabase/supabase.instance';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
+  const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
   await supabaseInstance
     .from('profiles')
@@ -23,6 +29,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .eq('id', user?.id)
     .throwOnError()
     .single();
+
+  const notionApiKey = getNotionApiKeyFromProfile(profileData);
+  const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
+
+  memoryCache.del(cacheKey);
 
   return res.status(EHttpStatusCode.OK).send('ok');
 };
