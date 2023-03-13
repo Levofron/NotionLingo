@@ -1,7 +1,7 @@
 import NextImage from 'next/image';
 import { FC } from 'react';
 
-import { Box, ChakraNextLink, Container, Flex, SimpleGrid, Stack, Text } from '@ui/atoms';
+import { Box, ChakraNextLink, Container, SimpleGrid, Stack, Text } from '@ui/atoms';
 
 import { ERoutes } from '@infrastructure/types/routes';
 
@@ -78,25 +78,6 @@ export const Footer: FC = (): JSX.Element => {
         </SimpleGrid>
       </Container>
       <Box py={{ base: 6, sm: 10 }}>
-        <Flex
-          _after={{
-            content: '""',
-            borderBottom: '1px solid',
-            borderColor: 'gray.50',
-            flexGrow: 1,
-            ml: 4,
-          }}
-          _before={{
-            content: '""',
-            borderBottom: '1px solid',
-            borderColor: 'gray.50',
-            flexGrow: 1,
-            mr: 4,
-          }}
-          align="center"
-        >
-          <NextImage alt="Logo White" height={50} src="logo-white.svg" width={50} />
-        </Flex>
         <Text color="gray.50" pt={{ base: 2, sm: 6 }} textAlign="center">
           © {currentYear} Paweł Wojtasiński. All rights reserved.
         </Text>
