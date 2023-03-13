@@ -10,7 +10,7 @@ import {
   Text,
 } from '@ui/atoms';
 
-import { QUESTIONS_AND_ANSWERS } from './faq.defaults';
+import { QUESTIONS_AND_ANSWERS } from '@config/constants';
 
 export const Faq = (): JSX.Element => (
   <Container maxW="3xl" py={{ base: 14, sm: 20, md: 40 }}>

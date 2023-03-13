@@ -1,7 +1,6 @@
 import { FAQPageJsonLd, LogoJsonLd, SocialProfileJsonLd } from 'next-seo';
 
 import { SEO } from '@ui/atoms';
-import { QUESTIONS_AND_ANSWERS } from '@ui/molecules/faq/faq.defaults';
 import { SidebarWithHeader } from '@ui/organisms';
 import { HomeTemplate } from '@ui/templates';
 
@@ -10,6 +9,7 @@ import {
   GITHUB_LINK,
   LINKEDIN_LINK,
   PAYPAL_LINK,
+  QUESTIONS_AND_ANSWERS,
   TWITTER_LINK,
 } from '@config/constants';
 
@@ -24,9 +24,9 @@ export const HomePage = (): JSX.Element => (
       url={LINKEDIN_LINK}
     />
     <FAQPageJsonLd
-      mainEntity={QUESTIONS_AND_ANSWERS.map((_quectionAndAnswer) => ({
-        questionName: _quectionAndAnswer.question,
-        acceptedAnswerText: _quectionAndAnswer.answer,
+      mainEntity={QUESTIONS_AND_ANSWERS.map((_questionAndAnswer) => ({
+        questionName: _questionAndAnswer.question,
+        acceptedAnswerText: _questionAndAnswer.answer,
       }))}
     />
     <SidebarWithHeader />
