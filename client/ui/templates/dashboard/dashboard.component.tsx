@@ -14,7 +14,8 @@ import {
   NotionWordCardFront,
 } from '@ui/organisms';
 
-import { restModule, speechSynthesisModule } from '@adapter/modules';
+import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
+import { speechSynthesisModule } from '@adapter/modules';
 
 import {
   IIncreaseDailyStreak,
@@ -23,7 +24,7 @@ import {
 } from '@domain/entities/rest.types';
 import { removeNotionWordFromArray, updateRecordInNotionWordArray } from '@domain/utils/rest';
 
-import { useAxios, useToast, useUser } from '@infrastructure/utils';
+import { useToast, useUser } from '@infrastructure/utils';
 
 export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -36,17 +37,13 @@ export const DashboardTemplate = (): JSX.Element => {
     totalLearnedWords: user?.totalLearnedWords || 0,
   });
 
-  const { isLoading: isGetRandomNotionWordsLoading, mutateAsync: mutateAsyncGetRandomNotionWords } =
-    useAxios(restModule.getRandomNotionWords);
-
-  const { mutateAsync: mutateAsyncIncreaseDailyStreak } = useAxios(restModule.increaseDailyStreak);
-
-  const { isLoading: isUpdateNotionWordLoading, mutateAsync: mutateAsyncUpdateNotionWord } =
-    useAxios(restModule.updateNotionWord);
+  const { increaseStreak } = useIncreaseStreak();
+  const { isUpdateWordLoading, updateWord } = useUpdateWord();
+  const { getRandomWords, isRandomWordsLoading } = useRandomWords();
 
   const fetchMoreWords = useCallback(
     () =>
-      mutateAsyncGetRandomNotionWords()
+      getRandomWords()
         .then((_response) => setWords((_prevState) => [..._response, ..._prevState]))
         .catch((_error) =>
           toast.error({
@@ -66,7 +63,7 @@ export const DashboardTemplate = (): JSX.Element => {
     setWords(newWords);
 
     speechSynthesisModule.cancel();
-    mutateAsyncIncreaseDailyStreak().then(setDailyStreakData);
+    increaseStreak().then(setDailyStreakData);
 
     if (newWords.length <= 3) {
       fetchMoreWords();
@@ -74,7 +71,7 @@ export const DashboardTemplate = (): JSX.Element => {
   };
 
   const handleApplySuggestion = (data: IUpdateNotionWordRequest) => () =>
-    mutateAsyncUpdateNotionWord(data)
+    updateWord(data)
       .then((_udpatedRecordId) => {
         const updatedNotionWords = updateRecordInNotionWordArray(words, _udpatedRecordId, data);
 
@@ -97,7 +94,7 @@ export const DashboardTemplate = (): JSX.Element => {
       );
 
   const renderContent = () => {
-    if (isGetRandomNotionWordsLoading && words.length === 0) {
+    if (isRandomWordsLoading && words.length === 0) {
       return (
         <FullScreenLoader
           backgroundColor="transparent"
@@ -155,7 +152,7 @@ export const DashboardTemplate = (): JSX.Element => {
                   ) : (
                     <Fade in={isTopCard}>
                       <NotionWordCardFront
-                        isLoading={isTopCard && isUpdateNotionWordLoading}
+                        isLoading={isTopCard && isUpdateWordLoading}
                         notionWord={_word}
                         onApplySuggestions={handleApplySuggestion({
                           id: _word.id,

@@ -3,17 +3,17 @@ import { RiWifiOffLine } from 'react-icons/ri';
 import { Flex } from '@ui/atoms';
 import { DisplayError, ParticlesBackgroundLayout } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { useHealthCheck } from '@adapter/hooks';
 
-import { useAxios, useRouter, useToast } from '@infrastructure/utils';
+import { useRouter, useToast } from '@infrastructure/utils';
 
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();
   const { redirectToHome } = useRouter();
-  const { isLoading, mutateAsync } = useAxios(restModule.healthCheck);
+  const { healthCheck, isHealthCheckLoading } = useHealthCheck();
 
   const handleRedirectToHome = () =>
-    mutateAsync()
+    healthCheck()
       .then(redirectToHome)
       .catch((_error) =>
         toast.error({
@@ -27,7 +27,7 @@ export const OfflineTemplate = (): JSX.Element => {
         <DisplayError
           errorMessage="We couldn't connect to the server. Please check your internet connection and try again."
           icon={RiWifiOffLine}
-          isLoading={isLoading}
+          isLoading={isHealthCheckLoading}
           title="You are offline :("
           onRedirectToHomeButtonClick={handleRedirectToHome}
         />

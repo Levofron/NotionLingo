@@ -2,9 +2,9 @@ import { ChangeEvent, FC } from 'react';
 
 import { InputControl, OnboardingStepLayout } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { useSetApiToken } from '@adapter/hooks';
 
-import { debounce, useAxios } from '@infrastructure/utils';
+import { debounce } from '@infrastructure/utils';
 
 import { IOnboardingStepFourProps } from './onboarding-step-four.types';
 
@@ -12,15 +12,10 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
   onBackButtonClick,
   onNextButtonClick,
 }): JSX.Element => {
-  const {
-    data: setNotionApiTokenData,
-    error: setNotionApiTokenError,
-    isLoading: isSetNotionApiTokenLoading,
-    mutateAsync: mutateAsyncSetNotionApiToken,
-  } = useAxios(restModule.setNotionApiToken);
+  const { hasApiTokenData, isSetApiTokenLoading, setApiToken, setApiTokenError } = useSetApiToken();
 
   const handleInputChange = debounce(async (event: ChangeEvent<HTMLInputElement>) => {
-    const result = await mutateAsyncSetNotionApiToken(event.target.value);
+    const result = await setApiToken(event.target.value);
 
     if (result) {
       onNextButtonClick();
@@ -35,9 +30,9 @@ export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
     >
       <InputControl
         isRequired
-        errorMessage={setNotionApiTokenError || undefined}
-        isDisabled={isSetNotionApiTokenLoading || !!setNotionApiTokenData}
-        isLoading={isSetNotionApiTokenLoading}
+        errorMessage={setApiTokenError || undefined}
+        isDisabled={isSetApiTokenLoading || hasApiTokenData}
+        isLoading={isSetApiTokenLoading}
         label="Integration token"
         name="integrationToken"
         placeholder="Your integration token"
