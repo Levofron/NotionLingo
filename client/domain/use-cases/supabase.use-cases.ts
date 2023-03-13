@@ -31,7 +31,7 @@ export const logoutUseCase = (
 ): TLogoutUseCase => ({
   execute: async () => {
     await supabaseRepository.logout();
-    await restRepository.setSupabaseCookie();
+    await restRepository.setSupabaseCookie(null);
   },
 });
 

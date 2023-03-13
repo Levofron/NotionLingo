@@ -1,5 +1,4 @@
 import { IRestApi } from '@api/rest/rest.types';
-import { ISupabaseApi } from '@api/supabase/supabase.types';
 
 import { IRestRepository } from '@domain/repositories/rest.repository';
 
@@ -14,18 +13,13 @@ const delay = (time: number) =>
     setTimeout(resolve, time);
   });
 
-export const getRestRepository = (
-  restApi: IRestApi,
-  supabaseApi: ISupabaseApi,
-): IRestRepository => ({
+export const getRestRepository = (restApi: IRestApi): IRestRepository => ({
   healthCheck: async () => {
     const { data } = await restApi.healthCheck();
 
     return data;
   },
-  setSupabaseCookie: async () => {
-    const session = await supabaseApi.getSession();
-
+  setSupabaseCookie: async (session) => {
     await restApi.setSupabaseCookie(session);
     await delay(1000);
   },
@@ -71,8 +65,6 @@ export const getRestRepository = (
   },
   deleteProfile: async () => {
     await restApi.deleteProfile();
-
-    supabaseApi.logout();
   },
   getDictionarySuggestions: async (word) => {
     const { data } = await restApi.getDictionarySuggestions(word);

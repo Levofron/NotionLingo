@@ -1,5 +1,6 @@
 import { getRestRepository } from '@repositories/rest/rest.repository';
 import { getSpeechSynthesisRepository } from '@repositories/speech-synthesis/speech-synthesis.repository';
+import { getSupabaseRepository } from '@repositories/supabase/supabase.repository';
 
 import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
 import { getRestApi } from '@api/rest/rest.api';
@@ -35,24 +36,25 @@ const speechSynthesisApi = getSpeechSynthesisApi();
 const supabaseApi = getSupabaseApi(supabaseInstance);
 
 // repositories
-const restRepository = getRestRepository(restApi, supabaseApi);
+const restRepository = getRestRepository(restApi);
+const supabaseRepository = getSupabaseRepository(supabaseApi);
 const speechSynthesisRepository = getSpeechSynthesisRepository(speechSynthesisApi, localStorageApi);
 
 export const restModule = {
   healthCheck: healthCheckUseCase(restRepository).execute,
-  deleteProfile: deleteProfileUseCase(restRepository).execute,
   getLoggedProfile: getLoggedProfileUseCase(restRepository).execute,
   updateNotionWord: updateNotionWordUseCase(restRepository).execute,
   createNotionWord: createNotionWordUseCase(restRepository).execute,
   setNotionApiToken: setNotionApiTokenUseCase(restRepository).execute,
-  setSupabaseCookie: setSupabaseCookieUseCase(restRepository).execute,
   sendContactFormData: sendContactFormDataUseCase(restRepository).execute,
   setNotionDatabaseId: setNotionDatabaseIdUseCase(restRepository).execute,
   getRandomNotionWords: getRandomNotionWordsUseCase(restRepository).execute,
   getNotionTableColumns: getNotionTableColumnsUseCase(restRepository).execute,
   resetNotionIntegration: resetNotionIntegrationUseCase(restRepository).execute,
+  deleteProfile: deleteProfileUseCase(restRepository, supabaseRepository).execute,
   getDictionarySuggestions: getDictionarySuggestionsUseCase(restRepository).execute,
   getAvailableNotionDatabases: getAvailableNotionDatabasesUseCase(restRepository).execute,
+  setSupabaseCookie: setSupabaseCookieUseCase(restRepository, supabaseRepository).execute,
   increaseDailyStreak: increaseDailyStreakUseCase(restRepository, speechSynthesisRepository)
     .execute,
 };
