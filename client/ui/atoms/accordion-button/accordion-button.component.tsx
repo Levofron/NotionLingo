@@ -9,5 +9,3 @@ const AccordionButtonComponent: ForwardRefRenderFunction<
 > = (props, ref): JSX.Element => <ChakraAccordionButton ref={ref} {...props} />;
 
 export const AccordionButton = memo(forwardRef(AccordionButtonComponent));
-
-export default AccordionButton;

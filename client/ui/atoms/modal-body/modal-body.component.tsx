@@ -9,5 +9,3 @@ const ModalBodyComponent: ForwardRefRenderFunction<HTMLDivElement, IModalBodyPro
 ): JSX.Element => <ChakraModalBody ref={ref} {...props} />;
 
 export const ModalBody = memo(forwardRef(ModalBodyComponent));
-
-export default ModalBody;

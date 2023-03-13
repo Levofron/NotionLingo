@@ -9,5 +9,3 @@ const FormControlComponent: ForwardRefRenderFunction<HTMLDivElement, IFormContro
 ): JSX.Element => <ChakraFormControl ref={ref} {...props} />;
 
 export const FormControl = memo(forwardRef(FormControlComponent));
-
-export default FormControl;

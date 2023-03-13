@@ -9,5 +9,3 @@ const SimpleGridComponent: ForwardRefRenderFunction<HTMLDivElement, ISimpleGridP
 ): JSX.Element => <ChakraSimpleGrid ref={ref} {...props} />;
 
 export const SimpleGrid = memo(forwardRef(SimpleGridComponent));
-
-export default SimpleGrid;

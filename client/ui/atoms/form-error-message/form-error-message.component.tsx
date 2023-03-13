@@ -9,5 +9,3 @@ const FormErrorMessageComponent: ForwardRefRenderFunction<
 > = (props, ref): JSX.Element => <ChakraFormErrorMessage ref={ref} {...props} />;
 
 export const FormErrorMessage = memo(forwardRef(FormErrorMessageComponent));
-
-export default FormErrorMessage;

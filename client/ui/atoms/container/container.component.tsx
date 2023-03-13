@@ -9,5 +9,3 @@ const ContainerComponent: ForwardRefRenderFunction<HTMLDivElement, IContainerPro
 ): JSX.Element => <ChakraContainer ref={ref} {...props} />;
 
 export const Container = memo(forwardRef(ContainerComponent));
-
-export default Container;

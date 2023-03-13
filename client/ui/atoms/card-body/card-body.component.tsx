@@ -9,5 +9,3 @@ const CardBodyComponent: ForwardRefRenderFunction<HTMLDivElement, ICardBodyProps
 ): JSX.Element => <ChakraCardBody ref={ref} {...props} />;
 
 export const CardBody = memo(forwardRef(CardBodyComponent));
-
-export default CardBody;

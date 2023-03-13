@@ -9,5 +9,3 @@ const FormHelperTextComponent: ForwardRefRenderFunction<HTMLDivElement, IFormHel
 ): JSX.Element => <ChakraFormHelperText ref={ref} {...props} />;
 
 export const FormHelperText = memo(forwardRef(FormHelperTextComponent));
-
-export default FormHelperText;

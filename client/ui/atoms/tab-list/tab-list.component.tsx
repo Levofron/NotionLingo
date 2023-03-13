@@ -9,5 +9,3 @@ const TabListComponent: ForwardRefRenderFunction<HTMLDivElement, ITabListProps> 
 ): JSX.Element => <ChakraTabList ref={ref} {...props} />;
 
 export const TabList = memo(forwardRef(TabListComponent));
-
-export default TabList;

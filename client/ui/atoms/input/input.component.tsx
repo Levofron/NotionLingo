@@ -25,5 +25,3 @@ const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = 
 };
 
 export const Input = memo(forwardRef(InputComponent));
-
-export default Input;

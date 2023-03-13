@@ -9,5 +9,3 @@ const LinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, ILinkProps> = (
 ): JSX.Element => <ChakraLink ref={ref} {...props} />;
 
 export const Link = memo(forwardRef(LinkComponent));
-
-export default Link;

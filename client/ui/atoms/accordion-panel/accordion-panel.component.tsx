@@ -9,5 +9,3 @@ const AccordionPanelComponent: ForwardRefRenderFunction<HTMLDivElement, IAccordi
 ): JSX.Element => <ChakraAccordionPanel ref={ref} {...props} />;
 
 export const AccordionPanel = memo(forwardRef(AccordionPanelComponent));
-
-export default AccordionPanel;

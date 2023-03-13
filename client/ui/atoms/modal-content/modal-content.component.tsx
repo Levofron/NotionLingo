@@ -9,5 +9,3 @@ const ModalContentComponent: ForwardRefRenderFunction<HTMLElement, IModalContent
 ): JSX.Element => <ChakraModalContent ref={ref} {...props} />;
 
 export const ModalContent = memo(forwardRef(ModalContentComponent));
-
-export default ModalContent;

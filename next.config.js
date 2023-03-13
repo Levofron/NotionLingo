@@ -21,12 +21,5 @@ module.exports = withPwa(
         'lh3.googleusercontent.com',
       ],
     },
-    // TODO - fix issues with this
-    // modularizeImports: {
-    //   '@ui/atoms': {
-    //     preventFullImport: true,
-    //     transform: '@ui/atoms/{{kebabCase member}}/{{kebabCase member}}.component',
-    //   },
-    // },
   }),
 );
