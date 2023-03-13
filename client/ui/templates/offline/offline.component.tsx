@@ -1,7 +1,7 @@
 import { RiWifiOffLine } from 'react-icons/ri';
 
-import { Box, Flex, ParticlesBackground } from '@ui/atoms';
-import { DisplayError } from '@ui/molecules';
+import { Flex } from '@ui/atoms';
+import { DisplayError, ParticlesBackgroundLayout } from '@ui/molecules';
 
 import { restModule } from '@adapter/modules';
 
@@ -22,8 +22,7 @@ export const OfflineTemplate = (): JSX.Element => {
       );
 
   return (
-    <Box bg="gray.50" height="100%" overflow="hidden">
-      <ParticlesBackground />
+    <ParticlesBackgroundLayout height="100%">
       <Flex align="center" h="100%" justify="center" w="100%">
         <DisplayError
           errorMessage="We couldn't connect to the server. Please check your internet connection and try again."
@@ -33,6 +32,6 @@ export const OfflineTemplate = (): JSX.Element => {
           onRedirectToHomeButtonClick={handleRedirectToHome}
         />
       </Flex>
-    </Box>
+    </ParticlesBackgroundLayout>
   );
 };

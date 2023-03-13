@@ -31,6 +31,21 @@ export const speakUseCase = (
   },
 });
 
+// cancelUseCase
+export type TCancelUseCase = IUseCaseWithoutParams<void>;
+
+export const cancelUseCase = (
+  speechSynthesisRepository: ISpeechSynthesisRepository,
+): TCancelUseCase => ({
+  execute: () => {
+    if (!speechSynthesisRepository.isSupported()) {
+      return;
+    }
+
+    speechSynthesisRepository.cancel();
+  },
+});
+
 // getVoicesUseCase
 export type TGetVoicesUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice[]>;
 

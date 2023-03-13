@@ -29,7 +29,7 @@ export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JS
 
   return (
     <AnimatePresence>
-      {scrollPosition > 1000 && (
+      {scrollPosition > 500 && (
         <MotionIconButton
           exit={{ y: 100, opacity: 0, transition: { duration: 0.6 } }}
           icon={BsArrowUpCircle}

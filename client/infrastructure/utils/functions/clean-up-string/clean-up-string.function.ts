@@ -26,9 +26,9 @@ export const cleanUpString = (string: unknown, options: IOptions = defaultOption
   const stringAsLowerCase = trimmedString.toLowerCase();
   const stringWithoutMultipleSpaces = stringAsLowerCase.replaceAll(/\s+/g, ' ');
   const stringWithoutWhitespaces = stringWithoutMultipleSpaces.replaceAll(/[\t\n\r]/g, ' ');
-  const stringWithoutLastColon = stringWithoutWhitespaces.replace(/:$/, '').trim();
+  const stringWithoutFirstAndLastColon = stringWithoutWhitespaces.replaceAll(/^:|:$/g, '').trim();
 
   return shouldCapitalizeFirstLetter
-    ? capitalizeFirstLetter(stringWithoutLastColon)
-    : stringWithoutLastColon;
+    ? capitalizeFirstLetter(stringWithoutFirstAndLastColon)
+    : stringWithoutFirstAndLastColon;
 };

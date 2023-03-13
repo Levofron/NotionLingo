@@ -20,4 +20,5 @@ export * from './get-text-from-page-property-instance/get-text-from-page-propert
 export * from './get-profile-data-with-notion-data-check/get-profile-data-with-notion-data-check.function';
 export * from './validate-if-user-is-logged-in-middleware/validate-if-user-is-logged-in-middleware.function';
 export * from './validate-if-parameters-exists-middleware/validate-if-parameters-exists-middleware.function';
+export * from './dictionary-response-to-meaning-and-example-array/dictionary-response-to-meaning-and-example-array.function';
 export * from './assign-request-token-to-supabase-session-middleware/assign-request-token-to-supabase-session-middleware.function';

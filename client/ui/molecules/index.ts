@@ -19,6 +19,7 @@ export * from './onboarding-tab-list/onboarding-tab-list.component';
 export * from './onboarding-step-layout/onboarding-step-layout.component';
 export * from './available-notion-database/available-notion-database.component';
 export * from './dashboard-profile-details/dashboard-profile-details.component';
+export * from './particles-background-layout/particles-background-layout.component';
 
 export * from './confirmation-modal/confirmation-modal.types';
 export * from './onboarding-tab-list/onboarding-tab-list.types';

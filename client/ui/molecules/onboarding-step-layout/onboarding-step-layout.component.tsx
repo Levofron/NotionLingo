@@ -6,6 +6,7 @@ import { Button, Flex, Icon, TabPanel, Text } from '@ui/atoms';
 import { IOnboardingStepLayoutProps } from './onboarding-step-layout.types';
 
 export const OnboardingStepLayout: FC<IOnboardingStepLayoutProps> = ({
+  backButtonLabel = 'Back',
   children,
   onBackButtonClick,
   onNextButtonClick,
@@ -37,7 +38,7 @@ export const OnboardingStepLayout: FC<IOnboardingStepLayoutProps> = ({
               mode="light"
               onClick={onBackButtonClick}
             >
-              Back
+              {backButtonLabel}
             </Button>
           ) : null}
           {onNextButtonClick ? (

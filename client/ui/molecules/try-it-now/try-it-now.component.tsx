@@ -30,7 +30,7 @@ export const TryItNow: FC = (): JSX.Element => {
 
   return (
     <Box bg="white">
-      <Container maxW="6xl" py={{ base: 14, sm: 20, md: 32 }}>
+      <Container maxW="6xl" py={{ base: 14, sm: 20, md: 40 }}>
         <Card bg="white" p={{ base: 4, md: 10 }}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
             <Box>

@@ -27,7 +27,7 @@ describe('getRestApi function', () => {
       createNotionWord: expect.any(Function),
       setNotionApiToken: expect.any(Function),
       setSupabaseCookie: expect.any(Function),
-      getWordSuggestions: expect.any(Function),
+      getDictionarySuggestions: expect.any(Function),
       sendContactFormData: expect.any(Function),
       increaseDailyStreak: expect.any(Function),
       setNotionDatabaseId: expect.any(Function),
@@ -426,7 +426,7 @@ describe('getRestApi function', () => {
     });
   });
 
-  describe('getWordSuggestions endpoint', () => {
+  describe('getDictionarySuggestions endpoint', () => {
     it('should call proper endpoint', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const axiosInstanceMock: any = {
@@ -435,7 +435,7 @@ describe('getRestApi function', () => {
 
       const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restApi.getWordSuggestions('suit up');
+      const result = restApi.getDictionarySuggestions('suit up');
 
       expect(result).resolves.toEqual({ data: {} });
       expect(axiosInstanceMock.get).toHaveBeenCalledWith('/dictionary/find?word=suit%20up');
@@ -449,7 +449,7 @@ describe('getRestApi function', () => {
 
       const restApi = getRestApi(axiosInstanceMock);
 
-      const result = restApi.getWordSuggestions('word');
+      const result = restApi.getDictionarySuggestions('word');
 
       expect(result).rejects.toThrow('error');
     });
