@@ -15,7 +15,6 @@ import {
 } from '@ui/organisms';
 
 import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
-import { speechSynthesisModule } from '@adapter/modules';
 
 import {
   IIncreaseDailyStreak,
@@ -61,8 +60,6 @@ export const DashboardTemplate = (): JSX.Element => {
     const newWords = removeNotionWordFromArray(words, notionWord);
 
     setWords(newWords);
-
-    speechSynthesisModule.cancel();
     increaseStreak().then(setDailyStreakData);
 
     if (newWords.length <= 3) {
