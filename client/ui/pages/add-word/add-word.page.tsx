@@ -7,25 +7,31 @@ import { DisplayError, FullScreenLoader, ParticlesBackgroundLayout } from '@ui/m
 import { SidebarWithHeader } from '@ui/organisms';
 import { AddWordTemplate } from '@ui/templates';
 
-import { restModule } from '@adapter/modules';
+import { useTableColumns } from '@adapter/hooks';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxios, useRouter } from '@infrastructure/utils';
+import { useRouter } from '@infrastructure/utils';
 
 const AddWordPageComponent = (): JSX.Element => {
   const { redirectToHome } = useRouter();
 
-  const { data, error, isLoading, mutate, reset } = useAxios(restModule.getNotionTableColumns);
+  const {
+    getTableColumns,
+    isTableColumnsLoading,
+    resetTableColumns,
+    tableColumns,
+    tableColumnsError,
+  } = useTableColumns();
 
-  useEffect(mutate, []);
+  useEffect(getTableColumns, []);
 
   const handleRefetch = () => {
-    reset();
-    mutate();
+    resetTableColumns();
+    getTableColumns();
   };
 
   const renderContent = () => {
-    if (isLoading || !data) {
+    if (isTableColumnsLoading || !tableColumns) {
       return (
         <FullScreenLoader
           backgroundColor="transparent"
@@ -39,10 +45,10 @@ const AddWordPageComponent = (): JSX.Element => {
       );
     }
 
-    if (error && !data) {
+    if (tableColumnsError && !tableColumns) {
       return (
         <DisplayError
-          errorMessage={error}
+          errorMessage={tableColumnsError}
           icon={BiErrorAlt}
           title="Error occured :("
           onRedirectToHomeButtonClick={redirectToHome}
@@ -51,7 +57,7 @@ const AddWordPageComponent = (): JSX.Element => {
       );
     }
 
-    return <AddWordTemplate tableColumns={data} />;
+    return <AddWordTemplate tableColumns={tableColumns} />;
   };
 
   return (

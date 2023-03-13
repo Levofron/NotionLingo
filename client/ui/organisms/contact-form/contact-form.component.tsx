@@ -17,9 +17,10 @@ import {
 } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
-import { localStorageModule, restModule } from '@adapter/modules';
+import { useSendContactFormData } from '@adapter/hooks';
+import { localStorageModule } from '@adapter/modules';
 
-import { useAxios, useToast } from '@infrastructure/utils';
+import { useToast } from '@infrastructure/utils';
 
 import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@config/constants';
 
@@ -31,11 +32,8 @@ export const ContactForm = (): JSX.Element => {
   const toast = useToast();
   const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
 
-  const {
-    isLoading: isSendContactFormDataLoading,
-    mutateAsync: mutateAsyncSendContactFormData,
-    reset: resetSendContactFormData,
-  } = useAxios(restModule.sendContactFormData);
+  const { isSendContactFormDataLoading, resetSendContactFormData, sendContactFormData } =
+    useSendContactFormData();
 
   const formik = useFormik({
     initialValues: {
@@ -70,7 +68,7 @@ export const ContactForm = (): JSX.Element => {
         }
       }
 
-      mutateAsyncSendContactFormData(_values)
+      sendContactFormData(_values)
         .then(() =>
           toast.success({
             title: 'Thank you!',

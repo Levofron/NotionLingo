@@ -5,13 +5,12 @@ import { BsPlusCircle } from 'react-icons/bs';
 import { Container, Divider, Flex, Heading, Text } from '@ui/atoms';
 import { InputControl, MotionIconButton } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { useDictionarySuggestions } from '@adapter/hooks';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import {
   debounce,
   isString,
-  useAxios,
   useCopyToClipboard,
   useIsFirstRender,
   useRouter,
@@ -37,20 +36,20 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
   }, []);
 
   const {
-    data: getDictionarySuggestionsData,
-    error: getDictionarySuggestionsError,
-    isLoading: isGetDictionarySuggestionsLoading,
-    mutate: mutateGetDictionarySuggestions,
-  } = useAxios(restModule.getDictionarySuggestions);
+    dictionarySuggestions,
+    dictionarySuggestionsError,
+    getDictionarySuggestions,
+    isGetDictionarySuggestionsLoading,
+  } = useDictionarySuggestions();
 
   useEffect(() => {
     if (isFirstRender && isString(queryStateWord)) {
-      mutateGetDictionarySuggestions(queryStateWord);
+      getDictionarySuggestions(queryStateWord);
     }
   }, [!!queryStateWord]);
 
   const handleInputChange = debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    mutateGetDictionarySuggestions(value);
+    getDictionarySuggestions(value);
 
     setQueryStateWord(value);
   }, 1000);
@@ -86,29 +85,29 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
           ref={inputRef}
           isRequired
           defaultValue={queryStateWord || ''}
-          errorMessage={getDictionarySuggestionsError || undefined}
+          errorMessage={dictionarySuggestionsError || undefined}
           isLoading={isGetDictionarySuggestionsLoading}
           label="Search for a word"
           name="searchWord"
           placeholder="Your search word"
           onChange={handleInputChange}
         />
-        {getDictionarySuggestionsData?.word ? (
+        {dictionarySuggestions?.word ? (
           <Heading
             as="h1"
             color="gray.900"
             cursor="pointer"
             fontSize={{ base: '3xl', sm: '4xl' }}
-            onClick={handleCopy(getDictionarySuggestionsData.word)}
+            onClick={handleCopy(dictionarySuggestions.word)}
           >
-            {getDictionarySuggestionsData.word}
+            {dictionarySuggestions.word}
           </Heading>
         ) : null}
-        {getDictionarySuggestionsData ? (
+        {dictionarySuggestions ? (
           <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
-            {getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
-              const key = `${getDictionarySuggestionsData.word}-${meaning}-${example}`;
-              const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
+            {dictionarySuggestions?.suggestions.map(({ example, meaning }, _index) => {
+              const key = `${dictionarySuggestions.word}-${meaning}-${example}`;
+              const isLastIndex = _index === dictionarySuggestions.suggestions.length - 1;
 
               return (
                 <Flex key={key} flexDirection="column" gap={{ base: 2, md: 4 }}>
@@ -117,7 +116,7 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
                       <MotionIconButton
                         icon={BsPlusCircle}
                         onClick={handleAddNotionWordClick(
-                          getDictionarySuggestionsData.word,
+                          dictionarySuggestions.word,
                           meaning,
                           example,
                         )}

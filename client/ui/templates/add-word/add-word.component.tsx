@@ -4,12 +4,12 @@ import { FC } from 'react';
 import { Button, Card, Flex } from '@ui/atoms';
 import { InputControl, SelectControl } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { useCreateWord } from '@adapter/hooks';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/utils/rest';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useAxios, useRouter, useToast } from '@infrastructure/utils';
+import { useRouter, useToast } from '@infrastructure/utils';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
 import { IAddWordTemplateProps } from './add-word.types';
@@ -18,8 +18,7 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
   const toast = useToast();
   const router = useRouter();
 
-  const { isLoading: isCreateNotionWordLoading, mutateAsync: mutateAsyncCreateNotionWord } =
-    useAxios(restModule.createNotionWord);
+  const { createWord, isCreateWordLoading } = useCreateWord();
 
   const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
 
@@ -34,7 +33,7 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
       router.query as Record<string, string>,
     ),
     onSubmit: (_values) => {
-      mutateAsyncCreateNotionWord(_values)
+      createWord(_values)
         .then(() => {
           const initialValues = getInitialFormValuesFromTableColumns(tableColumns);
 
@@ -101,7 +100,7 @@ export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JS
               />
             );
           })}
-          <Button isLoading={isCreateNotionWordLoading} mt={2} type="submit" width="full">
+          <Button isLoading={isCreateWordLoading} mt={2} type="submit" width="full">
             Add word
           </Button>
         </Flex>

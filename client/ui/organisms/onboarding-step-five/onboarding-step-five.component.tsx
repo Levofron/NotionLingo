@@ -3,32 +3,26 @@ import { FC, useEffect } from 'react';
 import { Button, Flex, Spinner, Text } from '@ui/atoms';
 import { AvailableNotionDatabase, OnboardingStepLayout } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { useNotionDatabases, useSetDatabaseId } from '@adapter/hooks';
 
-import { useAxios, useRouter, useToast, useUser } from '@infrastructure/utils';
+import { useRouter, useToast, useUser } from '@infrastructure/utils';
 
 import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
 
 export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   onBackButtonClick,
 }): JSX.Element => {
-  const {
-    data: availableNotionDatabasesData,
-    isLoading: isAvailableNotionDatabasesLoading,
-    mutate: mutateAvailableNotionDatabases,
-  } = useAxios(restModule.getAvailableNotionDatabases);
-
-  const { isLoading: isSetNotionDatabaseIdLoading, mutateAsync: mutateAsyncSetNotionDatabaseId } =
-    useAxios(restModule.setNotionDatabaseId);
+  const { isSetDatabaseIdLoading, setDatabaseId } = useSetDatabaseId();
+  const { getNotionDatabases, isNotionDatabasesLoading, notionDatabases } = useNotionDatabases();
 
   const toast = useToast();
   const { setNotionData } = useUser();
   const { redirectToDashboard } = useRouter();
 
-  useEffect(mutateAvailableNotionDatabases, []);
+  useEffect(getNotionDatabases, []);
 
   const handleAvailableNotionDatabaseClick = async (databaseId: string) => {
-    mutateAsyncSetNotionDatabaseId(databaseId)
+    setDatabaseId(databaseId)
       .then(() =>
         toast.success({
           duration: 2000,
@@ -47,11 +41,11 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   };
 
   const renderAvailableNotionDatabases = () => {
-    if (isAvailableNotionDatabasesLoading) {
+    if (isNotionDatabasesLoading) {
       return <Spinner size="lg" />;
     }
 
-    if (!availableNotionDatabasesData?.length) {
+    if (!notionDatabases?.length) {
       return (
         <Flex alignItems="center" flexDirection="column">
           <Text withBalancer color="red.400" fontSize="sm" fontWeight="normal" textAlign="center">
@@ -67,11 +61,11 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
       );
     }
 
-    return availableNotionDatabasesData?.map((_availableNotionDatabase) => (
+    return notionDatabases?.map((_availableNotionDatabase) => (
       <AvailableNotionDatabase
         key={_availableNotionDatabase.id}
         availableNotionDatabase={_availableNotionDatabase}
-        isLoading={isSetNotionDatabaseIdLoading}
+        isLoading={isSetDatabaseIdLoading}
         onClick={handleAvailableNotionDatabaseClick}
       />
     ));
