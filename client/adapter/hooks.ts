@@ -62,13 +62,13 @@ export const useRandomWords = () => {
   };
 };
 
-export const useNotionDatabases = () => {
+export const useDatabases = () => {
   const { data, isLoading, mutate } = useAxios(restModule.getAvailableNotionDatabases);
 
   return {
-    notionDatabases: data,
-    getNotionDatabases: mutate,
-    isNotionDatabasesLoading: isLoading,
+    databases: data,
+    getDatabases: mutate,
+    isDatabasesLoading: isLoading,
   };
 };
 

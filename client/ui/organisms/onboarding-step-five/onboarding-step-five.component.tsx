@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { Button, Flex, Spinner, Text } from '@ui/atoms';
 import { AvailableNotionDatabase, OnboardingStepLayout } from '@ui/molecules';
 
-import { useNotionDatabases, useSetDatabaseId } from '@adapter/hooks';
+import { useDatabases, useSetDatabaseId } from '@adapter/hooks';
 
 import { useRouter, useToast, useUser } from '@infrastructure/utils';
 
@@ -13,13 +13,13 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   onBackButtonClick,
 }): JSX.Element => {
   const { isSetDatabaseIdLoading, setDatabaseId } = useSetDatabaseId();
-  const { getNotionDatabases, isNotionDatabasesLoading, notionDatabases } = useNotionDatabases();
+  const { databases, getDatabases, isDatabasesLoading } = useDatabases();
 
   const toast = useToast();
   const { setNotionData } = useUser();
   const { redirectToDashboard } = useRouter();
 
-  useEffect(getNotionDatabases, []);
+  useEffect(getDatabases, []);
 
   const handleAvailableNotionDatabaseClick = async (databaseId: string) => {
     setDatabaseId(databaseId)
@@ -41,11 +41,11 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
   };
 
   const renderAvailableNotionDatabases = () => {
-    if (isNotionDatabasesLoading) {
+    if (isDatabasesLoading) {
       return <Spinner size="lg" />;
     }
 
-    if (!notionDatabases?.length) {
+    if (!databases?.length) {
       return (
         <Flex alignItems="center" flexDirection="column">
           <Text withBalancer color="red.400" fontSize="sm" fontWeight="normal" textAlign="center">
@@ -61,10 +61,10 @@ export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
       );
     }
 
-    return notionDatabases?.map((_availableNotionDatabase) => (
+    return databases?.map((_database) => (
       <AvailableNotionDatabase
-        key={_availableNotionDatabase.id}
-        availableNotionDatabase={_availableNotionDatabase}
+        key={_database.id}
+        availableNotionDatabase={_database}
         isLoading={isSetDatabaseIdLoading}
         onClick={handleAvailableNotionDatabaseClick}
       />
