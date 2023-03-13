@@ -11,10 +11,7 @@ describe('getRestRepository function', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const restApiMock: any = {};
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const supabaseApiMock: any = {};
-
-    const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+    const restRepository = getRestRepository(restApiMock);
 
     expect(restRepository).toEqual({
       healthCheck: expect.any(Function),
@@ -42,10 +39,7 @@ describe('getRestRepository function', () => {
         healthCheck: jest.fn().mockResolvedValue({ data: 'data' }),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = restRepository.healthCheck();
 
@@ -61,17 +55,12 @@ describe('getRestRepository function', () => {
         setSupabaseCookie: jest.fn().mockResolvedValue({ data: 'data' }),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {
-        getSession: jest.fn().mockResolvedValue({ data: 'data' }),
-      };
+      const restRepository = getRestRepository(restApiMock);
 
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
-
-      const result = await restRepository.setSupabaseCookie();
+      // @ts-expect-error
+      const result = await restRepository.setSupabaseCookie({ data: 'data' });
 
       expect(result).toBeUndefined();
-      expect(supabaseApiMock.getSession).toHaveBeenCalled();
       expect(restApiMock.setSupabaseCookie).toHaveBeenCalledWith({ data: 'data' });
     });
   });
@@ -85,10 +74,7 @@ describe('getRestRepository function', () => {
         getLoggedProfile: jest.fn().mockResolvedValue({ data: userMock }),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.getLoggedProfile();
 
@@ -106,10 +92,7 @@ describe('getRestRepository function', () => {
         setNotionApiToken: jest.fn().mockImplementation((token) => ({ data: token })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.setNotionApiToken(token);
 
@@ -127,10 +110,7 @@ describe('getRestRepository function', () => {
         getAvailableNotionDatabases: jest.fn().mockImplementation(() => ({ data: pages })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.getAvailableNotionDatabases();
 
@@ -148,10 +128,7 @@ describe('getRestRepository function', () => {
         setNotionDatabaseId: jest.fn().mockImplementation((databaseId) => ({ data: databaseId })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.setNotionDatabaseId(databaseId);
 
@@ -169,10 +146,7 @@ describe('getRestRepository function', () => {
         getRandomNotionWords: jest.fn().mockImplementation(() => ({ data: words })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.getRandomNotionWords();
 
@@ -200,10 +174,7 @@ describe('getRestRepository function', () => {
         sendContactFormData: jest.fn().mockImplementation(() => ({ data: formData })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.sendContactFormData(formData);
 
@@ -219,10 +190,7 @@ describe('getRestRepository function', () => {
         increaseDailyStreak: jest.fn().mockImplementation(() => ({ data: {} })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.increaseDailyStreak();
 
@@ -238,10 +206,7 @@ describe('getRestRepository function', () => {
         resetNotionIntegration: jest.fn().mockImplementation(() => ({ data: {} })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       await restRepository.resetNotionIntegration();
 
@@ -256,16 +221,10 @@ describe('getRestRepository function', () => {
         deleteProfile: jest.fn().mockImplementation(() => ({ data: {} })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {
-        logout: jest.fn(),
-      };
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       await restRepository.deleteProfile();
 
-      expect(supabaseApiMock.logout).toHaveBeenCalled();
       expect(restApiMock.deleteProfile).toHaveBeenCalled();
     });
   });
@@ -291,10 +250,7 @@ describe('getRestRepository function', () => {
         getDictionarySuggestions: jest.fn().mockImplementation(() => ({ data })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.getDictionarySuggestions('word');
 
@@ -310,10 +266,7 @@ describe('getRestRepository function', () => {
         updateNotionWord: jest.fn().mockImplementation(() => ({ data: {} })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       await restRepository.updateNotionWord({
         id: 'id',
@@ -338,10 +291,7 @@ describe('getRestRepository function', () => {
         getNotionTableColumns: jest.fn().mockImplementation(() => ({ data: columns })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       const result = await restRepository.getNotionTableColumns();
 
@@ -357,10 +307,7 @@ describe('getRestRepository function', () => {
         createNotionWord: jest.fn().mockImplementation(() => ({ data: {} })),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabaseApiMock: any = {};
-
-      const restRepository = getRestRepository(restApiMock, supabaseApiMock);
+      const restRepository = getRestRepository(restApiMock);
 
       await restRepository.createNotionWord({
         word: 'word',
