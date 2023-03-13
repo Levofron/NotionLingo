@@ -1,3 +1,5 @@
+import { ISpeechSynthesisRepository } from '@domain/repositories/speech-synthesis.repository';
+
 import {
   IContact,
   IDictionarySuggestions,
@@ -96,8 +98,13 @@ export type TIncreaseDailyStreakUseCase =
 
 export const increaseDailyStreakUseCase = (
   restRepository: IRestRepository,
+  speechSynthesisRepository: ISpeechSynthesisRepository,
 ): TIncreaseDailyStreakUseCase => ({
-  execute: () => restRepository.increaseDailyStreak(),
+  execute: () => {
+    speechSynthesisRepository.cancel();
+
+    return restRepository.increaseDailyStreak();
+  },
 });
 
 // resetNotionIntegrationUseCase
