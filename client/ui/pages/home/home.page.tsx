@@ -13,11 +13,10 @@ import {
   TWITTER_LINK,
 } from '@config/constants';
 
-// TODO - generate some logo for SEO
 export const HomePage = (): JSX.Element => (
   <>
     <SEO title="Improve vocabulary with your Notion database" />
-    <LogoJsonLd logo="https://notionlingo.com/images/logo.jpg" url="https://notionlingo.com" />
+    <LogoJsonLd logo="https://notionlingo.com/apple-touch-icon.png" url="https://notionlingo.com" />
     <SocialProfileJsonLd
       name="Paweł Wojtasiński"
       sameAs={[LINKEDIN_LINK, GITHUB_LINK, TWITTER_LINK, BUY_ME_A_COFFEE_LINK, PAYPAL_LINK]}

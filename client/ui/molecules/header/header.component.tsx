@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { TfiClose } from 'react-icons/tfi';
 
-import { Button, Container, Flex, IconButton } from '@ui/atoms';
+import { Button, Container, Flex, Heading, IconButton } from '@ui/atoms';
 
 import { useUser } from '@infrastructure/utils';
 
@@ -34,14 +34,17 @@ export const Header: FC<IHeaderProps> = ({
       {...restProps}
     >
       <Container alignItems="center" as={Flex} justifyContent="space-between" maxW="6xl" p={0}>
-        <IconButton
-          aria-label="Open menu"
-          disabled={isLoading}
-          icon={isOpen ? <TfiClose size="20px" /> : <RxHamburgerMenu size="20px" />}
-          onClick={isOpen ? onClose : onOpen}
-        />
+        <Flex alignItems="center" gap={3}>
+          <IconButton
+            aria-label="Open menu"
+            icon={isOpen ? <TfiClose size="20px" /> : <RxHamburgerMenu size="20px" />}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <Heading as="span" fontSize={{ base: 'xl', sm: '2xl' }}>
+            Early beta
+          </Heading>
+        </Flex>
         <Button
-          disabled={isLoading}
           isLoading={isLoading}
           width={{ base: '80px', sm: '100px' }}
           onClick={isUserAuthenticated ? logout : loginViaGoogle}

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { BiErrorAlt } from 'react-icons/bi';
 
-import { Box, Flex, ParticlesBackground, SEO, Text } from '@ui/atoms';
+import { Flex, SEO, Text } from '@ui/atoms';
 import { withCheckIfUserLogged } from '@ui/hoc';
-import { DisplayError, FullScreenLoader } from '@ui/molecules';
+import { DisplayError, FullScreenLoader, ParticlesBackgroundLayout } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { AddWordTemplate } from '@ui/templates';
 
@@ -58,12 +58,11 @@ const AddWordPageComponent = (): JSX.Element => {
     <>
       <SEO noFollow noIndex title="Add word" />
       <SidebarWithHeader />
-      <Box bg="gray.50" height="100%" overflow="hidden">
-        <ParticlesBackground />
+      <ParticlesBackgroundLayout height="100%">
         <Flex align="center" h="100%" justify="center" w="100%">
           {renderContent()}
         </Flex>
-      </Box>
+      </ParticlesBackgroundLayout>
     </>
   );
 };

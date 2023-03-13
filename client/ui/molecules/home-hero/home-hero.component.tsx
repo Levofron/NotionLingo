@@ -1,21 +1,12 @@
 import { useRouter } from 'next/router';
 import { FC, useMemo } from 'react';
 
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Highlight,
-  ParticlesBackground,
-  Stack,
-  Text,
-} from '@ui/atoms';
+import { Button, Container, Flex, Heading, Highlight, Stack, Text } from '@ui/atoms';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useUser } from '@infrastructure/utils';
 
+import { ParticlesBackgroundLayout } from '..';
 import { IHomeHeroProps } from './home-hero.types';
 
 export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
@@ -45,8 +36,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
   };
 
   return (
-    <Box bg="gray.50" position="relative">
-      <ParticlesBackground />
+    <ParticlesBackgroundLayout>
       <Container maxW="3xl" pt={{ base: 58, sm: 66, md: 74 }}>
         <Flex
           alignItems="center"
@@ -90,6 +80,6 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
           </Stack>
         </Flex>
       </Container>
-    </Box>
+    </ParticlesBackgroundLayout>
   );
 };

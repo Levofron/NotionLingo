@@ -1,5 +1,5 @@
 import { queryTypes, useQueryState } from 'next-usequerystate';
-import { ChangeEvent, Children, FC, useEffect, useRef } from 'react';
+import { ChangeEvent, FC, useEffect, useRef } from 'react';
 import { BsPlusCircle } from 'react-icons/bs';
 
 import { Container, Divider, Flex, Heading, Text } from '@ui/atoms';
@@ -13,6 +13,7 @@ import {
   isString,
   useAxios,
   useCopyToClipboard,
+  useIsFirstRender,
   useRouter,
   useToast,
 } from '@infrastructure/utils';
@@ -24,9 +25,10 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
 }): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
+  const isFirstRender = useIsFirstRender();
   const inputRef = useRef<HTMLInputElement>(null);
   const { copyToClipboard } = useCopyToClipboard();
-  const [word, setWord] = useQueryState('word', queryTypes.string);
+  const [queryStateWord, setQueryStateWord] = useQueryState('word', queryTypes.string);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -42,15 +44,15 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
   } = useAxios(restModule.getDictionarySuggestions);
 
   useEffect(() => {
-    if (isString(word)) {
-      mutateGetDictionarySuggestions(word);
+    if (isFirstRender && isString(queryStateWord)) {
+      mutateGetDictionarySuggestions(queryStateWord);
     }
-  }, [!!word]);
+  }, [!!queryStateWord]);
 
   const handleInputChange = debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     mutateGetDictionarySuggestions(value);
 
-    setWord(value);
+    setQueryStateWord(value);
   }, 1000);
 
   const handleAddNotionWordClick = (word: string, meaning: string, exampleSentence: string) => () =>
@@ -83,9 +85,8 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
         <InputControl
           ref={inputRef}
           isRequired
-          defaultValue={word || ''}
+          defaultValue={queryStateWord || ''}
           errorMessage={getDictionarySuggestionsError || undefined}
-          isDisabled={isGetDictionarySuggestionsLoading}
           isLoading={isGetDictionarySuggestionsLoading}
           label="Search for a word"
           name="searchWord"
@@ -105,50 +106,49 @@ export const FindWordTemplate: FC<IFindWordTemplateProps> = ({
         ) : null}
         {getDictionarySuggestionsData ? (
           <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
-            {Children.toArray(
-              getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
-                const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
+            {getDictionarySuggestionsData?.suggestions.map(({ example, meaning }, _index) => {
+              const key = `${getDictionarySuggestionsData.word}-${meaning}-${example}`;
+              const isLastIndex = _index === getDictionarySuggestionsData.suggestions.length - 1;
 
-                return (
-                  <Flex flexDirection="column" gap={{ base: 2, md: 4 }}>
-                    <Flex alignItems="flex-start" gap={{ base: 2, md: 4 }}>
-                      {isUserAuthenticated ? (
-                        <MotionIconButton
-                          icon={BsPlusCircle}
-                          onClick={handleAddNotionWordClick(
-                            getDictionarySuggestionsData.word,
-                            meaning,
-                            example,
-                          )}
-                        />
-                      ) : null}
-                      <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
-                        <Heading
-                          withBalancer
-                          color="gray.900"
-                          cursor="pointer"
-                          fontSize={{ base: 'md', sm: 'xl' }}
-                          textAlign="left"
-                          onClick={handleCopy(meaning)}
-                        >
-                          {meaning}
-                        </Heading>
-                        <Text
-                          key={example}
-                          withBalancer
-                          cursor="pointer"
-                          fontWeight="light"
-                          onClick={handleCopy(example)}
-                        >
-                          {example}
-                        </Text>
-                      </Flex>
+              return (
+                <Flex key={key} flexDirection="column" gap={{ base: 2, md: 4 }}>
+                  <Flex alignItems="flex-start" gap={{ base: 2, md: 4 }}>
+                    {isUserAuthenticated ? (
+                      <MotionIconButton
+                        icon={BsPlusCircle}
+                        onClick={handleAddNotionWordClick(
+                          getDictionarySuggestionsData.word,
+                          meaning,
+                          example,
+                        )}
+                      />
+                    ) : null}
+                    <Flex flexDirection="column" gap={{ base: 2, md: 4 }} w="100%">
+                      <Heading
+                        withBalancer
+                        color="gray.900"
+                        cursor="pointer"
+                        fontSize={{ base: 'md', sm: 'xl' }}
+                        textAlign="left"
+                        onClick={handleCopy(meaning)}
+                      >
+                        {meaning}
+                      </Heading>
+                      <Text
+                        key={example}
+                        withBalancer
+                        cursor="pointer"
+                        fontWeight="light"
+                        onClick={handleCopy(example)}
+                      >
+                        {example}
+                      </Text>
                     </Flex>
-                    {isLastIndex ? null : <Divider bg="gray.900" height="1px" width="100%" />}
                   </Flex>
-                );
-              }),
-            )}
+                  {isLastIndex ? null : <Divider bg="gray.900" height="1px" width="100%" />}
+                </Flex>
+              );
+            })}
           </Flex>
         ) : (
           <Flex

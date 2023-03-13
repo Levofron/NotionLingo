@@ -1,5 +1,7 @@
 import { INotionWord } from '@domain/entities/rest.types';
 
+import { findNotionWordIndexById } from '../find-notion-word-index-by-id/find-notion-word-index-by-id.function';
+
 export const removeNotionWordFromArray = (
   notionWords: INotionWord[],
   notionWordToRemove: INotionWord,
@@ -9,7 +11,7 @@ export const removeNotionWordFromArray = (
   }
 
   const copiedArray = [...notionWords];
-  const foundIndex = copiedArray.findIndex((notionWord) => notionWord.id === notionWordToRemove.id);
+  const foundIndex = findNotionWordIndexById(copiedArray, notionWordToRemove.id);
 
   if (foundIndex === -1) {
     return copiedArray;

@@ -2,8 +2,12 @@ import { Fade } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FiRefreshCcw } from 'react-icons/fi';
 
-import { Box, Button, Container, Flex, ParticlesBackground, Text } from '@ui/atoms';
-import { DashboardProfileDetails, FullScreenLoader } from '@ui/molecules';
+import { Button, Container, Flex, Text } from '@ui/atoms';
+import {
+  DashboardProfileDetails,
+  FullScreenLoader,
+  ParticlesBackgroundLayout,
+} from '@ui/molecules';
 import {
   NotionWordCardAnimationWrapper,
   NotionWordCardBack,
@@ -17,7 +21,7 @@ import {
   INotionWord,
   IUpdateNotionWordRequest,
 } from '@domain/entities/rest.types';
-import { removeNotionWordFromArray } from '@domain/utils/rest';
+import { removeNotionWordFromArray, updateRecordInNotionWordArray } from '@domain/utils/rest';
 
 import { useAxios, useToast, useUser } from '@infrastructure/utils';
 
@@ -69,29 +73,16 @@ export const DashboardTemplate = (): JSX.Element => {
     }
   };
 
-  // TODO - move this logic to domain
   const handleApplySuggestion = (data: IUpdateNotionWordRequest) => () =>
     mutateAsyncUpdateNotionWord(data)
       .then((_udpatedRecordId) => {
-        const copiedWords = [...words];
+        const updatedNotionWords = updateRecordInNotionWordArray(words, _udpatedRecordId, data);
 
-        const foundWord = copiedWords.find((_word) => _word.id === _udpatedRecordId);
-
-        if (!foundWord) {
+        if (!updatedNotionWords) {
           return;
         }
 
-        const foundWordIndex = copiedWords.indexOf(foundWord);
-
-        const updatedWord: INotionWord = {
-          ...foundWord,
-          meaning: data.meaning || foundWord.meaning,
-          exampleSentence: data.exampleSentence || foundWord.exampleSentence,
-        };
-
-        copiedWords[foundWordIndex] = updatedWord;
-
-        setWords(copiedWords);
+        setWords(updatedNotionWords);
 
         toast.success({
           duration: 3000,
@@ -185,12 +176,11 @@ export const DashboardTemplate = (): JSX.Element => {
   };
 
   return (
-    <Box bg="gray.50" height="100%" overflow="hidden">
-      <ParticlesBackground />
+    <ParticlesBackgroundLayout height="100%">
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
         <DashboardProfileDetails {...dailyStreakData} />
         {renderContent()}
       </Container>
-    </Box>
+    </ParticlesBackgroundLayout>
   );
 };
