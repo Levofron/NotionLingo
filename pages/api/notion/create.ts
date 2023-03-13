@@ -1,20 +1,24 @@
+import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
 import { cleanUpString, isString } from '@infrastructure/utils';
+
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
-  decrypt,
+  generateMemoryCacheKey,
+  getNotionApiKeyFromProfile,
+  getNotionTableColumns,
+  getProfileDataWithNotionDataCheck,
   getUserFromRequest,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
-import { getProfileDataWithNotionDataCheck, getTableColumns } from './table-columns';
 import { getTitleOrRichTextProperty } from './update';
 
 const getMultiSelectProperty = (columnName: string, type: string, newValue: string) => {
@@ -38,11 +42,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
   const profileData = await getProfileDataWithNotionDataCheck(user?.id!);
 
-  const hash = JSON.parse(profileData?.notion_api_key);
-  const notionApiKey = decrypt(hash);
-
+  const notionApiKey = getNotionApiKeyFromProfile(profileData);
   const notionClient = createNotionClient(notionApiKey);
-  const tableColumns = await getTableColumns(notionApiKey, profileData.notion_database_id);
+  const tableColumns = await getNotionTableColumns(notionApiKey, profileData.notion_database_id);
 
   const requestBodyKeys = Object.keys(requestBody);
 
@@ -113,6 +115,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     properties: newNotionRecordProperties,
   });
+
+  const cacheKey = generateMemoryCacheKey(user!.id, profileData.notion_database_id, notionApiKey);
+
+  memoryCache.del(cacheKey);
 
   return res.status(EHttpStatusCode.OK).json({
     id: result.id,

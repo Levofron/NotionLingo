@@ -1,27 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { getSupabaseService, supabaseInstance } from '@infrastructure/config';
-import { EHttpStatusCode } from '@infrastructure/types/http-status-code';
+import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
+  getProfileById,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
   withMiddleware,
-} from '@infrastructure/utils/node';
+} from '@server/utils';
 
-export const getProfileById = async (userId: string) => {
-  const { data } = await supabaseInstance
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .throwOnError()
-    .single();
-
-  return data;
-};
+import { getSupabaseService } from '@config/supabase/supabase.instance';
 
 const getUserMetadataById = (userId: string) => {
   const supabaseService = getSupabaseService();
