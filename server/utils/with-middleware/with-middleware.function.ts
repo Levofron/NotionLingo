@@ -37,9 +37,6 @@ export const withMiddleware =
       const currentDate = new Date();
       const isoDate = currentDate.toISOString();
 
-      // @ts-expect-error
-      console.log(error?.stack, typeof error);
-
       const stack = getExceptionStack(error);
       const message = getExceptionMessage(error);
       const statusCode = getExceptionStatus(error);
