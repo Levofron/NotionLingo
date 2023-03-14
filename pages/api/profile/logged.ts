@@ -14,7 +14,6 @@ import { getProfileAndUserMetadataById } from './get';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);
-
   const profileData = await getProfileAndUserMetadataById(user?.id!);
 
   res.status(EHttpStatusCode.OK).json(profileData);
