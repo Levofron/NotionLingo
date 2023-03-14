@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { withAxiom } from 'next-axiom';
+import { NextApiResponse } from 'next';
+import { AxiomAPIRequest, withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
@@ -21,11 +21,16 @@ const getUserMetadataById = (userId: string) => {
   return supabaseService.auth.api.getUserById(userId);
 };
 
-export const getProfileAndUserMetadataById = async (userId: string) => {
+export const getProfileAndUserMetadataById = async (userId: string, req: AxiomAPIRequest) => {
   const profileData = await getProfileById(userId);
+
+  req.log.info(JSON.stringify(profileData));
   const { data: user, error: userError } = await getUserMetadataById(userId);
 
+  req.log.info(JSON.stringify(user));
+
   if (userError) {
+    req.log.error(JSON.stringify(userError));
     throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, userError.message);
   }
 
@@ -44,9 +49,9 @@ export const getProfileAndUserMetadataById = async (userId: string) => {
   };
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: AxiomAPIRequest, res: NextApiResponse) => {
   const userId = req.query.id as string;
-  const profileDetails = await getProfileAndUserMetadataById(userId);
+  const profileDetails = await getProfileAndUserMetadataById(userId, req);
 
   res.status(EHttpStatusCode.OK).json(profileDetails);
 };
