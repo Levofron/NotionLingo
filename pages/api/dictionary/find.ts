@@ -1,5 +1,6 @@
 import { load } from 'cheerio';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { cleanUpString } from '@infrastructure/utils';
@@ -177,4 +178,4 @@ const middlewareToApply = [
   validateIfParametersExistsMiddleware('query', ['word']),
 ];
 
-export default withMiddleware(handler)(middlewareToApply);
+export default withAxiom(withMiddleware(handler)(middlewareToApply));

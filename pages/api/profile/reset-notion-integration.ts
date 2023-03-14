@@ -1,5 +1,6 @@
 import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withAxiom } from 'next-axiom';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
@@ -45,4 +46,4 @@ const middlewareToApply = [
   assignRequestTokenToSupabaseSessionMiddleware,
 ];
 
-export default withMiddleware(handler)(middlewareToApply);
+export default withAxiom(withMiddleware(handler)(middlewareToApply));

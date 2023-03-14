@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withAxiom } from 'next-axiom';
 
 import {
   validateRequestMethodMiddleware,
@@ -13,4 +14,4 @@ const handler = (req: NextApiRequest, res: NextApiResponse) =>
 
 const middlewareToApply = [validateRequestMethodMiddleware('POST'), validateRouteSecretMiddleware];
 
-export default withMiddleware(handler)(middlewareToApply);
+export default withAxiom(withMiddleware(handler)(middlewareToApply));
