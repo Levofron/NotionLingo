@@ -3,7 +3,7 @@
   "name": "notionlingo",
   "version": "0.1.0",
   "scripts": {
-    "prebuild": "yarn generate-sitemap && yarn generate-robots-txt",
+    "prebuild": "yarn generate-sitemap",
     "build": "next build",
     "check:all": "concurrently \"yarn lint\" \"yarn typecheck\" \"yarn format:check\" \"yarn test\" \"yarn build\"",
     "convert-pages-directory-to-routes-enum": "node ./scripts/node/convert-pages-directory-to-routes-enum.mjs",
@@ -15,7 +15,6 @@
     "format:check": "yarn prettier --check",
     "gcb": "bash ./scripts/shell/git-create-branch.sh",
     "gcdwp": "bash ./scripts/shell/git-checkout-develop-with-pull.sh",
-    "generate-robots-txt": "node ./scripts/node/generate-robots-txt.mjs",
     "generate-sitemap": "node ./scripts/node/generate-sitemap.mjs",
     "gpc": "bash ./scripts/shell/git-push-changes.sh",
     "grlc": "bash ./scripts/shell/git-reset-local-changes.sh",
