@@ -29,11 +29,15 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
 
     if (sessionUser) {
       setIsLoading(true);
-      await setSupabaseCookie();
-      const response = await getLoggedProfile();
 
-      setIsLoading(false);
-      setUser({ ...sessionUser, ...response });
+      try {
+        await setSupabaseCookie();
+        const response = await getLoggedProfile();
+
+        setUser({ ...sessionUser, ...response });
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
