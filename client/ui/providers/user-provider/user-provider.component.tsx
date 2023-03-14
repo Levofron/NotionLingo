@@ -25,17 +25,16 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
       return;
     }
 
-    setIsLoading(true);
     const sessionUser = supabaseModule.getUser();
 
     if (sessionUser) {
+      setIsLoading(true);
       await setSupabaseCookie();
       const response = await getLoggedProfile();
 
+      setIsLoading(false);
       setUser({ ...sessionUser, ...response });
     }
-
-    setIsLoading(false);
   };
 
   useEffect(() => {
