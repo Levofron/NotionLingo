@@ -40,6 +40,8 @@
     "@commitlint/config-conventional": "^17.4.4",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fontsource/montserrat": "^4.5.14",
+    "@fontsource/raleway": "^4.5.12",
     "@notionhq/client": "^2.2.3",
     "@optimizely/optimizely-sdk": "^4.9.2",
     "@supabase/supabase-js": "1.35.7",

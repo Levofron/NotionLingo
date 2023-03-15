@@ -2957,6 +2957,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/montserrat@npm:^4.5.14":
+  version: 4.5.14
+  resolution: "@fontsource/montserrat@npm:4.5.14"
+  checksum: c5ee54bdc7abb378240d613a0dd59ce4879bdfbe6c5168b324245dd3e031a410e321289bf9be614265e16d7319f16d39090b8f00f54e631c6d35e9cb2f8d652a
+  languageName: node
+  linkType: hard
+
+"@fontsource/raleway@npm:^4.5.12":
+  version: 4.5.12
+  resolution: "@fontsource/raleway@npm:4.5.12"
+  checksum: 62983f824e5cd4bcedd3b86ef1a0da654d19e173f418f2e9ef33245997bca7956c9f3b31198742ce1851152b8b8a2df82aaa4d621333554ebf37dc5438f1276f
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -10880,6 +10894,8 @@ __metadata:
     "@commitlint/config-conventional": ^17.4.4
     "@emotion/react": ^11.10.6
     "@emotion/styled": ^11.10.6
+    "@fontsource/montserrat": ^4.5.14
+    "@fontsource/raleway": ^4.5.12
     "@notionhq/client": ^2.2.3
     "@optimizely/optimizely-sdk": ^4.9.2
     "@supabase/supabase-js": 1.35.7
