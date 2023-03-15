@@ -1,20 +1,6 @@
-import { useClipboard } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
-import { MdEmail } from 'react-icons/md';
 
-import {
-  Box,
-  Button,
-  Card,
-  ChakraNextLink,
-  Flex,
-  Heading,
-  IconButton,
-  Stack,
-  Tooltip,
-  VStack,
-} from '@ui/atoms';
+import { Box, Button, Card, Flex, Heading, VStack } from '@ui/atoms';
 import { InputControl, TextareaControl } from '@ui/molecules';
 
 import { useSendContactFormData } from '@adapter/hooks';
@@ -22,15 +8,12 @@ import { localStorageModule } from '@adapter/modules';
 
 import { useToast } from '@infrastructure/utils';
 
-import { CONTACT_EMAIL, GITHUB_LINK, LINKEDIN_LINK, TWITTER_LINK } from '@config/constants';
-
 import { contactFormValidationSchema } from './contact-form.defaults';
 
 const LAST_CONTACT_FORM_SUBMISSION_KEY = 'lastContactFormSubmission';
 
 export const ContactForm = (): JSX.Element => {
   const toast = useToast();
-  const { hasCopied, onCopy } = useClipboard(CONTACT_EMAIL);
 
   const { isSendContactFormDataLoading, resetSendContactFormData, sendContactFormData } =
     useSendContactFormData();
@@ -98,96 +81,53 @@ export const ContactForm = (): JSX.Element => {
           <Heading color="gray.50" fontSize={{ base: '3xl', sm: '4xl' }}>
             Get in Touch
           </Heading>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 4, md: 8, lg: 20 }}>
-            <Stack align="center" direction={{ base: 'row', md: 'column' }} justify="space-around">
-              <Tooltip
-                hasArrow
-                closeOnClick={false}
-                label={hasCopied ? 'Email Copied!' : 'Copy Email'}
-              >
-                <IconButton
-                  aria-label="email"
-                  fontSize="3xl"
-                  icon={<MdEmail />}
+          <Card minW={{ base: '300px', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
+            <form onSubmit={formik.handleSubmit}>
+              <Flex flexDirection="column" gap="3px">
+                <InputControl
+                  isRequired
+                  errorMessage={formik.errors.fullName}
+                  label="Full Name"
                   mode="light"
-                  size="lg"
-                  onClick={onCopy}
+                  name="fullName"
+                  value={formik.values.fullName}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
-              </Tooltip>
-              <ChakraNextLink href={GITHUB_LINK} rel="noreferrer" target="_blank">
-                <IconButton
-                  aria-label="github"
-                  fontSize="3xl"
-                  icon={<BsGithub />}
+                <InputControl
+                  isRequired
+                  errorMessage={formik.errors.email}
+                  label="Email"
                   mode="light"
-                  size="lg"
+                  name="email"
+                  value={formik.values.email}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
-              </ChakraNextLink>
-              <ChakraNextLink href={TWITTER_LINK} rel="noreferrer" target="_blank">
-                <IconButton
-                  aria-label="twitter"
-                  icon={<BsTwitter size="28px" />}
+                <TextareaControl
+                  isRequired
+                  errorMessage={formik.errors.message}
+                  label="Message"
                   mode="light"
-                  size="lg"
+                  name="message"
+                  resize="none"
+                  rows={5}
+                  value={formik.values.message}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
-              </ChakraNextLink>
-              <ChakraNextLink href={LINKEDIN_LINK} rel="noreferrer" target="_blank">
-                <IconButton
-                  aria-label="linkedin"
-                  icon={<BsLinkedin size="28px" />}
+                <Button
+                  isLoading={isSendContactFormDataLoading}
                   mode="light"
-                  size="lg"
-                />
-              </ChakraNextLink>
-            </Stack>
-            <Card minW={{ base: '300px', md: '350px' }} mode="light" p={{ base: 4, sm: 6, md: 8 }}>
-              <form onSubmit={formik.handleSubmit}>
-                <Flex flexDirection="column" gap="3px">
-                  <InputControl
-                    isRequired
-                    errorMessage={formik.errors.fullName}
-                    label="Full Name"
-                    mode="light"
-                    name="fullName"
-                    value={formik.values.fullName}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  <InputControl
-                    isRequired
-                    errorMessage={formik.errors.email}
-                    label="Email"
-                    mode="light"
-                    name="email"
-                    value={formik.values.email}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  <TextareaControl
-                    isRequired
-                    errorMessage={formik.errors.message}
-                    label="Message"
-                    mode="light"
-                    name="message"
-                    resize="none"
-                    rows={5}
-                    value={formik.values.message}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  <Button
-                    isLoading={isSendContactFormDataLoading}
-                    mode="light"
-                    mt={2}
-                    type="submit"
-                    width="full"
-                  >
-                    Send Message
-                  </Button>
-                </Flex>
-              </form>
-            </Card>
-          </Stack>
+                  mt={2}
+                  type="submit"
+                  width="full"
+                >
+                  Send Message
+                </Button>
+              </Flex>
+            </form>
+          </Card>
         </VStack>
       </Box>
     </Flex>
