@@ -2,7 +2,6 @@ export * from './decrypt/decrypt.function';
 export * from './encrypt/encrypt.function';
 export * from './is-iso-date/is-iso-date.function';
 export * from './text-to-ipa/text-to-ipa.function';
-export * from './execute-command/execute-command.function';
 export * from './shuffle-array/shuffle-array.function';
 export * from './with-middleware/with-middleware.function';
 export * from './get-profile-by-id/get-profile-by-id.function';
