@@ -19,7 +19,6 @@ export const APPLICATION_ENVIRONMENT = process.env.NEXT_PUBLIC_APP_ENV || 'local
 export const { CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY, SUPABASE_SERVICE_ROLE } = process.env;
 
 export const GITHUB_LINK = 'https://github.com/playerony';
-export const CONTACT_EMAIL = 'pawel.wojtasinski.1995@gmail.com;';
 export const TWITTER_LINK = 'https://twitter.com/wojtasinskipawe';
 export const LINKEDIN_LINK = 'https://linkedin.com/in/pwojtasinski';
 export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/playerony';
