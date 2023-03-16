@@ -11,7 +11,7 @@ const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IIconButt
   <ChakraIconButton
     ref={ref}
     borderRadius={0}
-    borderWidth="2px"
+    borderWidth="1px"
     {...variantToStylesMapper[mode]}
     {...restProps}
   />
