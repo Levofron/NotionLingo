@@ -103,7 +103,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
         <Flex alignItems="center" height="100%" justifyContent="center">
           <Card alignItems="center" display="flex" p={{ base: 2, sm: 3, md: 4 }}>
             <Avatar
-              border="2px solid black"
+              border="1px solid black"
               borderRadius={0}
               mb={4}
               pos="relative"

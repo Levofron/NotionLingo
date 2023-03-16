@@ -51,7 +51,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
             fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
             fontWeight={800}
           >
-            <Highlight query={['expand', 'skills']}>
+            <Highlight query={['expand']}>
               Expand vocabulary with your own Notion database!
             </Highlight>
           </Heading>
