@@ -1,4 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiResponse } from 'next';
+import { AxiomAPIRequest } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { isError } from '@infrastructure/utils';
@@ -17,9 +18,9 @@ const getExceptionStack = (exception: unknown) =>
   isError(exception) ? exception.stack : undefined;
 
 export const withMiddleware =
-  <THandlerResponse>(handler: (req: NextApiRequest, res: NextApiResponse) => THandlerResponse) =>
+  <THandlerResponse>(handler: (req: AxiomAPIRequest, res: NextApiResponse) => THandlerResponse) =>
   (functionsToCheck: TFunctionToCheck[]) =>
-  async (req: NextApiRequest, res: NextApiResponse) => {
+  async (req: AxiomAPIRequest, res: NextApiResponse) => {
     for (const functionToCheck of functionsToCheck) {
       // eslint-disable-next-line no-await-in-loop
       const result = await functionToCheck(req, res);
@@ -34,6 +35,8 @@ export const withMiddleware =
 
       return result;
     } catch (error) {
+      req.log.error(JSON.stringify(error));
+
       const currentDate = new Date();
       const isoDate = currentDate.toISOString();
 

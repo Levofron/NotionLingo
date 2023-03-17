@@ -11,7 +11,7 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
   <ChakraButton
     ref={ref}
     borderRadius={0}
-    borderWidth="2px"
+    borderWidth="1px"
     size={{ base: 'sm', sm: 'md', md: 'lg' }}
     {...variantToStylesMapper[mode]}
     {...restProps}
@@ -19,5 +19,3 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
 );
 
 export const Button = memo(forwardRef(ButtonComponent));
-
-export default Button;

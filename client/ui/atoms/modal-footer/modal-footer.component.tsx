@@ -9,5 +9,3 @@ const ModalFooterComponent: ForwardRefRenderFunction<HTMLDivElement, IModalFoote
 ): JSX.Element => <ChakraModalFooter ref={ref} {...props} />;
 
 export const ModalFooter = memo(forwardRef(ModalFooterComponent));
-
-export default ModalFooter;

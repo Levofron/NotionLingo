@@ -49,6 +49,7 @@ export const useRouter = () => {
     query: router.query,
     redirectToDashboard,
     redirectToOnboarding,
+    pathname: router.pathname,
     redirectWithReplaceToAddWord,
     getCurrentPath: routerContext?.getCurrentPath,
     getPreviousPath: routerContext?.getPreviousPath,

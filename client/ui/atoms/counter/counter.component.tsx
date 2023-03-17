@@ -30,5 +30,3 @@ export const Counter: FC<ICounterProps> = ({
 
   return <span ref={nodeRef} />;
 };
-
-export default Counter;

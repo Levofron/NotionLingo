@@ -9,5 +9,3 @@ const ListItemComponent: ForwardRefRenderFunction<HTMLLIElement, IListItemProps>
 ): JSX.Element => <ChakraListItem ref={ref} {...props} />;
 
 export const ListItem = memo(forwardRef(ListItemComponent));
-
-export default ListItem;

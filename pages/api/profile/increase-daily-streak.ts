@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
 import { isString } from '@infrastructure/utils';
@@ -91,4 +92,4 @@ const middlewareToApply = [
   validateIfParametersExistsMiddleware('query', ['currentDate']),
 ];
 
-export default withMiddleware(handler)(middlewareToApply);
+export default withAxiom(withMiddleware(handler)(middlewareToApply));

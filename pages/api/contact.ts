@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withAxiom } from 'next-axiom';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 import {
@@ -17,9 +18,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .from('contacts')
     .insert({
       email: contactFormData.email,
-      // TODO - rename in DB
-      name: contactFormData.fullName,
       message: contactFormData.message,
+      fullName: contactFormData.fullName,
     })
     .throwOnError();
 
@@ -32,4 +32,4 @@ const middlewareToApply = [
   validateIfParametersExistsMiddleware('body', ['email', 'fullName', 'message']),
 ];
 
-export default withMiddleware(handler)(middlewareToApply);
+export default withAxiom(withMiddleware(handler)(middlewareToApply));

@@ -21,8 +21,8 @@ const restApi = getRestApi(axiosInstance);
 const supabaseApi = getSupabaseApi(supabaseInstance);
 
 // repositories
+const restRepository = getRestRepository(restApi);
 const supabaseRepository = getSupabaseRepository(supabaseApi);
-const restRepository = getRestRepository(restApi, supabaseApi);
 
 export const supabaseModule = {
   getUser: getUserUseCase(supabaseRepository).execute,

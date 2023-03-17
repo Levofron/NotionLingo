@@ -1,3 +1,5 @@
+import { Session } from '@supabase/supabase-js';
+
 import {
   IContact,
   IDictionarySuggestions,
@@ -24,6 +26,6 @@ export interface IRestRepository {
   sendContactFormData: (data: IContact) => Promise<IContact>;
   setNotionApiToken: (token: string) => Promise<IHash>;
   setNotionDatabaseId: (databaseId: string) => Promise<string>;
-  setSupabaseCookie: () => Promise<void>;
+  setSupabaseCookie: (session: Session | null) => Promise<void>;
   updateNotionWord: (data: IUpdateNotionWordRequest) => Promise<string>;
 }

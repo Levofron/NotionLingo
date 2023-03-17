@@ -9,5 +9,3 @@ const ListIconComponent: ForwardRefRenderFunction<SVGSVGElement, IListIconProps>
 ): JSX.Element => <ChakraListIcon ref={ref} {...props} />;
 
 export const ListIcon = memo(forwardRef(ListIconComponent));
-
-export default ListIcon;

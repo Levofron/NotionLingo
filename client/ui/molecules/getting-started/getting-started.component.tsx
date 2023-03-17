@@ -1,6 +1,6 @@
 import { ForwardRefRenderFunction, forwardRef } from 'react';
 
-import { Box, Card, Container, Flex, Heading, Stack, Text, TextUnderline } from '@ui/atoms';
+import { Box, Card, Container, Flex, Heading, Stack, Text } from '@ui/atoms';
 
 import { STEPS } from './getting-started.defaults';
 
@@ -14,7 +14,7 @@ const GettingStartedComponent: ForwardRefRenderFunction<HTMLDivElement> = (_, re
         mb={{ base: 14, sm: 20 }}
         textAlign="center"
       >
-        Getting started in <TextUnderline mode="light">3 easy steps</TextUnderline>
+        Getting started in 3 easy steps
       </Heading>
       <Flex
         align={{ base: 'flex-start', md: 'center' }}

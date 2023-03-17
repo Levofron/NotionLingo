@@ -74,7 +74,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
         </Button>
       ) : null}
       <Box
-        borderBottom="2px solid"
+        borderBottom="1px solid"
         borderColor="gray.900"
         height={{ base: '180px', sm: '205px', md: '240px' }}
         pointerEvents="none"
@@ -121,7 +121,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
         </Flex>
         {hasMeaningSuggestion ? (
           <Text
-            border="2px solid"
+            border="1px solid"
             borderColor="gray.900"
             color="gray.900"
             cursor={cursor}
@@ -144,7 +144,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           </Text>
         )}
       </Flex>
-      <Flex borderTop="2px solid" borderTopColor="gray.900" justifyContent="space-between">
+      <Flex borderTop="1px solid" borderTopColor="gray.900" justifyContent="space-between">
         <Flex gap={1} width="fit-content">
           {hasExampleSentenceSuggestion ? (
             <Flex
@@ -154,7 +154,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
               width="full"
             >
               <Text
-                border="2px solid"
+                border="1px solid"
                 borderColor="gray.900"
                 color="gray.900"
                 cursor={cursor}
@@ -186,7 +186,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
             borderColor: 'gray.900',
           }}
           alignItems="center"
-          borderLeft="2px solid"
+          borderLeft="1px solid"
           borderTopColor="gray.900"
           cursor="pointer"
           justifyContent="center"

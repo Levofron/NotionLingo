@@ -9,5 +9,3 @@ const AvatarComponent: ForwardRefRenderFunction<HTMLSpanElement, IAvatarProps> =
 ): JSX.Element => <ChakraAvatar ref={ref} {...props} />;
 
 export const Avatar = memo(forwardRef(AvatarComponent));
-
-export default Avatar;

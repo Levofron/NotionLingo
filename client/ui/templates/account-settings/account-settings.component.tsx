@@ -5,9 +5,9 @@ import { BiReset } from 'react-icons/bi';
 import { Avatar, Button, Card, Container, Flex, Heading, Text } from '@ui/atoms';
 import { ConfirmationModal, IConfirmationModalRef, ParticlesBackgroundLayout } from '@ui/molecules';
 
-import { restModule } from '@adapter/modules';
+import { useDeleteProfile, useResetIntegration } from '@adapter/hooks';
 
-import { useAxios, useCountdown, useRouter, useToast, useUser } from '@infrastructure/utils';
+import { useCountdown, useRouter, useToast, useUser } from '@infrastructure/utils';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();
@@ -30,17 +30,12 @@ export const AccountSettingsTemplate = (): JSX.Element => {
   const deleteAccountModalRef = useRef<IConfirmationModalRef>(null);
   const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
 
-  const {
-    isLoading: isResetNotionIntegrationLoading,
-    mutateAsync: mutateAsyncResetNotionIntegration,
-  } = useAxios(restModule.resetNotionIntegration);
+  const { isResetIntegrationLoading, resetIntegration } = useResetIntegration();
 
-  const { isLoading: isDeleteProfileLoading, mutateAsync: mutateAsyncDeleteProfile } = useAxios(
-    restModule.deleteProfile,
-  );
+  const { deleteProfile, isDeleteProfileLoading } = useDeleteProfile();
 
   const handleConfirmResetNotionIntegration = () =>
-    mutateAsyncResetNotionIntegration()
+    resetIntegration()
       .then(() => {
         startResetNotionIntegrationCountdown();
 
@@ -63,7 +58,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       .finally(resetIntegrationModalRef.current?.close);
 
   const handleConfirmDeleteProfile = () =>
-    mutateAsyncDeleteProfile()
+    deleteProfile()
       .then(() => {
         startDeleteProfileCountdown();
 
@@ -101,14 +96,14 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       <ConfirmationModal
         ref={resetIntegrationModalRef}
         description="Do you really want to reset you Notion integration?"
-        isConfirmLoading={isResetNotionIntegrationLoading}
+        isConfirmLoading={isResetIntegrationLoading}
         onConfirm={handleConfirmResetNotionIntegration}
       />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
           <Card alignItems="center" display="flex" p={{ base: 2, sm: 3, md: 4 }}>
             <Avatar
-              border="2px solid black"
+              border="1px solid black"
               borderRadius={0}
               mb={4}
               pos="relative"
@@ -128,7 +123,7 @@ export const AccountSettingsTemplate = (): JSX.Element => {
             </Text>
             <Button
               isDisabled={isDisabledButton}
-              isLoading={isResetNotionIntegrationLoading}
+              isLoading={isResetIntegrationLoading}
               leftIcon={<BiReset />}
               mb={2}
               onClick={() => resetIntegrationModalRef.current?.open()}

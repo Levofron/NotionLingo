@@ -11,11 +11,9 @@ const SpinnerComponent: ForwardRefRenderFunction<HTMLDivElement, ISpinnerProps> 
     ref={ref}
     color={mode === 'dark' ? 'gray.900' : 'gray.50'}
     size="xl"
-    thickness="2px"
+    thickness="1px"
     {...restProps}
   />
 );
 
 export const Spinner = memo(forwardRef(SpinnerComponent));
-
-export default Spinner;

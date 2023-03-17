@@ -32,5 +32,3 @@ const TextUnderlineComponent: FC<ITextUnderlineProps> = ({
 };
 
 export const TextUnderline = memo(TextUnderlineComponent);
-
-export default TextUnderline;

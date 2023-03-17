@@ -10,13 +10,13 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
   const [isSmallerThan400] = useMediaQuery('(max-width: 400px)');
 
   const isDarkMode = mode === 'dark';
-  const boxShadowSize = isSmallerThan400 ? '3px' : '6px';
+  const boxShadowSize = isSmallerThan400 ? '2px' : '4px';
 
   return (
     <ChakraCard
       ref={ref}
       bg={isDarkMode ? 'gray.50' : 'gray.900'}
-      border="2px"
+      border="1px"
       borderColor={isDarkMode ? 'gray.900' : 'gray.50'}
       borderRadius={0}
       boxShadow={`${boxShadowSize} ${boxShadowSize} 0 var(--chakra-colors-gray-${
@@ -28,5 +28,3 @@ const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
 };
 
 export const Card = memo(forwardRef(CardComponent));
-
-export default Card;

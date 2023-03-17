@@ -9,5 +9,3 @@ const BoxComponent: ForwardRefRenderFunction<HTMLDivElement, IBoxProps> = (
 ): JSX.Element => <ChakraBox ref={ref} {...props} />;
 
 export const Box = memo(forwardRef(BoxComponent));
-
-export default Box;

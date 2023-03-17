@@ -9,5 +9,3 @@ const CardFooterComponent: ForwardRefRenderFunction<HTMLDivElement, ICardFooterP
 ): JSX.Element => <ChakraCardFooter ref={ref} {...props} />;
 
 export const CardFooter = memo(forwardRef(CardFooterComponent));
-
-export default CardFooter;

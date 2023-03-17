@@ -1,3 +1,6 @@
+import { ISpeechSynthesisRepository } from '@domain/repositories/speech-synthesis.repository';
+import { ISupabaseRepository } from '@domain/repositories/supabase.repository';
+
 import {
   IContact,
   IDictionarySuggestions,
@@ -27,8 +30,13 @@ export type TSetSupabaseCookieUseCase = IUseCaseWithoutParamsAndPromiseResult<vo
 
 export const setSupabaseCookieUseCase = (
   restRepository: IRestRepository,
+  supabaseRepository: ISupabaseRepository,
 ): TSetSupabaseCookieUseCase => ({
-  execute: () => restRepository.setSupabaseCookie(),
+  execute: () => {
+    const session = supabaseRepository.getSession();
+
+    return restRepository.setSupabaseCookie(session);
+  },
 });
 
 // getLoggedProfileUseCase
@@ -96,8 +104,13 @@ export type TIncreaseDailyStreakUseCase =
 
 export const increaseDailyStreakUseCase = (
   restRepository: IRestRepository,
+  speechSynthesisRepository: ISpeechSynthesisRepository,
 ): TIncreaseDailyStreakUseCase => ({
-  execute: () => restRepository.increaseDailyStreak(),
+  execute: () => {
+    speechSynthesisRepository.cancel();
+
+    return restRepository.increaseDailyStreak();
+  },
 });
 
 // resetNotionIntegrationUseCase
@@ -112,8 +125,15 @@ export const resetNotionIntegrationUseCase = (
 // deleteProfileUseCase
 export type TDeleteProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
-export const deleteProfileUseCase = (restRepository: IRestRepository): TDeleteProfileUseCase => ({
-  execute: () => restRepository.deleteProfile(),
+export const deleteProfileUseCase = (
+  restRepository: IRestRepository,
+  supabaseRepository: ISupabaseRepository,
+): TDeleteProfileUseCase => ({
+  execute: async () => {
+    await restRepository.deleteProfile();
+
+    supabaseRepository.logout();
+  },
 });
 
 // getDictionarySuggestionsUseCase

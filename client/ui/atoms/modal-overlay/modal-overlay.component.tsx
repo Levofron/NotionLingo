@@ -9,5 +9,3 @@ const ModalOverlayComponent: ForwardRefRenderFunction<HTMLDivElement, IModalOver
 ): JSX.Element => <ChakraModalOverlay ref={ref} {...props} />;
 
 export const ModalOverlay = memo(forwardRef(ModalOverlayComponent));
-
-export default ModalOverlay;
