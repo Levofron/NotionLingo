@@ -25,6 +25,6 @@ export const sidebarItems: Array<ISidebarItem & { shouldHaveNotionData: boolean 
   {
     name: 'Donate',
     href: ERoutes.DONATE,
-    shouldHaveNotionData: false,
+    shouldHaveNotionData: true,
   },
 ];
