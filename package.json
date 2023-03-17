@@ -5,6 +5,7 @@
   "scripts": {
     "prebuild": "yarn generate-sitemap",
     "build": "next build",
+    "build:analyze": "ANALYZE=true yarn build",
     "check:all": "concurrently \"yarn lint\" \"yarn typecheck\" \"yarn format:check\" \"yarn test\" \"yarn build\"",
     "convert-pages-directory-to-routes-enum": "node ./scripts/node/convert-pages-directory-to-routes-enum.mjs",
     "create:component": "plop --plopfile ./scripts/plop/create-component/create-component.js",
@@ -42,6 +43,7 @@
     "@emotion/styled": "^11.10.6",
     "@fontsource/montserrat": "^4.5.14",
     "@fontsource/raleway": "^4.5.12",
+    "@next/bundle-analyzer": "^13.2.4",
     "@notionhq/client": "^2.2.3",
     "@optimizely/optimizely-sdk": "^4.9.2",
     "@supabase/supabase-js": "1.35.7",
