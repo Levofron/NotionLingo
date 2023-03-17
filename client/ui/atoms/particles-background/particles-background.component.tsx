@@ -19,24 +19,16 @@ export const ParticlesBackground = () => {
   };
 
   const getBubbleDistance = () => {
-    if (isSmallerThan600) {
-      return 50;
-    }
-
     if (isSmallerThan1024) {
-      return 120;
+      return 0;
     }
 
     return 200;
   };
 
   const getBubbleRepulseDistance = () => {
-    if (isSmallerThan600) {
-      return 100;
-    }
-
     if (isSmallerThan1024) {
-      return 200;
+      return 0;
     }
 
     return 300;
