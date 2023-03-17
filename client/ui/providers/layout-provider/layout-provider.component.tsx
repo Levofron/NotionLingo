@@ -1,12 +1,17 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { Box } from '@ui/atoms';
 import { BackToTopButton } from '@ui/organisms';
 
+import { scrollToTop, useRouter } from '@infrastructure/utils';
+
 import { ILayoutProviderProps } from './layout-provider.types';
 
 export const LayoutProvider: FC<ILayoutProviderProps> = ({ children }): JSX.Element => {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => scrollToTop(containerRef.current), [router.pathname]);
 
   return (
     <>

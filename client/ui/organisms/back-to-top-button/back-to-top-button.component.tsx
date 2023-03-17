@@ -5,19 +5,13 @@ import { BsArrowUpCircle } from 'react-icons/bs';
 
 import { MotionIconButton } from '@ui/molecules';
 
-import { useEventListener } from '@infrastructure/utils';
+import { scrollToTop, useEventListener } from '@infrastructure/utils';
 
 import { IBackToTopButtonProps } from './back-to-top-button.types';
 
 export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JSX.Element => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-
-  const scrollToTop = () =>
-    containerRef?.current?.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
 
   useEventListener(
     'scroll',
@@ -26,6 +20,8 @@ export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JS
     },
     { element: containerRef?.current! },
   );
+
+  const handleClick = () => scrollToTop(containerRef?.current, 'smooth');
 
   return (
     <AnimatePresence>
@@ -39,7 +35,7 @@ export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JS
             position: 'fixed',
             right: isSmallerThan800 ? 25 : 50,
           }}
-          onClick={scrollToTop}
+          onClick={handleClick}
         />
       )}
     </AnimatePresence>
