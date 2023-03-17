@@ -28,11 +28,11 @@ export const SidebarContent: FC<ISidebarContentProps> = ({
         backdropFilter: 'saturate(180%) blur(5px)',
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
-      height={{ base: 'calc(100vh - 58px)', sm: 'calc(100vh - 66px)', md: 'calc(100vh - 74px)' }}
+      height={{ base: 'calc(100vh - 57px)', sm: 'calc(100vh - 65px)', md: 'calc(100vh - 73px)' }}
       left={0}
       p={{ base: 2, sm: 3 }}
       position="fixed"
-      top={{ base: 58, sm: 66, md: 74 }}
+      top={{ base: 57, sm: 65, md: 73 }}
       w="full"
       zIndex={20}
       {...restProps}
