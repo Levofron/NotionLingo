@@ -1,4 +1,4 @@
-import { Provider, Session, User } from '@supabase/supabase-js';
+import { Session, User, UserCredentials } from '@supabase/supabase-js';
 
 import {
   ILogoutResponse,
@@ -12,5 +12,5 @@ export interface ISupabaseApi {
   getUser: () => User | null;
   logout: () => Promise<ILogoutResponse>;
   onAuthStateChange: (callback: TOnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
-  signIn: (provider: Provider) => Promise<IOAuthResponse>;
+  signIn: (userCredentials: UserCredentials) => Promise<IOAuthResponse>;
 }

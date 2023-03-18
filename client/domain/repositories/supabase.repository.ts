@@ -10,7 +10,7 @@ import {
 export interface ISupabaseRepository {
   getSession: () => Session | null;
   getUser: () => User | null;
-  loginViaGoogle: () => Promise<IOAuthResponse>;
+  loginViaMagicLink: (email: string) => Promise<IOAuthResponse>;
   logout: () => Promise<ILogoutResponse>;
   onAuthStateChange: (callback: TOnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
 }

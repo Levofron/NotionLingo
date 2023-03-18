@@ -30,7 +30,7 @@ describe('getSupabaseApi function', () => {
 
     const supabaseApi = getSupabaseApi(supabaseInstanceMock);
 
-    supabaseApi.signIn('google');
+    supabaseApi.signIn({ provider: 'google' });
 
     expect(supabaseInstanceMock.auth.signIn).toHaveBeenCalledWith({
       provider: 'google',

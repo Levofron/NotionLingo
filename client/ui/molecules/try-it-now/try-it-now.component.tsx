@@ -5,12 +5,12 @@ import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@
 import { useRouter, useUser } from '@infrastructure/utils';
 
 export const TryItNow: FC = (): JSX.Element => {
-  const { redirectToDashboard, redirectToOnboarding } = useRouter();
-  const { isLoading, loginViaGoogle, user } = useUser();
+  const { redirectToDashboard, redirectToLogin, redirectToOnboarding } = useRouter();
+  const { isLoading, user } = useUser();
 
   const handleActionButtonClick = () => {
     if (!user) {
-      return loginViaGoogle();
+      return redirectToLogin();
     }
 
     if (user.hasNotionData === true) {

@@ -11,8 +11,10 @@ import { useRouter } from '@infrastructure/utils';
 
 import { IUserProviderProps } from './user-provider.types';
 
+const loginViaMagicLink = (email: string) => supabaseModule.loginViaMagicLink(email);
+
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
-  const { redirectToHome, redirectToOnboarding } = useRouter();
+  const { redirectToHome } = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>();
   const [user, setUser] = useState<(User & IProfile) | null>(null);
@@ -54,12 +56,6 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     redirectToHome();
   };
 
-  const loginViaGoogle = async () => {
-    await supabaseModule.loginViaGoogle();
-
-    redirectToOnboarding();
-  };
-
   const setNotionData = (hasNotionData: boolean) =>
     setUser((_prevUser) => ({
       ..._prevUser!,
@@ -71,7 +67,7 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     logout,
     isLoading,
     setNotionData,
-    loginViaGoogle,
+    loginViaMagicLink,
     isUserAuthenticated: !!user,
   });
 

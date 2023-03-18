@@ -1,5 +1,6 @@
 export * as homePage from './home/home.page';
 export * as termsPage from './terms/terms.page';
+export * as loginPage from './login/login.page';
 export * as donatePage from './donate/donate.page';
 export * as offlinePage from './offline/offline.page';
 export * as addWordPage from './add-word/add-word.page';

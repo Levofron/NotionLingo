@@ -3,7 +3,7 @@ import { ISupabaseApi } from '@api/supabase/supabase.types';
 import { ISupabaseRepository } from '@domain/repositories/supabase.repository';
 
 export const getSupabaseRepository = (supabaseApi: ISupabaseApi): ISupabaseRepository => ({
-  loginViaGoogle: () => supabaseApi.signIn('google'),
+  loginViaMagicLink: (email) => supabaseApi.signIn({ email }),
   logout: () => supabaseApi.logout(),
   getUser: () => supabaseApi.getUser(),
   getSession: () => supabaseApi.getSession(),

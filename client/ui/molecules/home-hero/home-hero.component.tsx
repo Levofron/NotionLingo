@@ -1,24 +1,23 @@
-import { useRouter } from 'next/router';
 import { FC, useMemo } from 'react';
 
 import { Button, Container, Flex, Heading, Highlight, Stack, Text } from '@ui/atoms';
 
 import { ERoutes } from '@infrastructure/types/routes';
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 import { ParticlesBackgroundLayout } from '..';
 import { IHomeHeroProps } from './home-hero.types';
 
 export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
-  const router = useRouter();
-  const { isLoading, loginViaGoogle, user } = useUser();
+  const { push, redirectToLogin } = useRouter();
+  const { isLoading, user } = useUser();
 
   const handleActionButtonClick = () => {
     if (!user) {
-      return loginViaGoogle();
+      return redirectToLogin();
     }
 
-    router.push(user.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+    push(user.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
   };
 
   const buttonLabel = useMemo(() => {
