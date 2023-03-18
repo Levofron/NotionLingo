@@ -4,7 +4,7 @@ import { TfiClose } from 'react-icons/tfi';
 
 import { Button, Container, Flex, Heading, IconButton } from '@ui/atoms';
 
-import { useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/utils';
 
 import { IHeaderProps } from './header.types';
 
@@ -14,7 +14,8 @@ export const Header: FC<IHeaderProps> = ({
   onOpen,
   ...restProps
 }): JSX.Element => {
-  const { isLoading, isUserAuthenticated, loginViaGoogle, logout } = useUser();
+  const { redirectToLogin } = useRouter();
+  const { isLoading, isUserAuthenticated, logout } = useUser();
 
   return (
     <Flex
@@ -47,7 +48,7 @@ export const Header: FC<IHeaderProps> = ({
         <Button
           isLoading={isLoading}
           width={{ base: '80px', sm: '100px' }}
-          onClick={isUserAuthenticated ? logout : loginViaGoogle}
+          onClick={isUserAuthenticated ? logout : redirectToLogin}
         >
           {isUserAuthenticated ? 'Sign Out' : 'Sign In'}
         </Button>

@@ -9,17 +9,29 @@ import { IRestRepository } from '../repositories/rest.repository';
 import { ISupabaseRepository } from '../repositories/supabase.repository';
 import {
   IUseCaseWithSingleParam,
+  IUseCaseWithSingleParamAndPromiseResult,
   IUseCaseWithoutParams,
   IUseCaseWithoutParamsAndPromiseResult,
 } from './common.types';
 
-// loginViaGoogleUseCase
-export type TLoginViaGoogleUseCase = IUseCaseWithoutParamsAndPromiseResult<IOAuthResponse>;
+// loginViaMagicLinkUseCase
+export type TLoginViaMagicLinkUseCase = IUseCaseWithSingleParamAndPromiseResult<
+  string,
+  IOAuthResponse
+>;
 
-export const loginViaGoogleUseCase = (
+export const loginViaMagicLinkUseCase = (
   supabaseRepository: ISupabaseRepository,
-): TLoginViaGoogleUseCase => ({
-  execute: () => supabaseRepository.loginViaGoogle(),
+): TLoginViaMagicLinkUseCase => ({
+  execute: async (email) => {
+    const response = await supabaseRepository.loginViaMagicLink(email);
+
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+
+    return response;
+  },
 });
 
 // logoutUseCase

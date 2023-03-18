@@ -12,15 +12,15 @@ describe('getSupabaseRepository function', () => {
     const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
     expect(supabaseRepository).toEqual({
-      loginViaGoogle: expect.any(Function),
       logout: expect.any(Function),
       getUser: expect.any(Function),
       getSession: expect.any(Function),
       onAuthStateChange: expect.any(Function),
+      loginViaMagicLink: expect.any(Function),
     });
   });
 
-  describe('loginViaGoogle function', () => {
+  describe('loginViaMagicLink function', () => {
     it('should call signIn function with proper params', async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const supabaseApiMock: any = {
@@ -29,9 +29,9 @@ describe('getSupabaseRepository function', () => {
 
       const supabaseRepository = getSupabaseRepository(supabaseApiMock);
 
-      await supabaseRepository.loginViaGoogle();
+      await supabaseRepository.loginViaMagicLink('test');
 
-      expect(supabaseApiMock.signIn).toHaveBeenCalledWith('google');
+      expect(supabaseApiMock.signIn).toHaveBeenCalledWith({ email: 'test' });
     });
   });
 

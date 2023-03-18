@@ -6,7 +6,7 @@ describe('restModule object', () => {
       logout: expect.any(Function),
       getUser: expect.any(Function),
       getSession: expect.any(Function),
-      loginViaGoogle: expect.any(Function),
+      loginViaMagicLink: expect.any(Function),
       onAuthStateChange: expect.any(Function),
     });
   });

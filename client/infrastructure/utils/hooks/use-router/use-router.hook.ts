@@ -27,6 +27,8 @@ export const useRouter = () => {
 
   const redirectToHome = useCallback(() => redirectTo(ERoutes.HOME), [redirectTo]);
 
+  const redirectToLogin = useCallback(() => redirectTo(ERoutes.LOGIN), [redirectTo]);
+
   const redirectToDashboard = useCallback(() => redirectTo(ERoutes.DASHBOARD), [redirectTo]);
 
   const redirectToOnboarding = useCallback(() => redirectTo(ERoutes.ONBOARDING), [redirectTo]);
@@ -44,6 +46,7 @@ export const useRouter = () => {
     isDashboard,
     isOnboarding,
     redirectToHome,
+    redirectToLogin,
     back: router.back,
     push: router.push,
     query: router.query,

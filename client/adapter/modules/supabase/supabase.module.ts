@@ -7,7 +7,7 @@ import { getSupabaseApi } from '@api/supabase/supabase.api';
 import {
   getSessionUseCase,
   getUserUseCase,
-  loginViaGoogleUseCase,
+  loginViaMagicLinkUseCase,
   logoutUseCase,
   onAuthStateChangeUseCase,
 } from '@domain/use-cases/supabase.use-cases';
@@ -28,6 +28,6 @@ export const supabaseModule = {
   getUser: getUserUseCase(supabaseRepository).execute,
   getSession: getSessionUseCase(supabaseRepository).execute,
   logout: logoutUseCase(supabaseRepository, restRepository).execute,
-  loginViaGoogle: loginViaGoogleUseCase(supabaseRepository).execute,
+  loginViaMagicLink: loginViaMagicLinkUseCase(supabaseRepository).execute,
   onAuthStateChange: onAuthStateChangeUseCase(supabaseRepository).execute,
 };
