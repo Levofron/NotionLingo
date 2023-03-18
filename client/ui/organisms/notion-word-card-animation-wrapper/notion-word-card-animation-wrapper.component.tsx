@@ -24,15 +24,15 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
   const rotateWidth = useMemo(() => Math.max(windowSize.width, 700), [windowSize.width]);
 
   const getSensitive = () => {
-    if (windowSize.width < 320) {
+    if (windowSize.width < 400) {
+      return 100;
+    }
+
+    if (windowSize.width < 1000) {
       return 175;
     }
 
-    if (windowSize.width < 480) {
-      return 250;
-    }
-
-    return 300;
+    return 250;
   };
 
   const sensitive = useMemo(getSensitive, [windowSize.width]);
@@ -40,8 +40,8 @@ export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperP
   const x = useMotionValue(0);
   const animControls = useAnimation();
   const rotate = useTransform(x, [-rotateWidth, rotateWidth], [-35, 35]);
-  const leftLearnedLabelOpacity = useTransform(x, [100, sensitive], [0, 200]);
-  const rightLearnedLabelOpacity = useTransform(x, [-100, -sensitive], [0, 200]);
+  const leftLearnedLabelOpacity = useTransform(x, [90, sensitive], [0, 200]);
+  const rightLearnedLabelOpacity = useTransform(x, [-90, -sensitive], [0, 200]);
 
   useEffect(() => {
     if (isDraggable) {
