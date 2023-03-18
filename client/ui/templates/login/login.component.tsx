@@ -31,7 +31,6 @@ export const LoginTemplate = (): JSX.Element => {
 
           toast.success({
             description: 'Check your email for the login link!',
-            status: 'success',
             title: 'Email sent',
             onCloseComplete: window.close,
           });
@@ -39,7 +38,6 @@ export const LoginTemplate = (): JSX.Element => {
         .catch((_error) =>
           toast.error({
             description: _error.message,
-            status: 'error',
             title: 'Error',
           }),
         )
