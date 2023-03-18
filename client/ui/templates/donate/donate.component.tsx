@@ -9,7 +9,7 @@ export const DonateTemplate = (): JSX.Element => (
   <ParticlesBackgroundLayout height="100%">
     <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
       <Flex alignItems="center" height="100%" justifyContent="center">
-        <Card maxW="400px" p={{ base: 2, sm: 3, md: 4 }}>
+        <Card maxW="400px" minW={{ base: '300px', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
           <Heading fontSize="2xl" mb={2}>
             Donations
           </Heading>
@@ -34,7 +34,6 @@ export const DonateTemplate = (): JSX.Element => (
             flexDirection={{ base: 'column', sm: 'row' }}
             gap={{ base: 3, sm: 0 }}
             justifyContent="space-around"
-            mb={4}
           >
             <ChakraNextLink href={BUY_ME_A_COFFEE_LINK} target="_blank">
               <NextImage
@@ -54,9 +53,6 @@ export const DonateTemplate = (): JSX.Element => (
               />
             </ChakraNextLink>
           </Flex>
-          <Text color="gray.900" fontWeight="bold" textAlign="center">
-            I appreciate your support!
-          </Text>
         </Card>
       </Flex>
     </Container>
