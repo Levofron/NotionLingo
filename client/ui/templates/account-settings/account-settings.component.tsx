@@ -101,7 +101,12 @@ export const AccountSettingsTemplate = (): JSX.Element => {
       />
       <Container height="100%" maxW="6xl" position="relative" pt={{ base: 58, sm: 66, md: 74 }}>
         <Flex alignItems="center" height="100%" justifyContent="center">
-          <Card alignItems="center" display="flex" p={{ base: 2, sm: 3, md: 4 }}>
+          <Card
+            alignItems="center"
+            display="flex"
+            minW={{ base: '300px', md: '350px' }}
+            p={{ base: 4, sm: 6, md: 8 }}
+          >
             <Avatar
               border="1px solid black"
               borderRadius={0}
