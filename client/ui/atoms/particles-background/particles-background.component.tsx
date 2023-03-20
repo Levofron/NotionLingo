@@ -78,7 +78,7 @@ export const ParticlesBackground = () => {
             },
           },
           size: {
-            value: 3,
+            value: 2,
             random: true,
             anim: {
               speed: 4,
@@ -91,7 +91,7 @@ export const ParticlesBackground = () => {
           move: {
             enable: true,
             random: true,
-            speed: 1,
+            speed: 0.6,
             direction: 'top',
             out_mode: 'out',
           },
