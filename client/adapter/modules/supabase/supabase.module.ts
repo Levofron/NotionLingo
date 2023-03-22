@@ -10,7 +10,7 @@ import {
   loginViaMagicLinkUseCase,
   logoutUseCase,
   onAuthStateChangeUseCase,
-} from '@domain/use-cases/supabase.use-cases';
+} from '@domain/supabase/supabase.use-cases';
 
 import { axiosInstance } from '@infrastructure/config';
 

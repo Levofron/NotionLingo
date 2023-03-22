@@ -23,7 +23,7 @@ import {
   setNotionDatabaseIdUseCase,
   setSupabaseCookieUseCase,
   updateNotionWordUseCase,
-} from '@domain/use-cases/rest.use-cases';
+} from '@domain/rest/rest.use-cases';
 
 import { axiosInstance } from '@infrastructure/config';
 

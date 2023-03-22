@@ -16,12 +16,12 @@ import {
 
 import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
 
+import { removeNotionWordFromArray, updateRecordInNotionWordArray } from '@domain/rest/helpers';
 import {
   IIncreaseDailyStreak,
   INotionWord,
   IUpdateNotionWordRequest,
-} from '@domain/entities/rest.types';
-import { removeNotionWordFromArray, updateRecordInNotionWordArray } from '@domain/utils/rest';
+} from '@domain/rest/rest.types';
 
 import { useToast, useUser } from '@infrastructure/utils';
 

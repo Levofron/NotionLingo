@@ -1,6 +1,6 @@
-import { INotionWord } from '@domain/entities/rest.types';
+import { INotionWord } from '@domain/rest/rest.types';
 
-import { findNotionWordIndexById } from '../find-notion-word-index-by-id/find-notion-word-index-by-id.function';
+import { findNotionWordIndexById } from '..';
 
 export const removeNotionWordFromArray = (
   notionWords: INotionWord[],

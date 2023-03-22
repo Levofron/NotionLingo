@@ -1,6 +1,6 @@
-import { ISetItemParams } from '../entities/local-storage.types';
-import { ILocalStorageRepository } from '../repositories/local-storage.repository';
-import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from './common.types';
+import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../use-cases.types';
+import { ISetItemParams } from './local-storage.entities';
+import { ILocalStorageRepository } from './local-storage.repository';
 
 // isSupportedUseCase
 export type TIsSupportedUseCase = IUseCaseWithoutParams<boolean>;

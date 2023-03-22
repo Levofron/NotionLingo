@@ -1,7 +1,7 @@
 import { ILocalStorageApi } from '@api/local-storage/local-storage.types';
 import { ISpeechSynthesisApi } from '@api/speech-synthesis/speech-synthesis.types';
 
-import { ISpeechSynthesisRepository } from '@domain/repositories/speech-synthesis.repository';
+import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
 
 import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,

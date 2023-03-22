@@ -1,7 +1,6 @@
-import { INotionWord, IUpdateNotionWordRequest } from '@domain/entities/rest.types';
+import { INotionWord, IUpdateNotionWordRequest } from '@domain/rest/rest.types';
 
-import { findNotionWordById } from '../find-notion-word-by-id/find-notion-word-by-id.function';
-import { findNotionWordIndexById } from '../find-notion-word-index-by-id/find-notion-word-index-by-id.function';
+import { findNotionWordById, findNotionWordIndexById } from '..';
 
 export const updateRecordInNotionWordArray = (
   notionWords: INotionWord[],

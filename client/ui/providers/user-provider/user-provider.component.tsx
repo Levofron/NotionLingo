@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLoggedProfile, useSetSupabaseCookie } from '@adapter/hooks';
 import { supabaseModule } from '@adapter/modules';
 
-import { IProfile } from '@domain/entities/rest.types';
+import { IProfile } from '@domain/rest/rest.types';
 
 import { UserContext } from '@infrastructure/context';
 import { useRouter } from '@infrastructure/utils';

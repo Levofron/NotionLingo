@@ -1,4 +1,4 @@
-import { TNotionTableColumn } from '@domain/entities/rest.types';
+import { TNotionTableColumn } from '@domain/rest/rest.types';
 
 import { functionImportTest } from '@infrastructure/utils';
 

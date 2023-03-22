@@ -1,6 +1,6 @@
 import { IRestApi } from '@api/rest/rest.types';
 
-import { IRestRepository } from '@domain/repositories/rest.repository';
+import { IRestRepository } from '@domain/rest/rest.repository';
 
 import {
   addImageUrlForEachNotionWordTransformator,

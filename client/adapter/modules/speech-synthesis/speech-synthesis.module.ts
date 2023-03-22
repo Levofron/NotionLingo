@@ -17,7 +17,7 @@ import {
   setVoiceUseCase,
   setVolumeUseCase,
   speakUseCase,
-} from '@domain/use-cases/speech-synthesis.use-cases';
+} from '@domain/speech-synthesis/speech-synthesis.use-cases';
 
 // apis
 const localStorageApi = getLocalStorageApi();

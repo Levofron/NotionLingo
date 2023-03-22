@@ -1,4 +1,4 @@
-import { IContact } from '@domain/entities/rest.types';
+import { IContact } from '@domain/rest/rest.types';
 
 import { functionImportTest } from '@infrastructure/utils';
 
