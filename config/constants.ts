@@ -21,7 +21,7 @@ export const { CRYPTO_ALGORITHM, CRYPTO_SECRET_KEY, SUPABASE_SERVICE_ROLE } = pr
 export const GITHUB_LINK = 'https://github.com/playerony';
 export const TWITTER_LINK = 'https://twitter.com/wojtasinskipawe';
 export const LINKEDIN_LINK = 'https://linkedin.com/in/pwojtasinski';
-export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/playerony';
+export const BUY_ME_A_COFFEE_LINK = 'https://www.buymeacoffee.com/pawwoj';
 export const PAYPAL_LINK = 'https://www.paypal.com/donate/?hosted_button_id=XQC5QN5G4JJW2';
 
 export const DEFAULT_SPEECH_SYNTHESIS_PITCH = 1;
