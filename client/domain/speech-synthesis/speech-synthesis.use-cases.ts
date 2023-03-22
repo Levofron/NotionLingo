@@ -4,8 +4,8 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
 } from '@config/constants';
 
-import { ISpeechSynthesisRepository } from '../repositories/speech-synthesis.repository';
-import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from './common.types';
+import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../use-cases.types';
+import { ISpeechSynthesisRepository } from './speech-synthesis.repository';
 
 // isSupportedUseCase
 export type TIsSupportedUseCase = IUseCaseWithoutParams<boolean>;

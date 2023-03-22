@@ -6,7 +6,7 @@ import { InputControl, SelectControl } from '@ui/molecules';
 
 import { useCreateWord } from '@adapter/hooks';
 
-import { getInitialFormValuesFromTableColumns } from '@domain/utils/rest';
+import { getInitialFormValuesFromTableColumns } from '@domain/rest/helpers';
 
 import { ERoutes } from '@infrastructure/types/routes';
 import { useRouter, useToast } from '@infrastructure/utils';

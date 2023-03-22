@@ -1,10 +1,4 @@
-import {
-  IContact,
-  IHash,
-  INotionDatabase,
-  INotionWord,
-  IProfile,
-} from '@domain/entities/rest.types';
+import { IContact, IHash, INotionDatabase, INotionWord, IProfile } from '@domain/rest/rest.types';
 
 import { functionImportTest } from '@infrastructure/utils';
 

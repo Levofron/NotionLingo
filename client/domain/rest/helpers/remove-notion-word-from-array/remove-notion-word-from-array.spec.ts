@@ -1,4 +1,4 @@
-import { INotionWord } from '@domain/entities/rest.types';
+import { INotionWord } from '@domain/rest/rest.types';
 
 import { functionImportTest } from '@infrastructure/utils';
 

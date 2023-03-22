@@ -1,18 +1,18 @@
 import { Session, User } from '@supabase/supabase-js';
 
-import {
-  IOAuthResponse,
-  IOnAuthStateChangeResponse,
-  TOnAuthStateChangeCallback,
-} from '../entities/supabase.types';
-import { IRestRepository } from '../repositories/rest.repository';
-import { ISupabaseRepository } from '../repositories/supabase.repository';
+import { IRestRepository } from '../rest/rest.repository';
 import {
   IUseCaseWithSingleParam,
   IUseCaseWithSingleParamAndPromiseResult,
   IUseCaseWithoutParams,
   IUseCaseWithoutParamsAndPromiseResult,
-} from './common.types';
+} from '../use-cases.types';
+import {
+  IOAuthResponse,
+  IOnAuthStateChangeResponse,
+  TOnAuthStateChangeCallback,
+} from './supabase.entities';
+import { ISupabaseRepository } from './supabase.repository';
 
 // loginViaMagicLinkUseCase
 export type TLoginViaMagicLinkUseCase = IUseCaseWithSingleParamAndPromiseResult<

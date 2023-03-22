@@ -1,6 +1,6 @@
 import { ILocalStorageApi } from '@api/local-storage/local-storage.types';
 
-import { ILocalStorageRepository } from '@domain/repositories/local-storage.repository';
+import { ILocalStorageRepository } from '@domain/local-storage/local-storage.repository';
 
 export const getLocalStorageRepository = (
   localStorageApi: ILocalStorageApi,

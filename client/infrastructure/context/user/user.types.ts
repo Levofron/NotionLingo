@@ -1,7 +1,7 @@
 import { User } from '@supabase/supabase-js';
 
-import { IProfile } from '@domain/entities/rest.types';
-import { IOAuthResponse } from '@domain/entities/supabase.types';
+import { IProfile } from '@domain/rest/rest.types';
+import { IOAuthResponse } from '@domain/supabase/supabase.entities';
 
 export interface IUserContextValue {
   isLoading: boolean | undefined;

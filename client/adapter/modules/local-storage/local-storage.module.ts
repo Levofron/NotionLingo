@@ -7,7 +7,7 @@ import {
   isSupportedUseCase,
   removeItemUseCase,
   setItemUseCase,
-} from '@domain/use-cases/local-storage.use-cases';
+} from '@domain/local-storage/local-storage.use-cases';
 
 // apis
 const localStorageApi = getLocalStorageApi();

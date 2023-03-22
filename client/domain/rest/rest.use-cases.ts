@@ -1,6 +1,11 @@
-import { ISpeechSynthesisRepository } from '@domain/repositories/speech-synthesis.repository';
-import { ISupabaseRepository } from '@domain/repositories/supabase.repository';
+import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
+import { ISupabaseRepository } from '@domain/supabase/supabase.repository';
 
+import {
+  IUseCaseWithSingleParamAndPromiseResult,
+  IUseCaseWithoutParamsAndPromiseResult,
+} from '../use-cases.types';
+import { IRestRepository } from './rest.repository';
 import {
   IContact,
   IDictionarySuggestions,
@@ -11,12 +16,7 @@ import {
   IProfile,
   IUpdateNotionWordRequest,
   TNotionTableColumn,
-} from '../entities/rest.types';
-import { IRestRepository } from '../repositories/rest.repository';
-import {
-  IUseCaseWithSingleParamAndPromiseResult,
-  IUseCaseWithoutParamsAndPromiseResult,
-} from './common.types';
+} from './rest.types';
 
 // healthCheckUseCase
 export type THealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<string>;

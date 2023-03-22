@@ -1,7 +1,7 @@
 import { Session } from '@supabase/supabase-js';
 import { AxiosInstance } from 'axios';
 
-import { IContact } from '@domain/entities/rest.types';
+import { IContact } from '@domain/rest/rest.types';
 
 import { ERestEndpoints, IRestApi } from './rest.types';
 

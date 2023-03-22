@@ -1,8 +1,8 @@
-import { INotionWord } from '@domain/entities/rest.types';
+import { INotionWord } from '@domain/rest/rest.types';
 
 import { functionImportTest } from '@infrastructure/utils';
 
-import { findNotionWordIndexById } from './find-notion-word-index-by-id.function';
+import { findNotionWordById } from './find-notion-word-by-id.function';
 
 const notionWordMock: INotionWord = {
   id: 'id',
@@ -16,8 +16,8 @@ const notionWordMock: INotionWord = {
   exampleSentenceSuggestion: 'exampleSentenceSuggestion',
 };
 
-describe('findNotionWordIndexById function', () => {
-  functionImportTest(findNotionWordIndexById);
+describe('findNotionWordById function', () => {
+  functionImportTest(findNotionWordById);
 
   it('should return undefined if no notion word is found', () => {
     const notionWords = [
@@ -25,9 +25,9 @@ describe('findNotionWordIndexById function', () => {
       { ...notionWordMock, id: '2' },
     ];
     const notionWordId = '3';
-    const result = findNotionWordIndexById(notionWords, notionWordId);
+    const result = findNotionWordById(notionWords, notionWordId);
 
-    expect(result).toEqual(-1);
+    expect(result).toBeUndefined();
   });
 
   it('should return the notion word if found', () => {
@@ -36,8 +36,8 @@ describe('findNotionWordIndexById function', () => {
       { ...notionWordMock, id: '2' },
     ];
     const notionWordId = '2';
-    const result = findNotionWordIndexById(notionWords, notionWordId);
+    const result = findNotionWordById(notionWords, notionWordId);
 
-    expect(result).toEqual(1);
+    expect(result).toEqual(notionWords[1]);
   });
 });
