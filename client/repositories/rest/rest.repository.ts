@@ -6,7 +6,7 @@ import {
   addImageUrlForEachNotionWordTransformator,
   formatDictionarySuggestions,
   formatRandomNotionWordsTransformator,
-} from './utils';
+} from './helpers';
 
 const delay = (time: number) =>
   new Promise((resolve) => {
@@ -60,12 +60,8 @@ export const getRestRepository = (restApi: IRestApi): IRestRepository => ({
 
     return data;
   },
-  resetNotionIntegration: async () => {
-    await restApi.resetNotionIntegration();
-  },
-  deleteProfile: async () => {
-    await restApi.deleteProfile();
-  },
+  resetNotionIntegration: () => restApi.resetNotionIntegration(),
+  deleteProfile: () => restApi.deleteProfile(),
   getDictionarySuggestions: async (word) => {
     const { data } = await restApi.getDictionarySuggestions(word);
 
