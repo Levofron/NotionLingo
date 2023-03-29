@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 
 import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@ui/atoms';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/hooks';
 
 export const TryItNow: FC = (): JSX.Element => {
   const { redirectToDashboard, redirectToLogin, redirectToOnboarding } = useRouter();

@@ -7,7 +7,7 @@ import { ConfirmationModal, IConfirmationModalRef, ParticlesBackgroundLayout } f
 
 import { useDeleteProfile, useResetIntegration } from '@adapter/hooks';
 
-import { useCountdown, useRouter, useToast, useUser } from '@infrastructure/utils';
+import { useCountdown, useRouter, useToast, useUser } from '@infrastructure/hooks';
 
 export const AccountSettingsTemplate = (): JSX.Element => {
   const toast = useToast();

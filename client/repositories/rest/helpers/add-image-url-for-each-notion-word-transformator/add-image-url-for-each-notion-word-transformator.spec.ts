@@ -1,6 +1,6 @@
 import { INotionWordResponseRecord } from '@api/rest/rest.types';
 
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { addImageUrlForEachNotionWordTransformator } from './add-image-url-for-each-notion-word-transformator.function';
 

@@ -9,8 +9,8 @@ import { AddWordTemplate } from '@ui/templates';
 
 import { useTableColumns } from '@adapter/hooks';
 
+import { useRouter } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/types/routes';
-import { useRouter } from '@infrastructure/utils';
 
 const AddWordPageComponent = (): JSX.Element => {
   const { redirectToHome } = useRouter();

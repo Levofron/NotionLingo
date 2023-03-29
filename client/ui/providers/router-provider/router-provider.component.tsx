@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react';
 import { localStorageModule } from '@adapter/modules';
 
 import { RouterContext } from '@infrastructure/context';
-import { useIsFirstRender } from '@infrastructure/utils';
+import { useIsFirstRender } from '@infrastructure/hooks';
 
 import { IRouterProviderProps } from './router-provider.types';
 

@@ -7,7 +7,7 @@ import { supabaseModule } from '@adapter/modules';
 import { IProfile } from '@domain/rest/rest.types';
 
 import { UserContext } from '@infrastructure/context';
-import { useRouter } from '@infrastructure/utils';
+import { useRouter } from '@infrastructure/hooks';
 
 import { IUserProviderProps } from './user-provider.types';
 

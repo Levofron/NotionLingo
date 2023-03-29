@@ -3,7 +3,7 @@ import { FullScreenLoader, ParticlesBackgroundLayout } from '@ui/molecules';
 import { SidebarWithHeader } from '@ui/organisms';
 import { FindWordTemplate } from '@ui/templates';
 
-import { useUser } from '@infrastructure/utils';
+import { useUser } from '@infrastructure/hooks';
 
 export const FindWordPage = (): JSX.Element => {
   const { isLoading, isUserAuthenticated } = useUser();

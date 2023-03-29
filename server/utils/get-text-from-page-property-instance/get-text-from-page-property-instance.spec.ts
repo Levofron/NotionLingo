@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { SUPPORTED_TYPE_COLUMN_NAMES, SUPPORTED_WORD_COLUMN_NAMES } from '@config/constants';
 

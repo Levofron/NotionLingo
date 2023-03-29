@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import { ChakraNextLink, Heading } from '@ui/atoms';
 
-import { useRouter } from '@infrastructure/utils';
+import { useRouter } from '@infrastructure/hooks';
 
 import { INavigationItemProps } from './navigation-item.types';
 

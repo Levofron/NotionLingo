@@ -5,7 +5,7 @@ import { DisplayError, ParticlesBackgroundLayout } from '@ui/molecules';
 
 import { useHealthCheck } from '@adapter/hooks';
 
-import { useRouter, useToast } from '@infrastructure/utils';
+import { useRouter, useToast } from '@infrastructure/hooks';
 
 export const OfflineTemplate = (): JSX.Element => {
   const toast = useToast();

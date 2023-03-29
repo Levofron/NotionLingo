@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { fillUpMissedLocalStorageFields } from './fill-up-missed-local-storage-fields.function';
 

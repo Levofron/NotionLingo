@@ -1,6 +1,6 @@
 import { IContact } from '@domain/rest/rest.types';
 
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { getRestRepository } from './rest.repository';
 

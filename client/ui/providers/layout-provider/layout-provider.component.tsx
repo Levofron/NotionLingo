@@ -3,7 +3,8 @@ import { FC, useEffect, useRef } from 'react';
 import { Box } from '@ui/atoms';
 import { BackToTopButton } from '@ui/organisms';
 
-import { scrollToTop, useRouter } from '@infrastructure/utils';
+import { scrollToTop } from '@infrastructure/functions';
+import { useRouter } from '@infrastructure/hooks';
 
 import { ILayoutProviderProps } from './layout-provider.types';
 

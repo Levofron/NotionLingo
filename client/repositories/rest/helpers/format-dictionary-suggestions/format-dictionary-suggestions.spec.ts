@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { formatDictionarySuggestions } from './format-dictionary-suggestions.function';
 

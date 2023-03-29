@@ -1,6 +1,6 @@
 import { IDictionarySuggestions } from '@domain/rest/rest.types';
 
-import { cleanUpString } from '@infrastructure/utils';
+import { cleanUpString } from '@infrastructure/functions';
 
 export const formatDictionarySuggestions = ({
   suggestions,

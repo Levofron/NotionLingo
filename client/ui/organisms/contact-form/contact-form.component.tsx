@@ -6,7 +6,7 @@ import { InputControl, TextareaControl } from '@ui/molecules';
 import { useSendContactFormData } from '@adapter/hooks';
 import { localStorageModule } from '@adapter/modules';
 
-import { useToast } from '@infrastructure/utils';
+import { useToast } from '@infrastructure/hooks';
 
 import { contactFormValidationSchema } from './contact-form.defaults';
 

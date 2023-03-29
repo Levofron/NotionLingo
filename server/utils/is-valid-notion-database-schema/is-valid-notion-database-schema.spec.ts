@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { isValidNotionDatabaseSchema } from './is-valid-notion-database-schema.function';
 

@@ -7,15 +7,10 @@ import { InputControl, MotionIconButton } from '@ui/molecules';
 
 import { useDictionarySuggestions } from '@adapter/hooks';
 
+import { debounce } from '@infrastructure/functions';
+import { isString } from '@infrastructure/guards';
+import { useCopyToClipboard, useIsFirstRender, useRouter, useToast } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/types/routes';
-import {
-  debounce,
-  isString,
-  useCopyToClipboard,
-  useIsFirstRender,
-  useRouter,
-  useToast,
-} from '@infrastructure/utils';
 
 import { IFindWordTemplateProps } from './find-word.types';
 
