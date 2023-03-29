@@ -7,7 +7,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) =>
   supabaseInstance.auth.api.setAuthCookie(req, res);
