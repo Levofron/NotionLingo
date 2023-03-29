@@ -1,19 +1,17 @@
-name: CI - pull request
+name: CI
 
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
-  pull-request:
-    runs-on: ${{ matrix.os }}
+  push:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
-        node-version: [16.x]
+        node-version: [18.x]
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -21,11 +19,22 @@ jobs:
           node-version: "${{ matrix.node-version }}"
           cache: "yarn"
 
+      - uses: actions/cache@v2
+        with:
+          path: "~/.cache/yarn"
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
-      - name: Typecheck
-        run: yarn typecheck
+      - name: Typecheck, format check, and lint
+        run: |
+          yarn typecheck &
+          yarn format:check &
+          yarn lint &
+          wait
+      - name: Test
+        run: yarn test:ci
 
-      - name: Prettier
-        run: yarn format:check
+      - name: Build
+        run: yarn build
