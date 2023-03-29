@@ -16,7 +16,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { getSupabaseService, supabaseInstance } from '@config/supabase/supabase.instance';
+import { getSupabaseService, supabaseInstance } from '@config/supabase.instance';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getUserFromRequest(req);

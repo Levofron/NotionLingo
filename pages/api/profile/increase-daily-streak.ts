@@ -17,7 +17,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 const updateProfileDetailsDecorator =
   (userId: string, currentDate: Date, res: NextApiResponse) => async (data: object) => {

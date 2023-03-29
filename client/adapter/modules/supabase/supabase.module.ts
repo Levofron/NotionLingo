@@ -14,7 +14,7 @@ import {
 
 import { axiosInstance } from '@infrastructure/config';
 
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 // apis
 const restApi = getRestApi(axiosInstance);

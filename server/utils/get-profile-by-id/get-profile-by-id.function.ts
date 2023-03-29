@@ -1,4 +1,4 @@
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 export const getProfileById = async (userId: string) => {
   const { data } = await supabaseInstance

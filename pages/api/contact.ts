@@ -9,7 +9,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const contactFormData = req.body;

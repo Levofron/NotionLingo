@@ -1,6 +1,6 @@
 import { functionImportTest } from '@infrastructure/utils';
 
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 import { assignRequestTokenToSupabaseSessionMiddleware } from './assign-request-token-to-supabase-session-middleware.function';
 

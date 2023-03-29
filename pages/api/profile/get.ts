@@ -13,7 +13,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { getSupabaseService } from '@config/supabase/supabase.instance';
+import { getSupabaseService } from '@config/supabase.instance';
 
 const getUserMetadataById = (userId: string) => {
   const supabaseService = getSupabaseService();

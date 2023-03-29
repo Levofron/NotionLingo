@@ -16,7 +16,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-import { supabaseInstance } from '@config/supabase/supabase.instance';
+import { supabaseInstance } from '@config/supabase.instance';
 
 const updateProfileNotionApiKey = async (userId: string, newNotionDatabaseId: string) =>
   supabaseInstance
