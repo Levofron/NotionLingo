@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 
 import { cleanUpString } from '@infrastructure/functions';
 
-import { EHttpStatusCode } from '@server/types/http-status-code';
+import { EHttpStatusCode } from '@server/http-status-code';
 import {
   dictionaryResponseToMeaningAndExampleArray,
   validateIfParametersExistsMiddleware,
