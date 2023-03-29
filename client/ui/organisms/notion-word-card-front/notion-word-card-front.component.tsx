@@ -7,7 +7,7 @@ import { Box, Button, Card, Flex, Heading, Icon, Text } from '@ui/atoms';
 
 import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
-import { useKeyPressMapper } from '@infrastructure/utils';
+import { useKeyPressMapper } from '@infrastructure/hooks';
 
 import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 

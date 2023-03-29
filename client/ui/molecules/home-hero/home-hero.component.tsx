@@ -2,8 +2,8 @@ import { FC, useMemo } from 'react';
 
 import { Button, Container, Flex, Heading, Highlight, Stack, Text } from '@ui/atoms';
 
+import { useRouter, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/types/routes';
-import { useRouter, useUser } from '@infrastructure/utils';
 
 import { ParticlesBackgroundLayout } from '..';
 import { IHomeHeroProps } from './home-hero.types';

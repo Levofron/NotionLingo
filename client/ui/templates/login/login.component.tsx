@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button, Card, Container, Flex, Heading } from '@ui/atoms';
 import { InputControl, ParticlesBackgroundLayout } from '@ui/molecules';
 
-import { useToast, useUser } from '@infrastructure/utils';
+import { useToast, useUser } from '@infrastructure/hooks';
 
 import { loginFormValidationSchema } from './login.defaults';
 

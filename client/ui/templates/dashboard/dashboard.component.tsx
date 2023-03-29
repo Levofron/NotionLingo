@@ -23,7 +23,7 @@ import {
   IUpdateNotionWordRequest,
 } from '@domain/rest/rest.types';
 
-import { useToast, useUser } from '@infrastructure/utils';
+import { useToast, useUser } from '@infrastructure/hooks';
 
 export const DashboardTemplate = (): JSX.Element => {
   const toast = useToast();

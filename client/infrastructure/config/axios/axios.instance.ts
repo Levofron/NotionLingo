@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
-import { hasOwnProperty } from '@infrastructure/utils';
+import { hasOwnProperty } from '@infrastructure/guards';
 
 import { API_ROUTE_SECRET, DEFAULT_ERROR_MESSAGE } from '@config/constants';
 

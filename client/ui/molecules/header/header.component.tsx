@@ -4,7 +4,7 @@ import { TfiClose } from 'react-icons/tfi';
 
 import { Button, Container, Flex, Heading, IconButton } from '@ui/atoms';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/hooks';
 
 import { IHeaderProps } from './header.types';
 

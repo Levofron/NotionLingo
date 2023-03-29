@@ -2,7 +2,7 @@ import { NextApiResponse } from 'next';
 import { AxiomAPIRequest } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { isError } from '@infrastructure/utils';
+import { isError } from '@infrastructure/guards';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 

@@ -3,7 +3,7 @@ import { TbError404 } from 'react-icons/tb';
 import { Flex } from '@ui/atoms';
 import { DisplayError, ParticlesBackgroundLayout } from '@ui/molecules';
 
-import { useRouter } from '@infrastructure/utils';
+import { useRouter } from '@infrastructure/hooks';
 
 export const NotFoundTemplate = (): JSX.Element => {
   const { redirectToHome } = useRouter();

@@ -1,6 +1,7 @@
 import { INotionWordResponseRecord } from '@api/rest/rest.types';
 
-import { cleanUpString, isString, objectKeys } from '@infrastructure/utils';
+import { cleanUpString } from '@infrastructure/functions';
+import { isString, objectKeys } from '@infrastructure/guards';
 
 const cleanUpStringOptions = {
   toReturnWhenEmpty: '---',

@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { getSpeechSynthesisValueFromLocalStorage } from './get-speech-synthesis-value-from-local-storage.function';
 

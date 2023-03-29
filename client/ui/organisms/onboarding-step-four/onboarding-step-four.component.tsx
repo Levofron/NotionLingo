@@ -4,7 +4,7 @@ import { InputControl, OnboardingStepLayout } from '@ui/molecules';
 
 import { useSetApiToken } from '@adapter/hooks';
 
-import { debounce } from '@infrastructure/utils';
+import { debounce } from '@infrastructure/functions';
 
 import { IOnboardingStepFourProps } from './onboarding-step-four.types';
 

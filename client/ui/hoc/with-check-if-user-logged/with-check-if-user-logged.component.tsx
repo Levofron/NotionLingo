@@ -2,7 +2,7 @@ import { ComponentType, useEffect } from 'react';
 
 import { FullScreenLoader } from '@ui/molecules';
 
-import { useRouter, useUser } from '@infrastructure/utils';
+import { useRouter, useUser } from '@infrastructure/hooks';
 
 import { IWithCheckIfUserLoggedOptions } from './with-check-if-user-logged.types';
 

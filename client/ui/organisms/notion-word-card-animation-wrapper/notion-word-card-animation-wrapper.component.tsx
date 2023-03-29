@@ -7,7 +7,7 @@ import { Icon } from '@ui/atoms';
 
 import { localStorageModule, speechSynthesisModule } from '@adapter/modules';
 
-import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/utils';
+import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/hooks';
 
 import { INotionWordCardAnimationWrapperProps } from './notion-word-card-animation-wrapper.types';
 

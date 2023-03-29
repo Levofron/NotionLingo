@@ -1,6 +1,6 @@
 import { TNotionTableColumn } from '@domain/rest/rest.types';
 
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { getInitialFormValuesFromTableColumns } from './get-initial-form-values-from-table-columns.function';
 

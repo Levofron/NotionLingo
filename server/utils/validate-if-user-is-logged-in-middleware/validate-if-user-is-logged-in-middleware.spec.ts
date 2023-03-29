@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { validateIfUserIsLoggedInMiddleware } from './validate-if-user-is-logged-in-middleware.function';
 

@@ -8,8 +8,8 @@ import { useCreateWord } from '@adapter/hooks';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/rest/helpers';
 
+import { useRouter, useToast } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/types/routes';
-import { useRouter, useToast } from '@infrastructure/utils';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
 import { IAddWordTemplateProps } from './add-word.types';

@@ -5,7 +5,7 @@ import { AvailableNotionDatabase, OnboardingStepLayout } from '@ui/molecules';
 
 import { useDatabases, useSetDatabaseId } from '@adapter/hooks';
 
-import { useRouter, useToast, useUser } from '@infrastructure/utils';
+import { useRouter, useToast, useUser } from '@infrastructure/hooks';
 
 import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
 

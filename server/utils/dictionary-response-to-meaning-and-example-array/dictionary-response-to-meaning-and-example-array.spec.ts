@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { dictionaryResponseToMeaningAndExampleArray } from './dictionary-response-to-meaning-and-example-array.function';
 

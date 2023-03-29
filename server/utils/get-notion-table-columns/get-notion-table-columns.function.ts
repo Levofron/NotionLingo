@@ -1,7 +1,7 @@
 import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { isObject, objectKeys } from '@infrastructure/utils';
+import { isObject, objectKeys } from '@infrastructure/guards';
 
 import { EHttpStatusCode } from '@server/types/http-status-code';
 

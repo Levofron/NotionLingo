@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/utils';
+import { functionImportTest } from '@infrastructure/jest';
 
 import { formatRandomNotionWordsTransformator } from './format-random-notion-words-transformator.function';
 
