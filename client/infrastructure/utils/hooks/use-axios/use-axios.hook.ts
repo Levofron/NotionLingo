@@ -32,7 +32,10 @@ export const useAxios = <TParam, TResponse>(callback: TCallback<TParam, TRespons
     setIsLoading(true);
 
     executeCallbackPromiseWrapper(...params)
-      .then(setData)
+      .then((response) => {
+        setError(null);
+        setData(response);
+      })
       .catch(setError)
       .finally(() => setIsLoading(false));
   }, []);
@@ -44,6 +47,7 @@ export const useAxios = <TParam, TResponse>(callback: TCallback<TParam, TRespons
 
         executeCallbackPromiseWrapper(...params)
           .then((_response) => {
+            setError(null);
             setData(_response);
             resolve(_response);
           })
