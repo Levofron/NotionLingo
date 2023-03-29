@@ -6,7 +6,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 import { cleanUpString } from '@infrastructure/functions';
 import { isString } from '@infrastructure/guards';
 
-import { EHttpStatusCode } from '@server/types/http-status-code';
+import { EHttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,

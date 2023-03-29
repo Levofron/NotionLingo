@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 
-import { EHttpStatusCode } from '@server/types/http-status-code';
+import { EHttpStatusCode } from '@server/http-status-code';
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
