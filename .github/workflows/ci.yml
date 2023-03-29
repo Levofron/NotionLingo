@@ -19,10 +19,16 @@ jobs:
           node-version: "${{ matrix.node-version }}"
           cache: "yarn"
 
-      - uses: actions/cache@v2
+      - name: Cache node_modules and Yarn cache
+        uses: actions/cache@v2
         with:
-          path: "~/.cache/yarn"
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            ~/.npm
+            ~/.cache/yarn
+            .yarn/cache
+          key: ${{ runner.os }}-node-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-yarn-
 
       - name: Install dependencies
         run: yarn install
