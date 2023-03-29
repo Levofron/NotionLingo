@@ -2,7 +2,7 @@ import { useRouter as useNextRouter } from 'next/router';
 import { useCallback, useContext, useMemo } from 'react';
 
 import { RouterContext } from '@infrastructure/context';
-import { ERoutes } from '@infrastructure/types/routes';
+import { ERoutes } from '@infrastructure/routes';
 
 export const useRouter = () => {
   const router = useNextRouter();

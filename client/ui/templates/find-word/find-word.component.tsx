@@ -10,7 +10,7 @@ import { useDictionarySuggestions } from '@adapter/hooks';
 import { debounce } from '@infrastructure/functions';
 import { isString } from '@infrastructure/guards';
 import { useCopyToClipboard, useIsFirstRender, useRouter, useToast } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/types/routes';
+import { ERoutes } from '@infrastructure/routes';
 
 import { IFindWordTemplateProps } from './find-word.types';
 

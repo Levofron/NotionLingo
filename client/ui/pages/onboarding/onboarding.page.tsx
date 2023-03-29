@@ -2,7 +2,7 @@ import { SEO } from '@ui/atoms';
 import { withCheckIfUserLogged } from '@ui/hoc';
 import { OnboardingTemplate } from '@ui/templates';
 
-import { ERoutes } from '@infrastructure/types/routes';
+import { ERoutes } from '@infrastructure/routes';
 
 const OnboardingPageComponent = (): JSX.Element => (
   <>
