@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
+import { functionImportTest } from '@infrastructure/functions';
 import { useEventListener } from '@infrastructure/hooks';
-import { functionImportTest } from '@infrastructure/jest';
 
 let hackHandler: Function | null = null;
 const mouseMoveEvent = { clientX: 100, clientY: 200 };

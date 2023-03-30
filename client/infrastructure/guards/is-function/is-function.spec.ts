@@ -1,5 +1,5 @@
+import { functionImportTest } from '@infrastructure/functions';
 import { isFunction } from '@infrastructure/guards';
-import { functionImportTest } from '@infrastructure/jest';
 
 describe('isFunction function', () => {
   functionImportTest(isFunction);

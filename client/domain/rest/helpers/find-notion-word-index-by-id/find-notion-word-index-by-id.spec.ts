@@ -1,6 +1,6 @@
 import { INotionWord } from '@domain/rest/rest.types';
 
-import { functionImportTest } from '@infrastructure/jest';
+import { functionImportTest } from '@infrastructure/functions';
 
 import { findNotionWordIndexById } from './find-notion-word-index-by-id.function';
 

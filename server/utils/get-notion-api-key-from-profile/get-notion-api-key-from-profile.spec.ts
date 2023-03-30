@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/jest';
+import { functionImportTest } from '@infrastructure/functions';
 
 import { getNotionApiKeyFromProfile } from './get-notion-api-key-from-profile.function';
 
