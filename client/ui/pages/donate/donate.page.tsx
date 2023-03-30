@@ -3,7 +3,7 @@ import { withCheckIfUserLogged } from '@ui/hoc';
 import { SidebarWithHeader } from '@ui/organisms';
 import { DonateTemplate } from '@ui/templates';
 
-import { ERoutes } from '@infrastructure/types/routes';
+import { ERoutes } from '@infrastructure/routes';
 
 const DonatePageComponent = (): JSX.Element => (
   <>
