@@ -20,7 +20,7 @@ export const AccountSettings: FC<IAccountSettingsProps> = ({
   resetIntegrationModalRef,
   shouldDisableActionButtons,
   user,
-}): JSX.Element => (
+}) => (
   <ParticlesBackgroundLayout height="100%">
     <ConfirmationModal
       ref={deleteAccountModalRef}
