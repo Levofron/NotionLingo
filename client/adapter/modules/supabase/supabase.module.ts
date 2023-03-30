@@ -12,7 +12,7 @@ import {
   onAuthStateChangeUseCase,
 } from '@domain/supabase/supabase.use-cases';
 
-import { axiosInstance } from '@infrastructure/config';
+import { axiosInstance } from '@infrastructure/axios.instance';
 
 import { supabaseInstance } from '@config/supabase.instance';
 
