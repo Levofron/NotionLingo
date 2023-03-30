@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/jest';
+import { functionImportTest } from '@infrastructure/functions';
 
 import { API_ROUTE_SECRET } from '@config/constants';
 

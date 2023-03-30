@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/jest';
+import { functionImportTest } from '@infrastructure/functions';
 
 import { useCopyToClipboard } from './use-copy-to-clipboard.hook';
 
