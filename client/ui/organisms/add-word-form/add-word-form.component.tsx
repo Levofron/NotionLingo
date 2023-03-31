@@ -14,47 +14,49 @@ export const AddWordForm: FC<IAddWordFormProps> = ({
   tableColumns,
   values,
 }) => {
-  const formElements = useMemo(
-    () =>
-      tableColumns.map((_column) => {
-        const shouldRenderSelect = _column.type === 'multi_select';
+  const formElements = useMemo(() => {
+    if (Object.keys(values).length === 0) {
+      return null;
+    }
 
-        if (shouldRenderSelect) {
-          return (
-            <SelectControl
-              key={_column.columnName}
-              isRequired
-              errorMessage={errors[_column.columnName]}
-              label={_column.columnName}
-              name={_column.columnName}
-              value={values[_column.columnName]}
-              onBlur={onBlur}
-              onChange={onChange}
-            >
-              {_column.options.map((_option) => (
-                <option key={_option} value={_option}>
-                  {_option}
-                </option>
-              ))}
-            </SelectControl>
-          );
-        }
+    return tableColumns.map((_column) => {
+      const shouldRenderSelect = _column.type === 'multi_select';
 
+      if (shouldRenderSelect) {
         return (
-          <InputControl
+          <SelectControl
             key={_column.columnName}
+            isRequired
             errorMessage={errors[_column.columnName]}
-            isRequired={_column.isWord}
             label={_column.columnName}
             name={_column.columnName}
             value={values[_column.columnName]}
             onBlur={onBlur}
             onChange={onChange}
-          />
+          >
+            {_column.options.map((_option) => (
+              <option key={_option} value={_option}>
+                {_option}
+              </option>
+            ))}
+          </SelectControl>
         );
-      }),
-    [tableColumns, values, errors, onBlur, onChange],
-  );
+      }
+
+      return (
+        <InputControl
+          key={_column.columnName}
+          errorMessage={errors[_column.columnName]}
+          isRequired={_column.isWord}
+          label={_column.columnName}
+          name={_column.columnName}
+          value={values[_column.columnName]}
+          onBlur={onBlur}
+          onChange={onChange}
+        />
+      );
+    });
+  }, [tableColumns, values, errors, onBlur, onChange]);
 
   return (
     <Card minW={{ base: 'unset', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
