@@ -44,8 +44,7 @@ export const AddWord: FC<IAddWordProps> = ({
   });
 
   useEffect(() => {
-    const currentFormikValues = formik.values;
-    const hasValues = !!currentFormikValues && Object.keys(currentFormikValues).length > 0;
+    const hasValues = !!formik.values && Object.keys(formik.values).length > 0;
 
     if (!hasValues) {
       formik.setValues(

@@ -11,7 +11,6 @@ import { ERoutes } from '@infrastructure/routes';
 const AddWordComponent = (): JSX.Element => {
   const toast = useToast();
   const router = useRouter();
-  const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
 
   const {
     getTableColumns,
@@ -24,6 +23,8 @@ const AddWordComponent = (): JSX.Element => {
   const { createWord, isCreateWordLoading } = useCreateWord();
 
   useEffect(getTableColumns, []);
+
+  const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
 
   const handleRefetch = () => {
     resetTableColumns();
