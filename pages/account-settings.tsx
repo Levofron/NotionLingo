@@ -1,6 +1,13 @@
-import { accountSettingsPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { SidebarWithHeader } from '@ui/organisms';
+import { AccountSettings as AccountSettingsPage } from '@ui/pages';
 
-const { AccountSettingsPage } = accountSettingsPage;
+const AccountSettings = () => (
+  <>
+    <SEO noFollow noIndex title="Account Settings" />
+    <SidebarWithHeader />
+    <AccountSettingsPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { AccountSettingsPage as default };
+export default AccountSettings;

@@ -9,4 +9,4 @@ export * as findWordPage from './find-word/find-word.page';
 export * as dashboardPage from './dashboard/dashboard.page';
 export * as onboardingPage from './onboarding/onboarding.page';
 export * as privacyPolicyPage from './privacy-policy/privacy-policy.page';
-export * as accountSettingsPage from './account-settings/account-settings.page';
+export * from './account-settings/account-settings.page';
