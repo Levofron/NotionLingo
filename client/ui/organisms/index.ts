@@ -1,4 +1,5 @@
 export * from './contact-form/contact-form.component';
+export * from './add-word-form/add-word-form.component';
 export * from './back-to-top-button/back-to-top-button.component';
 export * from './onboarding-step-one/onboarding-step-one.component';
 export * from './onboarding-step-two/onboarding-step-two.component';
