@@ -151,13 +151,13 @@ export const getDictionarySuggestionsUseCase = (
 // updateNotionWordUseCase
 export type TUpdateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
   IUpdateNotionWordRequest,
-  string
+  INotionWord[]
 >;
 
 export const updateNotionWordUseCase = (
   restRepository: IRestRepository,
 ): TUpdateNotionWordUseCase => ({
-  execute: (word) => restRepository.updateNotionWord(word),
+  execute: (data) => restRepository.updateNotionWord(data),
 });
 
 // getNotionTableColumnsUseCase

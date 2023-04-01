@@ -55,10 +55,15 @@ export interface IDictionarySuggestions {
   word: string;
 }
 
-export interface IUpdateNotionWordRequest {
+export interface IUpdatedNotionWord {
   exampleSentence?: string;
   id: string;
   meaning?: string;
+}
+
+export interface IUpdateNotionWordRequest {
+  updatedNotionWord: IUpdatedNotionWord;
+  words: INotionWord[];
 }
 
 export type TNotionTableColumn =

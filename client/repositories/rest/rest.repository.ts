@@ -6,6 +6,7 @@ import {
   addImageUrlForEachNotionWordTransformator,
   formatDictionarySuggestions,
   formatRandomNotionWordsTransformator,
+  updateRecordInNotionWordArray,
 } from './helpers';
 
 const delay = (time: number) =>
@@ -71,10 +72,11 @@ export const getRestRepository = (restApi: IRestApi): IRestRepository => ({
 
     return formatDictionarySuggestions(data);
   },
-  updateNotionWord: async (data) => {
-    const { data: response } = await restApi.updateNotionWord(data);
+  updateNotionWord: async ({ updatedNotionWord, words }) => {
+    const { data: response } = await restApi.updateNotionWord(updatedNotionWord);
+    const updatedNotionWords = updateRecordInNotionWordArray(words, response.id, updatedNotionWord);
 
-    return response.id;
+    return updatedNotionWords || words;
   },
   getNotionTableColumns: async () => {
     const { data } = await restApi.getNotionTableColumns();

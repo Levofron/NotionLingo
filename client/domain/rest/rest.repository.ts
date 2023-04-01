@@ -27,5 +27,5 @@ export interface IRestRepository {
   setNotionApiToken: (token: string) => Promise<IHash>;
   setNotionDatabaseId: (databaseId: string) => Promise<string>;
   setSupabaseCookie: (session: Session | null) => Promise<void>;
-  updateNotionWord: (data: IUpdateNotionWordRequest) => Promise<string>;
+  updateNotionWord: (data: IUpdateNotionWordRequest) => Promise<INotionWord[]>;
 }

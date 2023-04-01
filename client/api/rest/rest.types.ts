@@ -8,7 +8,7 @@ import {
   IIncreaseDailyStreak,
   INotionDatabase,
   IProfile,
-  IUpdateNotionWordRequest,
+  IUpdatedNotionWord,
   TNotionTableColumn,
 } from '@domain/rest/rest.types';
 
@@ -58,7 +58,5 @@ export interface IRestApi {
   setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
   setNotionDatabaseId: (databaseId: string) => Promise<AxiosResponse<string>>;
   setSupabaseCookie: (supabaseSession: Session | null) => Promise<void>;
-  updateNotionWord: (
-    data: IUpdateNotionWordRequest,
-  ) => Promise<AxiosResponse<INotionWordResponseRecord>>;
+  updateNotionWord: (word: IUpdatedNotionWord) => Promise<AxiosResponse<INotionWordResponseRecord>>;
 }
