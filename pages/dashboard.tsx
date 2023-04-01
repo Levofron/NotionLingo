@@ -1,6 +1,11 @@
-import { dashboardPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { Dashboard as DashboardPage } from '@ui/pages';
 
-const { DashboardPage } = dashboardPage;
+const Dashboard = () => (
+  <>
+    <SEO noFollow noIndex title="Dashboard" />
+    <DashboardPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { DashboardPage as default };
+export default Dashboard;

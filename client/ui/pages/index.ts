@@ -6,7 +6,7 @@ export * as offlinePage from './offline/offline.page';
 export * from './add-word/add-word.page';
 export * as notFoundPage from './not-found/not-found.page';
 export * as findWordPage from './find-word/find-word.page';
-export * as dashboardPage from './dashboard/dashboard.page';
+export * from './dashboard/dashboard.page';
 export * as onboardingPage from './onboarding/onboarding.page';
 export * as privacyPolicyPage from './privacy-policy/privacy-policy.page';
 export * from './account-settings/account-settings.page';

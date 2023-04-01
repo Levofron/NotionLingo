@@ -1,19 +1,97 @@
-import { SEO } from '@ui/atoms';
-import { withCheckIfUserLogged } from '@ui/hoc';
-import { SidebarWithHeader } from '@ui/organisms';
-import { DashboardTemplate } from '@ui/templates';
+import { useCallback, useEffect, useState } from 'react';
 
+import { withCheckIfUserLogged } from '@ui/hoc';
+import { Dashboard as DashboardTemplate } from '@ui/templates';
+
+import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
+
+import { removeNotionWordFromArray, updateRecordInNotionWordArray } from '@domain/rest/helpers';
+import {
+  IIncreaseDailyStreak,
+  INotionWord,
+  IUpdateNotionWordRequest,
+} from '@domain/rest/rest.types';
+
+import { useToast, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
 
-const DashboardPageComponent = (): JSX.Element => (
-  <>
-    <SEO noFollow noIndex title="Account Settings" />
-    <SidebarWithHeader />
-    <DashboardTemplate />
-  </>
-);
+const DashboardComponent = () => {
+  const toast = useToast();
+  const { user } = useUser();
+  const [words, setWords] = useState<INotionWord[]>([]);
 
-export const DashboardPage = withCheckIfUserLogged(DashboardPageComponent, {
+  const [dailyStreakData, setDailyStreakData] = useState<IIncreaseDailyStreak>({
+    daysInStreak: user?.daysInStreak || 0,
+    todayWordsStreak: user?.todayWordsStreak || 0,
+    totalLearnedWords: user?.totalLearnedWords || 0,
+  });
+
+  const { increaseStreak } = useIncreaseStreak();
+  const { isUpdateWordLoading, updateWord } = useUpdateWord();
+  const { getRandomWords, isRandomWordsLoading } = useRandomWords();
+
+  const fetchMoreWords = useCallback(() => {
+    getRandomWords()
+      .then((_response) => setWords((_prevState) => [..._response, ..._prevState]))
+      .catch((_error) =>
+        toast.error({
+          description: _error,
+        }),
+      );
+  }, [setWords]);
+
+  useEffect(() => {
+    fetchMoreWords();
+  }, []);
+
+  const handleNotionWordCardClick = (notionWord: INotionWord) => () => {
+    const newWords = removeNotionWordFromArray(words, notionWord);
+
+    setWords(newWords);
+    increaseStreak().then(setDailyStreakData);
+
+    if (newWords.length <= 3) {
+      fetchMoreWords();
+    }
+  };
+
+  const handleApplySuggestion = (data: IUpdateNotionWordRequest) => () =>
+    updateWord(data)
+      .then((_udpatedRecordId) => {
+        const updatedNotionWords = updateRecordInNotionWordArray(words, _udpatedRecordId, data);
+
+        if (!updatedNotionWords) {
+          return;
+        }
+
+        setWords(updatedNotionWords);
+
+        toast.success({
+          duration: 3000,
+          description: 'Suggestions applied!',
+        });
+      })
+      .catch((_error) =>
+        toast.error({
+          duration: 3000,
+          description: _error,
+        }),
+      );
+
+  return (
+    <DashboardTemplate
+      dailyStreakData={dailyStreakData}
+      fetchMoreWords={fetchMoreWords}
+      isRandomWordsLoading={isRandomWordsLoading}
+      isUpdateWordLoading={isUpdateWordLoading}
+      words={words}
+      onApplySuggestion={handleApplySuggestion}
+      onNotionWordCardClick={handleNotionWordCardClick}
+    />
+  );
+};
+
+export const Dashboard = withCheckIfUserLogged(DashboardComponent, {
   currentPageUrl: ERoutes.DASHBOARD,
   redirectUrlOnError: ERoutes.ONBOARDING,
   shouldHaveNotionData: true,
