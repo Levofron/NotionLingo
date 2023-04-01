@@ -1,110 +1,109 @@
 import { useFormik } from 'formik';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { BiErrorAlt } from 'react-icons/bi';
 
-import { Button, Card, Flex } from '@ui/atoms';
-import { InputControl, SelectControl } from '@ui/molecules';
-
-import { useCreateWord } from '@adapter/hooks';
+import { Flex, Text } from '@ui/atoms';
+import { DisplayError, FullScreenLoader, ParticlesBackgroundLayout } from '@ui/molecules';
+import { AddWordForm, SidebarWithHeader } from '@ui/organisms';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/rest/helpers';
 
-import { useRouter, useToast } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/routes';
+import { useRouter } from '@infrastructure/hooks';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
-import { IAddWordTemplateProps } from './add-word.types';
+import { IAddWordProps } from './add-word.types';
 
-export const AddWordTemplate: FC<IAddWordTemplateProps> = ({ tableColumns }): JSX.Element => {
-  const toast = useToast();
+export const AddWord: FC<IAddWordProps> = ({
+  error,
+  isCreateWordLoading,
+  isTableColumnsLoading,
+  onRefetchButtonClick,
+  onSubmit,
+  redirectToHome,
+  tableColumns,
+}): JSX.Element => {
   const router = useRouter();
-
-  const { createWord, isCreateWordLoading } = useCreateWord();
-
-  const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
 
   const formik = useFormik({
     isInitialValid: true,
     validateOnBlur: false,
     validateOnMount: false,
     validateOnChange: true,
-    validationSchema: getAddWordFormValidationSchema(tableColumns),
+    validationSchema: getAddWordFormValidationSchema(tableColumns || []),
     initialValues: getInitialFormValuesFromTableColumns(
-      tableColumns,
+      tableColumns || [],
       router.query as Record<string, string>,
     ),
     onSubmit: (_values) => {
-      createWord(_values)
-        .then(() => {
-          const initialValues = getInitialFormValuesFromTableColumns(tableColumns);
+      const initialValues = getInitialFormValuesFromTableColumns(tableColumns!);
 
-          formik.setValues(initialValues);
-          router.redirectWithReplaceToAddWord();
+      const reset = () => formik.setValues(initialValues);
 
-          toast.success({
-            duration: 2000,
-            description: 'Word saved!',
-          });
-
-          if (isFindWordAsPreviousPath) {
-            setTimeout(() => {
-              router.redirectTo(ERoutes.FIND_WORD);
-            }, 2000);
-          }
-        })
-        .catch((_error) =>
-          toast.error({
-            description: _error,
-          }),
-        );
+      onSubmit(_values, reset);
     },
   });
 
+  useEffect(() => {
+    const hasValues = !!formik.values && Object.keys(formik.values).length > 0;
+
+    if (!hasValues) {
+      formik.setValues(
+        getInitialFormValuesFromTableColumns(
+          tableColumns || [],
+          router.query as Record<string, string>,
+        ),
+      );
+    }
+  }, [tableColumns]);
+
+  const renderContent = () => {
+    if (isTableColumnsLoading || !tableColumns) {
+      return (
+        <FullScreenLoader
+          backgroundColor="transparent"
+          flexDirection="column"
+          gap={{ base: 3, sm: 5 }}
+          position="relative"
+          zIndex={1}
+        >
+          <Text fontWeight="medium">Loading table columns...</Text>
+        </FullScreenLoader>
+      );
+    }
+
+    if (error && !tableColumns) {
+      return (
+        <DisplayError
+          errorMessage={error}
+          icon={BiErrorAlt}
+          title="Error occured :("
+          onRedirectToHomeButtonClick={redirectToHome}
+          onRefetchButtonClick={onRefetchButtonClick}
+        />
+      );
+    }
+
+    return (
+      <AddWordForm
+        errors={formik.errors}
+        isLoading={isCreateWordLoading}
+        tableColumns={tableColumns}
+        values={formik.values}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        onSubmit={formik.handleSubmit}
+      />
+    );
+  };
+
   return (
-    <Card minW={{ base: 'unset', md: '350px' }} p={{ base: 4, sm: 6, md: 8 }}>
-      <form onSubmit={formik.handleSubmit}>
-        <Flex flexDirection="column" gap="3px">
-          {tableColumns.map((_column) => {
-            const shouldRenderSelect = _column.type === 'multi_select';
-
-            if (shouldRenderSelect) {
-              return (
-                <SelectControl
-                  key={_column.columnName}
-                  isRequired
-                  errorMessage={formik.errors[_column.columnName]}
-                  label={_column.columnName}
-                  name={_column.columnName}
-                  value={formik.values[_column.columnName]}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                >
-                  {_column.options.map((_option) => (
-                    <option key={_option} value={_option}>
-                      {_option}
-                    </option>
-                  ))}
-                </SelectControl>
-              );
-            }
-
-            return (
-              <InputControl
-                key={_column.columnName}
-                errorMessage={formik.errors[_column.columnName]}
-                isRequired={_column.isWord}
-                label={_column.columnName}
-                name={_column.columnName}
-                value={formik.values[_column.columnName]}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-            );
-          })}
-          <Button isLoading={isCreateWordLoading} mt={2} type="submit" width="full">
-            Add word
-          </Button>
+    <>
+      <SidebarWithHeader />
+      <ParticlesBackgroundLayout height="100%">
+        <Flex align="center" h="100%" justify="center" w="100%">
+          {renderContent()}
         </Flex>
-      </form>
-    </Card>
+      </ParticlesBackgroundLayout>
+    </>
   );
 };

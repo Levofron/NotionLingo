@@ -1,6 +1,11 @@
-import { addWordPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { AddWord as AddWordPage } from '@ui/pages';
 
-const { AddWordPage } = addWordPage;
+const AddWord = () => (
+  <>
+    <SEO noFollow noIndex title="Account Settings" />
+    <AddWordPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { AddWordPage as default };
+export default AddWord;

@@ -2,7 +2,7 @@ import { TNotionTableColumn } from '@domain/rest/rest.types';
 
 const getFieldValue = (column: TNotionTableColumn, queryParams?: Record<string, string>) => {
   if (column.type === 'multi_select') {
-    return column.options[0];
+    return column.options[0] || '';
   }
 
   if (!queryParams) {

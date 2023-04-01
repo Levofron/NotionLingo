@@ -1,19 +1,16 @@
 import { useEffect } from 'react';
-import { BiErrorAlt } from 'react-icons/bi';
 
-import { Flex, SEO, Text } from '@ui/atoms';
 import { withCheckIfUserLogged } from '@ui/hoc';
-import { DisplayError, FullScreenLoader, ParticlesBackgroundLayout } from '@ui/molecules';
-import { SidebarWithHeader } from '@ui/organisms';
-import { AddWordTemplate } from '@ui/templates';
+import { AddWord as AddWordTemplate } from '@ui/templates';
 
-import { useTableColumns } from '@adapter/hooks';
+import { useCreateWord, useTableColumns } from '@adapter/hooks';
 
-import { useRouter } from '@infrastructure/hooks';
+import { useRouter, useToast } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
 
-const AddWordPageComponent = (): JSX.Element => {
-  const { redirectToHome } = useRouter();
+const AddWordComponent = (): JSX.Element => {
+  const toast = useToast();
+  const router = useRouter();
 
   const {
     getTableColumns,
@@ -23,57 +20,55 @@ const AddWordPageComponent = (): JSX.Element => {
     tableColumnsError,
   } = useTableColumns();
 
+  const { createWord, isCreateWordLoading } = useCreateWord();
+
   useEffect(getTableColumns, []);
+
+  const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
 
   const handleRefetch = () => {
     resetTableColumns();
     getTableColumns();
   };
 
-  const renderContent = () => {
-    if (isTableColumnsLoading || !tableColumns) {
-      return (
-        <FullScreenLoader
-          backgroundColor="transparent"
-          flexDirection="column"
-          gap={{ base: 3, sm: 5 }}
-          position="relative"
-          zIndex={1}
-        >
-          <Text fontWeight="medium">Loading table columns...</Text>
-        </FullScreenLoader>
-      );
-    }
+  const handleSubmit = (values: Record<string, string>, resetFormik: () => void) => {
+    createWord(values)
+      .then(() => {
+        resetFormik();
+        router.redirectWithReplaceToAddWord();
 
-    if (tableColumnsError && !tableColumns) {
-      return (
-        <DisplayError
-          errorMessage={tableColumnsError}
-          icon={BiErrorAlt}
-          title="Error occured :("
-          onRedirectToHomeButtonClick={redirectToHome}
-          onRefetchButtonClick={handleRefetch}
-        />
-      );
-    }
+        toast.success({
+          duration: 2000,
+          description: 'Word saved!',
+        });
 
-    return <AddWordTemplate tableColumns={tableColumns} />;
+        if (isFindWordAsPreviousPath) {
+          setTimeout(() => {
+            router.redirectTo(ERoutes.FIND_WORD);
+          }, 2000);
+        }
+      })
+      .catch((_error) =>
+        toast.error({
+          description: _error,
+        }),
+      );
   };
 
   return (
-    <>
-      <SEO noFollow noIndex title="Add word" />
-      <SidebarWithHeader />
-      <ParticlesBackgroundLayout height="100%">
-        <Flex align="center" h="100%" justify="center" w="100%">
-          {renderContent()}
-        </Flex>
-      </ParticlesBackgroundLayout>
-    </>
+    <AddWordTemplate
+      error={tableColumnsError}
+      isCreateWordLoading={isCreateWordLoading}
+      isTableColumnsLoading={isTableColumnsLoading}
+      redirectToHome={router.redirectToHome}
+      tableColumns={tableColumns}
+      onRefetchButtonClick={handleRefetch}
+      onSubmit={handleSubmit}
+    />
   );
 };
 
-export const AddWordPage = withCheckIfUserLogged(AddWordPageComponent, {
+export const AddWord = withCheckIfUserLogged(AddWordComponent, {
   currentPageUrl: ERoutes.ADD_WORD,
   redirectUrlOnError: ERoutes.ONBOARDING,
   shouldHaveNotionData: true,
