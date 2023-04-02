@@ -1,19 +1,11 @@
-import { SEO } from '@ui/atoms';
 import { withCheckIfUserLogged } from '@ui/hoc';
-import { SidebarWithHeader } from '@ui/organisms';
-import { DonateTemplate } from '@ui/templates';
+import { Donate as DonateTemplate } from '@ui/templates';
 
 import { ERoutes } from '@infrastructure/routes';
 
-const DonatePageComponent = (): JSX.Element => (
-  <>
-    <SEO noFollow noIndex title="Donate" />
-    <SidebarWithHeader />
-    <DonateTemplate />
-  </>
-);
+const DonateComponent = () => <DonateTemplate />;
 
-export const DonatePage = withCheckIfUserLogged(DonatePageComponent, {
+export const Donate = withCheckIfUserLogged(DonateComponent, {
   currentPageUrl: ERoutes.DONATE,
   redirectUrlOnError: ERoutes.ONBOARDING,
   shouldHaveNotionData: true,
