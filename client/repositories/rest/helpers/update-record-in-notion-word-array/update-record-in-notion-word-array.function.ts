@@ -1,18 +1,17 @@
-import { INotionWord, IUpdateNotionWordRequest } from '@domain/rest/rest.types';
-
-import { findNotionWordById, findNotionWordIndexById } from '..';
+import { findNotionWordById, findNotionWordIndexById } from '@domain/rest/helpers';
+import { INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
 
 export const updateRecordInNotionWordArray = (
-  notionWords: INotionWord[],
-  notionWordId: string,
-  updatedNotionWord: IUpdateNotionWordRequest,
+  words: INotionWord[],
+  wordId: string,
+  updatedNotionWord: IUpdatedNotionWord,
 ) => {
-  const copiedNotionWords = [...notionWords];
+  const copiedNotionWords = [...words];
 
-  const foundWord = findNotionWordById(copiedNotionWords, notionWordId);
+  const foundWord = findNotionWordById(copiedNotionWords, wordId);
 
   if (!foundWord) {
-    return;
+    return null;
   }
 
   const foundWordIndex = findNotionWordIndexById(copiedNotionWords, foundWord.id);

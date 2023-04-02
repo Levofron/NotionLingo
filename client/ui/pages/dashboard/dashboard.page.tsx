@@ -5,12 +5,8 @@ import { Dashboard as DashboardTemplate } from '@ui/templates';
 
 import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
 
-import { removeNotionWordFromArray, updateRecordInNotionWordArray } from '@domain/rest/helpers';
-import {
-  IIncreaseDailyStreak,
-  INotionWord,
-  IUpdateNotionWordRequest,
-} from '@domain/rest/rest.types';
+import { removeNotionWordFromArray } from '@domain/rest/helpers';
+import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
 
 import { useToast, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
@@ -55,16 +51,10 @@ const DashboardComponent = () => {
     }
   };
 
-  const handleApplySuggestion = (data: IUpdateNotionWordRequest) => () =>
-    updateWord(data)
-      .then((_udpatedRecordId) => {
-        const updatedNotionWords = updateRecordInNotionWordArray(words, _udpatedRecordId, data);
-
-        if (!updatedNotionWords) {
-          return;
-        }
-
-        setWords(updatedNotionWords);
+  const handleApplySuggestion = (updatedNotionWord: IUpdatedNotionWord) => () =>
+    updateWord({ updatedNotionWord, words })
+      .then((updatedWords) => {
+        setWords(updatedWords);
 
         toast.success({
           duration: 3000,

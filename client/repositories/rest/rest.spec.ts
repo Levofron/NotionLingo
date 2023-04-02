@@ -269,9 +269,22 @@ describe('getRestRepository function', () => {
       const restRepository = getRestRepository(restApiMock);
 
       await restRepository.updateNotionWord({
-        id: 'id',
-        meaning: 'meaning',
-        exampleSentence: 'exampleSentence',
+        words: [
+          {
+            id: 'id',
+            ipa: '123',
+            type: '123',
+            word: '123',
+            meaning: '123',
+            imageUrl: '123',
+            exampleSentence: '123',
+          },
+        ],
+        updatedNotionWord: {
+          id: 'id',
+          meaning: 'meaning',
+          exampleSentence: 'exampleSentence',
+        },
       });
 
       expect(restApiMock.updateNotionWord).toHaveBeenCalledWith({

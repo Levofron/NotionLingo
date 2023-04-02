@@ -26,7 +26,7 @@ describe('updateRecordInNotionWordArray function', () => {
     ];
     const result = updateRecordInNotionWordArray(notionWords, 'id', { id: 'id' });
 
-    expect(result).toBeUndefined();
+    expect(result).toBeNull();
   });
 
   it('should return updated array if notion word is found', () => {
