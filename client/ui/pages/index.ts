@@ -1,7 +1,7 @@
 export * as homePage from './home/home.page';
 export * as termsPage from './terms/terms.page';
 export * as loginPage from './login/login.page';
-export * as donatePage from './donate/donate.page';
+export * from './donate/donate.page';
 export * as offlinePage from './offline/offline.page';
 export * from './add-word/add-word.page';
 export * as notFoundPage from './not-found/not-found.page';

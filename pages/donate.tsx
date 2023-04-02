@@ -1,6 +1,11 @@
-import { donatePage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { Donate as DonatePage } from '@ui/pages';
 
-const { DonatePage } = donatePage;
+const Donate = () => (
+  <>
+    <SEO noFollow noIndex title="Donate" />
+    <DonatePage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { DonatePage as default };
+export default Donate;

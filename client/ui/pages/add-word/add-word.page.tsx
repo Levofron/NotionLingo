@@ -8,7 +8,7 @@ import { useCreateWord, useTableColumns } from '@adapter/hooks';
 import { useRouter, useToast } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
 
-const AddWordComponent = (): JSX.Element => {
+const AddWordComponent = () => {
   const toast = useToast();
   const router = useRouter();
 
