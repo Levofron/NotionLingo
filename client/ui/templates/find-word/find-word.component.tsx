@@ -29,7 +29,7 @@ export const FindWord: FC<IFindWordProps> = ({
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [inputRef.current, isUserLoading, queryStateWord]);
 
   return (
     <>
