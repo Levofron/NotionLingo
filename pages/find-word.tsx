@@ -1,6 +1,11 @@
-import { findWordPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { FindWord as FindWordPage } from '@ui/pages';
 
-const { FindWordPage } = findWordPage;
+const FindWord = () => (
+  <>
+    <SEO noFollow noIndex title="Find word" />
+    <FindWordPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { FindWordPage as default };
+export default FindWord;
