@@ -10,7 +10,7 @@ import { isString } from '@infrastructure/guards';
 import { useCopyToClipboard, useRouter, useToast, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
 
-export const FindWord = (): JSX.Element => {
+export const FindWord = () => {
   const toast = useToast();
   const router = useRouter();
   const { copyToClipboard } = useCopyToClipboard();
