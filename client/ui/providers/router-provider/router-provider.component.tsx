@@ -30,7 +30,7 @@ const updateStorePathValues = () => {
   localStorageModule.setItem({ key: CURRENT_PATH_KEY, value: window.location.pathname });
 };
 
-export const RouterProvider: FC<IRouterProviderProps> = ({ children }): JSX.Element => {
+export const RouterProvider: FC<IRouterProviderProps> = ({ children }) => {
   const router = useRouter();
   const isFirstRender = useIsFirstRender();
 
