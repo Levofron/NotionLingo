@@ -1,6 +1,6 @@
 export * from './home/home.page';
 export * as termsPage from './terms/terms.page';
-export * as loginPage from './login/login.page';
+export * from './login/login.page';
 export * from './donate/donate.page';
 export * as offlinePage from './offline/offline.page';
 export * from './add-word/add-word.page';
