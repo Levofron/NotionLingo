@@ -1,4 +1,4 @@
-export * as homePage from './home/home.page';
+export * from './home/home.page';
 export * as termsPage from './terms/terms.page';
 export * as loginPage from './login/login.page';
 export * from './donate/donate.page';
