@@ -1,6 +1,11 @@
-import { notFoundPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { NotFound as NotFoundPage } from '@ui/pages';
 
-const { NotFoundPage } = notFoundPage;
+const NotFound = () => (
+  <>
+    <SEO noFollow noIndex title="Not found" />
+    <NotFoundPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { NotFoundPage as default };
+export default NotFound;
