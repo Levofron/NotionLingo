@@ -1,6 +1,11 @@
-import { offlinePage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { Offline as OfflinePage } from '@ui/pages';
 
-const { OfflinePage } = offlinePage;
+const Offline = () => (
+  <>
+    <SEO noFollow noIndex title="Offline" />
+    <OfflinePage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { OfflinePage as default };
+export default Offline;
