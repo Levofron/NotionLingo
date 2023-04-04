@@ -1,3 +1,4 @@
+export * from './login-form/login-form.component';
 export * from './contact-form/contact-form.component';
 export * from './add-word-form/add-word-form.component';
 export * from './back-to-top-button/back-to-top-button.component';

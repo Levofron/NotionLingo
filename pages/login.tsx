@@ -1,6 +1,11 @@
-import { loginPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { Login as LoginPage } from '@ui/pages';
 
-const { LoginPage } = loginPage;
+const Login = () => (
+  <>
+    <SEO noFollow noIndex title="Login" />
+    <LoginPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { LoginPage as default };
+export default Login;
