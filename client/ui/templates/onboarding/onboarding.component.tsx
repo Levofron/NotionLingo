@@ -10,7 +10,7 @@ import {
   OnboardingStepTwo,
 } from '@ui/organisms';
 
-export const OnboardingTemplate = (): JSX.Element => {
+export const Onboarding = () => {
   const verifyDatabaseTabRef = useRef<HTMLButtonElement | null>(null);
   const validateIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
   const selectNotionDatabaseTabRef = useRef<HTMLButtonElement | null>(null);

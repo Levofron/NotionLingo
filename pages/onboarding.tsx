@@ -1,6 +1,11 @@
-import { onboardingPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { Onboarding as OnboardingPage } from '@ui/pages';
 
-const { OnboardingPage } = onboardingPage;
+const Onboarding = () => (
+  <>
+    <SEO noFollow noIndex title="Onboarding" />
+    <OnboardingPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { OnboardingPage as default };
+export default Onboarding;
