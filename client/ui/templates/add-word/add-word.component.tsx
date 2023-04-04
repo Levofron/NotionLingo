@@ -6,7 +6,7 @@ import { Flex, Text } from '@ui/atoms';
 import { DisplayError, FullScreenLoader, ParticlesBackgroundLayout } from '@ui/molecules';
 import { AddWordForm, SidebarWithHeader } from '@ui/organisms';
 
-import { getInitialFormValuesFromTableColumns } from '@domain/rest/helpers';
+import { getInitialFormValuesFromTableColumns } from '@domain/rest/operations';
 
 import { useRouter } from '@infrastructure/hooks';
 

@@ -5,7 +5,7 @@ import { Dashboard as DashboardTemplate } from '@ui/templates';
 
 import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
 
-import { removeNotionWordFromArray } from '@domain/rest/helpers';
+import { removeNotionWordFromArray } from '@domain/rest/operations';
 import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
 
 import { useToast, useUser } from '@infrastructure/hooks';
