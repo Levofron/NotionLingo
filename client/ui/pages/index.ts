@@ -8,5 +8,5 @@ export * as notFoundPage from './not-found/not-found.page';
 export * from './find-word/find-word.page';
 export * from './dashboard/dashboard.page';
 export * from './onboarding/onboarding.page';
-export * as privacyPolicyPage from './privacy-policy/privacy-policy.page';
+export * from './privacy-policy/privacy-policy.page';
 export * from './account-settings/account-settings.page';

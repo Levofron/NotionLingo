@@ -1,6 +1,11 @@
-import { privacyPolicyPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { PrivacyPolicy as PrivacyPolicyPage } from '@ui/pages';
 
-const { PrivacyPolicyPage } = privacyPolicyPage;
+const PrivacyPolicy = () => (
+  <>
+    <SEO title="Privacy Policy" />
+    <PrivacyPolicyPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { PrivacyPolicyPage as default };
+export default PrivacyPolicy;
