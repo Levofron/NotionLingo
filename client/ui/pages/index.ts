@@ -1,5 +1,5 @@
 export * from './home/home.page';
-export * as termsPage from './terms/terms.page';
+export * from './terms/terms.page';
 export * from './login/login.page';
 export * from './donate/donate.page';
 export * from './offline/offline.page';
