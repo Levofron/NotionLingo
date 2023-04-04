@@ -1,17 +1,11 @@
-import { SEO } from '@ui/atoms';
 import { withCheckIfUserLogged } from '@ui/hoc';
-import { OnboardingTemplate } from '@ui/templates';
+import { Onboarding as OnboardingTemplate } from '@ui/templates';
 
 import { ERoutes } from '@infrastructure/routes';
 
-const OnboardingPageComponent = (): JSX.Element => (
-  <>
-    <SEO noFollow noIndex title="Onboarding" />
-    <OnboardingTemplate />
-  </>
-);
+const OnboardingComponent = () => <OnboardingTemplate />;
 
-export const OnboardingPage = withCheckIfUserLogged(OnboardingPageComponent, {
+export const Onboarding = withCheckIfUserLogged(OnboardingComponent, {
   currentPageUrl: ERoutes.ONBOARDING,
   redirectUrlOnError: ERoutes.DASHBOARD,
   shouldHaveNotionData: false,
