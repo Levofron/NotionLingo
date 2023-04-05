@@ -5,7 +5,7 @@ import { DisplayError, ParticlesBackgroundLayout } from '@ui/molecules';
 
 import { useRouter } from '@infrastructure/hooks';
 
-export const NotFoundTemplate = (): JSX.Element => {
+export const NotFound = () => {
   const { redirectToHome } = useRouter();
 
   return (

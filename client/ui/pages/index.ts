@@ -4,7 +4,7 @@ export * from './login/login.page';
 export * from './donate/donate.page';
 export * from './offline/offline.page';
 export * from './add-word/add-word.page';
-export * as notFoundPage from './not-found/not-found.page';
+export * from './not-found/not-found.page';
 export * from './find-word/find-word.page';
 export * from './dashboard/dashboard.page';
 export * from './onboarding/onboarding.page';

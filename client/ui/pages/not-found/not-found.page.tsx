@@ -1,9 +1,3 @@
-import { SEO } from '@ui/atoms';
-import { NotFoundTemplate } from '@ui/templates';
+import { NotFound as NotFoundTemplate } from '@ui/templates';
 
-export const NotFoundPage = (): JSX.Element => (
-  <>
-    <SEO noFollow noIndex title="Not found" />
-    <NotFoundTemplate />
-  </>
-);
+export const NotFound = () => <NotFoundTemplate />;
