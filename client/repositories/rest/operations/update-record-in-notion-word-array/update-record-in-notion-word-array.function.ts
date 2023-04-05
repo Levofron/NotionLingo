@@ -1,4 +1,4 @@
-import { findNotionWordById, findNotionWordIndexById } from '@domain/rest/helpers';
+import { findNotionWordById, findNotionWordIndexById } from '@domain/rest/operations';
 import { INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
 
 export const updateRecordInNotionWordArray = (

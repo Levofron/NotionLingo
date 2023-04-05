@@ -7,7 +7,7 @@ import {
   formatDictionarySuggestions,
   formatRandomNotionWordsTransformator,
   updateRecordInNotionWordArray,
-} from './helpers';
+} from './operations';
 
 const delay = (time: number) =>
   new Promise((resolve) => {

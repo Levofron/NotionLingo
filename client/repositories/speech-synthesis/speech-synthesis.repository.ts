@@ -16,7 +16,7 @@ import {
 import {
   getSpeechSynthesisValueFromLocalStorage,
   setSpeechSynthesisValueToLocalStorage,
-} from './helpers';
+} from './operations';
 
 export function getSpeechSynthesisRepository(
   speechSynthesisApi: ISpeechSynthesisApi,
