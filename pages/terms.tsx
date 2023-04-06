@@ -1,6 +1,11 @@
-import { termsPage } from '@ui/pages';
+import { SEO } from '@ui/atoms';
+import { Terms as TermsPage } from '@ui/pages';
 
-const { TermsPage } = termsPage;
+const Terms = () => (
+  <>
+    <SEO title="Terms and Conditions" />
+    <TermsPage />
+  </>
+);
 
-// eslint-disable-next-line no-restricted-exports
-export { TermsPage as default };
+export default Terms;

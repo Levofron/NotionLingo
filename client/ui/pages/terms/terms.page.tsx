@@ -1,11 +1,9 @@
 import { SEO } from '@ui/atoms';
-import { SidebarWithHeader } from '@ui/organisms';
-import { TermsTemplate } from '@ui/templates';
+import { Terms as TermsTemplate } from '@ui/templates';
 
-export const TermsPage = (): JSX.Element => (
+export const Terms = () => (
   <>
     <SEO title="Terms and Conditions" />
-    <SidebarWithHeader />
     <TermsTemplate />
   </>
 );
