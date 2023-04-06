@@ -28,7 +28,7 @@ export const FindWord = () => {
     if (isString(queryStateWord)) {
       getDictionarySuggestions(queryStateWord);
     }
-  }, [!!queryStateWord]);
+  }, [queryStateWord]);
 
   const handleCopy = (phrase: string) => () =>
     copyToClipboard(phrase).then(() =>
