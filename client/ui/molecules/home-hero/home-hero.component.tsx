@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { Button, Container, Flex, Heading, Highlight, Stack, Text } from '@ui/atoms';
+import { Button, Container, Flex, Heading, Highlight } from '@ui/atoms';
 
 import { useRouter, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
@@ -54,29 +54,25 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
               Expand vocabulary with your own Notion database!
             </Highlight>
           </Heading>
-          <Text color="gray.900" display={{ base: 'none', sm: 'block' }} maxW="60%">
-            Our intuitive platform allows you to easily learn new words and phrases from your own{' '}
-            <b>Notion</b> database!
-          </Text>
-          <Stack
+          <Flex
             align="center"
             alignSelf="center"
-            direction="column"
-            position="relative"
-            spacing={{ base: 2, sm: 3 }}
+            direction={{ base: 'column', sm: 'row' }}
+            flex={{ base: '135 135', sm: '160 160', md: '190 190' }}
+            gap={{ base: 2, sm: 3 }}
           >
             <Button
               isDisabled={isLoading}
               isLoading={isLoading}
-              width="fit-content"
+              width="100%"
               onClick={handleActionButtonClick}
             >
               {buttonLabel}
             </Button>
-            <Text cursor="pointer" onClick={handleLearnMoreClick}>
+            <Button mode="light" width="100%" onClick={handleLearnMoreClick}>
               Learn more
-            </Text>
-          </Stack>
+            </Button>
+          </Flex>
         </Flex>
       </Container>
     </ParticlesBackgroundLayout>
