@@ -1,4 +1,5 @@
-import { FC, useMemo } from 'react';
+import { useMediaQuery } from '@chakra-ui/react';
+import { FC, useEffect, useMemo, useRef } from 'react';
 
 import { Button, Container, Flex, Heading, Highlight } from '@ui/atoms';
 
@@ -9,8 +10,16 @@ import { ParticlesBackgroundLayout } from '..';
 import { IHomeHeroProps } from './home-hero.types';
 
 export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { push, redirectToLogin } = useRouter();
   const { isLoading, user } = useUser();
+  const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  }, []);
 
   const handleActionButtonClick = () => {
     if (!user) {
@@ -73,6 +82,23 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
               Learn more
             </Button>
           </Flex>
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              objectFit: 'cover',
+              border: '1px solid',
+              zIndex: 1,
+              borderRadius: 10,
+              boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+              display: isSmallerThan800 ? 'none' : 'block',
+            }}
+          >
+            <source src="presentation.mp4" type="video/mp4" />
+          </video>
         </Flex>
       </Container>
     </ParticlesBackgroundLayout>

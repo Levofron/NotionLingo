@@ -51,7 +51,7 @@ export const Donate = (): JSX.Element => (
                   alt="PayPal"
                   height={40}
                   src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-color.svg"
-                  style={{ borderRadius: '6px' }}
+                  style={{ borderRadius: 10 }}
                   width={142.47}
                 />
               </ChakraNextLink>

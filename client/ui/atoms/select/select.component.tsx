@@ -14,7 +14,7 @@ const SelectComponent: ForwardRefRenderFunction<HTMLSelectElement, ISelectProps>
     borderColor="gray.900"
     color="gray.900"
     focusBorderColor="gray.900"
-    style={{ boxShadow: 'none', borderRadius: 0 }}
+    style={{ boxShadow: 'none', borderRadius: 10 }}
     {...props}
   />
 );

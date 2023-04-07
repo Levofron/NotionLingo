@@ -10,7 +10,7 @@ const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps>
 ): JSX.Element => (
   <ChakraButton
     ref={ref}
-    borderRadius={0}
+    borderRadius={10}
     borderWidth="1px"
     size={{ base: 'sm', sm: 'md', md: 'lg' }}
     {...variantToStylesMapper[mode]}

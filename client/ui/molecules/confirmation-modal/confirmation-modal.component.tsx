@@ -48,7 +48,7 @@ const ConfirmationModalComponent: ForwardRefRenderFunction<
   return (
     <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={handleClose}>
       <ModalOverlay />
-      <ModalContent as={Card} borderRadius={0} boxShadow="6px 6px 0 var(--chakra-colors-gray-900)">
+      <ModalContent as={Card} borderRadius={10} boxShadow="6px 6px 0 var(--chakra-colors-gray-900)">
         <ModalHeader fontSize="xl" textAlign="center">
           {title}
         </ModalHeader>

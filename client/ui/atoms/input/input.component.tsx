@@ -18,7 +18,7 @@ const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = 
       borderColor={color}
       color={color}
       focusBorderColor={color}
-      style={{ boxShadow: 'none', borderRadius: 0 }}
+      style={{ boxShadow: 'none', borderRadius: 10 }}
       {...restProps}
     />
   );
