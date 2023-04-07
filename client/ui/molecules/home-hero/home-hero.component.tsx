@@ -90,7 +90,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
             playsInline
             style={{
               objectFit: 'cover',
-              border: '1px solid',
+              border: '2px solid',
               zIndex: 1,
               minWidth: 740,
               minHeight: 418,
