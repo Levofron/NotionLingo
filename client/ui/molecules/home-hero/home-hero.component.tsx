@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@chakra-ui/react';
-import { FC, useEffect, useMemo, useRef } from 'react';
+import { FC, useMemo } from 'react';
 
 import { Button, Container, Flex, Heading, Highlight } from '@ui/atoms';
 
@@ -10,16 +10,9 @@ import { ParticlesBackgroundLayout } from '..';
 import { IHomeHeroProps } from './home-hero.types';
 
 export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const { push, redirectToLogin } = useRouter();
   const { isLoading, user } = useUser();
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  }, []);
 
   const handleActionButtonClick = () => {
     if (!user) {
@@ -83,7 +76,6 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
             </Button>
           </Flex>
           <video
-            ref={videoRef}
             autoPlay
             loop
             muted
