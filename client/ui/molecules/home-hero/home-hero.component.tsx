@@ -86,6 +86,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
             display={{ base: 'none', sm: 'block' }}
             minHeight={418}
             minWidth={740}
+            mt={5}
             objectFit="cover"
             zIndex={1}
           >
