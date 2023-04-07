@@ -92,6 +92,8 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
               objectFit: 'cover',
               border: '1px solid',
               zIndex: 1,
+              minWidth: 740,
+              minHeight: 418,
               borderRadius: 10,
               boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
               display: isSmallerThan800 ? 'none' : 'block',
