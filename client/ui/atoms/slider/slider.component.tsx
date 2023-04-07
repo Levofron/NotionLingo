@@ -35,7 +35,7 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
       onMouseLeave={handleMouseLeave}
       {...restProps}
     >
-      <SliderTrack bg="gray.50" border="1px solid" borderColor="gray.900" borderRadius={0}>
+      <SliderTrack bg="gray.50" border="1px solid" borderColor="gray.900" borderRadius={10}>
         <SliderFilledTrack bg="gray.900" />
       </SliderTrack>
       <Tooltip
@@ -46,7 +46,7 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
         label={value}
         placement="top"
       >
-        <SliderThumb bg="gray.900" borderRadius={0} />
+        <SliderThumb bg="gray.900" borderRadius={10} />
       </Tooltip>
       {children}
     </ChakraSlider>

@@ -10,7 +10,7 @@ const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IIconButt
 ): JSX.Element => (
   <ChakraIconButton
     ref={ref}
-    borderRadius={0}
+    borderRadius={10}
     borderWidth="1px"
     {...variantToStylesMapper[mode]}
     {...restProps}

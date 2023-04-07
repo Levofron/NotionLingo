@@ -10,6 +10,7 @@ export const Highlight: FC<IHighlightProps> = ({ styles, ...restProps }): JSX.El
       py: { base: 0, sm: 1 },
       bg: 'transparent',
       border: '2px solid',
+      borderRadius: 10,
       borderColor: 'gray.900',
       color: 'gray.900',
       ...styles,

@@ -47,7 +47,7 @@ export const AccountSettings: FC<IAccountSettingsProps> = ({
           >
             <Avatar
               border="1px solid black"
-              borderRadius={0}
+              borderRadius={10}
               mb={4}
               pos="relative"
               size="xl"

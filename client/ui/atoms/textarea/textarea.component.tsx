@@ -18,7 +18,7 @@ const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextarea
       borderColor={color}
       color={color}
       focusBorderColor={color}
-      style={{ boxShadow: 'none', borderRadius: 0, ...style }}
+      style={{ boxShadow: 'none', borderRadius: 10, ...style }}
       {...restProps}
     />
   );
