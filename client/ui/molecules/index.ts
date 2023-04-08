@@ -4,6 +4,7 @@ export * from './header/header.component';
 export * from './home-hero/home-hero.component';
 export * from './agreements/agreements.component';
 export * from './try-it-now/try-it-now.component';
+export * from './testimonials/testimonials.component';
 export * from './display-error/display-error.component';
 export * from './input-control/input-control.component';
 export * from './select-control/select-control.component';
