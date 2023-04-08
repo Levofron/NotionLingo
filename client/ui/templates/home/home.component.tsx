@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { Box } from '@ui/atoms';
-import { Faq, Footer, GettingStarted, HomeHero, TryItNow } from '@ui/molecules';
+import { Faq, Footer, GettingStarted, HomeHero, Testimonials, TryItNow } from '@ui/molecules';
 import { ContactForm, SidebarWithHeader } from '@ui/organisms';
 
 export const Home = () => {
@@ -14,6 +14,7 @@ export const Home = () => {
         <HomeHero gettingStartedRef={gettingStartedRef} />
         <GettingStarted ref={gettingStartedRef} />
         <TryItNow />
+        <Testimonials />
         <Faq />
         <ContactForm />
         <Footer />

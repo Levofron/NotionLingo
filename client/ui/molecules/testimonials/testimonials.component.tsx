@@ -1,10 +1,8 @@
-import { FC } from 'react';
-
 import { Avatar, Box, Container, Flex, Heading, Stack, Text } from '@ui/atoms';
 
 import { TESTIMONIALS } from './testimonials.defaults';
 
-export const Testimonials: FC = (): JSX.Element => (
+export const Testimonials = (): JSX.Element => (
   <Box bg="gray.100">
     <Container gap={12} maxW="6xl" py={{ base: 14, sm: 20, md: 40 }}>
       <Stack align="center" mb={{ base: 14, sm: 20 }} spacing={0}>
