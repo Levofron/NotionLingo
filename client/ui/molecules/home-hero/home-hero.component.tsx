@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { Box, Button, Container, Flex, Heading, Highlight } from '@ui/atoms';
+import { Box, Button, Card, Container, Flex, Heading, Highlight } from '@ui/atoms';
 
 import { useRouter, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
@@ -73,25 +73,23 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
               Learn more
             </Button>
           </Flex>
-          <Box
-            // @ts-expect-error
-            autoPlay
-            loop
-            muted
-            playsInline
-            as="video"
-            border="2px solid"
-            borderRadius={10}
-            boxShadow="0 0 10px 0 rgba(0, 0, 0, 0.1)"
-            display={{ base: 'none', sm: 'block' }}
-            minHeight={418}
-            minWidth={740}
-            mt={5}
-            objectFit="cover"
-            zIndex={1}
-          >
-            <source src="presentation.mp4" type="video/mp4" />
-          </Box>
+          <Card mt={5} overflow="hidden">
+            <Box
+              // @ts-expect-error
+              autoPlay
+              loop
+              muted
+              playsInline
+              as="video"
+              display={{ base: 'none', sm: 'block' }}
+              minHeight={418}
+              minWidth={740}
+              objectFit="cover"
+              zIndex={1}
+            >
+              <source src="presentation.mp4" type="video/mp4" />
+            </Box>
+          </Card>
         </Flex>
       </Container>
     </ParticlesBackgroundLayout>
