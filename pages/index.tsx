@@ -1,7 +1,7 @@
 import { FAQPageJsonLd, LogoJsonLd, SocialProfileJsonLd } from 'next-seo';
 
-import { SEO } from '@ui/atoms';
-import { Home as HomePage } from '@ui/templates';
+import { SEO } from '@presentation/atoms';
+import { Home as HomePage } from '@presentation/templates';
 
 import {
   BUY_ME_A_COFFEE_LINK,

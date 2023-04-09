@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { AddWord as AddWordPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { AddWord as AddWordPage } from '@presentation/pages';
 
 const AddWord = () => (
   <>

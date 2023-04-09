@@ -6,8 +6,8 @@
   "trailingComma": "all",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@ui",
-    "^@ui/(.*)$",
+    "^@presentation",
+    "^@presentation/(.*)$",
     "^@adapter",
     "^@adapter/(.*)$",
     "^@repositories",

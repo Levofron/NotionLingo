@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { Offline as OfflinePage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { Offline as OfflinePage } from '@presentation/pages';
 
 const Offline = () => (
   <>

@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { Terms as TermsPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { Terms as TermsPage } from '@presentation/pages';
 
 const Terms = () => (
   <>

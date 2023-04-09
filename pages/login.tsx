@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { Login as LoginPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { Login as LoginPage } from '@presentation/pages';
 
 const Login = () => (
   <>

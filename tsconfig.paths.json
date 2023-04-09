@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./client/ui/*"],
-      "@ui": ["./client/ui"],
+      "@presentation/*": ["./client/presentation/*"],
+      "@presentation": ["./client/presentation"],
       "@adapter/*": ["./client/adapter/*"],
       "@adapter": ["./client/adapter"],
       "@repositories/*": ["./client/repositories/*"],

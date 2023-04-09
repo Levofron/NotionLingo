@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { PrivacyPolicy as PrivacyPolicyPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { PrivacyPolicy as PrivacyPolicyPage } from '@presentation/pages';
 
 const PrivacyPolicy = () => (
   <>

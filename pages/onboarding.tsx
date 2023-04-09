@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { Onboarding as OnboardingPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { Onboarding as OnboardingPage } from '@presentation/pages';
 
 const Onboarding = () => (
   <>
