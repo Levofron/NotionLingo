@@ -6,7 +6,7 @@
     "prebuild": "yarn generate-sitemap",
     "build": "next build",
     "build:analyze": "ANALYZE=true yarn build",
-    "check:all": "concurrently \"yarn lint\" \"yarn typecheck\" \"yarn format:check\" \"yarn test\" \"yarn build\"",
+    "check:all": "concurrently \"yarn lint\" \"yarn typecheck\" \"yarn format:check\" \"yarn test\" \"yarn build\" \"yarn check:architecture\"",
     "check:architecture": "yarn depcruise --config .dependency-cruiser.js client",
     "convert-pages-directory-to-routes-enum": "node ./scripts/node/convert-pages-directory-to-routes-enum.mjs",
     "create:component": "plop --plopfile ./scripts/plop/create-component/create-component.js",
