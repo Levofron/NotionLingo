@@ -42,7 +42,7 @@ export const Header: FC<IHeaderProps> = ({
             onClick={isOpen ? onClose : onOpen}
           />
           <Heading as="span" fontSize={{ base: 'xl', sm: '2xl' }}>
-            Early beta
+            Beta
           </Heading>
         </Flex>
         <Button
