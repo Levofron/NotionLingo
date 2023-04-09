@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 
-import { Box } from '..';
+import { Box } from '../box/box.component';
 import { ITextUnderlineProps } from './text-underline.types';
 
 const TextUnderlineComponent: FC<ITextUnderlineProps> = ({

@@ -1,4 +1,4 @@
-import { isObject } from '@infrastructure/guards';
+import { isObject } from '../is-object/is-object.function';
 
 export const objectKeys = <TObject extends object>(object: TObject | null) => {
   if (!isObject(object)) {

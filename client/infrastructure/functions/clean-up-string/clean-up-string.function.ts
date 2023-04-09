@@ -1,6 +1,6 @@
-import { capitalizeFirstLetter } from '@infrastructure/functions';
 import { isString } from '@infrastructure/guards';
 
+import { capitalizeFirstLetter } from '../capitalize-first-letter/capitalize-first-letter.function';
 import { IOptions } from './clean-up-string.types';
 
 const defaultOptions: Required<IOptions> = {
