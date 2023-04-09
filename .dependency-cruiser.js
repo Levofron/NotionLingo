@@ -4,7 +4,7 @@ module.exports = {
     /* rules from the 'recommended' preset: */
     {
       name: 'no-circular',
-      severity: 'warn',
+      severity: 'error',
       comment:
         'This dependency is part of a circular relationship. You might want to revise ' +
         'your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ',
@@ -172,6 +172,87 @@ module.exports = {
       from: {},
       to: {
         dependencyTypes: ['npm-peer'],
+      },
+    },
+  ],
+  allowedSeverity: 'error',
+  allowed: [
+    {
+      from: { path: '(^client/ui)' },
+      to: {
+        path: [
+          '^$1',
+          '^client/adapter',
+          '^client/domain',
+          '^client/infrastructure',
+          '^(.yarn)',
+          '^config',
+        ],
+      },
+    },
+    {
+      from: { path: '(^client/adapter)' },
+      to: {
+        path: [
+          '^$1',
+          '^client/domain',
+          '^client/infrastructure',
+          '^client/api',
+          '^client/repositories',
+          '^config',
+          '^(.yarn)',
+        ],
+      },
+    },
+    {
+      from: { path: '(^client/domain)' },
+      to: {
+        path: [
+          '^$1',
+          '^client/repositories',
+          '^client/ui',
+          '^client/infrastructure',
+          '^config',
+          '^(.yarn)',
+        ],
+      },
+    },
+    {
+      from: { path: '(^client/api)' },
+      to: {
+        path: [
+          '^$1',
+          '^client/adapter',
+          '^client/domain',
+          '^client/repositories',
+          '^client/infrastructure',
+          '^(.yarn)',
+        ],
+      },
+    },
+    {
+      from: { path: '(^client/repositories)' },
+      to: {
+        path: [
+          '^$1',
+          '^client/adapter',
+          '^client/domain',
+          '^client/infrastructure',
+          '^client/api',
+          '^config',
+        ],
+      },
+    },
+    {
+      from: { path: '(^client/infrastructure)' },
+      to: {
+        path: ['^$1', '^client/domain', '^config', '^(.yarn)'],
+      },
+    },
+    {
+      from: { path: '(^config)' },
+      to: {
+        path: ['^$1', '^(.yarn)'],
       },
     },
   ],

@@ -5,7 +5,7 @@ import { Box, Button, Container, Flex, Heading, Highlight } from '@ui/atoms';
 import { useRouter, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';
 
-import { ParticlesBackgroundLayout } from '..';
+import { ParticlesBackgroundLayout } from '../particles-background-layout/particles-background-layout.component';
 import { IHomeHeroProps } from './home-hero.types';
 
 export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {

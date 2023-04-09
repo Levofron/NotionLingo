@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
 
 import { Box, Flex } from '@ui/atoms';
-import { NavigationItem } from '@ui/molecules';
 
 import { useUser } from '@infrastructure/hooks';
 
+import { NavigationItem } from '../navigation-item/navigation-item.component';
 import { sidebarItems } from './sidebar-content.defaults';
 import { ISidebarContentProps } from './sidebar-content.types';
 
