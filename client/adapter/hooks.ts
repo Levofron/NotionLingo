@@ -1,10 +1,6 @@
 import { restModule } from '@adapter/modules';
 
-import { findNotionWordById } from '@domain/rest/operations';
-
 import { useAxios } from '@infrastructure/hooks';
-
-console.log(findNotionWordById);
 
 export const useUpdateWord = () => {
   const { isLoading, mutateAsync } = useAxios(restModule.updateNotionWord);
