@@ -1,6 +1,6 @@
 import { hasOwnProperty, isObject, isString } from '@infrastructure/guards';
 
-import { decrypt } from '..';
+import { decrypt } from '../decrypt/decrypt.function';
 
 export const getNotionApiKeyFromProfile = (profileData: unknown) => {
   if (

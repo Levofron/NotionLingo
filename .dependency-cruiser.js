@@ -177,6 +177,7 @@ module.exports = {
   ],
   allowedSeverity: 'error',
   allowed: [
+    // client
     {
       from: { path: '(^client/presentation)' },
       to: {
@@ -259,6 +260,20 @@ module.exports = {
       from: { path: '(^pages)' },
       to: {
         path: ['^client/presentation', '^(.yarn)', '^config'],
+      },
+    },
+    // server
+    {
+      from: { path: '(^server)' },
+      to: {
+        path: ['^$1', '^client/infrastructure', '^crypto', '^(.yarn)', '^config'],
+      },
+    },
+    // config
+    {
+      from: { path: '(^config)' },
+      to: {
+        path: ['^$1'],
       },
     },
   ],

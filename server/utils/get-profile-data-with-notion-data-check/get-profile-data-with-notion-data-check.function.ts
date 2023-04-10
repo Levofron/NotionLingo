@@ -2,7 +2,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { EHttpStatusCode } from '@server/http-status-code';
 
-import { getProfileById } from '..';
+import { getProfileById } from '../get-profile-by-id/get-profile-by-id.function';
 
 export const getProfileDataWithNotionDataCheck = async (userId: string) => {
   const profileData = await getProfileById(userId);
