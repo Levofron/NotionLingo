@@ -82,7 +82,6 @@ const DashboardComponent = () => {
 };
 
 export const Dashboard = withCheckIfUserLogged(DashboardComponent, {
-  currentPageUrl: ERoutes.DASHBOARD,
   redirectUrlOnError: ERoutes.ONBOARDING,
   shouldHaveNotionData: true,
 });

@@ -15,7 +15,7 @@ export const Header: FC<IHeaderProps> = ({
   ...restProps
 }): JSX.Element => {
   const { redirectToLogin } = useRouter();
-  const { isLoading, isUserAuthenticated, logout } = useUser();
+  const { hasSessionUser, logout } = useUser();
 
   return (
     <Flex
@@ -46,11 +46,10 @@ export const Header: FC<IHeaderProps> = ({
           </Heading>
         </Flex>
         <Button
-          isLoading={isLoading}
           width={{ base: '80px', sm: '100px' }}
-          onClick={isUserAuthenticated ? logout : redirectToLogin}
+          onClick={hasSessionUser ? logout : redirectToLogin}
         >
-          {isUserAuthenticated ? 'Sign Out' : 'Sign In'}
+          {hasSessionUser ? 'Sign Out' : 'Sign In'}
         </Button>
       </Container>
     </Flex>

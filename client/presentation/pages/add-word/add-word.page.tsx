@@ -69,7 +69,6 @@ const AddWordComponent = () => {
 };
 
 export const AddWord = withCheckIfUserLogged(AddWordComponent, {
-  currentPageUrl: ERoutes.ADD_WORD,
   redirectUrlOnError: ERoutes.ONBOARDING,
   shouldHaveNotionData: true,
 });

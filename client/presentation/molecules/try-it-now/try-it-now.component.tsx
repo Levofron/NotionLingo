@@ -6,7 +6,7 @@ import { useRouter, useUser } from '@infrastructure/hooks';
 
 export const TryItNow: FC = (): JSX.Element => {
   const { redirectToDashboard, redirectToLogin, redirectToOnboarding } = useRouter();
-  const { isLoading, user } = useUser();
+  const { user } = useUser();
 
   const handleActionButtonClick = () => {
     if (!user) {
@@ -40,9 +40,7 @@ export const TryItNow: FC = (): JSX.Element => {
               <Text color="gray.900">and expand your vocabulary, elevate your skills!</Text>
             </Box>
             <Flex align="center" justify="center" w="full">
-              <Button isLoading={isLoading} onClick={handleActionButtonClick}>
-                {buttonLabel}
-              </Button>
+              <Button onClick={handleActionButtonClick}>{buttonLabel}</Button>
             </Flex>
           </SimpleGrid>
         </Card>
