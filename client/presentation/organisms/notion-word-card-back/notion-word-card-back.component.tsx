@@ -4,7 +4,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { Button, Card, Flex, VStack } from '@presentation/atoms';
 import { SelectControl, SliderControl } from '@presentation/molecules';
 
-import { speechSynthesisModule } from '@adapter/modules';
+import { speechSynthesisModule } from '@adapter/speech-synthesis/speech-synthesis.module';
 
 import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,

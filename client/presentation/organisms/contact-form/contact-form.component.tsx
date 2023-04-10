@@ -4,7 +4,7 @@ import { Box, Button, Card, Flex, Heading, VStack } from '@presentation/atoms';
 import { InputControl, TextareaControl } from '@presentation/molecules';
 
 import { useSendContactFormData } from '@adapter/hooks';
-import { localStorageModule } from '@adapter/modules';
+import { localStorageModule } from '@adapter/local-storage/local-storage.module';
 
 import { useToast } from '@infrastructure/hooks';
 
