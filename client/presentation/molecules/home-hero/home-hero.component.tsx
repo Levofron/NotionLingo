@@ -9,8 +9,8 @@ import { ParticlesBackgroundLayout } from '../particles-background-layout/partic
 import { IHomeHeroProps } from './home-hero.types';
 
 export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
+  const { user } = useUser();
   const { push, redirectToLogin } = useRouter();
-  const { isLoading, user } = useUser();
 
   const handleActionButtonClick = () => {
     if (!user) {
@@ -61,12 +61,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
             flex={{ base: '135 135', sm: '160 160', md: '190 190' }}
             gap={{ base: 2, sm: 3 }}
           >
-            <Button
-              isDisabled={isLoading}
-              isLoading={isLoading}
-              width="100%"
-              onClick={handleActionButtonClick}
-            >
+            <Button width="100%" onClick={handleActionButtonClick}>
               {buttonLabel}
             </Button>
             <Button mode="light" width="100%" onClick={handleLearnMoreClick}>

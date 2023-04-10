@@ -15,9 +15,8 @@ import { IFindWordProps } from './find-word.types';
 export const FindWord: FC<IFindWordProps> = ({
   dictionarySuggestions,
   dictionarySuggestionsError,
+  hasSessionUser,
   isDictionarySuggestionsLoading,
-  isUserAuthenticated,
-  isUserLoading,
   onAddWordClick,
   onCopy,
   onInputChange,
@@ -29,22 +28,14 @@ export const FindWord: FC<IFindWordProps> = ({
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputRef.current, isUserLoading, queryStateWord]);
+  }, [inputRef.current, queryStateWord]);
 
   return (
     <>
       <SidebarWithHeader />
       <ParticlesBackgroundLayout height="100%">
         <Box height="100%" overflow="scroll" width="100%">
-          {isUserLoading && !isUserAuthenticated ? (
-            <FullScreenLoader
-              backgroundColor="transparent"
-              flexDirection="column"
-              gap={{ base: 3, sm: 5 }}
-              position="relative"
-              zIndex={1}
-            />
-          ) : (
+          {hasSessionUser ? (
             <Container
               height="100%"
               maxW="6xl"
@@ -89,7 +80,7 @@ export const FindWord: FC<IFindWordProps> = ({
                       return (
                         <Flex key={key} flexDirection="column" gap={{ base: 2, md: 4 }}>
                           <Flex alignItems="flex-start" gap={{ base: 2, md: 4 }}>
-                            {isUserAuthenticated ? (
+                            {hasSessionUser ? (
                               <MotionIconButton
                                 icon={BsPlusCircle}
                                 onClick={onAddWordClick(
@@ -147,6 +138,14 @@ export const FindWord: FC<IFindWordProps> = ({
                 )}
               </Flex>
             </Container>
+          ) : (
+            <FullScreenLoader
+              backgroundColor="transparent"
+              flexDirection="column"
+              gap={{ base: 3, sm: 5 }}
+              position="relative"
+              zIndex={1}
+            />
           )}
         </Box>
       </ParticlesBackgroundLayout>
