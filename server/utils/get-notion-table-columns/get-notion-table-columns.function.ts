@@ -11,7 +11,7 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@config/constants';
 
-import { getAvailableNotionDatabases } from '..';
+import { getAvailableNotionDatabases } from '../get-available-notion-databases/get-available-notion-databases.function';
 
 const getPosition = (isWord: boolean, isMeaning: boolean) => {
   if (isWord) {

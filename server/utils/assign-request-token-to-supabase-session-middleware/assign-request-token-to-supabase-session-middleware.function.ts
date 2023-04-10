@@ -3,7 +3,7 @@ import { NextApiRequest } from 'next';
 
 import { supabaseInstance } from '@config/supabase.instance';
 
-import { getUserFromRequest } from '..';
+import { getUserFromRequest } from '../get-user-from-request/get-user-from-request.function';
 
 export const assignRequestTokenToSupabaseSessionMiddleware = async (req: NextApiRequest) => {
   const user = await getUserFromRequest(req);

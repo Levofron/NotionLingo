@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getUserFromRequest } from '..';
+import { getUserFromRequest } from '../get-user-from-request/get-user-from-request.function';
 
 export const validateIfUserIsLoggedInMiddleware = async (
   req: NextApiRequest,

@@ -1,4 +1,4 @@
-import { getRandomNumber } from '..';
+import { getRandomNumber } from '../get-random-number/get-random-number.function';
 
 export const shuffleArray = <T>(array: T[]) => {
   const copiedArray = [...array];
