@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
-import { localStorageModule } from '@adapter/modules';
+import { localStorageModule } from '@adapter/local-storage/local-storage.module';
 
 import { RouterContext } from '@infrastructure/context';
 import { useIsFirstRender } from '@infrastructure/hooks';

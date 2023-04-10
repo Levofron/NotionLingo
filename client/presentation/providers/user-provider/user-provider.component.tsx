@@ -2,7 +2,7 @@ import { User } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
 
 import { useLoggedProfile, useSetSupabaseCookie } from '@adapter/hooks';
-import { supabaseModule } from '@adapter/modules';
+import { supabaseModule } from '@adapter/supabase/supabase.module';
 
 import { IProfile } from '@domain/rest/rest.types';
 

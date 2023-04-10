@@ -1,4 +1,4 @@
-import { restModule } from '@adapter/modules';
+import { restModule } from '@adapter/rest/rest.module';
 
 import { useAxios } from '@infrastructure/hooks';
 
