@@ -57,13 +57,17 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const setNotionData = (hasNotionData: boolean) =>
     setUser((_prevUser) => (_prevUser ? { ..._prevUser, hasNotionData } : null));
 
-  const providerValue = Object.freeze({
-    user,
-    logout,
-    setNotionData,
-    hasSessionUser,
-    loginViaMagicLink,
-  });
-
-  return <UserContext.Provider value={providerValue}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        logout,
+        setNotionData,
+        hasSessionUser,
+        loginViaMagicLink,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
