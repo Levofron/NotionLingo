@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     .insert({
       email: contactFormData.email,
       message: contactFormData.message,
-      fullName: contactFormData.fullName,
+      full_name: contactFormData.fullName,
     })
     .throwOnError();
 

@@ -276,6 +276,13 @@ module.exports = {
         path: ['^$1'],
       },
     },
+    // pages
+    {
+      from: { path: '(^pages/api)' },
+      to: {
+        path: ['^server'],
+      },
+    },
   ],
   options: {
     /* conditions specifying which files not to follow further when encountered:
