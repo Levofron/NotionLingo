@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { FindWord as FindWordPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { FindWord as FindWordPage } from '@presentation/pages';
 
 const FindWord = () => (
   <>

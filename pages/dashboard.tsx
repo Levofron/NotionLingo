@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { Dashboard as DashboardPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { Dashboard as DashboardPage } from '@presentation/pages';
 
 const Dashboard = () => (
   <>

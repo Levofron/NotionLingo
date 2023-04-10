@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { AccountSettings as AccountSettingsPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { AccountSettings as AccountSettingsPage } from '@presentation/pages';
 
 const AccountSettings = () => (
   <>

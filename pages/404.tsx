@@ -1,5 +1,5 @@
-import { SEO } from '@ui/atoms';
-import { NotFound as NotFoundPage } from '@ui/pages';
+import { SEO } from '@presentation/atoms';
+import { NotFound as NotFoundPage } from '@presentation/pages';
 
 const NotFound = () => (
   <>

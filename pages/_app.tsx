@@ -1,4 +1,4 @@
-import { App } from '@ui';
+import { App } from '@presentation';
 
 export { reportWebVitals } from 'next-axiom';
 
