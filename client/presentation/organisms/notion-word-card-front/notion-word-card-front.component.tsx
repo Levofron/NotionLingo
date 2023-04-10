@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FC, useCallback } from 'react';
 import { AiTwotoneSound } from 'react-icons/ai';
-import { BsHeart } from 'react-icons/bs';
+import { CiHeart } from 'react-icons/ci';
 
 import { Box, Button, Card, Flex, Heading, Icon, Text } from '@presentation/atoms';
 
@@ -196,7 +196,7 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
           transition="all .3s ease"
           onClick={onClick}
         >
-          {isCountdownEnded ? <BsHeart fontSize="40px" /> : <Text fontSize="xl">{countdown}</Text>}
+          {isCountdownEnded ? <CiHeart fontSize="40px" /> : <Text fontSize="xl">{countdown}</Text>}
         </Flex>
       </Flex>
     </Card>
