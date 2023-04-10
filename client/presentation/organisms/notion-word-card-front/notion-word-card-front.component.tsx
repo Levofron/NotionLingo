@@ -80,7 +80,12 @@ export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
         pointerEvents="none"
         position="relative"
       >
-        <Image fill alt={`Image representing '${word}' word`} src={imageUrl} />
+        <Image
+          fill
+          alt={`Image representing '${word}' word`}
+          src={imageUrl}
+          style={{ filter: 'grayscale(100%)' }}
+        />
       </Box>
       <Flex flexDirection="column" gap={1} p={{ base: 2, sm: 3, md: 4 }}>
         {hasType ? (
