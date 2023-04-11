@@ -8,14 +8,18 @@ import { IWithCheckIfUserLoggedOptions } from './with-check-if-user-logged.types
 
 export const withCheckIfUserLogged = (
   WrappedComponent: ComponentType,
-  { redirectUrlOnError, shouldHaveNotionData }: IWithCheckIfUserLoggedOptions,
+  { currentPageUrl, redirectUrlOnError, shouldHaveNotionData }: IWithCheckIfUserLoggedOptions,
 ) => {
   const CheckIfUserLogged = () => {
-    const { hasSessionUser, user } = useUser();
+    const { isLoading, user } = useUser();
     const { isSamePath, redirectTo, redirectToHome } = useRouter();
 
     useEffect(() => {
-      if (!hasSessionUser || !user) {
+      if (isLoading === undefined || (isLoading && isSamePath(currentPageUrl))) {
+        return;
+      }
+
+      if (!user) {
         redirectToHome();
 
         return;
@@ -24,9 +28,9 @@ export const withCheckIfUserLogged = (
       if (user.hasNotionData !== shouldHaveNotionData) {
         redirectTo(redirectUrlOnError);
       }
-    }, [user, hasSessionUser, isSamePath, redirectTo]);
+    }, [user, isLoading, isSamePath, redirectTo]);
 
-    return !hasSessionUser || !user || user?.hasNotionData !== shouldHaveNotionData ? (
+    return !user || user.hasNotionData !== shouldHaveNotionData ? (
       <FullScreenLoader />
     ) : (
       <WrappedComponent />

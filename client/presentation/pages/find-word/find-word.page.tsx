@@ -13,8 +13,8 @@ import { ERoutes } from '@infrastructure/routes';
 export const FindWord = () => {
   const toast = useToast();
   const router = useRouter();
-  const { hasSessionUser } = useUser();
   const { copyToClipboard } = useCopyToClipboard();
+  const { isLoading, isUserAuthenticated } = useUser();
   const [queryStateWord, setQueryStateWord] = useQueryState('word', queryTypes.string);
 
   const {
@@ -57,8 +57,9 @@ export const FindWord = () => {
     <FindWordTemplate
       dictionarySuggestions={dictionarySuggestions}
       dictionarySuggestionsError={dictionarySuggestionsError}
-      hasSessionUser={hasSessionUser}
       isDictionarySuggestionsLoading={isDictionarySuggestionsLoading}
+      isUserAuthenticated={isUserAuthenticated}
+      isUserLoading={isLoading}
       queryStateWord={queryStateWord}
       onAddWordClick={handleAddWordClick}
       onCopy={handleCopy}
