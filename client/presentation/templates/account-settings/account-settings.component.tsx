@@ -47,7 +47,6 @@ export const AccountSettings: FC<IAccountSettingsProps> = ({
           >
             <Avatar
               border="1px solid black"
-              borderRadius={10}
               mb={4}
               pos="relative"
               size="xl"
@@ -68,7 +67,8 @@ export const AccountSettings: FC<IAccountSettingsProps> = ({
               isDisabled={shouldDisableActionButtons}
               isLoading={isResetIntegrationLoading}
               leftIcon={<BiReset />}
-              mb={2}
+              mb={{ base: 2, sm: 3 }}
+              width="100%"
               onClick={() => resetIntegrationModalRef.current?.open()}
             >
               {`Reset Notion integration${
@@ -79,6 +79,7 @@ export const AccountSettings: FC<IAccountSettingsProps> = ({
               isDisabled={shouldDisableActionButtons}
               isLoading={isDeleteProfileLoading}
               leftIcon={<AiFillDelete />}
+              width="100%"
               onClick={() => deleteAccountModalRef.current?.open()}
             >
               {`Delete Account${

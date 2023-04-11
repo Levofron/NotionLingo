@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { FaChevronRight } from 'react-icons/fa';
 
 import {
   Box,
@@ -53,9 +53,7 @@ export const TryItNow: FC = (): JSX.Element => {
             <Flex align="center" justify="center" w="full">
               <Button
                 isLoading={isLoading}
-                rightIcon={
-                  <Icon as={MdKeyboardArrowRight} fontSize={{ base: '20px', sm: '24px' }} />
-                }
+                rightIcon={<Icon as={FaChevronRight} fontSize={{ base: 11, sm: 13, md: 14 }} />}
                 onClick={handleActionButtonClick}
               >
                 {buttonLabel}

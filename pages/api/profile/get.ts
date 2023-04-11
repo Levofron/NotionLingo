@@ -37,10 +37,12 @@ export const getProfileAndUserMetadataById = async (userId: string) => {
     email: profileData.email,
     createdAt: profileData.created_at,
     fullName: user?.user_metadata.full_name,
-    avatarUrl: user?.user_metadata.avatar_url,
     daysInStreak: profileData?.days_in_streak,
     todayWordsStreak: profileData?.today_words_streak,
     totalLearnedWords: profileData?.total_learned_words,
+    avatarUrl:
+      user?.user_metadata.avatar_url ||
+      'https://images.unsplash.com/photo-1606951069946-cceca96395f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80',
   };
 };
 

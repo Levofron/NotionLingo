@@ -35,7 +35,7 @@ export const Donate = (): JSX.Element => (
             <Flex
               alignItems="center"
               flexDirection={{ base: 'column', sm: 'row' }}
-              gap={{ base: 3, sm: 0 }}
+              gap={{ base: 2, sm: 3 }}
               justifyContent="space-around"
             >
               <ChakraNextLink href={BUY_ME_A_COFFEE_LINK} target="_blank">
