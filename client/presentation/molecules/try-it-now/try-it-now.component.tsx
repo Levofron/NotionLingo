@@ -1,6 +1,17 @@
 import { FC, useMemo } from 'react';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
-import { Box, Button, Card, Container, Flex, Heading, SimpleGrid, Text } from '@presentation/atoms';
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Flex,
+  Heading,
+  Icon,
+  SimpleGrid,
+  Text,
+} from '@presentation/atoms';
 
 import { useRouter, useUser } from '@infrastructure/hooks';
 
@@ -40,7 +51,14 @@ export const TryItNow: FC = (): JSX.Element => {
               <Text color="gray.900">and expand your vocabulary, elevate your skills!</Text>
             </Box>
             <Flex align="center" justify="center" w="full">
-              <Button onClick={handleActionButtonClick}>{buttonLabel}</Button>
+              <Button
+                rightIcon={
+                  <Icon as={MdKeyboardArrowRight} fontSize={{ base: '20px', sm: '24px' }} />
+                }
+                onClick={handleActionButtonClick}
+              >
+                {buttonLabel}
+              </Button>
             </Flex>
           </SimpleGrid>
         </Card>
