@@ -23,51 +23,55 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const { setSupabaseCookie } = useSetSupabaseCookie();
 
   const getUserProfile = async () => {
-    if (!user) {
-      const sessionUser = supabaseModule.getUser();
+    if (user) {
+      return;
+    }
 
-      setHasSessionUser(!!sessionUser);
+    const sessionUser = supabaseModule.getUser();
 
-      if (sessionUser) {
-        try {
-          await setSupabaseCookie();
-          const response = await getLoggedProfile();
+    setHasSessionUser(!!sessionUser);
 
-          setUser({ ...sessionUser, ...response });
-        } catch {
-          setUser(null);
-          setHasSessionUser(false);
-        }
+    if (sessionUser) {
+      try {
+        await setSupabaseCookie();
+        const response = await getLoggedProfile();
+
+        setUser({ ...sessionUser, ...response });
+      } catch {
+        setUser(null);
+        setHasSessionUser(false);
       }
     }
   };
 
   useEffect(() => {
     getUserProfile();
+
     supabaseModule.onAuthStateChange(getUserProfile);
   }, []);
 
   const logout = async () => {
     await supabaseModule.logout();
+
     setUser(null);
     setHasSessionUser(false);
+
     redirectToHome();
   };
 
   const setNotionData = (hasNotionData: boolean) =>
-    setUser((_prevUser) => (_prevUser ? { ..._prevUser, hasNotionData } : null));
+    setUser((_prevUser) => ({
+      ..._prevUser!,
+      hasNotionData,
+    }));
 
-  return (
-    <UserContext.Provider
-      value={{
-        user,
-        logout,
-        setNotionData,
-        hasSessionUser,
-        loginViaMagicLink,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+  const providerValue = Object.freeze({
+    user,
+    logout,
+    setNotionData,
+    hasSessionUser,
+    loginViaMagicLink,
+  });
+
+  return <UserContext.Provider value={providerValue}>{children}</UserContext.Provider>;
 };
