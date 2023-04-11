@@ -16,8 +16,8 @@ import {
 import { useRouter, useUser } from '@infrastructure/hooks';
 
 export const TryItNow: FC = (): JSX.Element => {
+  const { isLoading, user } = useUser();
   const { redirectToDashboard, redirectToLogin, redirectToOnboarding } = useRouter();
-  const { user } = useUser();
 
   const handleActionButtonClick = () => {
     if (!user) {
@@ -52,6 +52,7 @@ export const TryItNow: FC = (): JSX.Element => {
             </Box>
             <Flex align="center" justify="center" w="full">
               <Button
+                isLoading={isLoading}
                 rightIcon={
                   <Icon as={MdKeyboardArrowRight} fontSize={{ base: '20px', sm: '24px' }} />
                 }

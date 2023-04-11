@@ -16,7 +16,7 @@ const loginViaMagicLink = (email: string) => supabaseModule.loginViaMagicLink(em
 export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
   const { redirectToHome } = useRouter();
 
-  const [hasSessionUser, setHasSessionUser] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>();
   const [user, setUser] = useState<(User & IProfile) | null>(null);
 
   const { getLoggedProfile } = useLoggedProfile();
@@ -29,17 +29,15 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
 
     const sessionUser = supabaseModule.getUser();
 
-    setHasSessionUser(!!sessionUser);
-
     if (sessionUser) {
+      setIsLoading(true);
       try {
         await setSupabaseCookie();
         const response = await getLoggedProfile();
 
         setUser({ ...sessionUser, ...response });
-      } catch {
-        setUser(null);
-        setHasSessionUser(false);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -54,8 +52,6 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
     await supabaseModule.logout();
 
     setUser(null);
-    setHasSessionUser(false);
-
     redirectToHome();
   };
 
@@ -65,13 +61,18 @@ export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
       hasNotionData,
     }));
 
-  const providerValue = Object.freeze({
-    user,
-    logout,
-    setNotionData,
-    hasSessionUser,
-    loginViaMagicLink,
-  });
-
-  return <UserContext.Provider value={providerValue}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        logout,
+        isLoading,
+        setNotionData,
+        loginViaMagicLink,
+        isUserAuthenticated: !!user,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };

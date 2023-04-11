@@ -102,6 +102,7 @@ const AccountSettingsComponent = () => {
 };
 
 export const AccountSettings = withCheckIfUserLogged(AccountSettingsComponent, {
+  currentPageUrl: ERoutes.ACCOUNT_SETTINGS,
   redirectUrlOnError: ERoutes.ONBOARDING,
   shouldHaveNotionData: true,
 });
