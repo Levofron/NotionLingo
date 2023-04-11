@@ -1,5 +1,3 @@
-![Logo](https://raw.githubusercontent.com/Levofron/NotionLingo/main/public/apple-touch-icon.png)
-
 # NotionLingo
 
 Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to easily learn new words and phrases from your own Notion database!
@@ -9,6 +7,10 @@ Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows
 ![Dashboard](https://i.imgur.com/JZ6C3ly.png)
 
 ![Onboarding](https://i.imgur.com/L0rzrXQ.png)
+
+## Architecture diagram
+
+![Architecture](https://i.imgur.com/Jv1M7aL.jpg)
 
 ## Features
 
