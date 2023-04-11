@@ -3,5 +3,5 @@ module.exports = {
   '*.{ts,tsx}': [() => 'tsc --skipLibCheck --noEmit'],
   '*.json': ['prettier --write'],
   'package.json': ['prettier-package-json --write'],
-  '*': 'yarn check:architecture',
+  '*': [() => 'yarn check:architecture'],
 };
