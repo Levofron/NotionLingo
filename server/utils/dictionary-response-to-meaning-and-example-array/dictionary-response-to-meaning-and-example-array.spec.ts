@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { dictionaryResponseToMeaningAndExampleArray } from './dictionary-response-to-meaning-and-example-array.function';
 

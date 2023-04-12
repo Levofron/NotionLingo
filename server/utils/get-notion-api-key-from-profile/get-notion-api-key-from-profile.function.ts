@@ -1,4 +1,4 @@
-import { hasOwnProperty, isObject, isString } from '@infrastructure/guards';
+import { hasOwnProperty, isObject, isString } from '@shared/guards';
 
 import { decrypt } from '../decrypt/decrypt.function';
 

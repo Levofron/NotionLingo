@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 
 import { Box, Flex } from '@presentation/atoms';
 
-import { useUser } from '@infrastructure/hooks';
+import { useUser } from '@shared/hooks';
 
 import { NavigationItem } from '../navigation-item/navigation-item.component';
 import { sidebarItems } from './sidebar-content.defaults';

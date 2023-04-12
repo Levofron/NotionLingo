@@ -4,8 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { cleanUpString } from '@infrastructure/functions';
-import { hasOwnProperty } from '@infrastructure/guards';
+import { cleanUpString } from '@shared/functions';
+import { hasOwnProperty } from '@shared/guards';
 
 import { EHttpStatusCode } from '@server/http-status-code';
 import {

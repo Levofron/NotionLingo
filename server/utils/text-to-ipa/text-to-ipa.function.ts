@@ -1,7 +1,7 @@
 import TextToIPA from 'text-to-ipa';
 
-import { cleanUpString } from '@infrastructure/functions';
-import { isString } from '@infrastructure/guards';
+import { cleanUpString } from '@shared/functions';
+import { isString } from '@shared/guards';
 
 const pickFirstWordFromOr = (word: string | null) => {
   if (!isString(word)) {

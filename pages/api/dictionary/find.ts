@@ -4,7 +4,7 @@ import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 import fetch from 'node-fetch';
 
-import { cleanUpString } from '@infrastructure/functions';
+import { cleanUpString } from '@shared/functions';
 
 import { EHttpStatusCode } from '@server/http-status-code';
 import {

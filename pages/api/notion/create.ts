@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { cleanUpString } from '@infrastructure/functions';
-import { isString } from '@infrastructure/guards';
+import { cleanUpString } from '@shared/functions';
+import { isString } from '@shared/guards';
 
 import { EHttpStatusCode } from '@server/http-status-code';
 import {

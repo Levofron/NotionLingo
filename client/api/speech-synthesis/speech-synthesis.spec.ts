@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { getSpeechSynthesisApi } from './speech-synthesis.api';
 

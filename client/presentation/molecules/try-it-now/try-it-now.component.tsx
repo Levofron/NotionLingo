@@ -13,7 +13,7 @@ import {
   Text,
 } from '@presentation/atoms';
 
-import { useRouter, useUser } from '@infrastructure/hooks';
+import { useRouter, useUser } from '@shared/hooks';
 
 export const TryItNow: FC = (): JSX.Element => {
   const { isLoading, user } = useUser();

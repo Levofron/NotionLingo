@@ -4,7 +4,7 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { Flex, List, ListIcon, ListItem, Text } from '@presentation/atoms';
 import { OnboardingStepLayout } from '@presentation/molecules';
 
-import { useRouter } from '@infrastructure/hooks';
+import { useRouter } from '@shared/hooks';
 
 import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,

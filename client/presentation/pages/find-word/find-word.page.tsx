@@ -5,10 +5,10 @@ import { FindWord as FindWordTemplate } from '@presentation/templates';
 
 import { useDictionarySuggestions } from '@adapter/hooks';
 
-import { debounce } from '@infrastructure/functions';
-import { isString } from '@infrastructure/guards';
-import { useCopyToClipboard, useRouter, useToast, useUser } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/routes';
+import { debounce } from '@shared/functions';
+import { isString } from '@shared/guards';
+import { useCopyToClipboard, useRouter, useToast, useUser } from '@shared/hooks';
+import { ERoutes } from '@shared/routes';
 
 export const FindWord = () => {
   const toast = useToast();

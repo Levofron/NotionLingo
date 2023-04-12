@@ -2,7 +2,7 @@ import { Offline as OfflineTemplate } from '@presentation/templates';
 
 import { useHealthCheck } from '@adapter/hooks';
 
-import { useRouter, useToast } from '@infrastructure/hooks';
+import { useRouter, useToast } from '@shared/hooks';
 
 export const Offline = () => {
   const toast = useToast();

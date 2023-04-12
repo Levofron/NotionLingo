@@ -1,4 +1,4 @@
-import { ERoutes } from '@infrastructure/routes';
+import { ERoutes } from '@shared/routes';
 
 import { ISidebarItem } from './sidebar-content.types';
 

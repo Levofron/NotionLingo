@@ -6,8 +6,8 @@ import { AccountSettings as AccountSettingsTemplate } from '@presentation/templa
 
 import { useDeleteProfile, useResetIntegration } from '@adapter/hooks';
 
-import { useCountdown, useRouter, useToast, useUser } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/routes';
+import { useCountdown, useRouter, useToast, useUser } from '@shared/hooks';
+import { ERoutes } from '@shared/routes';
 
 const AccountSettingsComponent = () => {
   const toast = useToast();

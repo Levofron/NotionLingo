@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { generateMemoryCacheKey } from './generate-memory-cache-key.function';
 

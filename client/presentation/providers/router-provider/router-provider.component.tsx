@@ -3,8 +3,8 @@ import { FC, useEffect } from 'react';
 
 import { localStorageModule } from '@adapter/local-storage/local-storage.module';
 
-import { RouterContext } from '@infrastructure/context';
-import { useIsFirstRender } from '@infrastructure/hooks';
+import { RouterContext } from '@shared/context';
+import { useIsFirstRender } from '@shared/hooks';
 
 import { IRouterProviderProps } from './router-provider.types';
 

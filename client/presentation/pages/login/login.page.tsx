@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Login as LoginTemplate } from '@presentation/templates';
 
-import { useToast, useUser } from '@infrastructure/hooks';
+import { useToast, useUser } from '@shared/hooks';
 
 export const Login = () => {
   const toast = useToast();

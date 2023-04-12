@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { validateIfParametersExistsMiddleware } from './validate-if-parameters-exists-middleware.function';
 

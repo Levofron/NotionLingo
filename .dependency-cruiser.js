@@ -181,14 +181,7 @@ module.exports = {
     {
       from: { path: '(^client/presentation)' },
       to: {
-        path: [
-          '^$1',
-          '^client/adapter',
-          '^client/domain',
-          '^client/infrastructure',
-          '^(.yarn)',
-          '^config',
-        ],
+        path: ['^$1', '^client/adapter', '^client/domain', '^client/shared', '^(.yarn)', '^config'],
       },
     },
     {
@@ -197,7 +190,7 @@ module.exports = {
         path: [
           '^$1',
           '^client/domain',
-          '^client/infrastructure',
+          '^client/shared',
           '^client/api',
           '^client/repositories',
           '^config',
@@ -212,7 +205,7 @@ module.exports = {
           '^$1',
           '^client/repositories',
           '^client/presentation',
-          '^client/infrastructure',
+          '^client/shared',
           '^config',
           '^(.yarn)',
         ],
@@ -226,7 +219,7 @@ module.exports = {
           '^client/adapter',
           '^client/domain',
           '^client/repositories',
-          '^client/infrastructure',
+          '^client/shared',
           '^(.yarn)',
         ],
       },
@@ -238,14 +231,14 @@ module.exports = {
           '^$1',
           '^client/adapter',
           '^client/domain',
-          '^client/infrastructure',
+          '^client/shared',
           '^client/api',
           '^config',
         ],
       },
     },
     {
-      from: { path: '(^client/infrastructure)' },
+      from: { path: '(^client/shared)' },
       to: {
         path: ['^$1', '^client/domain', '^config', '^(.yarn)'],
       },
@@ -266,7 +259,7 @@ module.exports = {
     {
       from: { path: '(^server)' },
       to: {
-        path: ['^$1', '^client/infrastructure', '^crypto', '^(.yarn)', '^config'],
+        path: ['^$1', '^client/shared', '^crypto', '^(.yarn)', '^config'],
       },
     },
     // config

@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { validateIfUserIsLoggedInMiddleware } from './validate-if-user-is-logged-in-middleware.function';
 

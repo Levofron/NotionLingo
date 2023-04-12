@@ -8,7 +8,7 @@ import { Box, Button, Card, Flex, Heading, Icon, Text } from '@presentation/atom
 import { localStorageModule } from '@adapter/local-storage/local-storage.module';
 import { speechSynthesisModule } from '@adapter/speech-synthesis/speech-synthesis.module';
 
-import { useKeyPressMapper } from '@infrastructure/hooks';
+import { useKeyPressMapper } from '@shared/hooks';
 
 import { INotionWordCardFrontProps } from './notion-word-card-front.types';
 

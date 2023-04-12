@@ -1,7 +1,7 @@
 import { withCheckIfUserLogged } from '@presentation/hoc';
 import { Donate as DonateTemplate } from '@presentation/templates';
 
-import { ERoutes } from '@infrastructure/routes';
+import { ERoutes } from '@shared/routes';
 
 const DonateComponent = () => <DonateTemplate />;
 

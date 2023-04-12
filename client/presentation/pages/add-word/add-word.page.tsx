@@ -5,8 +5,8 @@ import { AddWord as AddWordTemplate } from '@presentation/templates';
 
 import { useCreateWord, useTableColumns } from '@adapter/hooks';
 
-import { useRouter, useToast } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/routes';
+import { useRouter, useToast } from '@shared/hooks';
+import { ERoutes } from '@shared/routes';
 
 const AddWordComponent = () => {
   const toast = useToast();
