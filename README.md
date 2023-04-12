@@ -10,7 +10,7 @@ Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows
 
 ## Architecture diagram
 
-![Architecture](https://i.imgur.com/Jv1M7aL.jpg)
+![Architecture](https://i.imgur.com/6X3xYcb.png)
 
 ## Features
 
