@@ -1,7 +1,7 @@
 import { User } from '@supabase/supabase-js';
 import { ReactNode } from 'react';
 
-import { IProfile } from '@domain/rest/rest.types';
+import { IProfile } from '@domain/rest/rest.models';
 
 export interface IUserProviderProps {
   children: ReactNode;

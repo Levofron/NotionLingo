@@ -1,5 +1,5 @@
 import { findNotionWordById, findNotionWordIndexById } from '@domain/rest/operations';
-import { INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
+import { INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
 
 export const updateRecordInNotionWordArray = (
   words: INotionWord[],

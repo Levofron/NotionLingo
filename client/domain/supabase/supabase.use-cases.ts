@@ -11,7 +11,7 @@ import {
   IOAuthResponse,
   IOnAuthStateChangeResponse,
   TOnAuthStateChangeCallback,
-} from './supabase.entities';
+} from './supabase.models';
 import { ISupabaseRepository } from './supabase.repository';
 
 // loginViaMagicLinkUseCase

@@ -1,4 +1,4 @@
-import { INotionWord } from '@domain/rest/rest.types';
+import { INotionWord } from '@domain/rest/rest.models';
 
 import { findNotionWordIndexById } from '../find-notion-word-index-by-id/find-notion-word-index-by-id.function';
 

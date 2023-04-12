@@ -3,7 +3,7 @@ import { RefObject } from 'react';
 
 import { IConfirmationModalRef } from '@presentation/molecules';
 
-import { IProfile } from '@domain/rest/rest.types';
+import { IProfile } from '@domain/rest/rest.models';
 
 export interface IAccountSettingsProps {
   deleteAccountModalRef: RefObject<IConfirmationModalRef>;

@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { IDictionarySuggestions } from '@domain/rest/rest.types';
+import { IDictionarySuggestions } from '@domain/rest/rest.models';
 
 export interface IFindWordProps {
   dictionarySuggestions: IDictionarySuggestions | null;

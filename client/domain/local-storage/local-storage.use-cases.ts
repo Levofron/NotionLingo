@@ -1,5 +1,5 @@
 import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../use-cases.types';
-import { ISetItemParams } from './local-storage.entities';
+import { ISetItemParams } from './local-storage.models';
 import { ILocalStorageRepository } from './local-storage.repository';
 
 // isSupportedUseCase

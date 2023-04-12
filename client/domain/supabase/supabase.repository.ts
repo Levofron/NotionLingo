@@ -5,7 +5,7 @@ import {
   IOAuthResponse,
   IOnAuthStateChangeResponse,
   TOnAuthStateChangeCallback,
-} from './supabase.entities';
+} from './supabase.models';
 
 export interface ISupabaseRepository {
   getSession: () => Session | null;

@@ -10,7 +10,7 @@ import {
   IProfile,
   IUpdatedNotionWord,
   TNotionTableColumn,
-} from '@domain/rest/rest.types';
+} from '@domain/rest/rest.models';
 
 export interface INotionWordResponseRecord {
   exampleSentence: string;

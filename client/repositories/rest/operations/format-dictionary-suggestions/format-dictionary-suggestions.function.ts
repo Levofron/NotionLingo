@@ -1,4 +1,4 @@
-import { IDictionarySuggestions } from '@domain/rest/rest.types';
+import { IDictionarySuggestions } from '@domain/rest/rest.models';
 
 import { cleanUpString } from '@infrastructure/functions';
 
