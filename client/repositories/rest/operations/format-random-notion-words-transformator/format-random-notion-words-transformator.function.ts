@@ -14,6 +14,7 @@ export const formatRandomNotionWordsTransformator = (
     const randomNotionWord = { ..._randomNotionWord };
 
     for (const _key of objectKeys(randomNotionWord)) {
+      const isTypeColumn = _key === 'type';
       const currentValue = randomNotionWord[_key];
 
       if (['ipa', 'id'].includes(_key)) {
@@ -21,20 +22,23 @@ export const formatRandomNotionWordsTransformator = (
       }
 
       if (!currentValue) {
-        randomNotionWord[_key] = cleanUpStringOptions.toReturnWhenEmpty;
+        randomNotionWord[_key] = isTypeColumn ? '' : cleanUpStringOptions.toReturnWhenEmpty;
 
         continue;
       }
 
-      if (_key === 'type') {
+      if (isTypeColumn) {
         if (isString(currentValue)) {
-          randomNotionWord[_key] = cleanUpString(currentValue, cleanUpStringOptions);
+          randomNotionWord[_key] = cleanUpString(currentValue, {
+            ...cleanUpStringOptions,
+            toReturnWhenEmpty: '',
+          });
 
           continue;
         }
 
         randomNotionWord[_key] = currentValue.map((_value) =>
-          cleanUpString(_value, cleanUpStringOptions),
+          cleanUpString(_value, { ...cleanUpStringOptions, toReturnWhenEmpty: '' }),
         );
 
         continue;
