@@ -29,16 +29,13 @@ export const formatRandomNotionWordsTransformator = (
 
       if (isTypeColumn) {
         if (isString(currentValue)) {
-          randomNotionWord[_key] = cleanUpString(currentValue, {
-            ...cleanUpStringOptions,
-            toReturnWhenEmpty: '',
-          });
+          randomNotionWord[_key] = cleanUpString(currentValue, cleanUpStringOptions);
 
           continue;
         }
 
         randomNotionWord[_key] = currentValue.map((_value) =>
-          cleanUpString(_value, { ...cleanUpStringOptions, toReturnWhenEmpty: '' }),
+          cleanUpString(_value, cleanUpStringOptions),
         );
 
         continue;
