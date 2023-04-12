@@ -27,7 +27,7 @@ export const formatRandomNotionWordsTransformator = (
         continue;
       }
 
-      if (isTypeColumn) {
+      if (_key === 'type') {
         if (isString(currentValue)) {
           randomNotionWord[_key] = cleanUpString(currentValue, cleanUpStringOptions);
 
