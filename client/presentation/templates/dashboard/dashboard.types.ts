@@ -1,4 +1,4 @@
-import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
+import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
 
 export interface IDashboardProps {
   dailyStreakData: IIncreaseDailyStreak;

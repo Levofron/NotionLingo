@@ -1,6 +1,6 @@
 import { INotionWordResponseRecord } from '@api/rest/rest.types';
 
-import { INotionWord } from '@domain/rest/rest.types';
+import { INotionWord } from '@domain/rest/rest.models';
 
 import { UNSPLASH_BASE_URL } from '@config/constants';
 

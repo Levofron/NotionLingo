@@ -10,7 +10,7 @@ import {
   IProfile,
   IUpdateNotionWordRequest,
   TNotionTableColumn,
-} from './rest.types';
+} from './rest.models';
 
 export interface IRestRepository {
   createNotionWord: (data: Record<string, string>) => Promise<string>;

@@ -1,4 +1,4 @@
-import { INotionDatabase } from '@domain/rest/rest.types';
+import { INotionDatabase } from '@domain/rest/rest.models';
 
 export interface IAvailableNotionDatabaseProps {
   availableNotionDatabase: INotionDatabase;

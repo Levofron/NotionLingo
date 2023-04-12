@@ -1,7 +1,7 @@
 import { FormikErrors, useFormik } from 'formik';
 import { FormEvent } from 'react';
 
-import { TNotionTableColumn } from '@domain/rest/rest.types';
+import { TNotionTableColumn } from '@domain/rest/rest.models';
 
 export interface IAddWordFormProps {
   errors: FormikErrors<Record<string, string>>;

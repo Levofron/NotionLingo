@@ -5,7 +5,6 @@ import {
   IUseCaseWithSingleParamAndPromiseResult,
   IUseCaseWithoutParamsAndPromiseResult,
 } from '../use-cases.types';
-import { IRestRepository } from './rest.repository';
 import {
   IContact,
   IDictionarySuggestions,
@@ -16,7 +15,8 @@ import {
   IProfile,
   IUpdateNotionWordRequest,
   TNotionTableColumn,
-} from './rest.types';
+} from './rest.models';
+import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
 export type THealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<string>;

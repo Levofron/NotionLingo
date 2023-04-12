@@ -1,4 +1,4 @@
-import { ISpeakOptions } from '@domain/speech-synthesis/speech-synthesis.entities';
+import { ISpeakOptions } from '@domain/speech-synthesis/speech-synthesis.models';
 
 export interface ISpeechSynthesisApi {
   cancel: () => void;

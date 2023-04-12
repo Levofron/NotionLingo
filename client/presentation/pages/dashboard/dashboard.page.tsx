@@ -6,7 +6,7 @@ import { Dashboard as DashboardTemplate } from '@presentation/templates';
 import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
 
 import { removeNotionWordFromArray } from '@domain/rest/operations';
-import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.types';
+import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
 
 import { useToast, useUser } from '@infrastructure/hooks';
 import { ERoutes } from '@infrastructure/routes';

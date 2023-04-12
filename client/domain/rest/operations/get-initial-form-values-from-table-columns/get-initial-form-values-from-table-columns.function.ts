@@ -1,4 +1,4 @@
-import { TNotionTableColumn } from '@domain/rest/rest.types';
+import { TNotionTableColumn } from '@domain/rest/rest.models';
 
 const getFieldValue = (column: TNotionTableColumn, queryParams?: Record<string, string>) => {
   if (column.type === 'multi_select') {
