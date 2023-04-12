@@ -2,8 +2,8 @@ import { FC, useMemo } from 'react';
 
 import { Box, Button, Card, Container, Flex, Heading, Highlight } from '@presentation/atoms';
 
-import { useRouter, useUser } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/routes';
+import { useRouter, useUser } from '@shared/hooks';
+import { ERoutes } from '@shared/routes';
 
 import { ParticlesBackgroundLayout } from '../particles-background-layout/particles-background-layout.component';
 import { IHomeHeroProps } from './home-hero.types';

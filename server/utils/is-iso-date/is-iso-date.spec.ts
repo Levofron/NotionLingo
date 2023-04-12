@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { isIsoDate } from './is-iso-date.function';
 

@@ -5,8 +5,8 @@ import { BsArrowUpCircle } from 'react-icons/bs';
 
 import { MotionIconButton } from '@presentation/molecules';
 
-import { scrollToTop } from '@infrastructure/functions';
-import { useEventListener } from '@infrastructure/hooks';
+import { scrollToTop } from '@shared/functions';
+import { useEventListener } from '@shared/hooks';
 
 import { IBackToTopButtonProps } from './back-to-top-button.types';
 

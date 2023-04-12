@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { isString } from '@infrastructure/guards';
+import { isString } from '@shared/guards';
 
 import { EHttpStatusCode } from '@server/http-status-code';
 import {

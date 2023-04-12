@@ -1,6 +1,6 @@
 import { INotionWord } from '@domain/rest/rest.models';
 
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { updateRecordInNotionWordArray } from './update-record-in-notion-word-array.function';
 

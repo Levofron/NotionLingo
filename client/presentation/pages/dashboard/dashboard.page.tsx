@@ -8,8 +8,8 @@ import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks
 import { removeNotionWordFromArray } from '@domain/rest/operations';
 import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
 
-import { useToast, useUser } from '@infrastructure/hooks';
-import { ERoutes } from '@infrastructure/routes';
+import { useToast, useUser } from '@shared/hooks';
+import { ERoutes } from '@shared/routes';
 
 const DashboardComponent = () => {
   const toast = useToast();

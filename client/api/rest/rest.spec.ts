@@ -1,6 +1,6 @@
 import { IContact, IHash, INotionDatabase, INotionWord, IProfile } from '@domain/rest/rest.models';
 
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { getRestApi } from './rest.api';
 

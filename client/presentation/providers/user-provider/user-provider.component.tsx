@@ -6,8 +6,8 @@ import { supabaseModule } from '@adapter/supabase/supabase.module';
 
 import { IProfile } from '@domain/rest/rest.models';
 
-import { UserContext } from '@infrastructure/context';
-import { useRouter } from '@infrastructure/hooks';
+import { UserContext } from '@shared/context';
+import { useRouter } from '@shared/hooks';
 
 import { IUserProviderProps } from './user-provider.types';
 

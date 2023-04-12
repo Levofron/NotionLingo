@@ -25,7 +25,7 @@ import {
   updateNotionWordUseCase,
 } from '@domain/rest/rest.use-cases';
 
-import { axiosInstance } from '@infrastructure/axios.instance';
+import { axiosInstance } from '@shared/axios.instance';
 
 import { supabaseInstance } from '@config/supabase.instance';
 

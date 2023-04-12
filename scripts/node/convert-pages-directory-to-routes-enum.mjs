@@ -9,7 +9,7 @@ const getPath = (destination) => {
 
 const getPagesDirectoryPath = () => getPath('pages');
 
-const getRouteTypesDirectoryPath = () => getPath('client/infrastructure/routes.ts');
+const getRouteTypesDirectoryPath = () => getPath('client/shared/routes.ts');
 
 const getFilenamesFromDirectory = (dirname) =>
   new Promise((resolve, reject) => {

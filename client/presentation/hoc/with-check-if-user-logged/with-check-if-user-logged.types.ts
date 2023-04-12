@@ -1,4 +1,4 @@
-import { ERoutes } from '@infrastructure/routes';
+import { ERoutes } from '@shared/routes';
 
 export interface IWithCheckIfUserLoggedOptions {
   currentPageUrl: ERoutes;

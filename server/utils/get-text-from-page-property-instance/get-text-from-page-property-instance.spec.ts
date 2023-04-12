@@ -1,4 +1,4 @@
-import { functionImportTest } from '@infrastructure/functions';
+import { functionImportTest } from '@shared/functions';
 
 import { SUPPORTED_TYPE_COLUMN_NAMES, SUPPORTED_WORD_COLUMN_NAMES } from '@config/constants';
 

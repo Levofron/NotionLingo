@@ -8,7 +8,7 @@ import { Icon } from '@presentation/atoms';
 import { localStorageModule } from '@adapter/local-storage/local-storage.module';
 import { speechSynthesisModule } from '@adapter/speech-synthesis/speech-synthesis.module';
 
-import { useCountdown, useKeyPressMapper, useWindowSize } from '@infrastructure/hooks';
+import { useCountdown, useKeyPressMapper, useWindowSize } from '@shared/hooks';
 
 import { INotionWordCardAnimationWrapperProps } from './notion-word-card-animation-wrapper.types';
 

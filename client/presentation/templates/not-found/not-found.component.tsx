@@ -3,7 +3,7 @@ import { TbError404 } from 'react-icons/tb';
 import { Flex } from '@presentation/atoms';
 import { DisplayError, ParticlesBackgroundLayout } from '@presentation/molecules';
 
-import { useRouter } from '@infrastructure/hooks';
+import { useRouter } from '@shared/hooks';
 
 export const NotFound = () => {
   const { redirectToHome } = useRouter();

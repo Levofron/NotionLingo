@@ -1,7 +1,7 @@
 import { withCheckIfUserLogged } from '@presentation/hoc';
 import { Onboarding as OnboardingTemplate } from '@presentation/templates';
 
-import { ERoutes } from '@infrastructure/routes';
+import { ERoutes } from '@shared/routes';
 
 const OnboardingComponent = () => <OnboardingTemplate />;
 

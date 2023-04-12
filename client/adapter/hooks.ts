@@ -1,6 +1,6 @@
 import { restModule } from '@adapter/rest/rest.module';
 
-import { useAxios } from '@infrastructure/hooks';
+import { useAxios } from '@shared/hooks';
 
 export const useUpdateWord = () => {
   const { isLoading, mutateAsync } = useAxios(restModule.updateNotionWord);

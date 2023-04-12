@@ -8,7 +8,7 @@ import { AddWordForm, SidebarWithHeader } from '@presentation/organisms';
 
 import { getInitialFormValuesFromTableColumns } from '@domain/rest/operations';
 
-import { useRouter } from '@infrastructure/hooks';
+import { useRouter } from '@shared/hooks';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
 import { IAddWordProps } from './add-word.types';
