@@ -1,5 +1,5 @@
-import { getRestRepository } from '@repositories/rest/rest.repository';
-import { getSupabaseRepository } from '@repositories/supabase/supabase.repository';
+import { getRestRepository } from '@repository/rest/rest.repository';
+import { getSupabaseRepository } from '@repository/supabase/supabase.repository';
 
 import { getRestApi } from '@api/rest/rest.api';
 import { getSupabaseApi } from '@api/supabase/supabase.api';

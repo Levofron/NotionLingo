@@ -1,6 +1,6 @@
-import { getRestRepository } from '@repositories/rest/rest.repository';
-import { getSpeechSynthesisRepository } from '@repositories/speech-synthesis/speech-synthesis.repository';
-import { getSupabaseRepository } from '@repositories/supabase/supabase.repository';
+import { getRestRepository } from '@repository/rest/rest.repository';
+import { getSpeechSynthesisRepository } from '@repository/speech-synthesis/speech-synthesis.repository';
+import { getSupabaseRepository } from '@repository/supabase/supabase.repository';
 
 import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
 import { getRestApi } from '@api/rest/rest.api';

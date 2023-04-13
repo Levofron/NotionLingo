@@ -1,4 +1,4 @@
-import { getSpeechSynthesisRepository } from '@repositories/speech-synthesis/speech-synthesis.repository';
+import { getSpeechSynthesisRepository } from '@repository/speech-synthesis/speech-synthesis.repository';
 
 import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
 import { getSpeechSynthesisApi } from '@api/speech-synthesis/speech-synthesis.api';
