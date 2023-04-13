@@ -1,4 +1,4 @@
-import { getLocalStorageRepository } from '@repositories/local-storage/local-storage.repository';
+import { getLocalStorageRepository } from '@repository/local-storage/local-storage.repository';
 
 import { getLocalStorageApi } from '@api/local-storage/local-storage.api';
 

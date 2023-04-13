@@ -192,7 +192,7 @@ module.exports = {
           '^client/domain',
           '^client/shared',
           '^client/api',
-          '^client/repositories',
+          '^client/repository',
           '^config',
           '^(.yarn)',
         ],
@@ -203,7 +203,7 @@ module.exports = {
       to: {
         path: [
           '^$1',
-          '^client/repositories',
+          '^client/repository',
           '^client/presentation',
           '^client/shared',
           '^config',
@@ -218,14 +218,14 @@ module.exports = {
           '^$1',
           '^client/adapter',
           '^client/domain',
-          '^client/repositories',
+          '^client/repository',
           '^client/shared',
           '^(.yarn)',
         ],
       },
     },
     {
-      from: { path: '(^client/repositories)' },
+      from: { path: '(^client/repository)' },
       to: {
         path: [
           '^$1',
