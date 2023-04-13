@@ -75,7 +75,7 @@ describe('formatRandomNotionWordsTransformator function', () => {
       {
         id: 'id',
         ipa: 'ipa',
-        type: '---',
+        type: '',
         word: 'Word',
         meaning: 'Meaning',
         exampleSentence: 'Example sentence',
@@ -115,7 +115,7 @@ describe('formatRandomNotionWordsTransformator function', () => {
       },
       {
         id: '',
-        type: '---',
+        type: '',
         word: '---',
         ipa: 'ipa',
         meaning: '---',
