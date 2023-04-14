@@ -38,7 +38,7 @@ export const Donate = (): JSX.Element => (
               gap={{ base: 3, sm: 0 }}
               justifyContent="space-around"
             >
-              <ChakraNextLink href={BUY_ME_A_COFFEE_LINK} target="_blank">
+              <ChakraNextLink filter="grayscale(100%)" href={BUY_ME_A_COFFEE_LINK} target="_blank">
                 <NextImage
                   alt="Buy Me A Coffee"
                   height={40}
@@ -46,7 +46,7 @@ export const Donate = (): JSX.Element => (
                   width={142.47}
                 />
               </ChakraNextLink>
-              <ChakraNextLink href={PAYPAL_LINK} target="_blank">
+              <ChakraNextLink filter="grayscale(100%)" href={PAYPAL_LINK} target="_blank">
                 <NextImage
                   alt="PayPal"
                   height={40}

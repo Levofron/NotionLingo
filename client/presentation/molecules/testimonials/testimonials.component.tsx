@@ -50,7 +50,7 @@ export const Testimonials = (): JSX.Element => (
               </Text>
             </Flex>
             <Flex align="center" direction="column" mt={8}>
-              <Avatar mb={2} src={_testimonial.imageSrc} />
+              <Avatar filter="grayscale(100%)" mb={2} src={_testimonial.imageSrc} />
               <Stack align="center" spacing={-1}>
                 <Text fontWeight={600}>{_testimonial.name}</Text>
                 <Text color="gray.600" fontSize="sm">
