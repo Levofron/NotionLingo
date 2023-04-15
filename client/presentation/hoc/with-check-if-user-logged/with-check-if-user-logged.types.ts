@@ -1,7 +1,7 @@
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 export interface IWithCheckIfUserLoggedOptions {
-  currentPageUrl: ERoutes;
-  redirectUrlOnError: ERoutes;
+  currentPageUrl: Routes;
+  redirectUrlOnError: Routes;
   shouldHaveNotionData: boolean;
 }

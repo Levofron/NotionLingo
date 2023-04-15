@@ -4,7 +4,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { isString } from '@shared/guards';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   getProfileById,
@@ -31,7 +31,7 @@ const updateProfileDetailsDecorator =
       .throwOnError()
       .single();
 
-    return res.status(EHttpStatusCode.OK).json({
+    return res.status(HttpStatusCode.OK).json({
       daysInStreak: updatedProfileData?.days_in_streak,
       todayWordsStreak: updatedProfileData?.today_words_streak,
       totalLearnedWords: updatedProfileData?.total_learned_words,
@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const profileData = await getProfileById(user?.id!);
 
   if (!isString(currentDate) || !isIsoDate(currentDate)) {
-    throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'Invalid date');
+    throw new ApiError(HttpStatusCode.BAD_REQUEST, 'Invalid date');
   }
 
   const currentDateAsDate = new Date(currentDate);

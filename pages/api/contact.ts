@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
@@ -23,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     })
     .throwOnError();
 
-  res.status(EHttpStatusCode.OK).json(contactFormData);
+  res.status(HttpStatusCode.OK).json(contactFormData);
 };
 
 const middlewareToApply = [

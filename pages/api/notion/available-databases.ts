@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   decrypt,
@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!profileData.notion_api_key) {
     throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       'The user does not have a notion api key',
     );
   }

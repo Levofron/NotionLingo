@@ -1,4 +1,4 @@
-export enum ERoutes {
+export enum Routes {
   ACCOUNT_SETTINGS = '/account-settings',
   ADD_WORD = '/add-word',
   DASHBOARD = '/dashboard',

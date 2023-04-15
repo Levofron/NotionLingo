@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   encrypt,
@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const availableDatabases = await getAvailableNotionDatabases(token);
 
   if (!availableDatabases?.length) {
-    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Your words database is empty');
+    throw new ApiError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Your words database is empty');
   }
 
   const hash = encrypt(token);
@@ -42,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await updateProfileNotionApiKey(user?.id!, hashAsString);
 
-  return res.status(EHttpStatusCode.OK).json(hash);
+  return res.status(HttpStatusCode.OK).json(hash);
 };
 
 const middlewareToApply = [

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   validateRequestMethodMiddleware,
   validateRouteSecretMiddleware,
@@ -12,7 +12,7 @@ const handler = (_: NextApiRequest, res: NextApiResponse) => {
   const currentDate = new Date();
   const isoDate = currentDate.toISOString();
 
-  res.status(EHttpStatusCode.OK).json(isoDate);
+  res.status(HttpStatusCode.OK).json(isoDate);
 };
 
 const middlewareToApply = [validateRequestMethodMiddleware('GET'), validateRouteSecretMiddleware];

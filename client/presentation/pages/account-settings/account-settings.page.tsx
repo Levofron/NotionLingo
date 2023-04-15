@@ -7,7 +7,7 @@ import { AccountSettings as AccountSettingsTemplate } from '@presentation/templa
 import { useDeleteProfile, useResetIntegration } from '@adapter/hooks';
 
 import { useCountdown, useRouter, useToast, useUser } from '@shared/hooks';
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 const AccountSettingsComponent = () => {
   const toast = useToast();
@@ -102,7 +102,7 @@ const AccountSettingsComponent = () => {
 };
 
 export const AccountSettings = withCheckIfUserLogged(AccountSettingsComponent, {
-  currentPageUrl: ERoutes.ACCOUNT_SETTINGS,
-  redirectUrlOnError: ERoutes.ONBOARDING,
+  currentPageUrl: Routes.ACCOUNT_SETTINGS,
+  redirectUrlOnError: Routes.ONBOARDING,
   shouldHaveNotionData: true,
 });

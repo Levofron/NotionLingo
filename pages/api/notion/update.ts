@@ -7,7 +7,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 import { cleanUpString } from '@shared/functions';
 import { hasOwnProperty } from '@shared/guards';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -54,7 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!parsedMeaning && !parsedExampleSentence) {
     throw new ApiError(
-      EHttpStatusCode.BAD_REQUEST,
+      HttpStatusCode.BAD_REQUEST,
       'You need to provide at least one of the following parameters: meaning, exampleSentence',
     );
   }
@@ -73,7 +73,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!meaningColumn || !exampleSentenceColumn) {
     throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       'You need to have at least one of the following columns: meaning, exampleSentence',
     );
   }
@@ -100,7 +100,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (!hasOwnProperty(result, 'properties')) {
-    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    throw new ApiError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Something went wrong');
   }
 
   const properties = result?.properties as PageObjectResponse['properties'];
@@ -112,7 +112,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   memoryCache.del(cacheKey);
 
-  return res.status(EHttpStatusCode.OK).json({
+  return res.status(HttpStatusCode.OK).json({
     id: result.id,
     properties: {
       meaning: meaningText,

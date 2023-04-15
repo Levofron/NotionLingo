@@ -3,7 +3,7 @@ import { FC, useMemo } from 'react';
 import { Box, Button, Card, Container, Flex, Heading, Highlight } from '@presentation/atoms';
 
 import { useRouter, useUser } from '@shared/hooks';
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 import { ParticlesBackgroundLayout } from '../particles-background-layout/particles-background-layout.component';
 import { IHomeHeroProps } from './home-hero.types';
@@ -17,7 +17,7 @@ export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element
       return redirectToLogin();
     }
 
-    push(user.hasNotionData === true ? ERoutes.DASHBOARD : ERoutes.ONBOARDING);
+    push(user.hasNotionData === true ? Routes.DASHBOARD : Routes.ONBOARDING);
   };
 
   const buttonLabel = useMemo(() => {

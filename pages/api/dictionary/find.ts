@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 
 import { cleanUpString } from '@shared/functions';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   dictionaryResponseToMeaningAndExampleArray,
   validateIfParametersExistsMiddleware,
@@ -137,7 +137,7 @@ export const getWordDetailsFromDictionary = async (string: string) => {
   const hasCambridgeDictionaryResponse = hasResponse(cambridgeDictionaryResponse);
 
   if (!hasMerriamWebsterResponse || !hasCambridgeDictionaryResponse) {
-    throw new ApiError(EHttpStatusCode.BAD_REQUEST, `Word not found - ${parsedWord}`);
+    throw new ApiError(HttpStatusCode.BAD_REQUEST, `Word not found - ${parsedWord}`);
   }
 
   if (hasMerriamWebsterResponse && !hasCambridgeDictionaryResponse) {
@@ -172,7 +172,7 @@ export const getWordDetailsFromDictionary = async (string: string) => {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const response = await getWordDetailsFromDictionary(req.query.word as string);
 
-  res.status(EHttpStatusCode.OK).json(response);
+  res.status(HttpStatusCode.OK).json(response);
 };
 
 const middlewareToApply = [

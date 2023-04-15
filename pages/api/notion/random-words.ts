@@ -7,7 +7,7 @@ import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -208,7 +208,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }),
   );
 
-  return res.status(EHttpStatusCode.OK).json(formattedPages);
+  return res.status(HttpStatusCode.OK).json(formattedPages);
 };
 
 const middlewareToApply = [

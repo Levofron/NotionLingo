@@ -8,7 +8,7 @@ import { useDictionarySuggestions } from '@adapter/hooks';
 import { debounce } from '@shared/functions';
 import { isString } from '@shared/guards';
 import { useCopyToClipboard, useRouter, useToast, useUser } from '@shared/hooks';
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 export const FindWord = () => {
   const toast = useToast();
@@ -45,7 +45,7 @@ export const FindWord = () => {
 
   const handleAddWordClick = (word: string, meaning: string, exampleSentence: string) => () =>
     router.push({
-      pathname: ERoutes.ADD_WORD,
+      pathname: Routes.ADD_WORD,
       query: {
         word,
         meaning,
