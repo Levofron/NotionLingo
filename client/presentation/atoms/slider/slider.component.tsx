@@ -30,6 +30,7 @@ const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = 
   return (
     <ChakraSlider
       ref={ref}
+      value={value}
       onChange={handleChange}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
