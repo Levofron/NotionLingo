@@ -3,9 +3,9 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import { Button, Flex, Icon, TabPanel, Text } from '@presentation/atoms';
 
-import { IOnboardingStepLayoutProps } from './onboarding-step-layout.types';
+import { OnboardingStepLayoutProps } from './onboarding-step-layout.types';
 
-export const OnboardingStepLayout: FC<IOnboardingStepLayoutProps> = ({
+export const OnboardingStepLayout: FC<OnboardingStepLayoutProps> = ({
   backButtonLabel = 'Back',
   children,
   onBackButtonClick,

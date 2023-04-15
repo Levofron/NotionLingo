@@ -3,9 +3,9 @@ import { FC } from 'react';
 
 import { Counter } from '@presentation/atoms';
 
-import { IDashboardProfileDetailsProps } from './dashboard-profile-details.types';
+import { DashboardProfileDetailsProps } from './dashboard-profile-details.types';
 
-export const DashboardProfileDetails: FC<IDashboardProfileDetailsProps> = (
+export const DashboardProfileDetails: FC<DashboardProfileDetailsProps> = (
   dailyStreakData,
 ): JSX.Element => {
   const prevDailyStreakData = usePrevious(dailyStreakData);

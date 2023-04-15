@@ -2,17 +2,17 @@ import { Session } from '@supabase/supabase-js';
 import { AxiosResponse } from 'axios';
 
 import {
-  IContact,
-  IDictionarySuggestions,
-  IHash,
-  IIncreaseDailyStreak,
-  INotionDatabase,
-  IProfile,
-  IUpdatedNotionWord,
+  Contact,
+  DictionarySuggestions,
+  Hash,
+  IncreaseDailyStreak,
+  NotionDatabase,
   NotionTableColumn,
+  Profile,
+  UpdatedNotionWord,
 } from '@domain/rest/rest.models';
 
-export interface INotionWordResponseRecord {
+export interface NotionWordResponseRecord {
   exampleSentence: string;
   exampleSentenceSuggestion?: string;
   id: string;
@@ -41,22 +41,22 @@ export enum RestEndpoints {
   UPDATE_NOTION_WORD = '/notion/update',
 }
 
-export interface IRestApi {
+export interface RestApi {
   createNotionWord: (
     data: Record<string, string>,
-  ) => Promise<AxiosResponse<INotionWordResponseRecord>>;
+  ) => Promise<AxiosResponse<NotionWordResponseRecord>>;
   deleteProfile: () => Promise<void>;
-  getAvailableNotionDatabases: () => Promise<AxiosResponse<INotionDatabase[]>>;
-  getDictionarySuggestions: (word: string) => Promise<AxiosResponse<IDictionarySuggestions>>;
-  getLoggedProfile: () => Promise<AxiosResponse<IProfile>>;
+  getAvailableNotionDatabases: () => Promise<AxiosResponse<NotionDatabase[]>>;
+  getDictionarySuggestions: (word: string) => Promise<AxiosResponse<DictionarySuggestions>>;
+  getLoggedProfile: () => Promise<AxiosResponse<Profile>>;
   getNotionTableColumns: () => Promise<AxiosResponse<NotionTableColumn[]>>;
-  getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseRecord[]>>;
+  getRandomNotionWords: () => Promise<AxiosResponse<NotionWordResponseRecord[]>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
-  increaseDailyStreak: () => Promise<AxiosResponse<IIncreaseDailyStreak>>;
+  increaseDailyStreak: () => Promise<AxiosResponse<IncreaseDailyStreak>>;
   resetNotionIntegration: () => Promise<void>;
-  sendContactFormData: (data: IContact) => Promise<AxiosResponse<IContact>>;
-  setNotionApiToken: (token: string) => Promise<AxiosResponse<IHash>>;
+  sendContactFormData: (data: Contact) => Promise<AxiosResponse<Contact>>;
+  setNotionApiToken: (token: string) => Promise<AxiosResponse<Hash>>;
   setNotionDatabaseId: (databaseId: string) => Promise<AxiosResponse<string>>;
   setSupabaseCookie: (supabaseSession: Session | null) => Promise<void>;
-  updateNotionWord: (word: IUpdatedNotionWord) => Promise<AxiosResponse<INotionWordResponseRecord>>;
+  updateNotionWord: (word: UpdatedNotionWord) => Promise<AxiosResponse<NotionWordResponseRecord>>;
 }

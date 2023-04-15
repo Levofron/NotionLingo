@@ -15,9 +15,9 @@ import {
   SidebarWithHeader,
 } from '@presentation/organisms';
 
-import { IDashboardProps } from './dashboard.types';
+import { DashboardProps } from './dashboard.types';
 
-export const Dashboard: FC<IDashboardProps> = ({
+export const Dashboard: FC<DashboardProps> = ({
   dailyStreakData,
   fetchMoreWords,
   isRandomWordsLoading,

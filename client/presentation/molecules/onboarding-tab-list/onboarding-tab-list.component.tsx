@@ -3,11 +3,11 @@ import { BsCircleFill } from 'react-icons/bs';
 
 import { Flex, Icon, Tab, TabList } from '@presentation/atoms';
 
-import { IOnboardingTabListProps } from './onboarding-tab-list.types';
+import { OnboardingTabListProps } from './onboarding-tab-list.types';
 
 const width = { sm: '72px', md: '150px', lg: '180px' };
 
-export const OnboardingTabList: FC<IOnboardingTabListProps> = ({
+export const OnboardingTabList: FC<OnboardingTabListProps> = ({
   activeTabs,
   createNotionIntegrationTabRef,
   selectNotionDatabaseTabRef,

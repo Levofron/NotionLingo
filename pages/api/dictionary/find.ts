@@ -15,7 +15,7 @@ import {
   withMiddleware,
 } from '@server/utils';
 
-interface IMeaningWithExamples {
+interface MeaningWithExamples {
   examples: string[];
   meaning: string;
 }
@@ -64,7 +64,7 @@ const webscrapCambridgeDictionary = async (html: string) => {
   const $ = load(html as string);
 
   const additionalExamples: string[] = [];
-  const meaningAndExamples: IMeaningWithExamples[] = [];
+  const meaningAndExamples: MeaningWithExamples[] = [];
 
   const word = $('.dhw').first().text().trim();
 
@@ -102,7 +102,7 @@ const webscrapCambridgeDictionary = async (html: string) => {
 
 const webscrapMerriamWebster = async (html: string) => {
   const $ = load(html as string);
-  const meaningAndExamples: IMeaningWithExamples[] = [];
+  const meaningAndExamples: MeaningWithExamples[] = [];
 
   const word = $('.dhw').first().text().trim();
 

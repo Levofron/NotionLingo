@@ -1,36 +1,36 @@
-import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
-import { ISupabaseRepository } from '@domain/supabase/supabase.repository';
+import { SpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
+import { SupabaseRepository } from '@domain/supabase/supabase.repository';
 
 import {
-  IUseCaseWithSingleParamAndPromiseResult,
-  IUseCaseWithoutParamsAndPromiseResult,
+  UseCaseWithSingleParamAndPromiseResult,
+  UseCaseWithoutParamsAndPromiseResult,
 } from '../use-cases.types';
 import {
-  IContact,
-  IDictionarySuggestions,
-  IHash,
-  IIncreaseDailyStreak,
-  INotionDatabase,
-  INotionWord,
-  IProfile,
-  IUpdateNotionWordRequest,
+  Contact,
+  DictionarySuggestions,
+  Hash,
+  IncreaseDailyStreak,
+  NotionDatabase,
   NotionTableColumn,
+  NotionWord,
+  Profile,
+  UpdateNotionWordRequest,
 } from './rest.models';
-import { IRestRepository } from './rest.repository';
+import { RestRepository } from './rest.repository';
 
 // healthCheckUseCase
-export type HealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<string>;
+export type HealthCheckUseCase = UseCaseWithoutParamsAndPromiseResult<string>;
 
-export const healthCheckUseCase = (restRepository: IRestRepository): HealthCheckUseCase => ({
+export const healthCheckUseCase = (restRepository: RestRepository): HealthCheckUseCase => ({
   execute: () => restRepository.healthCheck(),
 });
 
 // setSupabaseCookieUseCase
-export type SetSupabaseCookieUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type SetSupabaseCookieUseCase = UseCaseWithoutParamsAndPromiseResult<void>;
 
 export const setSupabaseCookieUseCase = (
-  restRepository: IRestRepository,
-  supabaseRepository: ISupabaseRepository,
+  restRepository: RestRepository,
+  supabaseRepository: SupabaseRepository,
 ): SetSupabaseCookieUseCase => ({
   execute: () => {
     const session = supabaseRepository.getSession();
@@ -40,71 +40,67 @@ export const setSupabaseCookieUseCase = (
 });
 
 // getLoggedProfileUseCase
-export type GetLoggedProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<IProfile>;
+export type GetLoggedProfileUseCase = UseCaseWithoutParamsAndPromiseResult<Profile>;
 
 export const getLoggedProfileUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): GetLoggedProfileUseCase => ({
   execute: () => restRepository.getLoggedProfile(),
 });
 
 // setNotionApiTokenUseCase
-export type SetNotionApiTokenUseCase = IUseCaseWithSingleParamAndPromiseResult<string, IHash>;
+export type SetNotionApiTokenUseCase = UseCaseWithSingleParamAndPromiseResult<string, Hash>;
 
 export const setNotionApiTokenUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): SetNotionApiTokenUseCase => ({
   execute: (token) => restRepository.setNotionApiToken(token),
 });
 
 // getAvailableNotionDatabasesUseCase
-export type GetAvailableNotionDatabasesUseCase = IUseCaseWithoutParamsAndPromiseResult<
-  INotionDatabase[]
+export type GetAvailableNotionDatabasesUseCase = UseCaseWithoutParamsAndPromiseResult<
+  NotionDatabase[]
 >;
 
 export const getAvailableNotionDatabasesUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): GetAvailableNotionDatabasesUseCase => ({
   execute: () => restRepository.getAvailableNotionDatabases(),
 });
 
 // setNotionDatabaseIdUseCase
-export type SetNotionDatabaseIdUseCase = IUseCaseWithSingleParamAndPromiseResult<string, string>;
+export type SetNotionDatabaseIdUseCase = UseCaseWithSingleParamAndPromiseResult<string, string>;
 
 export const setNotionDatabaseIdUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): SetNotionDatabaseIdUseCase => ({
   execute: (databaseId) => restRepository.setNotionDatabaseId(databaseId),
 });
 
 // getRandomNotionWordsUseCase
-export type GetRandomNotionWordsUseCase = IUseCaseWithoutParamsAndPromiseResult<INotionWord[]>;
+export type GetRandomNotionWordsUseCase = UseCaseWithoutParamsAndPromiseResult<NotionWord[]>;
 
 export const getRandomNotionWordsUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): GetRandomNotionWordsUseCase => ({
   execute: () => restRepository.getRandomNotionWords(),
 });
 
 // sendContactFormDataUseCase
-export type SendContactFormDataUseCase = IUseCaseWithSingleParamAndPromiseResult<
-  IContact,
-  IContact
->;
+export type SendContactFormDataUseCase = UseCaseWithSingleParamAndPromiseResult<Contact, Contact>;
 
 export const sendContactFormDataUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): SendContactFormDataUseCase => ({
   execute: (data) => restRepository.sendContactFormData(data),
 });
 
 // increaseDailyStreakUseCase
-export type IncreaseDailyStreakUseCase =
-  IUseCaseWithoutParamsAndPromiseResult<IIncreaseDailyStreak>;
+export type IncreaseDailyStreakUseCase = UseCaseWithoutParamsAndPromiseResult<IncreaseDailyStreak>;
 
 export const increaseDailyStreakUseCase = (
-  restRepository: IRestRepository,
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  restRepository: RestRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): IncreaseDailyStreakUseCase => ({
   execute: () => {
     speechSynthesisRepository.cancel();
@@ -114,20 +110,20 @@ export const increaseDailyStreakUseCase = (
 });
 
 // resetNotionIntegrationUseCase
-export type ResetNotionIntegrationUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type ResetNotionIntegrationUseCase = UseCaseWithoutParamsAndPromiseResult<void>;
 
 export const resetNotionIntegrationUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): ResetNotionIntegrationUseCase => ({
   execute: () => restRepository.resetNotionIntegration(),
 });
 
 // deleteProfileUseCase
-export type DeleteProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type DeleteProfileUseCase = UseCaseWithoutParamsAndPromiseResult<void>;
 
 export const deleteProfileUseCase = (
-  restRepository: IRestRepository,
-  supabaseRepository: ISupabaseRepository,
+  restRepository: RestRepository,
+  supabaseRepository: SupabaseRepository,
 ): DeleteProfileUseCase => ({
   execute: async () => {
     await restRepository.deleteProfile();
@@ -137,48 +133,48 @@ export const deleteProfileUseCase = (
 });
 
 // getDictionarySuggestionsUseCase
-export type GetDictionarySuggestionsUseCaseUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type GetDictionarySuggestionsUseCaseUseCase = UseCaseWithSingleParamAndPromiseResult<
   string,
-  IDictionarySuggestions | null
+  DictionarySuggestions | null
 >;
 
 export const getDictionarySuggestionsUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): GetDictionarySuggestionsUseCaseUseCase => ({
   execute: (word) => restRepository.getDictionarySuggestions(word),
 });
 
 // updateNotionWordUseCase
-export type UpdateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
-  IUpdateNotionWordRequest,
-  INotionWord[]
+export type UpdateNotionWordUseCase = UseCaseWithSingleParamAndPromiseResult<
+  UpdateNotionWordRequest,
+  NotionWord[]
 >;
 
 export const updateNotionWordUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): UpdateNotionWordUseCase => ({
   execute: (data) => restRepository.updateNotionWord(data),
 });
 
 // getNotionTableColumnsUseCase
-export type GetNotionTableColumnsUseCase = IUseCaseWithoutParamsAndPromiseResult<
+export type GetNotionTableColumnsUseCase = UseCaseWithoutParamsAndPromiseResult<
   NotionTableColumn[]
 >;
 
 export const getNotionTableColumnsUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): GetNotionTableColumnsUseCase => ({
   execute: () => restRepository.getNotionTableColumns(),
 });
 
 // createNotionWordUseCase
-export type CreateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type CreateNotionWordUseCase = UseCaseWithSingleParamAndPromiseResult<
   Record<string, string>,
   string
 >;
 
 export const createNotionWordUseCase = (
-  restRepository: IRestRepository,
+  restRepository: RestRepository,
 ): CreateNotionWordUseCase => ({
   execute: (word) => restRepository.createNotionWord(word),
 });

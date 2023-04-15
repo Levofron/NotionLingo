@@ -1,5 +1,5 @@
 import { As, IconProps } from '@chakra-ui/react';
 
-export interface IListIconProps extends IconProps {
+export interface ListIconProps extends IconProps {
   as?: As;
 }

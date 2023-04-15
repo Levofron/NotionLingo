@@ -4,11 +4,11 @@ import { FullScreenLoader } from '@presentation/molecules';
 
 import { useRouter, useUser } from '@shared/hooks';
 
-import { IWithCheckIfUserLoggedOptions } from './with-check-if-user-logged.types';
+import { WithCheckIfUserLoggedOptions } from './with-check-if-user-logged.types';
 
 export const withCheckIfUserLogged = (
   WrappedComponent: ComponentType,
-  { currentPageUrl, redirectUrlOnError, shouldHaveNotionData }: IWithCheckIfUserLoggedOptions,
+  { currentPageUrl, redirectUrlOnError, shouldHaveNotionData }: WithCheckIfUserLoggedOptions,
 ) => {
   const CheckIfUserLogged = () => {
     const { isLoading, user } = useUser();

@@ -1,9 +1,9 @@
 import { Textarea as ChakraTextarea } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { ITextareaProps } from './textarea.types';
+import { TextareaProps } from './textarea.types';
 
-const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, ITextareaProps> = (
+const TextareaComponent: ForwardRefRenderFunction<HTMLTextAreaElement, TextareaProps> = (
   { mode = 'dark', style, ...restProps },
   ref,
 ): JSX.Element => {

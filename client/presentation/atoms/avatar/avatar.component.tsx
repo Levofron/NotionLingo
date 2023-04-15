@@ -1,9 +1,9 @@
 import { Avatar as ChakraAvatar } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IAvatarProps } from './avatar.types';
+import { AvatarProps } from './avatar.types';
 
-const AvatarComponent: ForwardRefRenderFunction<HTMLSpanElement, IAvatarProps> = (
+const AvatarComponent: ForwardRefRenderFunction<HTMLSpanElement, AvatarProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraAvatar ref={ref} {...props} />;

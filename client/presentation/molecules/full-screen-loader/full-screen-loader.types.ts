@@ -1,3 +1,3 @@
-import { IFlexProps } from '@presentation/atoms';
+import { FlexProps } from '@presentation/atoms';
 
-export interface IFullScreenLoaderProps extends IFlexProps {}
+export interface FullScreenLoaderProps extends FlexProps {}

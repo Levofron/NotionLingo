@@ -1,9 +1,9 @@
 import { Accordion as ChakraAccordion } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IAccordionProps } from './accordion.types';
+import { AccordionProps } from './accordion.types';
 
-const AccordionComponent: ForwardRefRenderFunction<HTMLDivElement, IAccordionProps> = (
+const AccordionComponent: ForwardRefRenderFunction<HTMLDivElement, AccordionProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraAccordion ref={ref} {...props} />;

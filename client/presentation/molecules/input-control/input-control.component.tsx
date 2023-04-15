@@ -9,9 +9,9 @@ import {
   Spinner,
 } from '@presentation/atoms';
 
-import { IInputControlProps } from './input-control.types';
+import { InputControlProps } from './input-control.types';
 
-const InputControlComponent: ForwardRefRenderFunction<HTMLInputElement, IInputControlProps> = (
+const InputControlComponent: ForwardRefRenderFunction<HTMLInputElement, InputControlProps> = (
   { errorMessage, isDisabled, isLoading, isRequired, label, mode, ...inputProps },
   ref,
 ): JSX.Element => (

@@ -4,9 +4,9 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { Flex, List, ListIcon, ListItem, Text, TextUnderline } from '@presentation/atoms';
 import { OnboardingStepLayout } from '@presentation/molecules';
 
-import { IOnboardingStepThreeProps } from './onboarding-step-three.types';
+import { OnboardingStepThreeProps } from './onboarding-step-three.types';
 
-export const OnboardingStepThree: FC<IOnboardingStepThreeProps> = (props): JSX.Element => (
+export const OnboardingStepThree: FC<OnboardingStepThreeProps> = (props): JSX.Element => (
   <OnboardingStepLayout
     {...props}
     subtitle="Now that you have created an integration, you need to grant it access to a database. To keep

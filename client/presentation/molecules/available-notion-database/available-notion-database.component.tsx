@@ -12,9 +12,9 @@ import {
   Text,
 } from '@presentation/atoms';
 
-import { IAvailableNotionDatabaseProps } from './available-notion-database.types';
+import { AvailableNotionDatabaseProps } from './available-notion-database.types';
 
-export const AvailableNotionDatabase: FC<IAvailableNotionDatabaseProps> = ({
+export const AvailableNotionDatabase: FC<AvailableNotionDatabaseProps> = ({
   availableNotionDatabase,
   isLoading,
   onClick,

@@ -1,5 +1,5 @@
-import { InputProps } from '@chakra-ui/react';
+import { InputProps as ChakraInputProps } from '@chakra-ui/react';
 
-export interface IInputProps extends InputProps {
+export interface InputProps extends ChakraInputProps {
   mode?: ThemeMode;
 }

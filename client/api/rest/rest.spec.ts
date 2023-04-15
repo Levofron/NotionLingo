@@ -1,4 +1,4 @@
-import { IContact, IHash, INotionDatabase, INotionWord, IProfile } from '@domain/rest/rest.models';
+import { Contact, Hash, NotionDatabase, NotionWord, Profile } from '@domain/rest/rest.models';
 
 import { functionImportTest } from '@shared/functions';
 
@@ -102,7 +102,7 @@ describe('getRestApi function', () => {
   });
 
   describe('getLoggedProfile endpoint', () => {
-    const userMock: IProfile = {
+    const userMock: Profile = {
       email: 'email',
       daysInStreak: 1,
       todayWordsStreak: 1,
@@ -142,7 +142,7 @@ describe('getRestApi function', () => {
   });
 
   describe('getRandomNotionWords endpoint', () => {
-    const notionWordMock: INotionWord = {
+    const notionWordMock: NotionWord = {
       id: 'id',
       ipa: 'ipa',
       word: 'word',
@@ -186,7 +186,7 @@ describe('getRestApi function', () => {
 
   describe('setNotionApiToken endpoint', () => {
     it('should call proper endpoint with proper data', () => {
-      const hashMock: IHash = {
+      const hashMock: Hash = {
         iv: 'iv',
         content: 'content',
       };
@@ -221,7 +221,7 @@ describe('getRestApi function', () => {
   });
 
   describe('getAvailableNotionDatabases endpoint', () => {
-    const notionDatabaseMock: INotionDatabase = {
+    const notionDatabaseMock: NotionDatabase = {
       id: 'id',
       url: 'url',
       title: 'title',
@@ -294,7 +294,7 @@ describe('getRestApi function', () => {
 
   describe('sendContactFormData endpoint', () => {
     it('should call proper endpoint with proper data', () => {
-      const contactFormDataMock: IContact = {
+      const contactFormDataMock: Contact = {
         email: 'email',
         message: 'message',
         fullName: 'fullName',

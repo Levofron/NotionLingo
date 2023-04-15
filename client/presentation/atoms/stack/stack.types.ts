@@ -1,3 +1,3 @@
-import { StackProps } from '@chakra-ui/react';
+import { StackProps as ChakraStackProps } from '@chakra-ui/react';
 
-export interface IStackProps extends StackProps {}
+export interface StackProps extends ChakraStackProps {}

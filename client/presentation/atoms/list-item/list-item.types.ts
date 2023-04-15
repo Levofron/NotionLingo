@@ -1,3 +1,3 @@
-import { ListItemProps } from '@chakra-ui/react';
+import { ListItemProps as ChakraListItemProps } from '@chakra-ui/react';
 
-export interface IListItemProps extends ListItemProps {}
+export interface ListItemProps extends ChakraListItemProps {}

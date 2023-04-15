@@ -1,5 +1,5 @@
-import { SpinnerProps } from '@chakra-ui/react';
+import { SpinnerProps as ChakraSpinnerProps } from '@chakra-ui/react';
 
-export interface ISpinnerProps extends SpinnerProps {
+export interface SpinnerProps extends ChakraSpinnerProps {
   mode?: ThemeMode;
 }

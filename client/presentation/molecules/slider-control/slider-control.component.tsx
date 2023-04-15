@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { FormControl, FormErrorMessage, FormLabel, Slider, Spinner } from '@presentation/atoms';
 
-import { ISliderControlProps } from './slider-control.types';
+import { SliderControlProps } from './slider-control.types';
 
-export const SliderControl: FC<ISliderControlProps> = ({
+export const SliderControl: FC<SliderControlProps> = ({
   errorMessage,
   isDisabled,
   isLoading,

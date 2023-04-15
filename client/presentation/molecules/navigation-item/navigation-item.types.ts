@@ -1,4 +1,4 @@
-export interface INavigationItemProps {
+export interface NavigationItemProps {
   children: string;
   href: string;
 }

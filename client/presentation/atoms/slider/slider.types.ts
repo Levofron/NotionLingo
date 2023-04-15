@@ -1,3 +1,3 @@
-import { SliderProps } from '@chakra-ui/react';
+import { SliderProps as ChakraSliderProps } from '@chakra-ui/react';
 
-export interface ISliderProps extends SliderProps {}
+export interface SliderProps extends ChakraSliderProps {}

@@ -1,3 +1,3 @@
-import { ModalHeaderProps } from '@chakra-ui/react';
+import { ModalHeaderProps as ChakraModalHeaderProps } from '@chakra-ui/react';
 
-export interface IModalHeaderProps extends ModalHeaderProps {}
+export interface ModalHeaderProps extends ChakraModalHeaderProps {}

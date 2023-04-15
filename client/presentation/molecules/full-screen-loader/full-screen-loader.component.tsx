@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { Flex, Spinner } from '@presentation/atoms';
 
-import { IFullScreenLoaderProps } from './full-screen-loader.types';
+import { FullScreenLoaderProps } from './full-screen-loader.types';
 
-export const FullScreenLoader: FC<IFullScreenLoaderProps> = ({
+export const FullScreenLoader: FC<FullScreenLoaderProps> = ({
   children,
   ...restProps
 }): JSX.Element => (

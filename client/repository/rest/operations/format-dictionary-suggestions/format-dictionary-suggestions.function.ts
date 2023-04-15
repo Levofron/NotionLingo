@@ -1,11 +1,11 @@
-import { IDictionarySuggestions } from '@domain/rest/rest.models';
+import { DictionarySuggestions } from '@domain/rest/rest.models';
 
 import { cleanUpString } from '@shared/functions';
 
 export const formatDictionarySuggestions = ({
   suggestions,
   word,
-}: IDictionarySuggestions): IDictionarySuggestions => {
+}: DictionarySuggestions): DictionarySuggestions => {
   const cleanedWord = cleanUpString(word);
 
   const cleanedSuggestions = suggestions.map((_suggestion) => {

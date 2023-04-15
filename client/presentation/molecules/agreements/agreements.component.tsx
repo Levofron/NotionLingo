@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { Box, Container, Flex, Heading, Text } from '@presentation/atoms';
 
-import { IAgreementsProps } from './agreements.types';
+import { AgreementsProps } from './agreements.types';
 
-export const Agreements: FC<IAgreementsProps> = ({ agreements, heading }): JSX.Element => (
+export const Agreements: FC<AgreementsProps> = ({ agreements, heading }): JSX.Element => (
   <Box bg="gray.50">
     <Container maxW="3xl" pt={{ base: 58, sm: 66, md: 74 }}>
       <Flex

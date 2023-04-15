@@ -1,6 +1,6 @@
-import { ITextareaProps } from '@presentation/atoms';
+import { TextareaProps as ChakraTextareaProps } from '@presentation/atoms';
 
-export interface ITextareaControlProps extends ITextareaProps {
+export interface TextareaControlProps extends ChakraTextareaProps {
   errorMessage?: string;
   isDisabled?: boolean;
   isRequired?: boolean;

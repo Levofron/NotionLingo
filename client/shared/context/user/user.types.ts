@@ -1,13 +1,13 @@
 import { User } from '@supabase/supabase-js';
 
-import { IProfile } from '@domain/rest/rest.models';
-import { IOAuthResponse } from '@domain/supabase/supabase.models';
+import { Profile } from '@domain/rest/rest.models';
+import { OAuthResponse } from '@domain/supabase/supabase.models';
 
-export interface IUserContextValue {
+export interface UserContextValue {
   isLoading: boolean | undefined;
   isUserAuthenticated: boolean;
-  loginViaMagicLink: (email: string) => Promise<IOAuthResponse>;
+  loginViaMagicLink: (email: string) => Promise<OAuthResponse>;
   logout: () => void;
   setNotionData: (hasNotionData: boolean) => void;
-  user: (User & IProfile) | null;
+  user: (User & Profile) | null;
 }

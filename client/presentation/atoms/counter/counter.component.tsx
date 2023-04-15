@@ -1,9 +1,9 @@
 import { animate } from 'framer-motion';
 import { FC, useEffect, useRef } from 'react';
 
-import { ICounterProps } from './counter.types';
+import { CounterProps } from './counter.types';
 
-export const Counter: FC<ICounterProps> = ({
+export const Counter: FC<CounterProps> = ({
   duration = 5,
   from,
   precision = 2,

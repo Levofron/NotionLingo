@@ -1,10 +1,10 @@
-import { INotionWord } from '@domain/rest/rest.models';
+import { NotionWord } from '@domain/rest/rest.models';
 
 import { functionImportTest } from '@shared/functions';
 
 import { findNotionWordIndexById } from './find-notion-word-index-by-id.function';
 
-const notionWordMock: INotionWord = {
+const notionWordMock: NotionWord = {
   id: 'id',
   ipa: 'ipa',
   word: 'word',

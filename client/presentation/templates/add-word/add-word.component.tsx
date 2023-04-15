@@ -11,9 +11,9 @@ import { getInitialFormValuesFromTableColumns } from '@domain/rest/operations';
 import { useRouter } from '@shared/hooks';
 
 import { getAddWordFormValidationSchema } from './add-word.defaults';
-import { IAddWordProps } from './add-word.types';
+import { AddWordProps } from './add-word.types';
 
-export const AddWord: FC<IAddWordProps> = ({
+export const AddWord: FC<AddWordProps> = ({
   error,
   isCreateWordLoading,
   isTableColumnsLoading,

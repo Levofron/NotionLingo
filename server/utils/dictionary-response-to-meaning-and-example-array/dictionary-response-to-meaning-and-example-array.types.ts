@@ -1,10 +1,10 @@
-export interface IMeaningWithExamples {
+export interface MeaningWithExamples {
   examples: string[];
   meaning: string;
 }
 
-export interface IDictionaryResponse {
+export interface DictionaryResponse {
   additionalExamples: string[];
-  meaningAndExamples: IMeaningWithExamples[];
+  meaningAndExamples: MeaningWithExamples[];
   word: string;
 }

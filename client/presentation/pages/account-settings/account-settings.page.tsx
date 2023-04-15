@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { withCheckIfUserLogged } from '@presentation/hoc';
-import { IConfirmationModalRef } from '@presentation/molecules';
+import { ConfirmationModalRef } from '@presentation/molecules';
 import { AccountSettings as AccountSettingsTemplate } from '@presentation/templates';
 
 import { useDeleteProfile, useResetIntegration } from '@adapter/hooks';
@@ -28,8 +28,8 @@ const AccountSettingsComponent = () => {
     start: startDeleteProfileCountdown,
   } = useCountdown(5);
 
-  const deleteAccountModalRef = useRef<IConfirmationModalRef>(null);
-  const resetIntegrationModalRef = useRef<IConfirmationModalRef>(null);
+  const deleteAccountModalRef = useRef<ConfirmationModalRef>(null);
+  const resetIntegrationModalRef = useRef<ConfirmationModalRef>(null);
 
   const { deleteProfile, isDeleteProfileLoading } = useDeleteProfile();
   const { isResetIntegrationLoading, resetIntegration } = useResetIntegration();

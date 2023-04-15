@@ -1,5 +1,5 @@
-import { TextareaProps } from '@chakra-ui/react';
+import { TextareaProps as ChakraTextareaProps } from '@chakra-ui/react';
 
-export interface ITextareaProps extends TextareaProps {
+export interface TextareaProps extends ChakraTextareaProps {
   mode?: ThemeMode;
 }

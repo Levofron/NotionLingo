@@ -1,9 +1,9 @@
 import { Tabs as ChakraTabs } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { ITabsProps } from './tabs.types';
+import { TabsProps } from './tabs.types';
 
-const TabsComponent: ForwardRefRenderFunction<HTMLDivElement, ITabsProps> = (
+const TabsComponent: ForwardRefRenderFunction<HTMLDivElement, TabsProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraTabs ref={ref} {...props} />;

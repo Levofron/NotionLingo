@@ -5,19 +5,19 @@ import {
 } from '@config/constants';
 
 import {
-  IDatabaseProperties,
-  IValidDatabaseProperties,
+  DatabaseProperties,
+  ValidDatabaseProperties,
 } from './is-valid-notion-database-schema.types';
 
-const validDatabaseProperties: IValidDatabaseProperties[] = [
+const validDatabaseProperties: ValidDatabaseProperties[] = [
   { type: 'title', names: SUPPORTED_WORD_COLUMN_NAMES },
   { type: 'rich_text', names: SUPPORTED_MEANING_COLUMN_NAMES },
   { type: 'rich_text', names: SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES },
 ];
 
 const hasValidTypeAndName =
-  (databasePropertiesValues: IDatabaseProperties[]) =>
-  (currentDatabaseProperty: IValidDatabaseProperties) =>
+  (databasePropertiesValues: DatabaseProperties[]) =>
+  (currentDatabaseProperty: ValidDatabaseProperties) =>
     databasePropertiesValues.some(
       (_value) =>
         currentDatabaseProperty.names.includes(_value.name) &&
@@ -25,7 +25,7 @@ const hasValidTypeAndName =
     );
 
 export const isValidNotionDatabaseSchema = (
-  databaseProperties: Record<string, IDatabaseProperties>,
+  databaseProperties: Record<string, DatabaseProperties>,
 ) => {
   const databasePropertiesValues = Object.values(databaseProperties);
 

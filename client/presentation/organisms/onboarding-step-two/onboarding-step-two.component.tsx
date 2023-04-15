@@ -12,9 +12,9 @@ import {
 } from '@presentation/atoms';
 import { OnboardingStepLayout } from '@presentation/molecules';
 
-import { IOnboardingStepTwoProps } from './onboarding-step-two.types';
+import { OnboardingStepTwoProps } from './onboarding-step-two.types';
 
-export const OnboardingStepTwo: FC<IOnboardingStepTwoProps> = (props): JSX.Element => (
+export const OnboardingStepTwo: FC<OnboardingStepTwoProps> = (props): JSX.Element => (
   <OnboardingStepLayout
     {...props}
     subtitle="A Notion integration lets you connect information in Notion to other software."

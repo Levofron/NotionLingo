@@ -1,5 +1,5 @@
-import { As, IconProps } from '@chakra-ui/react';
+import { As, IconProps as ChakraIconProps } from '@chakra-ui/react';
 
-export interface IIconProps extends IconProps {
+export interface IconProps extends ChakraIconProps {
   as?: As;
 }

@@ -1,3 +1,3 @@
-import { AlertDialogProps } from '@chakra-ui/react';
+import { AlertDialogProps as ChakraAlertDialogProps } from '@chakra-ui/react';
 
-export interface IAlertDialogProps extends AlertDialogProps {}
+export interface AlertDialogProps extends ChakraAlertDialogProps {}

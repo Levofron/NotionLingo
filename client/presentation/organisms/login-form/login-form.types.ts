@@ -1,7 +1,7 @@
 import { FormikErrors, useFormik } from 'formik';
 import { FormEvent } from 'react';
 
-export interface ILoginFormProps {
+export interface LoginFormProps {
   errors: FormikErrors<Record<string, string>>;
   isLoading: boolean;
   onBlur: ReturnType<typeof useFormik>['handleBlur'];

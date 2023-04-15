@@ -39,20 +39,20 @@ const CACHE_TIME = 1000 * 60 * 60;
 
 type Page = PageObjectResponse | PartialPageObjectResponse;
 
-interface IGetPagesParams {
+interface GetPagesParams {
   notionClient: Client;
   notionDatabaseId: string;
   startCursor: string | null;
 }
 
-interface IGetPagesWithCacheParams {
+interface GetPagesWithCacheParams {
   notionApiKey: string;
   notionClient: Client;
   notionDatabaseId: string;
   profileId: string;
 }
 
-interface IGetPagesResult {
+interface GetPagesResult {
   hasMore: boolean;
   nextCursor: string | null;
   pages: Page[];
@@ -92,7 +92,7 @@ const getPages = async ({
   notionClient,
   notionDatabaseId,
   startCursor,
-}: IGetPagesParams): Promise<IGetPagesResult> => {
+}: GetPagesParams): Promise<GetPagesResult> => {
   const database = await notionClient.databases.query({
     start_cursor: startCursor || undefined,
     database_id: notionDatabaseId,
@@ -107,9 +107,9 @@ const getPagesWithCache = async ({
   notionClient,
   notionDatabaseId,
   profileId,
-}: IGetPagesWithCacheParams) => {
+}: GetPagesWithCacheParams) => {
   const cacheKey = generateMemoryCacheKey(profileId, notionDatabaseId, notionApiKey);
-  const cachedGetPagesResult = memoryCache.get(cacheKey) as IGetPagesResult | null;
+  const cachedGetPagesResult = memoryCache.get(cacheKey) as GetPagesResult | null;
 
   if (!cachedGetPagesResult) {
     const result = await getPages({

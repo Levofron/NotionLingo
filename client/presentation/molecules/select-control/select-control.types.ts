@@ -1,6 +1,6 @@
-import { ISelectProps } from '@presentation/atoms';
+import { SelectProps } from '@presentation/atoms';
 
-export interface ISelectControlProps extends ISelectProps {
+export interface SelectControlProps extends SelectProps {
   errorMessage?: string;
   isDisabled?: boolean;
   isLoading?: boolean;

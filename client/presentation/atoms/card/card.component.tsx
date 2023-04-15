@@ -1,9 +1,9 @@
 import { Card as ChakraCard, useMediaQuery } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { ICardProps } from './card.types';
+import { CardProps } from './card.types';
 
-const CardComponent: ForwardRefRenderFunction<HTMLDivElement, ICardProps> = (
+const CardComponent: ForwardRefRenderFunction<HTMLDivElement, CardProps> = (
   { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => {

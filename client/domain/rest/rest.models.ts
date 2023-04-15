@@ -1,10 +1,10 @@
-export interface IIncreaseDailyStreak {
+export interface IncreaseDailyStreak {
   daysInStreak: number | null;
   todayWordsStreak: number | null;
   totalLearnedWords: number | null;
 }
 
-export interface IProfile extends IIncreaseDailyStreak {
+export interface Profile extends IncreaseDailyStreak {
   avatarUrl: string;
   createdAt: string;
   daysInStreak: number | null;
@@ -14,12 +14,12 @@ export interface IProfile extends IIncreaseDailyStreak {
   todayWordsStreak: number | null;
   totalLearnedWords: number | null;
 }
-export interface IHash {
+export interface Hash {
   content: string;
   iv: string;
 }
 
-export interface INotionWord {
+export interface NotionWord {
   exampleSentence: string;
   exampleSentenceSuggestion?: string;
   id: string;
@@ -31,7 +31,7 @@ export interface INotionWord {
   word: string;
 }
 
-export interface INotionDatabase {
+export interface NotionDatabase {
   createdTime: string;
   id: string;
   lastEditedTime: string;
@@ -39,31 +39,31 @@ export interface INotionDatabase {
   url: string;
 }
 
-export interface IContact {
+export interface Contact {
   email: string;
   fullName: string;
   message: string;
 }
 
-interface IDictionarySuggestion {
+interface DictionarySuggestion {
   example: string;
   meaning: string;
 }
 
-export interface IDictionarySuggestions {
-  suggestions: IDictionarySuggestion[];
+export interface DictionarySuggestions {
+  suggestions: DictionarySuggestion[];
   word: string;
 }
 
-export interface IUpdatedNotionWord {
+export interface UpdatedNotionWord {
   exampleSentence?: string;
   id: string;
   meaning?: string;
 }
 
-export interface IUpdateNotionWordRequest {
-  updatedNotionWord: IUpdatedNotionWord;
-  words: INotionWord[];
+export interface UpdateNotionWordRequest {
+  updatedNotionWord: UpdatedNotionWord;
+  words: NotionWord[];
 }
 
 export type NotionTableColumn =

@@ -1,4 +1,4 @@
-export interface IHash {
+export interface Hash {
   content: string;
   iv: string;
 }

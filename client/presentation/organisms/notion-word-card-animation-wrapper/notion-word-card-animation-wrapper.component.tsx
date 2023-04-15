@@ -10,9 +10,9 @@ import { speechSynthesisModule } from '@adapter/speech-synthesis/speech-synthesi
 
 import { useCountdown, useKeyPressMapper, useWindowSize } from '@shared/hooks';
 
-import { INotionWordCardAnimationWrapperProps } from './notion-word-card-animation-wrapper.types';
+import { NotionWordCardAnimationWrapperProps } from './notion-word-card-animation-wrapper.types';
 
-export const NotionWordCardAnimationWrapper: FC<INotionWordCardAnimationWrapperProps> = ({
+export const NotionWordCardAnimationWrapper: FC<NotionWordCardAnimationWrapperProps> = ({
   children,
   isDraggable,
   onScreenExit,

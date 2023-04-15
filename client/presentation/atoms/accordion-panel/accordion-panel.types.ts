@@ -1,3 +1,3 @@
-import { AccordionPanelProps } from '@chakra-ui/react';
+import { AccordionPanelProps as ChakraAccordionPanelProps } from '@chakra-ui/react';
 
-export interface IAccordionPanelProps extends AccordionPanelProps {}
+export interface AccordionPanelProps extends ChakraAccordionPanelProps {}

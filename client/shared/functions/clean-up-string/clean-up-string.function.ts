@@ -1,14 +1,14 @@
 import { isString } from '@shared/guards';
 
 import { capitalizeFirstLetter } from '../capitalize-first-letter/capitalize-first-letter.function';
-import { IOptions } from './clean-up-string.types';
+import { Options } from './clean-up-string.types';
 
-const defaultOptions: Required<IOptions> = {
+const defaultOptions: Required<Options> = {
   shouldCapitalizeFirstLetter: true,
   toReturnWhenEmpty: '',
 };
 
-export const cleanUpString = (string: unknown, options: IOptions = defaultOptions): string => {
+export const cleanUpString = (string: unknown, options: Options = defaultOptions): string => {
   const {
     shouldCapitalizeFirstLetter = defaultOptions.shouldCapitalizeFirstLetter,
     toReturnWhenEmpty = defaultOptions.toReturnWhenEmpty,

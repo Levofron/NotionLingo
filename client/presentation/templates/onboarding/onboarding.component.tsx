@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import { Flex, Heading, TabPanels, Tabs, Text } from '@presentation/atoms';
-import { IActiveTabs, OnboardingTabList } from '@presentation/molecules';
+import { ActiveTabs, OnboardingTabList } from '@presentation/molecules';
 import {
   OnboardingStepFive,
   OnboardingStepFour,
@@ -17,7 +17,7 @@ export const Onboarding = () => {
   const createNotionIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
   const shareDatabaseIntegrationTabRef = useRef<HTMLButtonElement | null>(null);
 
-  const [activeTabs, setActiveTabs] = useState<IActiveTabs>({
+  const [activeTabs, setActiveTabs] = useState<ActiveTabs>({
     verifyDatabase: true,
     createNotionIntegration: false,
     shareDatabaseIntegration: false,

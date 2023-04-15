@@ -4,23 +4,23 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
 } from '@config/constants';
 
-import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../use-cases.types';
-import { ISpeechSynthesisRepository } from './speech-synthesis.repository';
+import { UseCaseWithSingleParam, UseCaseWithoutParams } from '../use-cases.types';
+import { SpeechSynthesisRepository } from './speech-synthesis.repository';
 
 // isSupportedUseCase
-export type IsSupportedUseCase = IUseCaseWithoutParams<boolean>;
+export type IsSupportedUseCase = UseCaseWithoutParams<boolean>;
 
 export const isSupportedUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): IsSupportedUseCase => ({
   execute: () => speechSynthesisRepository.isSupported(),
 });
 
 // speakUseCase
-export type SpeakUseCase = IUseCaseWithSingleParam<string, void>;
+export type SpeakUseCase = UseCaseWithSingleParam<string, void>;
 
 export const speakUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): SpeakUseCase => ({
   execute: (text) => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -32,10 +32,10 @@ export const speakUseCase = (
 });
 
 // cancelUseCase
-export type CancelUseCase = IUseCaseWithoutParams<void>;
+export type CancelUseCase = UseCaseWithoutParams<void>;
 
 export const cancelUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): CancelUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -47,10 +47,10 @@ export const cancelUseCase = (
 });
 
 // getVoicesUseCase
-export type GetVoicesUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice[]>;
+export type GetVoicesUseCase = UseCaseWithoutParams<SpeechSynthesisVoice[]>;
 
 export const getVoicesUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): GetVoicesUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -62,10 +62,10 @@ export const getVoicesUseCase = (
 });
 
 // getPitchUseCase
-export type GetPitchUseCase = IUseCaseWithoutParams<number>;
+export type GetPitchUseCase = UseCaseWithoutParams<number>;
 
 export const getPitchUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): GetPitchUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -77,10 +77,10 @@ export const getPitchUseCase = (
 });
 
 // getRateUseCase
-export type GetRateUseCase = IUseCaseWithoutParams<number>;
+export type GetRateUseCase = UseCaseWithoutParams<number>;
 
 export const getRateUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): GetRateUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -92,10 +92,10 @@ export const getRateUseCase = (
 });
 
 // getVolumeUseCase
-export type GetVolumeUseCase = IUseCaseWithoutParams<number>;
+export type GetVolumeUseCase = UseCaseWithoutParams<number>;
 
 export const getVolumeUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): GetVolumeUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -107,10 +107,10 @@ export const getVolumeUseCase = (
 });
 
 // getVoiceUseCase
-export type GetVoiceUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice | undefined>;
+export type GetVoiceUseCase = UseCaseWithoutParams<SpeechSynthesisVoice | undefined>;
 
 export const getVoiceUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): GetVoiceUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -122,10 +122,10 @@ export const getVoiceUseCase = (
 });
 
 // setPitchUseCase
-export type SetPitchUseCase = IUseCaseWithSingleParam<number, void>;
+export type SetPitchUseCase = UseCaseWithSingleParam<number, void>;
 
 export const setPitchUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): SetPitchUseCase => ({
   execute: (pitch) => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -137,10 +137,10 @@ export const setPitchUseCase = (
 });
 
 // setRateUseCase
-export type SetRateUseCase = IUseCaseWithSingleParam<number, void>;
+export type SetRateUseCase = UseCaseWithSingleParam<number, void>;
 
 export const setRateUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): SetRateUseCase => ({
   execute: (rate) => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -152,10 +152,10 @@ export const setRateUseCase = (
 });
 
 // setVolumeUseCase
-export type SetVolumeUseCase = IUseCaseWithSingleParam<number, void>;
+export type SetVolumeUseCase = UseCaseWithSingleParam<number, void>;
 
 export const setVolumeUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): SetVolumeUseCase => ({
   execute: (volume) => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -167,10 +167,10 @@ export const setVolumeUseCase = (
 });
 
 // setVoiceUseCase
-export type SetVoiceUseCase = IUseCaseWithSingleParam<string, void>;
+export type SetVoiceUseCase = UseCaseWithSingleParam<string, void>;
 
 export const setVoiceUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): SetVoiceUseCase => ({
   execute: (voice) => {
     if (!speechSynthesisRepository.isSupported()) {
@@ -182,10 +182,10 @@ export const setVoiceUseCase = (
 });
 
 // onVoicesChangedUseCase
-export type OnVoicesChangedUseCase = IUseCaseWithSingleParam<() => void, void>;
+export type OnVoicesChangedUseCase = UseCaseWithSingleParam<() => void, void>;
 
 export const onVoicesChangedUseCase = (
-  speechSynthesisRepository: ISpeechSynthesisRepository,
+  speechSynthesisRepository: SpeechSynthesisRepository,
 ): OnVoicesChangedUseCase => ({
   execute: (callback) => {
     if (!speechSynthesisRepository.isSupported()) {

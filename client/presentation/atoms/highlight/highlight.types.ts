@@ -1,3 +1,3 @@
-import { HighlightProps } from '@chakra-ui/react';
+import { HighlightProps as ChakraHighlightProps } from '@chakra-ui/react';
 
-export interface IHighlightProps extends HighlightProps {}
+export interface HighlightProps extends ChakraHighlightProps {}

@@ -1,3 +1,3 @@
-import { TabListProps } from '@chakra-ui/react';
+import { TabListProps as ChakraTabListProps } from '@chakra-ui/react';
 
-export interface ITabListProps extends TabListProps {}
+export interface TabListProps extends ChakraTabListProps {}

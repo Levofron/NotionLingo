@@ -12,9 +12,9 @@ import {
   DEFAULT_SPEECH_SYNTHESIS_VOLUME,
 } from '@config/constants';
 
-import { INotionWordCardBackProps } from './notion-word-card-back.types';
+import { NotionWordCardBackProps } from './notion-word-card-back.types';
 
-export const NotionWordCardBack: FC<INotionWordCardBackProps> = ({ word }): JSX.Element => {
+export const NotionWordCardBack: FC<NotionWordCardBackProps> = ({ word }): JSX.Element => {
   const [rate, setRate] = useState(speechSynthesisModule.getRate());
   const [pitch, setPitch] = useState(speechSynthesisModule.getPitch());
   const [volume, setVolume] = useState(speechSynthesisModule.getVolume());

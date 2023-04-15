@@ -1,4 +1,4 @@
-export interface IConfirmationModalProps {
+export interface ConfirmationModalProps {
   cancelButtonText?: string;
   confirmButtonText?: string;
   description?: string;
@@ -7,7 +7,7 @@ export interface IConfirmationModalProps {
   title?: string;
 }
 
-export interface IConfirmationModalRef {
+export interface ConfirmationModalRef {
   close: () => void;
   open: () => void;
 }

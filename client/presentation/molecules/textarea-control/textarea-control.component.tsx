@@ -8,9 +8,9 @@ import {
   Textarea,
 } from '@presentation/atoms';
 
-import { ITextareaControlProps } from './textarea-control.types';
+import { TextareaControlProps } from './textarea-control.types';
 
-export const TextareaControl: FC<ITextareaControlProps> = ({
+export const TextareaControl: FC<TextareaControlProps> = ({
   errorMessage,
   isDisabled,
   isRequired,

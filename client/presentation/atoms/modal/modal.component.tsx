@@ -1,6 +1,6 @@
 import { Modal as ChakraModal } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { IModalProps } from './modal.types';
+import { ModalProps } from './modal.types';
 
-export const Modal: FC<IModalProps> = (props): JSX.Element => <ChakraModal {...props} />;
+export const Modal: FC<ModalProps> = (props): JSX.Element => <ChakraModal {...props} />;

@@ -1,4 +1,4 @@
-export interface ILocalStorageRepository {
+export interface LocalStorageRepository {
   getItem: (key: string) => string | null;
   isSupported: () => boolean;
   removeItem: (key: string) => void;

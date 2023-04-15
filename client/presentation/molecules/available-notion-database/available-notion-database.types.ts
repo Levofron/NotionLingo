@@ -1,7 +1,7 @@
-import { INotionDatabase } from '@domain/rest/rest.models';
+import { NotionDatabase } from '@domain/rest/rest.models';
 
-export interface IAvailableNotionDatabaseProps {
-  availableNotionDatabase: INotionDatabase;
+export interface AvailableNotionDatabaseProps {
+  availableNotionDatabase: NotionDatabase;
   isLoading: boolean;
   onClick: (notionDatabaseId: string) => void;
 }

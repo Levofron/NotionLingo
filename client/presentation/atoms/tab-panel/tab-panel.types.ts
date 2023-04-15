@@ -1,3 +1,3 @@
-import { TabPanelProps } from '@chakra-ui/react';
+import { TabPanelProps as ChakraTabPanelProps } from '@chakra-ui/react';
 
-export interface ITabPanelProps extends TabPanelProps {}
+export interface TabPanelProps extends ChakraTabPanelProps {}

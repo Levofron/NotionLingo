@@ -1,11 +1,11 @@
-import { INotionWord } from '@domain/rest/rest.models';
+import { NotionWord } from '@domain/rest/rest.models';
 
 import { findNotionWordIndexById } from '../find-notion-word-index-by-id/find-notion-word-index-by-id.function';
 
 export const removeNotionWordFromArray = (
-  notionWords: INotionWord[],
-  notionWordToRemove: INotionWord,
-): INotionWord[] => {
+  notionWords: NotionWord[],
+  notionWordToRemove: NotionWord,
+): NotionWord[] => {
   if (notionWords.length === 0) {
     return [];
   }

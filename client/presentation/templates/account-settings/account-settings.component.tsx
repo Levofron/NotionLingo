@@ -6,9 +6,9 @@ import { Avatar, Button, Card, Container, Flex, Heading, Text } from '@presentat
 import { ConfirmationModal, ParticlesBackgroundLayout } from '@presentation/molecules';
 import { SidebarWithHeader } from '@presentation/organisms';
 
-import { IAccountSettingsProps } from './account-settings.types';
+import { AccountSettingsProps } from './account-settings.types';
 
-export const AccountSettings: FC<IAccountSettingsProps> = ({
+export const AccountSettings: FC<AccountSettingsProps> = ({
   deleteAccountModalRef,
   deleteProfileCountdown,
   isDeleteProfileCountdownStarted,

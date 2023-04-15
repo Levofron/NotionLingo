@@ -1,6 +1,6 @@
 import { IconType } from 'react-icons';
 
-export interface IDisplayErrorProps {
+export interface DisplayErrorProps {
   errorMessage: string | null;
   icon: IconType;
   isLoading?: boolean;

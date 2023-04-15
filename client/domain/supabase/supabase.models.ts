@@ -7,16 +7,16 @@ import {
   User,
 } from '@supabase/supabase-js';
 
-export interface ILogoutResponse {
+export interface LogoutResponse {
   error: ApiError | null;
 }
 
-export interface IOnAuthStateChangeResponse {
+export interface OnAuthStateChangeResponse {
   data: Subscription | null;
   error: ApiError | null;
 }
 
-export interface IOAuthResponse extends ILogoutResponse {
+export interface OAuthResponse extends LogoutResponse {
   provider?: Provider;
   session: Session | null;
   url?: string | null;

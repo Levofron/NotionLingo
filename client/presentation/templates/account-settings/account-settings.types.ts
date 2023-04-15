@@ -1,12 +1,12 @@
 import { User } from '@supabase/supabase-js';
 import { RefObject } from 'react';
 
-import { IConfirmationModalRef } from '@presentation/molecules';
+import { ConfirmationModalRef } from '@presentation/molecules';
 
-import { IProfile } from '@domain/rest/rest.models';
+import { Profile } from '@domain/rest/rest.models';
 
-export interface IAccountSettingsProps {
-  deleteAccountModalRef: RefObject<IConfirmationModalRef>;
+export interface AccountSettingsProps {
+  deleteAccountModalRef: RefObject<ConfirmationModalRef>;
   deleteProfileCountdown: number;
   isDeleteProfileCountdownStarted: boolean;
   isDeleteProfileLoading: boolean;
@@ -15,7 +15,7 @@ export interface IAccountSettingsProps {
   onDeleteProfile: () => void;
   onResetIntegration: () => void;
   resetIntegrationCountdown: number;
-  resetIntegrationModalRef: RefObject<IConfirmationModalRef>;
+  resetIntegrationModalRef: RefObject<ConfirmationModalRef>;
   shouldDisableActionButtons: boolean;
-  user: (User & IProfile) | null;
+  user: (User & Profile) | null;
 }

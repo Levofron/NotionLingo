@@ -1,3 +1,3 @@
-import { AppProps } from 'next/app';
+import { AppProps as NextAppProps } from 'next/app';
 
-export interface IAppProps extends AppProps {}
+export interface AppProps extends NextAppProps {}

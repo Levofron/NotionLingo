@@ -1,3 +1,3 @@
-import { CardBodyProps } from '@chakra-ui/react';
+import { CardBodyProps as ChakraCardBodyProps } from '@chakra-ui/react';
 
-export interface ICardBodyProps extends CardBodyProps {}
+export interface CardBodyProps extends ChakraCardBodyProps {}

@@ -1,9 +1,9 @@
 import { ListIcon as ChakraListIcon } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IListIconProps } from './list-icon.types';
+import { ListIconProps } from './list-icon.types';
 
-const ListIconComponent: ForwardRefRenderFunction<SVGSVGElement, IListIconProps> = (
+const ListIconComponent: ForwardRefRenderFunction<SVGSVGElement, ListIconProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraListIcon ref={ref} {...props} />;

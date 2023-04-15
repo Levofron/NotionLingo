@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 
-import { IDictionarySuggestions } from '@domain/rest/rest.models';
+import { DictionarySuggestions } from '@domain/rest/rest.models';
 
-export interface IFindWordProps {
-  dictionarySuggestions: IDictionarySuggestions | null;
+export interface FindWordProps {
+  dictionarySuggestions: DictionarySuggestions | null;
   dictionarySuggestionsError: string | null;
   isDictionarySuggestionsLoading: boolean;
   isUserAuthenticated: boolean;

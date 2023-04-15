@@ -1,4 +1,4 @@
-export interface ITestimonial {
+export interface Testimonial {
   description: string;
   heading: string;
   imageSrc: string;

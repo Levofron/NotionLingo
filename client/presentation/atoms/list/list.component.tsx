@@ -1,9 +1,9 @@
 import { List as ChakraList } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IListProps } from './list.types';
+import { ListProps } from './list.types';
 
-const ListComponent: ForwardRefRenderFunction<HTMLUListElement, IListProps> = (
+const ListComponent: ForwardRefRenderFunction<HTMLUListElement, ListProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraList ref={ref} {...props} />;

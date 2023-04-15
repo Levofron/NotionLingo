@@ -1,3 +1,3 @@
-import { FormHelperTextProps } from '@chakra-ui/react';
+import { FormHelperTextProps as ChakraFormHelperTextProps } from '@chakra-ui/react';
 
-export interface IFormHelperTextProps extends FormHelperTextProps {}
+export interface FormHelperTextProps extends ChakraFormHelperTextProps {}

@@ -1,31 +1,31 @@
 import { Session } from '@supabase/supabase-js';
 
 import {
-  IContact,
-  IDictionarySuggestions,
-  IHash,
-  IIncreaseDailyStreak,
-  INotionDatabase,
-  INotionWord,
-  IProfile,
-  IUpdateNotionWordRequest,
+  Contact,
+  DictionarySuggestions,
+  Hash,
+  IncreaseDailyStreak,
+  NotionDatabase,
   NotionTableColumn,
+  NotionWord,
+  Profile,
+  UpdateNotionWordRequest,
 } from './rest.models';
 
-export interface IRestRepository {
+export interface RestRepository {
   createNotionWord: (data: Record<string, string>) => Promise<string>;
   deleteProfile: () => Promise<void>;
-  getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
-  getDictionarySuggestions: (word: string) => Promise<IDictionarySuggestions | null>;
-  getLoggedProfile: () => Promise<IProfile>;
+  getAvailableNotionDatabases: () => Promise<NotionDatabase[]>;
+  getDictionarySuggestions: (word: string) => Promise<DictionarySuggestions | null>;
+  getLoggedProfile: () => Promise<Profile>;
   getNotionTableColumns: () => Promise<NotionTableColumn[]>;
-  getRandomNotionWords: () => Promise<INotionWord[]>;
+  getRandomNotionWords: () => Promise<NotionWord[]>;
   healthCheck: () => Promise<string>;
-  increaseDailyStreak: () => Promise<IIncreaseDailyStreak>;
+  increaseDailyStreak: () => Promise<IncreaseDailyStreak>;
   resetNotionIntegration: () => Promise<void>;
-  sendContactFormData: (data: IContact) => Promise<IContact>;
-  setNotionApiToken: (token: string) => Promise<IHash>;
+  sendContactFormData: (data: Contact) => Promise<Contact>;
+  setNotionApiToken: (token: string) => Promise<Hash>;
   setNotionDatabaseId: (databaseId: string) => Promise<string>;
   setSupabaseCookie: (session: Session | null) => Promise<void>;
-  updateNotionWord: (data: IUpdateNotionWordRequest) => Promise<INotionWord[]>;
+  updateNotionWord: (data: UpdateNotionWordRequest) => Promise<NotionWord[]>;
 }

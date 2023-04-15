@@ -1,3 +1,3 @@
-import { AccordionItemProps } from '@chakra-ui/react';
+import { AccordionItemProps as ChakraAccordionItemProps } from '@chakra-ui/react';
 
-export interface IAccordionItemProps extends AccordionItemProps {}
+export interface AccordionItemProps extends ChakraAccordionItemProps {}

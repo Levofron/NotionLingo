@@ -1,3 +1,3 @@
-import { FlexProps } from '@chakra-ui/react';
+import { FlexProps as ChakraFlexProps } from '@chakra-ui/react';
 
-export interface IFlexProps extends FlexProps {}
+export interface FlexProps extends ChakraFlexProps {}

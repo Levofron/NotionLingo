@@ -1,9 +1,9 @@
 import { Divider as ChakraDivider } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IDividerProps } from './divider.types';
+import { DividerProps } from './divider.types';
 
-const DividerComponent: ForwardRefRenderFunction<HTMLHRElement, IDividerProps> = (
+const DividerComponent: ForwardRefRenderFunction<HTMLHRElement, DividerProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraDivider ref={ref} {...props} />;

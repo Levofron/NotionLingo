@@ -1,6 +1,6 @@
 import { NotionTableColumn } from '@domain/rest/rest.models';
 
-export interface IAddWordProps {
+export interface AddWordProps {
   error: string | null;
   isCreateWordLoading: boolean;
   isTableColumnsLoading: boolean;

@@ -1,16 +1,16 @@
 import { Session, User } from '@supabase/supabase-js';
 
 import {
-  ILogoutResponse,
-  IOAuthResponse,
-  IOnAuthStateChangeResponse,
+  LogoutResponse,
+  OAuthResponse,
   OnAuthStateChangeCallback,
+  OnAuthStateChangeResponse,
 } from './supabase.models';
 
-export interface ISupabaseRepository {
+export interface SupabaseRepository {
   getSession: () => Session | null;
   getUser: () => User | null;
-  loginViaMagicLink: (email: string) => Promise<IOAuthResponse>;
-  logout: () => Promise<ILogoutResponse>;
-  onAuthStateChange: (callback: OnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
+  loginViaMagicLink: (email: string) => Promise<OAuthResponse>;
+  logout: () => Promise<LogoutResponse>;
+  onAuthStateChange: (callback: OnAuthStateChangeCallback) => OnAuthStateChangeResponse;
 }

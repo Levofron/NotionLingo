@@ -1,3 +1,3 @@
-import { FormErrorMessageProps } from '@chakra-ui/react';
+import { FormErrorMessageProps as ChakraFormErrorMessageProps } from '@chakra-ui/react';
 
-export interface IFormErrorMessageProps extends FormErrorMessageProps {}
+export interface FormErrorMessageProps extends ChakraFormErrorMessageProps {}

@@ -1,4 +1,4 @@
-import { INotionWord } from '@domain/rest/rest.models';
+import { NotionWord } from '@domain/rest/rest.models';
 
-export const findNotionWordIndexById = (notionWords: INotionWord[], notionWordId: string) =>
+export const findNotionWordIndexById = (notionWords: NotionWord[], notionWordId: string) =>
   notionWords.findIndex((_notionWord) => _notionWord.id === notionWordId);

@@ -1,4 +1,4 @@
-export interface ISEOProps {
+export interface SEOProps {
   description?: string;
   noFollow?: boolean;
   noIndex?: boolean;

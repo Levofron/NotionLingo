@@ -5,9 +5,9 @@ import { ChakraNextLink, Heading } from '@presentation/atoms';
 
 import { useRouter } from '@shared/hooks';
 
-import { INavigationItemProps } from './navigation-item.types';
+import { NavigationItemProps } from './navigation-item.types';
 
-export const NavigationItem: FC<INavigationItemProps> = ({ children, href }) => {
+export const NavigationItem: FC<NavigationItemProps> = ({ children, href }) => {
   const { isSamePath } = useRouter();
 
   if (isSamePath(href)) {

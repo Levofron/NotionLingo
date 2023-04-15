@@ -1,27 +1,27 @@
 import { Session, User } from '@supabase/supabase-js';
 
-import { IRestRepository } from '../rest/rest.repository';
+import { RestRepository } from '../rest/rest.repository';
 import {
-  IUseCaseWithSingleParam,
-  IUseCaseWithSingleParamAndPromiseResult,
-  IUseCaseWithoutParams,
-  IUseCaseWithoutParamsAndPromiseResult,
+  UseCaseWithSingleParam,
+  UseCaseWithSingleParamAndPromiseResult,
+  UseCaseWithoutParams,
+  UseCaseWithoutParamsAndPromiseResult,
 } from '../use-cases.types';
 import {
-  IOAuthResponse,
-  IOnAuthStateChangeResponse,
+  OAuthResponse,
   OnAuthStateChangeCallback,
+  OnAuthStateChangeResponse,
 } from './supabase.models';
-import { ISupabaseRepository } from './supabase.repository';
+import { SupabaseRepository } from './supabase.repository';
 
 // loginViaMagicLinkUseCase
-export type LoginViaMagicLinkUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type LoginViaMagicLinkUseCase = UseCaseWithSingleParamAndPromiseResult<
   string,
-  IOAuthResponse
+  OAuthResponse
 >;
 
 export const loginViaMagicLinkUseCase = (
-  supabaseRepository: ISupabaseRepository,
+  supabaseRepository: SupabaseRepository,
 ): LoginViaMagicLinkUseCase => ({
   execute: async (email) => {
     const response = await supabaseRepository.loginViaMagicLink(email);
@@ -35,11 +35,11 @@ export const loginViaMagicLinkUseCase = (
 });
 
 // logoutUseCase
-export type LogoutUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type LogoutUseCase = UseCaseWithoutParamsAndPromiseResult<void>;
 
 export const logoutUseCase = (
-  supabaseRepository: ISupabaseRepository,
-  restRepository: IRestRepository,
+  supabaseRepository: SupabaseRepository,
+  restRepository: RestRepository,
 ): LogoutUseCase => ({
   execute: async () => {
     await supabaseRepository.logout();
@@ -48,27 +48,27 @@ export const logoutUseCase = (
 });
 
 // getUserUseCase
-export type GetUserUseCase = IUseCaseWithoutParams<User | null>;
+export type GetUserUseCase = UseCaseWithoutParams<User | null>;
 
-export const getUserUseCase = (supabaseRepository: ISupabaseRepository): GetUserUseCase => ({
+export const getUserUseCase = (supabaseRepository: SupabaseRepository): GetUserUseCase => ({
   execute: () => supabaseRepository.getUser(),
 });
 
 // getSessionUseCase
-export type GetSessionUseCase = IUseCaseWithoutParams<Session | null>;
+export type GetSessionUseCase = UseCaseWithoutParams<Session | null>;
 
-export const getSessionUseCase = (supabaseRepository: ISupabaseRepository): GetSessionUseCase => ({
+export const getSessionUseCase = (supabaseRepository: SupabaseRepository): GetSessionUseCase => ({
   execute: () => supabaseRepository.getSession(),
 });
 
 // onAuthStateChangeUseCase
-export type OnAuthStateChangeUseCase = IUseCaseWithSingleParam<
+export type OnAuthStateChangeUseCase = UseCaseWithSingleParam<
   OnAuthStateChangeCallback,
-  IOnAuthStateChangeResponse
+  OnAuthStateChangeResponse
 >;
 
 export const onAuthStateChangeUseCase = (
-  supabaseRepository: ISupabaseRepository,
+  supabaseRepository: SupabaseRepository,
 ): OnAuthStateChangeUseCase => ({
   execute: (callback) => supabaseRepository.onAuthStateChange(callback),
 });

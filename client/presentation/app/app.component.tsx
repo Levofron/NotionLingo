@@ -7,10 +7,10 @@ import {
   UserProvider,
   WrapBalancerProvider,
 } from '../providers';
-import { IAppProps } from './app.types';
+import { AppProps } from './app.types';
 import { createDevToolsClient, fillUpMissedLocalStorageFields } from './utils';
 
-export const App = ({ Component, pageProps }: IAppProps) => {
+export const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     createDevToolsClient();
     fillUpMissedLocalStorageFields();

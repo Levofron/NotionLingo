@@ -1,11 +1,11 @@
 import { Session } from '@supabase/supabase-js';
 import { AxiosInstance } from 'axios';
 
-import { IContact } from '@domain/rest/rest.models';
+import { Contact } from '@domain/rest/rest.models';
 
-import { IRestApi, RestEndpoints } from './rest.types';
+import { RestApi, RestEndpoints } from './rest.types';
 
-export const getRestApi = (axiosInstance: AxiosInstance): IRestApi => ({
+export const getRestApi = (axiosInstance: AxiosInstance): RestApi => ({
   healthCheck: () => axiosInstance.get(RestEndpoints.HEALTH_CHECK),
   setSupabaseCookie: async (supabaseSession: Session | null) => {
     axiosInstance.post(RestEndpoints.SET_SUPABASE_COOKIE, {
@@ -27,7 +27,7 @@ export const getRestApi = (axiosInstance: AxiosInstance): IRestApi => ({
   setNotionDatabaseId: (databaseId: string) =>
     axiosInstance.post(RestEndpoints.SET_NOTION_DATABASE_ID, { databaseId }),
   getRandomNotionWords: () => axiosInstance.get(RestEndpoints.GET_RANDOM_NOTION_WORDS),
-  sendContactFormData: (data: IContact) => axiosInstance.post(RestEndpoints.CONTACT, data),
+  sendContactFormData: (data: Contact) => axiosInstance.post(RestEndpoints.CONTACT, data),
   increaseDailyStreak: async () => {
     const encodedCurrentDate = encodeURIComponent(new Date().toISOString());
 

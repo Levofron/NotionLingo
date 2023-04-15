@@ -6,7 +6,7 @@ import { localStorageModule } from '@adapter/local-storage/local-storage.module'
 import { RouterContext } from '@shared/context';
 import { useIsFirstRender } from '@shared/hooks';
 
-import { IRouterProviderProps } from './router-provider.types';
+import { RouterProviderProps } from './router-provider.types';
 
 const CURRENT_PATH_KEY = 'currentPath';
 const PREVIOUS_PATH_KEY = 'previousPath';
@@ -30,7 +30,7 @@ const updateStorePathValues = () => {
   localStorageModule.setItem({ key: CURRENT_PATH_KEY, value: window.location.pathname });
 };
 
-export const RouterProvider: FC<IRouterProviderProps> = ({ children }) => {
+export const RouterProvider: FC<RouterProviderProps> = ({ children }) => {
   const router = useRouter();
   const isFirstRender = useIsFirstRender();
 

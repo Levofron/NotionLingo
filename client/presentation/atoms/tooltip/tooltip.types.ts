@@ -1,3 +1,3 @@
-import { TooltipProps } from '@chakra-ui/react';
+import { TooltipProps as ChakraTooltipProps } from '@chakra-ui/react';
 
-export interface ITooltipProps extends TooltipProps {}
+export interface TooltipProps extends ChakraTooltipProps {}

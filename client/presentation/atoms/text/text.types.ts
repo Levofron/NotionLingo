@@ -1,5 +1,5 @@
-import { TextProps } from '@chakra-ui/react';
+import { TextProps as ChakraTextProps } from '@chakra-ui/react';
 
-export interface ITextProps extends TextProps {
+export interface TextProps extends ChakraTextProps {
   withBalancer?: boolean;
 }

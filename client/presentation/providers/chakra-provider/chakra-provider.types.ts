@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
-export interface IChakraProviderProps {
+export interface ChakraProviderProps {
   children: ReactNode;
 }

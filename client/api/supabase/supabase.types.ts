@@ -1,16 +1,16 @@
 import { Session, User, UserCredentials } from '@supabase/supabase-js';
 
 import {
-  ILogoutResponse,
-  IOAuthResponse,
-  IOnAuthStateChangeResponse,
+  LogoutResponse,
+  OAuthResponse,
   OnAuthStateChangeCallback,
+  OnAuthStateChangeResponse,
 } from '@domain/supabase/supabase.models';
 
-export interface ISupabaseApi {
+export interface SupabaseApi {
   getSession: () => Session | null;
   getUser: () => User | null;
-  logout: () => Promise<ILogoutResponse>;
-  onAuthStateChange: (callback: OnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
-  signIn: (userCredentials: UserCredentials) => Promise<IOAuthResponse>;
+  logout: () => Promise<LogoutResponse>;
+  onAuthStateChange: (callback: OnAuthStateChangeCallback) => OnAuthStateChangeResponse;
+  signIn: (userCredentials: UserCredentials) => Promise<OAuthResponse>;
 }

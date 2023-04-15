@@ -1,6 +1,6 @@
-import { ISliderProps } from '@presentation/atoms';
+import { SliderProps } from '@presentation/atoms';
 
-export interface ISliderControlProps extends ISliderProps {
+export interface SliderControlProps extends SliderProps {
   errorMessage?: string;
   isDisabled?: boolean;
   isLoading?: boolean;

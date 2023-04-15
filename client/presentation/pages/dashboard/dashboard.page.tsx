@@ -6,7 +6,7 @@ import { Dashboard as DashboardTemplate } from '@presentation/templates';
 import { useIncreaseStreak, useRandomWords, useUpdateWord } from '@adapter/hooks';
 
 import { removeNotionWordFromArray } from '@domain/rest/operations';
-import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
+import { IncreaseDailyStreak, NotionWord, UpdatedNotionWord } from '@domain/rest/rest.models';
 
 import { useToast, useUser } from '@shared/hooks';
 import { Routes } from '@shared/routes';
@@ -14,9 +14,9 @@ import { Routes } from '@shared/routes';
 const DashboardComponent = () => {
   const toast = useToast();
   const { user } = useUser();
-  const [words, setWords] = useState<INotionWord[]>([]);
+  const [words, setWords] = useState<NotionWord[]>([]);
 
-  const [dailyStreakData, setDailyStreakData] = useState<IIncreaseDailyStreak>({
+  const [dailyStreakData, setDailyStreakData] = useState<IncreaseDailyStreak>({
     daysInStreak: user?.daysInStreak || 0,
     todayWordsStreak: user?.todayWordsStreak || 0,
     totalLearnedWords: user?.totalLearnedWords || 0,
@@ -40,7 +40,7 @@ const DashboardComponent = () => {
     fetchMoreWords();
   }, []);
 
-  const handleNotionWordCardClick = (notionWord: INotionWord) => () => {
+  const handleNotionWordCardClick = (notionWord: NotionWord) => () => {
     const newWords = removeNotionWordFromArray(words, notionWord);
 
     setWords(newWords);
@@ -51,7 +51,7 @@ const DashboardComponent = () => {
     }
   };
 
-  const handleApplySuggestion = (updatedNotionWord: IUpdatedNotionWord) => () =>
+  const handleApplySuggestion = (updatedNotionWord: UpdatedNotionWord) => () =>
     updateWord({ updatedNotionWord, words })
       .then((updatedWords) => {
         setWords(updatedWords);

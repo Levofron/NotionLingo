@@ -6,9 +6,9 @@ import { ParticlesBackgroundLayout } from '@presentation/molecules';
 import { LoginForm, SidebarWithHeader } from '@presentation/organisms';
 
 import { initialFormValues, loginFormValidationSchema } from './login.defaults';
-import { ILoginProps } from './login.types';
+import { LoginProps } from './login.types';
 
-export const Login: FC<ILoginProps> = ({ isLoading, onSubmit }) => {
+export const Login: FC<LoginProps> = ({ isLoading, onSubmit }) => {
   const formik = useFormik({
     isInitialValid: true,
     validateOnBlur: false,

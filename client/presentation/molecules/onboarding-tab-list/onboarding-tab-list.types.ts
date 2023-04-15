@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 
-export interface IActiveTabs {
+export interface ActiveTabs {
   createNotionIntegration: boolean;
   selectNotionDatabase: boolean;
   shareDatabaseIntegration: boolean;
@@ -8,8 +8,8 @@ export interface IActiveTabs {
   verifyDatabase: boolean;
 }
 
-export interface IOnboardingTabListProps {
-  activeTabs: IActiveTabs;
+export interface OnboardingTabListProps {
+  activeTabs: ActiveTabs;
   createNotionIntegrationTabRef: RefObject<HTMLButtonElement>;
   selectNotionDatabaseTabRef: RefObject<HTMLButtonElement>;
   shareDatabaseIntegrationTabRef: RefObject<HTMLButtonElement>;

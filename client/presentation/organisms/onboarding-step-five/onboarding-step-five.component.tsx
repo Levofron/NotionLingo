@@ -7,9 +7,9 @@ import { useDatabases, useSetDatabaseId } from '@adapter/hooks';
 
 import { useRouter, useToast, useUser } from '@shared/hooks';
 
-import { IOnboardingStepFiveProps } from './onboarding-step-five.types';
+import { OnboardingStepFiveProps } from './onboarding-step-five.types';
 
-export const OnboardingStepFive: FC<IOnboardingStepFiveProps> = ({
+export const OnboardingStepFive: FC<OnboardingStepFiveProps> = ({
   onBackButtonClick,
 }): JSX.Element => {
   const { isSetDatabaseIdLoading, setDatabaseId } = useSetDatabaseId();

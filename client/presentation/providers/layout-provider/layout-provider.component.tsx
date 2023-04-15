@@ -6,9 +6,9 @@ import { BackToTopButton } from '@presentation/organisms';
 import { scrollToTop } from '@shared/functions';
 import { useRouter } from '@shared/hooks';
 
-import { ILayoutProviderProps } from './layout-provider.types';
+import { LayoutProviderProps } from './layout-provider.types';
 
-export const LayoutProvider: FC<ILayoutProviderProps> = ({ children }): JSX.Element => {
+export const LayoutProvider: FC<LayoutProviderProps> = ({ children }): JSX.Element => {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
 

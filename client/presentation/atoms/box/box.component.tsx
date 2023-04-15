@@ -1,9 +1,9 @@
 import { Box as ChakraBox } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IBoxProps } from './box.types';
+import { BoxProps } from './box.types';
 
-const BoxComponent: ForwardRefRenderFunction<HTMLDivElement, IBoxProps> = (
+const BoxComponent: ForwardRefRenderFunction<HTMLDivElement, BoxProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraBox ref={ref} {...props} />;

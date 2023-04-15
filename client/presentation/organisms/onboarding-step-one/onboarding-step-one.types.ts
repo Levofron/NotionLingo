@@ -1,4 +1,4 @@
-import { IOnboardingStepLayoutProps } from '@presentation/molecules';
+import { OnboardingStepLayoutProps } from '@presentation/molecules';
 
-export interface IOnboardingStepOneProps
-  extends Required<Pick<IOnboardingStepLayoutProps, 'onNextButtonClick'>> {}
+export interface OnboardingStepOneProps
+  extends Required<Pick<OnboardingStepLayoutProps, 'onNextButtonClick'>> {}
