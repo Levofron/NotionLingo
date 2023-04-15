@@ -1,5 +1,5 @@
 import { SpinnerProps } from '@chakra-ui/react';
 
 export interface ISpinnerProps extends SpinnerProps {
-  mode?: TThemeMode;
+  mode?: ThemeMode;
 }

@@ -8,20 +8,20 @@ import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../use-cases.typ
 import { ISpeechSynthesisRepository } from './speech-synthesis.repository';
 
 // isSupportedUseCase
-export type TIsSupportedUseCase = IUseCaseWithoutParams<boolean>;
+export type IsSupportedUseCase = IUseCaseWithoutParams<boolean>;
 
 export const isSupportedUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TIsSupportedUseCase => ({
+): IsSupportedUseCase => ({
   execute: () => speechSynthesisRepository.isSupported(),
 });
 
 // speakUseCase
-export type TSpeakUseCase = IUseCaseWithSingleParam<string, void>;
+export type SpeakUseCase = IUseCaseWithSingleParam<string, void>;
 
 export const speakUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TSpeakUseCase => ({
+): SpeakUseCase => ({
   execute: (text) => {
     if (!speechSynthesisRepository.isSupported()) {
       return;
@@ -32,11 +32,11 @@ export const speakUseCase = (
 });
 
 // cancelUseCase
-export type TCancelUseCase = IUseCaseWithoutParams<void>;
+export type CancelUseCase = IUseCaseWithoutParams<void>;
 
 export const cancelUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TCancelUseCase => ({
+): CancelUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
       return;
@@ -47,11 +47,11 @@ export const cancelUseCase = (
 });
 
 // getVoicesUseCase
-export type TGetVoicesUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice[]>;
+export type GetVoicesUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice[]>;
 
 export const getVoicesUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TGetVoicesUseCase => ({
+): GetVoicesUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
       return [];
@@ -62,11 +62,11 @@ export const getVoicesUseCase = (
 });
 
 // getPitchUseCase
-export type TGetPitchUseCase = IUseCaseWithoutParams<number>;
+export type GetPitchUseCase = IUseCaseWithoutParams<number>;
 
 export const getPitchUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TGetPitchUseCase => ({
+): GetPitchUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
       return DEFAULT_SPEECH_SYNTHESIS_PITCH;
@@ -77,11 +77,11 @@ export const getPitchUseCase = (
 });
 
 // getRateUseCase
-export type TGetRateUseCase = IUseCaseWithoutParams<number>;
+export type GetRateUseCase = IUseCaseWithoutParams<number>;
 
 export const getRateUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TGetRateUseCase => ({
+): GetRateUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
       return DEFAULT_SPEECH_SYNTHESIS_RATE;
@@ -92,11 +92,11 @@ export const getRateUseCase = (
 });
 
 // getVolumeUseCase
-export type TGetVolumeUseCase = IUseCaseWithoutParams<number>;
+export type GetVolumeUseCase = IUseCaseWithoutParams<number>;
 
 export const getVolumeUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TGetVolumeUseCase => ({
+): GetVolumeUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
       return DEFAULT_SPEECH_SYNTHESIS_VOLUME;
@@ -107,11 +107,11 @@ export const getVolumeUseCase = (
 });
 
 // getVoiceUseCase
-export type TGetVoiceUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice | undefined>;
+export type GetVoiceUseCase = IUseCaseWithoutParams<SpeechSynthesisVoice | undefined>;
 
 export const getVoiceUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TGetVoiceUseCase => ({
+): GetVoiceUseCase => ({
   execute: () => {
     if (!speechSynthesisRepository.isSupported()) {
       return undefined;
@@ -122,11 +122,11 @@ export const getVoiceUseCase = (
 });
 
 // setPitchUseCase
-export type TSetPitchUseCase = IUseCaseWithSingleParam<number, void>;
+export type SetPitchUseCase = IUseCaseWithSingleParam<number, void>;
 
 export const setPitchUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TSetPitchUseCase => ({
+): SetPitchUseCase => ({
   execute: (pitch) => {
     if (!speechSynthesisRepository.isSupported()) {
       return;
@@ -137,11 +137,11 @@ export const setPitchUseCase = (
 });
 
 // setRateUseCase
-export type TSetRateUseCase = IUseCaseWithSingleParam<number, void>;
+export type SetRateUseCase = IUseCaseWithSingleParam<number, void>;
 
 export const setRateUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TSetRateUseCase => ({
+): SetRateUseCase => ({
   execute: (rate) => {
     if (!speechSynthesisRepository.isSupported()) {
       return;
@@ -152,11 +152,11 @@ export const setRateUseCase = (
 });
 
 // setVolumeUseCase
-export type TSetVolumeUseCase = IUseCaseWithSingleParam<number, void>;
+export type SetVolumeUseCase = IUseCaseWithSingleParam<number, void>;
 
 export const setVolumeUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TSetVolumeUseCase => ({
+): SetVolumeUseCase => ({
   execute: (volume) => {
     if (!speechSynthesisRepository.isSupported()) {
       return;
@@ -167,11 +167,11 @@ export const setVolumeUseCase = (
 });
 
 // setVoiceUseCase
-export type TSetVoiceUseCase = IUseCaseWithSingleParam<string, void>;
+export type SetVoiceUseCase = IUseCaseWithSingleParam<string, void>;
 
 export const setVoiceUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TSetVoiceUseCase => ({
+): SetVoiceUseCase => ({
   execute: (voice) => {
     if (!speechSynthesisRepository.isSupported()) {
       return;
@@ -182,11 +182,11 @@ export const setVoiceUseCase = (
 });
 
 // onVoicesChangedUseCase
-export type TOnVoicesChangedUseCase = IUseCaseWithSingleParam<() => void, void>;
+export type OnVoicesChangedUseCase = IUseCaseWithSingleParam<() => void, void>;
 
 export const onVoicesChangedUseCase = (
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TOnVoicesChangedUseCase => ({
+): OnVoicesChangedUseCase => ({
   execute: (callback) => {
     if (!speechSynthesisRepository.isSupported()) {
       return;

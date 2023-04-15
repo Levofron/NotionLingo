@@ -6,7 +6,7 @@ import { isError } from '@shared/guards';
 
 import { EHttpStatusCode } from '@server/http-status-code';
 
-import { TFunctionToCheck } from './with-middleware.types';
+import { FunctionToCheck } from './with-middleware.types';
 
 const getExceptionStatus = (exception: unknown) =>
   exception instanceof ApiError ? exception.statusCode : EHttpStatusCode.INTERNAL_SERVER_ERROR;
@@ -19,7 +19,7 @@ const getExceptionStack = (exception: unknown) =>
 
 export const withMiddleware =
   <THandlerResponse>(handler: (req: AxiomAPIRequest, res: NextApiResponse) => THandlerResponse) =>
-  (functionsToCheck: TFunctionToCheck[]) =>
+  (functionsToCheck: FunctionToCheck[]) =>
   async (req: AxiomAPIRequest, res: NextApiResponse) => {
     for (const functionToCheck of functionsToCheck) {
       // eslint-disable-next-line no-await-in-loop

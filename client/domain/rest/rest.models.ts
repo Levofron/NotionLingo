@@ -66,7 +66,7 @@ export interface IUpdateNotionWordRequest {
   words: INotionWord[];
 }
 
-export type TNotionTableColumn =
+export type NotionTableColumn =
   | {
       columnName: string;
       isExampleSentence: boolean;

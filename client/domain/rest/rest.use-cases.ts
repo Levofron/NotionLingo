@@ -14,24 +14,24 @@ import {
   INotionWord,
   IProfile,
   IUpdateNotionWordRequest,
-  TNotionTableColumn,
+  NotionTableColumn,
 } from './rest.models';
 import { IRestRepository } from './rest.repository';
 
 // healthCheckUseCase
-export type THealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<string>;
+export type HealthCheckUseCase = IUseCaseWithoutParamsAndPromiseResult<string>;
 
-export const healthCheckUseCase = (restRepository: IRestRepository): THealthCheckUseCase => ({
+export const healthCheckUseCase = (restRepository: IRestRepository): HealthCheckUseCase => ({
   execute: () => restRepository.healthCheck(),
 });
 
 // setSupabaseCookieUseCase
-export type TSetSupabaseCookieUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type SetSupabaseCookieUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
 export const setSupabaseCookieUseCase = (
   restRepository: IRestRepository,
   supabaseRepository: ISupabaseRepository,
-): TSetSupabaseCookieUseCase => ({
+): SetSupabaseCookieUseCase => ({
   execute: () => {
     const session = supabaseRepository.getSession();
 
@@ -40,72 +40,72 @@ export const setSupabaseCookieUseCase = (
 });
 
 // getLoggedProfileUseCase
-export type TGetLoggedProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<IProfile>;
+export type GetLoggedProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<IProfile>;
 
 export const getLoggedProfileUseCase = (
   restRepository: IRestRepository,
-): TGetLoggedProfileUseCase => ({
+): GetLoggedProfileUseCase => ({
   execute: () => restRepository.getLoggedProfile(),
 });
 
 // setNotionApiTokenUseCase
-export type TSetNotionApiTokenUseCase = IUseCaseWithSingleParamAndPromiseResult<string, IHash>;
+export type SetNotionApiTokenUseCase = IUseCaseWithSingleParamAndPromiseResult<string, IHash>;
 
 export const setNotionApiTokenUseCase = (
   restRepository: IRestRepository,
-): TSetNotionApiTokenUseCase => ({
+): SetNotionApiTokenUseCase => ({
   execute: (token) => restRepository.setNotionApiToken(token),
 });
 
 // getAvailableNotionDatabasesUseCase
-export type TGetAvailableNotionDatabasesUseCase = IUseCaseWithoutParamsAndPromiseResult<
+export type GetAvailableNotionDatabasesUseCase = IUseCaseWithoutParamsAndPromiseResult<
   INotionDatabase[]
 >;
 
 export const getAvailableNotionDatabasesUseCase = (
   restRepository: IRestRepository,
-): TGetAvailableNotionDatabasesUseCase => ({
+): GetAvailableNotionDatabasesUseCase => ({
   execute: () => restRepository.getAvailableNotionDatabases(),
 });
 
 // setNotionDatabaseIdUseCase
-export type TSetNotionDatabaseIdUseCase = IUseCaseWithSingleParamAndPromiseResult<string, string>;
+export type SetNotionDatabaseIdUseCase = IUseCaseWithSingleParamAndPromiseResult<string, string>;
 
 export const setNotionDatabaseIdUseCase = (
   restRepository: IRestRepository,
-): TSetNotionDatabaseIdUseCase => ({
+): SetNotionDatabaseIdUseCase => ({
   execute: (databaseId) => restRepository.setNotionDatabaseId(databaseId),
 });
 
 // getRandomNotionWordsUseCase
-export type TGetRandomNotionWordsUseCase = IUseCaseWithoutParamsAndPromiseResult<INotionWord[]>;
+export type GetRandomNotionWordsUseCase = IUseCaseWithoutParamsAndPromiseResult<INotionWord[]>;
 
 export const getRandomNotionWordsUseCase = (
   restRepository: IRestRepository,
-): TGetRandomNotionWordsUseCase => ({
+): GetRandomNotionWordsUseCase => ({
   execute: () => restRepository.getRandomNotionWords(),
 });
 
 // sendContactFormDataUseCase
-export type TSendContactFormDataUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type SendContactFormDataUseCase = IUseCaseWithSingleParamAndPromiseResult<
   IContact,
   IContact
 >;
 
 export const sendContactFormDataUseCase = (
   restRepository: IRestRepository,
-): TSendContactFormDataUseCase => ({
+): SendContactFormDataUseCase => ({
   execute: (data) => restRepository.sendContactFormData(data),
 });
 
 // increaseDailyStreakUseCase
-export type TIncreaseDailyStreakUseCase =
+export type IncreaseDailyStreakUseCase =
   IUseCaseWithoutParamsAndPromiseResult<IIncreaseDailyStreak>;
 
 export const increaseDailyStreakUseCase = (
   restRepository: IRestRepository,
   speechSynthesisRepository: ISpeechSynthesisRepository,
-): TIncreaseDailyStreakUseCase => ({
+): IncreaseDailyStreakUseCase => ({
   execute: () => {
     speechSynthesisRepository.cancel();
 
@@ -114,21 +114,21 @@ export const increaseDailyStreakUseCase = (
 });
 
 // resetNotionIntegrationUseCase
-export type TResetNotionIntegrationUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type ResetNotionIntegrationUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
 export const resetNotionIntegrationUseCase = (
   restRepository: IRestRepository,
-): TResetNotionIntegrationUseCase => ({
+): ResetNotionIntegrationUseCase => ({
   execute: () => restRepository.resetNotionIntegration(),
 });
 
 // deleteProfileUseCase
-export type TDeleteProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type DeleteProfileUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
 export const deleteProfileUseCase = (
   restRepository: IRestRepository,
   supabaseRepository: ISupabaseRepository,
-): TDeleteProfileUseCase => ({
+): DeleteProfileUseCase => ({
   execute: async () => {
     await restRepository.deleteProfile();
 
@@ -137,48 +137,48 @@ export const deleteProfileUseCase = (
 });
 
 // getDictionarySuggestionsUseCase
-export type TGetDictionarySuggestionsUseCaseUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type GetDictionarySuggestionsUseCaseUseCase = IUseCaseWithSingleParamAndPromiseResult<
   string,
   IDictionarySuggestions | null
 >;
 
 export const getDictionarySuggestionsUseCase = (
   restRepository: IRestRepository,
-): TGetDictionarySuggestionsUseCaseUseCase => ({
+): GetDictionarySuggestionsUseCaseUseCase => ({
   execute: (word) => restRepository.getDictionarySuggestions(word),
 });
 
 // updateNotionWordUseCase
-export type TUpdateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type UpdateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
   IUpdateNotionWordRequest,
   INotionWord[]
 >;
 
 export const updateNotionWordUseCase = (
   restRepository: IRestRepository,
-): TUpdateNotionWordUseCase => ({
+): UpdateNotionWordUseCase => ({
   execute: (data) => restRepository.updateNotionWord(data),
 });
 
 // getNotionTableColumnsUseCase
-export type TGetNotionTableColumnsUseCase = IUseCaseWithoutParamsAndPromiseResult<
-  TNotionTableColumn[]
+export type GetNotionTableColumnsUseCase = IUseCaseWithoutParamsAndPromiseResult<
+  NotionTableColumn[]
 >;
 
 export const getNotionTableColumnsUseCase = (
   restRepository: IRestRepository,
-): TGetNotionTableColumnsUseCase => ({
+): GetNotionTableColumnsUseCase => ({
   execute: () => restRepository.getNotionTableColumns(),
 });
 
 // createNotionWordUseCase
-export type TCreateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type CreateNotionWordUseCase = IUseCaseWithSingleParamAndPromiseResult<
   Record<string, string>,
   string
 >;
 
 export const createNotionWordUseCase = (
   restRepository: IRestRepository,
-): TCreateNotionWordUseCase => ({
+): CreateNotionWordUseCase => ({
   execute: (word) => restRepository.createNotionWord(word),
 });

@@ -1,6 +1,6 @@
-import { TNotionTableColumn } from '@domain/rest/rest.models';
+import { NotionTableColumn } from '@domain/rest/rest.models';
 
-const getFieldValue = (column: TNotionTableColumn, queryParams?: Record<string, string>) => {
+const getFieldValue = (column: NotionTableColumn, queryParams?: Record<string, string>) => {
   if (column.type === 'multi_select') {
     return column.options[0] || '';
   }
@@ -25,7 +25,7 @@ const getFieldValue = (column: TNotionTableColumn, queryParams?: Record<string, 
 };
 
 export const getInitialFormValuesFromTableColumns = (
-  tableColumns: TNotionTableColumn[],
+  tableColumns: NotionTableColumn[],
   queryParams?: Record<string, string>,
 ) =>
   tableColumns.reduce(

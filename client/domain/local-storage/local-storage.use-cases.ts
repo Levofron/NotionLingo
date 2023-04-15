@@ -3,20 +3,20 @@ import { ISetItemParams } from './local-storage.models';
 import { ILocalStorageRepository } from './local-storage.repository';
 
 // isSupportedUseCase
-export type TIsSupportedUseCase = IUseCaseWithoutParams<boolean>;
+export type IsSupportedUseCase = IUseCaseWithoutParams<boolean>;
 
 export const isSupportedUseCase = (
   localStorageRepository: ILocalStorageRepository,
-): TIsSupportedUseCase => ({
+): IsSupportedUseCase => ({
   execute: () => localStorageRepository.isSupported(),
 });
 
 // setItemUseCase
-export type TSetItemUseCase = IUseCaseWithSingleParam<ISetItemParams, void>;
+export type SetItemUseCase = IUseCaseWithSingleParam<ISetItemParams, void>;
 
 export const setItemUseCase = (
   localStorageRepository: ILocalStorageRepository,
-): TSetItemUseCase => ({
+): SetItemUseCase => ({
   execute: (params) => {
     if (!localStorageRepository.isSupported()) {
       return;
@@ -27,11 +27,11 @@ export const setItemUseCase = (
 });
 
 // getItemUseCase
-export type TGetItemUseCase = IUseCaseWithSingleParam<string, string | null>;
+export type GetItemUseCase = IUseCaseWithSingleParam<string, string | null>;
 
 export const getItemUseCase = (
   localStorageRepository: ILocalStorageRepository,
-): TGetItemUseCase => ({
+): GetItemUseCase => ({
   execute: (key) => {
     if (!localStorageRepository.isSupported()) {
       return null;
@@ -42,11 +42,11 @@ export const getItemUseCase = (
 });
 
 // removeItemUseCase
-export type TRemoveItemUseCase = IUseCaseWithSingleParam<string, void>;
+export type RemoveItemUseCase = IUseCaseWithSingleParam<string, void>;
 
 export const removeItemUseCase = (
   localStorageRepository: ILocalStorageRepository,
-): TRemoveItemUseCase => ({
+): RemoveItemUseCase => ({
   execute: (key) => {
     if (!localStorageRepository.isSupported()) {
       return;

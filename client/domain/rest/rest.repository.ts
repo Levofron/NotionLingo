@@ -9,7 +9,7 @@ import {
   INotionWord,
   IProfile,
   IUpdateNotionWordRequest,
-  TNotionTableColumn,
+  NotionTableColumn,
 } from './rest.models';
 
 export interface IRestRepository {
@@ -18,7 +18,7 @@ export interface IRestRepository {
   getAvailableNotionDatabases: () => Promise<INotionDatabase[]>;
   getDictionarySuggestions: (word: string) => Promise<IDictionarySuggestions | null>;
   getLoggedProfile: () => Promise<IProfile>;
-  getNotionTableColumns: () => Promise<TNotionTableColumn[]>;
+  getNotionTableColumns: () => Promise<NotionTableColumn[]>;
   getRandomNotionWords: () => Promise<INotionWord[]>;
   healthCheck: () => Promise<string>;
   increaseDailyStreak: () => Promise<IIncreaseDailyStreak>;

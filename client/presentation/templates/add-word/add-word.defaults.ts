@@ -1,8 +1,8 @@
 import { object, string } from 'yup';
 
-import { TNotionTableColumn } from '@domain/rest/rest.models';
+import { NotionTableColumn } from '@domain/rest/rest.models';
 
-export const getAddWordFormValidationSchema = (tableColumns: TNotionTableColumn[]) =>
+export const getAddWordFormValidationSchema = (tableColumns: NotionTableColumn[]) =>
   object().shape(
     Object.fromEntries(
       tableColumns.map((_column) => [

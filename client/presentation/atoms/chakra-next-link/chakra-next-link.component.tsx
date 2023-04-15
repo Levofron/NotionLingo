@@ -2,9 +2,9 @@ import { Link as ChakraLink } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { TChakraNextLinkProps } from './chakra-next-link.types';
+import { ChakraNextLinkProps } from './chakra-next-link.types';
 
-const ChakraNextLinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, TChakraNextLinkProps> = (
+const ChakraNextLinkComponent: ForwardRefRenderFunction<HTMLAnchorElement, ChakraNextLinkProps> = (
   { children, href, style, target, ...restProps },
   ref,
 ): JSX.Element => (
