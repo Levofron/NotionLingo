@@ -10,9 +10,9 @@ import {
   getNotionApiKeyFromProfile,
   getProfileDataWithNotionDataCheck,
   getUserFromRequest,
-  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('DELETE'),
-  validatRoutesecretMiddleware,
+  validateRouteSecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
 ];

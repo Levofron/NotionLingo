@@ -6,10 +6,10 @@ import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   getProfileById,
-  validatRoutesecretMiddleware,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -53,7 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
-  validatRoutesecretMiddleware,
+  validateRouteSecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
   validateIfParametersExistsMiddleware('query', ['id']),

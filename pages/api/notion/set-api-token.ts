@@ -8,10 +8,10 @@ import {
   encrypt,
   getAvailableNotionDatabases,
   getUserFromRequest,
-  validatRoutesecretMiddleware,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('POST'),
-  validatRoutesecretMiddleware,
+  validateRouteSecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateIfParametersExistsMiddleware('body', ['token']),
   assignRequestTokenToSupabaseSessionMiddleware,

@@ -18,9 +18,9 @@ import {
   getTextFromPagePropertyInstance,
   getUserFromRequest,
   textToIpa,
-  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -213,7 +213,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
-  validatRoutesecretMiddleware,
+  validateRouteSecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
 ];

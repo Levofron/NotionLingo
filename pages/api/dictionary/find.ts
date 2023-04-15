@@ -9,9 +9,9 @@ import { cleanUpString } from '@shared/functions';
 import { HttpStatusCode } from '@server/http-status-code';
 import {
   dictionaryResponseToMeaningAndExampleArray,
-  validatRoutesecretMiddleware,
   validateIfParametersExistsMiddleware,
   validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -177,7 +177,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
-  validatRoutesecretMiddleware,
+  validateRouteSecretMiddleware,
   validateIfParametersExistsMiddleware('query', ['word']),
 ];
 

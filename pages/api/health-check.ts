@@ -3,8 +3,8 @@ import { withAxiom } from 'next-axiom';
 
 import { HttpStatusCode } from '@server/http-status-code';
 import {
-  validatRoutesecretMiddleware,
   validateRequestMethodMiddleware,
+  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -15,6 +15,6 @@ const handler = (_: NextApiRequest, res: NextApiResponse) => {
   res.status(HttpStatusCode.OK).json(isoDate);
 };
 
-const middlewareToApply = [validateRequestMethodMiddleware('GET'), validatRoutesecretMiddleware];
+const middlewareToApply = [validateRequestMethodMiddleware('GET'), validateRouteSecretMiddleware];
 
 export default withAxiom(withMiddleware(handler)(middlewareToApply));
