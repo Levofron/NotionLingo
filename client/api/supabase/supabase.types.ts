@@ -4,13 +4,13 @@ import {
   ILogoutResponse,
   IOAuthResponse,
   IOnAuthStateChangeResponse,
-  TOnAuthStateChangeCallback,
+  OnAuthStateChangeCallback,
 } from '@domain/supabase/supabase.models';
 
 export interface ISupabaseApi {
   getSession: () => Session | null;
   getUser: () => User | null;
   logout: () => Promise<ILogoutResponse>;
-  onAuthStateChange: (callback: TOnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
+  onAuthStateChange: (callback: OnAuthStateChangeCallback) => IOnAuthStateChangeResponse;
   signIn: (userCredentials: UserCredentials) => Promise<IOAuthResponse>;
 }

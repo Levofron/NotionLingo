@@ -19,4 +19,4 @@ declare module 'text-to-ipa' {
   };
 }
 
-type TThemeMode = 'light' | 'dark';
+type ThemeMode = 'light' | 'dark';

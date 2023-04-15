@@ -1,4 +1,4 @@
-import { TNotionTableColumn } from '@domain/rest/rest.models';
+import { NotionTableColumn } from '@domain/rest/rest.models';
 
 import { functionImportTest } from '@shared/functions';
 
@@ -12,7 +12,7 @@ describe('getInitialFormValuesFromTableColumns function', () => {
   });
 
   it('should return object with one key for one column', () => {
-    const columnMock: TNotionTableColumn = {
+    const columnMock: NotionTableColumn = {
       columnName: 'test',
       isExampleSentence: false,
       isMeaning: false,
@@ -27,7 +27,7 @@ describe('getInitialFormValuesFromTableColumns function', () => {
   });
 
   it('should attach first options value as initial value for select', () => {
-    const columnMock: TNotionTableColumn = {
+    const columnMock: NotionTableColumn = {
       columnName: 'test',
       options: ['test', 'test2'],
       type: 'multi_select',
@@ -40,7 +40,7 @@ describe('getInitialFormValuesFromTableColumns function', () => {
   });
 
   it('should assign default values from query params', () => {
-    const columnMock: TNotionTableColumn = {
+    const columnMock: NotionTableColumn = {
       columnName: 'word',
       isExampleSentence: false,
       isMeaning: false,

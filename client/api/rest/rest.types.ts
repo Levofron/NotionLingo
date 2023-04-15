@@ -9,7 +9,7 @@ import {
   INotionDatabase,
   IProfile,
   IUpdatedNotionWord,
-  TNotionTableColumn,
+  NotionTableColumn,
 } from '@domain/rest/rest.models';
 
 export interface INotionWordResponseRecord {
@@ -49,7 +49,7 @@ export interface IRestApi {
   getAvailableNotionDatabases: () => Promise<AxiosResponse<INotionDatabase[]>>;
   getDictionarySuggestions: (word: string) => Promise<AxiosResponse<IDictionarySuggestions>>;
   getLoggedProfile: () => Promise<AxiosResponse<IProfile>>;
-  getNotionTableColumns: () => Promise<AxiosResponse<TNotionTableColumn[]>>;
+  getNotionTableColumns: () => Promise<AxiosResponse<NotionTableColumn[]>>;
   getRandomNotionWords: () => Promise<AxiosResponse<INotionWordResponseRecord[]>>;
   healthCheck: () => Promise<AxiosResponse<string>>;
   increaseDailyStreak: () => Promise<AxiosResponse<IIncreaseDailyStreak>>;

@@ -1,6 +1,6 @@
 import { IIconButtonProps } from './icon-button.types';
 
-export const variantToStylesMapper: Record<TThemeMode, Partial<IIconButtonProps>> = {
+export const variantToStylesMapper: Record<ThemeMode, Partial<IIconButtonProps>> = {
   dark: {
     _hover: {
       bg: 'transparent',

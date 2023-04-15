@@ -1,5 +1,5 @@
 import { ButtonProps } from '@chakra-ui/react';
 
 export interface IButtonProps extends ButtonProps {
-  mode?: TThemeMode;
+  mode?: ThemeMode;
 }

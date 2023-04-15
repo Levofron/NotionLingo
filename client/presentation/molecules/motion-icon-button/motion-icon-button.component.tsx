@@ -3,9 +3,9 @@ import { FC } from 'react';
 
 import { Icon } from '@presentation/atoms';
 
-import { TMotionIconButtonProps } from './motion-icon-button.types';
+import { MotionIconButtonProps } from './motion-icon-button.types';
 
-export const MotionIconButton: FC<TMotionIconButtonProps> = ({
+export const MotionIconButton: FC<MotionIconButtonProps> = ({
   icon,
   onClick,
   ...motionButtonProps

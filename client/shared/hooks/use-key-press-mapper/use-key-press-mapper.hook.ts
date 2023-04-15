@@ -1,10 +1,10 @@
 import { debounce } from '@shared/functions';
 
 import { useEventListener } from '../use-event-listener/use-event-listener.hook';
-import { TAvailableKeys } from './use-key-press-mapper.types';
+import { AvailableKey } from './use-key-press-mapper.types';
 
 export const useKeyPressMapper = (
-  keyMappers: [TAvailableKeys | TAvailableKeys[], () => void][],
+  keyMappers: [AvailableKey | AvailableKey[], () => void][],
   isBlocked?: boolean,
 ) => {
   const handleKeyPress = debounce((event: KeyboardEvent) => {
@@ -15,7 +15,7 @@ export const useKeyPressMapper = (
     }
 
     const foundKeyMapper = keyMappers.find(([keys]) =>
-      Array.isArray(keys) ? keys.includes(event.code as TAvailableKeys) : keys === event.code,
+      Array.isArray(keys) ? keys.includes(event.code as AvailableKey) : keys === event.code,
     );
 
     if (foundKeyMapper && foundKeyMapper.length > 0) {

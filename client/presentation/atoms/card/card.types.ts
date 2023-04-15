@@ -1,5 +1,5 @@
 import { CardProps } from '@chakra-ui/react';
 
 export interface ICardProps extends CardProps {
-  mode?: TThemeMode;
+  mode?: ThemeMode;
 }

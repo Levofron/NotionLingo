@@ -37,7 +37,7 @@ const PAGE_SIZE = 100;
 const RECORDS_TO_RETURN = 5;
 const CACHE_TIME = 1000 * 60 * 60;
 
-type TPage = PageObjectResponse | PartialPageObjectResponse;
+type Page = PageObjectResponse | PartialPageObjectResponse;
 
 interface IGetPagesParams {
   notionClient: Client;
@@ -55,17 +55,17 @@ interface IGetPagesWithCacheParams {
 interface IGetPagesResult {
   hasMore: boolean;
   nextCursor: string | null;
-  pages: TPage[];
+  pages: Page[];
 }
 
-const getRandomFivePages = (pages: TPage[]) => {
+const getRandomFivePages = (pages: Page[]) => {
   const amountOfRecords = pages.length;
 
   if (amountOfRecords <= RECORDS_TO_RETURN) {
     return pages;
   }
 
-  let result: TPage[] = [];
+  let result: Page[] = [];
   const copiedPages = [...pages];
 
   for (let i = 0; i < RECORDS_TO_RETURN; i += 1) {

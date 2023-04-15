@@ -23,4 +23,4 @@ export interface IOAuthResponse extends ILogoutResponse {
   user: User | null;
 }
 
-export type TOnAuthStateChangeCallback = (event: AuthChangeEvent, session: Session | null) => void;
+export type OnAuthStateChangeCallback = (event: AuthChangeEvent, session: Session | null) => void;

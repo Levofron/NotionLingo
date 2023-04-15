@@ -1,4 +1,4 @@
-import { TNotionTableColumn } from '@domain/rest/rest.models';
+import { NotionTableColumn } from '@domain/rest/rest.models';
 
 export interface IAddWordProps {
   error: string | null;
@@ -7,5 +7,5 @@ export interface IAddWordProps {
   onRefetchButtonClick: () => void;
   onSubmit: (values: Record<string, string>, reset: () => void) => void;
   redirectToHome: () => void;
-  tableColumns: TNotionTableColumn[] | null;
+  tableColumns: NotionTableColumn[] | null;
 }

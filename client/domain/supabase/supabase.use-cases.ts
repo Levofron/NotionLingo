@@ -10,19 +10,19 @@ import {
 import {
   IOAuthResponse,
   IOnAuthStateChangeResponse,
-  TOnAuthStateChangeCallback,
+  OnAuthStateChangeCallback,
 } from './supabase.models';
 import { ISupabaseRepository } from './supabase.repository';
 
 // loginViaMagicLinkUseCase
-export type TLoginViaMagicLinkUseCase = IUseCaseWithSingleParamAndPromiseResult<
+export type LoginViaMagicLinkUseCase = IUseCaseWithSingleParamAndPromiseResult<
   string,
   IOAuthResponse
 >;
 
 export const loginViaMagicLinkUseCase = (
   supabaseRepository: ISupabaseRepository,
-): TLoginViaMagicLinkUseCase => ({
+): LoginViaMagicLinkUseCase => ({
   execute: async (email) => {
     const response = await supabaseRepository.loginViaMagicLink(email);
 
@@ -35,12 +35,12 @@ export const loginViaMagicLinkUseCase = (
 });
 
 // logoutUseCase
-export type TLogoutUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
+export type LogoutUseCase = IUseCaseWithoutParamsAndPromiseResult<void>;
 
 export const logoutUseCase = (
   supabaseRepository: ISupabaseRepository,
   restRepository: IRestRepository,
-): TLogoutUseCase => ({
+): LogoutUseCase => ({
   execute: async () => {
     await supabaseRepository.logout();
     await restRepository.setSupabaseCookie(null);
@@ -48,27 +48,27 @@ export const logoutUseCase = (
 });
 
 // getUserUseCase
-export type TGetUserUseCase = IUseCaseWithoutParams<User | null>;
+export type GetUserUseCase = IUseCaseWithoutParams<User | null>;
 
-export const getUserUseCase = (supabaseRepository: ISupabaseRepository): TGetUserUseCase => ({
+export const getUserUseCase = (supabaseRepository: ISupabaseRepository): GetUserUseCase => ({
   execute: () => supabaseRepository.getUser(),
 });
 
 // getSessionUseCase
-export type TGetSessionUseCase = IUseCaseWithoutParams<Session | null>;
+export type GetSessionUseCase = IUseCaseWithoutParams<Session | null>;
 
-export const getSessionUseCase = (supabaseRepository: ISupabaseRepository): TGetSessionUseCase => ({
+export const getSessionUseCase = (supabaseRepository: ISupabaseRepository): GetSessionUseCase => ({
   execute: () => supabaseRepository.getSession(),
 });
 
 // onAuthStateChangeUseCase
-export type TOnAuthStateChangeUseCase = IUseCaseWithSingleParam<
-  TOnAuthStateChangeCallback,
+export type OnAuthStateChangeUseCase = IUseCaseWithSingleParam<
+  OnAuthStateChangeCallback,
   IOnAuthStateChangeResponse
 >;
 
 export const onAuthStateChangeUseCase = (
   supabaseRepository: ISupabaseRepository,
-): TOnAuthStateChangeUseCase => ({
+): OnAuthStateChangeUseCase => ({
   execute: (callback) => supabaseRepository.onAuthStateChange(callback),
 });

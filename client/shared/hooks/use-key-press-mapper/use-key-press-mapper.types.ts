@@ -1,1 +1,1 @@
-export type TAvailableKeys = 'KeyS' | 'KeyP' | 'KeyR' | 'Space';
+export type AvailableKey = 'KeyS' | 'KeyP' | 'KeyR' | 'Space';

@@ -1,7 +1,7 @@
 import { FormikErrors, useFormik } from 'formik';
 import { FormEvent } from 'react';
 
-import { TNotionTableColumn } from '@domain/rest/rest.models';
+import { NotionTableColumn } from '@domain/rest/rest.models';
 
 export interface IAddWordFormProps {
   errors: FormikErrors<Record<string, string>>;
@@ -9,6 +9,6 @@ export interface IAddWordFormProps {
   onBlur: ReturnType<typeof useFormik>['handleBlur'];
   onChange: ReturnType<typeof useFormik>['handleChange'];
   onSubmit: (event?: FormEvent<HTMLFormElement> | undefined) => void;
-  tableColumns: TNotionTableColumn[];
+  tableColumns: NotionTableColumn[];
   values: Record<string, string>;
 }
