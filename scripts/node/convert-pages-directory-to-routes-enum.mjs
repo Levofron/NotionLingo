@@ -68,7 +68,7 @@ const main = async () => {
   const filenamesWithoutExtensions = removeExtensionsFromFilenames(filteredFilenames);
 
   const enumBody = convertNamesToEnumBody(filenamesWithoutExtensions);
-  const enumContent = `export enum ERoutes {\n${enumBody}\n}\n`;
+  const enumContent = `export enum Routes {\n${enumBody}\n}\n`;
 
   writeEnumToRoutesFile(enumContent);
 };

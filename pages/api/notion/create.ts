@@ -6,7 +6,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 import { cleanUpString } from '@shared/functions';
 import { isString } from '@shared/guards';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   createNotionClient,
@@ -15,9 +15,9 @@ import {
   getNotionTableColumns,
   getProfileDataWithNotionDataCheck,
   getUserFromRequest,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
-  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -51,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const requestBodyKeys = Object.keys(requestBody);
 
   if (!requestBodyKeys?.length) {
-    throw new ApiError(EHttpStatusCode.BAD_REQUEST, 'You need to provide a body');
+    throw new ApiError(HttpStatusCode.BAD_REQUEST, 'You need to provide a body');
   }
 
   const invalidTableColumns = tableColumns.filter((_tableColumn) => {
@@ -67,7 +67,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .join(', ');
 
     throw new ApiError(
-      EHttpStatusCode.BAD_REQUEST,
+      HttpStatusCode.BAD_REQUEST,
       `You need to provide all the columns in the body. The following columns are missing: ${invalidTableColumnsAsString}`,
     );
   }
@@ -88,7 +88,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!isValidOption) {
         throw new ApiError(
-          EHttpStatusCode.BAD_REQUEST,
+          HttpStatusCode.BAD_REQUEST,
           `The provided value for the column "${_multiSelectTableColumn.columnName}" is not valid`,
         );
       }
@@ -122,7 +122,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   memoryCache.del(cacheKey);
 
-  return res.status(EHttpStatusCode.OK).json({
+  return res.status(HttpStatusCode.OK).json({
     id: result.id,
     properties: requestBody,
   });
@@ -130,7 +130,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('POST'),
-  validateRouteSecretMiddleware,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
 ];

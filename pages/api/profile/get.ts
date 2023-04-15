@@ -2,14 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   getProfileById,
+  validatRoutesecretMiddleware,
   validateIfParametersExistsMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
-  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -26,7 +26,7 @@ export const getProfileAndUserMetadataById = async (userId: string) => {
   const { data: user, error: userError } = await getUserMetadataById(userId);
 
   if (userError) {
-    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, userError.message);
+    throw new ApiError(HttpStatusCode.INTERNAL_SERVER_ERROR, userError.message);
   }
 
   const hasNotionData = !!profileData?.notion_api_key && !!profileData?.notion_database_id;
@@ -48,12 +48,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const userId = req.query.id as string;
   const profileDetails = await getProfileAndUserMetadataById(userId);
 
-  res.status(EHttpStatusCode.OK).json(profileDetails);
+  res.status(HttpStatusCode.OK).json(profileDetails);
 };
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
-  validateRouteSecretMiddleware,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
   validateIfParametersExistsMiddleware('query', ['id']),

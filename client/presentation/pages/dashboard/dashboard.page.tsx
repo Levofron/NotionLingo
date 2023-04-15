@@ -9,7 +9,7 @@ import { removeNotionWordFromArray } from '@domain/rest/operations';
 import { IIncreaseDailyStreak, INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
 
 import { useToast, useUser } from '@shared/hooks';
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 const DashboardComponent = () => {
   const toast = useToast();
@@ -82,7 +82,7 @@ const DashboardComponent = () => {
 };
 
 export const Dashboard = withCheckIfUserLogged(DashboardComponent, {
-  currentPageUrl: ERoutes.DASHBOARD,
-  redirectUrlOnError: ERoutes.ONBOARDING,
+  currentPageUrl: Routes.DASHBOARD,
+  redirectUrlOnError: Routes.ONBOARDING,
   shouldHaveNotionData: true,
 });

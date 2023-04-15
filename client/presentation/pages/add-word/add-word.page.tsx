@@ -6,7 +6,7 @@ import { AddWord as AddWordTemplate } from '@presentation/templates';
 import { useCreateWord, useTableColumns } from '@adapter/hooks';
 
 import { useRouter, useToast } from '@shared/hooks';
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 const AddWordComponent = () => {
   const toast = useToast();
@@ -24,7 +24,7 @@ const AddWordComponent = () => {
 
   useEffect(getTableColumns, []);
 
-  const isFindWordAsPreviousPath = router.getPreviousPath() === ERoutes.FIND_WORD;
+  const isFindWordAsPreviousPath = router.getPreviousPath() === Routes.FIND_WORD;
 
   const handleRefetch = () => {
     resetTableColumns();
@@ -44,7 +44,7 @@ const AddWordComponent = () => {
 
         if (isFindWordAsPreviousPath) {
           setTimeout(() => {
-            router.redirectTo(ERoutes.FIND_WORD);
+            router.redirectTo(Routes.FIND_WORD);
           }, 2000);
         }
       })
@@ -69,7 +69,7 @@ const AddWordComponent = () => {
 };
 
 export const AddWord = withCheckIfUserLogged(AddWordComponent, {
-  currentPageUrl: ERoutes.ADD_WORD,
-  redirectUrlOnError: ERoutes.ONBOARDING,
+  currentPageUrl: Routes.ADD_WORD,
+  redirectUrlOnError: Routes.ONBOARDING,
   shouldHaveNotionData: true,
 });

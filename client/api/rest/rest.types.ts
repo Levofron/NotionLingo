@@ -23,7 +23,7 @@ export interface INotionWordResponseRecord {
   word: string;
 }
 
-export enum ERestEndpoints {
+export enum RestEndpoints {
   CONTACT = '/contact',
   CREATE_NOTION_WORD = '/notion/create',
   DELETE_PROFILE = '/profile/delete',

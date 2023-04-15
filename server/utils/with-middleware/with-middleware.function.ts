@@ -4,12 +4,12 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { isError } from '@shared/guards';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 
 import { FunctionToCheck } from './with-middleware.types';
 
 const getExceptionStatus = (exception: unknown) =>
-  exception instanceof ApiError ? exception.statusCode : EHttpStatusCode.INTERNAL_SERVER_ERROR;
+  exception instanceof ApiError ? exception.statusCode : HttpStatusCode.INTERNAL_SERVER_ERROR;
 
 const getExceptionMessage = (exception: unknown) =>
   isError(exception) ? exception.message : 'Internal Server Error';

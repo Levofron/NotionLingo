@@ -2,7 +2,7 @@ import { useRouter as useNextRouter } from 'next/router';
 import { useCallback, useContext, useMemo } from 'react';
 
 import { RouterContext } from '@shared/context';
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 export const useRouter = () => {
   const router = useNextRouter();
@@ -17,24 +17,24 @@ export const useRouter = () => {
 
   const redirectWithReplace = useCallback((path: string) => router.replace(path), [router.replace]);
 
-  const isHome = useMemo(() => isSamePath(ERoutes.HOME), [isSamePath]);
+  const isHome = useMemo(() => isSamePath(Routes.HOME), [isSamePath]);
 
-  const isDonate = useMemo(() => isSamePath(ERoutes.DONATE), [isSamePath]);
+  const isDonate = useMemo(() => isSamePath(Routes.DONATE), [isSamePath]);
 
-  const isDashboard = useMemo(() => isSamePath(ERoutes.DASHBOARD), [isSamePath]);
+  const isDashboard = useMemo(() => isSamePath(Routes.DASHBOARD), [isSamePath]);
 
-  const isOnboarding = useMemo(() => isSamePath(ERoutes.ONBOARDING), [isSamePath]);
+  const isOnboarding = useMemo(() => isSamePath(Routes.ONBOARDING), [isSamePath]);
 
-  const redirectToHome = useCallback(() => redirectTo(ERoutes.HOME), [redirectTo]);
+  const redirectToHome = useCallback(() => redirectTo(Routes.HOME), [redirectTo]);
 
-  const redirectToLogin = useCallback(() => redirectTo(ERoutes.LOGIN), [redirectTo]);
+  const redirectToLogin = useCallback(() => redirectTo(Routes.LOGIN), [redirectTo]);
 
-  const redirectToDashboard = useCallback(() => redirectTo(ERoutes.DASHBOARD), [redirectTo]);
+  const redirectToDashboard = useCallback(() => redirectTo(Routes.DASHBOARD), [redirectTo]);
 
-  const redirectToOnboarding = useCallback(() => redirectTo(ERoutes.ONBOARDING), [redirectTo]);
+  const redirectToOnboarding = useCallback(() => redirectTo(Routes.ONBOARDING), [redirectTo]);
 
   const redirectWithReplaceToAddWord = useCallback(
-    () => redirectWithReplace(ERoutes.ADD_WORD),
+    () => redirectWithReplace(Routes.ADD_WORD),
     [redirectWithReplace],
   );
 

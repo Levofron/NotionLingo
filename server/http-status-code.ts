@@ -1,4 +1,4 @@
-export enum EHttpStatusCode {
+export enum HttpStatusCode {
   OK = 200,
   FORBIDDEN = 403,
   NOT_FOUND = 404,

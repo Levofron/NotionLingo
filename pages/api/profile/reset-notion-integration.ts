@@ -2,16 +2,16 @@ import memoryCache from 'memory-cache';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   generateMemoryCacheKey,
   getNotionApiKeyFromProfile,
   getProfileDataWithNotionDataCheck,
   getUserFromRequest,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
-  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -36,12 +36,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   memoryCache.del(cacheKey);
 
-  return res.status(EHttpStatusCode.OK).send('ok');
+  return res.status(HttpStatusCode.OK).send('ok');
 };
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('GET'),
-  validateRouteSecretMiddleware,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
 ];

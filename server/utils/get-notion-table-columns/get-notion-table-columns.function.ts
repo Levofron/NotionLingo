@@ -3,7 +3,7 @@ import { ApiError } from 'next/dist/server/api-utils';
 
 import { isObject, objectKeys } from '@shared/guards';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 
 import {
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
@@ -68,7 +68,7 @@ export const getNotionTableColumns = async (notionApiKey: string, notionDatabase
 
   if (!foundDatabase) {
     throw new ApiError(
-      EHttpStatusCode.INTERNAL_SERVER_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       'The user does not have any available pages',
     );
   }

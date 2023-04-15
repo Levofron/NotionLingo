@@ -120,7 +120,7 @@ module.exports = {
             selector: 'enum',
             format: ['PascalCase'],
             custom: {
-              regex: '^E[A-Z]',
+              regex: '^[A-Z]',
               match: true,
             },
           },

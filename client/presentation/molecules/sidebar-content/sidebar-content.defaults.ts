@@ -1,30 +1,30 @@
-import { ERoutes } from '@shared/routes';
+import { Routes } from '@shared/routes';
 
 import { ISidebarItem } from './sidebar-content.types';
 
 export const sidebarItems: Array<ISidebarItem & { shouldHaveNotionData: boolean }> = [
-  { name: 'Home', href: ERoutes.HOME, shouldHaveNotionData: false },
-  { name: 'Dashboard', href: ERoutes.DASHBOARD, shouldHaveNotionData: true },
-  { name: 'Find word', href: ERoutes.FIND_WORD, shouldHaveNotionData: false },
-  { name: 'Add word', href: ERoutes.ADD_WORD, shouldHaveNotionData: true },
+  { name: 'Home', href: Routes.HOME, shouldHaveNotionData: false },
+  { name: 'Dashboard', href: Routes.DASHBOARD, shouldHaveNotionData: true },
+  { name: 'Find word', href: Routes.FIND_WORD, shouldHaveNotionData: false },
+  { name: 'Add word', href: Routes.ADD_WORD, shouldHaveNotionData: true },
   {
     name: 'Account Settings',
-    href: ERoutes.ACCOUNT_SETTINGS,
+    href: Routes.ACCOUNT_SETTINGS,
     shouldHaveNotionData: true,
   },
   {
     name: 'Privacy Policy',
-    href: ERoutes.PRIVACY_POLICY,
+    href: Routes.PRIVACY_POLICY,
     shouldHaveNotionData: false,
   },
   {
     name: 'Terms & Conditions',
-    href: ERoutes.TERMS,
+    href: Routes.TERMS,
     shouldHaveNotionData: false,
   },
   {
     name: 'Donate',
-    href: ERoutes.DONATE,
+    href: Routes.DONATE,
     shouldHaveNotionData: true,
   },
 ];

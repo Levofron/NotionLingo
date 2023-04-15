@@ -3,16 +3,16 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAxiom } from 'next-axiom';
 import { ApiError } from 'next/dist/server/api-utils';
 
-import { EHttpStatusCode } from '@server/http-status-code';
+import { HttpStatusCode } from '@server/http-status-code';
 import {
   assignRequestTokenToSupabaseSessionMiddleware,
   generateMemoryCacheKey,
   getNotionApiKeyFromProfile,
   getProfileDataWithNotionDataCheck,
   getUserFromRequest,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   validateRequestMethodMiddleware,
-  validateRouteSecretMiddleware,
   withMiddleware,
 } from '@server/utils';
 
@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { error } = await supabaseService.auth.api.deleteUser(user?.id!);
 
   if (error) {
-    throw new ApiError(EHttpStatusCode.INTERNAL_SERVER_ERROR, error.message);
+    throw new ApiError(HttpStatusCode.INTERNAL_SERVER_ERROR, error.message);
   }
 
   await supabaseInstance
@@ -42,12 +42,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   memoryCache.del(cacheKey);
 
-  res.status(EHttpStatusCode.OK).json({ userId: user?.id });
+  res.status(HttpStatusCode.OK).json({ userId: user?.id });
 };
 
 const middlewareToApply = [
   validateRequestMethodMiddleware('DELETE'),
-  validateRouteSecretMiddleware,
+  validatRoutesecretMiddleware,
   validateIfUserIsLoggedInMiddleware,
   assignRequestTokenToSupabaseSessionMiddleware,
 ];

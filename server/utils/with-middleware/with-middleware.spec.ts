@@ -2,7 +2,7 @@ import { functionImportTest } from '@shared/functions';
 
 import { API_ROUTE_SECRET } from '@config/constants';
 
-import { validateRequestMethodMiddleware, validateRouteSecretMiddleware } from '..';
+import { validatRoutesecretMiddleware, validateRequestMethodMiddleware } from '..';
 import { withMiddleware } from './with-middleware.function';
 
 const responseJsonFunctionMock = jest.fn().mockReturnThis();
@@ -31,7 +31,7 @@ describe('withMiddleware function', () => {
 
     const handlerFunctionMock = jest.fn();
 
-    const result = await withMiddleware(handlerFunctionMock)([validateRouteSecretMiddleware])(
+    const result = await withMiddleware(handlerFunctionMock)([validatRoutesecretMiddleware])(
       request,
       response,
     );
@@ -56,7 +56,7 @@ describe('withMiddleware function', () => {
 
     const handlerFunctionMock = jest.fn().mockReturnValue('handler function result');
 
-    const result = await withMiddleware(handlerFunctionMock)([validateRouteSecretMiddleware])(
+    const result = await withMiddleware(handlerFunctionMock)([validatRoutesecretMiddleware])(
       request,
       response,
     );
@@ -81,7 +81,7 @@ describe('withMiddleware function', () => {
 
     const result = await withMiddleware(handlerFunctionMock)([
       validateRequestMethodMiddleware('GET'),
-      validateRouteSecretMiddleware,
+      validatRoutesecretMiddleware,
     ])(request, response);
 
     expect(result).toBe('handler function result');
@@ -104,7 +104,7 @@ describe('withMiddleware function', () => {
 
     const result = await withMiddleware(handlerFunctionMock)([
       validateRequestMethodMiddleware('POST'),
-      validateRouteSecretMiddleware,
+      validatRoutesecretMiddleware,
     ])(request, response);
 
     expect(result).toBeUndefined();
