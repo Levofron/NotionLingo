@@ -33,7 +33,7 @@ describe('useCopyToClipboard hook', () => {
     });
   });
 
-  it('does not copy text to clipboard when navigator.clipboard is not available', async () => {
+  it('should not copy text to clipboard when navigator.clipboard is not available', async () => {
     const originalClipboard = navigator.clipboard;
 
     // @ts-expect-error
