@@ -1,7 +1,7 @@
-import { ILocalStorageApi } from '@api/local-storage/local-storage.types';
-import { ISpeechSynthesisApi } from '@api/speech-synthesis/speech-synthesis.types';
+import { LocalStorageApi } from '@api/local-storage/local-storage.types';
+import { SpeechSynthesisApi } from '@api/speech-synthesis/speech-synthesis.types';
 
-import { ISpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
+import { SpeechSynthesisRepository } from '@domain/speech-synthesis/speech-synthesis.repository';
 
 import {
   DEFAULT_SPEECH_SYNTHESIS_PITCH,
@@ -19,9 +19,9 @@ import {
 } from './operations';
 
 export function getSpeechSynthesisRepository(
-  speechSynthesisApi: ISpeechSynthesisApi,
-  localStorageApi: ILocalStorageApi,
-): ISpeechSynthesisRepository {
+  speechSynthesisApi: SpeechSynthesisApi,
+  localStorageApi: LocalStorageApi,
+): SpeechSynthesisRepository {
   const getPitch = () =>
     getSpeechSynthesisValueFromLocalStorage({
       min: 0,

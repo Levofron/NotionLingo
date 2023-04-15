@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface IOnboardingStepLayoutProps {
+export interface OnboardingStepLayoutProps {
   backButtonLabel?: string;
   children: ReactNode;
   onBackButtonClick?: () => void;

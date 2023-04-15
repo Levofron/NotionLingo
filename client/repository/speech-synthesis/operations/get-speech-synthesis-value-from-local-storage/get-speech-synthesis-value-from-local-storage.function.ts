@@ -1,4 +1,4 @@
-import { IGetSpeechSynthesisValueFromLocalStorageParams } from './get-speech-synthesis-value-from-local-storage.types';
+import { GetSpeechSynthesisValueFromLocalStorageParams } from './get-speech-synthesis-value-from-local-storage.types';
 
 export const getSpeechSynthesisValueFromLocalStorage = ({
   defaultValue,
@@ -6,7 +6,7 @@ export const getSpeechSynthesisValueFromLocalStorage = ({
   localStorageApi,
   max,
   min,
-}: IGetSpeechSynthesisValueFromLocalStorageParams): number => {
+}: GetSpeechSynthesisValueFromLocalStorageParams): number => {
   const value = localStorageApi.getItem(key);
 
   if (!value) {

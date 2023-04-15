@@ -2,12 +2,12 @@ import { MutableRefObject, useEffect, useRef } from 'react';
 
 import { isBoolean } from '@shared/guards';
 
-import { IOptions } from './use-event-listener.types';
+import { Options } from './use-event-listener.types';
 
 export function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
   handler: (this: Window, ev: WindowEventMap[K]) => void,
-  options?: IOptions | boolean,
+  options?: Options | boolean,
 ): void {
   const savedHandler: MutableRefObject<Function | undefined> = useRef();
 

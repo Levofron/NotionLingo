@@ -1,9 +1,9 @@
 import { CardBody as ChakraCardBody } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { ICardBodyProps } from './card-body.types';
+import { CardBodyProps } from './card-body.types';
 
-const CardBodyComponent: ForwardRefRenderFunction<HTMLDivElement, ICardBodyProps> = (
+const CardBodyComponent: ForwardRefRenderFunction<HTMLDivElement, CardBodyProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraCardBody ref={ref} {...props} />;

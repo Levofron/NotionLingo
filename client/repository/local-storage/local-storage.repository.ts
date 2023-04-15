@@ -1,10 +1,10 @@
-import { ILocalStorageApi } from '@api/local-storage/local-storage.types';
+import { LocalStorageApi } from '@api/local-storage/local-storage.types';
 
-import { ILocalStorageRepository } from '@domain/local-storage/local-storage.repository';
+import { LocalStorageRepository } from '@domain/local-storage/local-storage.repository';
 
 export const getLocalStorageRepository = (
-  localStorageApi: ILocalStorageApi,
-): ILocalStorageRepository => ({
+  localStorageApi: LocalStorageApi,
+): LocalStorageRepository => ({
   isSupported: () => localStorageApi.isSupported(),
   getItem: (key) => localStorageApi.getItem(key),
   setItem: (key, value) => localStorageApi.setItem(key, value),

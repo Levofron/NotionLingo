@@ -2,7 +2,7 @@ import { NextSeo } from 'next-seo';
 import { FC, memo } from 'react';
 
 import { APP_NAME, DEFAULT_DESCRIPTION, SEO_KEYWORDS, WEBSITE_URL } from './seo.defaults';
-import { ISEOProps } from './seo.types';
+import { SEOProps } from './seo.types';
 
 const getTitle = (title?: string) => {
   if (!title) {
@@ -20,7 +20,7 @@ const getFullUrl = (url?: string) => {
   return `${WEBSITE_URL}${url}`;
 };
 
-const SEOComponent: FC<ISEOProps> = ({
+const SEOComponent: FC<SEOProps> = ({
   description = DEFAULT_DESCRIPTION,
   noFollow,
   noIndex,

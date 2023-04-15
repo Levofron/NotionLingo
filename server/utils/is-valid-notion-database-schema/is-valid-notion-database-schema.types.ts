@@ -1,9 +1,9 @@
-export interface IDatabaseProperties {
+export interface DatabaseProperties {
   name: string;
   type: string;
 }
 
-export interface IValidDatabaseProperties {
+export interface ValidDatabaseProperties {
   names: string[];
   type: string;
 }

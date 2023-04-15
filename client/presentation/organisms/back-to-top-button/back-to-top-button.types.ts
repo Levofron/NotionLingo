@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
 
-export interface IBackToTopButtonProps {
+export interface BackToTopButtonProps {
   containerRef: RefObject<HTMLDivElement>;
 }

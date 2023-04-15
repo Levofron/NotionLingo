@@ -1,6 +1,6 @@
-import { IRestApi } from '@api/rest/rest.types';
+import { RestApi } from '@api/rest/rest.types';
 
-import { IRestRepository } from '@domain/rest/rest.repository';
+import { RestRepository } from '@domain/rest/rest.repository';
 
 import {
   addImageUrlForEachNotionWordTransformator,
@@ -14,7 +14,7 @@ const delay = (time: number) =>
     setTimeout(resolve, time);
   });
 
-export const getRestRepository = (restApi: IRestApi): IRestRepository => ({
+export const getRestRepository = (restApi: RestApi): RestRepository => ({
   healthCheck: async () => {
     const { data } = await restApi.healthCheck();
 

@@ -1,3 +1,3 @@
-import { SimpleGridProps } from '@chakra-ui/react';
+import { SimpleGridProps as ChakraSimpleGridProps } from '@chakra-ui/react';
 
-export interface ISimpleGridProps extends SimpleGridProps {}
+export interface SimpleGridProps extends ChakraSimpleGridProps {}

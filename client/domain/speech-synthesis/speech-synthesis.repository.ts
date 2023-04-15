@@ -1,4 +1,4 @@
-export interface ISpeechSynthesisRepository {
+export interface SpeechSynthesisRepository {
   cancel: () => void;
   getPitch: () => number;
   getRate: () => number;

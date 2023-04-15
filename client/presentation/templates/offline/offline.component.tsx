@@ -4,9 +4,9 @@ import { RiWifiOffLine } from 'react-icons/ri';
 import { Flex } from '@presentation/atoms';
 import { DisplayError, ParticlesBackgroundLayout } from '@presentation/molecules';
 
-import { IOfflineProps } from './offline.types';
+import { OfflineProps } from './offline.types';
 
-export const Offline: FC<IOfflineProps> = ({ isLoading, onRedirectToHome }) => (
+export const Offline: FC<OfflineProps> = ({ isLoading, onRedirectToHome }) => (
   <ParticlesBackgroundLayout height="100%">
     <Flex align="center" h="100%" justify="center" w="100%">
       <DisplayError

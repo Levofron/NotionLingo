@@ -1,3 +1,3 @@
-import { DividerProps } from '@chakra-ui/react';
+import { DividerProps as ChakraDividerProps } from '@chakra-ui/react';
 
-export interface IDividerProps extends DividerProps {}
+export interface DividerProps extends ChakraDividerProps {}

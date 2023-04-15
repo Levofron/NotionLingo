@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
-export interface IWrapBalancerProviderProps {
+export interface WrapBalancerProviderProps {
   children: ReactNode;
 }

@@ -3,7 +3,7 @@ import { FormEvent } from 'react';
 
 import { NotionTableColumn } from '@domain/rest/rest.models';
 
-export interface IAddWordFormProps {
+export interface AddWordFormProps {
   errors: FormikErrors<Record<string, string>>;
   isLoading: boolean;
   onBlur: ReturnType<typeof useFormik>['handleBlur'];

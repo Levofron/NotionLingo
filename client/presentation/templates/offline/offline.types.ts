@@ -1,4 +1,4 @@
-export interface IOfflineProps {
+export interface OfflineProps {
   isLoading: boolean;
   onRedirectToHome: () => void;
 }

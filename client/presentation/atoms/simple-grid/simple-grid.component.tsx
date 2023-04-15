@@ -1,9 +1,9 @@
 import { SimpleGrid as ChakraSimpleGrid } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { ISimpleGridProps } from './simple-grid.types';
+import { SimpleGridProps } from './simple-grid.types';
 
-const SimpleGridComponent: ForwardRefRenderFunction<HTMLDivElement, ISimpleGridProps> = (
+const SimpleGridComponent: ForwardRefRenderFunction<HTMLDivElement, SimpleGridProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraSimpleGrid ref={ref} {...props} />;

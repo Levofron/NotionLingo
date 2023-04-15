@@ -1,8 +1,8 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { ISupabaseApi } from './supabase.types';
+import { SupabaseApi } from './supabase.types';
 
-export const getSupabaseApi = (supabaseInstance: SupabaseClient): ISupabaseApi => ({
+export const getSupabaseApi = (supabaseInstance: SupabaseClient): SupabaseApi => ({
   signIn: (userCreditials) => supabaseInstance.auth.signIn(userCreditials),
   logout: () => supabaseInstance.auth.signOut(),
   getUser: () => supabaseInstance.auth.user(),

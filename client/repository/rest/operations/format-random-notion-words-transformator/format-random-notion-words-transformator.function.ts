@@ -1,4 +1,4 @@
-import { INotionWordResponseRecord } from '@api/rest/rest.types';
+import { NotionWordResponseRecord } from '@api/rest/rest.types';
 
 import { cleanUpString } from '@shared/functions';
 import { isString, objectKeys } from '@shared/guards';
@@ -8,8 +8,8 @@ const cleanUpStringOptions = {
 };
 
 export const formatRandomNotionWordsTransformator = (
-  randomNotionWords: INotionWordResponseRecord[],
-): INotionWordResponseRecord[] =>
+  randomNotionWords: NotionWordResponseRecord[],
+): NotionWordResponseRecord[] =>
   randomNotionWords.map((_randomNotionWord) => {
     const randomNotionWord = { ..._randomNotionWord };
 

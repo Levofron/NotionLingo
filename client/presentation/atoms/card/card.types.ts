@@ -1,5 +1,5 @@
-import { CardProps } from '@chakra-ui/react';
+import { CardProps as ChakraCardProps } from '@chakra-ui/react';
 
-export interface ICardProps extends CardProps {
+export interface CardProps extends ChakraCardProps {
   mode?: ThemeMode;
 }

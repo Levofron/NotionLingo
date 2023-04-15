@@ -1,9 +1,9 @@
 import { FormControl as ChakraFormControl } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IFormControlProps } from './form-control.types';
+import { FormControlProps } from './form-control.types';
 
-const FormControlComponent: ForwardRefRenderFunction<HTMLDivElement, IFormControlProps> = (
+const FormControlComponent: ForwardRefRenderFunction<HTMLDivElement, FormControlProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraFormControl ref={ref} {...props} />;

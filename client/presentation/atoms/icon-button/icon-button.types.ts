@@ -1,5 +1,5 @@
-import { IconButtonProps } from '@chakra-ui/react';
+import { IconButtonProps as ChakraIconButtonProps } from '@chakra-ui/react';
 
-export interface IIconButtonProps extends IconButtonProps {
+export interface IconButtonProps extends ChakraIconButtonProps {
   mode?: ThemeMode;
 }

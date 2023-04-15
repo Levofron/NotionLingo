@@ -1,10 +1,10 @@
 import { findNotionWordById, findNotionWordIndexById } from '@domain/rest/operations';
-import { INotionWord, IUpdatedNotionWord } from '@domain/rest/rest.models';
+import { NotionWord, UpdatedNotionWord } from '@domain/rest/rest.models';
 
 export const updateRecordInNotionWordArray = (
-  words: INotionWord[],
+  words: NotionWord[],
   wordId: string,
-  updatedNotionWord: IUpdatedNotionWord,
+  updatedNotionWord: UpdatedNotionWord,
 ) => {
   const copiedNotionWords = [...words];
 
@@ -16,7 +16,7 @@ export const updateRecordInNotionWordArray = (
 
   const foundWordIndex = findNotionWordIndexById(copiedNotionWords, foundWord.id);
 
-  const updatedWord: INotionWord = {
+  const updatedWord: NotionWord = {
     ...foundWord,
     meaning: updatedNotionWord.meaning || foundWord.meaning,
     exampleSentence: updatedNotionWord.exampleSentence || foundWord.exampleSentence,

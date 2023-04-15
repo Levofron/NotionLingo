@@ -1,3 +1,3 @@
-import { SelectProps } from '@chakra-ui/react';
+import { SelectProps as ChakraSelectProps } from '@chakra-ui/react';
 
-export interface ISelectProps extends SelectProps {}
+export interface SelectProps extends ChakraSelectProps {}

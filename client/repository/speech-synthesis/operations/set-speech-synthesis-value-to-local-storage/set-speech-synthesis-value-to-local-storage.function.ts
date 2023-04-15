@@ -1,4 +1,4 @@
-import { ISetSpeechSynthesisValueToLocalStorageParams } from './set-speech-synthesis-value-to-local-storage.types';
+import { SetSpeechSynthesisValueToLocalStorageParams } from './set-speech-synthesis-value-to-local-storage.types';
 
 export const setSpeechSynthesisValueToLocalStorage = ({
   defaultValue,
@@ -7,7 +7,7 @@ export const setSpeechSynthesisValueToLocalStorage = ({
   max,
   min,
   newValue,
-}: ISetSpeechSynthesisValueToLocalStorageParams): void => {
+}: SetSpeechSynthesisValueToLocalStorageParams): void => {
   if (!newValue && newValue !== 0) {
     return localStorageApi.setItem(key, defaultValue.toString());
   }

@@ -9,9 +9,9 @@ import {
   Spinner,
 } from '@presentation/atoms';
 
-import { ISelectControlProps } from './select-control.types';
+import { SelectControlProps } from './select-control.types';
 
-export const SelectControl: FC<ISelectControlProps> = ({
+export const SelectControl: FC<SelectControlProps> = ({
   errorMessage,
   isDisabled,
   isLoading,

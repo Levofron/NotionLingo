@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface ITextUnderlineProps {
+export interface TextUnderlineProps {
   children: ReactNode;
   mode?: ThemeMode;
 }

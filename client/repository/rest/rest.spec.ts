@@ -1,4 +1,4 @@
-import { IContact } from '@domain/rest/rest.models';
+import { Contact } from '@domain/rest/rest.models';
 
 import { functionImportTest } from '@shared/functions';
 
@@ -163,7 +163,7 @@ describe('getRestRepository function', () => {
 
   describe('sendContactFormData function', () => {
     it('should call proper restApi function', async () => {
-      const formData: IContact = {
+      const formData: Contact = {
         email: 'email',
         message: 'message',
         fullName: 'fullName',

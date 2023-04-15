@@ -1,4 +1,4 @@
-export interface ISpeakOptions {
+export interface SpeakOptions {
   pitch?: number;
   rate?: number;
   text: string;

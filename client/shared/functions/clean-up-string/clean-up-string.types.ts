@@ -1,4 +1,4 @@
-export interface IOptions {
+export interface Options {
   shouldCapitalizeFirstLetter?: boolean;
   toReturnWhenEmpty?: string;
 }

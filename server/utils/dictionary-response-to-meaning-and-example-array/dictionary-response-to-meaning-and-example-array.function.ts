@@ -1,10 +1,10 @@
-import { IDictionaryResponse } from './dictionary-response-to-meaning-and-example-array.types';
+import { DictionaryResponse } from './dictionary-response-to-meaning-and-example-array.types';
 
 export const dictionaryResponseToMeaningAndExampleArray = ({
   additionalExamples,
   meaningAndExamples,
   word,
-}: IDictionaryResponse) => {
+}: DictionaryResponse) => {
   const suggestions = meaningAndExamples
     .map((_meaningAndExample) => {
       if (!_meaningAndExample) {

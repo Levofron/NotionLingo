@@ -2,7 +2,7 @@ import { ChakraProvider as ChakraProviderWrapper, extendTheme } from '@chakra-ui
 import '@fontsource/montserrat';
 import '@fontsource/raleway';
 
-import { IChakraProviderProps } from './chakra-provider.types';
+import { ChakraProviderProps } from './chakra-provider.types';
 
 const theme = extendTheme({
   colors: {
@@ -17,6 +17,6 @@ const theme = extendTheme({
   },
 });
 
-export const ChakraProvider = ({ children }: IChakraProviderProps): JSX.Element => (
+export const ChakraProvider = ({ children }: ChakraProviderProps): JSX.Element => (
   <ChakraProviderWrapper theme={theme}>{children}</ChakraProviderWrapper>
 );

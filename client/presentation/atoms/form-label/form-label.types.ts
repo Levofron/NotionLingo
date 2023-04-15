@@ -1,3 +1,3 @@
-import { FormLabelProps } from '@chakra-ui/react';
+import { FormLabelProps as ChakraFormLabelProps } from '@chakra-ui/react';
 
-export interface IFormLabelProps extends FormLabelProps {}
+export interface FormLabelProps extends ChakraFormLabelProps {}

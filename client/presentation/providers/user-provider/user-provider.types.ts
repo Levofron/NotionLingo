@@ -1,13 +1,13 @@
 import { User } from '@supabase/supabase-js';
 import { ReactNode } from 'react';
 
-import { IProfile } from '@domain/rest/rest.models';
+import { Profile } from '@domain/rest/rest.models';
 
-export interface IUserProviderProps {
+export interface UserProviderProps {
   children: ReactNode;
 }
 
-export interface IState {
+export interface State {
   isLoading: boolean | undefined;
-  user: (User & IProfile) | null;
+  user: (User & Profile) | null;
 }

@@ -1,10 +1,10 @@
-import { IBoxProps } from '@presentation/atoms';
+import { BoxProps } from '@presentation/atoms';
 
-export interface ISidebarContentProps extends IBoxProps {
+export interface SidebarContentProps extends BoxProps {
   onClose: () => void;
 }
 
-export interface ISidebarItem {
+export interface SidebarItem {
   href: string;
   name: string;
 }

@@ -8,9 +8,9 @@ import { MotionIconButton } from '@presentation/molecules';
 import { scrollToTop } from '@shared/functions';
 import { useEventListener } from '@shared/hooks';
 
-import { IBackToTopButtonProps } from './back-to-top-button.types';
+import { BackToTopButtonProps } from './back-to-top-button.types';
 
-export const BackToTopButton: FC<IBackToTopButtonProps> = ({ containerRef }): JSX.Element => {
+export const BackToTopButton: FC<BackToTopButtonProps> = ({ containerRef }): JSX.Element => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
 

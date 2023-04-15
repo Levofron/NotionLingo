@@ -14,11 +14,11 @@ import {
   ModalOverlay,
 } from '@presentation/atoms';
 
-import { IConfirmationModalProps, IConfirmationModalRef } from './confirmation-modal.types';
+import { ConfirmationModalProps, ConfirmationModalRef } from './confirmation-modal.types';
 
 const ConfirmationModalComponent: ForwardRefRenderFunction<
-  IConfirmationModalRef,
-  IConfirmationModalProps
+  ConfirmationModalRef,
+  ConfirmationModalProps
 > = (
   {
     cancelButtonText = 'No',

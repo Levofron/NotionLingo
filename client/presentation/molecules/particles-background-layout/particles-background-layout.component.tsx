@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { Box, ParticlesBackground } from '@presentation/atoms';
 
-import { IParticlesBackgroundLayoutProps } from './particles-background-layout.types';
+import { ParticlesBackgroundLayoutProps } from './particles-background-layout.types';
 
-export const ParticlesBackgroundLayout: FC<IParticlesBackgroundLayoutProps> = ({
+export const ParticlesBackgroundLayout: FC<ParticlesBackgroundLayoutProps> = ({
   children,
   height,
 }): JSX.Element => (

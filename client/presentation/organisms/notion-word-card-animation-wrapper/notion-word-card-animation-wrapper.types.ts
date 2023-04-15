@@ -1,7 +1,7 @@
 import { HTMLMotionProps } from 'framer-motion';
 import { ReactNode } from 'react';
 
-interface IChildrenProps {
+interface ChildrenProps {
   countdown: number;
   isCountdownEnded: boolean;
   isRotated: boolean;
@@ -9,9 +9,9 @@ interface IChildrenProps {
   onClick: () => void;
 }
 
-export interface INotionWordCardAnimationWrapperProps
+export interface NotionWordCardAnimationWrapperProps
   extends Omit<HTMLMotionProps<'div'>, 'children'> {
-  children: (props: IChildrenProps) => ReactNode;
+  children: (props: ChildrenProps) => ReactNode;
   isDraggable: boolean;
   onScreenExit: () => void;
   zIndex: number;

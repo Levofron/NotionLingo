@@ -2,9 +2,9 @@ import { Button as ChakraButton } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { variantToStylesMapper } from './button.defaults';
-import { IButtonProps } from './button.types';
+import { ButtonProps } from './button.types';
 
-const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IButtonProps> = (
+const ButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
   { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => (

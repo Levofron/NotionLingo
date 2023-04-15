@@ -1,3 +1,3 @@
-import { TabsProps } from '@chakra-ui/react';
+import { TabsProps as ChakraTabsProps } from '@chakra-ui/react';
 
-export interface ITabsProps extends TabsProps {}
+export interface TabsProps extends ChakraTabsProps {}

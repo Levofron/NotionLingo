@@ -1,9 +1,9 @@
 import { Highlight as ChakraHighlight } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { IHighlightProps } from './highlight.types';
+import { HighlightProps } from './highlight.types';
 
-export const Highlight: FC<IHighlightProps> = ({ styles, ...restProps }): JSX.Element => (
+export const Highlight: FC<HighlightProps> = ({ styles, ...restProps }): JSX.Element => (
   <ChakraHighlight
     styles={{
       px: { base: 1, sm: 2 },

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface IParticlesBackgroundLayoutProps {
+export interface ParticlesBackgroundLayoutProps {
   children: ReactNode;
   height?: string;
 }

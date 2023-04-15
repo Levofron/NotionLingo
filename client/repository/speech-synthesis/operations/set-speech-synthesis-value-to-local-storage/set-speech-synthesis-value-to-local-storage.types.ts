@@ -1,9 +1,9 @@
-import { ILocalStorageApi } from '@api/local-storage/local-storage.types';
+import { LocalStorageApi } from '@api/local-storage/local-storage.types';
 
-export interface ISetSpeechSynthesisValueToLocalStorageParams {
+export interface SetSpeechSynthesisValueToLocalStorageParams {
   defaultValue: number;
   key: string;
-  localStorageApi: ILocalStorageApi;
+  localStorageApi: LocalStorageApi;
   max: number;
   min: number;
   newValue: number;

@@ -3,9 +3,9 @@ import React, { FC, useMemo } from 'react';
 import { Button, Card, Flex } from '@presentation/atoms';
 import { InputControl, SelectControl } from '@presentation/molecules';
 
-import { IAddWordFormProps } from './add-word-form.types';
+import { AddWordFormProps } from './add-word-form.types';
 
-export const AddWordForm: FC<IAddWordFormProps> = ({
+export const AddWordForm: FC<AddWordFormProps> = ({
   errors,
   isLoading,
   onBlur,

@@ -1,9 +1,9 @@
 import { FC, memo } from 'react';
 
 import { Box } from '../box/box.component';
-import { ITextUnderlineProps } from './text-underline.types';
+import { TextUnderlineProps } from './text-underline.types';
 
-const TextUnderlineComponent: FC<ITextUnderlineProps> = ({
+const TextUnderlineComponent: FC<TextUnderlineProps> = ({
   children,
   mode = 'dark',
 }): JSX.Element => {

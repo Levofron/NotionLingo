@@ -7,9 +7,9 @@ import {
 } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo, useState } from 'react';
 
-import { ISliderProps } from './slider.types';
+import { SliderProps } from './slider.types';
 
-const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, ISliderProps> = (
+const SliderComponent: ForwardRefRenderFunction<HTMLDivElement, SliderProps> = (
   { children, onChange, value, ...restProps },
   ref,
 ): JSX.Element => {

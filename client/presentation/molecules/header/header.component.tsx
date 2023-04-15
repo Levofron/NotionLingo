@@ -6,14 +6,9 @@ import { Button, Container, Flex, Heading, IconButton } from '@presentation/atom
 
 import { useRouter, useUser } from '@shared/hooks';
 
-import { IHeaderProps } from './header.types';
+import { HeaderProps } from './header.types';
 
-export const Header: FC<IHeaderProps> = ({
-  isOpen,
-  onClose,
-  onOpen,
-  ...restProps
-}): JSX.Element => {
+export const Header: FC<HeaderProps> = ({ isOpen, onClose, onOpen, ...restProps }): JSX.Element => {
   const { redirectToLogin } = useRouter();
   const { isLoading, isUserAuthenticated, logout } = useUser();
 

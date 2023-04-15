@@ -1,3 +1,3 @@
-import { AvatarProps } from '@chakra-ui/react';
+import { AvatarProps as ChakraAvatarProps } from '@chakra-ui/react';
 
-export interface IAvatarProps extends AvatarProps {}
+export interface AvatarProps extends ChakraAvatarProps {}

@@ -6,12 +6,9 @@ import { useUser } from '@shared/hooks';
 
 import { NavigationItem } from '../navigation-item/navigation-item.component';
 import { sidebarItems } from './sidebar-content.defaults';
-import { ISidebarContentProps } from './sidebar-content.types';
+import { SidebarContentProps } from './sidebar-content.types';
 
-export const SidebarContent: FC<ISidebarContentProps> = ({
-  onClose,
-  ...restProps
-}): JSX.Element => {
+export const SidebarContent: FC<SidebarContentProps> = ({ onClose, ...restProps }): JSX.Element => {
   const { user } = useUser();
 
   const filteredSidebarItems = useMemo(

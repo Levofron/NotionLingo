@@ -1,9 +1,9 @@
 import { ModalFooter as ChakraModalFooter } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IModalFooterProps } from './modal-footer.types';
+import { ModalFooterProps } from './modal-footer.types';
 
-const ModalFooterComponent: ForwardRefRenderFunction<HTMLDivElement, IModalFooterProps> = (
+const ModalFooterComponent: ForwardRefRenderFunction<HTMLDivElement, ModalFooterProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraModalFooter ref={ref} {...props} />;

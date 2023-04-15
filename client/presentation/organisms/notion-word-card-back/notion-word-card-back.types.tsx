@@ -1,3 +1,3 @@
-export interface INotionWordCardBackProps {
+export interface NotionWordCardBackProps {
   word: string;
 }

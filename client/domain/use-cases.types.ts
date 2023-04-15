@@ -1,23 +1,23 @@
-export interface IUseCaseWithSingleParamAndPromiseResult<TParam, TResult> {
+export interface UseCaseWithSingleParamAndPromiseResult<TParam, TResult> {
   execute: (param: TParam) => Promise<TResult>;
 }
 
-export interface IUseCaseWithMultipleParamsAndPromiseResult<TParam, TResult> {
+export interface UseCaseWithMultipleParamsAndPromiseResult<TParam, TResult> {
   execute: (...params: TParam[]) => Promise<TResult>;
 }
 
-export interface IUseCaseWithSingleParam<TParam, TResult> {
+export interface UseCaseWithSingleParam<TParam, TResult> {
   execute: (param: TParam) => TResult;
 }
 
-export interface IUseCaseWithMultipleParams<TParam, TResult> {
+export interface UseCaseWithMultipleParams<TParam, TResult> {
   execute: (...params: TParam[]) => TResult;
 }
 
-export interface IUseCaseWithoutParams<TResult> {
+export interface UseCaseWithoutParams<TResult> {
   execute: () => TResult;
 }
 
-export interface IUseCaseWithoutParamsAndPromiseResult<TResult> {
+export interface UseCaseWithoutParamsAndPromiseResult<TResult> {
   execute: () => Promise<TResult>;
 }

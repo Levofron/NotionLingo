@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
 
-export interface IHomeHeroProps {
+export interface HomeHeroProps {
   gettingStartedRef: RefObject<HTMLDivElement>;
 }

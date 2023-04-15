@@ -1,9 +1,9 @@
 import { Input as ChakraInput } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IInputProps } from './input.types';
+import { InputProps } from './input.types';
 
-const InputComponent: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
+const InputComponent: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => {

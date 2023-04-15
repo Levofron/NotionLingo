@@ -1,4 +1,4 @@
-export interface ISetItemParams {
+export interface SetItemParams {
   key: string;
   value: string;
 }

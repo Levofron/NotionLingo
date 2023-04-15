@@ -1,9 +1,9 @@
 import { Spinner as ChakraSpinner } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { ISpinnerProps } from './spinner.types';
+import { SpinnerProps } from './spinner.types';
 
-const SpinnerComponent: ForwardRefRenderFunction<HTMLDivElement, ISpinnerProps> = (
+const SpinnerComponent: ForwardRefRenderFunction<HTMLDivElement, SpinnerProps> = (
   { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => (

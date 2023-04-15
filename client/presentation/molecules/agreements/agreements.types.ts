@@ -1,9 +1,9 @@
-export interface IAgreement {
+export interface Agreement {
   content: string;
   title: string | null;
 }
 
-export interface IAgreementsProps {
-  agreements: IAgreement[];
+export interface AgreementsProps {
+  agreements: Agreement[];
   heading: string;
 }

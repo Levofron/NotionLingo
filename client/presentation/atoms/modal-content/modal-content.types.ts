@@ -1,3 +1,3 @@
-import { ModalContentProps } from '@chakra-ui/react';
+import { ModalContentProps as ChakraModalContentProps } from '@chakra-ui/react';
 
-export interface IModalContentProps extends ModalContentProps {}
+export interface ModalContentProps extends ChakraModalContentProps {}

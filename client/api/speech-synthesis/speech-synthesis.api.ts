@@ -1,6 +1,6 @@
-import { ISpeechSynthesisApi } from './speech-synthesis.types';
+import { SpeechSynthesisApi } from './speech-synthesis.types';
 
-export const getSpeechSynthesisApi = (): ISpeechSynthesisApi => ({
+export const getSpeechSynthesisApi = (): SpeechSynthesisApi => ({
   isSupported: () => typeof window !== 'undefined' && !!window.speechSynthesis,
   speak: ({ pitch = 1, rate = 0.8, text, voice = null, volume = 1 }) => {
     const utterance = new window.SpeechSynthesisUtterance();

@@ -6,9 +6,9 @@ import { useRouter, useUser } from '@shared/hooks';
 import { Routes } from '@shared/routes';
 
 import { ParticlesBackgroundLayout } from '../particles-background-layout/particles-background-layout.component';
-import { IHomeHeroProps } from './home-hero.types';
+import { HomeHeroProps } from './home-hero.types';
 
-export const HomeHero: FC<IHomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
+export const HomeHero: FC<HomeHeroProps> = ({ gettingStartedRef }): JSX.Element => {
   const { isLoading, user } = useUser();
   const { push, redirectToLogin } = useRouter();
 

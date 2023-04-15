@@ -1,3 +1,3 @@
-import { AccordionButtonProps } from '@chakra-ui/react';
+import { AccordionButtonProps as ChakraAccordionButtonProps } from '@chakra-ui/react';
 
-export interface IAccordionButtonProps extends AccordionButtonProps {}
+export interface AccordionButtonProps extends ChakraAccordionButtonProps {}

@@ -1,11 +1,11 @@
-import { INotionWord } from '@domain/rest/rest.models';
+import { NotionWord } from '@domain/rest/rest.models';
 
-export interface INotionWordCardFrontProps {
+export interface NotionWordCardFrontProps {
   countdown: number;
   isCountdownEnded: boolean;
   isLoading: boolean;
   isTopCard: boolean;
-  notionWord: INotionWord;
+  notionWord: NotionWord;
   onApplySuggestions: () => void;
   onClick: () => void;
 }

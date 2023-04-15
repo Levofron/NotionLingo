@@ -1,3 +1,3 @@
-import { ModalOverlayProps } from '@chakra-ui/react';
+import { ModalOverlayProps as ChakraModalOverlayProps } from '@chakra-ui/react';
 
-export interface IModalOverlayProps extends ModalOverlayProps {}
+export interface ModalOverlayProps extends ChakraModalOverlayProps {}

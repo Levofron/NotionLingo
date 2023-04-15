@@ -4,20 +4,20 @@ import { useEffect, useState } from 'react';
 import { useLoggedProfile, useSetSupabaseCookie } from '@adapter/hooks';
 import { supabaseModule } from '@adapter/supabase/supabase.module';
 
-import { IProfile } from '@domain/rest/rest.models';
+import { Profile } from '@domain/rest/rest.models';
 
 import { UserContext } from '@shared/context';
 import { useRouter } from '@shared/hooks';
 
-import { IUserProviderProps } from './user-provider.types';
+import { UserProviderProps } from './user-provider.types';
 
 const loginViaMagicLink = (email: string) => supabaseModule.loginViaMagicLink(email);
 
-export const UserProvider = ({ children }: IUserProviderProps): JSX.Element => {
+export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
   const { redirectToHome } = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>();
-  const [user, setUser] = useState<(User & IProfile) | null>(null);
+  const [user, setUser] = useState<(User & Profile) | null>(null);
 
   const { getLoggedProfile } = useLoggedProfile();
   const { setSupabaseCookie } = useSetSupabaseCookie();

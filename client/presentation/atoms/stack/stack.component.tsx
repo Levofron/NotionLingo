@@ -1,9 +1,9 @@
 import { Stack as ChakraStack } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
-import { IStackProps } from './stack.types';
+import { StackProps } from './stack.types';
 
-const StackComponent: ForwardRefRenderFunction<HTMLDivElement, IStackProps> = (
+const StackComponent: ForwardRefRenderFunction<HTMLDivElement, StackProps> = (
   props,
   ref,
 ): JSX.Element => <ChakraStack ref={ref} {...props} />;

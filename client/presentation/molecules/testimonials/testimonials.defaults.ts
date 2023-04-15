@@ -1,6 +1,6 @@
-import { ITestimonial } from './testimonials.types';
+import { Testimonial } from './testimonials.types';
 
-export const TESTIMONIALS: ITestimonial[] = [
+export const TESTIMONIALS: Testimonial[] = [
   {
     heading: "A Believer in the App's Effectiveness",
     description:

@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 
-import { IRouterContextValue } from './router.types';
+import { RouterContextValue } from './router.types';
 
-export const RouterContext = createContext<IRouterContextValue>({
+export const RouterContext = createContext<RouterContextValue>({
   getCurrentPath: () => null,
   getPreviousPath: () => null,
 });

@@ -6,9 +6,9 @@ import { useSetApiToken } from '@adapter/hooks';
 
 import { debounce } from '@shared/functions';
 
-import { IOnboardingStepFourProps } from './onboarding-step-four.types';
+import { OnboardingStepFourProps } from './onboarding-step-four.types';
 
-export const OnboardingStepFour: FC<IOnboardingStepFourProps> = ({
+export const OnboardingStepFour: FC<OnboardingStepFourProps> = ({
   onBackButtonClick,
   onNextButtonClick,
 }): JSX.Element => {

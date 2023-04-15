@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 import { Button, Card, Flex, Heading } from '@presentation/atoms';
 import { InputControl } from '@presentation/molecules';
 
-import { ILoginFormProps } from './login-form.types';
+import { LoginFormProps } from './login-form.types';
 
-export const LoginForm: FC<ILoginFormProps> = ({
+export const LoginForm: FC<LoginFormProps> = ({
   errors,
   isLoading,
   onBlur,

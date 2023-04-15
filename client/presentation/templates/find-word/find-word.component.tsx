@@ -10,9 +10,9 @@ import {
 } from '@presentation/molecules';
 import { SidebarWithHeader } from '@presentation/organisms';
 
-import { IFindWordProps } from './find-word.types';
+import { FindWordProps } from './find-word.types';
 
-export const FindWord: FC<IFindWordProps> = ({
+export const FindWord: FC<FindWordProps> = ({
   dictionarySuggestions,
   dictionarySuggestionsError,
   isDictionarySuggestionsLoading,

@@ -1,22 +1,20 @@
-import { IUseCaseWithSingleParam, IUseCaseWithoutParams } from '../use-cases.types';
-import { ISetItemParams } from './local-storage.models';
-import { ILocalStorageRepository } from './local-storage.repository';
+import { UseCaseWithSingleParam, UseCaseWithoutParams } from '../use-cases.types';
+import { SetItemParams } from './local-storage.models';
+import { LocalStorageRepository } from './local-storage.repository';
 
 // isSupportedUseCase
-export type IsSupportedUseCase = IUseCaseWithoutParams<boolean>;
+export type IsSupportedUseCase = UseCaseWithoutParams<boolean>;
 
 export const isSupportedUseCase = (
-  localStorageRepository: ILocalStorageRepository,
+  localStorageRepository: LocalStorageRepository,
 ): IsSupportedUseCase => ({
   execute: () => localStorageRepository.isSupported(),
 });
 
 // setItemUseCase
-export type SetItemUseCase = IUseCaseWithSingleParam<ISetItemParams, void>;
+export type SetItemUseCase = UseCaseWithSingleParam<SetItemParams, void>;
 
-export const setItemUseCase = (
-  localStorageRepository: ILocalStorageRepository,
-): SetItemUseCase => ({
+export const setItemUseCase = (localStorageRepository: LocalStorageRepository): SetItemUseCase => ({
   execute: (params) => {
     if (!localStorageRepository.isSupported()) {
       return;
@@ -27,11 +25,9 @@ export const setItemUseCase = (
 });
 
 // getItemUseCase
-export type GetItemUseCase = IUseCaseWithSingleParam<string, string | null>;
+export type GetItemUseCase = UseCaseWithSingleParam<string, string | null>;
 
-export const getItemUseCase = (
-  localStorageRepository: ILocalStorageRepository,
-): GetItemUseCase => ({
+export const getItemUseCase = (localStorageRepository: LocalStorageRepository): GetItemUseCase => ({
   execute: (key) => {
     if (!localStorageRepository.isSupported()) {
       return null;
@@ -42,10 +38,10 @@ export const getItemUseCase = (
 });
 
 // removeItemUseCase
-export type RemoveItemUseCase = IUseCaseWithSingleParam<string, void>;
+export type RemoveItemUseCase = UseCaseWithSingleParam<string, void>;
 
 export const removeItemUseCase = (
-  localStorageRepository: ILocalStorageRepository,
+  localStorageRepository: LocalStorageRepository,
 ): RemoveItemUseCase => ({
   execute: (key) => {
     if (!localStorageRepository.isSupported()) {

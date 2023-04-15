@@ -1,4 +1,4 @@
-import { INotionWordResponseRecord } from '@api/rest/rest.types';
+import { NotionWordResponseRecord } from '@api/rest/rest.types';
 
 import { functionImportTest } from '@shared/functions';
 
@@ -8,7 +8,7 @@ describe('addImageUrlForEachNotionWordTransformator function', () => {
   functionImportTest(addImageUrlForEachNotionWordTransformator);
 
   it('should return proper object', () => {
-    const randomNotionWordsMock: INotionWordResponseRecord[] = [
+    const randomNotionWordsMock: NotionWordResponseRecord[] = [
       {
         id: 'id',
         ipa: 'ipa',

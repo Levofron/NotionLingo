@@ -1,8 +1,8 @@
 import { Routes } from '@shared/routes';
 
-import { ISidebarItem } from './sidebar-content.types';
+import { SidebarItem } from './sidebar-content.types';
 
-export const sidebarItems: Array<ISidebarItem & { shouldHaveNotionData: boolean }> = [
+export const sidebarItems: Array<SidebarItem & { shouldHaveNotionData: boolean }> = [
   { name: 'Home', href: Routes.HOME, shouldHaveNotionData: false },
   { name: 'Dashboard', href: Routes.DASHBOARD, shouldHaveNotionData: true },
   { name: 'Find word', href: Routes.FIND_WORD, shouldHaveNotionData: false },

@@ -12,7 +12,7 @@ import {
   SUPPORTED_WORD_COLUMN_NAMES,
 } from '@config/constants';
 
-import { IOnboardingStepOneProps } from './onboarding-step-one.types';
+import { OnboardingStepOneProps } from './onboarding-step-one.types';
 import { mapColumnNamesToComponents } from './utils';
 
 const supportedWordColumnNamesAsList = mapColumnNamesToComponents(SUPPORTED_WORD_COLUMN_NAMES);
@@ -23,7 +23,7 @@ const supportedExampleSentenceColumnNamesAsList = mapColumnNamesToComponents(
   SUPPORTED_EXAMPLE_SENTENCE_COLUMN_NAMES,
 );
 
-export const OnboardingStepOne: FC<IOnboardingStepOneProps> = ({
+export const OnboardingStepOne: FC<OnboardingStepOneProps> = ({
   onNextButtonClick,
 }): JSX.Element => {
   const { redirectToHome } = useRouter();

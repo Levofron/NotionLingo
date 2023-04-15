@@ -2,9 +2,9 @@ import { IconButton as ChakraIconButton } from '@chakra-ui/react';
 import { ForwardRefRenderFunction, forwardRef, memo } from 'react';
 
 import { variantToStylesMapper } from './icon-button.defaults';
-import { IIconButtonProps } from './icon-button.types';
+import { IconButtonProps } from './icon-button.types';
 
-const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IIconButtonProps> = (
+const IconButtonComponent: ForwardRefRenderFunction<HTMLButtonElement, IconButtonProps> = (
   { mode = 'dark', ...restProps },
   ref,
 ): JSX.Element => (

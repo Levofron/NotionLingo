@@ -10,7 +10,7 @@ import { speechSynthesisModule } from '@adapter/speech-synthesis/speech-synthesi
 
 import { useKeyPressMapper } from '@shared/hooks';
 
-import { INotionWordCardFrontProps } from './notion-word-card-front.types';
+import { NotionWordCardFrontProps } from './notion-word-card-front.types';
 
 const shouldEnableSpeechFeature =
   localStorageModule.isSupported() && speechSynthesisModule.isSupported();
@@ -21,7 +21,7 @@ const hasSuggestion = (original: string, suggestion?: string) =>
 const handleSpeak = (phrase: string) => () =>
   shouldEnableSpeechFeature && speechSynthesisModule.speak(phrase);
 
-export const NotionWordCardFront: FC<INotionWordCardFrontProps> = ({
+export const NotionWordCardFront: FC<NotionWordCardFrontProps> = ({
   countdown,
   isCountdownEnded,
   isLoading,

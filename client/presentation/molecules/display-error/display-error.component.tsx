@@ -3,9 +3,9 @@ import { FiRefreshCcw } from 'react-icons/fi';
 
 import { Button, Card, Flex, Heading, Icon, Stack, Text } from '@presentation/atoms';
 
-import { IDisplayErrorProps } from './display-error.types';
+import { DisplayErrorProps } from './display-error.types';
 
-export const DisplayError: FC<IDisplayErrorProps> = ({
+export const DisplayError: FC<DisplayErrorProps> = ({
   errorMessage,
   icon,
   isLoading,

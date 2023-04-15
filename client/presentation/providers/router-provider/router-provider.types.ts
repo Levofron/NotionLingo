@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
-export interface IRouterProviderProps {
+export interface RouterProviderProps {
   children: ReactNode;
 }

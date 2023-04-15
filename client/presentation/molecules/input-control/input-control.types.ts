@@ -1,6 +1,6 @@
-import { IInputProps } from '@presentation/atoms';
+import { InputProps } from '@presentation/atoms';
 
-export interface IInputControlProps extends IInputProps {
+export interface InputControlProps extends InputProps {
   errorMessage?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
