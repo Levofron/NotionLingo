@@ -59,8 +59,6 @@ export const NotionWordCardFront: FC<NotionWordCardFrontProps> = ({
   const hasMeaningSuggestion = hasSuggestion(meaning, meaningSuggestion);
   const hasExampleSentenceSuggestion = hasSuggestion(exampleSentence, exampleSentenceSuggestion);
 
-  console.log(hasMeaningSuggestion, hasExampleSentenceSuggestion);
-
   return (
     <Card width={{ base: 300, sm: 350, md: 400 }}>
       {hasMeaningSuggestion || hasExampleSentenceSuggestion ? (
