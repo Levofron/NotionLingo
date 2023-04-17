@@ -2,6 +2,11 @@
 
 Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to easily learn new words and phrases from your own Notion database!
 
+## Motivation and goals
+- I needed an app to easily and really, really fast learn new vocabulary
+- I wanted to test clean architecture approach on frontend for production ready application
+- I wanted to create some app to see how is web scrapping working
+
 ## Screenshots
 
 ![Dashboard](https://i.imgur.com/JZ6C3ly.png)
