@@ -73,7 +73,7 @@ export const Dashboard: FC<DashboardProps> = ({
 
           return (
             <NotionWordCardAnimationWrapper
-              key={_word.word}
+              key={_word.id}
               isDraggable={isTopCard}
               zIndex={_index}
               onScreenExit={onNotionWordCardClick(_word)}
