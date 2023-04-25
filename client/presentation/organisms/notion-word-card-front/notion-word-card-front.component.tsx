@@ -78,6 +78,7 @@ export const NotionWordCardFront: FC<NotionWordCardFrontProps> = ({
         backgroundColor="gray.900"
         borderBottom="1px solid"
         borderColor="gray.900"
+        borderRadius="9px 9px 0 0"
         height={{ base: '180px', sm: '205px', md: '240px' }}
         pointerEvents="none"
         position="relative"
@@ -86,7 +87,7 @@ export const NotionWordCardFront: FC<NotionWordCardFrontProps> = ({
           fill
           alt={`Image representing '${word}' word`}
           src={imageUrl}
-          style={{ filter: 'grayscale(100%)' }}
+          style={{ filter: 'grayscale(100%)', borderRadius: '9px 9px 0 0' }}
         />
       </Box>
       <Flex flexDirection="column" gap={1} p={{ base: 2, sm: 3, md: 4 }}>
