@@ -14,6 +14,7 @@ export interface Profile extends IncreaseDailyStreak {
   todayWordsStreak: number | null;
   totalLearnedWords: number | null;
 }
+
 export interface Hash {
   content: string;
   iv: string;
