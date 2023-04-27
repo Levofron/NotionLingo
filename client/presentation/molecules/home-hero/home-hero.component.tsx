@@ -1,3 +1,4 @@
+import NextImage from 'next/image';
 import { FC, useMemo } from 'react';
 
 import { Box, Button, Card, Container, Flex, Heading, Highlight } from '@presentation/atoms';
@@ -73,7 +74,13 @@ export const HomeHero: FC<HomeHeroProps> = ({ gettingStartedRef }): JSX.Element 
               Learn more
             </Button>
           </Flex>
-          <Card mt={5} overflow="hidden">
+          <Card display={{ base: 'none', sm: 'block' }} mt={5} overflow="hidden">
+            <NextImage
+              alt="Dashboard placeholder"
+              height={418}
+              src="/presentation-placeholder.jpg"
+              width={740}
+            />
             <Box
               // @ts-expect-error
               autoPlay
@@ -82,9 +89,11 @@ export const HomeHero: FC<HomeHeroProps> = ({ gettingStartedRef }): JSX.Element 
               playsInline
               as="video"
               display={{ base: 'none', sm: 'block' }}
-              minHeight={418}
-              minWidth={740}
-              objectFit="cover"
+              height="100%"
+              left={0}
+              objectFit="contain"
+              position="absolute"
+              top={0}
               zIndex={1}
             >
               <source src="presentation.mp4" type="video/mp4" />
