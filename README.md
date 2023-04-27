@@ -9,7 +9,7 @@ Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows
 
 ## Screenshots
 
-![Dashboard](https://i.imgur.com/JZ6C3ly.png)
+![Dashboard](https://i.imgur.com/roPzYY6.png)
 
 ![Onboarding](https://i.imgur.com/L0rzrXQ.png)
 
