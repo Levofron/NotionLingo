@@ -1,4 +1,3 @@
-
 # NotionLingo
 
 Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to easily learn new words and phrases from your own Notion database!
