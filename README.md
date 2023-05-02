@@ -17,7 +17,7 @@ Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows
 
 ![Architecture](https://i.imgur.com/6X3xYcb.png)
 
-### [Article that describes diagram above](https://hackernoon.com/testing-a-clean-architecture-in-a-frontend-application-does-it-make-sense)
+### [The article that describes the diagram above](https://hackernoon.com/testing-a-clean-architecture-in-a-frontend-application-does-it-make-sense)
 
 ## Features
 
