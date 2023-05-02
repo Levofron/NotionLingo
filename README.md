@@ -1,3 +1,4 @@
+
 # NotionLingo
 
 Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows you to easily learn new words and phrases from your own Notion database!
@@ -16,6 +17,8 @@ Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows
 ## Architecture diagram
 
 ![Architecture](https://i.imgur.com/6X3xYcb.png)
+
+### [Article that describes diagram above](https://hackernoon.com/testing-a-clean-architecture-in-a-frontend-application-does-it-make-sense)
 
 ## Features
 
