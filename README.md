@@ -18,6 +18,7 @@ Elevate your vocabulary with our cutting-edge app! Our intuitive platform allows
 ![Architecture](https://i.imgur.com/6X3xYcb.png)
 
 ### [The article that describes the diagram above](https://hackernoon.com/testing-a-clean-architecture-in-a-frontend-application-does-it-make-sense)
+### [The article that describes the presentation layer](https://hackernoon.com/the-double-edged-sword-of-atomic-design)
 
 ## Features
 
